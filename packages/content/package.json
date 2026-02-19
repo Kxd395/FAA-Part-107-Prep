@@ -1,0 +1,12 @@
+{
+  "name": "@part107/content",
+  "version": "1.0.0",
+  "description": "Part 107 Exam Prep — Shared Question Bank, Categories, and Figure References",
+  "main": "index.js",
+  "scripts": {
+    "validate": "node scripts/validate-questions.js",
+    "stats": "node scripts/question-stats.js"
+  },
+  "keywords": ["faa", "part107", "drone", "exam-prep"],
+  "license": "MIT"
+}

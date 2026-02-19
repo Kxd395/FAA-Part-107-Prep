@@ -1,0 +1,40 @@
+# Part 107 Drone Exam Prep — Project Root
+# Monorepo: Next.js (Web/Vercel) + SwiftUI (iOS/iPadOS/macOS) + Shared Content
+
+.DS_Store
+node_modules/
+.next/
+.vercel/
+out/
+dist/
+build/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# iOS/Xcode
+*.xcuserdata
+*.xcworkspace
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# IDE
+.vscode/settings.json
+*.swp
+*.swo
+
+# Large PDFs served locally (not for git/Vercel)
+apps/web/public/pdfs/
+
+# OS
+Thumbs.db

@@ -1,0 +1,1424 @@
+[
+  {
+    "id": "WX-001",
+    "category": "Weather",
+    "subcategory": "Weather Theory",
+    "question_text": "What are characteristics of a moist, unstable air mass?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Turbulence and showery precipitation."
+      },
+      {
+        "id": "B",
+        "text": "Poor visibility and smooth air."
+      },
+      {
+        "id": "C",
+        "text": "Haze and smoke."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "A moist, unstable air mass is characterized by cumuliform clouds, turbulence, and showery precipitation. Unstable air has a tendency to rise, creating convective activity.",
+    "explanation_distractors": {
+      "B": "Poor visibility and smooth air are characteristics of a stable air mass, not unstable.",
+      "C": "Haze and smoke are associated with stable air conditions where pollutants are trapped near the surface."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 1,
+    "tags": [
+      "unstable-air",
+      "precipitation",
+      "turbulence"
+    ],
+    "acs_code": "UA.III.B.K1d",
+    "source": "UAG Q1"
+  },
+  {
+    "id": "WX-002",
+    "category": "Weather",
+    "subcategory": "Density Altitude",
+    "question_text": "What effect does high density altitude have on the efficiency of a UA propeller?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Propeller efficiency is increased."
+      },
+      {
+        "id": "B",
+        "text": "Propeller efficiency is decreased."
+      },
+      {
+        "id": "C",
+        "text": "Density altitude does not affect propeller efficiency."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "High density altitude means the air is less dense. A propeller is an airfoil that produces thrust by accelerating air — in thinner air, the propeller moves less air mass per revolution, decreasing its efficiency and the aircraft's overall performance.",
+    "explanation_distractors": {
+      "A": "Thinner air reduces propeller efficiency — it does not increase it.",
+      "C": "Density altitude significantly affects propeller efficiency because propellers depend on air density to generate thrust."
+    },
+    "citation": "FAA-H-8083-25, Ch 11",
+    "difficulty_level": 2,
+    "tags": [
+      "density-altitude",
+      "propeller",
+      "performance"
+    ],
+    "acs_code": "UA.III.B.K1a",
+    "source": "UAG Q4"
+  },
+  {
+    "id": "WX-003",
+    "category": "Weather",
+    "subcategory": "Weather Reports",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 12.) What are the current conditions for Chicago Midway Airport (KMDW)?",
+    "figure_reference": "figure-12",
+    "figure_text": "METAR KINK 121845Z 11012G18KT 15SM SKC 25/17 A3000\nMETAR KBOI 121854Z 13004KT 30SM SCT150 17/6 A3015\nMETAR KLAX 121852Z 25004KT 6SM BR SCT007 SCT250 16/15 A2991\nSPECI KMDW 121856Z 32005KT 1 1/2SM RA OVC007 17/16 A2980 RMK RAB35\nSPECI KJFK 121853Z 18004KT 1/2SM FG R04/2200 OVC005 20/18 A3006",
+    "options": [
+      {
+        "id": "A",
+        "text": "Sky 700 feet overcast, visibility 1-1/2SM, rain."
+      },
+      {
+        "id": "B",
+        "text": "Sky 7,000 feet overcast, visibility 1-1/2SM, heavy rain."
+      },
+      {
+        "id": "C",
+        "text": "Sky 700 feet overcast, visibility 11, occasionally 2SM, with rain."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Reading the METAR for KMDW: OVC007 means overcast at 700 feet AGL. The visibility is 1-1/2 statute miles with rain (RA). METAR cloud heights are reported in hundreds of feet AGL.",
+    "explanation_distractors": {
+      "B": "OVC007 means 700 feet, not 7,000 feet. METAR cloud heights are in hundreds of feet.",
+      "C": "The visibility is 1-1/2SM, not 11SM. The OVC007 is 700 feet overcast."
+    },
+    "citation": "FAA-CT-8080-2H, Figure 12; AIM 7-1-31",
+    "difficulty_level": 3,
+    "tags": [
+      "metar",
+      "weather-reports",
+      "aviation-weather"
+    ],
+    "acs_code": "UA.III.A.K2",
+    "source": "UAG Q25"
+  },
+  {
+    "id": "WX-004",
+    "category": "Weather",
+    "subcategory": "Weather Reports",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 12.) The wind direction and velocity at KJFK is from",
+    "figure_reference": "figure-12",
+    "figure_text": "METAR KINK 121845Z 11012G18KT 15SM SKC 25/17 A3000\nMETAR KBOI 121854Z 13004KT 30SM SCT150 17/6 A3015\nMETAR KLAX 121852Z 25004KT 6SM BR SCT007 SCT250 16/15 A2991\nSPECI KMDW 121856Z 32005KT 1 1/2SM RA OVC007 17/16 A2980 RMK RAB35\nSPECI KJFK 121853Z 18004KT 1/2SM FG R04/2200 OVC005 20/18 A3006",
+    "options": [
+      {
+        "id": "A",
+        "text": "180° true at 4 knots."
+      },
+      {
+        "id": "B",
+        "text": "180° magnetic at 4 knots."
+      },
+      {
+        "id": "C",
+        "text": "040° true at 18 knots."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "METAR wind reports give direction in degrees true north and speed in knots. The KJFK METAR shows 18004KT, meaning wind from 180° true at 4 knots.",
+    "explanation_distractors": {
+      "B": "METAR wind directions are referenced to true north, not magnetic north.",
+      "C": "040° at 18 knots is a misreading — the format is dddssKT where ddd=direction and ss=speed."
+    },
+    "citation": "FAA-CT-8080-2H, Figure 12; AIM 7-1-31",
+    "difficulty_level": 2,
+    "tags": [
+      "metar",
+      "wind",
+      "true-north"
+    ],
+    "acs_code": "UA.III.A.K2",
+    "source": "UAG Q26"
+  },
+  {
+    "id": "WX-005",
+    "category": "Weather",
+    "subcategory": "Weather Theory",
+    "question_text": "What are the characteristics of stable air?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Good visibility and steady precipitation."
+      },
+      {
+        "id": "B",
+        "text": "Poor visibility and steady precipitation."
+      },
+      {
+        "id": "C",
+        "text": "Poor visibility and intermittent precipitation."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Stable air is characterized by stratiform clouds, poor visibility (due to haze, fog, or smog trapped near the surface), smooth air, and steady (continuous) precipitation rather than showery.",
+    "explanation_distractors": {
+      "A": "Good visibility is typically not associated with stable air — stable conditions trap pollutants and moisture, reducing visibility.",
+      "C": "Intermittent/showery precipitation is characteristic of unstable air, not stable air."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 2,
+    "tags": [
+      "stable-air",
+      "visibility",
+      "precipitation"
+    ],
+    "acs_code": "UA.III.B.K1c",
+    "source": "UAG Q38"
+  },
+  {
+    "id": "WX-006",
+    "category": "Weather",
+    "subcategory": "Weather Theory",
+    "question_text": "You have received an outlook briefing from flight service through 1800wxbrief.com. The briefing indicates you can expect a low-level temperature inversion with high relative humidity. What weather conditions would you expect?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Smooth air, poor visibility, fog, haze, or low clouds."
+      },
+      {
+        "id": "B",
+        "text": "Light wind shear, poor visibility, haze, and light rain."
+      },
+      {
+        "id": "C",
+        "text": "Turbulent air, poor visibility, fog, low stratus type clouds, and showery precipitation."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "A temperature inversion traps air near the surface, creating very stable conditions. Combined with high humidity, this produces smooth air, poor visibility, and potential fog, haze, or low clouds. Pollutants and moisture are trapped below the inversion layer.",
+    "explanation_distractors": {
+      "B": "While poor visibility is correct, wind shear and light rain are not the primary characteristics of an inversion with high humidity.",
+      "C": "Turbulence and showery precipitation are characteristic of unstable air, not the stable conditions created by a temperature inversion."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 2,
+    "tags": [
+      "temperature-inversion",
+      "fog",
+      "visibility",
+      "stable-air"
+    ],
+    "acs_code": "UA.III.B.K1j",
+    "source": "UAG Q39"
+  },
+  {
+    "id": "WX-007",
+    "category": "Weather",
+    "subcategory": "Wind Shear",
+    "question_text": "A pilot can expect a wind-shear zone in a temperature inversion whenever the windspeed at 2,000 to 4,000 feet above the surface is at least",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "10 knots."
+      },
+      {
+        "id": "B",
+        "text": "15 knots."
+      },
+      {
+        "id": "C",
+        "text": "25 knots."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "A significant wind-shear zone can be expected in a temperature inversion when the wind speed at 2,000 to 4,000 feet above the surface is at least 25 knots. The inversion creates a boundary where wind conditions change dramatically over a short vertical distance.",
+    "explanation_distractors": {
+      "A": "10 knots is too low to create a significant wind shear zone in a temperature inversion.",
+      "B": "15 knots is not sufficient — 25 knots is the threshold for expecting a wind-shear zone."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 3,
+    "tags": [
+      "wind-shear",
+      "temperature-inversion",
+      "wind-speed"
+    ],
+    "acs_code": "UA.III.B.K1j",
+    "source": "SPA Q6"
+  },
+  {
+    "id": "WX-008",
+    "category": "Weather",
+    "subcategory": "Weather Reports",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 15.) What is the valid period for the TAF for KMEM?",
+    "figure_reference": "figure-15",
+    "figure_text": "TAF\nKMEM 121720Z 1218/1324 20012KT 5SM HZ BKN030 PROB40 1220/1222 1SM TSRA OVC008CB\nFM122200 33015G20KT P6SM BKN015 OVC025 PROB40 1220/1222 3SM SHRA\nFM120200 35012KT OVC008 PROB40 1202/1205 2SM-RASN BECMG 1306/1308 02008KT BKN012\nBECMG 1310/1312 00000KT 3SM BR SKC TEMPO 1212/1214 1/2SM FG\nFM131600 VRB06KT P6SM SKC=\nKOKC 051130Z 0512/0618 14008KT 5SM BR BKN030 TEMPO 0513/0516 1 1/2SM BR\nFM051600 18010KT P6SM SKC BECMG 0522/0524 20013G20KT 4SM SHRA OVC020\nPROB40 0600/0606 2SM TSRA OVC008CB BECMG 0606/0608 21015KT P6SM SCT040=",
+    "options": [
+      {
+        "id": "A",
+        "text": "1200Z to 1200Z."
+      },
+      {
+        "id": "B",
+        "text": "1200Z to 1800Z."
+      },
+      {
+        "id": "C",
+        "text": "1800Z to 2400Z."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The TAF (Terminal Aerodrome Forecast) for KMEM covers a 24-hour period from 1200Z to 1200Z, as shown in the forecast header. Standard TAFs are valid for 24 or 30 hours.",
+    "explanation_distractors": {
+      "B": "1200Z to 1800Z would only be a 6-hour period, which is not a standard TAF validity period.",
+      "C": "1800Z to 2400Z would only be a 6-hour period and does not match the issued TAF validity."
+    },
+    "citation": "FAA-CT-8080-2H, Figure 15; AIM 7-1-31",
+    "difficulty_level": 2,
+    "tags": [
+      "taf",
+      "forecast",
+      "weather-reports"
+    ],
+    "acs_code": "UA.III.A.K2",
+    "source": "SPA Q7"
+  },
+  {
+    "id": "WX-009",
+    "category": "Weather",
+    "subcategory": "Weather Reports",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 17.) What wind is forecast for STL at 9,000 feet?",
+    "figure_reference": "figure-17",
+    "figure_text": "FB WBC 151745\nDATA BASED ON 151200Z\nVALID 1600Z FOR USE 1800-0300Z. TEMPS NEG ABV 24000\n\nFT    3000  6000  9000  12000  18000  24000  30000  34000  39000\nSTL   2113  2325+07  2332+02  2339-04  2356-16  2373-27  239440  730649  731960",
+    "options": [
+      {
+        "id": "A",
+        "text": "230° true at 32 knots."
+      },
+      {
+        "id": "B",
+        "text": "230° true at 25 knots."
+      },
+      {
+        "id": "C",
+        "text": "230° magnetic at 25 knots."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The Winds and Temperatures Aloft Forecast shows the wind for STL at 9,000 feet as 2325, meaning 230° true at 25 knots. Winds aloft forecasts always use true north for direction.",
+    "explanation_distractors": {
+      "A": "32 knots is not the correct speed reading for the 9,000 foot level at STL.",
+      "C": "Winds aloft forecasts reference true north, not magnetic north."
+    },
+    "citation": "FAA-CT-8080-2H, Figure 17; AIM 7-1-27",
+    "difficulty_level": 3,
+    "tags": [
+      "winds-aloft",
+      "forecast",
+      "true-north"
+    ],
+    "acs_code": "UA.III.A.K2",
+    "source": "SPA Q8"
+  },
+  {
+    "id": "WX-010",
+    "category": "Weather",
+    "subcategory": "Density Altitude",
+    "question_text": "Which combination of atmospheric conditions will reduce aircraft takeoff and climb performance?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Low temperature, low relative humidity, and low density altitude."
+      },
+      {
+        "id": "B",
+        "text": "High temperature, low relative humidity, and low density altitude."
+      },
+      {
+        "id": "C",
+        "text": "High temperature, high relative humidity, and high density altitude."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "High temperature, high humidity, and high density altitude all result in less dense air. Less dense air reduces engine power output, propeller efficiency, and aerodynamic lift — all of which degrade takeoff and climb performance.",
+    "explanation_distractors": {
+      "A": "Low temperature, low humidity, and low density altitude create dense air, which improves performance.",
+      "B": "While high temperature hurts performance, low humidity and low density altitude help it — the combination in C is the worst case."
+    },
+    "citation": "FAA-H-8083-25, Ch 11",
+    "difficulty_level": 2,
+    "tags": [
+      "density-altitude",
+      "performance",
+      "temperature",
+      "humidity"
+    ],
+    "acs_code": "UA.III.B.K1a",
+    "source": "SPA Q27"
+  },
+  {
+    "id": "WX-ACS-011",
+    "category": "Weather",
+    "subcategory": "Sources of Weather",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.A.K1?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Aviation routine weather reports (METAR)."
+      },
+      {
+        "id": "B",
+        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "Terminal aerodrome forecasts (TAF)."
+      },
+      {
+        "id": "D",
+        "text": "Internet weather briefing and sources of weather available for flight planning purposes."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.III.A.K1 corresponds to: Internet weather briefing and sources of weather available for flight planning purposes.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.III.A.K1 corresponds to: Internet weather briefing and sources of weather available for flight planning purposes.",
+      "B": "This is incorrect. UA.III.A.K1 corresponds to: Internet weather briefing and sources of weather available for flight planning purposes.",
+      "C": "This is incorrect. UA.III.A.K1 corresponds to: Internet weather briefing and sources of weather available for flight planning purposes."
+    },
+    "citation": "ACS UA.III.A.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-a-k1",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "ACS Mastery (UA.III.A.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-012",
+    "category": "Weather",
+    "subcategory": "Sources of Weather",
+    "question_text": "Which ACS knowledge code matches this topic: \"Internet weather briefing and sources of weather available for flight planning purposes.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.A.K2"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.A.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.A.K4"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.A.K3"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.A.K1.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K1.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K1.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K1."
+    },
+    "citation": "ACS UA.III.A.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-a-k1",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "ACS Mastery (UA.III.A.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-013",
+    "category": "Weather",
+    "subcategory": "Sources of Weather",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.A.K3?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Weather charts."
+      },
+      {
+        "id": "B",
+        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "Aviation routine weather reports (METAR)."
+      },
+      {
+        "id": "D",
+        "text": "Terminal aerodrome forecasts (TAF)."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.III.A.K3 corresponds to: Terminal aerodrome forecasts (TAF).",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.III.A.K3 corresponds to: Terminal aerodrome forecasts (TAF).",
+      "B": "This is incorrect. UA.III.A.K3 corresponds to: Terminal aerodrome forecasts (TAF).",
+      "C": "This is incorrect. UA.III.A.K3 corresponds to: Terminal aerodrome forecasts (TAF)."
+    },
+    "citation": "ACS UA.III.A.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-a-k3",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.A.K3",
+    "source": "ACS Mastery (UA.III.A.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-014",
+    "category": "Weather",
+    "subcategory": "Sources of Weather",
+    "question_text": "Which ACS knowledge code matches this topic: \"Terminal aerodrome forecasts (TAF).\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.A.K3"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.A.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.A.K5"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.A.K4"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.A.K3.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K3.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K3.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K3."
+    },
+    "citation": "ACS UA.III.A.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-a-k3",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.A.K3",
+    "source": "ACS Mastery (UA.III.A.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-015",
+    "category": "Weather",
+    "subcategory": "Sources of Weather",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.A.K4?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Weather charts."
+      },
+      {
+        "id": "B",
+        "text": "Internet weather briefing and sources of weather available for flight planning purposes."
+      },
+      {
+        "id": "C",
+        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "D",
+        "text": "Terminal aerodrome forecasts (TAF)."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.III.A.K4 corresponds to: Weather charts.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.III.A.K4 corresponds to: Weather charts.",
+      "C": "This is incorrect. UA.III.A.K4 corresponds to: Weather charts.",
+      "D": "This is incorrect. UA.III.A.K4 corresponds to: Weather charts."
+    },
+    "citation": "ACS UA.III.A.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-a-k4",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.A.K4",
+    "source": "ACS Mastery (UA.III.A.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-016",
+    "category": "Weather",
+    "subcategory": "Sources of Weather",
+    "question_text": "Which ACS knowledge code matches this topic: \"Weather charts.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.A.K2"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.A.K3"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.A.K5"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.A.K4"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.A.K4.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K4.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K4.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K4."
+    },
+    "citation": "ACS UA.III.A.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-a-k4",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.A.K4",
+    "source": "ACS Mastery (UA.III.A.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-017",
+    "category": "Weather",
+    "subcategory": "Sources of Weather",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.A.K5?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Weather charts."
+      },
+      {
+        "id": "B",
+        "text": "Aviation routine weather reports (METAR)."
+      },
+      {
+        "id": "C",
+        "text": "Internet weather briefing and sources of weather available for flight planning purposes."
+      },
+      {
+        "id": "D",
+        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "B": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "C": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+    },
+    "citation": "ACS UA.III.A.K5",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-a-k5",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.A.K5",
+    "source": "ACS Mastery (UA.III.A.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-018",
+    "category": "Weather",
+    "subcategory": "Sources of Weather",
+    "question_text": "Which ACS knowledge code matches this topic: \"Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.A.K2"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.A.K5"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.A.K4"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.A.K1"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.A.K5.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K5.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K5.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K5."
+    },
+    "citation": "ACS UA.III.A.K5",
+    "difficulty_level": 3,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-a-k5",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.A.K5",
+    "source": "ACS Mastery (UA.III.A.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-019",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "d. Air masses and fronts"
+      },
+      {
+        "id": "B",
+        "text": "k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "i. Fog"
+      },
+      {
+        "id": "D",
+        "text": "Weather factors and their effects on performance."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.III.B.K1 corresponds to: Weather factors and their effects on performance.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.III.B.K1 corresponds to: Weather factors and their effects on performance.",
+      "B": "This is incorrect. UA.III.B.K1 corresponds to: Weather factors and their effects on performance.",
+      "C": "This is incorrect. UA.III.B.K1 corresponds to: Weather factors and their effects on performance."
+    },
+    "citation": "ACS UA.III.B.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "part-107",
+      "ua-iii-b-k1",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "ACS Mastery (UA.III.B.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-020",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Which ACS knowledge code matches this topic: \"Weather factors and their effects on performance.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.B.K1j"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.B.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.B.K1a"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.B.K1k"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1."
+    },
+    "citation": "ACS UA.III.B.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "part-107",
+      "ua-iii-b-k1",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "ACS Mastery (UA.III.B.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-021",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1b?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "a. Density altitude"
+      },
+      {
+        "id": "B",
+        "text": "k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "j. Ceiling and visibility"
+      },
+      {
+        "id": "D",
+        "text": "b. Wind and currents"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.III.B.K1b corresponds to: b. Wind and currents",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.III.B.K1b corresponds to: b. Wind and currents",
+      "B": "This is incorrect. UA.III.B.K1b corresponds to: b. Wind and currents",
+      "C": "This is incorrect. UA.III.B.K1b corresponds to: b. Wind and currents"
+    },
+    "citation": "ACS UA.III.B.K1b",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1b",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1b",
+    "source": "ACS Mastery (UA.III.B.K1b)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-022",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Which ACS knowledge code matches this topic: \"b. Wind and currents\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.B.K1d"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.B.K1b"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.B.K1f"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.B.K1j"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1b.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1b.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1b.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1b."
+    },
+    "citation": "ACS UA.III.B.K1b",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1b",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1b",
+    "source": "ACS Mastery (UA.III.B.K1b)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-023",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1e?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "j. Ceiling and visibility"
+      },
+      {
+        "id": "B",
+        "text": "e. Thunderstorms and microbursts"
+      },
+      {
+        "id": "C",
+        "text": "Weather factors and their effects on performance."
+      },
+      {
+        "id": "D",
+        "text": "f. Tornadoes"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.III.B.K1e corresponds to: e. Thunderstorms and microbursts",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.III.B.K1e corresponds to: e. Thunderstorms and microbursts",
+      "C": "This is incorrect. UA.III.B.K1e corresponds to: e. Thunderstorms and microbursts",
+      "D": "This is incorrect. UA.III.B.K1e corresponds to: e. Thunderstorms and microbursts"
+    },
+    "citation": "ACS UA.III.B.K1e",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1e",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1e",
+    "source": "ACS Mastery (UA.III.B.K1e)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-024",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Which ACS knowledge code matches this topic: \"e. Thunderstorms and microbursts\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.B.K1"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.B.K1e"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.B.K1d"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.B.K1a"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1e.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1e.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1e.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1e."
+    },
+    "citation": "ACS UA.III.B.K1e",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1e",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1e",
+    "source": "ACS Mastery (UA.III.B.K1e)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-025",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1f?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "e. Thunderstorms and microbursts"
+      },
+      {
+        "id": "B",
+        "text": "d. Air masses and fronts"
+      },
+      {
+        "id": "C",
+        "text": "f. Tornadoes"
+      },
+      {
+        "id": "D",
+        "text": "k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "UA.III.B.K1f corresponds to: f. Tornadoes",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.III.B.K1f corresponds to: f. Tornadoes",
+      "B": "This is incorrect. UA.III.B.K1f corresponds to: f. Tornadoes",
+      "D": "This is incorrect. UA.III.B.K1f corresponds to: f. Tornadoes"
+    },
+    "citation": "ACS UA.III.B.K1f",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1f",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1f",
+    "source": "ACS Mastery (UA.III.B.K1f)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-026",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Which ACS knowledge code matches this topic: \"f. Tornadoes\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.B.K1e"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.B.K1f"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.B.K1j"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.B.K1c"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1f.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1f.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1f.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1f."
+    },
+    "citation": "ACS UA.III.B.K1f",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1f",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1f",
+    "source": "ACS Mastery (UA.III.B.K1f)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-027",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1g?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "d. Air masses and fronts"
+      },
+      {
+        "id": "B",
+        "text": "f. Tornadoes"
+      },
+      {
+        "id": "C",
+        "text": "b. Wind and currents"
+      },
+      {
+        "id": "D",
+        "text": "g. Icing"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.III.B.K1g corresponds to: g. Icing",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.III.B.K1g corresponds to: g. Icing",
+      "B": "This is incorrect. UA.III.B.K1g corresponds to: g. Icing",
+      "C": "This is incorrect. UA.III.B.K1g corresponds to: g. Icing"
+    },
+    "citation": "ACS UA.III.B.K1g",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1g",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1g",
+    "source": "ACS Mastery (UA.III.B.K1g)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-028",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Which ACS knowledge code matches this topic: \"g. Icing\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.B.K1f"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.B.K1g"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.B.K1j"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.B.K1b"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1g.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1g.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1g.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1g."
+    },
+    "citation": "ACS UA.III.B.K1g",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1g",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1g",
+    "source": "ACS Mastery (UA.III.B.K1g)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-029",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1h?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "b. Wind and currents"
+      },
+      {
+        "id": "B",
+        "text": "Weather factors and their effects on performance."
+      },
+      {
+        "id": "C",
+        "text": "d. Air masses and fronts"
+      },
+      {
+        "id": "D",
+        "text": "h. Hail"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.III.B.K1h corresponds to: h. Hail",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.III.B.K1h corresponds to: h. Hail",
+      "B": "This is incorrect. UA.III.B.K1h corresponds to: h. Hail",
+      "C": "This is incorrect. UA.III.B.K1h corresponds to: h. Hail"
+    },
+    "citation": "ACS UA.III.B.K1h",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1h",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1h",
+    "source": "ACS Mastery (UA.III.B.K1h)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-030",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Which ACS knowledge code matches this topic: \"h. Hail\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.B.K1h"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.B.K1j"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.B.K1c"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.B.K1"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1h.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1h.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1h.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1h."
+    },
+    "citation": "ACS UA.III.B.K1h",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1h",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1h",
+    "source": "ACS Mastery (UA.III.B.K1h)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-031",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1i?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "h. Hail"
+      },
+      {
+        "id": "B",
+        "text": "d. Air masses and fronts"
+      },
+      {
+        "id": "C",
+        "text": "i. Fog"
+      },
+      {
+        "id": "D",
+        "text": "c. Atmospheric stability, pressure, and temperature"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "UA.III.B.K1i corresponds to: i. Fog",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.III.B.K1i corresponds to: i. Fog",
+      "B": "This is incorrect. UA.III.B.K1i corresponds to: i. Fog",
+      "D": "This is incorrect. UA.III.B.K1i corresponds to: i. Fog"
+    },
+    "citation": "ACS UA.III.B.K1i",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1i",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1i",
+    "source": "ACS Mastery (UA.III.B.K1i)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-032",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Which ACS knowledge code matches this topic: \"i. Fog\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.B.K1b"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.B.K1j"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.B.K1i"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.B.K1g"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1i.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1i.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1i.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1i."
+    },
+    "citation": "ACS UA.III.B.K1i",
+    "difficulty_level": 2,
+    "tags": [
+      "acs-mastery",
+      "ua-iii-b-k1i",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1i",
+    "source": "ACS Mastery (UA.III.B.K1i)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-033",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1k?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "B",
+        "text": "i. Fog"
+      },
+      {
+        "id": "C",
+        "text": "Weather factors and their effects on performance."
+      },
+      {
+        "id": "D",
+        "text": "a. Density altitude"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.III.B.K1k corresponds to: k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "C": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "D": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+    },
+    "citation": "ACS UA.III.B.K1k",
+    "difficulty_level": 2,
+    "tags": [
+      "ua-iii-b-k1k",
+      "acs-mastery",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1k",
+    "source": "ACS Mastery (UA.III.B.K1k)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "WX-ACS-034",
+    "category": "Weather",
+    "subcategory": "Effects of Weather on Performance",
+    "question_text": "Which ACS knowledge code matches this topic: \"k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.III.B.K1k"
+      },
+      {
+        "id": "B",
+        "text": "UA.III.B.K1a"
+      },
+      {
+        "id": "C",
+        "text": "UA.III.B.K1i"
+      },
+      {
+        "id": "D",
+        "text": "UA.III.B.K1c"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1k.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1k.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1k.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1k."
+    },
+    "citation": "ACS UA.III.B.K1k",
+    "difficulty_level": 3,
+    "tags": [
+      "ua-iii-b-k1k",
+      "acs-mastery",
+      "part-107",
+      "weather",
+      "meteorology"
+    ],
+    "acs_code": "UA.III.B.K1k",
+    "source": "ACS Mastery (UA.III.B.K1k)",
+    "source_type": "acs_generated"
+  }
+]

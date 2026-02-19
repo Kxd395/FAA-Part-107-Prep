@@ -1,0 +1,18 @@
+{
+  "name": "@part107/core",
+  "version": "1.0.0",
+  "description": "Part 107 Exam Prep — Shared quiz engine, scoring, and session logic",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^2.0.0"
+  },
+  "keywords": ["quiz-engine", "part107", "exam-prep"],
+  "license": "MIT"
+}

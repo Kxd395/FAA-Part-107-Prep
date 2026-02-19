@@ -1,0 +1,2197 @@
+[
+  {
+    "id": "AIR-001",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "According to 14 CFR part 107 the remote pilot in command (PIC) of a small unmanned aircraft planning to operate within Class C airspace",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "must use a visual observer."
+      },
+      {
+        "id": "B",
+        "text": "is required to file a flight plan."
+      },
+      {
+        "id": "C",
+        "text": "is required to receive ATC authorization."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Under 14 CFR 107.41, the remote PIC must receive ATC authorization before operating in Class B, C, or D airspace, or within the lateral boundaries of the surface area of Class E airspace designated for an airport.",
+    "explanation_distractors": {
+      "A": "A visual observer is not required for Class C operations — ATC authorization is the requirement.",
+      "B": "Part 107 does not require filing a flight plan. The requirement is prior ATC authorization."
+    },
+    "citation": "14 CFR §107.41",
+    "difficulty_level": 1,
+    "tags": [
+      "class-c",
+      "atc-authorization",
+      "controlled-airspace"
+    ],
+    "acs_code": "UA.II.A.K1b",
+    "source": "UAG Q3"
+  },
+  {
+    "id": "AIR-002",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 23, area 3.) What is the floor of the Savannah Class C airspace at the shelf area (outer circle)?",
+    "figure_reference": "figure-23",
+    "image_ref": "/figures/figure-23.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "1,300 feet AGL."
+      },
+      {
+        "id": "B",
+        "text": "1,300 feet MSL."
+      },
+      {
+        "id": "C",
+        "text": "1,700 feet MSL."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The outer shelf of the Savannah Class C airspace has a floor of 1,300 feet MSL, as indicated on the sectional chart. Airspace altitudes on sectional charts are always expressed in MSL unless specifically noted as AGL.",
+    "explanation_distractors": {
+      "A": "Airspace dimensions on sectional charts are given in MSL, not AGL.",
+      "C": "1,700 feet MSL represents a different airspace boundary, not the outer shelf floor."
+    },
+    "citation": "FAA-CT-8080-2H, Figure 23",
+    "difficulty_level": 2,
+    "tags": [
+      "class-c",
+      "airspace-floor",
+      "sectional-chart",
+      "msl"
+    ],
+    "acs_code": "UA.II.A.K1b",
+    "source": "UAG Q8"
+  },
+  {
+    "id": "AIR-003",
+    "category": "Airspace",
+    "subcategory": "Special Use Airspace",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 21.) You have been hired by a farmer to use your small UA to inspect his crops. The area that you are to survey is in the Devil's Lake West MOA, east of area 2. How would you find out if the MOA is active?",
+    "figure_reference": "figure-21",
+    "image_ref": "/figures/figure-21.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "Refer to the chart legend."
+      },
+      {
+        "id": "B",
+        "text": "This information is available in the Small UAS database."
+      },
+      {
+        "id": "C",
+        "text": "Refer to the Military Operations Directory."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MOA activity information can be found by referring to the chart legend on the sectional chart, which provides the controlling agency contact information. The specific times of use and contact frequencies are listed in the Chart Supplements U.S. and on the sectional chart border information.",
+    "explanation_distractors": {
+      "B": "There is no 'Small UAS database' that provides real-time MOA activity information.",
+      "C": "There is no publication called the 'Military Operations Directory.' The chart legend and Chart Supplements provide this information."
+    },
+    "citation": "FAA-CT-8080-2H, Figure 21; AIM 3-4-5",
+    "difficulty_level": 2,
+    "tags": [
+      "moa",
+      "special-use-airspace",
+      "sectional-chart"
+    ],
+    "acs_code": "UA.II.A.K2",
+    "source": "UAG Q10"
+  },
+  {
+    "id": "AIR-004",
+    "category": "Airspace",
+    "subcategory": "NOTAMs",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 20, area 5.) How would a remote PIC \"CHECK NOTAMS\" as noted in the CAUTION box regarding the unmarked balloon?",
+    "figure_reference": "figure-20",
+    "image_ref": "/figures/figure-20.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "By utilizing the B4UFLY mobile application."
+      },
+      {
+        "id": "B",
+        "text": "By contacting the FAA district office."
+      },
+      {
+        "id": "C",
+        "text": "By obtaining a briefing via an online source such as: 1800WXBrief.com."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "NOTAMs (Notices to Air Missions) can be obtained by getting a briefing from Flight Service via 1800WXBrief.com or by calling 1-800-WX-BRIEF. This is the official source for NOTAMs.",
+    "explanation_distractors": {
+      "A": "While B4UFLY provides some airspace information, it is not the primary source for NOTAMs. 1800WXBrief.com is the official source.",
+      "B": "The FAA district office is not the standard resource for obtaining NOTAMs."
+    },
+    "citation": "AIM 7-1-3",
+    "difficulty_level": 2,
+    "tags": [
+      "notams",
+      "flight-service",
+      "weather-briefing"
+    ],
+    "acs_code": "UA.II.B.K5",
+    "source": "UAG Q14"
+  },
+  {
+    "id": "AIR-005",
+    "category": "Airspace",
+    "subcategory": "Special Use Airspace",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 59, area 2.) The chart shows a gray line with \"VR1667, VR1617, VR1638, and VR1668.\" Could this area present a hazard to the operations of a small UA?",
+    "figure_reference": "figure-59",
+    "image_ref": "/figures/figure-59.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "No, all operations will be above 400 feet."
+      },
+      {
+        "id": "B",
+        "text": "Yes, this is a Military Training Route from the surface to 1,500 feet AGL."
+      },
+      {
+        "id": "C",
+        "text": "Yes, the defined route provides traffic separation to manned aircraft."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "VR routes (Visual Routes) with 4-digit numbers are Military Training Routes flown at or below 1,500 feet AGL. Military aircraft travel at high speeds at very low altitudes along these routes, posing a significant hazard to sUAS operations.",
+    "explanation_distractors": {
+      "A": "Military training routes include operations at low altitudes, well within the altitude range of sUAS operations.",
+      "C": "Military Training Routes do not provide traffic separation — they are routes where fast-moving military aircraft operate at low altitudes."
+    },
+    "citation": "AIM 3-5-2",
+    "difficulty_level": 3,
+    "tags": [
+      "mtr",
+      "military-training-route",
+      "vr-route",
+      "hazard"
+    ],
+    "acs_code": "UA.II.A.K2",
+    "source": "UAG Q30"
+  },
+  {
+    "id": "AIR-006",
+    "category": "Airspace",
+    "subcategory": "Temporary Flight Restrictions",
+    "question_text": "Your surveying company is a title sponsor for a race team at the Indianapolis 500. To promote your new aerial surveying department, you decide to video part of the race using a small UA. The FAA has issued a Temporary Flight Restriction (TFR) for the race in the area you plan to fly. In this situation",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "you may fly your drone in the TFR since your company is sponsoring a team at the race."
+      },
+      {
+        "id": "B",
+        "text": "the TFR applies to all aircraft; you may not fly in the area without a Certificate of Waiver or Authorization."
+      },
+      {
+        "id": "C",
+        "text": "flying your drone is allowed if you notify all non-participating people of the closed course UA operation."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "TFRs apply to ALL aircraft, including small unmanned aircraft systems. You may not fly in an active TFR area without a Certificate of Waiver or Authorization (COA) from the FAA. Sponsorship of an event does not grant airspace access.",
+    "explanation_distractors": {
+      "A": "Sponsoring a team does not grant airspace privileges. TFRs apply to all aircraft regardless of affiliation.",
+      "C": "Notifying people does not override a TFR. A COA is required."
+    },
+    "citation": "14 CFR §91.137-145; AIM 3-5-3",
+    "difficulty_level": 2,
+    "tags": [
+      "tfr",
+      "temporary-flight-restriction",
+      "waiver"
+    ],
+    "acs_code": "UA.II.A.K3",
+    "source": "UAG Q46"
+  },
+  {
+    "id": "AIR-007",
+    "category": "Airspace",
+    "subcategory": "Special Use Airspace",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 26.) The Devils Lake East MOA (area 1) is a",
+    "figure_reference": "figure-26",
+    "image_ref": "/figures/figure-26.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "meteorological observation area."
+      },
+      {
+        "id": "B",
+        "text": "military observation area."
+      },
+      {
+        "id": "C",
+        "text": "military operations area."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "MOA stands for Military Operations Area. MOAs are airspace established to separate certain non-hazardous military activities from IFR traffic. Pilots should exercise extreme caution while flying within a MOA.",
+    "explanation_distractors": {
+      "A": "MOA does not stand for meteorological observation area.",
+      "B": "MOA does not stand for military observation area — it is a Military Operations Area."
+    },
+    "citation": "AIM 3-4-5",
+    "difficulty_level": 1,
+    "tags": [
+      "moa",
+      "military-operations-area",
+      "special-use-airspace"
+    ],
+    "acs_code": "UA.II.A.K2",
+    "source": "SPA Q36"
+  },
+  {
+    "id": "AIR-ACS-008",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.A.K1?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "B",
+        "text": "d. Class E controlled airspace"
+      },
+      {
+        "id": "C",
+        "text": "c. Class D controlled airspace"
+      },
+      {
+        "id": "D",
+        "text": "General airspace:"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.II.A.K1 corresponds to: General airspace:",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.A.K1 corresponds to: General airspace:",
+      "B": "This is incorrect. UA.II.A.K1 corresponds to: General airspace:",
+      "C": "This is incorrect. UA.II.A.K1 corresponds to: General airspace:"
+    },
+    "citation": "ACS UA.II.A.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-a-k1"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "ACS Mastery (UA.II.A.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-009",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Which ACS knowledge code matches this topic: \"General airspace:\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.A.K2"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.A.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.A.K4"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.A.K1d"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.A.K1.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1."
+    },
+    "citation": "ACS UA.II.A.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-a-k1"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "ACS Mastery (UA.II.A.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-010",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.A.K1a?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "b. Class C controlled airspace"
+      },
+      {
+        "id": "B",
+        "text": "d. Class E controlled airspace"
+      },
+      {
+        "id": "C",
+        "text": "General airspace:"
+      },
+      {
+        "id": "D",
+        "text": "a. Class B controlled airspace"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.II.A.K1a corresponds to: a. Class B controlled airspace",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.A.K1a corresponds to: a. Class B controlled airspace",
+      "B": "This is incorrect. UA.II.A.K1a corresponds to: a. Class B controlled airspace",
+      "C": "This is incorrect. UA.II.A.K1a corresponds to: a. Class B controlled airspace"
+    },
+    "citation": "ACS UA.II.A.K1a",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-a-k1a"
+    ],
+    "acs_code": "UA.II.A.K1a",
+    "source": "ACS Mastery (UA.II.A.K1a)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-011",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Which ACS knowledge code matches this topic: \"a. Class B controlled airspace\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.A.K1a"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.A.K1e"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.A.K1b"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.A.K2"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.A.K1a.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1a.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1a.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1a."
+    },
+    "citation": "ACS UA.II.A.K1a",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-a-k1a"
+    ],
+    "acs_code": "UA.II.A.K1a",
+    "source": "ACS Mastery (UA.II.A.K1a)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-012",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.A.K1c?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Special-use airspace, such as prohibited, restricted, warning areas, military operation areas, alert areas, and controlled firing areas."
+      },
+      {
+        "id": "B",
+        "text": "General airspace:"
+      },
+      {
+        "id": "C",
+        "text": "c. Class D controlled airspace"
+      },
+      {
+        "id": "D",
+        "text": "b. Class C controlled airspace"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "UA.II.A.K1c corresponds to: c. Class D controlled airspace",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.A.K1c corresponds to: c. Class D controlled airspace",
+      "B": "This is incorrect. UA.II.A.K1c corresponds to: c. Class D controlled airspace",
+      "D": "This is incorrect. UA.II.A.K1c corresponds to: c. Class D controlled airspace"
+    },
+    "citation": "ACS UA.II.A.K1c",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-a-k1c",
+      "part-107"
+    ],
+    "acs_code": "UA.II.A.K1c",
+    "source": "ACS Mastery (UA.II.A.K1c)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-013",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Which ACS knowledge code matches this topic: \"c. Class D controlled airspace\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.A.K1b"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.A.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.A.K3"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.A.K1c"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.A.K1c.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1c.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1c.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1c."
+    },
+    "citation": "ACS UA.II.A.K1c",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-a-k1c",
+      "part-107"
+    ],
+    "acs_code": "UA.II.A.K1c",
+    "source": "ACS Mastery (UA.II.A.K1c)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-014",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.A.K1d?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "d. Class E controlled airspace"
+      },
+      {
+        "id": "B",
+        "text": "c. Class D controlled airspace"
+      },
+      {
+        "id": "C",
+        "text": "b. Class C controlled airspace"
+      },
+      {
+        "id": "D",
+        "text": "Other airspace areas, such as Airport Advisory Services, Military Training Routes (MTRs), Temporary Flight Restrictions (TFRs), Parachute Jump Operations, Terminal Radar Service Areas (TRSAs), National Security Areas (NSA) and Visual Flight Rules (VFR) routes."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.II.A.K1d corresponds to: d. Class E controlled airspace",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.II.A.K1d corresponds to: d. Class E controlled airspace",
+      "C": "This is incorrect. UA.II.A.K1d corresponds to: d. Class E controlled airspace",
+      "D": "This is incorrect. UA.II.A.K1d corresponds to: d. Class E controlled airspace"
+    },
+    "citation": "ACS UA.II.A.K1d",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-a-k1d",
+      "part-107"
+    ],
+    "acs_code": "UA.II.A.K1d",
+    "source": "ACS Mastery (UA.II.A.K1d)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-015",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Which ACS knowledge code matches this topic: \"d. Class E controlled airspace\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.A.K1d"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.A.K1a"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.A.K1b"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.A.K2"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.A.K1d.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1d.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1d.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1d."
+    },
+    "citation": "ACS UA.II.A.K1d",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-a-k1d",
+      "part-107"
+    ],
+    "acs_code": "UA.II.A.K1d",
+    "source": "ACS Mastery (UA.II.A.K1d)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-016",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.A.K1e?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "e. Class G uncontrolled airspace"
+      },
+      {
+        "id": "B",
+        "text": "Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "d. Class E controlled airspace"
+      },
+      {
+        "id": "D",
+        "text": "Special-use airspace, such as prohibited, restricted, warning areas, military operation areas, alert areas, and controlled firing areas."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.II.A.K1e corresponds to: e. Class G uncontrolled airspace",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.II.A.K1e corresponds to: e. Class G uncontrolled airspace",
+      "C": "This is incorrect. UA.II.A.K1e corresponds to: e. Class G uncontrolled airspace",
+      "D": "This is incorrect. UA.II.A.K1e corresponds to: e. Class G uncontrolled airspace"
+    },
+    "citation": "ACS UA.II.A.K1e",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-a-k1e",
+      "part-107"
+    ],
+    "acs_code": "UA.II.A.K1e",
+    "source": "ACS Mastery (UA.II.A.K1e)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-017",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Which ACS knowledge code matches this topic: \"e. Class G uncontrolled airspace\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.A.K1a"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.A.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.A.K1e"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.A.K1c"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.A.K1e.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1e.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1e.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K1e."
+    },
+    "citation": "ACS UA.II.A.K1e",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-a-k1e",
+      "part-107"
+    ],
+    "acs_code": "UA.II.A.K1e",
+    "source": "ACS Mastery (UA.II.A.K1e)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-018",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.A.K4?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Other airspace areas, such as Airport Advisory Services, Military Training Routes (MTRs), Temporary Flight Restrictions (TFRs), Parachute Jump Operations, Terminal Radar Service Areas (TRSAs), National Security Areas (NSA) and Visual Flight Rules (VFR) routes."
+      },
+      {
+        "id": "B",
+        "text": "d. Class E controlled airspace"
+      },
+      {
+        "id": "C",
+        "text": "e. Class G uncontrolled airspace"
+      },
+      {
+        "id": "D",
+        "text": "Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "B": "This is incorrect. UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "C": "This is incorrect. UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+    },
+    "citation": "ACS UA.II.A.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-a-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.II.A.K4",
+    "source": "ACS Mastery (UA.II.A.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-019",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Which ACS knowledge code matches this topic: \"Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.A.K1d"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.A.K3"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.A.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.A.K4"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.A.K4.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K4.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K4.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.A.K4."
+    },
+    "citation": "ACS UA.II.A.K4",
+    "difficulty_level": 3,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-a-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.II.A.K4",
+    "source": "ACS Mastery (UA.II.A.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-020",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K1?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "b. Avoid flight beneath unmanned balloons"
+      },
+      {
+        "id": "B",
+        "text": "Operations near airports."
+      },
+      {
+        "id": "C",
+        "text": "g. Flying in the wire environment"
+      },
+      {
+        "id": "D",
+        "text": "Basic weather minimums."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.II.B.K1 corresponds to: Basic weather minimums.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.B.K1 corresponds to: Basic weather minimums.",
+      "B": "This is incorrect. UA.II.B.K1 corresponds to: Basic weather minimums.",
+      "C": "This is incorrect. UA.II.B.K1 corresponds to: Basic weather minimums."
+    },
+    "citation": "ACS UA.II.B.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k1",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K1",
+    "source": "ACS Mastery (UA.II.B.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-021",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"Basic weather minimums.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K3"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K10"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K7"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K1.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K1.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K1.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K1."
+    },
+    "citation": "ACS UA.II.B.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k1",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K1",
+    "source": "ACS Mastery (UA.II.B.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-022",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K2?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "ATC authorizations and related operating limitations."
+      },
+      {
+        "id": "B",
+        "text": "Ground structures and ground structure lighting."
+      },
+      {
+        "id": "C",
+        "text": "Basic weather minimums."
+      },
+      {
+        "id": "D",
+        "text": "Potential flight hazards."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.II.B.K2 corresponds to: ATC authorizations and related operating limitations.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.II.B.K2 corresponds to: ATC authorizations and related operating limitations.",
+      "C": "This is incorrect. UA.II.B.K2 corresponds to: ATC authorizations and related operating limitations.",
+      "D": "This is incorrect. UA.II.B.K2 corresponds to: ATC authorizations and related operating limitations."
+    },
+    "citation": "ACS UA.II.B.K2",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-b-k2"
+    ],
+    "acs_code": "UA.II.B.K2",
+    "source": "ACS Mastery (UA.II.B.K2)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-023",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"ATC authorizations and related operating limitations.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K4b"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K6"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K4e"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K2"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K2.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K2.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K2.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K2."
+    },
+    "citation": "ACS UA.II.B.K2",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-b-k2"
+    ],
+    "acs_code": "UA.II.B.K2",
+    "source": "ACS Mastery (UA.II.B.K2)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-024",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K3?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Potential flight hazards."
+      },
+      {
+        "id": "B",
+        "text": "Operations near airports."
+      },
+      {
+        "id": "C",
+        "text": "d. Precipitation static"
+      },
+      {
+        "id": "D",
+        "text": "c. Emergency airborne inspection of other aircraft"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.II.B.K3 corresponds to: Operations near airports.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.B.K3 corresponds to: Operations near airports.",
+      "C": "This is incorrect. UA.II.B.K3 corresponds to: Operations near airports.",
+      "D": "This is incorrect. UA.II.B.K3 corresponds to: Operations near airports."
+    },
+    "citation": "ACS UA.II.B.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k3",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K3",
+    "source": "ACS Mastery (UA.II.B.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-025",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"Operations near airports.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K3"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K2"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K4a"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K5"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K3.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K3.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K3.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K3."
+    },
+    "citation": "ACS UA.II.B.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k3",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K3",
+    "source": "ACS Mastery (UA.II.B.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-026",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K4?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Potential flight hazards."
+      },
+      {
+        "id": "B",
+        "text": "Ground structures and ground structure lighting."
+      },
+      {
+        "id": "C",
+        "text": "d. Precipitation static"
+      },
+      {
+        "id": "D",
+        "text": "ATC authorizations and related operating limitations."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.II.B.K4 corresponds to: Potential flight hazards.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.II.B.K4 corresponds to: Potential flight hazards.",
+      "C": "This is incorrect. UA.II.B.K4 corresponds to: Potential flight hazards.",
+      "D": "This is incorrect. UA.II.B.K4 corresponds to: Potential flight hazards."
+    },
+    "citation": "ACS UA.II.B.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4",
+    "source": "ACS Mastery (UA.II.B.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-027",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"Potential flight hazards.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K4a"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K4"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K4f"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K3"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K4.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4."
+    },
+    "citation": "ACS UA.II.B.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4",
+    "source": "ACS Mastery (UA.II.B.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-028",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K4a?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Ground structures and ground structure lighting."
+      },
+      {
+        "id": "B",
+        "text": "sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "a. Common aircraft accident causal factors"
+      },
+      {
+        "id": "D",
+        "text": "Hazards on the ground that do not have lighting."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "UA.II.B.K4a corresponds to: a. Common aircraft accident causal factors",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.B.K4a corresponds to: a. Common aircraft accident causal factors",
+      "B": "This is incorrect. UA.II.B.K4a corresponds to: a. Common aircraft accident causal factors",
+      "D": "This is incorrect. UA.II.B.K4a corresponds to: a. Common aircraft accident causal factors"
+    },
+    "citation": "ACS UA.II.B.K4a",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-b-k4a"
+    ],
+    "acs_code": "UA.II.B.K4a",
+    "source": "ACS Mastery (UA.II.B.K4a)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-029",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"a. Common aircraft accident causal factors\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K4d"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K4a"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K10"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K5"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K4a.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4a.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4a.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4a."
+    },
+    "citation": "ACS UA.II.B.K4a",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-b-k4a"
+    ],
+    "acs_code": "UA.II.B.K4a",
+    "source": "ACS Mastery (UA.II.B.K4a)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-030",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K4b?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "b. Avoid flight beneath unmanned balloons"
+      },
+      {
+        "id": "B",
+        "text": "a. Common aircraft accident causal factors"
+      },
+      {
+        "id": "C",
+        "text": "e. Light amplification by stimulated emission of radiation (laser) operations and reporting illumination of aircraft"
+      },
+      {
+        "id": "D",
+        "text": "Basic weather minimums."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.II.B.K4b corresponds to: b. Avoid flight beneath unmanned balloons",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.II.B.K4b corresponds to: b. Avoid flight beneath unmanned balloons",
+      "C": "This is incorrect. UA.II.B.K4b corresponds to: b. Avoid flight beneath unmanned balloons",
+      "D": "This is incorrect. UA.II.B.K4b corresponds to: b. Avoid flight beneath unmanned balloons"
+    },
+    "citation": "ACS UA.II.B.K4b",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k4b",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4b",
+    "source": "ACS Mastery (UA.II.B.K4b)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-031",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"b. Avoid flight beneath unmanned balloons\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K1"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K4a"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K7"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K4b"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K4b.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4b.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4b.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4b."
+    },
+    "citation": "ACS UA.II.B.K4b",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k4b",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4b",
+    "source": "ACS Mastery (UA.II.B.K4b)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-032",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K4c?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "e. Light amplification by stimulated emission of radiation (laser) operations and reporting illumination of aircraft"
+      },
+      {
+        "id": "B",
+        "text": "c. Emergency airborne inspection of other aircraft"
+      },
+      {
+        "id": "C",
+        "text": "d. Precipitation static"
+      },
+      {
+        "id": "D",
+        "text": "sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.II.B.K4c corresponds to: c. Emergency airborne inspection of other aircraft",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.B.K4c corresponds to: c. Emergency airborne inspection of other aircraft",
+      "C": "This is incorrect. UA.II.B.K4c corresponds to: c. Emergency airborne inspection of other aircraft",
+      "D": "This is incorrect. UA.II.B.K4c corresponds to: c. Emergency airborne inspection of other aircraft"
+    },
+    "citation": "ACS UA.II.B.K4c",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k4c",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4c",
+    "source": "ACS Mastery (UA.II.B.K4c)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-033",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"c. Emergency airborne inspection of other aircraft\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K4c"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K8"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K4g"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K6"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K4c.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4c.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4c.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4c."
+    },
+    "citation": "ACS UA.II.B.K4c",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k4c",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4c",
+    "source": "ACS Mastery (UA.II.B.K4c)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-034",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K4d?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "g. Flying in the wire environment"
+      },
+      {
+        "id": "B",
+        "text": "d. Precipitation static"
+      },
+      {
+        "id": "C",
+        "text": "Basic weather minimums."
+      },
+      {
+        "id": "D",
+        "text": "a. Common aircraft accident causal factors"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.II.B.K4d corresponds to: d. Precipitation static",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.B.K4d corresponds to: d. Precipitation static",
+      "C": "This is incorrect. UA.II.B.K4d corresponds to: d. Precipitation static",
+      "D": "This is incorrect. UA.II.B.K4d corresponds to: d. Precipitation static"
+    },
+    "citation": "ACS UA.II.B.K4d",
+    "difficulty_level": 2,
+    "tags": [
+      "ua-ii-b-k4d",
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4d",
+    "source": "ACS Mastery (UA.II.B.K4d)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-035",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"d. Precipitation static\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K6"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K4g"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K4d"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K5"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K4d.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4d.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4d.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4d."
+    },
+    "citation": "ACS UA.II.B.K4d",
+    "difficulty_level": 2,
+    "tags": [
+      "ua-ii-b-k4d",
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4d",
+    "source": "ACS Mastery (UA.II.B.K4d)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-036",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K4e?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "b. Avoid flight beneath unmanned balloons"
+      },
+      {
+        "id": "B",
+        "text": "e. Light amplification by stimulated emission of radiation (laser) operations and reporting illumination of aircraft"
+      },
+      {
+        "id": "C",
+        "text": "The NOTAM system, including how to obtain an established NOTAM through Flight Service."
+      },
+      {
+        "id": "D",
+        "text": "c. Emergency airborne inspection of other aircraft"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.II.B.K4e corresponds to: e. Light amplification by stimulated emission of radiation (laser) operations and reporting illumination of aircraft",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.B.K4e corresponds to: e. Light amplification by stimulated emission of radiation (laser) operations and reporting illumination of aircraft",
+      "C": "This is incorrect. UA.II.B.K4e corresponds to: e. Light amplification by stimulated emission of radiation (laser) operations and reporting illumination of aircraft",
+      "D": "This is incorrect. UA.II.B.K4e corresponds to: e. Light amplification by stimulated emission of radiation (laser) operations and reporting illumination of aircraft"
+    },
+    "citation": "ACS UA.II.B.K4e",
+    "difficulty_level": 2,
+    "tags": [
+      "ua-ii-b-k4e",
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4e",
+    "source": "ACS Mastery (UA.II.B.K4e)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-037",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"e. Light amplification by stimulated emission of radiation (laser) operations and reporting illumination of aircraft\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K4"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K4e"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K4b"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K8"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K4e.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4e.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4e.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4e."
+    },
+    "citation": "ACS UA.II.B.K4e",
+    "difficulty_level": 3,
+    "tags": [
+      "ua-ii-b-k4e",
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4e",
+    "source": "ACS Mastery (UA.II.B.K4e)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-038",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K4f?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "c. Emergency airborne inspection of other aircraft"
+      },
+      {
+        "id": "B",
+        "text": "The NOTAM system, including how to obtain an established NOTAM through Flight Service."
+      },
+      {
+        "id": "C",
+        "text": "sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "D",
+        "text": "f. Avoiding flight in the vicinity of thermal plumes such as smoke stacks and cooling towers"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.II.B.K4f corresponds to: f. Avoiding flight in the vicinity of thermal plumes such as smoke stacks and cooling towers",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.B.K4f corresponds to: f. Avoiding flight in the vicinity of thermal plumes such as smoke stacks and cooling towers",
+      "B": "This is incorrect. UA.II.B.K4f corresponds to: f. Avoiding flight in the vicinity of thermal plumes such as smoke stacks and cooling towers",
+      "C": "This is incorrect. UA.II.B.K4f corresponds to: f. Avoiding flight in the vicinity of thermal plumes such as smoke stacks and cooling towers"
+    },
+    "citation": "ACS UA.II.B.K4f",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "ua-ii-b-k4f",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4f",
+    "source": "ACS Mastery (UA.II.B.K4f)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-039",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"f. Avoiding flight in the vicinity of thermal plumes such as smoke stacks and cooling towers\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K4a"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K3"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K2"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K4f"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K4f.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4f.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4f.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4f."
+    },
+    "citation": "ACS UA.II.B.K4f",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "ua-ii-b-k4f",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4f",
+    "source": "ACS Mastery (UA.II.B.K4f)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-040",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K4g?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "a. Common aircraft accident causal factors"
+      },
+      {
+        "id": "B",
+        "text": "g. Flying in the wire environment"
+      },
+      {
+        "id": "C",
+        "text": "b. Avoid flight beneath unmanned balloons"
+      },
+      {
+        "id": "D",
+        "text": "Ground structures and ground structure lighting."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.II.B.K4g corresponds to: g. Flying in the wire environment",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.B.K4g corresponds to: g. Flying in the wire environment",
+      "C": "This is incorrect. UA.II.B.K4g corresponds to: g. Flying in the wire environment",
+      "D": "This is incorrect. UA.II.B.K4g corresponds to: g. Flying in the wire environment"
+    },
+    "citation": "ACS UA.II.B.K4g",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k4g",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4g",
+    "source": "ACS Mastery (UA.II.B.K4g)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-041",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"g. Flying in the wire environment\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K4g"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K4f"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K4a"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K4b"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K4g.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4g.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4g.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K4g."
+    },
+    "citation": "ACS UA.II.B.K4g",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k4g",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K4g",
+    "source": "ACS Mastery (UA.II.B.K4g)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-042",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K6?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Potential flight hazards."
+      },
+      {
+        "id": "B",
+        "text": "Operator equipment for night flight."
+      },
+      {
+        "id": "C",
+        "text": "f. Avoiding flight in the vicinity of thermal plumes such as smoke stacks and cooling towers"
+      },
+      {
+        "id": "D",
+        "text": "g. Flying in the wire environment"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.II.B.K6 corresponds to: Operator equipment for night flight.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.B.K6 corresponds to: Operator equipment for night flight.",
+      "C": "This is incorrect. UA.II.B.K6 corresponds to: Operator equipment for night flight.",
+      "D": "This is incorrect. UA.II.B.K6 corresponds to: Operator equipment for night flight."
+    },
+    "citation": "ACS UA.II.B.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-b-k6"
+    ],
+    "acs_code": "UA.II.B.K6",
+    "source": "ACS Mastery (UA.II.B.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-043",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"Operator equipment for night flight.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K6"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K5"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K4"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K8"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K6.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K6.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K6.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K6."
+    },
+    "citation": "ACS UA.II.B.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-b-k6"
+    ],
+    "acs_code": "UA.II.B.K6",
+    "source": "ACS Mastery (UA.II.B.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-044",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K7?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Ground structures and ground structure lighting."
+      },
+      {
+        "id": "B",
+        "text": "Potential flight hazards."
+      },
+      {
+        "id": "C",
+        "text": "ATC authorizations and related operating limitations."
+      },
+      {
+        "id": "D",
+        "text": "Operator equipment for night flight."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.II.B.K7 corresponds to: Ground structures and ground structure lighting.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.II.B.K7 corresponds to: Ground structures and ground structure lighting.",
+      "C": "This is incorrect. UA.II.B.K7 corresponds to: Ground structures and ground structure lighting.",
+      "D": "This is incorrect. UA.II.B.K7 corresponds to: Ground structures and ground structure lighting."
+    },
+    "citation": "ACS UA.II.B.K7",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k7",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K7",
+    "source": "ACS Mastery (UA.II.B.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-045",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"Ground structures and ground structure lighting.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K4g"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K2"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K7"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K7.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K7.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K7.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K7."
+    },
+    "citation": "ACS UA.II.B.K7",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k7",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K7",
+    "source": "ACS Mastery (UA.II.B.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-046",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K8?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Operator equipment for night flight."
+      },
+      {
+        "id": "B",
+        "text": "Hazards on the ground that do not have lighting."
+      },
+      {
+        "id": "C",
+        "text": "f. Avoiding flight in the vicinity of thermal plumes such as smoke stacks and cooling towers"
+      },
+      {
+        "id": "D",
+        "text": "The NOTAM system, including how to obtain an established NOTAM through Flight Service."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.II.B.K8 corresponds to: Hazards on the ground that do not have lighting.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.II.B.K8 corresponds to: Hazards on the ground that do not have lighting.",
+      "C": "This is incorrect. UA.II.B.K8 corresponds to: Hazards on the ground that do not have lighting.",
+      "D": "This is incorrect. UA.II.B.K8 corresponds to: Hazards on the ground that do not have lighting."
+    },
+    "citation": "ACS UA.II.B.K8",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k8",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K8",
+    "source": "ACS Mastery (UA.II.B.K8)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-047",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"Hazards on the ground that do not have lighting.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K1"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K4g"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K4f"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K8"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K8.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K8.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K8.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K8."
+    },
+    "citation": "ACS UA.II.B.K8",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k8",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K8",
+    "source": "ACS Mastery (UA.II.B.K8)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-048",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K9?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Manned aircraft lighting."
+      },
+      {
+        "id": "B",
+        "text": "g. Flying in the wire environment"
+      },
+      {
+        "id": "C",
+        "text": "Operator equipment for night flight."
+      },
+      {
+        "id": "D",
+        "text": "The NOTAM system, including how to obtain an established NOTAM through Flight Service."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.II.B.K9 corresponds to: Manned aircraft lighting.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.II.B.K9 corresponds to: Manned aircraft lighting.",
+      "C": "This is incorrect. UA.II.B.K9 corresponds to: Manned aircraft lighting.",
+      "D": "This is incorrect. UA.II.B.K9 corresponds to: Manned aircraft lighting."
+    },
+    "citation": "ACS UA.II.B.K9",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k9",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K9",
+    "source": "ACS Mastery (UA.II.B.K9)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-049",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"Manned aircraft lighting.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K7"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K6"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K9"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K9.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K9.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K9.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K9."
+    },
+    "citation": "ACS UA.II.B.K9",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "ua-ii-b-k9",
+      "part-107"
+    ],
+    "acs_code": "UA.II.B.K9",
+    "source": "ACS Mastery (UA.II.B.K9)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-050",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K10?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "B",
+        "text": "Operator equipment for night flight."
+      },
+      {
+        "id": "C",
+        "text": "Hazards on the ground that do not have lighting."
+      },
+      {
+        "id": "D",
+        "text": "c. Emergency airborne inspection of other aircraft"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.II.B.K10 corresponds to: sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.II.B.K10 corresponds to: sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "C": "This is incorrect. UA.II.B.K10 corresponds to: sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "D": "This is incorrect. UA.II.B.K10 corresponds to: sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+    },
+    "citation": "ACS UA.II.B.K10",
+    "difficulty_level": 2,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-b-k10"
+    ],
+    "acs_code": "UA.II.B.K10",
+    "source": "ACS Mastery (UA.II.B.K10)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "AIR-ACS-051",
+    "category": "Airspace",
+    "subcategory": "Airspace Operational Requirements",
+    "question_text": "Which ACS knowledge code matches this topic: \"sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.II.B.K9"
+      },
+      {
+        "id": "B",
+        "text": "UA.II.B.K4f"
+      },
+      {
+        "id": "C",
+        "text": "UA.II.B.K7"
+      },
+      {
+        "id": "D",
+        "text": "UA.II.B.K10"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.II.B.K10.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K10.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K10.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.II.B.K10."
+    },
+    "citation": "ACS UA.II.B.K10",
+    "difficulty_level": 3,
+    "tags": [
+      "operating-requirements",
+      "airspace",
+      "acs-mastery",
+      "part-107",
+      "ua-ii-b-k10"
+    ],
+    "acs_code": "UA.II.B.K10",
+    "source": "ACS Mastery (UA.II.B.K10)",
+    "source_type": "acs_generated"
+  }
+]

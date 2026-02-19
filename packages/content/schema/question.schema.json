@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Part 107 Question",
+  "description": "Schema for a single Part 107 exam prep question. Used by both the Next.js web app and SwiftUI native app.",
+  "type": "object",
+  "required": [
+    "id",
+    "category",
+    "subcategory",
+    "question_text",
+    "options",
+    "correct_option_id",
+    "explanation_correct",
+    "explanation_distractors",
+    "citation",
+    "difficulty_level",
+    "acs_code"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique question ID. Format: CATEGORY-NNN (e.g., REG-001, AIR-015, WX-042)",
+      "pattern": "^[A-Z]{2,4}-\\d{3}$"
+    },
+    "category": {
+      "type": "string",
+      "description": "Primary topic category, maps to ACS areas",
+      "enum": [
+        "Regulations",
+        "Airspace",
+        "Weather",
+        "Loading & Performance",
+        "Operations",
+        "Emergency Procedures",
+        "Crew Resource Management",
+        "Radio Communications",
+        "Airport Operations",
+        "Maintenance & Preflight",
+        "Physiology",
+        "Remote ID"
+      ]
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "More specific topic within the category (e.g., 'Class G Airspace', 'METAR Decoding', 'Night Operations')"
+    },
+    "question_text": {
+      "type": "string",
+      "description": "The full question text as it would appear on the exam"
+    },
+    "figure_reference": {
+      "type": ["string", "null"],
+      "description": "Reference to a Testing Supplement figure (e.g., 'figure-21', 'figure-26'). Null if no figure needed.",
+      "default": null
+    },
+    "options": {
+      "type": "array",
+      "description": "Answer choices. Supports 3 or 4 options (A-D) depending on source material.",
+      "minItems": 3,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["id", "text"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": ["A", "B", "C", "D"]
+          },
+          "text": {
+            "type": "string",
+            "description": "The answer choice text"
+          }
+        }
+      }
+    },
+    "correct_option_id": {
+      "type": "string",
+      "enum": ["A", "B", "C", "D"],
+      "description": "The ID of the correct answer"
+    },
+    "explanation_correct": {
+      "type": "string",
+      "description": "Explanation of WHY the correct answer is right. Should cite the specific regulation or concept."
+    },
+    "explanation_distractors": {
+      "type": "object",
+      "description": "Explanation of why each WRONG answer is wrong. Key = option ID, Value = explanation.",
+      "properties": {
+        "A": { "type": "string" },
+        "B": { "type": "string" },
+        "C": { "type": "string" },
+        "D": { "type": "string" }
+      }
+    },
+    "citation": {
+      "type": "string",
+      "description": "The specific CFR reference or study guide section (e.g., '14 CFR 107.51', 'AIM 3-2-1')"
+    },
+    "difficulty_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3,
+      "description": "1 = Easy (recall), 2 = Medium (application), 3 = Hard (scenario/chart reading)"
+    },
+    "acs_code": {
+      "type": "string",
+      "description": "The ACS task code this question maps to (e.g., 'UA.I.A', 'UA.III.B')"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Optional tags for smart filtering (e.g., ['night-ops', 'remote-id', '2026-update', 'chart-reading'])",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "year_updated": {
+      "type": "integer",
+      "description": "Year this question was last reviewed/updated for accuracy",
+      "default": 2026
+    }
+  }
+}

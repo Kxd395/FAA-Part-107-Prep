@@ -1,0 +1,194 @@
+{
+  "categories": [
+    {
+      "id": "REG",
+      "name": "Regulations",
+      "description": "14 CFR Part 107 rules, certification requirements, waivers",
+      "acs_area": "UA.I",
+      "icon": "scale",
+      "color": "#3B82F6",
+      "subcategories": [
+        "Certification & Registration",
+        "Operating Rules",
+        "Waivers",
+        "Remote PIC Responsibilities",
+        "Alcohol & Drug Rules"
+      ]
+    },
+    {
+      "id": "AIR",
+      "name": "Airspace",
+      "description": "Airspace classifications, requirements, charts, NOTAMs",
+      "acs_area": "UA.II",
+      "icon": "map",
+      "color": "#8B5CF6",
+      "subcategories": [
+        "Class B Airspace",
+        "Class C Airspace",
+        "Class D Airspace",
+        "Class E Airspace",
+        "Class G Airspace",
+        "Special Use Airspace",
+        "TFRs & NOTAMs",
+        "Sectional Chart Reading"
+      ]
+    },
+    {
+      "id": "WX",
+      "name": "Weather",
+      "description": "Weather theory, sources, METARs, TAFs, effects on flight",
+      "acs_area": "UA.III",
+      "icon": "cloud",
+      "color": "#06B6D4",
+      "subcategories": [
+        "Weather Theory",
+        "METAR Decoding",
+        "TAF Decoding",
+        "Weather Briefings",
+        "Atmospheric Conditions",
+        "Wind & Turbulence",
+        "Visibility & Cloud Clearance"
+      ]
+    },
+    {
+      "id": "LOAD",
+      "name": "Loading & Performance",
+      "description": "Weight/balance, density altitude, performance factors",
+      "acs_area": "UA.IV",
+      "icon": "gauge",
+      "color": "#F59E0B",
+      "subcategories": [
+        "Weight & Balance",
+        "Density Altitude",
+        "Performance Calculations",
+        "Effects of Temperature"
+      ]
+    },
+    {
+      "id": "OPS",
+      "name": "Operations",
+      "description": "Flight operations, Remote ID, operations over people, night ops",
+      "acs_area": "UA.V",
+      "icon": "drone",
+      "color": "#10B981",
+      "subcategories": [
+        "General Operating Rules",
+        "Night Operations",
+        "Operations Over People",
+        "Remote ID",
+        "Visual Line of Sight",
+        "Right-of-Way Rules",
+        "Speed & Altitude Limits"
+      ]
+    },
+    {
+      "id": "EMER",
+      "name": "Emergency Procedures",
+      "description": "In-flight emergencies, lost link, accident reporting",
+      "acs_area": "UA.V",
+      "icon": "alert-triangle",
+      "color": "#EF4444",
+      "subcategories": [
+        "Emergency Actions",
+        "Lost Link Procedures",
+        "Accident Reporting"
+      ]
+    },
+    {
+      "id": "CRM",
+      "name": "Crew Resource Management",
+      "description": "Communication, task management, visual observers",
+      "acs_area": "UA.V",
+      "icon": "users",
+      "color": "#EC4899",
+      "subcategories": [
+        "Visual Observer Roles",
+        "Communication Procedures",
+        "Task Management",
+        "Situational Awareness"
+      ]
+    },
+    {
+      "id": "RADIO",
+      "name": "Radio Communications",
+      "description": "ATC communications, frequencies, phraseology",
+      "acs_area": "UA.II",
+      "icon": "radio",
+      "color": "#6366F1",
+      "subcategories": [
+        "ATC Communication",
+        "Frequencies",
+        "CTAF Procedures"
+      ]
+    },
+    {
+      "id": "APT",
+      "name": "Airport Operations",
+      "description": "Airport markings, signs, lighting, traffic patterns",
+      "acs_area": "UA.II",
+      "icon": "plane",
+      "color": "#14B8A6",
+      "subcategories": [
+        "Runway Markings",
+        "Airport Signs",
+        "Traffic Patterns",
+        "Taxiway Markings",
+        "Airport Lighting"
+      ]
+    },
+    {
+      "id": "MNT",
+      "name": "Maintenance & Preflight",
+      "description": "Preflight inspection, maintenance, airworthiness",
+      "acs_area": "UA.I",
+      "icon": "wrench",
+      "color": "#78716C",
+      "subcategories": [
+        "Preflight Inspection",
+        "Maintenance Requirements",
+        "Battery Safety"
+      ]
+    },
+    {
+      "id": "PHYS",
+      "name": "Physiology",
+      "description": "Fitness for duty, vision, hypoxia, fatigue, stress",
+      "acs_area": "UA.I",
+      "icon": "heart-pulse",
+      "color": "#F43F5E",
+      "subcategories": [
+        "Fitness for Duty",
+        "Vision & Illusions",
+        "Hypoxia",
+        "Hyperventilation",
+        "Fatigue & Stress",
+        "Alcohol & Drugs"
+      ]
+    },
+    {
+      "id": "RID",
+      "name": "Remote ID",
+      "description": "Remote Identification requirements (2026 rules)",
+      "acs_area": "UA.V",
+      "icon": "broadcast",
+      "color": "#0EA5E9",
+      "subcategories": [
+        "Standard Remote ID",
+        "Remote ID Broadcast Module",
+        "FRIA (FAA-Recognized Identification Areas)",
+        "Remote ID Requirements"
+      ]
+    }
+  ],
+  "exam_config": {
+    "total_questions": 60,
+    "time_limit_minutes": 120,
+    "passing_score_percent": 70,
+    "passing_score_count": 42
+  },
+  "difficulty_labels": {
+    "1": "Easy — Direct recall from regulations",
+    "2": "Medium — Apply knowledge to a scenario",
+    "3": "Hard — Chart reading or multi-step reasoning"
+  }
+}

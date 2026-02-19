@@ -1,0 +1,87 @@
+{
+  "description": "Figure manifest for FAA Airman Knowledge Testing Supplement (FAA-CT-8080-2H). These figures are referenced by questions. Extract high-res PNGs from sport_rec_private_akts.pdf.",
+  "source_pdf": "sport_rec_private_akts.pdf",
+  "figures": [
+    {
+      "id": "figure-20",
+      "title": "Sectional Chart Excerpt — Airport Area",
+      "description": "Shows airport symbols, airspace boundaries, and surrounding features",
+      "page_range": "Figure 20",
+      "file": "figures/figure-20.png",
+      "used_by_categories": ["Airspace", "Airport Operations"]
+    },
+    {
+      "id": "figure-21",
+      "title": "Sectional Chart Excerpt — Class C & D Airspace",
+      "description": "Detailed view of controlled airspace around a towered airport",
+      "page_range": "Figure 21",
+      "file": "figures/figure-21.png",
+      "used_by_categories": ["Airspace"]
+    },
+    {
+      "id": "figure-22",
+      "title": "Sectional Chart Excerpt — Airspace & Obstructions",
+      "description": "Shows various airspace types, obstructions, and landmarks",
+      "page_range": "Figure 22",
+      "file": "figures/figure-22.png",
+      "used_by_categories": ["Airspace"]
+    },
+    {
+      "id": "figure-23",
+      "title": "Sectional Chart Legend",
+      "description": "Comprehensive legend showing all sectional chart symbols",
+      "page_range": "Figure 23",
+      "file": "figures/figure-23.png",
+      "used_by_categories": ["Airspace", "Airport Operations"]
+    },
+    {
+      "id": "figure-24",
+      "title": "Sectional Chart Excerpt — VFR Chart Symbols",
+      "description": "Additional chart symbols and navigational features",
+      "page_range": "Figure 24",
+      "file": "figures/figure-24.png",
+      "used_by_categories": ["Airspace"]
+    },
+    {
+      "id": "figure-25",
+      "title": "Airport Diagram",
+      "description": "Detailed airport layout with runways, taxiways, and markings",
+      "page_range": "Figure 25",
+      "file": "figures/figure-25.png",
+      "used_by_categories": ["Airport Operations"]
+    },
+    {
+      "id": "figure-26",
+      "title": "Sectional Chart Excerpt — Complex Airspace",
+      "description": "Area with multiple overlapping airspace types and MOAs",
+      "page_range": "Figure 26",
+      "file": "figures/figure-26.png",
+      "used_by_categories": ["Airspace"]
+    },
+    {
+      "id": "figure-59",
+      "title": "METAR/TAF Example",
+      "description": "Sample METAR and TAF weather reports for decoding practice",
+      "page_range": "Figure 59",
+      "file": "figures/figure-59.png",
+      "used_by_categories": ["Weather"]
+    },
+    {
+      "id": "figure-69",
+      "title": "Airport Sign Examples",
+      "description": "Runway and taxiway signs — mandatory, location, direction",
+      "page_range": "Figure 69",
+      "file": "figures/figure-69.png",
+      "used_by_categories": ["Airport Operations"]
+    },
+    {
+      "id": "figure-78",
+      "title": "Density Altitude Chart",
+      "description": "Chart for computing density altitude based on pressure altitude and temperature",
+      "page_range": "Figure 78",
+      "file": "figures/figure-78.png",
+      "used_by_categories": ["Weather", "Loading & Performance"]
+    }
+  ],
+  "extraction_notes": "Use `tools/content-pipeline/extract_figures.py` to extract these from the PDF. Target resolution: 300 DPI minimum for readability on mobile."
+}

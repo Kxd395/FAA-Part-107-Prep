@@ -1,0 +1,4213 @@
+[
+  {
+    "id": "OPS-001",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 22, area 2.) At Coeur D'Alene which frequency should be used as a Common Traffic Advisory Frequency (CTAF) to monitor airport traffic?",
+    "figure_reference": "figure-22",
+    "image_ref": "/figures/figure-22.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "122.05 MHz."
+      },
+      {
+        "id": "B",
+        "text": "135.075 MHz."
+      },
+      {
+        "id": "C",
+        "text": "122.8 MHz."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The CTAF for Coeur D'Alene Airport is 122.8 MHz, shown on the sectional chart with the circled 'C' designator. The CTAF is the frequency used to communicate traffic information at non-towered airports.",
+    "explanation_distractors": {
+      "A": "122.05 MHz is not the CTAF for this airport.",
+      "B": "135.075 MHz is the AWOS-3 (weather) frequency, not the CTAF."
+    },
+    "citation": "FAA-CT-8080-2H, Figure 22",
+    "difficulty_level": 2,
+    "tags": [
+      "ctaf",
+      "airport-frequency",
+      "sectional-chart"
+    ],
+    "acs_code": "UA.V.B.K6a",
+    "source": "UAG Q5"
+  },
+  {
+    "id": "OPS-002",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 20, area 3.) With ATC authorization, you are operating your small unmanned aircraft approximately 4 SM southeast of Elizabeth City Regional Airport (ECG). What hazard is indicated to be in that area?",
+    "figure_reference": "figure-20",
+    "image_ref": "/figures/figure-20.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "High density military operations in the vicinity."
+      },
+      {
+        "id": "B",
+        "text": "Unmarked balloon on a cable up to 3,008 feet AGL."
+      },
+      {
+        "id": "C",
+        "text": "Unmarked balloon on a cable up to 3,008 feet MSL."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The sectional chart shows a caution note about an unmarked balloon on a cable up to 3,008 feet MSL in that area. Chart altitudes for obstacles and hazards are given in MSL (mean sea level), not AGL.",
+    "explanation_distractors": {
+      "A": "While there may be military operations nearby, the specific hazard shown on the chart is the balloon on a cable.",
+      "B": "The altitude is listed as 3,008 feet MSL, not AGL. Sectional chart obstacle altitudes are MSL."
+    },
+    "citation": "FAA-CT-8080-2H, Figure 20",
+    "difficulty_level": 3,
+    "tags": [
+      "hazards",
+      "balloon",
+      "sectional-chart",
+      "msl"
+    ],
+    "acs_code": "UA.V.B.K6a",
+    "source": "UAG Q9"
+  },
+  {
+    "id": "OPS-003",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "The most comprehensive information on a given airport is provided by",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "the Chart Supplements U.S. (formerly Airport Facility Directory)."
+      },
+      {
+        "id": "B",
+        "text": "Notices to Airmen (NOTAMS)."
+      },
+      {
+        "id": "C",
+        "text": "Terminal Area Chart (TAC)."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The Chart Supplements U.S. (formerly Airport/Facility Directory) provides the most comprehensive data for a given airport, including runway data, services, frequencies, lighting, remarks, and operational notes.",
+    "explanation_distractors": {
+      "B": "NOTAMs provide time-critical temporary information, not comprehensive permanent airport data.",
+      "C": "Terminal Area Charts show a detailed view of the airspace around busy airports but do not contain comprehensive airport-specific data."
+    },
+    "citation": "AIM 9-1-4",
+    "difficulty_level": 1,
+    "tags": [
+      "chart-supplements",
+      "airport-directory",
+      "airport-info"
+    ],
+    "acs_code": "UA.V.B.K6b",
+    "source": "UAG Q11"
+  },
+  {
+    "id": "OPS-004",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision Making",
+    "question_text": "Identify the hazardous attitude or characteristic a remote pilot displays while taking risks in order to impress others?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Impulsivity."
+      },
+      {
+        "id": "B",
+        "text": "Invulnerability."
+      },
+      {
+        "id": "C",
+        "text": "Macho."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The 'Macho' hazardous attitude involves taking risks to prove oneself or impress others. The antidote is: 'Taking chances is foolish.'",
+    "explanation_distractors": {
+      "A": "Impulsivity is the urge to do something immediately without thinking. Its antidote is 'Not so fast. Think first.'",
+      "B": "Invulnerability is the belief that 'It won't happen to me.' Its antidote is 'It could happen to me.'"
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 1,
+    "tags": [
+      "hazardous-attitudes",
+      "macho",
+      "adm"
+    ],
+    "acs_code": "UA.V.D.K4",
+    "source": "UAG Q12"
+  },
+  {
+    "id": "OPS-005",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 26, area 4.) You have been hired to inspect the tower under construction at 46.9N and 98.6W, near Jamestown Regional (JMS). What must you receive prior to flying your unmanned aircraft in this area?",
+    "figure_reference": "figure-26",
+    "image_ref": "/figures/figure-26.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "Authorization from the military."
+      },
+      {
+        "id": "B",
+        "text": "Authorization from ATC."
+      },
+      {
+        "id": "C",
+        "text": "Authorization from the National Park Service."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Jamestown Regional Airport has Class E airspace designated for it. Under 14 CFR 107.41, you must receive prior ATC authorization to operate within the surface area of Class E airspace designated for an airport.",
+    "explanation_distractors": {
+      "A": "The area near Jamestown Regional is civilian-controlled airspace, not military.",
+      "C": "The National Park Service does not control airspace — ATC authorization is required."
+    },
+    "citation": "14 CFR §107.41",
+    "difficulty_level": 2,
+    "tags": [
+      "atc-authorization",
+      "class-e",
+      "airport-vicinity"
+    ],
+    "acs_code": "UA.V.B.K6a",
+    "source": "UAG Q13"
+  },
+  {
+    "id": "OPS-006",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision Making",
+    "question_text": "When adapting crew resource management (CRM) concepts to the operation of a small UA, CRM must be integrated into",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "the flight portion only."
+      },
+      {
+        "id": "B",
+        "text": "all phases of the operation."
+      },
+      {
+        "id": "C",
+        "text": "the communications only."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "CRM must be integrated into all phases of the UAS operation, including preflight planning, briefings, the actual flight, and post-flight debriefing. Effective CRM is not limited to any single phase.",
+    "explanation_distractors": {
+      "A": "Limiting CRM to only the flight portion ignores critical planning and briefing phases.",
+      "C": "CRM encompasses much more than just communications — it includes workload management, decision-making, and situational awareness."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 2,
+    "tags": [
+      "crm",
+      "crew-resource-management",
+      "adm"
+    ],
+    "acs_code": "UA.V.D.K2",
+    "source": "UAG Q15"
+  },
+  {
+    "id": "OPS-007",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision Making",
+    "question_text": "You have been hired as a remote pilot by a local TV news station to film breaking news with a small UA. You expressed a safety concern and the station manager has instructed you to \"fly first, ask questions later.\" What type of hazardous attitude does this attitude represent?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Machismo."
+      },
+      {
+        "id": "B",
+        "text": "Invulnerability."
+      },
+      {
+        "id": "C",
+        "text": "Impulsivity."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "'Fly first, ask questions later' is an example of Impulsivity — the urge to act immediately without adequate thought. The antidote is 'Not so fast. Think first.'",
+    "explanation_distractors": {
+      "A": "Machismo involves taking risks to impress others or prove oneself, not acting without thinking.",
+      "B": "Invulnerability is the belief that accidents happen to others but not to you."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 1,
+    "tags": [
+      "hazardous-attitudes",
+      "impulsivity",
+      "adm"
+    ],
+    "acs_code": "UA.V.D.K4",
+    "source": "UAG Q16"
+  },
+  {
+    "id": "OPS-008",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision Making",
+    "question_text": "A local TV station has hired a remote pilot to operate their small UA to cover news stories. The remote pilot has had multiple near misses with obstacles on the ground and two small UAS accidents. What would be a solution for the news station to improve their operating safety culture?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The news station should implement a policy of no more than five crashes/incidents within 6 months."
+      },
+      {
+        "id": "B",
+        "text": "The news station does not need to make any changes; there are times that an accident is unavoidable."
+      },
+      {
+        "id": "C",
+        "text": "The news station should recognize hazardous attitudes and situations and develop standard operating procedures that emphasize safety."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "A strong safety culture requires recognizing hazardous attitudes, identifying risks, and developing SOPs that emphasize safety. This is the foundation of Safety Management Systems (SMS).",
+    "explanation_distractors": {
+      "A": "Setting an acceptable crash limit is the opposite of a safety culture — the goal should be zero incidents.",
+      "B": "Accepting accidents as unavoidable reflects a poor safety culture and invulnerability hazardous attitude."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 1,
+    "tags": [
+      "safety-culture",
+      "sms",
+      "risk-management"
+    ],
+    "acs_code": "UA.V.D.K1",
+    "source": "UAG Q17"
+  },
+  {
+    "id": "OPS-009",
+    "category": "Operations",
+    "subcategory": "Radio Communications",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 26, area 2.) While monitoring the Cooperstown CTAF you hear an aircraft announce that they are midfield left downwind to RWY 13. Where would the aircraft be relative to the runway?",
+    "figure_reference": "figure-26",
+    "image_ref": "/figures/figure-26.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "The aircraft is East."
+      },
+      {
+        "id": "B",
+        "text": "The aircraft is South."
+      },
+      {
+        "id": "C",
+        "text": "The aircraft is West."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Runway 13 points to a heading of 130°. Left downwind for RWY 13 means the aircraft is flying parallel to the runway but in the opposite direction (heading 310°), on the left side when viewed from the landing direction. This places the aircraft to the west of the runway.",
+    "explanation_distractors": {
+      "A": "East would be on the right side of the runway, not the left downwind side.",
+      "B": "South of the runway would not be the left downwind position for RWY 13."
+    },
+    "citation": "AIM 4-3-3",
+    "difficulty_level": 3,
+    "tags": [
+      "traffic-pattern",
+      "radio-communications",
+      "downwind"
+    ],
+    "acs_code": "UA.V.A.K3",
+    "source": "UAG Q18"
+  },
+  {
+    "id": "OPS-010",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "To avoid a possible collision with a manned airplane, you estimate that your small UA climbed to an altitude greater than 600 feet AGL. To whom must you report the deviation?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Air Traffic Control."
+      },
+      {
+        "id": "B",
+        "text": "The National Transportation Safety Board."
+      },
+      {
+        "id": "C",
+        "text": "Upon request of the Federal Aviation Administration."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Under 14 CFR 107.21, in an in-flight emergency requiring immediate action, the remote PIC may deviate from any rule of Part 107 to the extent required to meet that emergency. They must report the deviation to the FAA upon request.",
+    "explanation_distractors": {
+      "A": "Reporting to ATC is not the specific requirement. The deviation must be reported to the FAA upon their request.",
+      "B": "The NTSB handles accident reporting, not emergency deviations from operating rules."
+    },
+    "citation": "14 CFR §107.21",
+    "difficulty_level": 2,
+    "tags": [
+      "emergency",
+      "deviation",
+      "reporting"
+    ],
+    "acs_code": "UA.V.C.K1",
+    "source": "UAG Q19"
+  },
+  {
+    "id": "OPS-011",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision Making",
+    "question_text": "Safety is an important element for a remote pilot to consider prior to operating an unmanned aircraft system. To prevent the final \"link\" in the accident chain, a remote pilot must consider which methodology?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Crew Resource Management."
+      },
+      {
+        "id": "B",
+        "text": "Safety Management System."
+      },
+      {
+        "id": "C",
+        "text": "Risk Management."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Risk Management is the methodology used to identify, assess, and mitigate hazards before they lead to an accident. Breaking the accident chain requires proactive risk assessment at each stage.",
+    "explanation_distractors": {
+      "A": "CRM is a component of safe operations but is not the specific methodology for breaking the accident chain.",
+      "B": "SMS is an organizational framework, while Risk Management is the specific process for preventing individual incidents."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 2,
+    "tags": [
+      "risk-management",
+      "accident-chain",
+      "adm"
+    ],
+    "acs_code": "UA.V.D.K1",
+    "source": "UAG Q22"
+  },
+  {
+    "id": "OPS-012",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "You are a remote pilot for a co-op energy service provider. You are to use your UA to inspect power lines in a remote area 15 hours away from your home office. After the drive, fatigue impacts your abilities to complete your assignment on time. Fatigue can be recognized",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "easily by an experienced pilot."
+      },
+      {
+        "id": "B",
+        "text": "as being in an impaired state."
+      },
+      {
+        "id": "C",
+        "text": "by an ability to overcome sleep deprivation."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Fatigue is recognized as being in an impaired state. It degrades attention, judgment, and reaction time. A fatigued pilot is an impaired pilot and should not operate an aircraft.",
+    "explanation_distractors": {
+      "A": "Fatigue is insidious and difficult to self-assess, even for experienced pilots.",
+      "C": "Sleep deprivation cannot be overcome by willpower alone — only adequate rest addresses fatigue."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 2,
+    "tags": [
+      "fatigue",
+      "fitness-for-duty",
+      "physiology"
+    ],
+    "acs_code": "UA.V.E.K5",
+    "source": "UAG Q23"
+  },
+  {
+    "id": "OPS-013",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 21.) What airport is located approximately 47 (degrees) 40 (minutes) N latitude and 101 (degrees) 26 (minutes) W longitude?",
+    "figure_reference": "figure-21",
+    "image_ref": "/figures/figure-21.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mercer County Regional Airport."
+      },
+      {
+        "id": "B",
+        "text": "Semshenko Airport."
+      },
+      {
+        "id": "C",
+        "text": "Garrison Airport."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Using latitude and longitude coordinates on the sectional chart, the airport at approximately 47°40'N and 101°26'W is Garrison Airport.",
+    "explanation_distractors": {
+      "A": "Mercer County Regional Airport is located at different coordinates.",
+      "B": "Semshenko Airport is located at different coordinates on the chart."
+    },
+    "citation": "FAA-CT-8080-2H, Figure 21",
+    "difficulty_level": 2,
+    "tags": [
+      "latitude-longitude",
+      "sectional-chart",
+      "airport-identification"
+    ],
+    "acs_code": "UA.V.B.K6a",
+    "source": "UAG Q24"
+  },
+  {
+    "id": "OPS-014",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 26.) What does the line of latitude at area 4 measure?",
+    "figure_reference": "figure-26",
+    "image_ref": "/figures/figure-26.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "The degrees of latitude east and west of the Prime Meridian."
+      },
+      {
+        "id": "B",
+        "text": "The degrees of latitude north and south of the equator."
+      },
+      {
+        "id": "C",
+        "text": "The degrees of latitude east and west of the line that passes through Greenwich, England."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Lines of latitude run east-west and measure the angular distance north or south of the equator. They range from 0° at the equator to 90° at the poles.",
+    "explanation_distractors": {
+      "A": "Measurements east and west of the Prime Meridian describe longitude, not latitude.",
+      "C": "Greenwich, England is the reference for the Prime Meridian (longitude), not for latitude."
+    },
+    "citation": "FAA-H-8083-25, Ch 16",
+    "difficulty_level": 1,
+    "tags": [
+      "latitude",
+      "navigation",
+      "coordinates"
+    ],
+    "acs_code": "UA.V.B.K6a",
+    "source": "UAG Q31"
+  },
+  {
+    "id": "OPS-015",
+    "category": "Operations",
+    "subcategory": "Maintenance",
+    "question_text": "Under what condition should the operator of a small UA establish scheduled maintenance protocol?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "When the manufacturer does not provide a maintenance schedule."
+      },
+      {
+        "id": "B",
+        "text": "UAS does not need a required maintenance schedule."
+      },
+      {
+        "id": "C",
+        "text": "When the FAA requires you to, following an accident."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "When the manufacturer does not provide a maintenance schedule, the operator should establish one. Best practice is to always have a maintenance protocol to ensure the sUAS remains in a condition for safe operation.",
+    "explanation_distractors": {
+      "B": "Proper maintenance is essential for safe sUAS operations and should always be scheduled.",
+      "C": "Waiting for the FAA to require maintenance after an accident is reactive and unsafe."
+    },
+    "citation": "AC 107-2",
+    "difficulty_level": 2,
+    "tags": [
+      "maintenance",
+      "inspection",
+      "safety"
+    ],
+    "acs_code": "UA.V.F.K1",
+    "source": "UAG Q32"
+  },
+  {
+    "id": "OPS-016",
+    "category": "Operations",
+    "subcategory": "Maintenance",
+    "question_text": "According to 14 CFR part 107, the responsibility to inspect the small UAS to ensure it is in a safe operating condition rests with the",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "remote pilot-in-command."
+      },
+      {
+        "id": "B",
+        "text": "visual observer."
+      },
+      {
+        "id": "C",
+        "text": "owner of the small UAS."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Under 14 CFR 107.15 and 107.49, the remote PIC is responsible for ensuring the sUAS is in a condition for safe operation before each flight.",
+    "explanation_distractors": {
+      "B": "The visual observer assists the PIC but does not bear the responsibility for aircraft condition.",
+      "C": "While the owner may maintain the aircraft, the PIC is responsible for verifying safe condition before flight."
+    },
+    "citation": "14 CFR §107.15, §107.49",
+    "difficulty_level": 1,
+    "tags": [
+      "inspection",
+      "remote-pic",
+      "maintenance"
+    ],
+    "acs_code": "UA.V.F.K2",
+    "source": "UAG Q33"
+  },
+  {
+    "id": "OPS-017",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Which is true regarding the presence of alcohol within the human body?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "A small amount of alcohol increases vision acuity."
+      },
+      {
+        "id": "B",
+        "text": "Consuming an equal amount of water will increase the destruction of alcohol and alleviate a hangover."
+      },
+      {
+        "id": "C",
+        "text": "Judgment and decision-making abilities can be adversely affected by even small amounts of alcohol."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Even small amounts of alcohol impair judgment, decision-making, and reaction time. Under 14 CFR 107.27, no person may operate or act as remote PIC while under the influence of alcohol.",
+    "explanation_distractors": {
+      "A": "Alcohol impairs vision — it does not improve visual acuity.",
+      "B": "Water does not accelerate the metabolism of alcohol. Only time allows the body to process alcohol."
+    },
+    "citation": "14 CFR §107.27",
+    "difficulty_level": 1,
+    "tags": [
+      "alcohol",
+      "impairment",
+      "physiology"
+    ],
+    "acs_code": "UA.V.E.K2",
+    "source": "UAG Q36"
+  },
+  {
+    "id": "OPS-018",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "When using a small UA in a commercial operation, who is responsible for briefing the participants about emergency procedures?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The FAA inspector-in-charge."
+      },
+      {
+        "id": "B",
+        "text": "The lead visual observer."
+      },
+      {
+        "id": "C",
+        "text": "The remote PIC."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The remote PIC is responsible for all aspects of the operation, including ensuring that all participants and crew members are briefed on emergency procedures before the operation begins.",
+    "explanation_distractors": {
+      "A": "FAA inspectors do not brief participants — this is the PIC's responsibility.",
+      "B": "Visual observers support the PIC but are not responsible for conducting emergency briefings."
+    },
+    "citation": "14 CFR §107.49",
+    "difficulty_level": 1,
+    "tags": [
+      "emergency-briefing",
+      "remote-pic",
+      "responsibility"
+    ],
+    "acs_code": "UA.V.C.K1",
+    "source": "UAG Q37"
+  },
+  {
+    "id": "OPS-019",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "When preparing for a night flight, what should an sUAS pilot be aware of after assembling and conducting a preflight of an aircraft while using a bright flashlight or work light?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Once adapted to darkness, a person's eyes are relatively immune to bright lights."
+      },
+      {
+        "id": "B",
+        "text": "It takes approximately 30 minutes for a person's eyes to fully adapt to darkness."
+      },
+      {
+        "id": "C",
+        "text": "The person should use a flashlight equipped with LED lights to facilitate their night vision."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Dark adaptation of the eyes takes approximately 30 minutes. Using bright white lights during preflight will reset this process, so pilots should allow adequate time for their eyes to readjust before operating at night.",
+    "explanation_distractors": {
+      "A": "Once adapted, the eyes are very sensitive to bright lights — a brief exposure can undo 30 minutes of adaptation.",
+      "C": "Bright LED lights can actually harm night vision. Red light is preferred for maintaining dark adaptation."
+    },
+    "citation": "AIM 8-1-6",
+    "difficulty_level": 2,
+    "tags": [
+      "night-vision",
+      "dark-adaptation",
+      "physiology"
+    ],
+    "acs_code": "UA.V.E.K8",
+    "source": "UAG Q43"
+  },
+  {
+    "id": "OPS-ACS-020",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.A.K1?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Recommended traffic advisory procedures used by manned aircraft pilots such as self-announcing of position and intentions."
+      },
+      {
+        "id": "B",
+        "text": "Aircraft call signs and registration numbers."
+      },
+      {
+        "id": "C",
+        "text": "Automatic Terminal Information Service (ATIS)."
+      },
+      {
+        "id": "D",
+        "text": "Airport operations with and without an operating control tower."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.A.K1 corresponds to: Airport operations with and without an operating control tower.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.A.K1 corresponds to: Airport operations with and without an operating control tower.",
+      "B": "This is incorrect. UA.V.A.K1 corresponds to: Airport operations with and without an operating control tower.",
+      "C": "This is incorrect. UA.V.A.K1 corresponds to: Airport operations with and without an operating control tower."
+    },
+    "citation": "ACS UA.V.A.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k1",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K1",
+    "source": "ACS Mastery (UA.V.A.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-021",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Airport operations with and without an operating control tower.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.A.K2"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.A.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.A.K6"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.A.K3"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.A.K1.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K1.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K1.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K1."
+    },
+    "citation": "ACS UA.V.A.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k1",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K1",
+    "source": "ACS Mastery (UA.V.A.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-022",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.A.K2?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The phonetic alphabet."
+      },
+      {
+        "id": "B",
+        "text": "The description and use of a Common Traffic Advisory Frequency (CTAF) to monitor manned aircraft communications."
+      },
+      {
+        "id": "C",
+        "text": "Automatic Terminal Information Service (ATIS)."
+      },
+      {
+        "id": "D",
+        "text": "Aircraft call signs and registration numbers."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.A.K2 corresponds to: The description and use of a Common Traffic Advisory Frequency (CTAF) to monitor manned aircraft communications.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.A.K2 corresponds to: The description and use of a Common Traffic Advisory Frequency (CTAF) to monitor manned aircraft communications.",
+      "C": "This is incorrect. UA.V.A.K2 corresponds to: The description and use of a Common Traffic Advisory Frequency (CTAF) to monitor manned aircraft communications.",
+      "D": "This is incorrect. UA.V.A.K2 corresponds to: The description and use of a Common Traffic Advisory Frequency (CTAF) to monitor manned aircraft communications."
+    },
+    "citation": "ACS UA.V.A.K2",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k2",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K2",
+    "source": "ACS Mastery (UA.V.A.K2)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-023",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"The description and use of a Common Traffic Advisory Frequency (CTAF) to monitor manned aircraft communications.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.A.K1"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.A.K3"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.A.K2"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.A.K4"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.A.K2.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K2.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K2.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K2."
+    },
+    "citation": "ACS UA.V.A.K2",
+    "difficulty_level": 3,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k2",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K2",
+    "source": "ACS Mastery (UA.V.A.K2)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-024",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.A.K4?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "B",
+        "text": "Aircraft call signs and registration numbers."
+      },
+      {
+        "id": "C",
+        "text": "Aeronautical advisory communication station (UNICOM) and associated communication procedures used by manned aircraft pilots."
+      },
+      {
+        "id": "D",
+        "text": "The description and use of a Common Traffic Advisory Frequency (CTAF) to monitor manned aircraft communications."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "UA.V.A.K4 corresponds to: Aeronautical advisory communication station (UNICOM) and associated communication procedures used by manned aircraft pilots.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.A.K4 corresponds to: Aeronautical advisory communication station (UNICOM) and associated communication procedures used by manned aircraft pilots.",
+      "B": "This is incorrect. UA.V.A.K4 corresponds to: Aeronautical advisory communication station (UNICOM) and associated communication procedures used by manned aircraft pilots.",
+      "D": "This is incorrect. UA.V.A.K4 corresponds to: Aeronautical advisory communication station (UNICOM) and associated communication procedures used by manned aircraft pilots."
+    },
+    "citation": "ACS UA.V.A.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K4",
+    "source": "ACS Mastery (UA.V.A.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-025",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Aeronautical advisory communication station (UNICOM) and associated communication procedures used by manned aircraft pilots.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.A.K3"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.A.K2"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.A.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.A.K4"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.A.K4.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K4.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K4.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K4."
+    },
+    "citation": "ACS UA.V.A.K4",
+    "difficulty_level": 3,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K4",
+    "source": "ACS Mastery (UA.V.A.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-026",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.A.K5?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Automatic Terminal Information Service (ATIS)."
+      },
+      {
+        "id": "B",
+        "text": "Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "Recommended traffic advisory procedures used by manned aircraft pilots such as self-announcing of position and intentions."
+      },
+      {
+        "id": "D",
+        "text": "The description and use of a Common Traffic Advisory Frequency (CTAF) to monitor manned aircraft communications."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.A.K5 corresponds to: Automatic Terminal Information Service (ATIS).",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.A.K5 corresponds to: Automatic Terminal Information Service (ATIS).",
+      "C": "This is incorrect. UA.V.A.K5 corresponds to: Automatic Terminal Information Service (ATIS).",
+      "D": "This is incorrect. UA.V.A.K5 corresponds to: Automatic Terminal Information Service (ATIS)."
+    },
+    "citation": "ACS UA.V.A.K5",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k5",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K5",
+    "source": "ACS Mastery (UA.V.A.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-027",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Automatic Terminal Information Service (ATIS).\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.A.K8"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.A.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.A.K5"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.A.K2"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.A.K5.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K5.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K5.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K5."
+    },
+    "citation": "ACS UA.V.A.K5",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k5",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K5",
+    "source": "ACS Mastery (UA.V.A.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-028",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.A.K6?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Aircraft call signs and registration numbers."
+      },
+      {
+        "id": "B",
+        "text": "The phonetic alphabet."
+      },
+      {
+        "id": "C",
+        "text": "Recommended traffic advisory procedures used by manned aircraft pilots such as self-announcing of position and intentions."
+      },
+      {
+        "id": "D",
+        "text": "The description and use of a Common Traffic Advisory Frequency (CTAF) to monitor manned aircraft communications."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.A.K6 corresponds to: Aircraft call signs and registration numbers.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.A.K6 corresponds to: Aircraft call signs and registration numbers.",
+      "C": "This is incorrect. UA.V.A.K6 corresponds to: Aircraft call signs and registration numbers.",
+      "D": "This is incorrect. UA.V.A.K6 corresponds to: Aircraft call signs and registration numbers."
+    },
+    "citation": "ACS UA.V.A.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k6",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K6",
+    "source": "ACS Mastery (UA.V.A.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-029",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Aircraft call signs and registration numbers.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.A.K8"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.A.K6"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.A.K7"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.A.K5"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.A.K6.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K6.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K6.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K6."
+    },
+    "citation": "ACS UA.V.A.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k6",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K6",
+    "source": "ACS Mastery (UA.V.A.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-030",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.A.K7?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Aircraft call signs and registration numbers."
+      },
+      {
+        "id": "B",
+        "text": "The phonetic alphabet."
+      },
+      {
+        "id": "C",
+        "text": "Aeronautical advisory communication station (UNICOM) and associated communication procedures used by manned aircraft pilots."
+      },
+      {
+        "id": "D",
+        "text": "The description and use of a Common Traffic Advisory Frequency (CTAF) to monitor manned aircraft communications."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.A.K7 corresponds to: The phonetic alphabet.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.A.K7 corresponds to: The phonetic alphabet.",
+      "C": "This is incorrect. UA.V.A.K7 corresponds to: The phonetic alphabet.",
+      "D": "This is incorrect. UA.V.A.K7 corresponds to: The phonetic alphabet."
+    },
+    "citation": "ACS UA.V.A.K7",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k7",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K7",
+    "source": "ACS Mastery (UA.V.A.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-031",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"The phonetic alphabet.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.A.K5"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.A.K7"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.A.K3"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.A.K2"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.A.K7.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K7.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K7.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K7."
+    },
+    "citation": "ACS UA.V.A.K7",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-a-k7",
+      "part-107"
+    ],
+    "acs_code": "UA.V.A.K7",
+    "source": "ACS Mastery (UA.V.A.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-032",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.A.K8?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "B",
+        "text": "Automatic Terminal Information Service (ATIS)."
+      },
+      {
+        "id": "C",
+        "text": "The phonetic alphabet."
+      },
+      {
+        "id": "D",
+        "text": "Airport operations with and without an operating control tower."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "C": "This is incorrect. UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "D": "This is incorrect. UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+    },
+    "citation": "ACS UA.V.A.K8",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "part-107",
+      "ua-v-a-k8"
+    ],
+    "acs_code": "UA.V.A.K8",
+    "source": "ACS Mastery (UA.V.A.K8)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-033",
+    "category": "Operations",
+    "subcategory": "Radio Communications Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.A.K8"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.A.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.A.K2"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.A.K4"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.A.K8.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K8.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K8.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.A.K8."
+    },
+    "citation": "ACS UA.V.A.K8",
+    "difficulty_level": 3,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "part-107",
+      "ua-v-a-k8"
+    ],
+    "acs_code": "UA.V.A.K8",
+    "source": "ACS Mastery (UA.V.A.K8)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-034",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.B.K1?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Security Identification Display Areas (SIDA)."
+      },
+      {
+        "id": "B",
+        "text": "b. Chart Supplements"
+      },
+      {
+        "id": "C",
+        "text": "Traffic patterns used by manned aircraft pilots."
+      },
+      {
+        "id": "D",
+        "text": "Types of airports such as towered, uncontrolled towered, heliport, and seaplane bases."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.B.K1 corresponds to: Types of airports such as towered, uncontrolled towered, heliport, and seaplane bases.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.B.K1 corresponds to: Types of airports such as towered, uncontrolled towered, heliport, and seaplane bases.",
+      "B": "This is incorrect. UA.V.B.K1 corresponds to: Types of airports such as towered, uncontrolled towered, heliport, and seaplane bases.",
+      "C": "This is incorrect. UA.V.B.K1 corresponds to: Types of airports such as towered, uncontrolled towered, heliport, and seaplane bases."
+    },
+    "citation": "ACS UA.V.B.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-b-k1",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K1",
+    "source": "ACS Mastery (UA.V.B.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-035",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Which ACS knowledge code matches this topic: \"Types of airports such as towered, uncontrolled towered, heliport, and seaplane bases.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.B.K6a"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.B.K2"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.B.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.B.K8"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.B.K1.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K1.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K1.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K1."
+    },
+    "citation": "ACS UA.V.B.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-b-k1",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K1",
+    "source": "ACS Mastery (UA.V.B.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-036",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.B.K2?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "ATC towers, such as ensuring the remote pilot can monitor and interpret ATC communications to improve situational awareness."
+      },
+      {
+        "id": "B",
+        "text": "a. Aeronautical charts"
+      },
+      {
+        "id": "C",
+        "text": "Types of airports such as towered, uncontrolled towered, heliport, and seaplane bases."
+      },
+      {
+        "id": "D",
+        "text": "Sources for airport data."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.B.K2 corresponds to: ATC towers, such as ensuring the remote pilot can monitor and interpret ATC communications to improve situational awareness.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.B.K2 corresponds to: ATC towers, such as ensuring the remote pilot can monitor and interpret ATC communications to improve situational awareness.",
+      "C": "This is incorrect. UA.V.B.K2 corresponds to: ATC towers, such as ensuring the remote pilot can monitor and interpret ATC communications to improve situational awareness.",
+      "D": "This is incorrect. UA.V.B.K2 corresponds to: ATC towers, such as ensuring the remote pilot can monitor and interpret ATC communications to improve situational awareness."
+    },
+    "citation": "ACS UA.V.B.K2",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-b-k2",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K2",
+    "source": "ACS Mastery (UA.V.B.K2)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-037",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Which ACS knowledge code matches this topic: \"ATC towers, such as ensuring the remote pilot can monitor and interpret ATC communications to improve situational awareness.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.B.K8"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.B.K2"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.B.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.B.K3"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.B.K2.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K2.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K2.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K2."
+    },
+    "citation": "ACS UA.V.B.K2",
+    "difficulty_level": 3,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-b-k2",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K2",
+    "source": "ACS Mastery (UA.V.B.K2)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-038",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.B.K3?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Runway markings and signage."
+      },
+      {
+        "id": "B",
+        "text": "Sources for airport data."
+      },
+      {
+        "id": "C",
+        "text": "Traffic patterns used by manned aircraft pilots."
+      },
+      {
+        "id": "D",
+        "text": "b. Chart Supplements"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.B.K3 corresponds to: Runway markings and signage.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.B.K3 corresponds to: Runway markings and signage.",
+      "C": "This is incorrect. UA.V.B.K3 corresponds to: Runway markings and signage.",
+      "D": "This is incorrect. UA.V.B.K3 corresponds to: Runway markings and signage."
+    },
+    "citation": "ACS UA.V.B.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-b-k3",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K3",
+    "source": "ACS Mastery (UA.V.B.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-039",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Which ACS knowledge code matches this topic: \"Runway markings and signage.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.B.K5"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.B.K2"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.B.K3"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.B.K6b"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.B.K3.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K3.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K3.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K3."
+    },
+    "citation": "ACS UA.V.B.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-b-k3",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K3",
+    "source": "ACS Mastery (UA.V.B.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-040",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.B.K4?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Security Identification Display Areas (SIDA)."
+      },
+      {
+        "id": "B",
+        "text": "Traffic patterns used by manned aircraft pilots."
+      },
+      {
+        "id": "C",
+        "text": "b. Chart Supplements"
+      },
+      {
+        "id": "D",
+        "text": "ATC towers, such as ensuring the remote pilot can monitor and interpret ATC communications to improve situational awareness."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.B.K4 corresponds to: Traffic patterns used by manned aircraft pilots.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.B.K4 corresponds to: Traffic patterns used by manned aircraft pilots.",
+      "C": "This is incorrect. UA.V.B.K4 corresponds to: Traffic patterns used by manned aircraft pilots.",
+      "D": "This is incorrect. UA.V.B.K4 corresponds to: Traffic patterns used by manned aircraft pilots."
+    },
+    "citation": "ACS UA.V.B.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-b-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K4",
+    "source": "ACS Mastery (UA.V.B.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-041",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Which ACS knowledge code matches this topic: \"Traffic patterns used by manned aircraft pilots.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.B.K2"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.B.K6"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.B.K4"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.B.K1"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.B.K4.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K4.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K4.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K4."
+    },
+    "citation": "ACS UA.V.B.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-b-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K4",
+    "source": "ACS Mastery (UA.V.B.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-042",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.B.K5?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Types of airports such as towered, uncontrolled towered, heliport, and seaplane bases."
+      },
+      {
+        "id": "B",
+        "text": "Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "ATC towers, such as ensuring the remote pilot can monitor and interpret ATC communications to improve situational awareness."
+      },
+      {
+        "id": "D",
+        "text": "Security Identification Display Areas (SIDA)."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.B.K5 corresponds to: Security Identification Display Areas (SIDA).",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.B.K5 corresponds to: Security Identification Display Areas (SIDA).",
+      "B": "This is incorrect. UA.V.B.K5 corresponds to: Security Identification Display Areas (SIDA).",
+      "C": "This is incorrect. UA.V.B.K5 corresponds to: Security Identification Display Areas (SIDA)."
+    },
+    "citation": "ACS UA.V.B.K5",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "part-107",
+      "ua-v-b-k5"
+    ],
+    "acs_code": "UA.V.B.K5",
+    "source": "ACS Mastery (UA.V.B.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-043",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Which ACS knowledge code matches this topic: \"Security Identification Display Areas (SIDA).\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.B.K6b"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.B.K6"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.B.K4"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.B.K5"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.B.K5.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K5.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K5.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K5."
+    },
+    "citation": "ACS UA.V.B.K5",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "part-107",
+      "ua-v-b-k5"
+    ],
+    "acs_code": "UA.V.B.K5",
+    "source": "ACS Mastery (UA.V.B.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-044",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.B.K6?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "ATC towers, such as ensuring the remote pilot can monitor and interpret ATC communications to improve situational awareness."
+      },
+      {
+        "id": "B",
+        "text": "Sources for airport data."
+      },
+      {
+        "id": "C",
+        "text": "Traffic patterns used by manned aircraft pilots."
+      },
+      {
+        "id": "D",
+        "text": "b. Chart Supplements"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.B.K6 corresponds to: Sources for airport data.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.B.K6 corresponds to: Sources for airport data.",
+      "C": "This is incorrect. UA.V.B.K6 corresponds to: Sources for airport data.",
+      "D": "This is incorrect. UA.V.B.K6 corresponds to: Sources for airport data."
+    },
+    "citation": "ACS UA.V.B.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-b-k6",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K6",
+    "source": "ACS Mastery (UA.V.B.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-045",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Which ACS knowledge code matches this topic: \"Sources for airport data.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.B.K7"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.B.K6"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.B.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.B.K6a"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.B.K6.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K6.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K6.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K6."
+    },
+    "citation": "ACS UA.V.B.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-b-k6",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K6",
+    "source": "ACS Mastery (UA.V.B.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-046",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.B.K7?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Sources for airport data."
+      },
+      {
+        "id": "B",
+        "text": "Avoiding bird and wildlife hazards and reporting collisions between aircraft and wildlife."
+      },
+      {
+        "id": "C",
+        "text": "Types of airports such as towered, uncontrolled towered, heliport, and seaplane bases."
+      },
+      {
+        "id": "D",
+        "text": "ATC towers, such as ensuring the remote pilot can monitor and interpret ATC communications to improve situational awareness."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.B.K7 corresponds to: Avoiding bird and wildlife hazards and reporting collisions between aircraft and wildlife.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.B.K7 corresponds to: Avoiding bird and wildlife hazards and reporting collisions between aircraft and wildlife.",
+      "C": "This is incorrect. UA.V.B.K7 corresponds to: Avoiding bird and wildlife hazards and reporting collisions between aircraft and wildlife.",
+      "D": "This is incorrect. UA.V.B.K7 corresponds to: Avoiding bird and wildlife hazards and reporting collisions between aircraft and wildlife."
+    },
+    "citation": "ACS UA.V.B.K7",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "ua-v-b-k7",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K7",
+    "source": "ACS Mastery (UA.V.B.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-047",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Which ACS knowledge code matches this topic: \"Avoiding bird and wildlife hazards and reporting collisions between aircraft and wildlife.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.B.K6a"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.B.K8"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.B.K7"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.B.K2"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.B.K7.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K7.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K7.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K7."
+    },
+    "citation": "ACS UA.V.B.K7",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "ua-v-b-k7",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K7",
+    "source": "ACS Mastery (UA.V.B.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-048",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.B.K8?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "a. Aeronautical charts"
+      },
+      {
+        "id": "B",
+        "text": "Sources for airport data."
+      },
+      {
+        "id": "C",
+        "text": "b. Chart Supplements"
+      },
+      {
+        "id": "D",
+        "text": "Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.B.K8 corresponds to: Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.B.K8 corresponds to: Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "B": "This is incorrect. UA.V.B.K8 corresponds to: Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "C": "This is incorrect. UA.V.B.K8 corresponds to: Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+    },
+    "citation": "ACS UA.V.B.K8",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "ua-v-b-k8",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K8",
+    "source": "ACS Mastery (UA.V.B.K8)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-049",
+    "category": "Operations",
+    "subcategory": "Airport Operations",
+    "question_text": "Which ACS knowledge code matches this topic: \"Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.B.K4"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.B.K7"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.B.K8"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.B.K5"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.B.K8.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K8.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K8.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.B.K8."
+    },
+    "citation": "ACS UA.V.B.K8",
+    "difficulty_level": 3,
+    "tags": [
+      "procedures",
+      "operations",
+      "ua-v-b-k8",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.B.K8",
+    "source": "ACS Mastery (UA.V.B.K8)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-050",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.C.K2?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Characteristics and potential hazards of lithium batteries."
+      },
+      {
+        "id": "B",
+        "text": "d. Risks of fires involving lithium batteries"
+      },
+      {
+        "id": "C",
+        "text": "b. Safe charging"
+      },
+      {
+        "id": "D",
+        "text": "c. Safe usage"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.C.K2 corresponds to: Characteristics and potential hazards of lithium batteries.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.C.K2 corresponds to: Characteristics and potential hazards of lithium batteries.",
+      "C": "This is incorrect. UA.V.C.K2 corresponds to: Characteristics and potential hazards of lithium batteries.",
+      "D": "This is incorrect. UA.V.C.K2 corresponds to: Characteristics and potential hazards of lithium batteries."
+    },
+    "citation": "ACS UA.V.C.K2",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k2",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K2",
+    "source": "ACS Mastery (UA.V.C.K2)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-051",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Characteristics and potential hazards of lithium batteries.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.C.K2"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.C.K3"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.C.K2a"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.C.K1"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.C.K2.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2."
+    },
+    "citation": "ACS UA.V.C.K2",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k2",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K2",
+    "source": "ACS Mastery (UA.V.C.K2)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-052",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.C.K2a?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "b. Safe charging"
+      },
+      {
+        "id": "B",
+        "text": "Loss of aircraft control link and fly-aways."
+      },
+      {
+        "id": "C",
+        "text": "Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "D",
+        "text": "a. Safe transportation such as proper inspection and handling"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.C.K2a corresponds to: a. Safe transportation such as proper inspection and handling",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.C.K2a corresponds to: a. Safe transportation such as proper inspection and handling",
+      "B": "This is incorrect. UA.V.C.K2a corresponds to: a. Safe transportation such as proper inspection and handling",
+      "C": "This is incorrect. UA.V.C.K2a corresponds to: a. Safe transportation such as proper inspection and handling"
+    },
+    "citation": "ACS UA.V.C.K2a",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k2a",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K2a",
+    "source": "ACS Mastery (UA.V.C.K2a)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-053",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"a. Safe transportation such as proper inspection and handling\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.C.K2a"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.C.K2d"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.C.K4"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.C.K3"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.C.K2a.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2a.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2a.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2a."
+    },
+    "citation": "ACS UA.V.C.K2a",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k2a",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K2a",
+    "source": "ACS Mastery (UA.V.C.K2a)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-054",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.C.K2b?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "b. Safe charging"
+      },
+      {
+        "id": "B",
+        "text": "Loss of aircraft control link and fly-aways."
+      },
+      {
+        "id": "C",
+        "text": "Characteristics and potential hazards of lithium batteries."
+      },
+      {
+        "id": "D",
+        "text": "Procedures for operations over people."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.C.K2b corresponds to: b. Safe charging",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.C.K2b corresponds to: b. Safe charging",
+      "C": "This is incorrect. UA.V.C.K2b corresponds to: b. Safe charging",
+      "D": "This is incorrect. UA.V.C.K2b corresponds to: b. Safe charging"
+    },
+    "citation": "ACS UA.V.C.K2b",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "ua-v-c-k2b",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K2b",
+    "source": "ACS Mastery (UA.V.C.K2b)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-055",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"b. Safe charging\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.C.K4"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.C.K5"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.C.K7"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.C.K2b"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.C.K2b.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2b.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2b.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2b."
+    },
+    "citation": "ACS UA.V.C.K2b",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "ua-v-c-k2b",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K2b",
+    "source": "ACS Mastery (UA.V.C.K2b)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-056",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.C.K2c?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Procedures for operations over people."
+      },
+      {
+        "id": "B",
+        "text": "Emergency planning and communication."
+      },
+      {
+        "id": "C",
+        "text": "Frequency spectrums and associated limitations."
+      },
+      {
+        "id": "D",
+        "text": "c. Safe usage"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.C.K2c corresponds to: c. Safe usage",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.C.K2c corresponds to: c. Safe usage",
+      "B": "This is incorrect. UA.V.C.K2c corresponds to: c. Safe usage",
+      "C": "This is incorrect. UA.V.C.K2c corresponds to: c. Safe usage"
+    },
+    "citation": "ACS UA.V.C.K2c",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "ua-v-c-k2c",
+      "operations",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K2c",
+    "source": "ACS Mastery (UA.V.C.K2c)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-057",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"c. Safe usage\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.C.K2c"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.C.K2a"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.C.K6"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.C.K1"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.C.K2c.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2c.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2c.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2c."
+    },
+    "citation": "ACS UA.V.C.K2c",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "ua-v-c-k2c",
+      "operations",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K2c",
+    "source": "ACS Mastery (UA.V.C.K2c)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-058",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.C.K2d?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Emergency planning and communication."
+      },
+      {
+        "id": "B",
+        "text": "d. Risks of fires involving lithium batteries"
+      },
+      {
+        "id": "C",
+        "text": "Frequency spectrums and associated limitations."
+      },
+      {
+        "id": "D",
+        "text": "a. Safe transportation such as proper inspection and handling"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.C.K2d corresponds to: d. Risks of fires involving lithium batteries",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.C.K2d corresponds to: d. Risks of fires involving lithium batteries",
+      "C": "This is incorrect. UA.V.C.K2d corresponds to: d. Risks of fires involving lithium batteries",
+      "D": "This is incorrect. UA.V.C.K2d corresponds to: d. Risks of fires involving lithium batteries"
+    },
+    "citation": "ACS UA.V.C.K2d",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "part-107",
+      "ua-v-c-k2d"
+    ],
+    "acs_code": "UA.V.C.K2d",
+    "source": "ACS Mastery (UA.V.C.K2d)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-059",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"d. Risks of fires involving lithium batteries\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.C.K2b"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.C.K2c"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.C.K2a"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.C.K2d"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.C.K2d.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2d.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2d.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K2d."
+    },
+    "citation": "ACS UA.V.C.K2d",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "part-107",
+      "ua-v-c-k2d"
+    ],
+    "acs_code": "UA.V.C.K2d",
+    "source": "ACS Mastery (UA.V.C.K2d)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-060",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.C.K3?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "d. Risks of fires involving lithium batteries"
+      },
+      {
+        "id": "B",
+        "text": "Characteristics and potential hazards of lithium batteries."
+      },
+      {
+        "id": "C",
+        "text": "Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "D",
+        "text": "Loss of aircraft control link and fly-aways."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.C.K3 corresponds to: Loss of aircraft control link and fly-aways.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.C.K3 corresponds to: Loss of aircraft control link and fly-aways.",
+      "B": "This is incorrect. UA.V.C.K3 corresponds to: Loss of aircraft control link and fly-aways.",
+      "C": "This is incorrect. UA.V.C.K3 corresponds to: Loss of aircraft control link and fly-aways."
+    },
+    "citation": "ACS UA.V.C.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k3",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K3",
+    "source": "ACS Mastery (UA.V.C.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-061",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Loss of aircraft control link and fly-aways.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.C.K3"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.C.K2b"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.C.K7"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.C.K4"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.C.K3.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K3.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K3.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K3."
+    },
+    "citation": "ACS UA.V.C.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k3",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K3",
+    "source": "ACS Mastery (UA.V.C.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-062",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.C.K4?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "b. Safe charging"
+      },
+      {
+        "id": "B",
+        "text": "Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "Loss of Global Positioning System (GPS) signal during flight and potential consequences."
+      },
+      {
+        "id": "D",
+        "text": "Characteristics and potential hazards of lithium batteries."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "UA.V.C.K4 corresponds to: Loss of Global Positioning System (GPS) signal during flight and potential consequences.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.C.K4 corresponds to: Loss of Global Positioning System (GPS) signal during flight and potential consequences.",
+      "B": "This is incorrect. UA.V.C.K4 corresponds to: Loss of Global Positioning System (GPS) signal during flight and potential consequences.",
+      "D": "This is incorrect. UA.V.C.K4 corresponds to: Loss of Global Positioning System (GPS) signal during flight and potential consequences."
+    },
+    "citation": "ACS UA.V.C.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "part-107",
+      "ua-v-c-k4"
+    ],
+    "acs_code": "UA.V.C.K4",
+    "source": "ACS Mastery (UA.V.C.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-063",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Loss of Global Positioning System (GPS) signal during flight and potential consequences.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.C.K4"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.C.K7"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.C.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.C.K2d"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.C.K4.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K4.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K4.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K4."
+    },
+    "citation": "ACS UA.V.C.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "part-107",
+      "ua-v-c-k4"
+    ],
+    "acs_code": "UA.V.C.K4",
+    "source": "ACS Mastery (UA.V.C.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-064",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.C.K5?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "d. Risks of fires involving lithium batteries"
+      },
+      {
+        "id": "B",
+        "text": "Loss of aircraft control link and fly-aways."
+      },
+      {
+        "id": "C",
+        "text": "Emergency planning and communication."
+      },
+      {
+        "id": "D",
+        "text": "Frequency spectrums and associated limitations."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.C.K5 corresponds to: Frequency spectrums and associated limitations.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.C.K5 corresponds to: Frequency spectrums and associated limitations.",
+      "B": "This is incorrect. UA.V.C.K5 corresponds to: Frequency spectrums and associated limitations.",
+      "C": "This is incorrect. UA.V.C.K5 corresponds to: Frequency spectrums and associated limitations."
+    },
+    "citation": "ACS UA.V.C.K5",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k5",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K5",
+    "source": "ACS Mastery (UA.V.C.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-065",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Frequency spectrums and associated limitations.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.C.K7"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.C.K2d"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.C.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.C.K5"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.C.K5.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K5.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K5.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K5."
+    },
+    "citation": "ACS UA.V.C.K5",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k5",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K5",
+    "source": "ACS Mastery (UA.V.C.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-066",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.C.K6?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Frequency spectrums and associated limitations."
+      },
+      {
+        "id": "B",
+        "text": "Procedures for operations over people."
+      },
+      {
+        "id": "C",
+        "text": "Loss of Global Positioning System (GPS) signal during flight and potential consequences."
+      },
+      {
+        "id": "D",
+        "text": "d. Risks of fires involving lithium batteries"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.C.K6 corresponds to: Procedures for operations over people.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.C.K6 corresponds to: Procedures for operations over people.",
+      "C": "This is incorrect. UA.V.C.K6 corresponds to: Procedures for operations over people.",
+      "D": "This is incorrect. UA.V.C.K6 corresponds to: Procedures for operations over people."
+    },
+    "citation": "ACS UA.V.C.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k6",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K6",
+    "source": "ACS Mastery (UA.V.C.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-067",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Procedures for operations over people.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.C.K2b"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.C.K2c"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.C.K6"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.C.K2d"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.C.K6.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K6.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K6.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K6."
+    },
+    "citation": "ACS UA.V.C.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k6",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K6",
+    "source": "ACS Mastery (UA.V.C.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-068",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.C.K7?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "c. Safe usage"
+      },
+      {
+        "id": "B",
+        "text": "d. Risks of fires involving lithium batteries"
+      },
+      {
+        "id": "C",
+        "text": "b. Safe charging"
+      },
+      {
+        "id": "D",
+        "text": "Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.C.K7 corresponds to: Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.C.K7 corresponds to: Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "B": "This is incorrect. UA.V.C.K7 corresponds to: Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "C": "This is incorrect. UA.V.C.K7 corresponds to: Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+    },
+    "citation": "ACS UA.V.C.K7",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k7",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K7",
+    "source": "ACS Mastery (UA.V.C.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-069",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.C.K6"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.C.K1"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.C.K2a"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.C.K7"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.C.K7.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K7.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K7.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.C.K7."
+    },
+    "citation": "ACS UA.V.C.K7",
+    "difficulty_level": 3,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-c-k7",
+      "part-107"
+    ],
+    "acs_code": "UA.V.C.K7",
+    "source": "ACS Mastery (UA.V.C.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-070",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision-Making",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.D.K1a?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "a. Effective team communication"
+      },
+      {
+        "id": "B",
+        "text": "Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "Aeronautical decision-making (ADM)."
+      },
+      {
+        "id": "D",
+        "text": "Hazardous attitudes."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.D.K1a corresponds to: a. Effective team communication",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.D.K1a corresponds to: a. Effective team communication",
+      "C": "This is incorrect. UA.V.D.K1a corresponds to: a. Effective team communication",
+      "D": "This is incorrect. UA.V.D.K1a corresponds to: a. Effective team communication"
+    },
+    "citation": "ACS UA.V.D.K1a",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "ua-v-d-k1a",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.D.K1a",
+    "source": "ACS Mastery (UA.V.D.K1a)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-071",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision-Making",
+    "question_text": "Which ACS knowledge code matches this topic: \"a. Effective team communication\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.D.K2"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.D.K1a"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.D.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.D.K5"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.D.K1a.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K1a.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K1a.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K1a."
+    },
+    "citation": "ACS UA.V.D.K1a",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "ua-v-d-k1a",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.D.K1a",
+    "source": "ACS Mastery (UA.V.D.K1a)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-072",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision-Making",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.D.K1b?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "b. Task management"
+      },
+      {
+        "id": "B",
+        "text": "Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "a. Effective team communication"
+      },
+      {
+        "id": "D",
+        "text": "Crew Resource Management (CRM)."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.D.K1b corresponds to: b. Task management",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.D.K1b corresponds to: b. Task management",
+      "C": "This is incorrect. UA.V.D.K1b corresponds to: b. Task management",
+      "D": "This is incorrect. UA.V.D.K1b corresponds to: b. Task management"
+    },
+    "citation": "ACS UA.V.D.K1b",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-d-k1b",
+      "part-107"
+    ],
+    "acs_code": "UA.V.D.K1b",
+    "source": "ACS Mastery (UA.V.D.K1b)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-073",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision-Making",
+    "question_text": "Which ACS knowledge code matches this topic: \"b. Task management\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.D.K5"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.D.K1b"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.D.K3"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.D.K1"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.D.K1b.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K1b.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K1b.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K1b."
+    },
+    "citation": "ACS UA.V.D.K1b",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-d-k1b",
+      "part-107"
+    ],
+    "acs_code": "UA.V.D.K1b",
+    "source": "ACS Mastery (UA.V.D.K1b)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-074",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision-Making",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.D.K3?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Crew Resource Management (CRM)."
+      },
+      {
+        "id": "B",
+        "text": "Hazardous attitudes."
+      },
+      {
+        "id": "C",
+        "text": "Situational awareness."
+      },
+      {
+        "id": "D",
+        "text": "a. Effective team communication"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "UA.V.D.K3 corresponds to: Situational awareness.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.D.K3 corresponds to: Situational awareness.",
+      "B": "This is incorrect. UA.V.D.K3 corresponds to: Situational awareness.",
+      "D": "This is incorrect. UA.V.D.K3 corresponds to: Situational awareness."
+    },
+    "citation": "ACS UA.V.D.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-d-k3",
+      "part-107"
+    ],
+    "acs_code": "UA.V.D.K3",
+    "source": "ACS Mastery (UA.V.D.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-075",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision-Making",
+    "question_text": "Which ACS knowledge code matches this topic: \"Situational awareness.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.D.K2"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.D.K3"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.D.K4"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.D.K1a"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.D.K3.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K3.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K3.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K3."
+    },
+    "citation": "ACS UA.V.D.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-d-k3",
+      "part-107"
+    ],
+    "acs_code": "UA.V.D.K3",
+    "source": "ACS Mastery (UA.V.D.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-076",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision-Making",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.D.K5?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "B",
+        "text": "Hazardous attitudes."
+      },
+      {
+        "id": "C",
+        "text": "b. Task management"
+      },
+      {
+        "id": "D",
+        "text": "Crew Resource Management (CRM)."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.D.K5 corresponds to: Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.D.K5 corresponds to: Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "C": "This is incorrect. UA.V.D.K5 corresponds to: Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "D": "This is incorrect. UA.V.D.K5 corresponds to: Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+    },
+    "citation": "ACS UA.V.D.K5",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-d-k5",
+      "part-107"
+    ],
+    "acs_code": "UA.V.D.K5",
+    "source": "ACS Mastery (UA.V.D.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-077",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision-Making",
+    "question_text": "Which ACS knowledge code matches this topic: \"Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.D.K1"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.D.K5"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.D.K2"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.D.K4"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.D.K5.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K5.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K5.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.D.K5."
+    },
+    "citation": "ACS UA.V.D.K5",
+    "difficulty_level": 3,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-d-k5",
+      "part-107"
+    ],
+    "acs_code": "UA.V.D.K5",
+    "source": "ACS Mastery (UA.V.D.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-078",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.E.K1?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "B",
+        "text": "Physiological considerations and their effects on safety such as dehydration and heatstroke."
+      },
+      {
+        "id": "C",
+        "text": "Drug and alcohol use."
+      },
+      {
+        "id": "D",
+        "text": "Prescription and over-the-counter medication."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.E.K1 corresponds to: Physiological considerations and their effects on safety such as dehydration and heatstroke.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.E.K1 corresponds to: Physiological considerations and their effects on safety such as dehydration and heatstroke.",
+      "C": "This is incorrect. UA.V.E.K1 corresponds to: Physiological considerations and their effects on safety such as dehydration and heatstroke.",
+      "D": "This is incorrect. UA.V.E.K1 corresponds to: Physiological considerations and their effects on safety such as dehydration and heatstroke."
+    },
+    "citation": "ACS UA.V.E.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-e-k1",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K1",
+    "source": "ACS Mastery (UA.V.E.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-079",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Which ACS knowledge code matches this topic: \"Physiological considerations and their effects on safety such as dehydration and heatstroke.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.E.K4"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.E.K2"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.E.K3"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.E.K1"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.E.K1.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K1.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K1.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K1."
+    },
+    "citation": "ACS UA.V.E.K1",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-e-k1",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K1",
+    "source": "ACS Mastery (UA.V.E.K1)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-080",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.E.K3?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Physiological aspects of night operation."
+      },
+      {
+        "id": "B",
+        "text": "Fitness for flight."
+      },
+      {
+        "id": "C",
+        "text": "Prescription and over-the-counter medication."
+      },
+      {
+        "id": "D",
+        "text": "Hyperventilation."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "UA.V.E.K3 corresponds to: Prescription and over-the-counter medication.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.E.K3 corresponds to: Prescription and over-the-counter medication.",
+      "B": "This is incorrect. UA.V.E.K3 corresponds to: Prescription and over-the-counter medication.",
+      "D": "This is incorrect. UA.V.E.K3 corresponds to: Prescription and over-the-counter medication."
+    },
+    "citation": "ACS UA.V.E.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-e-k3",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K3",
+    "source": "ACS Mastery (UA.V.E.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-081",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Which ACS knowledge code matches this topic: \"Prescription and over-the-counter medication.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.E.K1"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.E.K7"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.E.K3"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.E.K8"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.E.K3.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K3.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K3.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K3."
+    },
+    "citation": "ACS UA.V.E.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-e-k3",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K3",
+    "source": "ACS Mastery (UA.V.E.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-082",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.E.K4?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Physiological considerations and their effects on safety such as dehydration and heatstroke."
+      },
+      {
+        "id": "B",
+        "text": "Factors affecting vision."
+      },
+      {
+        "id": "C",
+        "text": "Fitness for flight."
+      },
+      {
+        "id": "D",
+        "text": "Hyperventilation."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.E.K4 corresponds to: Hyperventilation.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.E.K4 corresponds to: Hyperventilation.",
+      "B": "This is incorrect. UA.V.E.K4 corresponds to: Hyperventilation.",
+      "C": "This is incorrect. UA.V.E.K4 corresponds to: Hyperventilation."
+    },
+    "citation": "ACS UA.V.E.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-e-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K4",
+    "source": "ACS Mastery (UA.V.E.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-083",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Which ACS knowledge code matches this topic: \"Hyperventilation.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.E.K7"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.E.K5"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.E.K8"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.E.K4"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.E.K4.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K4.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K4.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K4."
+    },
+    "citation": "ACS UA.V.E.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-e-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K4",
+    "source": "ACS Mastery (UA.V.E.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-084",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.E.K6?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Factors affecting vision."
+      },
+      {
+        "id": "B",
+        "text": "Fitness for flight."
+      },
+      {
+        "id": "C",
+        "text": "Stress and fatigue."
+      },
+      {
+        "id": "D",
+        "text": "Physiological aspects of night operation."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.E.K6 corresponds to: Factors affecting vision.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.E.K6 corresponds to: Factors affecting vision.",
+      "C": "This is incorrect. UA.V.E.K6 corresponds to: Factors affecting vision.",
+      "D": "This is incorrect. UA.V.E.K6 corresponds to: Factors affecting vision."
+    },
+    "citation": "ACS UA.V.E.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-e-k6",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K6",
+    "source": "ACS Mastery (UA.V.E.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-085",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Which ACS knowledge code matches this topic: \"Factors affecting vision.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.E.K4"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.E.K6"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.E.K2"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.E.K1"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.E.K6.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K6.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K6.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K6."
+    },
+    "citation": "ACS UA.V.E.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-e-k6",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K6",
+    "source": "ACS Mastery (UA.V.E.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-086",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.E.K7?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Fitness for flight."
+      },
+      {
+        "id": "B",
+        "text": "Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "Hyperventilation."
+      },
+      {
+        "id": "D",
+        "text": "Stress and fatigue."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UA.V.E.K7 corresponds to: Fitness for flight.",
+    "explanation_distractors": {
+      "B": "This is incorrect. UA.V.E.K7 corresponds to: Fitness for flight.",
+      "C": "This is incorrect. UA.V.E.K7 corresponds to: Fitness for flight.",
+      "D": "This is incorrect. UA.V.E.K7 corresponds to: Fitness for flight."
+    },
+    "citation": "ACS UA.V.E.K7",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "ua-v-e-k7",
+      "operations",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K7",
+    "source": "ACS Mastery (UA.V.E.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-087",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Which ACS knowledge code matches this topic: \"Fitness for flight.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.E.K6"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.E.K7"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.E.K8"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.E.K5"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.E.K7.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K7.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K7.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K7."
+    },
+    "citation": "ACS UA.V.E.K7",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "ua-v-e-k7",
+      "operations",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K7",
+    "source": "ACS Mastery (UA.V.E.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-088",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.E.K9?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Fitness for flight."
+      },
+      {
+        "id": "B",
+        "text": "Factors affecting vision."
+      },
+      {
+        "id": "C",
+        "text": "Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "D",
+        "text": "Hyperventilation."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "UA.V.E.K9 corresponds to: Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.E.K9 corresponds to: Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "B": "This is incorrect. UA.V.E.K9 corresponds to: Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "D": "This is incorrect. UA.V.E.K9 corresponds to: Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+    },
+    "citation": "ACS UA.V.E.K9",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-e-k9",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K9",
+    "source": "ACS Mastery (UA.V.E.K9)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-089",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "Which ACS knowledge code matches this topic: \"Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.E.K3"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.E.K4"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.E.K5"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.E.K9"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.E.K9.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K9.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K9.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.E.K9."
+    },
+    "citation": "ACS UA.V.E.K9",
+    "difficulty_level": 3,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-e-k9",
+      "part-107"
+    ],
+    "acs_code": "UA.V.E.K9",
+    "source": "ACS Mastery (UA.V.E.K9)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-090",
+    "category": "Operations",
+    "subcategory": "Maintenance and Inspection Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.F.K3?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Preflight inspection."
+      },
+      {
+        "id": "B",
+        "text": "Techniques to mitigate mechanical failures of all elements used in sUAS operations such as the battery and any device(s) used to operate the sUAS."
+      },
+      {
+        "id": "C",
+        "text": "Preflight inspection for night operations."
+      },
+      {
+        "id": "D",
+        "text": "Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.F.K3 corresponds to: Techniques to mitigate mechanical failures of all elements used in sUAS operations such as the battery and any device(s) used to operate the sUAS.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.F.K3 corresponds to: Techniques to mitigate mechanical failures of all elements used in sUAS operations such as the battery and any device(s) used to operate the sUAS.",
+      "C": "This is incorrect. UA.V.F.K3 corresponds to: Techniques to mitigate mechanical failures of all elements used in sUAS operations such as the battery and any device(s) used to operate the sUAS.",
+      "D": "This is incorrect. UA.V.F.K3 corresponds to: Techniques to mitigate mechanical failures of all elements used in sUAS operations such as the battery and any device(s) used to operate the sUAS."
+    },
+    "citation": "ACS UA.V.F.K3",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "ua-v-f-k3",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.F.K3",
+    "source": "ACS Mastery (UA.V.F.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-091",
+    "category": "Operations",
+    "subcategory": "Maintenance and Inspection Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Techniques to mitigate mechanical failures of all elements used in sUAS operations such as the battery and any device(s) used to operate the sUAS.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.F.K6"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.F.K3"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.F.K1"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.F.K2"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.F.K3.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K3.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K3.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K3."
+    },
+    "citation": "ACS UA.V.F.K3",
+    "difficulty_level": 3,
+    "tags": [
+      "procedures",
+      "operations",
+      "ua-v-f-k3",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.F.K3",
+    "source": "ACS Mastery (UA.V.F.K3)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-092",
+    "category": "Operations",
+    "subcategory": "Maintenance and Inspection Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.F.K4?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Persons that may perform maintenance on an sUAS."
+      },
+      {
+        "id": "B",
+        "text": "Techniques to mitigate mechanical failures of all elements used in sUAS operations such as the battery and any device(s) used to operate the sUAS."
+      },
+      {
+        "id": "C",
+        "text": "Preflight inspection for night operations."
+      },
+      {
+        "id": "D",
+        "text": "Appropriate record keeping."
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "UA.V.F.K4 corresponds to: Appropriate record keeping.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.F.K4 corresponds to: Appropriate record keeping.",
+      "B": "This is incorrect. UA.V.F.K4 corresponds to: Appropriate record keeping.",
+      "C": "This is incorrect. UA.V.F.K4 corresponds to: Appropriate record keeping."
+    },
+    "citation": "ACS UA.V.F.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-f-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.V.F.K4",
+    "source": "ACS Mastery (UA.V.F.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-093",
+    "category": "Operations",
+    "subcategory": "Maintenance and Inspection Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Appropriate record keeping.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.F.K1"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.F.K7"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.F.K6"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.F.K4"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.F.K4.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K4.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K4.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K4."
+    },
+    "citation": "ACS UA.V.F.K4",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-f-k4",
+      "part-107"
+    ],
+    "acs_code": "UA.V.F.K4",
+    "source": "ACS Mastery (UA.V.F.K4)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-094",
+    "category": "Operations",
+    "subcategory": "Maintenance and Inspection Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.F.K5?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Appropriate record keeping."
+      },
+      {
+        "id": "B",
+        "text": "Basic maintenance."
+      },
+      {
+        "id": "C",
+        "text": "Persons that may perform maintenance on an sUAS."
+      },
+      {
+        "id": "D",
+        "text": "Techniques to mitigate mechanical failures of all elements used in sUAS operations such as the battery and any device(s) used to operate the sUAS."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "UA.V.F.K5 corresponds to: Persons that may perform maintenance on an sUAS.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.F.K5 corresponds to: Persons that may perform maintenance on an sUAS.",
+      "B": "This is incorrect. UA.V.F.K5 corresponds to: Persons that may perform maintenance on an sUAS.",
+      "D": "This is incorrect. UA.V.F.K5 corresponds to: Persons that may perform maintenance on an sUAS."
+    },
+    "citation": "ACS UA.V.F.K5",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "ua-v-f-k5",
+      "operations",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.F.K5",
+    "source": "ACS Mastery (UA.V.F.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-095",
+    "category": "Operations",
+    "subcategory": "Maintenance and Inspection Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Persons that may perform maintenance on an sUAS.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.F.K5"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.F.K7"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.F.K2"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.F.K1"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.F.K5.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K5.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K5.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K5."
+    },
+    "citation": "ACS UA.V.F.K5",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "ua-v-f-k5",
+      "operations",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.F.K5",
+    "source": "ACS Mastery (UA.V.F.K5)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-096",
+    "category": "Operations",
+    "subcategory": "Maintenance and Inspection Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.F.K6?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Persons that may perform maintenance on an sUAS."
+      },
+      {
+        "id": "B",
+        "text": "Preflight inspection for night operations."
+      },
+      {
+        "id": "C",
+        "text": "Techniques to mitigate mechanical failures of all elements used in sUAS operations such as the battery and any device(s) used to operate the sUAS."
+      },
+      {
+        "id": "D",
+        "text": "Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.F.K6 corresponds to: Preflight inspection for night operations.",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.F.K6 corresponds to: Preflight inspection for night operations.",
+      "C": "This is incorrect. UA.V.F.K6 corresponds to: Preflight inspection for night operations.",
+      "D": "This is incorrect. UA.V.F.K6 corresponds to: Preflight inspection for night operations."
+    },
+    "citation": "ACS UA.V.F.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-f-k6",
+      "part-107"
+    ],
+    "acs_code": "UA.V.F.K6",
+    "source": "ACS Mastery (UA.V.F.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-097",
+    "category": "Operations",
+    "subcategory": "Maintenance and Inspection Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Preflight inspection for night operations.\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.F.K7"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.F.K3"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.F.K6"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.F.K5"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.F.K6.",
+    "explanation_distractors": {
+      "A": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K6.",
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K6.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K6."
+    },
+    "citation": "ACS UA.V.F.K6",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "operations",
+      "acs-mastery",
+      "ua-v-f-k6",
+      "part-107"
+    ],
+    "acs_code": "UA.V.F.K6",
+    "source": "ACS Mastery (UA.V.F.K6)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-098",
+    "category": "Operations",
+    "subcategory": "Maintenance and Inspection Procedures",
+    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.V.F.K7?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Persons that may perform maintenance on an sUAS."
+      },
+      {
+        "id": "B",
+        "text": "Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      },
+      {
+        "id": "C",
+        "text": "Preflight inspection."
+      },
+      {
+        "id": "D",
+        "text": "Techniques to mitigate mechanical failures of all elements used in sUAS operations such as the battery and any device(s) used to operate the sUAS."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_distractors": {
+      "A": "This is incorrect. UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "C": "This is incorrect. UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+      "D": "This is incorrect. UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+    },
+    "citation": "ACS UA.V.F.K7",
+    "difficulty_level": 2,
+    "tags": [
+      "procedures",
+      "ua-v-f-k7",
+      "operations",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.F.K7",
+    "source": "ACS Mastery (UA.V.F.K7)",
+    "source_type": "acs_generated"
+  },
+  {
+    "id": "OPS-ACS-099",
+    "category": "Operations",
+    "subcategory": "Maintenance and Inspection Procedures",
+    "question_text": "Which ACS knowledge code matches this topic: \"Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "UA.V.F.K7"
+      },
+      {
+        "id": "B",
+        "text": "UA.V.F.K3"
+      },
+      {
+        "id": "C",
+        "text": "UA.V.F.K6"
+      },
+      {
+        "id": "D",
+        "text": "UA.V.F.K4"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The matching knowledge code for this topic is UA.V.F.K7.",
+    "explanation_distractors": {
+      "B": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K7.",
+      "C": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K7.",
+      "D": "This is incorrect. The matching knowledge code for this topic is UA.V.F.K7."
+    },
+    "citation": "ACS UA.V.F.K7",
+    "difficulty_level": 3,
+    "tags": [
+      "procedures",
+      "ua-v-f-k7",
+      "operations",
+      "acs-mastery",
+      "part-107"
+    ],
+    "acs_code": "UA.V.F.K7",
+    "source": "ACS Mastery (UA.V.F.K7)",
+    "source_type": "acs_generated"
+  }
+]
