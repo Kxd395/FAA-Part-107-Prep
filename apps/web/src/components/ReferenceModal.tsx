@@ -30,13 +30,18 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
     };
   }, []);
 
-  // Helper to build iframe src; append page fragment for PDFs when available
-  const buildIframeSrc = (r: ResolvedReference) => {
-    if (r.type === "pdf") {
-      if (r.page) return `${r.url}#page=${r.page}`;
-      return r.url;
+  const buildReferenceUrl = (r: ResolvedReference) => {
+    if (r.type !== "pdf") return r.url;
+
+    const fragment = new URLSearchParams();
+    if (r.page && r.page > 0) {
+      fragment.set("page", String(r.page));
     }
-    return r.url;
+    if (r.search?.trim()) {
+      fragment.set("search", r.search.trim());
+    }
+    const suffix = fragment.toString();
+    return suffix ? `${r.url}#${suffix}` : r.url;
   };
 
   return (
@@ -54,11 +59,16 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
           <div>
             <h3 className="text-sm font-semibold text-white">{ref_.label}</h3>
             <p className="text-xs text-[var(--muted)]">{ref_.description}</p>
+            {ref_.type === "pdf" && ref_.search?.trim() && (
+              <p className="mt-1 text-[11px] text-brand-300">
+                Jump target: {ref_.search}
+              </p>
+            )}
           </div>
           <div className="flex items-center gap-2">
             {/* Open in new tab */}
             <a
-              href={ref_.type === "pdf" && ref_.page ? `${ref_.url}#page=${ref_.page}` : ref_.url}
+              href={buildReferenceUrl(ref_)}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white hover:border-brand-500/50 transition-colors"
@@ -95,7 +105,7 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
             </div>
           ) : ref_.url.startsWith("/") ? (
             <iframe
-              src={buildIframeSrc(ref_)}
+              src={buildReferenceUrl(ref_)}
               title={ref_.description}
               className="w-full h-full min-h-[60vh]"
               style={{ border: "none" }}
@@ -107,7 +117,7 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
                   This reference cannot be embedded here. Open it in a new browser tab.
                 </p>
                 <a
-                  href={ref_.type === "pdf" && ref_.page ? `${ref_.url}#page=${ref_.page}` : ref_.url}
+                  href={buildReferenceUrl(ref_)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center rounded-lg border border-brand-500/40 bg-brand-500/10 px-4 py-2 text-sm text-brand-300 hover:bg-brand-500/20"
@@ -160,7 +170,15 @@ export default function CitationLinks({
             onClick={() => {
               onReferenceClick?.(ref);
               if (ref.type === "external" || (ref.type === "pdf" && !ref.url.startsWith("/"))) {
-                const url = ref.type === "pdf" && ref.page ? `${ref.url}#page=${ref.page}` : ref.url;
+                const urlParams = new URLSearchParams();
+                if (ref.page && ref.page > 0) {
+                  urlParams.set("page", String(ref.page));
+                }
+                if (ref.search?.trim()) {
+                  urlParams.set("search", ref.search.trim());
+                }
+                const suffix = ref.type === "pdf" ? urlParams.toString() : "";
+                const url = suffix ? `${ref.url}#${suffix}` : ref.url;
                 window.open(url, "_blank", "noopener,noreferrer");
                 return;
               }

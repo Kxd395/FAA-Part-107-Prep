@@ -15,7 +15,14 @@ describe("parseCitation", () => {
 
   it("parses ACS and CFR multi-section references", () => {
     const refs = parseCitation("ACS UA.II.A.K1; 14 CFR §107.15, §107.49");
-    expect(refs.some((r) => r.label === "ACS UA.II.A.K1")).toBe(true);
+    expect(refs).toContainEqual(
+      expect.objectContaining({
+        label: "ACS UA.II.A.K1",
+        type: "pdf",
+        url: "/api/docs/uas-acs",
+        search: "UA.II.A.K1",
+      })
+    );
     expect(refs.some((r) => r.label === "14 CFR §107.15")).toBe(true);
     expect(refs.some((r) => r.label === "14 CFR §107.49")).toBe(true);
   });
