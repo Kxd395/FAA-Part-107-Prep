@@ -4,6 +4,7 @@ const IMAGE_SECTION_PATTERN = /\s*###\s*Images[\s\S]*$/i;
 const IMAGE_MARKDOWN_PATTERN = /!\[[^\]]*]\(([^)]+)\)/i;
 const IMAGE_TAG_PATTERN = /`image=([^`]+)`/i;
 const IMAGE_METADATA_PATTERN = /`(?:image|size|bbox_area_ratio)=[^`]+`/gi;
+const OCR_STRIP_IMAGE_PREFIX = "/images/uas-acsocr/";
 
 function normalizeInlineWhitespace(text: string): string {
   return text.replace(/\s+/g, " ").trim();
@@ -62,10 +63,19 @@ export function sanitizeQuestionText(text: string): string {
 export function sanitizeQuestion(question: Question): Question {
   const candidateTexts = [question.question_text, ...question.options.map((option) => option.text)];
   const extractedImageRef = candidateTexts.map(extractImageRefFromText).find(Boolean) ?? null;
+  const normalizedImageRef =
+    typeof question.image_ref === "string" && question.image_ref.trim()
+      ? toPublicImageRef(question.image_ref)
+      : null;
+  const imageRefCandidate = normalizedImageRef ?? extractedImageRef;
+  const imageRef =
+    imageRefCandidate && imageRefCandidate.startsWith(OCR_STRIP_IMAGE_PREFIX)
+      ? null
+      : imageRefCandidate;
 
   return {
     ...question,
-    image_ref: question.image_ref ?? extractedImageRef,
+    image_ref: imageRef,
     question_text: sanitizeQuestionText(question.question_text),
     options: question.options.map((option) => ({
       ...option,

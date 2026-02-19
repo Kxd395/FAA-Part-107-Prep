@@ -22,6 +22,7 @@ const SAMPLE_QUESTION = {
   citation: "Part 107 ACS",
   difficulty_level: 2,
   tags: [],
+  source_type: "acs_generated",
 } as const;
 
 describe("question sanitizer", () => {
@@ -34,7 +35,7 @@ describe("question sanitizer", () => {
 
   it("removes image metadata blocks from prompt and options", () => {
     const cleaned = sanitizeQuestion(SAMPLE_QUESTION);
-    expect(cleaned.image_ref).toBe("/images/uas-acsocr/p016_img01_5b91968bce71.png");
+    expect(cleaned.image_ref).toBeNull();
     expect(cleaned.question_text).not.toContain("### Images");
     expect(cleaned.options[1].text).not.toContain("### Images");
     expect(cleaned.options[1].text).toBe("sUAS lighting requirements.");
@@ -43,5 +44,15 @@ describe("question sanitizer", () => {
   it("handles standalone image tags", () => {
     const text = "Topic text `image=p009_img01_5b91968bce71.png` `size=2341x196`";
     expect(sanitizeQuestionText(text)).toBe("Topic text");
+  });
+
+  it("normalizes existing relative image_ref values", () => {
+    const cleaned = sanitizeQuestion({
+      ...SAMPLE_QUESTION,
+      source_type: undefined,
+      image_ref: "../figures/figure-20.png",
+    });
+
+    expect(cleaned.image_ref).toBe("/figures/figure-20.png");
   });
 });

@@ -15,10 +15,12 @@ interface QuestionCardProps {
 export default function QuestionCard({ question, onOpenFigure }: QuestionCardProps) {
   const [imageFailed, setImageFailed] = useState(false);
   const figureLabel = formatFigureLabel(question.figure_reference);
+  const normalizedQuestionImageRef =
+    typeof question.image_ref === "string" ? question.image_ref.trim() : question.image_ref;
   const fallbackFigureImage = question.figure_reference
     ? `/figures/${question.figure_reference}.png`
     : null;
-  const imageRef = question.image_ref ?? fallbackFigureImage;
+  const imageRef = normalizedQuestionImageRef || fallbackFigureImage;
 
   useEffect(() => {
     setImageFailed(false);

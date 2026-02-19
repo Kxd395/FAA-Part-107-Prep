@@ -78,4 +78,24 @@ describe("QuestionCard", () => {
       })
     );
   });
+
+  it("ignores blank image_ref values and uses figure_reference fallback", async () => {
+    const onOpenFigure = vi.fn();
+    const user = userEvent.setup();
+
+    const { getByRole } = render(
+      <QuestionCard
+        question={{ ...baseQuestion, image_ref: "   ", figure_reference: "figure-20", figure_text: undefined }}
+        onOpenFigure={onOpenFigure}
+      />
+    );
+
+    await user.click(getByRole("button"));
+    expect(onOpenFigure).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: "image",
+        url: "/figures/figure-20.png",
+      })
+    );
+  });
 });
