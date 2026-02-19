@@ -47,6 +47,26 @@ describe("questionType", () => {
     expect(isAcsCodeMatchingQuestion(normal)).toBe(false);
   });
 
+  it("identifies ACS code matching by citation even without source type", () => {
+    const acsByCitation = {
+      ...makeQuestion("q3", "What concept matches this code?"),
+      citation: "ACS UA.III.B.K1k",
+      source_type: undefined,
+    };
+
+    expect(isAcsCodeMatchingQuestion(acsByCitation)).toBe(true);
+  });
+
+  it("does not classify non-ACS prompts as ACS just because they carry an acs_code", () => {
+    const normalWithAcsCode: Question = {
+      ...makeQuestion("q4", "What should a remote PIC verify before takeoff?"),
+      acs_code: "UA.I.A.K1",
+      source_type: undefined,
+    };
+
+    expect(isAcsCodeMatchingQuestion(normalWithAcsCode)).toBe(false);
+  });
+
   it("filters real exam and mastery pools correctly", () => {
     const acs = makeQuestion(
       "q1",

@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  filterQuestionsByCategory,
-  normalizeCategory,
-  shuffleQuestions,
-} from "../../../../../../packages/core/src/quiz";
-import type { Question } from "../../../../../../packages/core/src/types";
+import { filterQuestionsByCategory, normalizeCategory, shuffleQuestions } from "@part107/core/quiz";
+import type { Question } from "@part107/core/types";
 
 import regulationsData from "../../../../../../packages/content/questions/regulations.json";
 import airspaceData from "../../../../../../packages/content/questions/airspace.json";

@@ -18,6 +18,7 @@ class QuizViewModel: ObservableObject {
     @Published var isComplete: Bool = false
     @Published var selectedOption: String? = nil
     @Published var answerState: AnswerState = .unanswered
+    @Published private(set) var allQuestions: [Question] = []
     
     // Timer
     @Published var remainingTimeMs: Int = ExamConstants.timeLimitMs
@@ -60,25 +61,30 @@ class QuizViewModel: ObservableObject {
     // MARK: - Load Questions
     
     func loadQuestions(from bundle: Bundle = .main) {
-        var allQuestions: [Question] = []
-        let files = ["regulations", "airspace", "weather", "operations"]
+        var loadedQuestions: [Question] = []
+        let files = ["regulations", "airspace", "weather", "operations", "loading_performance"]
         
         for file in files {
             if let url = bundle.url(forResource: file, withExtension: "json"),
-               let data = try? Data(contentsOf: url),
-               let decoded = try? JSONDecoder().decode([Question].self, from: data) {
-                allQuestions.append(contentsOf: decoded)
+               let data = try? Data(contentsOf: url) {
+                do {
+                    let decoded = try JSONDecoder().decode([Question].self, from: data)
+                    loadedQuestions.append(contentsOf: decoded)
+                } catch {
+                    print("Failed to decode \(file).json: \(error)")
+                }
             }
         }
         
-        self.questions = allQuestions.shuffled()
+        self.allQuestions = loadedQuestions
+        self.questions = loadedQuestions.shuffled()
     }
     
     // MARK: - Start Session
     
     func startStudySession(category: QuestionCategory? = nil) {
         mode = .study
-        var pool = questions
+        var pool = allQuestions
         if let category = category {
             pool = pool.filter { $0.category == category }
         }
@@ -88,7 +94,7 @@ class QuizViewModel: ObservableObject {
     
     func startExamSession() {
         mode = .exam
-        questions = Array(questions.shuffled().prefix(ExamConstants.totalQuestions))
+        questions = Array(allQuestions.shuffled().prefix(ExamConstants.totalQuestions))
         resetSession()
         startTimer()
     }

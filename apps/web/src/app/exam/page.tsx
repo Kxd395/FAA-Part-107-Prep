@@ -68,6 +68,7 @@ function ExamPageClient() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const questionTypeParam = searchParams.get("type");
+  const invalidQuestionTypeParam = !!questionTypeParam && !normalizeQuestionTypeProfile(questionTypeParam);
   const parsedQuestionType = normalizeQuestionTypeProfile(questionTypeParam) ?? "real_exam";
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
@@ -245,7 +246,7 @@ function ExamPageClient() {
           </div>
         )}
 
-        {preview.invalidQuestionType && (
+        {invalidQuestionTypeParam && (
           <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
             Unknown question type &quot;{questionTypeParam}&quot;. Falling back to Exclude ACS Code-Matching.
           </div>

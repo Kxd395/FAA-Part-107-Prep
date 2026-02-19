@@ -37,7 +37,7 @@ const FEATURES = [
     title: "Smart Review",
     description:
       "AI detects your weak spots and auto-generates quizzes targeting what you need to practice most.",
-    href: "/study?focus=weak",
+    href: "/study?type=weak_spots",
     color: "from-amber-500/20 to-amber-600/5",
   },
 ];

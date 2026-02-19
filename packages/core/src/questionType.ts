@@ -25,8 +25,11 @@ export function normalizeQuestionTypeProfile(input: string | null | undefined): 
 
 export function isAcsCodeMatchingQuestion(question: Question): boolean {
   const text = question.question_text.trim().toLowerCase();
+  const sourceType = question.source_type?.trim().toLowerCase();
+  const citation = question.citation?.trim().toUpperCase() ?? "";
   return (
-    question.source_type === "acs_generated" ||
+    sourceType === "acs_generated" ||
+    citation.startsWith("ACS UA.") ||
     text.startsWith("under part 107 acs, which concept is covered by knowledge code") ||
     text.startsWith("which acs knowledge code matches this topic")
   );

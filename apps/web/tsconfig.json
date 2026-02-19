@@ -17,6 +17,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@part107/core": ["../../packages/core/src"],
+      "@part107/core/*": ["../../packages/core/src/*"],
       "@part107/content": ["../../packages/content"]
     }
   },

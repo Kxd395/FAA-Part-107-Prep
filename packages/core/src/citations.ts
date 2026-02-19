@@ -13,6 +13,7 @@ const FAA_LINKS = {
     "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/remote_pilot_study_guide.pdf",
   ac107_2a:
     "https://www.faa.gov/regulations_policies/advisory_circulars/index.cfm/go/document.information/documentID/1038977",
+  chartsPage: "/charts",
 } as const;
 
 const PHAK_CHAPTER_PAGES: Record<number, number> = {
@@ -36,10 +37,6 @@ const PHAK_CHAPTER_PAGES: Record<number, number> = {
 };
 
 const FIGURE_IMAGES: Record<string, string> = {
-  "2": "",
-  "12": "",
-  "15": "",
-  "17": "",
   "20": "/figures/figure-20.png",
   "21": "/figures/figure-21.png",
   "22": "/figures/figure-22.png",
@@ -88,6 +85,13 @@ export function parseCitation(citation: string): CitationReference[] {
           type: "image",
           url: imageUrl,
           description: `AKTS Supplement — Figure ${figNum}`,
+        });
+      } else {
+        refs.push({
+          label: `Figure ${figNum}`,
+          type: "external",
+          url: FAA_LINKS.chartsPage,
+          description: `AKTS Supplement — Figure ${figNum} (open charts page)`,
         });
       }
     }

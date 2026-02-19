@@ -68,7 +68,10 @@ function StudyPageClient() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const questionTypeParam = searchParams.get("type");
-  const parsedQuestionType = normalizeQuestionTypeProfile(questionTypeParam) ?? "real_exam";
+  const focusParam = searchParams.get("focus");
+  const weakFocusRequested = focusParam?.trim().toLowerCase() === "weak";
+  const parsedQuestionType =
+    normalizeQuestionTypeProfile(questionTypeParam) ?? (weakFocusRequested ? "weak_spots" : "real_exam");
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
   );
@@ -119,19 +122,24 @@ function StudyPageClient() {
 
   useEffect(() => {
     const nextType = normalizeQuestionTypeProfile(questionTypeParam);
-    if (!nextType) return;
-    setSelectedQuestionType(nextType);
-  }, [questionTypeParam]);
+    if (nextType) {
+      setSelectedQuestionType(nextType);
+      return;
+    }
+    if (weakFocusRequested) {
+      setSelectedQuestionType("weak_spots");
+    }
+  }, [questionTypeParam, weakFocusRequested]);
 
   useEffect(() => {
     if (!loaded || autoStarted.current) return;
 
-    if (!categoryParam) return;
+    if (!categoryParam && !weakFocusRequested) return;
 
     autoStarted.current = true;
     const matched = normalizeCategory(categoryParam);
     study.startQuiz(matched ?? "All");
-  }, [categoryParam, loaded, study]);
+  }, [categoryParam, loaded, study, weakFocusRequested]);
 
   useEffect(() => {
     if (!study.quizStarted || study.isComplete || !study.currentQuestion) return;

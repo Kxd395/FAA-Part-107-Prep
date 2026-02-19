@@ -17,10 +17,12 @@ const REQUIRED_FIELDS = [
   "explanation_distractors",
   "citation",
   "difficulty_level",
+  "acs_code",
 ];
 
 const VALID_OPTION_IDS = new Set(["A", "B", "C", "D"]);
 const VALID_CORRECT_IDS = new Set(["A", "B", "C", "D"]);
+const QUESTION_ID_PATTERN = /^[A-Z]{2,6}(?:-ACS)?-\d{3}$/;
 
 function loadQuestionFiles() {
   return fs
@@ -54,6 +56,10 @@ function validateQuestion(q, file, idx, errors) {
     if (typeof q.correct_option_id === "string" && !ids.includes(q.correct_option_id)) {
       errors.push(`${where}: correct_option_id '${q.correct_option_id}' is not present in options[]`);
     }
+  }
+
+  if (typeof q.id !== "string" || !QUESTION_ID_PATTERN.test(q.id)) {
+    errors.push(`${where}: id '${q.id}' does not match expected format PREFIX-NNN or PREFIX-ACS-NNN`);
   }
 
   if (!VALID_CORRECT_IDS.has(q.correct_option_id)) {

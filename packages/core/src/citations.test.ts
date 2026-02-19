@@ -29,4 +29,14 @@ describe("parseCitation", () => {
       url: "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap4.html",
     });
   });
+
+  it("returns a fallback charts link when figure image is not locally available", () => {
+    const refs = parseCitation("FAA-CT-8080-2H, Figure 12");
+    expect(refs).toHaveLength(1);
+    expect(refs[0]).toMatchObject({
+      label: "Figure 12",
+      type: "external",
+      url: "/charts",
+    });
+  });
 });

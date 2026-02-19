@@ -226,16 +226,16 @@ This is separate from session-level progress history and can be swapped to a bac
 
 ## Question Bank
 
-Currently **20 questions** across 4 categories as seed data.
-Use the content pipeline to scale to 300+ from the FAA PDFs.
+Current bank: **343 questions** across 5 active categories.
+The bank includes curated exam-style items and ACS mastery items.
 
 | Category | Count | Status |
 |----------|-------|--------|
-| Regulations | 5 | ✅ Seed |
-| Airspace | 5 | ✅ Seed |
-| Weather | 5 | ✅ Seed |
-| Operations | 5 | ✅ Seed |
-| Loading & Performance | — | 🔲 Generate |
+| Regulations | 147 | ✅ Active |
+| Airspace | 51 | ✅ Active |
+| Weather | 34 | ✅ Active |
+| Operations | 99 | ✅ Active |
+| Loading & Performance | 12 | ✅ Active |
 | Emergency Procedures | — | 🔲 Generate |
 | CRM | — | 🔲 Generate |
 | Radio Comms | — | 🔲 Generate |

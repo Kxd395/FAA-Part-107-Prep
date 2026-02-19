@@ -127,10 +127,15 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
 
 interface CitationLinksProps {
   citation: string;
+  label?: string;
   onReferenceClick?: (ref: ResolvedReference) => void;
 }
 
-export default function CitationLinks({ citation, onReferenceClick }: CitationLinksProps) {
+export default function CitationLinks({
+  citation,
+  label = "📖 Reference:",
+  onReferenceClick,
+}: CitationLinksProps) {
   const [activeRef, setActiveRef] = useState<ResolvedReference | null>(null);
   const refs = parseCitation(citation);
 
@@ -140,7 +145,7 @@ export default function CitationLinks({ citation, onReferenceClick }: CitationLi
     // Fallback: just show the raw citation text
     return (
       <div className="mt-4 text-xs text-[var(--muted)]">
-        📖 Reference: {citation}
+        {label} {citation}
       </div>
     );
   }
@@ -148,7 +153,7 @@ export default function CitationLinks({ citation, onReferenceClick }: CitationLi
   return (
     <>
       <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-        <span className="text-[var(--muted)]">📖 Reference:</span>
+        <span className="text-[var(--muted)]">{label}</span>
         {refs.map((ref, i) => (
           <button
             key={`${ref.label}-${i}`}
