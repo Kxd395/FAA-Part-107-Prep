@@ -11,6 +11,7 @@ export interface ProgressQuestionResult {
 export interface ProgressSessionRecord {
   id: string;
   mode: QuizMode;
+  questionTypeProfile?: string;
   timestamp: string;
   category: string;
   score: number;

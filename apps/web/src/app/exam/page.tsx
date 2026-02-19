@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { formatClockTime, useExamSession } from "@part107/core";
+import {
+  QUESTION_TYPE_PROFILE_LABELS,
+  formatClockTime,
+  normalizeQuestionTypeProfile,
+  type QuestionTypeProfile,
+  useExamSession,
+} from "@part107/core";
 import CitationLinks, { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
 import AnswerOptions from "../../components/quiz/AnswerOptions";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
@@ -14,6 +20,33 @@ import { useProgress, type QuestionResult } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 
 const PASSING_PERCENT = 70;
+
+const QUESTION_TYPE_OPTIONS: Array<{
+  value: QuestionTypeProfile;
+  title: string;
+  description: string;
+}> = [
+  {
+    value: "real_exam",
+    title: "Real Exam Style (Recommended)",
+    description: "Prioritizes realistic FAA-style scenario/regulation prompts and excludes ACS code-matching items.",
+  },
+  {
+    value: "acs_mastery",
+    title: "ACS Mastery",
+    description: "Focuses on ACS knowledge-code mapping and code recall.",
+  },
+  {
+    value: "mixed",
+    title: "Mixed",
+    description: "Uses the full pool: exam-style + ACS mastery prompts.",
+  },
+  {
+    value: "weak_spots",
+    title: "Weak Spots Only",
+    description: "Pulls from questions you are missing or have not mastered.",
+  },
+];
 
 export default function ExamPage() {
   return (
@@ -32,6 +65,11 @@ export default function ExamPage() {
 function ExamPageClient() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
+  const questionTypeParam = searchParams.get("type");
+  const parsedQuestionType = normalizeQuestionTypeProfile(questionTypeParam) ?? "real_exam";
+  const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
+    parsedQuestionType
+  );
 
   const { saveSession } = useProgress();
   const adaptive = useAdaptiveQuestionStats();
@@ -39,6 +77,7 @@ function ExamPageClient() {
   const exam = useExamSession({
     allQuestions,
     passPercent: PASSING_PERCENT,
+    initialQuestionTypeProfile: selectedQuestionType,
     adaptive: {
       userId: adaptive.userId,
       userStatsByKey: adaptive.statsByKey,
@@ -49,6 +88,12 @@ function ExamPageClient() {
   const [sessionSaved, setSessionSaved] = useState(false);
   const [showNavigator, setShowNavigator] = useState(false);
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
+
+  useEffect(() => {
+    const nextType = normalizeQuestionTypeProfile(questionTypeParam);
+    if (!nextType) return;
+    setSelectedQuestionType(nextType);
+  }, [questionTypeParam]);
 
   useEffect(() => {
     if (exam.phase === "in-progress") {
@@ -77,6 +122,7 @@ function ExamPageClient() {
     saveSession({
       mode: "exam",
       category: exam.examCategory,
+      questionTypeProfile: exam.questionTypeProfile,
       score: exam.review.correctCount,
       total: exam.questions.length,
       timeSpentMs: exam.review.totalTimeMs,
@@ -110,7 +156,7 @@ function ExamPageClient() {
   }
 
   if (exam.phase === "setup") {
-    const preview = exam.getSetupPreview(categoryParam);
+    const preview = exam.getSetupPreview(categoryParam, selectedQuestionType);
     const timeDisplay =
       preview.category === "All" ? "2 Hours" : `${Math.round(preview.timeLimitMs / 60000)} min`;
 
@@ -134,6 +180,12 @@ function ExamPageClient() {
           </div>
         )}
 
+        {preview.invalidQuestionType && (
+          <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
+            Unknown question type &quot;{questionTypeParam}&quot;. Falling back to Real Exam Style.
+          </div>
+        )}
+
         {preview.category !== "All" && (
           <div className="flex justify-center">
             <span className="rounded-full bg-brand-500/10 px-4 py-1.5 text-sm font-medium text-brand-500">
@@ -141,6 +193,31 @@ function ExamPageClient() {
             </span>
           </div>
         )}
+
+        <div className="space-y-3">
+          <div className="text-sm font-semibold text-white">Question Type</div>
+          <div className="grid gap-2">
+            {QUESTION_TYPE_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => setSelectedQuestionType(option.value)}
+                className={`rounded-xl border px-4 py-3 text-left transition-colors ${
+                  selectedQuestionType === option.value
+                    ? "border-brand-500/60 bg-brand-500/10"
+                    : "border-[var(--card-border)] bg-[var(--card)] hover:border-brand-500/30"
+                }`}
+              >
+                <div className="text-sm font-semibold text-white">{option.title}</div>
+                <div className="mt-1 text-xs text-[var(--muted)]">{option.description}</div>
+              </button>
+            ))}
+          </div>
+          <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
+            Note: Real Exam Style emphasizes practical FAA-style questions. ACS Mastery is intended for knowledge
+            code memorization and may feel less like the real test.
+          </div>
+        </div>
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6 space-y-4">
           <div className="flex justify-between text-sm">
@@ -159,10 +236,14 @@ function ExamPageClient() {
             <span className="text-[var(--muted)]">Feedback</span>
             <span className="font-medium text-amber-400">After submission only</span>
           </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-[var(--muted)]">Question Type</span>
+            <span className="font-medium text-white">{QUESTION_TYPE_PROFILE_LABELS[preview.questionTypeProfile]}</span>
+          </div>
         </div>
 
         <button
-          onClick={() => exam.startExam(preview.category)}
+          onClick={() => exam.startExam(preview.category, selectedQuestionType)}
           disabled={preview.questionCount === 0}
           className="w-full rounded-xl bg-brand-600 py-4 text-lg font-semibold text-white transition-all hover:bg-brand-700 hover:scale-[1.02] disabled:opacity-60"
         >
@@ -170,7 +251,9 @@ function ExamPageClient() {
         </button>
 
         {preview.questionCount === 0 && (
-          <div className="text-center text-sm text-[var(--muted)]">No questions found for this category yet.</div>
+          <div className="text-center text-sm text-[var(--muted)]">
+            No questions available for {QUESTION_TYPE_PROFILE_LABELS[preview.questionTypeProfile]} in this category.
+          </div>
         )}
 
         {preview.category !== "All" && (
@@ -204,7 +287,7 @@ function ExamPageClient() {
 
           <div className="flex gap-3">
             <button
-              onClick={() => exam.startExam()}
+              onClick={() => exam.startExam(exam.examCategory, exam.questionTypeProfile)}
               className="flex-1 rounded-xl bg-brand-600 py-3 font-semibold text-white hover:bg-brand-700"
             >
               Retake Exam
@@ -286,6 +369,12 @@ function ExamPageClient() {
         progress={exam.progressPercent}
         progressClassName={isTimeLow ? "bg-incorrect animate-pulse" : "bg-brand-500"}
       />
+
+      <div className="flex items-center gap-2">
+        <span className="rounded-full bg-brand-500/10 px-3 py-1 text-xs font-medium text-brand-400">
+          {QUESTION_TYPE_PROFILE_LABELS[exam.questionTypeProfile]}
+        </span>
+      </div>
 
       <QuestionCard question={exam.currentQuestion} onOpenFigure={setFigureRef} />
 

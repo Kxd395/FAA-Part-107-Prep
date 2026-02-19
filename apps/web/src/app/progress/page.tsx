@@ -337,6 +337,12 @@ function HistoryTab({ sessions }: { sessions: SessionRecord[] }) {
                   {session.mode}
                 </span>
 
+                {session.mode === "exam" && session.questionTypeProfile && (
+                  <span className="rounded-lg border border-[var(--card-border)] px-2 py-1 text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                    {session.questionTypeProfile.replaceAll("_", " ")}
+                  </span>
+                )}
+
                 {/* Category (study only) */}
                 {session.mode === "study" && (
                   <span className="text-sm text-[var(--muted)]">

@@ -27,6 +27,7 @@ export type {
 
 export type { CitationReference } from "./citations";
 export type { StudyCategory } from "./quiz";
+export type { QuestionTypeProfile, FilterQuestionsByTypeOptions } from "./questionType";
 export type {
   CanonicalKeyOptions,
   UserQuestionStats,
@@ -80,6 +81,13 @@ export {
   formatClockTime,
   buildExamQuestionSet,
 } from "./quiz";
+export {
+  QUESTION_TYPE_PROFILES,
+  QUESTION_TYPE_PROFILE_LABELS,
+  normalizeQuestionTypeProfile,
+  isAcsCodeMatchingQuestion,
+  filterQuestionsByType,
+} from "./questionType";
 
 export { computeProgressStats } from "./progress";
 export { parseCitation } from "./citations";

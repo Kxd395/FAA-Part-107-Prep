@@ -1,0 +1,98 @@
+import { describe, expect, it } from "vitest";
+import { canonicalQuestionKey } from "./adaptive";
+import {
+  filterQuestionsByType,
+  isAcsCodeMatchingQuestion,
+  normalizeQuestionTypeProfile,
+} from "./questionType";
+import type { Question } from "./types";
+
+function makeQuestion(id: string, questionText: string, sourceType?: string): Question {
+  return {
+    id,
+    category: "Airspace",
+    subcategory: "General",
+    question_text: questionText,
+    figure_reference: null,
+    options: [
+      { id: "A", text: "Option A" },
+      { id: "B", text: "Option B" },
+      { id: "C", text: "Option C" },
+    ],
+    correct_option_id: "A",
+    explanation_correct: "A is correct.",
+    explanation_distractors: { B: "B wrong", C: "C wrong" },
+    citation: "14 CFR §107.41",
+    difficulty_level: 2,
+    source_type: sourceType,
+    tags: [],
+  };
+}
+
+describe("questionType", () => {
+  it("normalizes question type input", () => {
+    expect(normalizeQuestionTypeProfile("Real Exam")).toBe("real_exam");
+    expect(normalizeQuestionTypeProfile("weak-spots")).toBe("weak_spots");
+    expect(normalizeQuestionTypeProfile("unknown")).toBeNull();
+  });
+
+  it("identifies ACS code matching prompts", () => {
+    const acs = makeQuestion(
+      "q1",
+      "Which ACS knowledge code matches this topic: \"Operations near airports.\"?",
+      "acs_generated"
+    );
+    const normal = makeQuestion("q2", "What should a remote PIC verify before takeoff?");
+    expect(isAcsCodeMatchingQuestion(acs)).toBe(true);
+    expect(isAcsCodeMatchingQuestion(normal)).toBe(false);
+  });
+
+  it("filters real exam and mastery pools correctly", () => {
+    const acs = makeQuestion(
+      "q1",
+      "Under Part 107 ACS, which concept is covered by knowledge code UA.II.B.K3?",
+      "acs_generated"
+    );
+    const normal = makeQuestion("q2", "What should a remote PIC verify before takeoff?");
+    const pool = [acs, normal];
+
+    expect(filterQuestionsByType(pool, "real_exam").map((q) => q.id)).toEqual(["q2"]);
+    expect(filterQuestionsByType(pool, "acs_mastery").map((q) => q.id)).toEqual(["q1"]);
+  });
+
+  it("returns weak/unmastered set for weak_spots profile", () => {
+    const q1 = makeQuestion("q1", "Question one");
+    const q2 = makeQuestion("q2", "Question two");
+    const key1 = canonicalQuestionKey(q1);
+    const key2 = canonicalQuestionKey(q2);
+
+    const weakOnly = filterQuestionsByType([q1, q2], "weak_spots", {
+      userStatsByKey: {
+        [key1]: {
+          userId: "u1",
+          canonicalKey: key1,
+          attempts: 5,
+          correct: 1,
+          incorrect: 4,
+          correctStreak: 0,
+          lastAttemptAt: new Date().toISOString(),
+          lastResultWasCorrect: false,
+          masteryScore: 0.2,
+        },
+        [key2]: {
+          userId: "u1",
+          canonicalKey: key2,
+          attempts: 5,
+          correct: 5,
+          incorrect: 0,
+          correctStreak: 5,
+          lastAttemptAt: new Date().toISOString(),
+          lastResultWasCorrect: true,
+          masteryScore: 0.98,
+        },
+      },
+    });
+
+    expect(weakOnly.map((q) => q.id)).toEqual(["q1"]);
+  });
+});
