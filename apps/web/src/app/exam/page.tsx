@@ -29,8 +29,8 @@ const QUESTION_TYPE_OPTIONS: Array<{
 }> = [
   {
     value: "real_exam",
-    title: "Real Exam Style (Recommended)",
-    description: "Prioritizes realistic FAA-style scenario/regulation prompts and excludes ACS code-matching items.",
+    title: "Exclude ACS Code-Matching (Recommended)",
+    description: "Uses realistic exam-style prompts and excludes ACS code-matching questions.",
   },
   {
     value: "acs_mastery",
@@ -243,7 +243,7 @@ function ExamPageClient() {
 
         {preview.invalidQuestionType && (
           <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
-            Unknown question type &quot;{questionTypeParam}&quot;. Falling back to Real Exam Style.
+            Unknown question type &quot;{questionTypeParam}&quot;. Falling back to Exclude ACS Code-Matching.
           </div>
         )}
 
@@ -275,8 +275,7 @@ function ExamPageClient() {
             ))}
           </div>
           <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
-            Note: Real Exam Style emphasizes practical FAA-style questions. ACS Mastery is intended for knowledge
-            code memorization and may feel less like the real test.
+            Note: Exclude ACS Code-Matching removes the code-recall style prompts you flagged and keeps practical FAA-style questions.
           </div>
         </div>
 

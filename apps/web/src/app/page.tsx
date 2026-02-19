@@ -56,8 +56,8 @@ const QUESTION_TYPE_OPTIONS: Array<{
 }> = [
   {
     value: "real_exam",
-    title: "Real Exam Style (Recommended)",
-    description: "Best simulation of real FAA question style.",
+    title: "Exclude ACS Code-Matching (Recommended)",
+    description: "Removes the ACS code-matching questions you said you do not want.",
   },
   {
     value: "acs_mastery",

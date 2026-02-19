@@ -11,7 +11,7 @@ export const QUESTION_TYPE_PROFILES = [
 export type QuestionTypeProfile = (typeof QUESTION_TYPE_PROFILES)[number];
 
 export const QUESTION_TYPE_PROFILE_LABELS: Record<QuestionTypeProfile, string> = {
-  real_exam: "Real Exam Style",
+  real_exam: "Exclude ACS Code-Matching",
   acs_mastery: "ACS Mastery",
   mixed: "Mixed",
   weak_spots: "Weak Spots Only",
