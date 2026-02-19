@@ -1,4 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useMemo, useState } from "react";
+import {
+  QUESTION_TYPE_PROFILE_LABELS,
+  type QuestionTypeProfile,
+} from "@part107/core";
 
 const FEATURES = [
   {
@@ -42,7 +49,37 @@ const STATS = [
   { label: "Updated", value: "2026", sub: "Remote ID & Ops Over People" },
 ];
 
+const QUESTION_TYPE_OPTIONS: Array<{
+  value: QuestionTypeProfile;
+  title: string;
+  description: string;
+}> = [
+  {
+    value: "real_exam",
+    title: "Real Exam Style (Recommended)",
+    description: "Best simulation of real FAA question style.",
+  },
+  {
+    value: "acs_mastery",
+    title: "ACS Mastery",
+    description: "Focus on ACS code mapping and memorization.",
+  },
+  {
+    value: "mixed",
+    title: "Mixed",
+    description: "Combination of exam-style and ACS mastery.",
+  },
+  {
+    value: "weak_spots",
+    title: "Weak Spots Only",
+    description: "Targets questions you miss most often.",
+  },
+];
+
 export default function HomePage() {
+  const [practiceType, setPracticeType] = useState<QuestionTypeProfile>("real_exam");
+  const practiceExamHref = useMemo(() => `/exam?type=${encodeURIComponent(practiceType)}`, [practiceType]);
+
   return (
     <div className="space-y-16">
       {/* Hero */}
@@ -63,7 +100,7 @@ export default function HomePage() {
           explanations, high-res charts, and AI-powered tutoring. Built by a
           pilot, for pilots.
         </p>
-        <div className="mt-8 flex items-center justify-center gap-4">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/study"
             className="rounded-xl bg-brand-600 px-8 py-3 font-semibold text-white transition-all hover:bg-brand-700 hover:scale-105"
@@ -71,11 +108,34 @@ export default function HomePage() {
             Start Studying →
           </Link>
           <Link
-            href="/exam"
+            href={practiceExamHref}
             className="rounded-xl border border-[var(--card-border)] px-8 py-3 font-semibold text-[var(--muted)] transition-all hover:border-white/30 hover:text-white"
           >
             Take Practice Exam
           </Link>
+        </div>
+        <div className="mx-auto mt-4 max-w-xl space-y-2 rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-left">
+          <label htmlFor="practice-type" className="block text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
+            Practice Question Type
+          </label>
+          <select
+            id="practice-type"
+            value={practiceType}
+            onChange={(event) => setPracticeType(event.target.value as QuestionTypeProfile)}
+            className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-white focus:border-brand-500/60 focus:outline-none"
+          >
+            {QUESTION_TYPE_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.title}
+              </option>
+            ))}
+          </select>
+          <p className="text-xs text-[var(--muted)]">
+            {QUESTION_TYPE_OPTIONS.find((option) => option.value === practiceType)?.description}
+          </p>
+          <p className="text-xs text-[var(--muted)]/80">
+            Selected: <span className="text-brand-400">{QUESTION_TYPE_PROFILE_LABELS[practiceType]}</span>
+          </p>
         </div>
       </section>
 
@@ -162,7 +222,7 @@ export default function HomePage() {
                   📖 Study
                 </Link>
                 <Link
-                  href={`/exam?category=${encodeURIComponent(topic.name)}`}
+                  href={`/exam?category=${encodeURIComponent(topic.name)}&type=${encodeURIComponent(practiceType)}`}
                   className="flex-1 rounded-lg border border-[var(--card-border)] py-2 text-center text-xs font-semibold text-[var(--muted)] transition-all hover:border-white/30 hover:text-white"
                 >
                   🎯 Test
