@@ -1,56 +1,22 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import {
+  computeProgressStats,
+  type ProgressCategoryStat,
+  type ProgressQuestionResult,
+  type ProgressSessionRecord,
+  type ProgressStats,
+} from "@part107/core";
 
 // ─────────────────────────────────────────────
 // Types
 // ─────────────────────────────────────────────
 
-export interface QuestionResult {
-  questionId: string;
-  userAnswer: "A" | "B" | "C" | "D" | null;
-  correctAnswer: "A" | "B" | "C" | "D";
-  isCorrect: boolean;
-  category: string;
-}
-
-export interface SessionRecord {
-  id: string;
-  mode: "study" | "exam";
-  /** ISO timestamp */
-  timestamp: string;
-  /** Category filter (study mode) or "All" */
-  category: string;
-  score: number;
-  total: number;
-  percentage: number;
-  passed: boolean;
-  timeSpentMs: number;
-  questions: QuestionResult[];
-}
-
-export interface CategoryStat {
-  category: string;
-  correct: number;
-  total: number;
-  percentage: number;
-}
-
-export interface ProgressStats {
-  totalSessions: number;
-  totalQuestions: number;
-  totalCorrect: number;
-  overallAccuracy: number;
-  studySessions: number;
-  examSessions: number;
-  examPassRate: number;
-  bestExamScore: number;
-  currentStreak: number;
-  longestStreak: number;
-  categoryBreakdown: CategoryStat[];
-  weakSpots: CategoryStat[];
-  recentTrend: { date: string; percentage: number; mode: string }[];
-}
+export type QuestionResult = ProgressQuestionResult;
+export type SessionRecord = ProgressSessionRecord;
+export type CategoryStat = ProgressCategoryStat;
+export type { ProgressStats };
 
 // ─────────────────────────────────────────────
 // Constants
@@ -134,96 +100,10 @@ export function useProgress() {
   }, []);
 
   // ------ Compute stats ------
-  const getStats = useCallback((): ProgressStats => {
-    const totalSessions = sessions.length;
-    const allQuestions = sessions.flatMap((s) => s.questions);
-    const totalQuestions = allQuestions.length;
-    const totalCorrect = allQuestions.filter((q) => q.isCorrect).length;
-    const overallAccuracy =
-      totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
-
-    const studySessions = sessions.filter((s) => s.mode === "study").length;
-    const examSessions = sessions.filter((s) => s.mode === "exam");
-    const examPassRate =
-      examSessions.length > 0
-        ? Math.round(
-            (examSessions.filter((e) => e.passed).length / examSessions.length) * 100
-          )
-        : 0;
-    const bestExamScore =
-      examSessions.length > 0
-        ? Math.max(...examSessions.map((e) => e.percentage))
-        : 0;
-
-    // Streak: consecutive sessions with ≥70% (newest first)
-    let currentStreak = 0;
-    for (const s of sessions) {
-      if (s.passed) currentStreak++;
-      else break;
-    }
-    let longestStreak = 0;
-    let streak = 0;
-    for (const s of sessions) {
-      if (s.passed) {
-        streak++;
-        longestStreak = Math.max(longestStreak, streak);
-      } else {
-        streak = 0;
-      }
-    }
-
-    // Category breakdown
-    const catMap = new Map<string, { correct: number; total: number }>();
-    for (const q of allQuestions) {
-      const cat = q.category;
-      const entry = catMap.get(cat) ?? { correct: 0, total: 0 };
-      entry.total++;
-      if (q.isCorrect) entry.correct++;
-      catMap.set(cat, entry);
-    }
-    const categoryBreakdown: CategoryStat[] = Array.from(catMap.entries())
-      .map(([category, { correct, total }]) => ({
-        category,
-        correct,
-        total,
-        percentage: Math.round((correct / total) * 100),
-      }))
-      .sort((a, b) => a.category.localeCompare(b.category));
-
-    // Weak spots: categories below passing
-    const weakSpots = categoryBreakdown
-      .filter((c) => c.percentage < PASSING_PERCENT)
-      .sort((a, b) => a.percentage - b.percentage);
-
-    // Recent trend (last 20 sessions, oldest → newest for chart)
-    const recentTrend = sessions
-      .slice(0, 20)
-      .reverse()
-      .map((s) => ({
-        date: new Date(s.timestamp).toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-        }),
-        percentage: s.percentage,
-        mode: s.mode,
-      }));
-
-    return {
-      totalSessions,
-      totalQuestions,
-      totalCorrect,
-      overallAccuracy,
-      studySessions,
-      examSessions: examSessions.length,
-      examPassRate,
-      bestExamScore,
-      currentStreak,
-      longestStreak,
-      categoryBreakdown,
-      weakSpots,
-      recentTrend,
-    };
-  }, [sessions]);
+  const getStats = useCallback(
+    (): ProgressStats => computeProgressStats(sessions, PASSING_PERCENT),
+    [sessions]
+  );
 
   return {
     sessions,

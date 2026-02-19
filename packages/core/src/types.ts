@@ -3,9 +3,11 @@
 // Shared between Next.js (web) and SwiftUI (native) via JSON
 // ============================================================
 
+export type OptionId = "A" | "B" | "C" | "D";
+
 /** Answer option (A, B, C, or D depending on source) */
 export interface QuestionOption {
-  id: "A" | "B" | "C" | "D";
+  id: OptionId;
   text: string;
 }
 
@@ -16,15 +18,19 @@ export interface Question {
   subcategory: string;
   question_text: string;
   figure_reference: string | null;
+  image_ref?: string | null;
+  figure_text?: string | null;
   options: QuestionOption[];
-  correct_option_id: "A" | "B" | "C" | "D";
+  correct_option_id: OptionId;
   explanation_correct: string;
-  explanation_distractors: Partial<Record<"A" | "B" | "C" | "D", string>>;
+  explanation_distractors: Partial<Record<OptionId, string>>;
   citation: string;
   difficulty_level: 1 | 2 | 3;
-  acs_code: string;
+  acs_code?: string;
+  source_type?: string;
+  source?: string;
   tags: string[];
-  year_updated: number;
+  year_updated?: number;
 }
 
 /** All topic categories (maps to ACS areas) */
@@ -48,7 +54,7 @@ export type QuizMode = "study" | "exam";
 /** Tracks a user's answer to a single question */
 export interface UserAnswer {
   question_id: string;
-  selected_option_id: "A" | "B" | "C" | "D";
+  selected_option_id: OptionId;
   is_correct: boolean;
   time_spent_ms: number;
   flagged_for_review: boolean;

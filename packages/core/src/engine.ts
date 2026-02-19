@@ -8,11 +8,11 @@ import type {
   Question,
   QuizConfig,
   QuizSession,
-  QuizMode,
   UserAnswer,
   SessionResult,
   CategoryScore,
   Category,
+  OptionId,
 } from "./types";
 
 /** Default exam configuration (mirrors real FAA Part 107 exam) */
@@ -112,7 +112,7 @@ export function createSession(
 export function submitAnswer(
   session: QuizSession,
   questionId: string,
-  selectedOptionId: "A" | "B" | "C" | "D",
+  selectedOptionId: OptionId,
   timeSpentMs: number,
   flagged: boolean = false
 ): UserAnswer {
@@ -140,7 +140,7 @@ export function submitAnswer(
  */
 export function getAnswerFeedback(
   question: Question,
-  selectedOptionId: "A" | "B" | "C" | "D"
+  selectedOptionId: OptionId
 ): {
   is_correct: boolean;
   correct_answer: string;
