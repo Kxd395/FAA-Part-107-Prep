@@ -11,6 +11,7 @@ import airspaceData from "../../../../../../packages/content/questions/airspace.
 import weatherData from "../../../../../../packages/content/questions/weather.json";
 import operationsData from "../../../../../../packages/content/questions/operations.json";
 import loadingPerformanceData from "../../../../../../packages/content/questions/loading_performance.json";
+import { sanitizeQuestion } from "../../../lib/questionSanitizer";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -70,8 +71,9 @@ export async function GET(request: NextRequest) {
     const baseQuestions = remoteSourceUrl
       ? await loadRemoteQuestions(remoteSourceUrl)
       : LOCAL_QUESTIONS;
+    const sanitizedQuestions = baseQuestions.map((question) => sanitizeQuestion(question));
 
-    let questions = filterQuestionsByCategory(baseQuestions, normalizedCategory);
+    let questions = filterQuestionsByCategory(sanitizedQuestions, normalizedCategory);
     if (shouldShuffle) {
       questions = shuffleQuestions(questions);
     }

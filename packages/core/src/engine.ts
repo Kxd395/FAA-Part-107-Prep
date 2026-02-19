@@ -14,6 +14,7 @@ import type {
   Category,
   OptionId,
 } from "./types";
+import { dedupeQuestions } from "./adaptive";
 
 /** Default exam configuration (mirrors real FAA Part 107 exam) */
 export const EXAM_DEFAULTS = {
@@ -37,7 +38,7 @@ export function selectQuestions(
   config: QuizConfig,
   weakSpots?: Category[]
 ): Question[] {
-  let pool = [...allQuestions];
+  let pool = dedupeQuestions(allQuestions).questions;
 
   // Filter by category if specified
   if (config.categories && config.categories.length > 0) {

@@ -28,6 +28,15 @@ export type {
 export type { CitationReference } from "./citations";
 export type { StudyCategory } from "./quiz";
 export type {
+  CanonicalKeyOptions,
+  UserQuestionStats,
+  AdaptiveQuizConfig,
+  DedupeQuestionsResult,
+  AdaptiveSelectionInput,
+  AdaptiveSelectionResult,
+  UpdateUserQuestionStatsInput,
+} from "./adaptive";
+export type {
   StudyAnswerState,
   UseStudySessionOptions,
   UseStudySessionResult,
@@ -74,5 +83,15 @@ export {
 
 export { computeProgressStats } from "./progress";
 export { parseCitation } from "./citations";
+export {
+  DEFAULT_ADAPTIVE_QUIZ_CONFIG,
+  canonicalQuestionKey,
+  dedupeQuestions,
+  computeAccuracy,
+  computeMasteryScore,
+  isMastered,
+  updateUserQuestionStats,
+  selectAdaptiveQuestions,
+} from "./adaptive";
 export { useStudySession } from "./studySession";
 export { useExamSession } from "./examSession";

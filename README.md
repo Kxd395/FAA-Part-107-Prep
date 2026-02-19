@@ -39,7 +39,7 @@ FAA_107_Study_Guide/
 ### Web App (Next.js)
 
 ```bash
-cd apps/web
+cd FAA_107_Study_Guide
 npm install
 npm run dev
 # → http://localhost:3000
@@ -48,6 +48,16 @@ npm run dev
 Deploy to Vercel:
 ```bash
 npx vercel
+```
+
+### Local Build/Test (macOS)
+
+```bash
+cd FAA_107_Study_Guide
+npm install
+npm run lint
+npm run test
+npm run build
 ```
 
 ### Content Pipeline (Generate Questions from PDFs)
@@ -94,6 +104,51 @@ See [apps/ios/README.md](apps/ios/README.md) for Xcode setup instructions.
 - [ ] Offline mode (service worker / Core Data)
 - [ ] PWA manifest for mobile web install
 - [ ] Full SwiftUI quiz views for iOS/Mac
+
+## Adaptive Quiz Generation
+
+Quiz generation now supports deduplication + adaptive per-user selection.
+
+- Deduplication key:
+  - Normalized prompt text (trim, collapse whitespace, lowercase)
+  - Plus normalized choices (default enabled)
+  - Stored as a canonical hashed key
+- Adaptive stats tracked per user + canonical key:
+  - `attempts`, `correct`, `incorrect`, `correctStreak`
+  - `lastAttemptAt`, `lastResultWasCorrect`, `masteryScore`
+- Mastered rule defaults:
+  - `minAttempts = 3`
+  - `minAccuracy = 0.85`
+  - `minStreak = 3`
+- Selection behavior:
+  - Excludes mastered questions by default
+  - If not enough non-mastered questions exist, backfills with mastered review items
+  - Weights selection toward lower `masteryScore`
+  - Adds a boost for recently missed questions
+
+### Adaptive Stats Storage
+
+Current implementation stores adaptive stats in browser `localStorage`:
+
+- Key: `part107_adaptive_stats_v1`
+- Scope: per-browser, per-device
+- Default user ID: `local-user`
+
+Storage is intentionally separated from selection logic, so you can swap to a DB/API backend later without rewriting core selection behavior.
+
+### Adaptive Config Options
+
+Defaults come from `@part107/core` (`DEFAULT_ADAPTIVE_QUIZ_CONFIG`):
+
+- `minAttempts`
+- `minAccuracy`
+- `minStreak`
+- `excludeMastered`
+- `includeMasteredOnShortfall`
+- `reviewRate`
+- `includeChoicesInCanonicalKey`
+- `recentMissWindowMs`
+- `recentMissBoost`
 
 ## Question Bank
 

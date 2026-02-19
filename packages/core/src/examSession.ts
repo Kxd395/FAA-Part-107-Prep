@@ -1,11 +1,17 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+  dedupeQuestions,
+  selectAdaptiveQuestions,
+  type AdaptiveQuizConfig,
+  type UserQuestionStats,
+} from "./adaptive";
+import {
   FULL_EXAM_QUESTION_COUNT,
-  buildExamQuestionSet,
   buildTimeLimitMs,
   computeRemainingTime,
   filterQuestionsByCategory,
   normalizeCategory,
+  shuffleQuestions,
   type StudyCategory,
 } from "./quiz";
 import type { OptionId, Question } from "./types";
@@ -36,6 +42,11 @@ export interface ExamSetupPreview {
 export interface UseExamSessionOptions<Q extends Question = Question> {
   allQuestions: readonly Q[];
   passPercent?: number;
+  adaptive?: {
+    userId: string;
+    userStatsByKey?: Record<string, UserQuestionStats>;
+    config?: Partial<AdaptiveQuizConfig>;
+  };
 }
 
 export interface UseExamSessionResult<Q extends Question = Question> {
@@ -66,6 +77,7 @@ export interface UseExamSessionResult<Q extends Question = Question> {
 export function useExamSession<Q extends Question = Question>({
   allQuestions,
   passPercent = 70,
+  adaptive,
 }: UseExamSessionOptions<Q>): UseExamSessionResult<Q> {
   const [phase, setPhase] = useState<ExamPhase>("setup");
   const [examCategory, setExamCategory] = useState<StudyCategory>("All");
@@ -81,9 +93,27 @@ export function useExamSession<Q extends Question = Question>({
   const startExam = useCallback(
     (categoryInput?: string | StudyCategory) => {
       const normalized = normalizeCategory(categoryInput ?? examCategory) ?? "All";
-      const set = buildExamQuestionSet(allQuestions, normalized);
+      const filtered = filterQuestionsByCategory(allQuestions, normalized) as Q[];
+      const deduped = dedupeQuestions(filtered);
+      const targetCount =
+        normalized === "All"
+          ? Math.min(FULL_EXAM_QUESTION_COUNT, deduped.questions.length)
+          : deduped.questions.length;
 
-      if (set.questions.length === 0) {
+      let selectedQuestions: Q[];
+      if (adaptive?.userId) {
+        selectedQuestions = selectAdaptiveQuestions({
+          userId: adaptive.userId,
+          desiredQuizSize: targetCount,
+          fullQuestionBank: filtered,
+          userStatsByKey: adaptive.userStatsByKey,
+          config: adaptive.config,
+        }).questions as Q[];
+      } else {
+        selectedQuestions = shuffleQuestions(deduped.questions as Q[]).slice(0, targetCount);
+      }
+
+      if (selectedQuestions.length === 0) {
         setQuestions([]);
         setExamCategory("All");
         setPhase("setup");
@@ -91,18 +121,20 @@ export function useExamSession<Q extends Question = Question>({
       }
 
       const now = Date.now();
-      setExamCategory(set.category);
-      setQuestions(set.questions as Q[]);
+      const nextTimeLimitMs = buildTimeLimitMs(selectedQuestions.length, normalized);
+
+      setExamCategory(normalized);
+      setQuestions(selectedQuestions);
       setCurrentIndex(0);
       setAnswers(new Map());
       setFlagged(new Set());
       setStartTime(now);
-      setTimeLimitMs(set.timeLimitMs);
-      setRemainingMs(set.timeLimitMs);
+      setTimeLimitMs(nextTimeLimitMs);
+      setRemainingMs(nextTimeLimitMs);
       setPhase("in-progress");
       return true;
     },
-    [allQuestions, examCategory]
+    [adaptive, allQuestions, examCategory]
   );
 
   useEffect(() => {
@@ -199,7 +231,22 @@ export function useExamSession<Q extends Question = Question>({
       const invalidCategory = !!categoryInput && !parsed;
 
       const pool = filterQuestionsByCategory(allQuestions, category);
-      const questionCount = category === "All" ? Math.min(FULL_EXAM_QUESTION_COUNT, pool.length) : pool.length;
+      const deduped = dedupeQuestions(pool);
+      const targetCount =
+        category === "All"
+          ? Math.min(FULL_EXAM_QUESTION_COUNT, deduped.questions.length)
+          : deduped.questions.length;
+
+      const questionCount = adaptive?.userId
+        ? selectAdaptiveQuestions({
+            userId: adaptive.userId,
+            desiredQuizSize: targetCount,
+            fullQuestionBank: pool,
+            userStatsByKey: adaptive.userStatsByKey,
+            config: adaptive.config,
+          }).questions.length
+        : targetCount;
+
       const timeLimitMs = buildTimeLimitMs(questionCount, category);
 
       return {
@@ -209,7 +256,7 @@ export function useExamSession<Q extends Question = Question>({
         invalidCategory,
       };
     },
-    [allQuestions, examCategory]
+    [adaptive, allQuestions, examCategory]
   );
 
   const answeredCount = answers.size;

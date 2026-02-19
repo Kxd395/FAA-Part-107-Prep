@@ -1,4 +1,11 @@
 import { useCallback, useMemo, useState } from "react";
+import {
+  canonicalQuestionKey,
+  dedupeQuestions,
+  selectAdaptiveQuestions,
+  type AdaptiveQuizConfig,
+  type UserQuestionStats,
+} from "./adaptive";
 import type { ProgressQuestionResult } from "./progress";
 import { filterQuestionsByCategory, normalizeCategory, shuffleQuestions, type StudyCategory } from "./quiz";
 import type { OptionId, Question } from "./types";
@@ -8,6 +15,18 @@ export type StudyAnswerState = "unanswered" | "correct" | "incorrect";
 export interface UseStudySessionOptions<Q extends Question = Question> {
   allQuestions: readonly Q[];
   initialCategory?: StudyCategory;
+  adaptive?: {
+    userId: string;
+    userStatsByKey?: Record<string, UserQuestionStats>;
+    config?: Partial<AdaptiveQuizConfig>;
+    onQuestionEvaluated?: (payload: {
+      question: Q;
+      canonicalKey: string;
+      selectedOption: OptionId;
+      isCorrect: boolean;
+      answeredAt: string;
+    }) => void;
+  };
 }
 
 export interface StudyScore {
@@ -38,6 +57,7 @@ export interface UseStudySessionResult<Q extends Question = Question> {
 export function useStudySession<Q extends Question = Question>({
   allQuestions,
   initialCategory = "All",
+  adaptive,
 }: UseStudySessionOptions<Q>): UseStudySessionResult<Q> {
   const [selectedCategory, setSelectedCategory] = useState<StudyCategory>(initialCategory);
   const [questions, setQuestions] = useState<Q[]>([]);
@@ -54,8 +74,23 @@ export function useStudySession<Q extends Question = Question>({
       const normalized = normalizeCategory(categoryInput ?? selectedCategory) ?? "All";
       const filtered = filterQuestionsByCategory(allQuestions, normalized) as Q[];
 
+      const targetCount = filtered.length;
+      let nextQuestions: Q[];
+      if (adaptive?.userId) {
+        nextQuestions = selectAdaptiveQuestions({
+          userId: adaptive.userId,
+          desiredQuizSize: targetCount,
+          fullQuestionBank: filtered,
+          userStatsByKey: adaptive.userStatsByKey,
+          config: adaptive.config,
+        }).questions as Q[];
+      } else {
+        const deduped = dedupeQuestions(filtered);
+        nextQuestions = shuffleQuestions(deduped.questions as Q[]);
+      }
+
       setSelectedCategory(normalized);
-      setQuestions(shuffleQuestions(filtered));
+      setQuestions(nextQuestions);
       setCurrentIndex(0);
       setSelectedOption(null);
       setAnswerState("unanswered");
@@ -64,7 +99,7 @@ export function useStudySession<Q extends Question = Question>({
       setQuestionResults([]);
       setQuizStarted(true);
     },
-    [allQuestions, selectedCategory]
+    [adaptive, allQuestions, selectedCategory]
   );
 
   const currentQuestion = useMemo(() => {
@@ -95,8 +130,21 @@ export function useStudySession<Q extends Question = Question>({
           category: currentQuestion.category,
         },
       ]);
+
+      if (adaptive?.onQuestionEvaluated) {
+        const canonicalKey = canonicalQuestionKey(currentQuestion, {
+          includeChoices: adaptive.config?.includeChoicesInCanonicalKey ?? true,
+        });
+        adaptive.onQuestionEvaluated({
+          question: currentQuestion,
+          canonicalKey,
+          selectedOption: optionId,
+          isCorrect,
+          answeredAt: new Date().toISOString(),
+        });
+      }
     },
-    [answerState, currentQuestion]
+    [adaptive, answerState, currentQuestion]
   );
 
   const nextQuestion = useCallback(() => {
@@ -118,7 +166,7 @@ export function useStudySession<Q extends Question = Question>({
   const isComplete = quizStarted && questions.length > 0 && currentIndex >= questions.length;
   const progressPercent =
     questions.length > 0
-      ? Math.min(100, ((Math.min(currentIndex + 1, questions.length)) / questions.length) * 100)
+      ? Math.min(100, (Math.min(currentIndex + 1, questions.length) / questions.length) * 100)
       : 0;
 
   return {

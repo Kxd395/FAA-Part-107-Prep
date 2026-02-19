@@ -9,6 +9,7 @@ import AnswerOptions from "../../components/quiz/AnswerOptions";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
 import SessionSummaryCard from "../../components/quiz/SessionSummaryCard";
+import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
 import { useProgress } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { STUDY_CATEGORIES } from "../../lib/questionBank";
@@ -31,8 +32,19 @@ function StudyPageClient() {
   const searchParams = useSearchParams();
   const { saveSession } = useProgress();
   const { questions: allQuestions, loaded, loading, error, counts, reload } = useQuestionBank();
+  const adaptive = useAdaptiveQuestionStats();
 
-  const study = useStudySession({ allQuestions });
+  const study = useStudySession({
+    allQuestions,
+    adaptive: {
+      userId: adaptive.userId,
+      userStatsByKey: adaptive.statsByKey,
+      config: adaptive.config,
+      onQuestionEvaluated: ({ question, isCorrect }) => {
+        adaptive.recordAnswer(question, isCorrect);
+      },
+    },
+  });
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const autoStarted = useRef(false);
   const [sessionSaved, setSessionSaved] = useState(false);

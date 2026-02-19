@@ -9,6 +9,7 @@ import AnswerOptions from "../../components/quiz/AnswerOptions";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
 import SessionSummaryCard from "../../components/quiz/SessionSummaryCard";
+import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
 import { useProgress, type QuestionResult } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 
@@ -33,8 +34,17 @@ function ExamPageClient() {
   const categoryParam = searchParams.get("category");
 
   const { saveSession } = useProgress();
+  const adaptive = useAdaptiveQuestionStats();
   const { questions: allQuestions, loaded, loading, error, reload } = useQuestionBank();
-  const exam = useExamSession({ allQuestions, passPercent: PASSING_PERCENT });
+  const exam = useExamSession({
+    allQuestions,
+    passPercent: PASSING_PERCENT,
+    adaptive: {
+      userId: adaptive.userId,
+      userStatsByKey: adaptive.statsByKey,
+      config: adaptive.config,
+    },
+  });
 
   const [sessionSaved, setSessionSaved] = useState(false);
   const [showNavigator, setShowNavigator] = useState(false);
@@ -48,6 +58,13 @@ function ExamPageClient() {
 
   useEffect(() => {
     if (exam.phase !== "review" || sessionSaved || exam.questions.length === 0) return;
+
+    adaptive.recordExamReview(
+      exam.review.rows.map((row) => ({
+        question: row.question,
+        isCorrect: row.isCorrect,
+      }))
+    );
 
     const questionResults: QuestionResult[] = exam.review.rows.map((row) => ({
       questionId: row.question.id,
@@ -67,7 +84,7 @@ function ExamPageClient() {
     });
 
     setSessionSaved(true);
-  }, [exam, saveSession, sessionSaved]);
+  }, [adaptive, exam, saveSession, sessionSaved]);
 
   if (loading && !loaded) {
     return (

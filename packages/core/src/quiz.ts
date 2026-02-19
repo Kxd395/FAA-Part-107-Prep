@@ -1,4 +1,5 @@
 import type { Question } from "./types";
+import { dedupeQuestions } from "./adaptive";
 
 export const STUDY_CATEGORIES = [
   "All",
@@ -72,8 +73,12 @@ export function buildExamQuestionSet(
   timeLimitMs: number;
 } {
   const pool = filterQuestionsByCategory(allQuestions, category);
-  const targetCount = category === "All" ? fullExamQuestionCount : pool.length;
-  const questions = shuffleQuestions(pool).slice(0, Math.min(targetCount, pool.length));
+  const deduped = dedupeQuestions(pool);
+  const targetCount = category === "All" ? fullExamQuestionCount : deduped.questions.length;
+  const questions = shuffleQuestions(deduped.questions).slice(
+    0,
+    Math.min(targetCount, deduped.questions.length)
+  );
   return {
     category,
     questions,
