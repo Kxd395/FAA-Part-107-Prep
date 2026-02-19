@@ -30,13 +30,13 @@ const QUESTION_TYPE_OPTIONS: Array<{
 }> = [
   {
     value: "real_exam",
-    title: "Exclude ACS Code-Matching (Recommended)",
-    description: "Shows realistic FAA-style prompts and excludes ACS code-recall questions.",
+    title: "Real Exam MCQ (Recommended)",
+    description: "Shows FAA-style multiple-choice prompts and excludes ACS code-mapping drills.",
   },
   {
     value: "acs_mastery",
-    title: "ACS Mastery",
-    description: "Focuses on ACS code mapping and memorization.",
+    title: "ACS Code Mapping Drill",
+    description: "AKTR-style remediation practice for mapping ACS codes to concepts.",
   },
   {
     value: "mixed",
@@ -244,6 +244,10 @@ function StudyPageClient() {
             <span className="font-medium text-brand-400">
               {QUESTION_TYPE_PROFILE_LABELS[selectedQuestionType]}
             </span>
+            <div className="mt-2">
+              Real UAG questions are standard MCQs. ACS/learning codes are primarily post-test AKTR
+              remediation signals.
+            </div>
           </div>
         </div>
 

@@ -43,7 +43,7 @@ const FEATURES = [
 ];
 
 const STATS = [
-  { label: "Questions", value: "343", sub: "FAA ACS + official UAG sources" },
+  { label: "Questions", value: "343", sub: "51 exam-style + 292 ACS mapping drills" },
   { label: "Pass Rate", value: "70%", sub: "42 of 60 to pass" },
   { label: "Time Limit", value: "2 hrs", sub: "120 minutes on exam day" },
   { label: "Updated", value: "2026", sub: "Remote ID & Ops Over People" },
@@ -56,13 +56,13 @@ const QUESTION_TYPE_OPTIONS: Array<{
 }> = [
   {
     value: "real_exam",
-    title: "Exclude ACS Code-Matching (Recommended)",
-    description: "Removes the ACS code-matching questions you said you do not want.",
+    title: "Real Exam MCQ (Recommended)",
+    description: "Keeps standard FAA-style multiple-choice prompts and excludes ACS code-mapping drills.",
   },
   {
     value: "acs_mastery",
-    title: "ACS Mastery",
-    description: "Focus on ACS code mapping and memorization.",
+    title: "ACS Code Mapping Drill",
+    description: "AKTR remediation practice: map ACS codes to concepts (not a live exam format).",
   },
   {
     value: "mixed",
@@ -79,6 +79,7 @@ const QUESTION_TYPE_OPTIONS: Array<{
 export default function HomePage() {
   const [practiceType, setPracticeType] = useState<QuestionTypeProfile>("real_exam");
   const practiceExamHref = useMemo(() => `/exam?type=${encodeURIComponent(practiceType)}`, [practiceType]);
+  const studyHref = useMemo(() => `/study?type=${encodeURIComponent(practiceType)}`, [practiceType]);
 
   return (
     <div className="space-y-16">
@@ -102,7 +103,7 @@ export default function HomePage() {
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
-            href="/study"
+            href={studyHref}
             className="rounded-xl bg-brand-600 px-8 py-3 font-semibold text-white transition-all hover:bg-brand-700 hover:scale-105"
           >
             Start Studying →
@@ -135,6 +136,9 @@ export default function HomePage() {
           </p>
           <p className="text-xs text-[var(--muted)]/80">
             Selected: <span className="text-brand-400">{QUESTION_TYPE_PROFILE_LABELS[practiceType]}</span>
+          </p>
+          <p className="text-xs text-[var(--muted)]/80">
+            UAG format is 60 questions, 2.0 hours, 70% passing. ACS codes appear on AKTR after testing to identify deficient areas.
           </p>
         </div>
       </section>
@@ -216,7 +220,7 @@ export default function HomePage() {
               </p>
               <div className="mt-3 flex gap-2">
                 <Link
-                  href={`/study?category=${encodeURIComponent(topic.name)}`}
+                  href={`/study?category=${encodeURIComponent(topic.name)}&type=${encodeURIComponent(practiceType)}`}
                   className="flex-1 rounded-lg bg-brand-600/80 py-2 text-center text-xs font-semibold text-white transition-all hover:bg-brand-600"
                 >
                   📖 Study

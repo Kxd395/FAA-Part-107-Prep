@@ -11,8 +11,8 @@ export const QUESTION_TYPE_PROFILES = [
 export type QuestionTypeProfile = (typeof QUESTION_TYPE_PROFILES)[number];
 
 export const QUESTION_TYPE_PROFILE_LABELS: Record<QuestionTypeProfile, string> = {
-  real_exam: "Exclude ACS Code-Matching",
-  acs_mastery: "ACS Mastery",
+  real_exam: "Real Exam MCQ (No ACS Mapping)",
+  acs_mastery: "ACS Code Mapping Drill",
   mixed: "Mixed",
   weak_spots: "Weak Spots Only",
 };
@@ -23,16 +23,20 @@ export function normalizeQuestionTypeProfile(input: string | null | undefined): 
   return QUESTION_TYPE_PROFILES.find((profile) => profile === normalized) ?? null;
 }
 
+const ACS_MASTERY_TAG = "acs-mastery";
+const ACS_CODE_MATCHING_PATTERNS = [
+  /^\s*which(?:\s+acs)?\s+knowledge\s+code\s+matches\s+this\s+topic/i,
+  /^\s*under\s+part\s+107\s+acs,\s*which\s+concept\s+is\s+covered\s+by\s+knowledge\s+code/i,
+];
+
 export function isAcsCodeMatchingQuestion(question: Question): boolean {
-  const text = question.question_text.trim().toLowerCase();
-  const sourceType = question.source_type?.trim().toLowerCase();
-  const citation = question.citation?.trim().toUpperCase() ?? "";
-  return (
-    sourceType === "acs_generated" ||
-    citation.startsWith("ACS UA.") ||
-    text.startsWith("under part 107 acs, which concept is covered by knowledge code") ||
-    text.startsWith("which acs knowledge code matches this topic")
-  );
+  const tags = question.tags ?? [];
+  if (tags.some((tag) => tag.trim().toLowerCase() === ACS_MASTERY_TAG)) {
+    return true;
+  }
+
+  const text = question.question_text.trim();
+  return ACS_CODE_MATCHING_PATTERNS.some((pattern) => pattern.test(text));
 }
 
 export interface FilterQuestionsByTypeOptions {

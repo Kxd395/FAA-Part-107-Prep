@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import {
+  FULL_EXAM_QUESTION_COUNT,
   QUESTION_TYPE_PROFILE_LABELS,
   formatClockTime,
   normalizeQuestionTypeProfile,
@@ -30,13 +31,13 @@ const QUESTION_TYPE_OPTIONS: Array<{
 }> = [
   {
     value: "real_exam",
-    title: "Exclude ACS Code-Matching (Recommended)",
-    description: "Uses realistic exam-style prompts and excludes ACS code-matching questions.",
+    title: "Real Exam MCQ (Recommended)",
+    description: "Standard FAA-style multiple-choice prompts only. Excludes ACS code-mapping drills.",
   },
   {
     value: "acs_mastery",
-    title: "ACS Mastery",
-    description: "Focuses on ACS knowledge-code mapping and code recall.",
+    title: "ACS Code Mapping Drill",
+    description: "AKTR-style remediation practice: map ACS codes to concepts (not the real exam format).",
   },
   {
     value: "mixed",
@@ -225,6 +226,10 @@ function ExamPageClient() {
     const preview = exam.getSetupPreview(categoryParam, selectedQuestionType);
     const timeDisplay =
       preview.category === "All" ? "2 Hours" : `${Math.round(preview.timeLimitMs / 60000)} min`;
+    const fullRealExamShortfall =
+      preview.category === "All" && preview.questionTypeProfile === "real_exam"
+        ? Math.max(0, FULL_EXAM_QUESTION_COUNT - preview.questionCount)
+        : 0;
 
     return (
       <div className="mx-auto max-w-lg space-y-8 pt-8">
@@ -248,7 +253,7 @@ function ExamPageClient() {
 
         {invalidQuestionTypeParam && (
           <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
-            Unknown question type &quot;{questionTypeParam}&quot;. Falling back to Exclude ACS Code-Matching.
+            Unknown question type &quot;{questionTypeParam}&quot;. Falling back to Real Exam MCQ.
           </div>
         )}
 
@@ -280,9 +285,17 @@ function ExamPageClient() {
             ))}
           </div>
           <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
-            Note: Exclude ACS Code-Matching removes the code-recall style prompts you flagged and keeps practical FAA-style questions.
+            Real UAG format is multiple-choice only. ACS/learning codes are shown on your AKTR after testing for remediation, not as a live question format.
           </div>
         </div>
+
+        {fullRealExamShortfall > 0 && (
+          <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+            Real UAG target is {FULL_EXAM_QUESTION_COUNT} questions in 2.0 hours (70% pass). This
+            current Real Exam MCQ pool has {preview.questionCount} questions, so this run is short by{" "}
+            {fullRealExamShortfall}.
+          </div>
+        )}
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6 space-y-4">
           <div className="flex justify-between text-sm">

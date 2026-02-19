@@ -244,6 +244,20 @@ The bank includes curated exam-style items and ACS mastery items.
 | Physiology | — | 🔲 Generate |
 | Remote ID | — | 🔲 Generate |
 
+## UAG Test Format Notes
+
+The real FAA Part 107 UAG test is MCQ-only. Per FAA testing references:
+
+- UAG is **60 questions**, **2.0 hours**, **70 passing score**.
+- ACS codes are printed on the **AKTR** for missed-item remediation.
+- The ACS/learning-code matching workflow is a **post-test review step**, not a live test question type.
+
+Local extracted references used for these facts:
+
+- `source-materials/PDFtoMD/out_to_ocr/markdown/testing-matrix.md`
+- `source-materials/PDFtoMD/out_to_ocr/markdown/learningstatementreferenceguide.md`
+- `source-materials/PDFtoMD/out_to_ocr/markdown/uas-testing-information.md`
+
 ## Monetization (Freemium)
 
 | Tier | Price | Features |
