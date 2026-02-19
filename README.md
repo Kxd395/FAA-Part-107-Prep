@@ -114,17 +114,51 @@ Quiz generation now supports deduplication + adaptive per-user selection.
   - Plus normalized choices (default enabled)
   - Stored as a canonical hashed key
 - Adaptive stats tracked per user + canonical key:
-  - `attempts`, `correct`, `incorrect`, `correctStreak`
-  - `lastAttemptAt`, `lastResultWasCorrect`, `masteryScore`
+  - Core:
+    - `attempts`, `correct`, `incorrect`, `correctStreak`, `wrongStreak`
+    - `lastAttemptAt`, `lastCorrectAt`, `lastResultWasCorrect`
+  - Rolling windows:
+    - `last10Bits`, `last10Count`, `last10Accuracy`
+    - `last20Bits`, `last20Count`, `last20Accuracy`
+    - `momentum` (`last10Accuracy - last20Accuracy`)
+    - `volatility` (flip rate across last-10 outcomes)
+  - Trend/speed:
+    - `emaAccuracy`, `emaResponseTimeMs`, `averageResponseTimeMs`
+  - Scheduling:
+    - `intervalDays`, `nextDueAt`
+  - `masteryScore`
 - Mastered rule defaults:
   - `minAttempts = 3`
-  - `minAccuracy = 0.85`
+  - `minAccuracy = 0.85` (used as mastery score threshold)
   - `minStreak = 3`
 - Selection behavior:
   - Excludes mastered questions by default
   - If not enough non-mastered questions exist, backfills with mastered review items
-  - Weights selection toward lower `masteryScore`
+  - Weights selection toward lower `masteryScore` (weakness-first)
+  - Adds boosts for due items (`nextDueAt`) and unseen items
   - Adds a boost for recently missed questions
+
+### Mastery Formula
+
+`masteryScore` is computed as:
+
+- `base = posteriorMean(correct, attempts)` using Beta prior (`a=1`, `b=1`)
+- `recent = last10Accuracy` (or `base` until 10 attempts exist)
+- `recencyPenalty` based on days since last attempt
+- `volatilityPenalty` based on flips in last-10 outcomes
+
+Final:
+
+- `masteryScore = clamp(0.6*base + 0.4*recent - recencyPenalty - volatilityPenalty, 0, 1)`
+
+### Scheduling Rule (Spaced Review)
+
+Each answer updates `intervalDays` and `nextDueAt`:
+
+- Wrong answer: `intervalDays = 1`
+- Correct + fast (`responseTimeMs <= fastResponseTimeMs`): `intervalDays *= 2`
+- Correct + slower: `intervalDays *= 1.5`
+- Interval is clamped to `[minIntervalDays, maxIntervalDays]`
 
 ### Adaptive Stats Storage
 
@@ -150,6 +184,31 @@ Defaults come from `@part107/core` (`DEFAULT_ADAPTIVE_QUIZ_CONFIG`):
 - `includeChoicesInCanonicalKey`
 - `recentMissWindowMs`
 - `recentMissBoost`
+- `emaAlpha`
+- `posteriorPriorCorrect`
+- `posteriorPriorIncorrect`
+- `recencyPenaltyDays`
+- `recencyPenaltyMax`
+- `volatilityPenaltyMax`
+- `fastResponseTimeMs`
+- `slowResponseTimeMs`
+- `minIntervalDays`
+- `maxIntervalDays`
+- `weakWeightBoost`
+- `dueWeightBoost`
+- `noveltyWeightBoost`
+
+### Attempt Event Logging
+
+The app now writes one immutable attempt event per graded answer:
+
+- Key: `part107_attempt_events_v1`
+- Stored fields:
+  - `attemptId`, `userId`, `questionKey`, `questionId`, `timestamp`
+  - `mode` (`pretest`, `practice`, `quiz`, `mock`)
+  - `correct`, `responseTimeMs`, `selectedOptionId`, `quizId`
+  - `topicTags`, `difficulty`, `confidence`
+- Adapter interface: `AttemptEventStore` (`apps/web/src/lib/attemptEventStore.ts`)
 
 ### Learning Event Logging
 

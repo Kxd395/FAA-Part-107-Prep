@@ -19,6 +19,7 @@ import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useProgress, type QuestionResult } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
+import { extractCitationText, mergeCitations } from "../../lib/citationContext";
 
 const PASSING_PERCENT = 70;
 
@@ -169,7 +170,10 @@ function ExamPageClient() {
       exam.review.rows.map((row) => ({
         question: row.question,
         isCorrect: row.isCorrect,
-      }))
+        userAnswer: row.userAnswer,
+      })),
+      Date.now(),
+      { mode: "mock", quizId: String(exam.startTime) }
     );
 
     const questionResults: QuestionResult[] = exam.review.rows.map((row) => ({
@@ -395,6 +399,7 @@ function ExamPageClient() {
                     <p className="text-gray-400">{result.question.explanation_correct}</p>
                     <CitationLinks
                       citation={result.question.citation}
+                      label="📖 Correct answer reference:"
                       onReferenceClick={(ref) => {
                         events.logEvent({
                           type: "citation_clicked",
@@ -402,7 +407,30 @@ function ExamPageClient() {
                           questionId: result.question.id,
                           category: result.question.category,
                           subcategory: result.question.subcategory,
-                          citationLabel: ref.label,
+                          citationLabel: `correct:${ref.label}`,
+                          citationUrl: ref.url,
+                          questionTypeProfile: exam.questionTypeProfile,
+                        });
+                      }}
+                    />
+                    <CitationLinks
+                      citation={mergeCitations(
+                        result.question.citation,
+                        extractCitationText(
+                          result.userAnswer
+                            ? result.question.explanation_distractors[result.userAnswer]
+                            : undefined
+                        )
+                      )}
+                      label={`📖 Why "${result.userAnswer ?? "unanswered"}" reference:`}
+                      onReferenceClick={(ref) => {
+                        events.logEvent({
+                          type: "citation_clicked",
+                          mode: "exam",
+                          questionId: result.question.id,
+                          category: result.question.category,
+                          subcategory: result.question.subcategory,
+                          citationLabel: `selected:${result.userAnswer ?? "unanswered"}:${ref.label}`,
                           citationUrl: ref.url,
                           questionTypeProfile: exam.questionTypeProfile,
                         });

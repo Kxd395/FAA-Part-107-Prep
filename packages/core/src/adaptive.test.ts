@@ -150,4 +150,61 @@ describe("adaptive stats updates", () => {
     expect(second.masteryScore).toBeGreaterThanOrEqual(0);
     expect(second.masteryScore).toBeLessThanOrEqual(1);
   });
+
+  it("tracks rolling windows and momentum", () => {
+    const outcomes = [true, false, true, true, false, true, false, false, true, true] as const;
+    let stats: UserQuestionStats | undefined;
+    for (const [i, outcome] of outcomes.entries()) {
+      stats = updateUserQuestionStats({
+        userId: "user-1",
+        canonicalKey: "rolling",
+        previous: stats,
+        isCorrect: outcome,
+        answeredAtMs: 1_700_000_000_000 + i * 1_000,
+      });
+    }
+
+    expect(stats).toBeDefined();
+    expect(stats?.attempts).toBe(10);
+    expect(stats?.last10Count).toBe(6);
+    expect(stats?.last10Accuracy).toBeCloseTo(0.6, 5);
+    expect(stats?.last20Accuracy).toBeCloseTo(0.6, 5);
+    expect(stats?.momentum).toBeCloseTo(0, 5);
+    expect(stats?.volatility).toBeGreaterThan(0);
+  });
+
+  it("updates EMA and spacing interval based on correctness and speed", () => {
+    const first = updateUserQuestionStats({
+      userId: "user-1",
+      canonicalKey: "schedule",
+      isCorrect: true,
+      responseTimeMs: 12_000,
+      answeredAtMs: 1_700_000_000_000,
+    });
+    const second = updateUserQuestionStats({
+      userId: "user-1",
+      canonicalKey: "schedule",
+      previous: first,
+      isCorrect: true,
+      responseTimeMs: 120_000,
+      answeredAtMs: 1_700_000_100_000,
+    });
+    const third = updateUserQuestionStats({
+      userId: "user-1",
+      canonicalKey: "schedule",
+      previous: second,
+      isCorrect: false,
+      responseTimeMs: 40_000,
+      answeredAtMs: 1_700_000_200_000,
+    });
+
+    expect(first.intervalDays).toBe(2);
+    expect(second.intervalDays).toBe(3);
+    expect(third.intervalDays).toBe(1);
+    expect(third.wrongStreak).toBe(1);
+    expect(third.correctStreak).toBe(0);
+    expect(second.emaResponseTimeMs).not.toBeNull();
+    expect(third.emaAccuracy).toBeGreaterThanOrEqual(0);
+    expect(third.emaAccuracy).toBeLessThanOrEqual(1);
+  });
 });

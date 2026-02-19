@@ -1,8 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useProgress, SessionRecord } from "../../hooks/useProgress";
+import { defaultAdaptiveStatsStore } from "../../lib/adaptiveStatsStore";
+import { computeAdaptiveInsights } from "../../lib/adaptiveInsights";
+import { defaultAttemptEventStore } from "../../lib/attemptEventStore";
+
+const LOCAL_USER_ID = "local-user";
 
 // ─────────────────────────────────────────────
 // Helpers
@@ -41,6 +46,14 @@ export default function ProgressPage() {
   const { sessions, loaded, getStats, clearAll } = useProgress();
   const [showConfirmClear, setShowConfirmClear] = useState(false);
   const [activeTab, setActiveTab] = useState<"overview" | "history" | "categories">("overview");
+  const adaptiveInsights = useMemo(() => {
+    if (!loaded) {
+      return computeAdaptiveInsights({ statsByKey: {}, attempts: [] });
+    }
+    const statsByKey = defaultAdaptiveStatsStore.load(LOCAL_USER_ID);
+    const attempts = defaultAttemptEventStore.load(LOCAL_USER_ID);
+    return computeAdaptiveInsights({ statsByKey, attempts });
+  }, [loaded]);
 
   if (!loaded) {
     return (
@@ -172,7 +185,7 @@ export default function ProgressPage() {
       </div>
 
       {/* Tab Content */}
-      {activeTab === "overview" && <OverviewTab stats={stats} />}
+      {activeTab === "overview" && <OverviewTab stats={stats} adaptiveInsights={adaptiveInsights} />}
       {activeTab === "history" && <HistoryTab sessions={sessions} />}
       {activeTab === "categories" && <CategoriesTab stats={stats} />}
     </div>
@@ -213,9 +226,92 @@ function StatCard({
 // ─────────────────────────────────────────────
 // Overview Tab
 // ─────────────────────────────────────────────
-function OverviewTab({ stats }: { stats: ReturnType<ReturnType<typeof useProgress>["getStats"]> }) {
+function OverviewTab({
+  stats,
+  adaptiveInsights,
+}: {
+  stats: ReturnType<ReturnType<typeof useProgress>["getStats"]>;
+  adaptiveInsights: ReturnType<typeof computeAdaptiveInsights>;
+}) {
   return (
     <div className="space-y-6">
+      {adaptiveInsights.trackedQuestions > 0 && (
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
+          <h3 className="mb-4 font-semibold text-white">🧠 Adaptive Insights</h3>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Last 10 Attempts</div>
+              <div className="mt-1 text-2xl font-bold text-white">
+                {adaptiveInsights.last10AccuracyPercent !== null
+                  ? `${adaptiveInsights.last10AccuracyPercent}%`
+                  : "—"}
+              </div>
+              <div className="mt-1 text-xs text-[var(--muted)]">
+                {adaptiveInsights.last10CorrectCount}/{adaptiveInsights.last10AttemptCount} correct
+              </div>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Momentum</div>
+              <div
+                className={`mt-1 text-2xl font-bold ${
+                  adaptiveInsights.momentumPercent === null
+                    ? "text-[var(--muted)]"
+                    : adaptiveInsights.momentumPercent >= 0
+                      ? "text-correct"
+                      : "text-incorrect"
+                }`}
+              >
+                {adaptiveInsights.momentumPercent === null
+                  ? "—"
+                  : `${adaptiveInsights.momentumPercent >= 0 ? "+" : ""}${adaptiveInsights.momentumPercent}`}
+              </div>
+              <div className="mt-1 text-xs text-[var(--muted)]">vs previous 10 attempts</div>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Due Now</div>
+              <div className="mt-1 text-2xl font-bold text-amber-300">{adaptiveInsights.dueNowCount}</div>
+              <div className="mt-1 text-xs text-[var(--muted)]">
+                {adaptiveInsights.dueWithin24hCount} more due within 24h
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 grid gap-2 text-xs text-[var(--muted)] sm:grid-cols-2">
+            <div>
+              Tracked questions:{" "}
+              <span className="font-medium text-white">{adaptiveInsights.trackedQuestions}</span>
+            </div>
+            <div>
+              At-risk questions:{" "}
+              <span className="font-medium text-incorrect">{adaptiveInsights.atRiskCount}</span>
+            </div>
+            <div>
+              Avg rolling last10:{" "}
+              <span className="font-medium text-white">
+                {adaptiveInsights.averageRollingLast10Percent !== null
+                  ? `${adaptiveInsights.averageRollingLast10Percent}%`
+                  : "—"}
+              </span>
+            </div>
+            <div>
+              Avg rolling momentum:{" "}
+              <span
+                className={`font-medium ${
+                  adaptiveInsights.averageRollingMomentumPercent === null
+                    ? "text-white"
+                    : adaptiveInsights.averageRollingMomentumPercent >= 0
+                      ? "text-correct"
+                      : "text-incorrect"
+                }`}
+              >
+                {adaptiveInsights.averageRollingMomentumPercent === null
+                  ? "—"
+                  : `${adaptiveInsights.averageRollingMomentumPercent >= 0 ? "+" : ""}${adaptiveInsights.averageRollingMomentumPercent}`}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Accuracy Trend (Text-based chart) */}
       {stats.recentTrend.length > 1 && (
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">

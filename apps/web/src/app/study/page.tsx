@@ -2,8 +2,15 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useRef, useState } from "react";
-import { normalizeCategory, useStudySession } from "@part107/core";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import {
+  QUESTION_TYPE_PROFILE_LABELS,
+  filterQuestionsByType,
+  normalizeCategory,
+  normalizeQuestionTypeProfile,
+  type QuestionTypeProfile,
+  useStudySession,
+} from "@part107/core";
 import CitationLinks, { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
 import AnswerOptions from "../../components/quiz/AnswerOptions";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
@@ -13,7 +20,35 @@ import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useProgress } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
-import { STUDY_CATEGORIES } from "../../lib/questionBank";
+import { extractCitationText, mergeCitations } from "../../lib/citationContext";
+import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
+
+const QUESTION_TYPE_OPTIONS: Array<{
+  value: QuestionTypeProfile;
+  title: string;
+  description: string;
+}> = [
+  {
+    value: "real_exam",
+    title: "Exclude ACS Code-Matching (Recommended)",
+    description: "Shows realistic FAA-style prompts and excludes ACS code-recall questions.",
+  },
+  {
+    value: "acs_mastery",
+    title: "ACS Mastery",
+    description: "Focuses on ACS code mapping and memorization.",
+  },
+  {
+    value: "mixed",
+    title: "Mixed",
+    description: "Includes both exam-style and ACS mastery prompts.",
+  },
+  {
+    value: "weak_spots",
+    title: "Weak Spots Only",
+    description: "Prioritizes questions you still struggle with.",
+  },
+];
 
 export default function StudyPage() {
   return (
@@ -31,19 +66,40 @@ export default function StudyPage() {
 
 function StudyPageClient() {
   const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const questionTypeParam = searchParams.get("type");
+  const parsedQuestionType = normalizeQuestionTypeProfile(questionTypeParam) ?? "real_exam";
+  const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
+    parsedQuestionType
+  );
   const { saveSession } = useProgress();
-  const { questions: allQuestions, loaded, loading, error, counts, reload } = useQuestionBank();
+  const { questions: allQuestions, loaded, loading, error, reload } = useQuestionBank();
   const adaptive = useAdaptiveQuestionStats();
   const events = useLearningEventLogger(adaptive.userId);
+  const filteredQuestions = useMemo(
+    () =>
+      filterQuestionsByType(allQuestions, selectedQuestionType, {
+        userStatsByKey: adaptive.statsByKey,
+        adaptiveConfig: adaptive.config,
+      }),
+    [adaptive.config, adaptive.statsByKey, allQuestions, selectedQuestionType]
+  );
+  const visibleCounts = useMemo(() => countQuestionsByCategory(filteredQuestions), [filteredQuestions]);
+  const questionShownAtRef = useRef(Date.now());
 
   const study = useStudySession({
-    allQuestions,
+    allQuestions: filteredQuestions,
     adaptive: {
       userId: adaptive.userId,
       userStatsByKey: adaptive.statsByKey,
       config: adaptive.config,
       onQuestionEvaluated: ({ question, selectedOption, isCorrect }) => {
-        adaptive.recordAnswer(question, isCorrect);
+        adaptive.recordAnswer(question, isCorrect, Date.now(), {
+          mode: "practice",
+          selectedOptionId: selectedOption,
+          responseTimeMs: Math.max(0, Date.now() - questionShownAtRef.current),
+          quizId: null,
+        });
         events.logEvent({
           type: "answer_submitted",
           mode: "study",
@@ -62,18 +118,24 @@ function StudyPageClient() {
   const [sessionSaved, setSessionSaved] = useState(false);
 
   useEffect(() => {
+    const nextType = normalizeQuestionTypeProfile(questionTypeParam);
+    if (!nextType) return;
+    setSelectedQuestionType(nextType);
+  }, [questionTypeParam]);
+
+  useEffect(() => {
     if (!loaded || autoStarted.current) return;
 
-    const categoryParam = searchParams.get("category");
     if (!categoryParam) return;
 
     autoStarted.current = true;
     const matched = normalizeCategory(categoryParam);
     study.startQuiz(matched ?? "All");
-  }, [loaded, searchParams, study]);
+  }, [categoryParam, loaded, study]);
 
   useEffect(() => {
     if (!study.quizStarted || study.isComplete || !study.currentQuestion) return;
+    questionShownAtRef.current = Date.now();
 
     events.logEvent({
       type: "question_shown",
@@ -150,6 +212,33 @@ function StudyPageClient() {
           </p>
         </div>
 
+        <div className="space-y-3">
+          <div className="text-sm font-semibold text-white">Question Type</div>
+          <div className="grid gap-2">
+            {QUESTION_TYPE_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => setSelectedQuestionType(option.value)}
+                className={`rounded-xl border px-4 py-3 text-left transition-colors ${
+                  selectedQuestionType === option.value
+                    ? "border-brand-500/60 bg-brand-500/10"
+                    : "border-[var(--card-border)] bg-[var(--card)] hover:border-brand-500/30"
+                }`}
+              >
+                <div className="text-sm font-semibold text-white">{option.title}</div>
+                <div className="mt-1 text-xs text-[var(--muted)]">{option.description}</div>
+              </button>
+            ))}
+          </div>
+          <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
+            Selected:{" "}
+            <span className="font-medium text-brand-400">
+              {QUESTION_TYPE_PROFILE_LABELS[selectedQuestionType]}
+            </span>
+          </div>
+        </div>
+
         <div className="grid gap-3 sm:grid-cols-2">
           {STUDY_CATEGORIES.map((category) => (
             <button
@@ -158,7 +247,9 @@ function StudyPageClient() {
               className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 text-left transition-all hover:border-brand-500/50 hover:scale-[1.02]"
             >
               <div className="text-lg font-semibold text-white">{category}</div>
-              <div className="mt-1 text-sm text-[var(--muted)]">{counts[category] ?? 0} questions available</div>
+              <div className="mt-1 text-sm text-[var(--muted)]">
+                {visibleCounts[category] ?? 0} questions available
+              </div>
             </button>
           ))}
         </div>
@@ -213,6 +304,15 @@ function StudyPageClient() {
     study.score.total > 0
       ? `Score: ${study.score.correct}/${study.score.total} (${Math.round((study.score.correct / study.score.total) * 100)}%)`
       : `Score: ${study.score.correct}/${study.score.total}`;
+  const selectedDistractorExplanation =
+    study.selectedOption && study.answerState === "incorrect"
+      ? study.currentQuestion.explanation_distractors[study.selectedOption] ??
+        "This answer does not match the correct regulation."
+      : null;
+  const selectedAnswerCitation = mergeCitations(
+    study.currentQuestion.citation,
+    extractCitationText(selectedDistractorExplanation)
+  );
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -229,6 +329,9 @@ function StudyPageClient() {
         </span>
         <span className="rounded-full bg-[var(--card)] px-3 py-1 text-xs text-[var(--muted)]">
           {study.currentQuestion.subcategory}
+        </span>
+        <span className="rounded-full bg-[var(--card)] px-3 py-1 text-xs text-[var(--muted)]">
+          {QUESTION_TYPE_PROFILE_LABELS[selectedQuestionType]}
         </span>
         <span className="rounded-full bg-[var(--card)] px-3 py-1 text-xs text-[var(--muted)]">
           {"⭐".repeat(study.currentQuestion.difficulty_level)}
@@ -269,15 +372,13 @@ function StudyPageClient() {
               <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-incorrect">
                 Why &quot;{study.selectedOption}&quot; is wrong:
               </div>
-              <p className="text-sm text-gray-400">
-                {study.currentQuestion.explanation_distractors[study.selectedOption] ??
-                  "This answer does not match the correct regulation."}
-              </p>
+              <p className="text-sm text-gray-400">{selectedDistractorExplanation}</p>
             </div>
           )}
 
           <CitationLinks
             citation={study.currentQuestion.citation}
+            label="📖 Correct answer reference:"
             onReferenceClick={(ref) => {
               events.logEvent({
                 type: "citation_clicked",
@@ -285,11 +386,29 @@ function StudyPageClient() {
                 questionId: study.currentQuestion?.id,
                 category: study.currentQuestion?.category,
                 subcategory: study.currentQuestion?.subcategory,
-                citationLabel: ref.label,
+                citationLabel: `correct:${ref.label}`,
                 citationUrl: ref.url,
               });
             }}
           />
+
+          {study.answerState === "incorrect" && study.selectedOption && (
+            <CitationLinks
+              citation={selectedAnswerCitation}
+              label={`📖 Why "${study.selectedOption}" reference:`}
+              onReferenceClick={(ref) => {
+                events.logEvent({
+                  type: "citation_clicked",
+                  mode: "study",
+                  questionId: study.currentQuestion?.id,
+                  category: study.currentQuestion?.category,
+                  subcategory: study.currentQuestion?.subcategory,
+                  citationLabel: `selected:${study.selectedOption}:${ref.label}`,
+                  citationUrl: ref.url,
+                });
+              }}
+            />
+          )}
 
           <button
             onClick={study.nextQuestion}
