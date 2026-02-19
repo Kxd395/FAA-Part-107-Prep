@@ -123,4 +123,16 @@ describe("questionType", () => {
 
     expect(weakOnly.map((q) => q.id)).toEqual(["q1"]);
   });
+
+  it("excludes ACS code-mapping drills from weak_spots when realistic MCQs are available", () => {
+    const realistic = makeQuestion("q-real", "What should a remote PIC verify before takeoff?");
+    const acs = makeQuestion("q-acs", "Which ACS knowledge code matches this topic: \"Operations near airports.\"?", {
+      tags: ["acs-mastery"],
+      source_type: "acs_generated",
+    });
+
+    expect(filterQuestionsByType([realistic, acs], "weak_spots").map((q) => q.id)).toEqual([
+      "q-real",
+    ]);
+  });
 });

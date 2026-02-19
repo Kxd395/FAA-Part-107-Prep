@@ -23,6 +23,15 @@ import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { extractCitationText, mergeCitations } from "../../lib/citationContext";
 
 const PASSING_PERCENT = 70;
+const SUPPORTED_QUESTION_TYPES: readonly QuestionTypeProfile[] = ["real_exam", "weak_spots"];
+
+function normalizeSelectableQuestionTypeProfile(
+  input: string | null | undefined
+): QuestionTypeProfile | null {
+  const normalized = normalizeQuestionTypeProfile(input);
+  if (!normalized) return null;
+  return SUPPORTED_QUESTION_TYPES.includes(normalized) ? normalized : null;
+}
 
 const QUESTION_TYPE_OPTIONS: Array<{
   value: QuestionTypeProfile;
@@ -35,19 +44,9 @@ const QUESTION_TYPE_OPTIONS: Array<{
     description: "Standard FAA-style multiple-choice prompts only. Excludes ACS code-mapping drills.",
   },
   {
-    value: "acs_mastery",
-    title: "ACS Code Mapping Drill",
-    description: "AKTR-style remediation practice: map ACS codes to concepts (not the real exam format).",
-  },
-  {
-    value: "mixed",
-    title: "Mixed",
-    description: "Uses the full pool: exam-style + ACS mastery prompts.",
-  },
-  {
     value: "weak_spots",
     title: "Weak Spots Only",
-    description: "Pulls from questions you are missing or have not mastered.",
+    description: "Prioritizes realistic MCQs you have not mastered yet.",
   },
 ];
 
@@ -69,8 +68,9 @@ function ExamPageClient() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const questionTypeParam = searchParams.get("type");
-  const invalidQuestionTypeParam = !!questionTypeParam && !normalizeQuestionTypeProfile(questionTypeParam);
-  const parsedQuestionType = normalizeQuestionTypeProfile(questionTypeParam) ?? "real_exam";
+  const invalidQuestionTypeParam =
+    !!questionTypeParam && !normalizeSelectableQuestionTypeProfile(questionTypeParam);
+  const parsedQuestionType = normalizeSelectableQuestionTypeProfile(questionTypeParam) ?? "real_exam";
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
   );
@@ -96,7 +96,7 @@ function ExamPageClient() {
   const lastReviewLoggedStartRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const nextType = normalizeQuestionTypeProfile(questionTypeParam);
+    const nextType = normalizeSelectableQuestionTypeProfile(questionTypeParam);
     if (!nextType) return;
     setSelectedQuestionType(nextType);
   }, [questionTypeParam]);
@@ -253,7 +253,8 @@ function ExamPageClient() {
 
         {invalidQuestionTypeParam && (
           <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
-            Unknown question type &quot;{questionTypeParam}&quot;. Falling back to Real Exam MCQ.
+            Question type &quot;{questionTypeParam}&quot; is not available in realistic mode. Falling
+            back to Real Exam MCQ.
           </div>
         )}
 

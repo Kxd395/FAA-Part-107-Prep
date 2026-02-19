@@ -23,6 +23,16 @@ import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { extractCitationText, mergeCitations } from "../../lib/citationContext";
 import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
 
+const SUPPORTED_QUESTION_TYPES: readonly QuestionTypeProfile[] = ["real_exam", "weak_spots"];
+
+function normalizeSelectableQuestionTypeProfile(
+  input: string | null | undefined
+): QuestionTypeProfile | null {
+  const normalized = normalizeQuestionTypeProfile(input);
+  if (!normalized) return null;
+  return SUPPORTED_QUESTION_TYPES.includes(normalized) ? normalized : null;
+}
+
 const QUESTION_TYPE_OPTIONS: Array<{
   value: QuestionTypeProfile;
   title: string;
@@ -34,19 +44,9 @@ const QUESTION_TYPE_OPTIONS: Array<{
     description: "Shows FAA-style multiple-choice prompts and excludes ACS code-mapping drills.",
   },
   {
-    value: "acs_mastery",
-    title: "ACS Code Mapping Drill",
-    description: "AKTR-style remediation practice for mapping ACS codes to concepts.",
-  },
-  {
-    value: "mixed",
-    title: "Mixed",
-    description: "Includes both exam-style and ACS mastery prompts.",
-  },
-  {
     value: "weak_spots",
     title: "Weak Spots Only",
-    description: "Prioritizes questions you still struggle with.",
+    description: "Prioritizes realistic MCQs you still struggle with.",
   },
 ];
 
@@ -69,9 +69,12 @@ function StudyPageClient() {
   const categoryParam = searchParams.get("category");
   const questionTypeParam = searchParams.get("type");
   const focusParam = searchParams.get("focus");
+  const invalidQuestionTypeParam =
+    !!questionTypeParam && !normalizeSelectableQuestionTypeProfile(questionTypeParam);
   const weakFocusRequested = focusParam?.trim().toLowerCase() === "weak";
   const parsedQuestionType =
-    normalizeQuestionTypeProfile(questionTypeParam) ?? (weakFocusRequested ? "weak_spots" : "real_exam");
+    normalizeSelectableQuestionTypeProfile(questionTypeParam) ??
+    (weakFocusRequested ? "weak_spots" : "real_exam");
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
   );
@@ -121,7 +124,7 @@ function StudyPageClient() {
   const [sessionSaved, setSessionSaved] = useState(false);
 
   useEffect(() => {
-    const nextType = normalizeQuestionTypeProfile(questionTypeParam);
+    const nextType = normalizeSelectableQuestionTypeProfile(questionTypeParam);
     if (nextType) {
       setSelectedQuestionType(nextType);
       return;
@@ -219,6 +222,13 @@ function StudyPageClient() {
             Choose a topic to drill down on, or study all categories. You&apos;ll get instant feedback after each answer.
           </p>
         </div>
+
+        {invalidQuestionTypeParam && (
+          <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
+            Question type &quot;{questionTypeParam}&quot; is not available in realistic mode. Falling
+            back to Real Exam MCQ.
+          </div>
+        )}
 
         <div className="space-y-3">
           <div className="text-sm font-semibold text-white">Question Type</div>

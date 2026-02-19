@@ -60,19 +60,9 @@ const QUESTION_TYPE_OPTIONS: Array<{
     description: "Keeps standard FAA-style multiple-choice prompts and excludes ACS code-mapping drills.",
   },
   {
-    value: "acs_mastery",
-    title: "ACS Code Mapping Drill",
-    description: "AKTR remediation practice: map ACS codes to concepts (not a live exam format).",
-  },
-  {
-    value: "mixed",
-    title: "Mixed",
-    description: "Combination of exam-style and ACS mastery.",
-  },
-  {
     value: "weak_spots",
     title: "Weak Spots Only",
-    description: "Targets questions you miss most often.",
+    description: "Targets realistic MCQs you miss most often.",
   },
 ];
 

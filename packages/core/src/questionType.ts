@@ -61,12 +61,14 @@ export function filterQuestionsByType<Q extends Question = Question>(
     return questions.filter((question) => isAcsCodeMatchingQuestion(question));
   }
 
+  const realisticPool = questions.filter((question) => !isAcsCodeMatchingQuestion(question));
+  const pool = realisticPool.length > 0 ? realisticPool : [...questions];
   const statsByKey = options.userStatsByKey ?? {};
   const weak: Q[] = [];
   const unseen: Q[] = [];
   const mastered: Q[] = [];
 
-  for (const question of questions) {
+  for (const question of pool) {
     const key = canonicalQuestionKey(question, {
       includeChoices: options.adaptiveConfig?.includeChoicesInCanonicalKey ?? true,
     });
