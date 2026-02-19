@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import {
   FULL_EXAM_QUESTION_COUNT,
+  REAL_EXAM_BLUEPRINT_TARGETS,
   QUESTION_TYPE_PROFILE_LABELS,
   formatClockTime,
   normalizeQuestionTypeProfile,
@@ -320,6 +321,24 @@ function ExamPageClient() {
             <span className="font-medium text-white">{QUESTION_TYPE_PROFILE_LABELS[preview.questionTypeProfile]}</span>
           </div>
         </div>
+
+        {preview.category === "All" && preview.questionTypeProfile === "real_exam" && (
+          <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
+            <div className="font-semibold text-white">Real Exam Blueprint (60Q target)</div>
+            <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">
+              <span>Regulations (15-25%)</span>
+              <span className="text-right">{REAL_EXAM_BLUEPRINT_TARGETS.Regulations}</span>
+              <span>Airspace (15-25%)</span>
+              <span className="text-right">{REAL_EXAM_BLUEPRINT_TARGETS.Airspace}</span>
+              <span>Weather (10-20%)</span>
+              <span className="text-right">{REAL_EXAM_BLUEPRINT_TARGETS.Weather}</span>
+              <span>Loading &amp; Performance (~10%)</span>
+              <span className="text-right">{REAL_EXAM_BLUEPRINT_TARGETS["Loading & Performance"]}</span>
+              <span>Operations (35-45%)</span>
+              <span className="text-right">{REAL_EXAM_BLUEPRINT_TARGETS.Operations}</span>
+            </div>
+          </div>
+        )}
 
         <button
           onClick={() => exam.startExam(preview.category, selectedQuestionType)}

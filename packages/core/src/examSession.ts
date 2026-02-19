@@ -12,6 +12,7 @@ import {
 } from "./questionType";
 import {
   FULL_EXAM_QUESTION_COUNT,
+  buildRealExamBlueprintQuestionSet,
   buildTimeLimitMs,
   computeRemainingTime,
   filterQuestionsByCategory,
@@ -122,13 +123,21 @@ export function useExamSession<Q extends Question = Question>({
       }) as Q[];
 
       const deduped = dedupeQuestions(filteredByType);
+      const useRealExamBlueprint = normalizedCategory === "All" && normalizedType === "real_exam";
       const targetCount =
-        normalizedCategory === "All"
+        useRealExamBlueprint
+          ? Math.min(FULL_EXAM_QUESTION_COUNT, deduped.questions.length)
+          : normalizedCategory === "All"
           ? Math.min(FULL_EXAM_QUESTION_COUNT, deduped.questions.length)
           : deduped.questions.length;
 
       let selectedQuestions: Q[];
-      if (adaptive?.userId) {
+      if (useRealExamBlueprint) {
+        selectedQuestions = buildRealExamBlueprintQuestionSet(
+          deduped.questions as Q[],
+          FULL_EXAM_QUESTION_COUNT
+        ).questions;
+      } else if (adaptive?.userId) {
         selectedQuestions = selectAdaptiveQuestions({
           userId: adaptive.userId,
           desiredQuizSize: targetCount,
@@ -272,20 +281,28 @@ export function useExamSession<Q extends Question = Question>({
         adaptiveConfig: adaptive?.config,
       });
       const deduped = dedupeQuestions(filteredByType);
+      const useRealExamBlueprint = category === "All" && questionType === "real_exam";
       const targetCount =
-        category === "All"
+        useRealExamBlueprint
+          ? Math.min(FULL_EXAM_QUESTION_COUNT, deduped.questions.length)
+          : category === "All"
           ? Math.min(FULL_EXAM_QUESTION_COUNT, deduped.questions.length)
           : deduped.questions.length;
 
-      const questionCount = adaptive?.userId
-        ? selectAdaptiveQuestions({
-            userId: adaptive.userId,
-            desiredQuizSize: targetCount,
-            fullQuestionBank: filteredByType,
-            userStatsByKey: adaptive.userStatsByKey,
-            config: adaptive.config,
-          }).questions.length
-        : targetCount;
+      const questionCount = useRealExamBlueprint
+        ? buildRealExamBlueprintQuestionSet(
+            deduped.questions,
+            FULL_EXAM_QUESTION_COUNT
+          ).questions.length
+        : adaptive?.userId
+          ? selectAdaptiveQuestions({
+              userId: adaptive.userId,
+              desiredQuizSize: targetCount,
+              fullQuestionBank: filteredByType,
+              userStatsByKey: adaptive.userStatsByKey,
+              config: adaptive.config,
+            }).questions.length
+          : targetCount;
 
       const timeLimitMs = buildTimeLimitMs(questionCount, category);
 

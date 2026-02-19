@@ -73,6 +73,7 @@ export {
   STUDY_CATEGORIES,
   FULL_EXAM_QUESTION_COUNT,
   FULL_EXAM_TIME_LIMIT_MS,
+  REAL_EXAM_BLUEPRINT_TARGETS,
   shuffleQuestions,
   normalizeCategory,
   filterQuestionsByCategory,
@@ -80,6 +81,7 @@ export {
   computeRemainingTime,
   formatClockTime,
   buildExamQuestionSet,
+  buildRealExamBlueprintQuestionSet,
 } from "./quiz";
 export {
   QUESTION_TYPE_PROFILES,
