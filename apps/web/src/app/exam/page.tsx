@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import {
   QUESTION_TYPE_PROFILE_LABELS,
   formatClockTime,
@@ -16,6 +16,7 @@ import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
 import SessionSummaryCard from "../../components/quiz/SessionSummaryCard";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
+import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useProgress, type QuestionResult } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 
@@ -73,6 +74,7 @@ function ExamPageClient() {
 
   const { saveSession } = useProgress();
   const adaptive = useAdaptiveQuestionStats();
+  const events = useLearningEventLogger(adaptive.userId);
   const { questions: allQuestions, loaded, loading, error, reload } = useQuestionBank();
   const exam = useExamSession({
     allQuestions,
@@ -88,6 +90,7 @@ function ExamPageClient() {
   const [sessionSaved, setSessionSaved] = useState(false);
   const [showNavigator, setShowNavigator] = useState(false);
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
+  const lastReviewLoggedStartRef = useRef<number | null>(null);
 
   useEffect(() => {
     const nextType = normalizeQuestionTypeProfile(questionTypeParam);
@@ -100,6 +103,64 @@ function ExamPageClient() {
       setSessionSaved(false);
     }
   }, [exam.phase, exam.startTime]);
+
+  useEffect(() => {
+    if (exam.phase !== "in-progress" || !exam.currentQuestion) return;
+    events.logEvent({
+      type: "question_shown",
+      mode: "exam",
+      questionId: exam.currentQuestion.id,
+      category: exam.currentQuestion.category,
+      subcategory: exam.currentQuestion.subcategory,
+      questionTypeProfile: exam.questionTypeProfile,
+    });
+  }, [events, exam.phase, exam.currentQuestion, exam.questionTypeProfile]);
+
+  useEffect(() => {
+    if (exam.phase !== "review" || exam.questions.length === 0) return;
+    if (lastReviewLoggedStartRef.current === exam.startTime) return;
+    lastReviewLoggedStartRef.current = exam.startTime;
+
+    events.logEvent({
+      type: "review_opened",
+      mode: "exam",
+      category: exam.examCategory,
+      questionTypeProfile: exam.questionTypeProfile,
+      metadata: {
+        scorePercent: exam.review.scorePercent,
+        correctCount: exam.review.correctCount,
+        totalQuestions: exam.questions.length,
+      },
+    });
+  }, [
+    events,
+    exam.examCategory,
+    exam.phase,
+    exam.questionTypeProfile,
+    exam.questions.length,
+    exam.review.correctCount,
+    exam.review.scorePercent,
+    exam.startTime,
+  ]);
+
+  const handleAnswerSelect = useCallback(
+    (optionId: "A" | "B" | "C" | "D") => {
+      if (!exam.currentQuestion) return;
+      events.logEvent({
+        type: "answer_submitted",
+        mode: "exam",
+        questionId: exam.currentQuestion.id,
+        category: exam.currentQuestion.category,
+        subcategory: exam.currentQuestion.subcategory,
+        selectedOption: optionId,
+        correctOption: exam.currentQuestion.correct_option_id,
+        isCorrect: optionId === exam.currentQuestion.correct_option_id,
+        questionTypeProfile: exam.questionTypeProfile,
+      });
+      exam.selectAnswer(optionId);
+    },
+    [events, exam]
+  );
 
   useEffect(() => {
     if (exam.phase !== "review" || sessionSaved || exam.questions.length === 0) return;
@@ -333,7 +394,21 @@ function ExamPageClient() {
                     <div className="text-incorrect">Your answer: {result.userAnswer ?? "Unanswered"}</div>
                     <div className="text-correct">Correct: {result.question.correct_option_id}</div>
                     <p className="text-gray-400">{result.question.explanation_correct}</p>
-                    <CitationLinks citation={result.question.citation} />
+                    <CitationLinks
+                      citation={result.question.citation}
+                      onReferenceClick={(ref) => {
+                        events.logEvent({
+                          type: "citation_clicked",
+                          mode: "exam",
+                          questionId: result.question.id,
+                          category: result.question.category,
+                          subcategory: result.question.subcategory,
+                          citationLabel: ref.label,
+                          citationUrl: ref.url,
+                          questionTypeProfile: exam.questionTypeProfile,
+                        });
+                      }}
+                    />
                   </div>
                 )}
               </div>
@@ -382,7 +457,7 @@ function ExamPageClient() {
         options={exam.currentQuestion.options}
         mode="exam"
         selectedOption={exam.currentAnswer}
-        onSelect={exam.selectAnswer}
+        onSelect={handleAnswerSelect}
       />
 
       <div className="flex items-center gap-3">

@@ -130,9 +130,10 @@ Quiz generation now supports deduplication + adaptive per-user selection.
 
 Current implementation stores adaptive stats in browser `localStorage`:
 
-- Key: `part107_adaptive_stats_v1`
+- Key: `part107_adaptive_stats_v2`
 - Scope: per-browser, per-device
 - Default user ID: `local-user`
+- Adapter interface: `AdaptiveStatsStore` (`apps/web/src/lib/adaptiveStatsStore.ts`)
 
 Storage is intentionally separated from selection logic, so you can swap to a DB/API backend later without rewriting core selection behavior.
 
@@ -149,6 +150,20 @@ Defaults come from `@part107/core` (`DEFAULT_ADAPTIVE_QUIZ_CONFIG`):
 - `includeChoicesInCanonicalKey`
 - `recentMissWindowMs`
 - `recentMissBoost`
+
+### Learning Event Logging
+
+The app also logs question interaction events in browser `localStorage` for analysis and future coaching features:
+
+- Key: `part107_learning_events_v1`
+- Event types:
+  - `question_shown`
+  - `answer_submitted`
+  - `review_opened`
+  - `citation_clicked`
+- Adapter interface: `LearningEventStore` (`apps/web/src/lib/learningEventStore.ts`)
+
+This is separate from session-level progress history and can be swapped to a backend sink later (e.g., Supabase/Postgres, Segment, or custom API ingestion).
 
 ## Question Bank
 

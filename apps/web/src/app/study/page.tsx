@@ -10,6 +10,7 @@ import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
 import SessionSummaryCard from "../../components/quiz/SessionSummaryCard";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
+import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useProgress } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { STUDY_CATEGORIES } from "../../lib/questionBank";
@@ -33,6 +34,7 @@ function StudyPageClient() {
   const { saveSession } = useProgress();
   const { questions: allQuestions, loaded, loading, error, counts, reload } = useQuestionBank();
   const adaptive = useAdaptiveQuestionStats();
+  const events = useLearningEventLogger(adaptive.userId);
 
   const study = useStudySession({
     allQuestions,
@@ -40,8 +42,18 @@ function StudyPageClient() {
       userId: adaptive.userId,
       userStatsByKey: adaptive.statsByKey,
       config: adaptive.config,
-      onQuestionEvaluated: ({ question, isCorrect }) => {
+      onQuestionEvaluated: ({ question, selectedOption, isCorrect }) => {
         adaptive.recordAnswer(question, isCorrect);
+        events.logEvent({
+          type: "answer_submitted",
+          mode: "study",
+          questionId: question.id,
+          category: question.category,
+          subcategory: question.subcategory,
+          selectedOption,
+          correctOption: question.correct_option_id,
+          isCorrect,
+        });
       },
     },
   });
@@ -59,6 +71,18 @@ function StudyPageClient() {
     const matched = normalizeCategory(categoryParam);
     study.startQuiz(matched ?? "All");
   }, [loaded, searchParams, study]);
+
+  useEffect(() => {
+    if (!study.quizStarted || study.isComplete || !study.currentQuestion) return;
+
+    events.logEvent({
+      type: "question_shown",
+      mode: "study",
+      questionId: study.currentQuestion.id,
+      category: study.currentQuestion.category,
+      subcategory: study.currentQuestion.subcategory,
+    });
+  }, [events, study.currentQuestion, study.isComplete, study.quizStarted]);
 
   useEffect(() => {
     if (study.quizStarted && !study.isComplete) {
@@ -79,6 +103,19 @@ function StudyPageClient() {
     });
     setSessionSaved(true);
   }, [saveSession, sessionSaved, study]);
+
+  useEffect(() => {
+    if (study.answerState === "unanswered" || !study.currentQuestion) return;
+
+    events.logEvent({
+      type: "review_opened",
+      mode: "study",
+      questionId: study.currentQuestion.id,
+      category: study.currentQuestion.category,
+      subcategory: study.currentQuestion.subcategory,
+      isCorrect: study.answerState === "correct",
+    });
+  }, [events, study.answerState, study.currentQuestion]);
 
   if (loading && !loaded) {
     return (
@@ -239,7 +276,20 @@ function StudyPageClient() {
             </div>
           )}
 
-          <CitationLinks citation={study.currentQuestion.citation} />
+          <CitationLinks
+            citation={study.currentQuestion.citation}
+            onReferenceClick={(ref) => {
+              events.logEvent({
+                type: "citation_clicked",
+                mode: "study",
+                questionId: study.currentQuestion?.id,
+                category: study.currentQuestion?.category,
+                subcategory: study.currentQuestion?.subcategory,
+                citationLabel: ref.label,
+                citationUrl: ref.url,
+              });
+            }}
+          />
 
           <button
             onClick={study.nextQuestion}

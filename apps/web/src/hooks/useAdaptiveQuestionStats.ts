@@ -9,42 +9,9 @@ import {
   type Question,
   type UserQuestionStats,
 } from "@part107/core";
+import { defaultAdaptiveStatsStore, type AdaptiveStatsStore } from "../lib/adaptiveStatsStore";
 
-const STORAGE_KEY = "part107_adaptive_stats_v1";
 const DEFAULT_USER_ID = "local-user";
-
-interface StoredAdaptiveStats {
-  version: 1;
-  userId: string;
-  statsByKey: Record<string, UserQuestionStats>;
-}
-
-function loadStoredStats(userId: string): Record<string, UserQuestionStats> {
-  if (typeof window === "undefined") return {};
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return {};
-
-    const parsed = JSON.parse(raw) as StoredAdaptiveStats;
-    if (!parsed || parsed.version !== 1 || parsed.userId !== userId || !parsed.statsByKey) {
-      return {};
-    }
-
-    return parsed.statsByKey;
-  } catch {
-    return {};
-  }
-}
-
-function persistStoredStats(userId: string, statsByKey: Record<string, UserQuestionStats>): void {
-  if (typeof window === "undefined") return;
-  const payload: StoredAdaptiveStats = {
-    version: 1,
-    userId,
-    statsByKey,
-  };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-}
 
 export interface ExamReviewInput {
   question: Question;
@@ -53,7 +20,8 @@ export interface ExamReviewInput {
 
 export function useAdaptiveQuestionStats(
   userId: string = DEFAULT_USER_ID,
-  config: Partial<AdaptiveQuizConfig> = {}
+  config: Partial<AdaptiveQuizConfig> = {},
+  store: AdaptiveStatsStore = defaultAdaptiveStatsStore
 ) {
   const resolvedConfig = useMemo(
     () => ({ ...DEFAULT_ADAPTIVE_QUIZ_CONFIG, ...config }),
@@ -64,14 +32,14 @@ export function useAdaptiveQuestionStats(
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setStatsByKey(loadStoredStats(userId));
+    setStatsByKey(store.load(userId));
     setLoaded(true);
-  }, [userId]);
+  }, [store, userId]);
 
   const clear = useCallback(() => {
     setStatsByKey({});
-    persistStoredStats(userId, {});
-  }, [userId]);
+    store.clear(userId);
+  }, [store, userId]);
 
   const recordAnswer = useCallback(
     (question: Question, isCorrect: boolean, answeredAtMs: number = Date.now()) => {
@@ -90,11 +58,11 @@ export function useAdaptiveQuestionStats(
         });
 
         const next = { ...prev, [canonicalKey]: updated };
-        persistStoredStats(userId, next);
+        store.save(userId, next);
         return next;
       });
     },
-    [resolvedConfig, userId]
+    [resolvedConfig, store, userId]
   );
 
   const recordExamReview = useCallback(
@@ -118,11 +86,11 @@ export function useAdaptiveQuestionStats(
           });
         }
 
-        persistStoredStats(userId, next);
+        store.save(userId, next);
         return next;
       });
     },
-    [resolvedConfig, userId]
+    [resolvedConfig, store, userId]
   );
 
   return {

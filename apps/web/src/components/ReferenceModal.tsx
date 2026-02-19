@@ -127,9 +127,10 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
 
 interface CitationLinksProps {
   citation: string;
+  onReferenceClick?: (ref: ResolvedReference) => void;
 }
 
-export default function CitationLinks({ citation }: CitationLinksProps) {
+export default function CitationLinks({ citation, onReferenceClick }: CitationLinksProps) {
   const [activeRef, setActiveRef] = useState<ResolvedReference | null>(null);
   const refs = parseCitation(citation);
 
@@ -152,6 +153,7 @@ export default function CitationLinks({ citation }: CitationLinksProps) {
           <button
             key={`${ref.label}-${i}`}
             onClick={() => {
+              onReferenceClick?.(ref);
               if (ref.type === "external" || (ref.type === "pdf" && !ref.url.startsWith("/"))) {
                 const url = ref.type === "pdf" && ref.page ? `${ref.url}#page=${ref.page}` : ref.url;
                 window.open(url, "_blank", "noopener,noreferrer");
