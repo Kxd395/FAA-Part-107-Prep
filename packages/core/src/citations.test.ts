@@ -2,13 +2,13 @@ import { describe, expect, it } from "vitest";
 import { parseCitation } from "./citations";
 
 describe("parseCitation", () => {
-  it("parses PHAK chapter references to pdf links", () => {
+  it("parses PHAK chapter references to FAA handbook links", () => {
     const refs = parseCitation("FAA-H-8083-25C, Ch 3");
     expect(refs).toHaveLength(1);
     expect(refs[0]).toMatchObject({
       label: "PHAK Ch 3",
-      type: "pdf",
-      url: "/pdfs/faa-h-8083-25c.pdf",
+      type: "external",
+      url: "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/phak",
       page: 72,
     });
   });

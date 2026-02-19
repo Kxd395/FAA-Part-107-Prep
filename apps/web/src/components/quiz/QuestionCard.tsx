@@ -1,4 +1,5 @@
 import type { Question } from "@part107/core";
+import { useState } from "react";
 import type { ResolvedReference } from "../ReferenceModal";
 
 function formatFigureLabel(figureRef: string | null): string {
@@ -12,13 +13,14 @@ interface QuestionCardProps {
 }
 
 export default function QuestionCard({ question, onOpenFigure }: QuestionCardProps) {
+  const [imageFailed, setImageFailed] = useState(false);
   const figureLabel = formatFigureLabel(question.figure_reference);
 
   return (
     <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
       <p className="text-lg leading-relaxed whitespace-pre-line">{question.question_text}</p>
 
-      {question.image_ref && (
+      {question.image_ref && !imageFailed && (
         <button
           type="button"
           className="mt-4 w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-2 overflow-hidden cursor-pointer hover:border-brand-500/50 transition-colors"
@@ -38,12 +40,13 @@ export default function QuestionCard({ question, onOpenFigure }: QuestionCardPro
           <img
             src={question.image_ref}
             alt={question.figure_reference ?? "Figure"}
+            onError={() => setImageFailed(true)}
             className="w-full rounded-lg max-h-[500px] object-contain"
           />
         </button>
       )}
 
-      {!question.image_ref && question.figure_text && (
+      {(imageFailed || !question.image_ref) && question.figure_text && (
         <div className="mt-4 rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
           <p className="mb-2 text-xs font-medium text-[var(--muted)] uppercase tracking-wide">
             📊 {figureLabel}
@@ -54,7 +57,7 @@ export default function QuestionCard({ question, onOpenFigure }: QuestionCardPro
         </div>
       )}
 
-      {question.figure_reference && !question.image_ref && !question.figure_text && (
+      {question.figure_reference && (imageFailed || !question.image_ref) && !question.figure_text && (
         <div className="mt-4 rounded-lg border border-dashed border-[var(--card-border)] bg-[var(--background)] p-4 text-center text-sm text-[var(--muted)]">
           📊 Refer to {figureLabel}
         </div>

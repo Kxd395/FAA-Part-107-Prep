@@ -1,6 +1,13 @@
 import Link from "next/link";
 
 const FIGURES = [20, 21, 22, 23, 26, 59] as const;
+const FAA_REFERENCE_LINKS = {
+  uasAcs: "https://www.faa.gov/sites/faa.gov/files/training_testing/testing/acs/uas_acs.pdf",
+  ac107_2a:
+    "https://www.faa.gov/regulations_policies/advisory_circulars/index.cfm/go/document.information/documentID/1038977",
+  remotePilotStudyGuide:
+    "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/remote_pilot_study_guide.pdf",
+} as const;
 
 export default function ChartsPage() {
   return (
@@ -40,13 +47,13 @@ export default function ChartsPage() {
       <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-sm text-[var(--muted)]">
         <p>Additional FAA references:</p>
         <div className="mt-2 flex flex-wrap gap-3 text-brand-400">
-          <a href="/pdfs/uas-acs.pdf" target="_blank" rel="noopener noreferrer">
+          <a href={FAA_REFERENCE_LINKS.uasAcs} target="_blank" rel="noopener noreferrer">
             UAS ACS (PDF)
           </a>
-          <a href="/pdfs/ac-107-2a.pdf" target="_blank" rel="noopener noreferrer">
+          <a href={FAA_REFERENCE_LINKS.ac107_2a} target="_blank" rel="noopener noreferrer">
             AC 107-2A (PDF)
           </a>
-          <a href="/pdfs/remote-pilot-study-guide.pdf" target="_blank" rel="noopener noreferrer">
+          <a href={FAA_REFERENCE_LINKS.remotePilotStudyGuide} target="_blank" rel="noopener noreferrer">
             Remote Pilot Study Guide (PDF)
           </a>
         </div>

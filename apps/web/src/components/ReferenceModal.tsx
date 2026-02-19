@@ -93,13 +93,29 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
                 className="max-w-full max-h-full object-contain rounded-lg"
               />
             </div>
-          ) : (
+          ) : ref_.url.startsWith("/") ? (
             <iframe
               src={buildIframeSrc(ref_)}
               title={ref_.description}
               className="w-full h-full min-h-[60vh]"
               style={{ border: "none" }}
             />
+          ) : (
+            <div className="h-full min-h-[60vh] flex items-center justify-center p-6 bg-[var(--background)]">
+              <div className="max-w-md text-center space-y-3">
+                <p className="text-sm text-[var(--muted)]">
+                  This reference cannot be embedded here. Open it in a new browser tab.
+                </p>
+                <a
+                  href={ref_.type === "pdf" && ref_.page ? `${ref_.url}#page=${ref_.page}` : ref_.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-lg border border-brand-500/40 bg-brand-500/10 px-4 py-2 text-sm text-brand-300 hover:bg-brand-500/20"
+                >
+                  Open Reference ↗
+                </a>
+              </div>
+            </div>
           )}
         </div>
       </div>
@@ -136,8 +152,11 @@ export default function CitationLinks({ citation }: CitationLinksProps) {
           <button
             key={`${ref.label}-${i}`}
             onClick={() => {
-              // Open everything in the modal when possible. External sites may
-              // refuse to be embedded; in that case users can use "Open in Tab".
+              if (ref.type === "external" || (ref.type === "pdf" && !ref.url.startsWith("/"))) {
+                const url = ref.type === "pdf" && ref.page ? `${ref.url}#page=${ref.page}` : ref.url;
+                window.open(url, "_blank", "noopener,noreferrer");
+                return;
+              }
               setActiveRef(ref);
             }}
             className="inline-flex items-center gap-1 rounded-lg border border-brand-500/30 bg-brand-500/10 px-2.5 py-1 text-brand-400 hover:bg-brand-500/20 hover:text-brand-300 transition-colors cursor-pointer"

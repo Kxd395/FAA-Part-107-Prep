@@ -6,6 +6,15 @@ export interface CitationReference {
   page?: number | null;
 }
 
+const FAA_LINKS = {
+  phak: "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/phak",
+  uasAcsPdf: "https://www.faa.gov/sites/faa.gov/files/training_testing/testing/acs/uas_acs.pdf",
+  remotePilotStudyGuidePdf:
+    "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/remote_pilot_study_guide.pdf",
+  ac107_2a:
+    "https://www.faa.gov/regulations_policies/advisory_circulars/index.cfm/go/document.information/documentID/1038977",
+} as const;
+
 const PHAK_CHAPTER_PAGES: Record<number, number> = {
   1: 16,
   2: 40,
@@ -49,9 +58,9 @@ export function parseCitation(citation: string): CitationReference[] {
       const ch = parseInt(phakMatch[1], 10);
       refs.push({
         label: `PHAK Ch ${ch}`,
-        type: "pdf",
-        url: `/pdfs/faa-h-8083-25c.pdf`,
-        page: PHAK_CHAPTER_PAGES[ch] ?? 1,
+        type: "external",
+        url: FAA_LINKS.phak,
+        page: PHAK_CHAPTER_PAGES[ch] ?? null,
         description: `Pilot's Handbook of Aeronautical Knowledge — Chapter ${ch}`,
       });
       continue;
@@ -62,7 +71,7 @@ export function parseCitation(citation: string): CitationReference[] {
       refs.push({
         label: `ACS ${acsMatch[1]}`,
         type: "pdf",
-        url: `/pdfs/uas-acs.pdf`,
+        url: FAA_LINKS.uasAcsPdf,
         page: null,
         description: `UAS Airman Certification Standards — ${acsMatch[1]}`,
       });
@@ -139,9 +148,19 @@ export function parseCitation(citation: string): CitationReference[] {
     if (/AC\s*107-2/i.test(part)) {
       refs.push({
         label: "AC 107-2A",
-        type: "pdf",
-        url: `/pdfs/ac-107-2a.pdf`,
+        type: "external",
+        url: FAA_LINKS.ac107_2a,
         description: "Advisory Circular 107-2A — Small Unmanned Aircraft Systems",
+      });
+      continue;
+    }
+
+    if (/FAA-G-8082-22/i.test(part)) {
+      refs.push({
+        label: "FAA-G-8082-22",
+        type: "pdf",
+        url: FAA_LINKS.remotePilotStudyGuidePdf,
+        description: "Remote Pilot — Small Unmanned Aircraft Systems Study Guide",
       });
       continue;
     }
