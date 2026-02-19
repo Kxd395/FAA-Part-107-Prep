@@ -584,7 +584,7 @@
       },
       {
         "id": "B",
-        "text": "Previously manufactured sUAS. ### Images ![Page 8 image](../images/uas-acsocr/p008_img01_5b91968bce71.png) - `image=p008_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Previously manufactured sUAS."
       },
       {
         "id": "C",
@@ -613,7 +613,8 @@
     ],
     "acs_code": "UA.I.A.K3",
     "source": "ACS Mastery (UA.I.A.K3)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p008_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-017",
@@ -940,7 +941,7 @@
       },
       {
         "id": "C",
-        "text": "Previously manufactured sUAS. ### Images ![Page 8 image](../images/uas-acsocr/p008_img01_5b91968bce71.png) - `image=p008_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Previously manufactured sUAS."
       },
       {
         "id": "D",
@@ -965,7 +966,8 @@
     ],
     "acs_code": "UA.I.A.K7",
     "source": "ACS Mastery (UA.I.A.K7)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p008_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-025",
@@ -1024,7 +1026,7 @@
       },
       {
         "id": "B",
-        "text": "Previously manufactured sUAS. ### Images ![Page 8 image](../images/uas-acsocr/p008_img01_5b91968bce71.png) - `image=p008_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Previously manufactured sUAS."
       },
       {
         "id": "C",
@@ -1053,13 +1055,14 @@
     ],
     "acs_code": "UA.I.A.K8",
     "source": "ACS Mastery (UA.I.A.K8)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p008_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-027",
     "category": "Regulations",
     "subcategory": "General",
-    "question_text": "Which ACS knowledge code matches this topic: \"Previously manufactured sUAS. ### Images ![Page 8 image](../images/uas-acsocr/p008_img01_5b91968bce71.png) - `image=p008_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Previously manufactured sUAS.",
     "figure_reference": null,
     "options": [
       {
@@ -1097,7 +1100,8 @@
     ],
     "acs_code": "UA.I.A.K8",
     "source": "ACS Mastery (UA.I.A.K8)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p008_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-028",
@@ -2964,7 +2968,7 @@
       },
       {
         "id": "C",
-        "text": "Automated operations. ### Images ![Page 9 image](../images/uas-acsocr/p009_img01_5b91968bce71.png) - `image=p009_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Automated operations."
       },
       {
         "id": "D",
@@ -2989,7 +2993,8 @@
     ],
     "acs_code": "UA.I.B.K21b",
     "source": "ACS Mastery (UA.I.B.K21b)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p009_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-071",
@@ -3312,7 +3317,7 @@
       },
       {
         "id": "B",
-        "text": "Automated operations. ### Images ![Page 9 image](../images/uas-acsocr/p009_img01_5b91968bce71.png) - `image=p009_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Automated operations."
       },
       {
         "id": "C",
@@ -3341,13 +3346,14 @@
     ],
     "acs_code": "UA.I.B.K23",
     "source": "ACS Mastery (UA.I.B.K23)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p009_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-079",
     "category": "Regulations",
     "subcategory": "Operating Rules",
-    "question_text": "Which ACS knowledge code matches this topic: \"Automated operations. ### Images ![Page 9 image](../images/uas-acsocr/p009_img01_5b91968bce71.png) - `image=p009_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Automated operations.",
     "figure_reference": null,
     "options": [
       {
@@ -3385,7 +3391,8 @@
     ],
     "acs_code": "UA.I.B.K23",
     "source": "ACS Mastery (UA.I.B.K23)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p009_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-080",
@@ -3748,7 +3755,7 @@
     "options": [
       {
         "id": "A",
-        "text": "Aeronautical knowledge recency. ### Images ![Page 11 image](../images/uas-acsocr/p011_img01_5b91968bce71.png) - `image=p011_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Aeronautical knowledge recency."
       },
       {
         "id": "B",
@@ -3781,7 +3788,8 @@
     ],
     "acs_code": "UA.I.C.K1",
     "source": "ACS Mastery (UA.I.C.K1)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p011_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-089",
@@ -3848,7 +3856,7 @@
       },
       {
         "id": "D",
-        "text": "Aeronautical knowledge recency. ### Images ![Page 11 image](../images/uas-acsocr/p011_img01_5b91968bce71.png) - `image=p011_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Aeronautical knowledge recency."
       }
     ],
     "correct_option_id": "A",
@@ -3869,7 +3877,8 @@
     ],
     "acs_code": "UA.I.C.K2",
     "source": "ACS Mastery (UA.I.C.K2)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p011_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-091",
@@ -3936,7 +3945,7 @@
       },
       {
         "id": "D",
-        "text": "Aeronautical knowledge recency. ### Images ![Page 11 image](../images/uas-acsocr/p011_img01_5b91968bce71.png) - `image=p011_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Aeronautical knowledge recency."
       }
     ],
     "correct_option_id": "C",
@@ -3957,7 +3966,8 @@
     ],
     "acs_code": "UA.I.C.K3",
     "source": "ACS Mastery (UA.I.C.K3)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p011_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-093",
@@ -4024,7 +4034,7 @@
       },
       {
         "id": "D",
-        "text": "Aeronautical knowledge recency. ### Images ![Page 11 image](../images/uas-acsocr/p011_img01_5b91968bce71.png) - `image=p011_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Aeronautical knowledge recency."
       }
     ],
     "correct_option_id": "D",
@@ -4045,13 +4055,14 @@
     ],
     "acs_code": "UA.I.C.K4",
     "source": "ACS Mastery (UA.I.C.K4)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p011_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-095",
     "category": "Regulations",
     "subcategory": "Remote Pilot Certification with an sUAS Rating",
-    "question_text": "Which ACS knowledge code matches this topic: \"Aeronautical knowledge recency. ### Images ![Page 11 image](../images/uas-acsocr/p011_img01_5b91968bce71.png) - `image=p011_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Aeronautical knowledge recency.",
     "figure_reference": null,
     "options": [
       {
@@ -4089,7 +4100,8 @@
     ],
     "acs_code": "UA.I.C.K4",
     "source": "ACS Mastery (UA.I.C.K4)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p011_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-096",
@@ -4112,7 +4124,7 @@
       },
       {
         "id": "D",
-        "text": "Waiver policy and requirements. ### Images ![Page 12 image](../images/uas-acsocr/p012_img01_5b91968bce71.png) - `image=p012_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Waiver policy and requirements."
       }
     ],
     "correct_option_id": "D",
@@ -4133,13 +4145,14 @@
     ],
     "acs_code": "UA.I.D.K1",
     "source": "ACS Mastery (UA.I.D.K1)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p012_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-097",
     "category": "Regulations",
     "subcategory": "Waivers",
-    "question_text": "Which ACS knowledge code matches this topic: \"Waiver policy and requirements. ### Images ![Page 12 image](../images/uas-acsocr/p012_img01_5b91968bce71.png) - `image=p012_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Waiver policy and requirements.",
     "figure_reference": null,
     "options": [
       {
@@ -4177,7 +4190,8 @@
     ],
     "acs_code": "UA.I.D.K1",
     "source": "ACS Mastery (UA.I.D.K1)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p012_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-098",
@@ -4288,7 +4302,7 @@
       },
       {
         "id": "D",
-        "text": "Exposed rotating parts. ### Images ![Page 13 image](../images/uas-acsocr/p013_img01_5b91968bce71.png) - `image=p013_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Exposed rotating parts."
       }
     ],
     "correct_option_id": "C",
@@ -4309,7 +4323,8 @@
     ],
     "acs_code": "UA.I.E.K2",
     "source": "ACS Mastery (UA.I.E.K2)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p013_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-101",
@@ -5160,7 +5175,7 @@
       },
       {
         "id": "B",
-        "text": "Exposed rotating parts. ### Images ![Page 13 image](../images/uas-acsocr/p013_img01_5b91968bce71.png) - `image=p013_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Exposed rotating parts."
       },
       {
         "id": "C",
@@ -5189,7 +5204,8 @@
     ],
     "acs_code": "UA.I.E.K10",
     "source": "ACS Mastery (UA.I.E.K10)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p013_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-121",
@@ -5420,7 +5436,7 @@
     "options": [
       {
         "id": "A",
-        "text": "Exposed rotating parts. ### Images ![Page 13 image](../images/uas-acsocr/p013_img01_5b91968bce71.png) - `image=p013_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Exposed rotating parts."
       },
       {
         "id": "B",
@@ -5453,7 +5469,8 @@
     ],
     "acs_code": "UA.I.E.K13",
     "source": "ACS Mastery (UA.I.E.K13)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p013_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-127",
@@ -5780,7 +5797,7 @@
       },
       {
         "id": "C",
-        "text": "Exposed rotating parts. ### Images ![Page 13 image](../images/uas-acsocr/p013_img01_5b91968bce71.png) - `image=p013_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Exposed rotating parts."
       },
       {
         "id": "D",
@@ -5805,13 +5822,14 @@
     ],
     "acs_code": "UA.I.E.K17",
     "source": "ACS Mastery (UA.I.E.K17)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p013_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-135",
     "category": "Regulations",
     "subcategory": "Operations Over People",
-    "question_text": "Which ACS knowledge code matches this topic: \"Exposed rotating parts. ### Images ![Page 13 image](../images/uas-acsocr/p013_img01_5b91968bce71.png) - `image=p013_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Exposed rotating parts.",
     "figure_reference": null,
     "options": [
       {
@@ -5849,7 +5867,8 @@
     ],
     "acs_code": "UA.I.E.K17",
     "source": "ACS Mastery (UA.I.E.K17)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p013_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-136",
@@ -6220,7 +6239,7 @@
       },
       {
         "id": "C",
-        "text": "Product labeling. ### Images ![Page 14 image](../images/uas-acsocr/p014_img01_5b91968bce71.png) - `image=p014_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Product labeling."
       },
       {
         "id": "D",
@@ -6245,7 +6264,8 @@
     ],
     "acs_code": "UA.I.F.K6",
     "source": "ACS Mastery (UA.I.F.K6)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p014_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-145",
@@ -6308,7 +6328,7 @@
       },
       {
         "id": "C",
-        "text": "Product labeling. ### Images ![Page 14 image](../images/uas-acsocr/p014_img01_5b91968bce71.png) - `image=p014_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Product labeling."
       },
       {
         "id": "D",
@@ -6333,13 +6353,14 @@
     ],
     "acs_code": "UA.I.F.K7",
     "source": "ACS Mastery (UA.I.F.K7)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p014_img01_5b91968bce71.png"
   },
   {
     "id": "REG-ACS-147",
     "category": "Regulations",
     "subcategory": "Remote Identification (RID)",
-    "question_text": "Which ACS knowledge code matches this topic: \"Product labeling. ### Images ![Page 14 image](../images/uas-acsocr/p014_img01_5b91968bce71.png) - `image=p014_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Product labeling.",
     "figure_reference": null,
     "options": [
       {
@@ -6377,6 +6398,7 @@
     ],
     "acs_code": "UA.I.F.K7",
     "source": "ACS Mastery (UA.I.F.K7)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p014_img01_5b91968bce71.png"
   }
 ]

@@ -875,7 +875,7 @@
     "options": [
       {
         "id": "A",
-        "text": "Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Phraseology: altitudes, directions, speed, and time."
       },
       {
         "id": "B",
@@ -908,7 +908,8 @@
     ],
     "acs_code": "UA.V.A.K4",
     "source": "ACS Mastery (UA.V.A.K4)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p020_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-025",
@@ -967,7 +968,7 @@
       },
       {
         "id": "B",
-        "text": "Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Phraseology: altitudes, directions, speed, and time."
       },
       {
         "id": "C",
@@ -996,7 +997,8 @@
     ],
     "acs_code": "UA.V.A.K5",
     "source": "ACS Mastery (UA.V.A.K5)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p020_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-027",
@@ -1227,7 +1229,7 @@
     "options": [
       {
         "id": "A",
-        "text": "Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Phraseology: altitudes, directions, speed, and time."
       },
       {
         "id": "B",
@@ -1260,13 +1262,14 @@
     ],
     "acs_code": "UA.V.A.K8",
     "source": "ACS Mastery (UA.V.A.K8)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p020_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-033",
     "category": "Operations",
     "subcategory": "Radio Communications Procedures",
-    "question_text": "Which ACS knowledge code matches this topic: \"Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Phraseology: altitudes, directions, speed, and time.",
     "figure_reference": null,
     "options": [
       {
@@ -1304,7 +1307,8 @@
     ],
     "acs_code": "UA.V.A.K8",
     "source": "ACS Mastery (UA.V.A.K8)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p020_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-034",
@@ -1671,7 +1675,7 @@
       },
       {
         "id": "B",
-        "text": "Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Airport and seaplane base lighting."
       },
       {
         "id": "C",
@@ -1700,7 +1704,8 @@
     ],
     "acs_code": "UA.V.B.K5",
     "source": "ACS Mastery (UA.V.B.K5)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p021_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-043",
@@ -1943,7 +1948,7 @@
       },
       {
         "id": "D",
-        "text": "Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Airport and seaplane base lighting."
       }
     ],
     "correct_option_id": "D",
@@ -1964,13 +1969,14 @@
     ],
     "acs_code": "UA.V.B.K8",
     "source": "ACS Mastery (UA.V.B.K8)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p021_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-049",
     "category": "Operations",
     "subcategory": "Airport Operations",
-    "question_text": "Which ACS knowledge code matches this topic: \"Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Airport and seaplane base lighting.",
     "figure_reference": null,
     "options": [
       {
@@ -2008,7 +2014,8 @@
     ],
     "acs_code": "UA.V.B.K8",
     "source": "ACS Mastery (UA.V.B.K8)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p021_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-050",
@@ -2115,7 +2122,7 @@
       },
       {
         "id": "C",
-        "text": "Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Procedures for operations at night."
       },
       {
         "id": "D",
@@ -2140,7 +2147,8 @@
     ],
     "acs_code": "UA.V.C.K2a",
     "source": "ACS Mastery (UA.V.C.K2a)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p022_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-053",
@@ -2467,7 +2475,7 @@
       },
       {
         "id": "C",
-        "text": "Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Procedures for operations at night."
       },
       {
         "id": "D",
@@ -2492,7 +2500,8 @@
     ],
     "acs_code": "UA.V.C.K3",
     "source": "ACS Mastery (UA.V.C.K3)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p022_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-061",
@@ -2551,7 +2560,7 @@
       },
       {
         "id": "B",
-        "text": "Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Procedures for operations at night."
       },
       {
         "id": "C",
@@ -2580,7 +2589,8 @@
     ],
     "acs_code": "UA.V.C.K4",
     "source": "ACS Mastery (UA.V.C.K4)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p022_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-063",
@@ -2823,7 +2833,7 @@
       },
       {
         "id": "D",
-        "text": "Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Procedures for operations at night."
       }
     ],
     "correct_option_id": "D",
@@ -2844,13 +2854,14 @@
     ],
     "acs_code": "UA.V.C.K7",
     "source": "ACS Mastery (UA.V.C.K7)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p022_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-069",
     "category": "Operations",
     "subcategory": "Emergency Procedures",
-    "question_text": "Which ACS knowledge code matches this topic: \"Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Procedures for operations at night.",
     "figure_reference": null,
     "options": [
       {
@@ -2888,7 +2899,8 @@
     ],
     "acs_code": "UA.V.C.K7",
     "source": "ACS Mastery (UA.V.C.K7)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p022_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-070",
@@ -2903,7 +2915,7 @@
       },
       {
         "id": "B",
-        "text": "Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Hazard identification and risk assessment."
       },
       {
         "id": "C",
@@ -2932,7 +2944,8 @@
     ],
     "acs_code": "UA.V.D.K1a",
     "source": "ACS Mastery (UA.V.D.K1a)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p023_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-071",
@@ -2991,7 +3004,7 @@
       },
       {
         "id": "B",
-        "text": "Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Hazard identification and risk assessment."
       },
       {
         "id": "C",
@@ -3020,7 +3033,8 @@
     ],
     "acs_code": "UA.V.D.K1b",
     "source": "ACS Mastery (UA.V.D.K1b)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p023_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-073",
@@ -3163,7 +3177,7 @@
     "options": [
       {
         "id": "A",
-        "text": "Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Hazard identification and risk assessment."
       },
       {
         "id": "B",
@@ -3196,13 +3210,14 @@
     ],
     "acs_code": "UA.V.D.K5",
     "source": "ACS Mastery (UA.V.D.K5)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p023_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-077",
     "category": "Operations",
     "subcategory": "Aeronautical Decision-Making",
-    "question_text": "Which ACS knowledge code matches this topic: \"Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Hazard identification and risk assessment.",
     "figure_reference": null,
     "options": [
       {
@@ -3240,7 +3255,8 @@
     ],
     "acs_code": "UA.V.D.K5",
     "source": "ACS Mastery (UA.V.D.K5)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p023_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-078",
@@ -3251,7 +3267,7 @@
     "options": [
       {
         "id": "A",
-        "text": "Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Night illusions."
       },
       {
         "id": "B",
@@ -3284,7 +3300,8 @@
     ],
     "acs_code": "UA.V.E.K1",
     "source": "ACS Mastery (UA.V.E.K1)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p024_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-079",
@@ -3607,7 +3624,7 @@
       },
       {
         "id": "B",
-        "text": "Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Night illusions."
       },
       {
         "id": "C",
@@ -3636,7 +3653,8 @@
     ],
     "acs_code": "UA.V.E.K7",
     "source": "ACS Mastery (UA.V.E.K7)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p024_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-087",
@@ -3699,7 +3717,7 @@
       },
       {
         "id": "C",
-        "text": "Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Night illusions."
       },
       {
         "id": "D",
@@ -3724,13 +3742,14 @@
     ],
     "acs_code": "UA.V.E.K9",
     "source": "ACS Mastery (UA.V.E.K9)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p024_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-089",
     "category": "Operations",
     "subcategory": "Physiology",
-    "question_text": "Which ACS knowledge code matches this topic: \"Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Night illusions.",
     "figure_reference": null,
     "options": [
       {
@@ -3768,7 +3787,8 @@
     ],
     "acs_code": "UA.V.E.K9",
     "source": "ACS Mastery (UA.V.E.K9)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p024_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-090",
@@ -3791,7 +3811,7 @@
       },
       {
         "id": "D",
-        "text": "Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Manufacturer's Declaration of Compliance for Category 2 and 3 operations."
       }
     ],
     "correct_option_id": "B",
@@ -3812,7 +3832,8 @@
     ],
     "acs_code": "UA.V.F.K3",
     "source": "ACS Mastery (UA.V.F.K3)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p025_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-091",
@@ -4055,7 +4076,7 @@
       },
       {
         "id": "D",
-        "text": "Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Manufacturer's Declaration of Compliance for Category 2 and 3 operations."
       }
     ],
     "correct_option_id": "B",
@@ -4076,7 +4097,8 @@
     ],
     "acs_code": "UA.V.F.K6",
     "source": "ACS Mastery (UA.V.F.K6)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p025_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-097",
@@ -4135,7 +4157,7 @@
       },
       {
         "id": "B",
-        "text": "Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Manufacturer's Declaration of Compliance for Category 2 and 3 operations."
       },
       {
         "id": "C",
@@ -4164,13 +4186,14 @@
     ],
     "acs_code": "UA.V.F.K7",
     "source": "ACS Mastery (UA.V.F.K7)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p025_img01_5b91968bce71.png"
   },
   {
     "id": "OPS-ACS-099",
     "category": "Operations",
     "subcategory": "Maintenance and Inspection Procedures",
-    "question_text": "Which ACS knowledge code matches this topic: \"Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Manufacturer's Declaration of Compliance for Category 2 and 3 operations.",
     "figure_reference": null,
     "options": [
       {
@@ -4208,6 +4231,7 @@
     ],
     "acs_code": "UA.V.F.K7",
     "source": "ACS Mastery (UA.V.F.K7)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p025_img01_5b91968bce71.png"
   }
 ]

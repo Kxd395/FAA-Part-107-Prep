@@ -267,7 +267,7 @@
     "options": [
       {
         "id": "A",
-        "text": "Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Air Traffic Control (ATC) and the NAS."
       },
       {
         "id": "B",
@@ -300,7 +300,8 @@
     ],
     "acs_code": "UA.II.A.K1",
     "source": "ACS Mastery (UA.II.A.K1)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p015_img01_5b91968bce71.png"
   },
   {
     "id": "AIR-ACS-009",
@@ -623,7 +624,7 @@
       },
       {
         "id": "B",
-        "text": "Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Air Traffic Control (ATC) and the NAS."
       },
       {
         "id": "C",
@@ -652,7 +653,8 @@
     ],
     "acs_code": "UA.II.A.K1e",
     "source": "ACS Mastery (UA.II.A.K1e)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p015_img01_5b91968bce71.png"
   },
   {
     "id": "AIR-ACS-017",
@@ -719,7 +721,7 @@
       },
       {
         "id": "D",
-        "text": "Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Air Traffic Control (ATC) and the NAS."
       }
     ],
     "correct_option_id": "D",
@@ -740,13 +742,14 @@
     ],
     "acs_code": "UA.II.A.K4",
     "source": "ACS Mastery (UA.II.A.K4)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p015_img01_5b91968bce71.png"
   },
   {
     "id": "AIR-ACS-019",
     "category": "Airspace",
     "subcategory": "Airspace Classification",
-    "question_text": "Which ACS knowledge code matches this topic: \"Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Air Traffic Control (ATC) and the NAS.",
     "figure_reference": null,
     "options": [
       {
@@ -784,7 +787,8 @@
     ],
     "acs_code": "UA.II.A.K4",
     "source": "ACS Mastery (UA.II.A.K4)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p015_img01_5b91968bce71.png"
   },
   {
     "id": "AIR-ACS-020",
@@ -1151,7 +1155,7 @@
       },
       {
         "id": "B",
-        "text": "sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "sUAS lighting requirements."
       },
       {
         "id": "C",
@@ -1180,7 +1184,8 @@
     ],
     "acs_code": "UA.II.B.K4a",
     "source": "ACS Mastery (UA.II.B.K4a)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p016_img01_5b91968bce71.png"
   },
   {
     "id": "AIR-ACS-029",
@@ -1335,7 +1340,7 @@
       },
       {
         "id": "D",
-        "text": "sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "sUAS lighting requirements."
       }
     ],
     "correct_option_id": "B",
@@ -1356,7 +1361,8 @@
     ],
     "acs_code": "UA.II.B.K4c",
     "source": "ACS Mastery (UA.II.B.K4c)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p016_img01_5b91968bce71.png"
   },
   {
     "id": "AIR-ACS-033",
@@ -1595,7 +1601,7 @@
       },
       {
         "id": "C",
-        "text": "sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "sUAS lighting requirements."
       },
       {
         "id": "D",
@@ -1620,7 +1626,8 @@
     ],
     "acs_code": "UA.II.B.K4f",
     "source": "ACS Mastery (UA.II.B.K4f)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p016_img01_5b91968bce71.png"
   },
   {
     "id": "AIR-ACS-039",
@@ -2115,7 +2122,7 @@
     "options": [
       {
         "id": "A",
-        "text": "sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "sUAS lighting requirements."
       },
       {
         "id": "B",
@@ -2148,13 +2155,14 @@
     ],
     "acs_code": "UA.II.B.K10",
     "source": "ACS Mastery (UA.II.B.K10)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p016_img01_5b91968bce71.png"
   },
   {
     "id": "AIR-ACS-051",
     "category": "Airspace",
     "subcategory": "Airspace Operational Requirements",
-    "question_text": "Which ACS knowledge code matches this topic: \"sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"sUAS lighting requirements.",
     "figure_reference": null,
     "options": [
       {
@@ -2192,6 +2200,7 @@
     ],
     "acs_code": "UA.II.B.K10",
     "source": "ACS Mastery (UA.II.B.K10)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p016_img01_5b91968bce71.png"
   }
 ]

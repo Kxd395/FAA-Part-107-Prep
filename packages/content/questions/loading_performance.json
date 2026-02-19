@@ -157,7 +157,7 @@
       },
       {
         "id": "C",
-        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS. ### Images ![Page 19 image](../images/uas-acsocr/p019_img01_5b91968bce71.png) - `image=p019_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS."
       },
       {
         "id": "D",
@@ -183,7 +183,8 @@
     ],
     "acs_code": "UA.IV.A.K1",
     "source": "ACS Mastery (UA.IV.A.K1)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p019_img01_5b91968bce71.png"
   },
   {
     "id": "LP-ACS-006",
@@ -239,7 +240,7 @@
     "options": [
       {
         "id": "A",
-        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS. ### Images ![Page 19 image](../images/uas-acsocr/p019_img01_5b91968bce71.png) - `image=p019_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS."
       },
       {
         "id": "B",
@@ -273,7 +274,8 @@
     ],
     "acs_code": "UA.IV.A.K1a",
     "source": "ACS Mastery (UA.IV.A.K1a)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p019_img01_5b91968bce71.png"
   },
   {
     "id": "LP-ACS-008",
@@ -333,7 +335,7 @@
       },
       {
         "id": "B",
-        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS. ### Images ![Page 19 image](../images/uas-acsocr/p019_img01_5b91968bce71.png) - `image=p019_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS."
       },
       {
         "id": "C",
@@ -363,7 +365,8 @@
     ],
     "acs_code": "UA.IV.A.K1b",
     "source": "ACS Mastery (UA.IV.A.K1b)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p019_img01_5b91968bce71.png"
   },
   {
     "id": "LP-ACS-010",
@@ -431,7 +434,7 @@
       },
       {
         "id": "D",
-        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS. ### Images ![Page 19 image](../images/uas-acsocr/p019_img01_5b91968bce71.png) - `image=p019_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS."
       }
     ],
     "correct_option_id": "D",
@@ -453,13 +456,14 @@
     ],
     "acs_code": "UA.IV.A.K2",
     "source": "ACS Mastery (UA.IV.A.K2)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p019_img01_5b91968bce71.png"
   },
   {
     "id": "LP-ACS-012",
     "category": "Loading & Performance",
     "subcategory": "Loading and Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS. ### Images ![Page 19 image](../images/uas-acsocr/p019_img01_5b91968bce71.png) - `image=p019_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS.",
     "figure_reference": null,
     "options": [
       {
@@ -498,6 +502,7 @@
     ],
     "acs_code": "UA.IV.A.K2",
     "source": "ACS Mastery (UA.IV.A.K2)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p019_img01_5b91968bce71.png"
   }
 ]

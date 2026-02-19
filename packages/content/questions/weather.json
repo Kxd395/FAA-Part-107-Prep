@@ -378,7 +378,7 @@
       },
       {
         "id": "B",
-        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS)."
       },
       {
         "id": "C",
@@ -407,7 +407,8 @@
     ],
     "acs_code": "UA.III.A.K1",
     "source": "ACS Mastery (UA.III.A.K1)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p017_img01_5b91968bce71.png"
   },
   {
     "id": "WX-ACS-012",
@@ -466,7 +467,7 @@
       },
       {
         "id": "B",
-        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS)."
       },
       {
         "id": "C",
@@ -495,7 +496,8 @@
     ],
     "acs_code": "UA.III.A.K3",
     "source": "ACS Mastery (UA.III.A.K3)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p017_img01_5b91968bce71.png"
   },
   {
     "id": "WX-ACS-014",
@@ -558,7 +560,7 @@
       },
       {
         "id": "C",
-        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS)."
       },
       {
         "id": "D",
@@ -583,7 +585,8 @@
     ],
     "acs_code": "UA.III.A.K4",
     "source": "ACS Mastery (UA.III.A.K4)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p017_img01_5b91968bce71.png"
   },
   {
     "id": "WX-ACS-016",
@@ -650,7 +653,7 @@
       },
       {
         "id": "D",
-        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS)."
       }
     ],
     "correct_option_id": "D",
@@ -671,13 +674,14 @@
     ],
     "acs_code": "UA.III.A.K5",
     "source": "ACS Mastery (UA.III.A.K5)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p017_img01_5b91968bce71.png"
   },
   {
     "id": "WX-ACS-018",
     "category": "Weather",
     "subcategory": "Sources of Weather",
-    "question_text": "Which ACS knowledge code matches this topic: \"Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"Automated surface observing systems (ASOS) and automated weather observing systems (AWOS).",
     "figure_reference": null,
     "options": [
       {
@@ -715,7 +719,8 @@
     ],
     "acs_code": "UA.III.A.K5",
     "source": "ACS Mastery (UA.III.A.K5)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p017_img01_5b91968bce71.png"
   },
   {
     "id": "WX-ACS-019",
@@ -730,7 +735,7 @@
       },
       {
         "id": "B",
-        "text": "k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "k. Lightning"
       },
       {
         "id": "C",
@@ -759,7 +764,8 @@
     ],
     "acs_code": "UA.III.B.K1",
     "source": "ACS Mastery (UA.III.B.K1)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p018_img01_5b91968bce71.png"
   },
   {
     "id": "WX-ACS-020",
@@ -818,7 +824,7 @@
       },
       {
         "id": "B",
-        "text": "k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "k. Lightning"
       },
       {
         "id": "C",
@@ -847,7 +853,8 @@
     ],
     "acs_code": "UA.III.B.K1b",
     "source": "ACS Mastery (UA.III.B.K1b)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p018_img01_5b91968bce71.png"
   },
   {
     "id": "WX-ACS-022",
@@ -1002,7 +1009,7 @@
       },
       {
         "id": "D",
-        "text": "k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "k. Lightning"
       }
     ],
     "correct_option_id": "C",
@@ -1023,7 +1030,8 @@
     ],
     "acs_code": "UA.III.B.K1f",
     "source": "ACS Mastery (UA.III.B.K1f)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p018_img01_5b91968bce71.png"
   },
   {
     "id": "WX-ACS-026",
@@ -1342,7 +1350,7 @@
     "options": [
       {
         "id": "A",
-        "text": "k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+        "text": "k. Lightning"
       },
       {
         "id": "B",
@@ -1375,13 +1383,14 @@
     ],
     "acs_code": "UA.III.B.K1k",
     "source": "ACS Mastery (UA.III.B.K1k)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p018_img01_5b91968bce71.png"
   },
   {
     "id": "WX-ACS-034",
     "category": "Weather",
     "subcategory": "Effects of Weather on Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`\"?",
+    "question_text": "Which ACS knowledge code matches this topic: \"k. Lightning",
     "figure_reference": null,
     "options": [
       {
@@ -1419,6 +1428,7 @@
     ],
     "acs_code": "UA.III.B.K1k",
     "source": "ACS Mastery (UA.III.B.K1k)",
-    "source_type": "acs_generated"
+    "source_type": "acs_generated",
+    "image_ref": "/images/uas-acsocr/p018_img01_5b91968bce71.png"
   }
 ]

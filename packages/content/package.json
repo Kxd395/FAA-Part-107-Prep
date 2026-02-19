@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "validate": "node scripts/validate-questions.js",
-    "stats": "node scripts/question-stats.js"
+    "stats": "node scripts/question-stats.js",
+    "sanitize": "node scripts/sanitize-questions.js"
   },
   "keywords": ["faa", "part107", "drone", "exam-prep"],
   "license": "MIT"
