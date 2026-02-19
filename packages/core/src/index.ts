@@ -27,6 +27,20 @@ export type {
 
 export type { CitationReference } from "./citations";
 export type { StudyCategory } from "./quiz";
+export type {
+  StudyAnswerState,
+  UseStudySessionOptions,
+  UseStudySessionResult,
+  StudyScore,
+} from "./studySession";
+export type {
+  ExamPhase,
+  ExamReviewRow,
+  ExamReviewSummary,
+  ExamSetupPreview,
+  UseExamSessionOptions,
+  UseExamSessionResult,
+} from "./examSession";
 
 // Engine
 export {
@@ -60,3 +74,5 @@ export {
 
 export { computeProgressStats } from "./progress";
 export { parseCitation } from "./citations";
+export { useStudySession } from "./studySession";
+export { useExamSession } from "./examSession";

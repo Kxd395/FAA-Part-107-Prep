@@ -2,24 +2,17 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useRef, useState } from "react";
-import {
-  buildExamQuestionSet,
-  computeRemainingTime,
-  formatClockTime,
-  normalizeCategory,
-  type OptionId,
-} from "@part107/core";
+import { Suspense, useEffect, useState } from "react";
+import { formatClockTime, useExamSession } from "@part107/core";
 import CitationLinks, { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
+import AnswerOptions from "../../components/quiz/AnswerOptions";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
 import SessionSummaryCard from "../../components/quiz/SessionSummaryCard";
 import { useProgress, type QuestionResult } from "../../hooks/useProgress";
-import { ALL_QUESTIONS, type AppQuestion, type StudyCategory } from "../../lib/questionBank";
+import { useQuestionBank } from "../../hooks/useQuestionBank";
 
 const PASSING_PERCENT = 70;
-
-type ExamPhase = "setup" | "in-progress" | "review";
 
 export default function ExamPage() {
   return (
@@ -38,153 +31,96 @@ export default function ExamPage() {
 function ExamPageClient() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
-  const { saveSession } = useProgress();
 
-  const [phase, setPhase] = useState<ExamPhase>("setup");
-  const [examCategory, setExamCategory] = useState<StudyCategory>("All");
-  const [questions, setQuestions] = useState<AppQuestion[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState<Map<string, OptionId>>(new Map());
-  const [flagged, setFlagged] = useState<Set<string>>(new Set());
-  const [startTime, setStartTime] = useState(0);
-  const [timeLimitMs, setTimeLimitMs] = useState(0);
-  const [remainingMs, setRemainingMs] = useState(0);
-  const [showNavigator, setShowNavigator] = useState(false);
+  const { saveSession } = useProgress();
+  const { questions: allQuestions, loaded, loading, error, reload } = useQuestionBank();
+  const exam = useExamSession({ allQuestions, passPercent: PASSING_PERCENT });
+
   const [sessionSaved, setSessionSaved] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [showNavigator, setShowNavigator] = useState(false);
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
 
-  const startExam = (categoryInput?: string) => {
-    const category = normalizeCategory(categoryInput ?? examCategory) ?? "All";
-    const nextSet = buildExamQuestionSet(ALL_QUESTIONS, category);
-
-    if (nextSet.questions.length === 0) {
-      setQuestions([]);
-      setExamCategory("All");
-      setPhase("setup");
-      return;
+  useEffect(() => {
+    if (exam.phase === "in-progress") {
+      setSessionSaved(false);
     }
-
-    const now = Date.now();
-    setQuestions(nextSet.questions as AppQuestion[]);
-    setExamCategory(nextSet.category);
-    setCurrentIndex(0);
-    setAnswers(new Map());
-    setFlagged(new Set());
-    setStartTime(now);
-    setTimeLimitMs(nextSet.timeLimitMs);
-    setRemainingMs(nextSet.timeLimitMs);
-    setSessionSaved(false);
-    setShowNavigator(false);
-    setPhase("in-progress");
-  };
+  }, [exam.phase, exam.startTime]);
 
   useEffect(() => {
-    if (phase !== "in-progress") return;
+    if (exam.phase !== "review" || sessionSaved || exam.questions.length === 0) return;
 
-    timerRef.current = setInterval(() => {
-      const remaining = computeRemainingTime(startTime, timeLimitMs);
-      setRemainingMs(remaining);
-      if (remaining <= 0) {
-        setPhase("review");
-      }
-    }, 1000);
+    const questionResults: QuestionResult[] = exam.review.rows.map((row) => ({
+      questionId: row.question.id,
+      userAnswer: row.userAnswer,
+      correctAnswer: row.question.correct_option_id,
+      isCorrect: row.isCorrect,
+      category: row.question.category,
+    }));
 
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [phase, startTime, timeLimitMs]);
-
-  useEffect(() => {
-    if (phase !== "review" || sessionSaved || questions.length === 0) return;
-
-    const questionResults: QuestionResult[] = questions.map((q) => {
-      const userAnswer = answers.get(q.id) ?? null;
-      return {
-        questionId: q.id,
-        userAnswer,
-        correctAnswer: q.correct_option_id,
-        isCorrect: userAnswer === q.correct_option_id,
-        category: q.category,
-      };
-    });
-
-    const correctCount = questionResults.filter((r) => r.isCorrect).length;
     saveSession({
       mode: "exam",
-      category: examCategory,
-      score: correctCount,
-      total: questions.length,
-      timeSpentMs: Math.max(0, timeLimitMs - remainingMs),
+      category: exam.examCategory,
+      score: exam.review.correctCount,
+      total: exam.questions.length,
+      timeSpentMs: exam.review.totalTimeMs,
       questions: questionResults,
     });
+
     setSessionSaved(true);
-  }, [answers, examCategory, phase, questions, remainingMs, saveSession, sessionSaved, timeLimitMs]);
+  }, [exam, saveSession, sessionSaved]);
 
-  const selectAnswer = (optionId: OptionId) => {
-    const question = questions[currentIndex];
-    if (!question) return;
+  if (loading && !loaded) {
+    return (
+      <div className="flex items-center justify-center py-32">
+        <div className="text-[var(--muted)]">Loading question bank…</div>
+      </div>
+    );
+  }
 
-    setAnswers((prev) => {
-      const next = new Map(prev);
-      next.set(question.id, optionId);
-      return next;
-    });
-  };
+  if (error && !loaded) {
+    return (
+      <div className="mx-auto max-w-lg space-y-4 rounded-xl border border-incorrect/30 bg-incorrect/10 p-6 text-center">
+        <h1 className="text-xl font-bold text-incorrect">Couldn&apos;t load questions</h1>
+        <p className="text-sm text-[var(--muted)]">{error}</p>
+        <button
+          onClick={() => void reload()}
+          className="rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
 
-  const toggleFlag = () => {
-    const question = questions[currentIndex];
-    if (!question) return;
-
-    setFlagged((prev) => {
-      const next = new Set(prev);
-      if (next.has(question.id)) next.delete(question.id);
-      else next.add(question.id);
-      return next;
-    });
-  };
-
-  const submitExam = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    setPhase("review");
-  };
-
-  const currentQuestion = questions[currentIndex] ?? null;
-  const currentAnswer = currentQuestion ? answers.get(currentQuestion.id) : null;
-
-  if (phase === "setup") {
-    const normalizedCategory = normalizeCategory(categoryParam);
-    const invalidCategory = !!categoryParam && !normalizedCategory;
-    const effectiveCategory = normalizedCategory ?? "All";
-
-    const preview = buildExamQuestionSet(ALL_QUESTIONS, effectiveCategory);
-    const questionCount = preview.questions.length;
-    const timeDisplay = effectiveCategory === "All" ? "2 Hours" : `${questionCount * 2} min`;
+  if (exam.phase === "setup") {
+    const preview = exam.getSetupPreview(categoryParam);
+    const timeDisplay =
+      preview.category === "All" ? "2 Hours" : `${Math.round(preview.timeLimitMs / 60000)} min`;
 
     return (
       <div className="mx-auto max-w-lg space-y-8 pt-8">
         <div className="text-center">
           <div className="text-5xl">🎯</div>
           <h1 className="mt-4 text-3xl font-bold">
-            {effectiveCategory === "All" ? "Practice Exam" : `${effectiveCategory} Test`}
+            {preview.category === "All" ? "Practice Exam" : `${preview.category} Test`}
           </h1>
           <p className="mt-2 text-[var(--muted)]">
-            {effectiveCategory === "All"
+            {preview.category === "All"
               ? "Simulates the real FAA Part 107 knowledge test. No feedback until the end — just like exam day."
-              : `Test your knowledge of ${effectiveCategory}. No feedback until the end.`}
+              : `Test your knowledge of ${preview.category}. No feedback until the end.`}
           </p>
         </div>
 
-        {invalidCategory && (
+        {preview.invalidCategory && (
           <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
             Unknown category &quot;{categoryParam}&quot;. Falling back to full practice exam.
           </div>
         )}
 
-        {effectiveCategory !== "All" && (
+        {preview.category !== "All" && (
           <div className="flex justify-center">
             <span className="rounded-full bg-brand-500/10 px-4 py-1.5 text-sm font-medium text-brand-500">
-              📂 Topic: {effectiveCategory}
+              📂 Topic: {preview.category}
             </span>
           </div>
         )}
@@ -192,7 +128,7 @@ function ExamPageClient() {
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6 space-y-4">
           <div className="flex justify-between text-sm">
             <span className="text-[var(--muted)]">Questions</span>
-            <span className="font-medium text-white">{questionCount}</span>
+            <span className="font-medium text-white">{preview.questionCount}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-[var(--muted)]">Time Limit</span>
@@ -209,18 +145,18 @@ function ExamPageClient() {
         </div>
 
         <button
-          onClick={() => startExam(effectiveCategory)}
-          disabled={questionCount === 0}
+          onClick={() => exam.startExam(preview.category)}
+          disabled={preview.questionCount === 0}
           className="w-full rounded-xl bg-brand-600 py-4 text-lg font-semibold text-white transition-all hover:bg-brand-700 hover:scale-[1.02] disabled:opacity-60"
         >
-          {effectiveCategory === "All" ? "Begin Exam →" : `Begin ${effectiveCategory} Test →`}
+          {preview.category === "All" ? "Begin Exam →" : `Begin ${preview.category} Test →`}
         </button>
 
-        {questionCount === 0 && (
+        {preview.questionCount === 0 && (
           <div className="text-center text-sm text-[var(--muted)]">No questions found for this category yet.</div>
         )}
 
-        {effectiveCategory !== "All" && (
+        {preview.category !== "All" && (
           <Link
             href="/exam"
             className="block text-center text-sm text-[var(--muted)] hover:text-white transition-colors"
@@ -232,36 +168,26 @@ function ExamPageClient() {
     );
   }
 
-  if (phase === "review") {
-    let correctCount = 0;
-    const results = questions.map((q) => {
-      const userAnswer = answers.get(q.id);
-      const isCorrect = userAnswer === q.correct_option_id;
-      if (isCorrect) correctCount++;
-      return { question: q, userAnswer, isCorrect };
-    });
-
-    const scorePercent = questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 0;
-    const passed = scorePercent >= PASSING_PERCENT;
-    const totalTime = Math.max(0, timeLimitMs - remainingMs);
-
+  if (exam.phase === "review") {
     return (
       <div className="space-y-8">
         <div className="mx-auto max-w-lg text-center space-y-4">
-          <div className="text-6xl">{passed ? "🎉" : "📚"}</div>
-          <h1 className="text-3xl font-bold">{passed ? "You Passed!" : "Not Quite — Keep Going!"}</h1>
+          <div className="text-6xl">{exam.review.passed ? "🎉" : "📚"}</div>
+          <h1 className="text-3xl font-bold">
+            {exam.review.passed ? "You Passed!" : "Not Quite — Keep Going!"}
+          </h1>
 
           <SessionSummaryCard
-            passed={passed}
-            percentage={scorePercent}
-            correct={correctCount}
-            total={questions.length}
-            subtitle={`Time used: ${formatClockTime(totalTime)}`}
+            passed={exam.review.passed}
+            percentage={exam.review.scorePercent}
+            correct={exam.review.correctCount}
+            total={exam.questions.length}
+            subtitle={`Time used: ${formatClockTime(exam.review.totalTimeMs)}`}
           />
 
           <div className="flex gap-3">
             <button
-              onClick={() => startExam()}
+              onClick={() => exam.startExam()}
               className="flex-1 rounded-xl bg-brand-600 py-3 font-semibold text-white hover:bg-brand-700"
             >
               Retake Exam
@@ -285,7 +211,7 @@ function ExamPageClient() {
         <div>
           <h2 className="mb-4 text-xl font-bold">Question Review</h2>
           <div className="space-y-4">
-            {results.map((result, i) => (
+            {exam.review.rows.map((result, i) => (
               <div
                 key={result.question.id}
                 className={`rounded-xl border p-4 ${
@@ -318,7 +244,7 @@ function ExamPageClient() {
     );
   }
 
-  if (!currentQuestion) {
+  if (!exam.currentQuestion) {
     return (
       <div className="mx-auto max-w-lg space-y-5 rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6 text-center">
         <h1 className="text-2xl font-bold">Exam Unavailable</h1>
@@ -333,65 +259,43 @@ function ExamPageClient() {
     );
   }
 
-  const progress = ((currentIndex + 1) / questions.length) * 100;
-  const answeredCount = answers.size;
-  const isTimeLow = remainingMs < 10 * 60 * 1000;
+  const isTimeLow = exam.remainingMs < 10 * 60 * 1000;
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <ProgressHeader
-        left={`Q ${currentIndex + 1} / ${questions.length} (${answeredCount} answered)`}
-        right={`⏱ ${formatClockTime(remainingMs)}`}
-        progress={progress}
+        left={`Q ${exam.currentIndex + 1} / ${exam.questions.length} (${exam.answeredCount} answered)`}
+        right={`⏱ ${formatClockTime(exam.remainingMs)}`}
+        progress={exam.progressPercent}
         progressClassName={isTimeLow ? "bg-incorrect animate-pulse" : "bg-brand-500"}
       />
 
-      <QuestionCard question={currentQuestion} onOpenFigure={setFigureRef} />
+      <QuestionCard question={exam.currentQuestion} onOpenFigure={setFigureRef} />
 
-      <div className="space-y-3">
-        {currentQuestion.options.map((option) => (
-          <button
-            key={option.id}
-            onClick={() => selectAnswer(option.id)}
-            className={`w-full rounded-xl border p-4 text-left transition-all ${
-              currentAnswer === option.id
-                ? "border-brand-500 bg-brand-500/10"
-                : "border-[var(--card-border)] bg-[var(--card)] hover:border-brand-500/30"
-            }`}
-          >
-            <div className="flex items-start gap-3">
-              <span
-                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
-                  currentAnswer === option.id
-                    ? "bg-brand-500 text-white"
-                    : "bg-[var(--background)] text-[var(--muted)]"
-                }`}
-              >
-                {option.id}
-              </span>
-              <span className="pt-0.5">{option.text}</span>
-            </div>
-          </button>
-        ))}
-      </div>
+      <AnswerOptions
+        options={exam.currentQuestion.options}
+        mode="exam"
+        selectedOption={exam.currentAnswer}
+        onSelect={exam.selectAnswer}
+      />
 
       <div className="flex items-center gap-3">
         <button
-          onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))}
-          disabled={currentIndex === 0}
+          onClick={exam.previousQuestion}
+          disabled={exam.currentIndex === 0}
           className="rounded-xl border border-[var(--card-border)] px-4 py-2.5 text-sm text-[var(--muted)] hover:text-white disabled:opacity-30"
         >
           ← Prev
         </button>
         <button
-          onClick={toggleFlag}
+          onClick={exam.toggleFlagCurrent}
           className={`rounded-xl border px-4 py-2.5 text-sm ${
-            flagged.has(currentQuestion.id)
+            exam.flagged.has(exam.currentQuestion.id)
               ? "border-amber-500 bg-amber-500/10 text-amber-400"
               : "border-[var(--card-border)] text-[var(--muted)] hover:text-white"
           }`}
         >
-          🚩 {flagged.has(currentQuestion.id) ? "Flagged" : "Flag for Review"}
+          🚩 {exam.flagged.has(exam.currentQuestion.id) ? "Flagged" : "Flag for Review"}
         </button>
         <button
           onClick={() => setShowNavigator((prev) => !prev)}
@@ -400,16 +304,16 @@ function ExamPageClient() {
           📋 Navigator
         </button>
         <div className="flex-1" />
-        {currentIndex < questions.length - 1 ? (
+        {exam.currentIndex < exam.questions.length - 1 ? (
           <button
-            onClick={() => setCurrentIndex((i) => i + 1)}
+            onClick={exam.nextQuestion}
             className="rounded-xl bg-brand-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
           >
             Next →
           </button>
         ) : (
           <button
-            onClick={submitExam}
+            onClick={exam.submitExam}
             className="rounded-xl bg-correct px-6 py-2.5 text-sm font-semibold text-white hover:bg-correct-dark"
           >
             Submit Exam ✓
@@ -422,21 +326,21 @@ function ExamPageClient() {
           <div className="mb-3 flex items-center justify-between text-sm">
             <span className="font-medium text-white">Question Navigator</span>
             <span className="text-[var(--muted)]">
-              {answeredCount}/{questions.length} answered • {flagged.size} flagged
+              {exam.answeredCount}/{exam.questions.length} answered • {exam.flagged.size} flagged
             </span>
           </div>
 
           <div className="grid grid-cols-10 gap-1.5">
-            {questions.map((q, i) => {
-              const isAnswered = answers.has(q.id);
-              const isFlagged = flagged.has(q.id);
-              const isCurrent = i === currentIndex;
+            {exam.questions.map((question, i) => {
+              const isAnswered = exam.answers.has(question.id);
+              const isFlagged = exam.flagged.has(question.id);
+              const isCurrent = i === exam.currentIndex;
 
               return (
                 <button
-                  key={q.id}
+                  key={question.id}
                   onClick={() => {
-                    setCurrentIndex(i);
+                    exam.goToQuestion(i);
                     setShowNavigator(false);
                   }}
                   className={`h-8 rounded text-xs font-medium transition-all ${

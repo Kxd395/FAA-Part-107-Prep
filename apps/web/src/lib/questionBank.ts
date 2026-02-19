@@ -1,34 +1,61 @@
-import {
-  STUDY_CATEGORIES,
-  filterQuestionsByCategory,
-  shuffleQuestions,
-  type Question,
-  type StudyCategory,
-} from "@part107/core";
-
-import regulationsData from "../../../../packages/content/questions/regulations.json";
-import airspaceData from "../../../../packages/content/questions/airspace.json";
-import weatherData from "../../../../packages/content/questions/weather.json";
-import operationsData from "../../../../packages/content/questions/operations.json";
-import loadingPerformanceData from "../../../../packages/content/questions/loading_performance.json";
+import { STUDY_CATEGORIES, type Question, type StudyCategory } from "@part107/core";
 
 export type AppQuestion = Question;
-
 export { STUDY_CATEGORIES };
 export type { StudyCategory };
 
-export const ALL_QUESTIONS: AppQuestion[] = [
-  ...(regulationsData as AppQuestion[]),
-  ...(airspaceData as AppQuestion[]),
-  ...(weatherData as AppQuestion[]),
-  ...(operationsData as AppQuestion[]),
-  ...(loadingPerformanceData as AppQuestion[]),
-];
-
-export function getQuestionsForCategory(category: StudyCategory): AppQuestion[] {
-  return filterQuestionsByCategory(ALL_QUESTIONS, category) as AppQuestion[];
+export interface QuestionApiResponse {
+  questions: AppQuestion[];
+  meta: {
+    total: number;
+    category: string;
+    shuffled: boolean;
+    limit: number | null;
+    source: "remote" | "local";
+  };
 }
 
-export function buildStudyQuestionSet(category: StudyCategory): AppQuestion[] {
-  return shuffleQuestions(getQuestionsForCategory(category));
+interface FetchQuestionsOptions {
+  category?: string;
+  shuffle?: boolean;
+  limit?: number;
+  signal?: AbortSignal;
+}
+
+export async function fetchQuestions({
+  category = "All",
+  shuffle = false,
+  limit,
+  signal,
+}: FetchQuestionsOptions = {}): Promise<QuestionApiResponse> {
+  const params = new URLSearchParams();
+  params.set("category", category);
+  if (shuffle) params.set("shuffle", "1");
+  if (typeof limit === "number" && Number.isFinite(limit) && limit > 0) {
+    params.set("limit", String(limit));
+  }
+
+  const response = await fetch(`/api/questions?${params.toString()}`, {
+    method: "GET",
+    cache: "no-store",
+    signal,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch questions (${response.status})`);
+  }
+
+  return (await response.json()) as QuestionApiResponse;
+}
+
+export function countQuestionsByCategory(allQuestions: readonly AppQuestion[]) {
+  return STUDY_CATEGORIES.reduce<Record<StudyCategory, number>>((acc, category) => {
+    if (category === "All") {
+      acc[category] = allQuestions.length;
+      return acc;
+    }
+
+    acc[category] = allQuestions.filter((q) => q.category === category).length;
+    return acc;
+  }, {} as Record<StudyCategory, number>);
 }

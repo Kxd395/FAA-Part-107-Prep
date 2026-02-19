@@ -1,0 +1,14 @@
+{
+  "name": "faa-107-study-guide",
+  "private": true,
+  "workspaces": ["apps/web", "packages/core", "packages/content"],
+  "scripts": {
+    "dev": "npm run dev --workspace=apps/web",
+    "build": "npm run build --workspace=apps/web",
+    "start": "npm run start --workspace=apps/web",
+    "lint": "npm run lint --workspace=apps/web",
+    "test": "npm run test --workspace=apps/web",
+    "build:core": "npm run build --workspace=@part107/core",
+    "validate:content": "npm run validate --workspace=@part107/content"
+  }
+}
