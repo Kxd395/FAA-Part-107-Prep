@@ -23,6 +23,16 @@ import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { extractCitationText, mergeCitations } from "../../lib/citationContext";
 import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
 
+const SUPPORTED_QUESTION_TYPES: readonly QuestionTypeProfile[] = ["real_exam", "weak_spots"];
+
+function normalizeSelectableQuestionTypeProfile(
+  input: string | null | undefined
+): QuestionTypeProfile | null {
+  const normalized = normalizeQuestionTypeProfile(input);
+  if (!normalized) return null;
+  return SUPPORTED_QUESTION_TYPES.includes(normalized) ? normalized : null;
+}
+
 const QUESTION_TYPE_OPTIONS: Array<{
   value: QuestionTypeProfile;
   title: string;
@@ -30,23 +40,13 @@ const QUESTION_TYPE_OPTIONS: Array<{
 }> = [
   {
     value: "real_exam",
-    title: "Exclude ACS Code-Matching (Recommended)",
-    description: "Shows realistic FAA-style prompts and excludes ACS code-recall questions.",
-  },
-  {
-    value: "acs_mastery",
-    title: "ACS Mastery",
-    description: "Focuses on ACS code mapping and memorization.",
-  },
-  {
-    value: "mixed",
-    title: "Mixed",
-    description: "Includes both exam-style and ACS mastery prompts.",
+    title: "Real Exam MCQ (Recommended)",
+    description: "Shows FAA-style multiple-choice prompts and excludes ACS code-mapping drills.",
   },
   {
     value: "weak_spots",
     title: "Weak Spots Only",
-    description: "Prioritizes questions you still struggle with.",
+    description: "Prioritizes realistic MCQs you still struggle with.",
   },
 ];
 
@@ -68,7 +68,13 @@ function StudyPageClient() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const questionTypeParam = searchParams.get("type");
-  const parsedQuestionType = normalizeQuestionTypeProfile(questionTypeParam) ?? "real_exam";
+  const focusParam = searchParams.get("focus");
+  const invalidQuestionTypeParam =
+    !!questionTypeParam && !normalizeSelectableQuestionTypeProfile(questionTypeParam);
+  const weakFocusRequested = focusParam?.trim().toLowerCase() === "weak";
+  const parsedQuestionType =
+    normalizeSelectableQuestionTypeProfile(questionTypeParam) ??
+    (weakFocusRequested ? "weak_spots" : "real_exam");
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
   );
@@ -118,20 +124,25 @@ function StudyPageClient() {
   const [sessionSaved, setSessionSaved] = useState(false);
 
   useEffect(() => {
-    const nextType = normalizeQuestionTypeProfile(questionTypeParam);
-    if (!nextType) return;
-    setSelectedQuestionType(nextType);
-  }, [questionTypeParam]);
+    const nextType = normalizeSelectableQuestionTypeProfile(questionTypeParam);
+    if (nextType) {
+      setSelectedQuestionType(nextType);
+      return;
+    }
+    if (weakFocusRequested) {
+      setSelectedQuestionType("weak_spots");
+    }
+  }, [questionTypeParam, weakFocusRequested]);
 
   useEffect(() => {
     if (!loaded || autoStarted.current) return;
 
-    if (!categoryParam) return;
+    if (!categoryParam && !weakFocusRequested) return;
 
     autoStarted.current = true;
     const matched = normalizeCategory(categoryParam);
     study.startQuiz(matched ?? "All");
-  }, [categoryParam, loaded, study]);
+  }, [categoryParam, loaded, study, weakFocusRequested]);
 
   useEffect(() => {
     if (!study.quizStarted || study.isComplete || !study.currentQuestion) return;
@@ -212,6 +223,13 @@ function StudyPageClient() {
           </p>
         </div>
 
+        {invalidQuestionTypeParam && (
+          <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
+            Question type &quot;{questionTypeParam}&quot; is not available in realistic mode. Falling
+            back to Real Exam MCQ.
+          </div>
+        )}
+
         <div className="space-y-3">
           <div className="text-sm font-semibold text-white">Question Type</div>
           <div className="grid gap-2">
@@ -236,6 +254,10 @@ function StudyPageClient() {
             <span className="font-medium text-brand-400">
               {QUESTION_TYPE_PROFILE_LABELS[selectedQuestionType]}
             </span>
+            <div className="mt-2">
+              Real UAG questions are standard MCQs. ACS/learning codes are primarily post-test AKTR
+              remediation signals.
+            </div>
           </div>
         </div>
 

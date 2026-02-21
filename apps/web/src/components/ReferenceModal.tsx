@@ -131,19 +131,11 @@ interface CitationLinksProps {
   onReferenceClick?: (ref: ResolvedReference) => void;
 }
 
-const UAS_ACS_PDF_URL =
-  "https://www.faa.gov/sites/faa.gov/files/training_testing/testing/acs/uas_acs.pdf";
-
-function normalizeBrokenReference(ref: ResolvedReference): ResolvedReference {
-  if (ref.type !== "pdf") return ref;
-  if (!/^\/references\/acs/i.test(ref.url)) return ref;
-  return {
-    ...ref,
-    url: UAS_ACS_PDF_URL,
-  };
-}
-
-export default function CitationLinks({ citation, label = "📖 Reference:", onReferenceClick }: CitationLinksProps) {
+export default function CitationLinks({
+  citation,
+  label = "📖 Reference:",
+  onReferenceClick,
+}: CitationLinksProps) {
   const [activeRef, setActiveRef] = useState<ResolvedReference | null>(null);
   const refs = parseCitation(citation);
 
@@ -166,7 +158,7 @@ export default function CitationLinks({ citation, label = "📖 Reference:", onR
           <button
             key={`${ref.label}-${i}`}
             onClick={() => {
-              const normalizedRef = normalizeBrokenReference(ref);
+              const normalizedRef = ref;
               onReferenceClick?.(normalizedRef);
 
               const isEmbeddableLocalPdf =

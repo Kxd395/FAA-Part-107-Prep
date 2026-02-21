@@ -35,6 +35,7 @@ DerivedData/
 
 # Large PDFs served locally (not for git/Vercel)
 apps/web/public/pdfs/
+source-materials/
 
 # OS
 Thumbs.db

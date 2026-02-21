@@ -37,7 +37,7 @@ const FEATURES = [
     title: "Smart Review",
     description:
       "AI detects your weak spots and auto-generates quizzes targeting what you need to practice most.",
-    href: "/study?focus=weak",
+    href: "/study?type=weak_spots",
     color: "from-amber-500/20 to-amber-600/5",
   },
 ];
@@ -56,23 +56,13 @@ const QUESTION_TYPE_OPTIONS: Array<{
 }> = [
   {
     value: "real_exam",
-    title: "Exclude ACS Code-Matching (Recommended)",
-    description: "Removes the ACS code-matching questions you said you do not want.",
-  },
-  {
-    value: "acs_mastery",
-    title: "ACS Mastery",
-    description: "Focus on ACS code mapping and memorization.",
-  },
-  {
-    value: "mixed",
-    title: "Mixed",
-    description: "Combination of exam-style and ACS mastery.",
+    title: "Real Exam MCQ (Recommended)",
+    description: "Keeps standard FAA-style multiple-choice prompts and excludes ACS code-mapping drills.",
   },
   {
     value: "weak_spots",
     title: "Weak Spots Only",
-    description: "Targets questions you miss most often.",
+    description: "Targets realistic MCQs you miss most often.",
   },
 ];
 
@@ -136,6 +126,9 @@ export default function HomePage() {
           </p>
           <p className="text-xs text-[var(--muted)]/80">
             Selected: <span className="text-brand-400">{QUESTION_TYPE_PROFILE_LABELS[practiceType]}</span>
+          </p>
+          <p className="text-xs text-[var(--muted)]/80">
+            UAG format is 60 questions, 2.0 hours, 70% passing. ACS codes appear on AKTR after testing to identify deficient areas.
           </p>
         </div>
       </section>

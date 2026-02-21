@@ -28,6 +28,7 @@ Copy the JSON files from `packages/content/questions/` into the Xcode project as
 - `airspace.json`
 - `weather.json`
 - `operations.json`
+- `loading_performance.json`
 
 Make sure "Add to Target: Part107Prep" is checked.
 

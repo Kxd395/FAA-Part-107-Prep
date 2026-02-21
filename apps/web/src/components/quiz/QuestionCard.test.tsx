@@ -1,7 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { afterEach } from "vitest";
 import { describe, expect, it, vi } from "vitest";
 import QuestionCard from "./QuestionCard";
+
+afterEach(() => cleanup());
 
 const baseQuestion = {
   id: "Q-1",
@@ -27,14 +30,14 @@ describe("QuestionCard", () => {
     const onOpenFigure = vi.fn();
     const user = userEvent.setup();
 
-    render(
+    const { getByRole } = render(
       <QuestionCard
         question={{ ...baseQuestion, image_ref: "/figures/figure-20.png" }}
         onOpenFigure={onOpenFigure}
       />
     );
 
-    await user.click(screen.getByRole("button"));
+    await user.click(getByRole("button"));
 
     expect(onOpenFigure).toHaveBeenCalledTimes(1);
     expect(onOpenFigure).toHaveBeenCalledWith(
@@ -46,13 +49,53 @@ describe("QuestionCard", () => {
   });
 
   it("renders text-based figure block when figure_text is present", () => {
-    render(
+    const { getByText } = render(
       <QuestionCard
-        question={{ ...baseQuestion, figure_reference: "figure-12", figure_text: "KMDW 121853Z ..." }}
+        question={{ ...baseQuestion, figure_reference: null, image_ref: undefined, figure_text: "KMDW 121853Z ..." }}
         onOpenFigure={vi.fn()}
       />
     );
 
-    expect(screen.getByText("KMDW 121853Z ...")).toBeInTheDocument();
+    expect(getByText("KMDW 121853Z ...")).toBeInTheDocument();
+  });
+
+  it("falls back to figure_reference image path when image_ref is missing", async () => {
+    const onOpenFigure = vi.fn();
+    const user = userEvent.setup();
+
+    const { getByRole } = render(
+      <QuestionCard
+        question={{ ...baseQuestion, image_ref: undefined, figure_reference: "figure-20", figure_text: undefined }}
+        onOpenFigure={onOpenFigure}
+      />
+    );
+
+    await user.click(getByRole("button"));
+    expect(onOpenFigure).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: "image",
+        url: "/figures/figure-20.png",
+      })
+    );
+  });
+
+  it("ignores blank image_ref values and uses figure_reference fallback", async () => {
+    const onOpenFigure = vi.fn();
+    const user = userEvent.setup();
+
+    const { getByRole } = render(
+      <QuestionCard
+        question={{ ...baseQuestion, image_ref: "   ", figure_reference: "figure-20", figure_text: undefined }}
+        onOpenFigure={onOpenFigure}
+      />
+    );
+
+    await user.click(getByRole("button"));
+    expect(onOpenFigure).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: "image",
+        url: "/figures/figure-20.png",
+      })
+    );
   });
 });

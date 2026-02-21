@@ -18,9 +18,9 @@ struct Question: Codable, Identifiable {
     let explanationDistractors: [String: String]
     let citation: String
     let difficultyLevel: Int
-    let acsCode: String
+    let acsCode: String?
     let tags: [String]
-    let yearUpdated: Int
+    let yearUpdated: Int?
     
     enum CodingKeys: String, CodingKey {
         case id, category, subcategory, options, citation, tags

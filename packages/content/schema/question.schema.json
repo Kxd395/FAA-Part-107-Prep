@@ -19,8 +19,8 @@
   "properties": {
     "id": {
       "type": "string",
-      "description": "Unique question ID. Format: CATEGORY-NNN (e.g., REG-001, AIR-015, WX-042)",
-      "pattern": "^[A-Z]{2,4}-\\d{3}$"
+      "description": "Unique question ID. Format: PREFIX-NNN or PREFIX-ACS-NNN (e.g., REG-001, AIR-015, WX-042, REG-ACS-101)",
+      "pattern": "^[A-Z]{2,6}(?:-ACS)?-\\d{3}$"
     },
     "category": {
       "type": "string",

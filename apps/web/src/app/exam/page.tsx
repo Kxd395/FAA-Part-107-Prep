@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import {
+  FULL_EXAM_QUESTION_COUNT,
+  REAL_EXAM_BLUEPRINT_TARGETS,
   QUESTION_TYPE_PROFILE_LABELS,
   formatClockTime,
   normalizeQuestionTypeProfile,
@@ -22,6 +24,15 @@ import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { extractCitationText, mergeCitations } from "../../lib/citationContext";
 
 const PASSING_PERCENT = 70;
+const SUPPORTED_QUESTION_TYPES: readonly QuestionTypeProfile[] = ["real_exam", "weak_spots"];
+
+function normalizeSelectableQuestionTypeProfile(
+  input: string | null | undefined
+): QuestionTypeProfile | null {
+  const normalized = normalizeQuestionTypeProfile(input);
+  if (!normalized) return null;
+  return SUPPORTED_QUESTION_TYPES.includes(normalized) ? normalized : null;
+}
 
 const QUESTION_TYPE_OPTIONS: Array<{
   value: QuestionTypeProfile;
@@ -30,23 +41,13 @@ const QUESTION_TYPE_OPTIONS: Array<{
 }> = [
   {
     value: "real_exam",
-    title: "Exclude ACS Code-Matching (Recommended)",
-    description: "Uses realistic exam-style prompts and excludes ACS code-matching questions.",
-  },
-  {
-    value: "acs_mastery",
-    title: "ACS Mastery",
-    description: "Focuses on ACS knowledge-code mapping and code recall.",
-  },
-  {
-    value: "mixed",
-    title: "Mixed",
-    description: "Uses the full pool: exam-style + ACS mastery prompts.",
+    title: "Real Exam MCQ (Recommended)",
+    description: "Standard FAA-style multiple-choice prompts only. Excludes ACS code-mapping drills.",
   },
   {
     value: "weak_spots",
     title: "Weak Spots Only",
-    description: "Pulls from questions you are missing or have not mastered.",
+    description: "Prioritizes realistic MCQs you have not mastered yet.",
   },
 ];
 
@@ -68,7 +69,9 @@ function ExamPageClient() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const questionTypeParam = searchParams.get("type");
-  const parsedQuestionType = normalizeQuestionTypeProfile(questionTypeParam) ?? "real_exam";
+  const invalidQuestionTypeParam =
+    !!questionTypeParam && !normalizeSelectableQuestionTypeProfile(questionTypeParam);
+  const parsedQuestionType = normalizeSelectableQuestionTypeProfile(questionTypeParam) ?? "real_exam";
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
   );
@@ -94,7 +97,7 @@ function ExamPageClient() {
   const lastReviewLoggedStartRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const nextType = normalizeQuestionTypeProfile(questionTypeParam);
+    const nextType = normalizeSelectableQuestionTypeProfile(questionTypeParam);
     if (!nextType) return;
     setSelectedQuestionType(nextType);
   }, [questionTypeParam]);
@@ -224,6 +227,10 @@ function ExamPageClient() {
     const preview = exam.getSetupPreview(categoryParam, selectedQuestionType);
     const timeDisplay =
       preview.category === "All" ? "2 Hours" : `${Math.round(preview.timeLimitMs / 60000)} min`;
+    const fullRealExamShortfall =
+      preview.category === "All" && preview.questionTypeProfile === "real_exam"
+        ? Math.max(0, FULL_EXAM_QUESTION_COUNT - preview.questionCount)
+        : 0;
 
     return (
       <div className="mx-auto max-w-lg space-y-8 pt-8">
@@ -245,9 +252,10 @@ function ExamPageClient() {
           </div>
         )}
 
-        {preview.invalidQuestionType && (
+        {invalidQuestionTypeParam && (
           <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
-            Unknown question type &quot;{questionTypeParam}&quot;. Falling back to Exclude ACS Code-Matching.
+            Question type &quot;{questionTypeParam}&quot; is not available in realistic mode. Falling
+            back to Real Exam MCQ.
           </div>
         )}
 
@@ -279,9 +287,17 @@ function ExamPageClient() {
             ))}
           </div>
           <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
-            Note: Exclude ACS Code-Matching removes the code-recall style prompts you flagged and keeps practical FAA-style questions.
+            Real UAG format is multiple-choice only. ACS/learning codes are shown on your AKTR after testing for remediation, not as a live question format.
           </div>
         </div>
+
+        {fullRealExamShortfall > 0 && (
+          <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+            Real UAG target is {FULL_EXAM_QUESTION_COUNT} questions in 2.0 hours (70% pass). This
+            current Real Exam MCQ pool has {preview.questionCount} questions, so this run is short by{" "}
+            {fullRealExamShortfall}.
+          </div>
+        )}
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6 space-y-4">
           <div className="flex justify-between text-sm">
@@ -305,6 +321,24 @@ function ExamPageClient() {
             <span className="font-medium text-white">{QUESTION_TYPE_PROFILE_LABELS[preview.questionTypeProfile]}</span>
           </div>
         </div>
+
+        {preview.category === "All" && preview.questionTypeProfile === "real_exam" && (
+          <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
+            <div className="font-semibold text-white">Real Exam Blueprint (60Q target)</div>
+            <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">
+              <span>Regulations (15-25%)</span>
+              <span className="text-right">{REAL_EXAM_BLUEPRINT_TARGETS.Regulations}</span>
+              <span>Airspace (15-25%)</span>
+              <span className="text-right">{REAL_EXAM_BLUEPRINT_TARGETS.Airspace}</span>
+              <span>Weather (10-20%)</span>
+              <span className="text-right">{REAL_EXAM_BLUEPRINT_TARGETS.Weather}</span>
+              <span>Loading &amp; Performance (~10%)</span>
+              <span className="text-right">{REAL_EXAM_BLUEPRINT_TARGETS["Loading & Performance"]}</span>
+              <span>Operations (35-45%)</span>
+              <span className="text-right">{REAL_EXAM_BLUEPRINT_TARGETS.Operations}</span>
+            </div>
+          </div>
+        )}
 
         <button
           onClick={() => exam.startExam(preview.category, selectedQuestionType)}

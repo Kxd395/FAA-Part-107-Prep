@@ -6,6 +6,7 @@ import { useProgress, SessionRecord } from "../../hooks/useProgress";
 import { defaultAdaptiveStatsStore } from "../../lib/adaptiveStatsStore";
 import { computeAdaptiveInsights } from "../../lib/adaptiveInsights";
 import { defaultAttemptEventStore } from "../../lib/attemptEventStore";
+import { defaultLearningEventStore } from "../../lib/learningEventStore";
 
 const LOCAL_USER_ID = "local-user";
 
@@ -111,6 +112,9 @@ export default function ProgressPage() {
               <button
                 onClick={() => {
                   clearAll();
+                  defaultAdaptiveStatsStore.clear(LOCAL_USER_ID);
+                  defaultAttemptEventStore.clear(LOCAL_USER_ID);
+                  defaultLearningEventStore.clear(LOCAL_USER_ID);
                   setShowConfirmClear(false);
                 }}
                 className="rounded-lg bg-incorrect/20 px-3 py-1.5 text-xs font-semibold text-incorrect hover:bg-incorrect/30"

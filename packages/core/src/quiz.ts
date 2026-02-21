@@ -15,6 +15,22 @@ export type StudyCategory = (typeof STUDY_CATEGORIES)[number];
 export const FULL_EXAM_QUESTION_COUNT = 60;
 export const FULL_EXAM_TIME_LIMIT_MS = 2 * 60 * 60 * 1000;
 
+export const REAL_EXAM_BLUEPRINT_TARGETS = {
+  Regulations: 11,
+  Airspace: 11,
+  Weather: 9,
+  "Loading & Performance": 6,
+  Operations: 23,
+} as const;
+
+const REAL_EXAM_BLUEPRINT_CATEGORIES = [
+  "Regulations",
+  "Airspace",
+  "Weather",
+  "Loading & Performance",
+  "Operations",
+] as const;
+
 export function shuffleQuestions<T>(questions: readonly T[]): T[] {
   const copy = [...questions];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -83,5 +99,48 @@ export function buildExamQuestionSet(
     category,
     questions,
     timeLimitMs: buildTimeLimitMs(questions.length, category),
+  };
+}
+
+export function buildRealExamBlueprintQuestionSet<T extends Question = Question>(
+  allQuestions: readonly T[],
+  fullExamQuestionCount: number = FULL_EXAM_QUESTION_COUNT
+): {
+  questions: T[];
+  targetCounts: Record<(typeof REAL_EXAM_BLUEPRINT_CATEGORIES)[number], number>;
+} {
+  const grouped = new Map<string, T[]>();
+  for (const question of allQuestions) {
+    if (!grouped.has(question.category)) grouped.set(question.category, []);
+    grouped.get(question.category)!.push(question);
+  }
+
+  for (const [category, questions] of grouped) {
+    grouped.set(category, shuffleQuestions(questions));
+  }
+
+  const selected: T[] = [];
+  const selectedIds = new Set<string>();
+
+  for (const category of REAL_EXAM_BLUEPRINT_CATEGORIES) {
+    const target = REAL_EXAM_BLUEPRINT_TARGETS[category];
+    const pool = grouped.get(category) ?? [];
+    const taken = pool.slice(0, Math.min(target, pool.length));
+    for (const question of taken) {
+      selected.push(question);
+      selectedIds.add(question.id);
+    }
+  }
+
+  if (selected.length < fullExamQuestionCount) {
+    const remaining = shuffleQuestions(
+      allQuestions.filter((question) => !selectedIds.has(question.id))
+    );
+    selected.push(...remaining.slice(0, fullExamQuestionCount - selected.length));
+  }
+
+  return {
+    questions: shuffleQuestions(selected.slice(0, fullExamQuestionCount)),
+    targetCounts: { ...REAL_EXAM_BLUEPRINT_TARGETS },
   };
 }

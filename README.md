@@ -226,16 +226,16 @@ This is separate from session-level progress history and can be swapped to a bac
 
 ## Question Bank
 
-Currently **20 questions** across 4 categories as seed data.
-Use the content pipeline to scale to 300+ from the FAA PDFs.
+Current bank: **343 questions** across 5 active categories.
+The bank includes curated exam-style items and ACS mastery items.
 
 | Category | Count | Status |
 |----------|-------|--------|
-| Regulations | 5 | ✅ Seed |
-| Airspace | 5 | ✅ Seed |
-| Weather | 5 | ✅ Seed |
-| Operations | 5 | ✅ Seed |
-| Loading & Performance | — | 🔲 Generate |
+| Regulations | 147 | ✅ Active |
+| Airspace | 51 | ✅ Active |
+| Weather | 34 | ✅ Active |
+| Operations | 99 | ✅ Active |
+| Loading & Performance | 12 | ✅ Active |
 | Emergency Procedures | — | 🔲 Generate |
 | CRM | — | 🔲 Generate |
 | Radio Comms | — | 🔲 Generate |
@@ -243,6 +243,20 @@ Use the content pipeline to scale to 300+ from the FAA PDFs.
 | Maintenance | — | 🔲 Generate |
 | Physiology | — | 🔲 Generate |
 | Remote ID | — | 🔲 Generate |
+
+## UAG Test Format Notes
+
+The real FAA Part 107 UAG test is MCQ-only. Per FAA testing references:
+
+- UAG is **60 questions**, **2.0 hours**, **70 passing score**.
+- ACS codes are printed on the **AKTR** for missed-item remediation.
+- The ACS/learning-code matching workflow is a **post-test review step**, not a live test question type.
+
+Local extracted references used for these facts:
+
+- `source-materials/PDFtoMD/out_to_ocr/markdown/testing-matrix.md`
+- `source-materials/PDFtoMD/out_to_ocr/markdown/learningstatementreferenceguide.md`
+- `source-materials/PDFtoMD/out_to_ocr/markdown/uas-testing-information.md`
 
 ## Monetization (Freemium)
 

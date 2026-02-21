@@ -1,22 +1,19 @@
 #!/usr/bin/env python3
 """
-Integrate 352 ACS mastery questions from the separate PDFtoMD project
-into our app's question bank format.
-
-Merges with existing 51 questions (46 UAG + 5 SPA) that already have
-verified answers and figure data.
+Integrate ACS mastery questions from a combined PDFtoMD bank
+into this repo's app question-bank format.
 """
 
+import argparse
 import json
-import os
 import re
-from collections import Counter
+from pathlib import Path
 
-# Paths
-COMBINED_BANK = "/Volumes/Developer/test/PDFtoMD/out/question_bank_part107_combined.json"
-QUESTIONS_DIR = "/Volumes/Developer/projects/experiments/FAA_107_Study_Guide/packages/content/questions"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_COMBINED_BANK = REPO_ROOT / "source-materials" / "PDFtoMD" / "out" / "question_bank_part107_combined.json"
+DEFAULT_QUESTIONS_DIR = REPO_ROOT / "packages" / "content" / "questions"
 
-# Category mapping from ACS area names to our app categories
+# Category mapping from ACS area names to app categories
 AREA_TO_CATEGORY = {
     "I. Regulations": "Regulations",
     "II. Airspace Classification and Operating Requirements": "Airspace",
@@ -43,207 +40,212 @@ CATEGORY_TO_PREFIX = {
     "Operations": "OPS",
 }
 
-# Task name extraction: "Task A. General" → "General"
-def extract_subcategory(task_str):
+
+def extract_subcategory(task_str: str | None) -> str:
+    """Task A. General -> General"""
     if not task_str:
         return "General"
-    match = re.match(r'Task\s+[A-Z]\.\s*(.*)', task_str)
+    match = re.match(r"Task\s+[A-Z]\.\s*(.*)", task_str)
     return match.group(1) if match else task_str
 
-# Difficulty heuristic based on number of choices and question complexity
-def estimate_difficulty(q):
-    n_choices = len(q.get("choices", []))
-    text_len = len(q.get("question", ""))
+
+def estimate_difficulty(question: dict) -> int:
+    """Simple heuristic for seeded ACS imports."""
+    n_choices = len(question.get("choices", []))
+    text_len = len(question.get("question", ""))
     if n_choices >= 4 and text_len > 150:
-        return 3  # hard
-    elif n_choices >= 4 or text_len > 100:
-        return 2  # medium
-    return 1  # easy
+        return 3
+    if n_choices >= 4 or text_len > 100:
+        return 2
+    return 1
 
-# Build citation from ACS code and source_refs
-def build_citation(q):
-    parts = []
-    acs = q.get("acs_code")
-    if acs:
-        parts.append(f"ACS {acs}")
-    # Don't include local file paths from source_refs
-    return "; ".join(parts) if parts else None
 
-# Build tags from ACS code components
-def build_tags(q, category):
+def build_citation(question: dict) -> str | None:
+    acs_code = question.get("acs_code")
+    if acs_code:
+        return f"ACS {acs_code}"
+    return None
+
+
+def build_tags(question: dict, category: str) -> list[str]:
     tags = ["acs-mastery", "part-107"]
-    acs = q.get("acs_code", "")
-    if acs:
-        tags.append(acs.lower().replace(".", "-"))
-    # Add category-specific tags
-    cat_tags = {
+    acs_code = question.get("acs_code", "")
+    if acs_code:
+        tags.append(acs_code.lower().replace(".", "-"))
+
+    category_tags = {
         "Regulations": ["regulations", "14-cfr-107"],
         "Airspace": ["airspace", "operating-requirements"],
         "Weather": ["weather", "meteorology"],
         "Loading & Performance": ["loading", "performance", "weight-balance"],
         "Operations": ["operations", "procedures"],
     }
-    tags.extend(cat_tags.get(category, []))
-    return list(set(tags))  # deduplicate
+    tags.extend(category_tags.get(category, []))
+    return sorted(set(tags))
 
 
-def transform_acs_question(q, category, seq_num):
-    """Transform an ACS question to our app format."""
+def transform_acs_question(question: dict, category: str, seq_num: int) -> dict:
     prefix = CATEGORY_TO_PREFIX[category]
-    
-    # Convert choices to our option format
-    options = []
-    for choice in q.get("choices", []):
-        options.append({
-            "id": choice["label"],
-            "text": choice["text"]
-        })
-    
-    # Determine correct answer
-    correct_idx = q.get("correct_choice_index")
-    choices = q.get("choices", [])
-    if correct_idx is not None and correct_idx < len(choices):
+    choices = question.get("choices", [])
+
+    options = [{"id": choice["label"], "text": choice["text"]} for choice in choices]
+
+    correct_idx = question.get("correct_choice_index")
+    if isinstance(correct_idx, int) and 0 <= correct_idx < len(choices):
         correct_option_id = choices[correct_idx]["label"]
     else:
-        correct_option_id = "A"  # fallback
-    
-    # Build distractor explanations
-    explanation_distractors = {}
-    for choice in choices:
-        if choice["label"] != correct_option_id:
-            explanation_distractors[choice["label"]] = f"This is incorrect. {q.get('explanation', '')}"
-    
+        correct_option_id = "A"
+
+    explanation = question.get("explanation", "")
+    explanation_distractors = {
+        choice["label"]: f"This is incorrect. {explanation}"
+        for choice in choices
+        if choice.get("label") != correct_option_id
+    }
+
     return {
         "id": f"{prefix}-ACS-{seq_num:03d}",
         "category": category,
-        "subcategory": extract_subcategory(q.get("task")),
-        "question_text": q.get("question", ""),
+        "subcategory": extract_subcategory(question.get("task")),
+        "question_text": question.get("question", ""),
         "figure_reference": None,
         "options": options,
         "correct_option_id": correct_option_id,
-        "explanation_correct": q.get("explanation", ""),
+        "explanation_correct": explanation,
         "explanation_distractors": explanation_distractors,
-        "citation": build_citation(q),
-        "difficulty_level": estimate_difficulty(q),
-        "tags": build_tags(q, category),
-        "acs_code": q.get("acs_code"),
-        "source": f"ACS Mastery ({q.get('acs_code', 'unknown')})",
-        "source_type": "acs_generated"
+        "citation": build_citation(question),
+        "difficulty_level": estimate_difficulty(question),
+        "tags": build_tags(question, category),
+        "acs_code": question.get("acs_code"),
+        "source": f"ACS Mastery ({question.get('acs_code', 'unknown')})",
+        "source_type": "acs_generated",
     }
 
 
-def main():
-    # Load the combined bank
-    print(f"Loading combined bank from: {COMBINED_BANK}")
-    with open(COMBINED_BANK, 'r') as f:
-        bank = json.load(f)
-    
-    all_questions = bank["questions"]
+def load_combined_questions(path: Path) -> list[dict]:
+    with path.open("r", encoding="utf-8") as handle:
+        payload = json.load(handle)
+
+    if isinstance(payload, dict) and isinstance(payload.get("questions"), list):
+        return payload["questions"]
+    if isinstance(payload, list):
+        return payload
+
+    raise ValueError("Combined bank must be a list or an object with questions[].")
+
+
+def highest_sequence(questions: list[dict]) -> int:
+    max_seq = 0
+    for question in questions:
+        match = re.search(r"(?:-ACS)?-(\d+)$", question.get("id", ""))
+        if match:
+            max_seq = max(max_seq, int(match.group(1)))
+    return max_seq
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Integrate ACS questions into local category files")
+    parser.add_argument(
+        "--combined-bank",
+        default=str(DEFAULT_COMBINED_BANK),
+        help="Path to combined question bank JSON",
+    )
+    parser.add_argument(
+        "--questions-dir",
+        default=str(DEFAULT_QUESTIONS_DIR),
+        help="Path to packages/content/questions directory",
+    )
+    parser.add_argument("--dry-run", action="store_true", help="Print plan without writing files")
+    args = parser.parse_args()
+
+    combined_bank = Path(args.combined_bank).expanduser().resolve()
+    questions_dir = Path(args.questions_dir).expanduser().resolve()
+
+    if not combined_bank.exists():
+        raise SystemExit(f"Combined bank not found: {combined_bank}")
+    if not questions_dir.exists():
+        raise SystemExit(f"Questions directory not found: {questions_dir}")
+
+    print(f"Loading combined bank from: {combined_bank}")
+    all_questions = load_combined_questions(combined_bank)
     print(f"Total questions in bank: {len(all_questions)}")
-    
-    # Separate ACS vs UAG
+
     acs_questions = [q for q in all_questions if q.get("id", "").startswith("acs")]
     uag_questions = [q for q in all_questions if q.get("id", "").startswith("uag")]
     print(f"ACS questions: {len(acs_questions)}")
-    print(f"UAG questions: {len(uag_questions)} (skipping - we already have these with verified answers)")
-    
-    # Load existing questions per category
-    existing = {}
+    print(f"UAG questions: {len(uag_questions)} (skipping - already curated in app bank)")
+
+    existing_by_category: dict[str, list[dict]] = {}
     for category, filename in CATEGORY_TO_FILE.items():
-        filepath = os.path.join(QUESTIONS_DIR, filename)
-        if os.path.exists(filepath):
-            with open(filepath, 'r') as f:
-                existing[category] = json.load(f)
-            print(f"Existing {category}: {len(existing[category])} questions")
+        filepath = questions_dir / filename
+        if filepath.exists():
+            with filepath.open("r", encoding="utf-8") as handle:
+                existing_by_category[category] = json.load(handle)
         else:
-            existing[category] = []
-            print(f"Existing {category}: 0 questions (file not found)")
-    
-    # Track existing ACS codes to avoid duplicates
-    existing_acs_codes = set()
-    for cat_qs in existing.values():
-        for q in cat_qs:
-            if q.get("acs_code"):
-                existing_acs_codes.add(q["acs_code"])
+            existing_by_category[category] = []
+        print(f"Existing {category}: {len(existing_by_category[category])} questions")
+
+    existing_acs_codes = {
+        question["acs_code"]
+        for questions in existing_by_category.values()
+        for question in questions
+        if question.get("acs_code")
+    }
     print(f"\nExisting ACS codes already in bank: {len(existing_acs_codes)}")
-    
-    # Group ACS questions by category
-    acs_by_category = {}
+
+    acs_by_category: dict[str, list[dict]] = {}
     skipped = 0
-    for q in acs_questions:
-        area = q.get("area", "")
+    for question in acs_questions:
+        area = question.get("area", "")
         category = AREA_TO_CATEGORY.get(area)
         if not category:
-            print(f"  WARNING: Unknown area '{area}' for {q['id']}")
+            print(f"  WARNING: Unknown area '{area}' for {question.get('id', '<missing-id>')}")
             skipped += 1
             continue
-        
-        # Skip if ACS code already exists in our bank
-        if q.get("acs_code") in existing_acs_codes:
+
+        acs_code = question.get("acs_code")
+        if acs_code in existing_acs_codes:
             skipped += 1
             continue
-        
-        if category not in acs_by_category:
-            acs_by_category[category] = []
-        acs_by_category[category].append(q)
-    
+
+        acs_by_category.setdefault(category, []).append(question)
+
     print(f"Skipped (duplicates or unknown area): {skipped}")
-    
-    # Transform and merge
-    new_counts = {}
+
+    new_counts: dict[str, int] = {}
     for category, filename in CATEGORY_TO_FILE.items():
-        filepath = os.path.join(QUESTIONS_DIR, filename)
-        current = existing.get(category, [])
-        
-        # Find the highest existing sequence number
-        max_seq = 0
-        for q in current:
-            match = re.search(r'-(\d+)$', q.get("id", ""))
-            if match:
-                max_seq = max(max_seq, int(match.group(1)))
-        
-        # Also check for ACS-NNN pattern
-        for q in current:
-            match = re.search(r'ACS-(\d+)$', q.get("id", ""))
-            if match:
-                max_seq = max(max_seq, int(match.group(1)))
-        
-        # Transform new ACS questions
-        acs_for_cat = acs_by_category.get(category, [])
-        new_questions = []
-        for i, q in enumerate(acs_for_cat, start=1):
-            transformed = transform_acs_question(q, category, max_seq + i)
-            new_questions.append(transformed)
-        
-        # Merge: existing first, then new ACS
-        merged = current + new_questions
-        new_counts[category] = len(new_questions)
-        
-        # Write back
-        with open(filepath, 'w') as f:
-            json.dump(merged, f, indent=2, ensure_ascii=False)
-        
+        filepath = questions_dir / filename
+        current = existing_by_category.get(category, [])
+        max_seq = highest_sequence(current)
+
+        transformed = [
+            transform_acs_question(question, category, max_seq + i)
+            for i, question in enumerate(acs_by_category.get(category, []), start=1)
+        ]
+
+        merged = current + transformed
+        new_counts[category] = len(transformed)
+
         print(f"\n{category}:")
         print(f"  Existing: {len(current)}")
-        print(f"  New ACS:  {len(new_questions)}")
+        print(f"  New ACS:  {len(transformed)}")
         print(f"  Total:    {len(merged)}")
-    
-    # Summary
-    total_existing = sum(len(existing.get(c, [])) for c in CATEGORY_TO_FILE.keys())
+
+        if not args.dry_run:
+            with filepath.open("w", encoding="utf-8") as handle:
+                json.dump(merged, handle, indent=2, ensure_ascii=False)
+
+    total_existing = sum(len(existing_by_category.get(category, [])) for category in CATEGORY_TO_FILE)
     total_new = sum(new_counts.values())
-    total = total_existing + total_new
-    print(f"\n{'='*50}")
-    print(f"INTEGRATION COMPLETE")
-    print(f"{'='*50}")
+
+    print(f"\n{'=' * 50}")
+    print("INTEGRATION COMPLETE")
+    print(f"{'=' * 50}")
     print(f"Previous total: {total_existing}")
     print(f"New ACS added:  {total_new}")
-    print(f"Grand total:    {total}")
-    print(f"\nBreakdown:")
-    for category, filename in CATEGORY_TO_FILE.items():
-        filepath = os.path.join(QUESTIONS_DIR, filename)
-        with open(filepath, 'r') as f:
-            count = len(json.load(f))
-        print(f"  {category}: {count}")
+    print(f"Grand total:    {total_existing + total_new}")
+    if args.dry_run:
+        print("(dry-run: no files were written)")
 
 
 if __name__ == "__main__":
