@@ -55,6 +55,15 @@ export default function RootLayout({
               <Link href="/exam" className="hover:text-white transition-colors">
                 Exam
               </Link>
+              <Link href="/flashcards" className="hover:text-white transition-colors">
+                Flashcards
+              </Link>
+              <Link href="/learn" className="hover:text-white transition-colors">
+                Learn
+              </Link>
+              <Link href="/missed" className="hover:text-white transition-colors">
+                Missed
+              </Link>
               <Link href="/progress" className="hover:text-white transition-colors">
                 Progress
               </Link>

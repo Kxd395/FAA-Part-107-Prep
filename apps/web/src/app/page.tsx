@@ -25,6 +25,30 @@ const FEATURES = [
     color: "from-purple-500/20 to-purple-600/5",
   },
   {
+    icon: "🃏",
+    title: "Flashcards",
+    description:
+      "Flip cards with spaced repetition. Rate each card Know It or Still Learning — the algorithm resurfaces what you need.",
+    href: "/flashcards",
+    color: "from-pink-500/20 to-pink-600/5",
+  },
+  {
+    icon: "🧠",
+    title: "Learn Mode",
+    description:
+      "Read the correct answer and explanation first, then get quizzed on the same batch. Teach-first, test-second.",
+    href: "/learn",
+    color: "from-teal-500/20 to-teal-600/5",
+  },
+  {
+    icon: "❌",
+    title: "Missed Questions",
+    description:
+      "Review every question you've gotten wrong across all sessions. Sorted by frequency — fix your weak spots.",
+    href: "/missed",
+    color: "from-red-500/20 to-red-600/5",
+  },
+  {
     icon: "🗺️",
     title: "Sectional Charts",
     description:
@@ -33,7 +57,7 @@ const FEATURES = [
     color: "from-emerald-500/20 to-emerald-600/5",
   },
   {
-    icon: "🧠",
+    icon: "📊",
     title: "Smart Review",
     description:
       "AI detects your weak spots and auto-generates quizzes targeting what you need to practice most.",
