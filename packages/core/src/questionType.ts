@@ -6,6 +6,9 @@ export const QUESTION_TYPE_PROFILES = [
   "acs_mastery",
   "mixed",
   "weak_spots",
+  "confirmed_test",
+  "all_random",
+  "acs_practice",
 ] as const;
 
 export type QuestionTypeProfile = (typeof QUESTION_TYPE_PROFILES)[number];
@@ -15,7 +18,25 @@ export const QUESTION_TYPE_PROFILE_LABELS: Record<QuestionTypeProfile, string> =
   acs_mastery: "ACS Code Mapping Drill",
   mixed: "Mixed",
   weak_spots: "Weak Spots Only",
+  confirmed_test: "Confirmed Test Questions",
+  all_random: "All Questions (Random)",
+  acs_practice: "ACS Practice Only",
 };
+
+// ---------------------------------------------------------------------------
+// Source-based helpers
+// ---------------------------------------------------------------------------
+const CONFIRMED_SOURCE_PREFIXES = ["review.md", "uag", "spa"];
+
+/**
+ * Returns `true` when a question's `source` field indicates it came from a
+ * confirmed real-test origin (Review.md, UAG, or SPA question banks).
+ */
+export function isConfirmedTestQuestion(question: Question): boolean {
+  const src = (question.source ?? "").trim().toLowerCase();
+  if (!src) return false;
+  return CONFIRMED_SOURCE_PREFIXES.some((prefix) => src.startsWith(prefix));
+}
 
 export function normalizeQuestionTypeProfile(input: string | null | undefined): QuestionTypeProfile | null {
   if (!input) return null;
@@ -51,6 +72,18 @@ export function filterQuestionsByType<Q extends Question = Question>(
 ): Q[] {
   if (profile === "mixed") {
     return [...questions];
+  }
+
+  if (profile === "all_random") {
+    return [...questions];
+  }
+
+  if (profile === "confirmed_test") {
+    return questions.filter((question) => isConfirmedTestQuestion(question));
+  }
+
+  if (profile === "acs_practice") {
+    return questions.filter((question) => !isConfirmedTestQuestion(question));
   }
 
   if (profile === "real_exam") {

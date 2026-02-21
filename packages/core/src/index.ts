@@ -88,6 +88,7 @@ export {
   QUESTION_TYPE_PROFILE_LABELS,
   normalizeQuestionTypeProfile,
   isAcsCodeMatchingQuestion,
+  isConfirmedTestQuestion,
   filterQuestionsByType,
 } from "./questionType";
 

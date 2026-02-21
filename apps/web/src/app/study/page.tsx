@@ -23,7 +23,13 @@ import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { extractCitationText, mergeCitations } from "../../lib/citationContext";
 import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
 
-const SUPPORTED_QUESTION_TYPES: readonly QuestionTypeProfile[] = ["real_exam", "weak_spots"];
+const SUPPORTED_QUESTION_TYPES: readonly QuestionTypeProfile[] = [
+  "confirmed_test",
+  "all_random",
+  "acs_practice",
+  "real_exam",
+  "weak_spots",
+];
 
 function normalizeSelectableQuestionTypeProfile(
   input: string | null | undefined
@@ -39,13 +45,31 @@ const QUESTION_TYPE_OPTIONS: Array<{
   description: string;
 }> = [
   {
+    value: "confirmed_test",
+    title: "✅ Confirmed Test Questions",
+    description:
+      "Only questions verified from the real FAA exam — Review.md, UAG, and SPA banks (70 questions).",
+  },
+  {
+    value: "all_random",
+    title: "🎲 All Questions (Random)",
+    description:
+      "Study from all 362 questions — confirmed test material plus ACS practice drills.",
+  },
+  {
+    value: "acs_practice",
+    title: "📚 ACS Practice Only",
+    description:
+      "Only ACS-generated mastery drills. Excludes confirmed real-test questions.",
+  },
+  {
     value: "real_exam",
-    title: "Real Exam MCQ (Recommended)",
-    description: "Shows FAA-style multiple-choice prompts and excludes ACS code-mapping drills.",
+    title: "Real Exam MCQ (Legacy)",
+    description: "Shows FAA-style MCQs and excludes ACS code-mapping drill format questions.",
   },
   {
     value: "weak_spots",
-    title: "Weak Spots Only",
+    title: "🔥 Weak Spots Only",
     description: "Prioritizes realistic MCQs you still struggle with.",
   },
 ];
@@ -74,7 +98,7 @@ function StudyPageClient() {
   const weakFocusRequested = focusParam?.trim().toLowerCase() === "weak";
   const parsedQuestionType =
     normalizeSelectableQuestionTypeProfile(questionTypeParam) ??
-    (weakFocusRequested ? "weak_spots" : "real_exam");
+    (weakFocusRequested ? "weak_spots" : "confirmed_test");
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
   );
