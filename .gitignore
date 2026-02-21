@@ -39,3 +39,6 @@ source-materials/
 
 # OS
 Thumbs.db
+source-materials/PDFtoMD/to_ocr/*.pdf
+source-materials/PDFtoMD/*.pdf
+source-materials/*.pdf
