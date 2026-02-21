@@ -35,6 +35,11 @@ function toPublicImageRef(rawPath: string): string {
   return trimmed;
 }
 
+function shouldSuppressImageRef(question: Question, imageRef: string | null): boolean {
+  if (!imageRef) return false;
+  return question.source_type === "acs_generated" && imageRef.startsWith("/images/uas-acsocr/");
+}
+
 export function extractImageRefFromText(text: string): string | null {
   const markdownMatch = text.match(IMAGE_MARKDOWN_PATTERN);
   if (markdownMatch?.[1]) {
@@ -60,16 +65,34 @@ export function sanitizeQuestionText(text: string): string {
 }
 
 export function sanitizeQuestion(question: Question): Question {
-  const candidateTexts = [question.question_text, ...question.options.map((option) => option.text)];
+  const candidateTexts = [
+    question.question_text,
+    question.explanation_correct,
+    ...question.options.map((option) => option.text),
+    ...Object.values(question.explanation_distractors ?? {}),
+  ];
   const extractedImageRef = candidateTexts.map(extractImageRefFromText).find(Boolean) ?? null;
+  const normalizedImageRef =
+    typeof question.image_ref === "string" && question.image_ref.trim()
+      ? toPublicImageRef(question.image_ref)
+      : null;
+  const imageRefCandidate = normalizedImageRef ?? extractedImageRef;
+  const imageRef = shouldSuppressImageRef(question, imageRefCandidate) ? null : imageRefCandidate;
 
   return {
     ...question,
-    image_ref: question.image_ref ?? extractedImageRef,
+    image_ref: imageRef,
     question_text: sanitizeQuestionText(question.question_text),
+    explanation_correct: sanitizeQuestionText(question.explanation_correct),
     options: question.options.map((option) => ({
       ...option,
       text: sanitizeQuestionText(option.text),
     })),
+    explanation_distractors: Object.fromEntries(
+      Object.entries(question.explanation_distractors ?? {}).map(([optionId, explanation]) => [
+        optionId,
+        sanitizeQuestionText(explanation),
+      ])
+    ),
   };
 }

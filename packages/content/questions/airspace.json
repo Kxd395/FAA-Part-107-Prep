@@ -301,7 +301,7 @@
     "acs_code": "UA.II.A.K1",
     "source": "ACS Mastery (UA.II.A.K1)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p015_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "AIR-ACS-009",
@@ -654,7 +654,7 @@
     "acs_code": "UA.II.A.K1e",
     "source": "ACS Mastery (UA.II.A.K1e)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p015_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "AIR-ACS-017",
@@ -725,11 +725,11 @@
       }
     ],
     "correct_option_id": "D",
-    "explanation_correct": "UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "B": "This is incorrect. UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS. ### Images ![Page 15 image](../images/uas-acsocr/p015_img01_5b91968bce71.png) - `image=p015_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS.",
+      "B": "This is incorrect. UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS.",
+      "C": "This is incorrect. UA.II.A.K4 corresponds to: Air Traffic Control (ATC) and the NAS."
     },
     "citation": "ACS UA.II.A.K4",
     "difficulty_level": 2,
@@ -743,7 +743,7 @@
     "acs_code": "UA.II.A.K4",
     "source": "ACS Mastery (UA.II.A.K4)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p015_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "AIR-ACS-019",
@@ -788,7 +788,7 @@
     "acs_code": "UA.II.A.K4",
     "source": "ACS Mastery (UA.II.A.K4)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p015_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "AIR-ACS-020",
@@ -1185,7 +1185,7 @@
     "acs_code": "UA.II.B.K4a",
     "source": "ACS Mastery (UA.II.B.K4a)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p016_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "AIR-ACS-029",
@@ -1362,7 +1362,7 @@
     "acs_code": "UA.II.B.K4c",
     "source": "ACS Mastery (UA.II.B.K4c)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p016_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "AIR-ACS-033",
@@ -1627,7 +1627,7 @@
     "acs_code": "UA.II.B.K4f",
     "source": "ACS Mastery (UA.II.B.K4f)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p016_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "AIR-ACS-039",
@@ -2138,11 +2138,11 @@
       }
     ],
     "correct_option_id": "A",
-    "explanation_correct": "UA.II.B.K10 corresponds to: sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.II.B.K10 corresponds to: sUAS lighting requirements.",
     "explanation_distractors": {
-      "B": "This is incorrect. UA.II.B.K10 corresponds to: sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.II.B.K10 corresponds to: sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "D": "This is incorrect. UA.II.B.K10 corresponds to: sUAS lighting requirements. ### Images ![Page 16 image](../images/uas-acsocr/p016_img01_5b91968bce71.png) - `image=p016_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "B": "This is incorrect. UA.II.B.K10 corresponds to: sUAS lighting requirements.",
+      "C": "This is incorrect. UA.II.B.K10 corresponds to: sUAS lighting requirements.",
+      "D": "This is incorrect. UA.II.B.K10 corresponds to: sUAS lighting requirements."
     },
     "citation": "ACS UA.II.B.K10",
     "difficulty_level": 2,
@@ -2156,7 +2156,7 @@
     "acs_code": "UA.II.B.K10",
     "source": "ACS Mastery (UA.II.B.K10)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p016_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "AIR-ACS-051",
@@ -2201,6 +2201,378 @@
     "acs_code": "UA.II.B.K10",
     "source": "ACS Mastery (UA.II.B.K10)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p016_img01_5b91968bce71.png"
+    "image_ref": null
+  },
+  {
+    "id": "AIR-052",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "Which class of airspace does NOT require authorization from Air Traffic Control for small UAS operations?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Class B"
+      },
+      {
+        "id": "B",
+        "text": "Class C"
+      },
+      {
+        "id": "C",
+        "text": "Class D"
+      },
+      {
+        "id": "D",
+        "text": "Class G"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "Class G airspace is uncontrolled airspace. No ATC authorization is required for small UAS operations in Class G airspace. All controlled airspace classes (B, C, D, and surface E) require prior ATC authorization via LAANC or a Part 107 waiver.",
+    "explanation_distractors": {
+      "A": "Class B requires ATC authorization under 14 CFR §107.41.",
+      "B": "Class C requires ATC authorization under 14 CFR §107.41.",
+      "C": "Class D requires ATC authorization under 14 CFR §107.41."
+    },
+    "citation": "14 CFR §107.41",
+    "difficulty_level": 1,
+    "tags": [
+      "class-g",
+      "uncontrolled-airspace",
+      "no-authorization"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "Review.md"
+  },
+  {
+    "id": "AIR-053",
+    "category": "Airspace",
+    "subcategory": "Airspace Classification",
+    "question_text": "What class of airspace surrounds the nation's busiest airports, such as Atlanta Hartsfield-Jackson?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Class C"
+      },
+      {
+        "id": "B",
+        "text": "Class D"
+      },
+      {
+        "id": "C",
+        "text": "Class B"
+      },
+      {
+        "id": "D",
+        "text": "Class E"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Class B airspace surrounds the nation's busiest airports (e.g., Atlanta Hartsfield-Jackson, LAX, O'Hare). It is depicted on sectional charts by solid blue lines and typically extends from the surface to 10,000 ft MSL in a layered structure.",
+    "explanation_distractors": {
+      "A": "Class C surrounds airports with moderate traffic — depicted by solid magenta circles.",
+      "B": "Class D surrounds smaller towered airports — depicted by dashed blue circles.",
+      "D": "Class E is general controlled airspace, not specific to the busiest airports."
+    },
+    "citation": "AIM 3-2-3",
+    "difficulty_level": 1,
+    "tags": [
+      "class-b",
+      "major-airports",
+      "atlanta"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "Review.md"
+  },
+  {
+    "id": "AIR-054",
+    "category": "Airspace",
+    "subcategory": "Sectional Charts",
+    "question_text": "On a sectional chart, what does a magenta vignette (shaded area) around an airport indicate?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Class B airspace from the surface"
+      },
+      {
+        "id": "B",
+        "text": "Class C airspace from the surface"
+      },
+      {
+        "id": "C",
+        "text": "Class E airspace beginning at 700 ft AGL"
+      },
+      {
+        "id": "D",
+        "text": "Class G airspace"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "A magenta vignette (fading shading) around an airport on a sectional chart indicates Class E airspace that begins at 700 feet AGL. This is the transition area that supports IFR arrivals and departures at the airport.",
+    "explanation_distractors": {
+      "A": "Class B is depicted by solid blue lines, not a magenta vignette.",
+      "B": "Class C surface area is depicted by solid magenta circles, not a vignette.",
+      "D": "Class G is uncontrolled and is not depicted with a vignette."
+    },
+    "citation": "AIM 3-2-6",
+    "difficulty_level": 2,
+    "tags": [
+      "magenta-vignette",
+      "class-e",
+      "700-ft",
+      "sectional-chart"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "Review.md"
+  },
+  {
+    "id": "AIR-055",
+    "category": "Airspace",
+    "subcategory": "Special Use Airspace",
+    "question_text": "What type of special use airspace is designed for high-density student pilot training activity but is NOT classified as controlled or restricted airspace?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Warning Area"
+      },
+      {
+        "id": "B",
+        "text": "Military Operations Area (MOA)"
+      },
+      {
+        "id": "C",
+        "text": "Restricted Area"
+      },
+      {
+        "id": "D",
+        "text": "Alert Area"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "Alert Areas are depicted on aeronautical charts to inform pilots of areas that may contain a high volume of pilot training, unusual aerial activity, or other hazards. They are NOT restricted — you can fly through them but should exercise extreme caution.",
+    "explanation_distractors": {
+      "A": "Warning Areas contain hazards to nonparticipating aircraft but are located over international waters.",
+      "B": "MOAs are used for military flight training and may be active or inactive — but are not student training focused.",
+      "C": "Restricted Areas require ATC authorization and may be active or inactive."
+    },
+    "citation": "AIM 3-4-6",
+    "difficulty_level": 2,
+    "tags": [
+      "alert-area",
+      "special-use-airspace",
+      "student-training"
+    ],
+    "acs_code": "UA.II.B.K1",
+    "source": "Review.md"
+  },
+  {
+    "id": "AIR-056",
+    "category": "Airspace",
+    "subcategory": "Special Use Airspace",
+    "question_text": "What type of special use airspace designates areas where flight is prohibited due to national security or welfare reasons?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Alert Area"
+      },
+      {
+        "id": "B",
+        "text": "Restricted Area"
+      },
+      {
+        "id": "C",
+        "text": "Military Operations Area (MOA)"
+      },
+      {
+        "id": "D",
+        "text": "Prohibited Area"
+      }
+    ],
+    "correct_option_id": "D",
+    "explanation_correct": "Prohibited Areas contain airspace within which flight is prohibited for national security or other welfare reasons. Examples include the airspace over the White House (P-56) and Camp David. Flight in Prohibited Areas is never permitted without specific authorization.",
+    "explanation_distractors": {
+      "A": "Alert Areas are advisory in nature — they are not restricted or prohibited.",
+      "B": "Restricted Areas may have hazardous activities but can sometimes be transited with ATC permission.",
+      "C": "MOAs are used for military training and can often be transited when inactive."
+    },
+    "citation": "AIM 3-4-2",
+    "difficulty_level": 1,
+    "tags": [
+      "prohibited-area",
+      "special-use-airspace",
+      "national-security"
+    ],
+    "acs_code": "UA.II.B.K1",
+    "source": "Review.md"
+  },
+  {
+    "id": "AIR-057",
+    "category": "Airspace",
+    "subcategory": "Sectional Charts",
+    "question_text": "On a sectional chart, a gray line with a four-digit route number indicates a Military Training Route (MTR). Could this present a hazard to small UAS operations?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "No — MTRs only apply to high-altitude operations above 10,000 ft MSL"
+      },
+      {
+        "id": "B",
+        "text": "No — military aircraft always coordinate with FAA ATC before using MTRs"
+      },
+      {
+        "id": "C",
+        "text": "Yes — MTRs with four-digit numbers are flown at or below 1,500 ft AGL"
+      },
+      {
+        "id": "D",
+        "text": "Yes — but only when the route is active during published hours"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "MTRs with four-digit numbers (e.g., IR1206, VR1001) are conducted at 1,500 ft AGL or below and at speeds exceeding 250 knots. This makes them a direct hazard to sUAS operations at low altitudes. Three-digit MTRs are flown above 1,500 ft AGL.",
+    "explanation_distractors": {
+      "A": "Incorrect — four-digit MTRs specifically operate at or below 1,500 ft AGL.",
+      "B": "MTR coordination is internal to the military and does not involve real-time ATC advisories for sUAS operators.",
+      "D": "MTRs can be flown any time and are not restricted to published hours."
+    },
+    "citation": "AIM 3-5-2",
+    "difficulty_level": 2,
+    "tags": [
+      "mtr",
+      "military-training-route",
+      "four-digit",
+      "1500-ft"
+    ],
+    "acs_code": "UA.II.B.K2",
+    "source": "Review.md"
+  },
+  {
+    "id": "AIR-058",
+    "category": "Airspace",
+    "subcategory": "Airport Operations",
+    "question_text": "An aircraft announces on CTAF that it is on short final for runway 9. In which direction will the aircraft be traveling, and from which direction is it approaching?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Traveling west, approaching from the east"
+      },
+      {
+        "id": "B",
+        "text": "Traveling east, approaching from the west"
+      },
+      {
+        "id": "C",
+        "text": "Traveling north, approaching from the south"
+      },
+      {
+        "id": "D",
+        "text": "Traveling south, approaching from the north"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Runway numbers correspond to magnetic heading rounded to the nearest 10 degrees. Runway 9 corresponds to a heading of 090° (east). An aircraft on short final for runway 9 is therefore flying toward the east and approaching from the west.",
+    "explanation_distractors": {
+      "A": "Runway 27 would be heading west — runway 9 is the opposite direction (east).",
+      "C": "Runway 36 or 360 would be heading north.",
+      "D": "Runway 18 would be heading south."
+    },
+    "citation": "AIM 2-3-3",
+    "difficulty_level": 2,
+    "tags": [
+      "runway-numbers",
+      "airport-operations",
+      "landing-direction"
+    ],
+    "acs_code": "UA.V.B.K2",
+    "source": "Review.md"
+  },
+  {
+    "id": "AIR-059",
+    "category": "Airspace",
+    "subcategory": "Airport Operations",
+    "question_text": "When approaching runway hold-short lines from the side with continuous (unbroken) lines, the pilot or operator should do what?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Proceed across the lines without stopping — they only apply to manned aircraft"
+      },
+      {
+        "id": "B",
+        "text": "Stop and do not cross without clearance from the tower"
+      },
+      {
+        "id": "C",
+        "text": "Slow down and cross if no aircraft are on final approach"
+      },
+      {
+        "id": "D",
+        "text": "Flash lights to signal intent to cross"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Runway hold-short markings consist of four yellow lines — two solid (continuous) and two dashed. The solid lines are on the side that requires stopping; you must stop and hold short until cleared by ATC. The dashed side indicates you are exiting the runway.",
+    "explanation_distractors": {
+      "A": "Hold-short markings apply to all operations on an airport surface.",
+      "C": "You must have positive ATC clearance to cross a hold-short line — situational awareness alone is not sufficient.",
+      "D": "Light signals are for communication when radio fails — hold-short lines require ATC verbal clearance."
+    },
+    "citation": "AIM 2-3-5",
+    "difficulty_level": 2,
+    "tags": [
+      "hold-short",
+      "runway-markings",
+      "airport-surface"
+    ],
+    "acs_code": "UA.V.B.K3",
+    "source": "Review.md"
+  },
+  {
+    "id": "AIR-060",
+    "category": "Airspace",
+    "subcategory": "Airport Operations",
+    "question_text": "You are operating a small UAS northeast of a nearby airport. A pilot announces on CTAF that they are departing runway 36 using a right-hand traffic pattern. Will the aircraft conflict with your operation?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "No — runway 36 departs to the south, away from your position"
+      },
+      {
+        "id": "B",
+        "text": "No — right traffic keeps the aircraft south and west of the airport"
+      },
+      {
+        "id": "C",
+        "text": "Yes — the aircraft departs north then turns right (east), directly over your northeast position"
+      },
+      {
+        "id": "D",
+        "text": "Only if your UAS is above 400 ft AGL"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Runway 36 is oriented toward a heading of 360° (north). Departing runway 36 with a right-hand traffic pattern means the aircraft climbs northbound, then turns right (east) on crosswind, then southeast on downwind. This path goes directly over the northeast operating area.",
+    "explanation_distractors": {
+      "A": "Runway 36 takes off heading north, not south — runway 18 departs to the south.",
+      "B": "A right turn from runway 36 takes the aircraft east and northeast, not south or west.",
+      "D": "Traffic pattern altitudes are typically 800–1,000 ft AGL — any UAS operating in the area is a potential conflict regardless of altitude."
+    },
+    "citation": "AIM 4-3-2",
+    "difficulty_level": 3,
+    "tags": [
+      "traffic-pattern",
+      "runway-36",
+      "right-traffic",
+      "conflict"
+    ],
+    "acs_code": "UA.V.B.K4",
+    "source": "Review.md"
   }
 ]

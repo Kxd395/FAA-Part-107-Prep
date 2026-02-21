@@ -1,0 +1,15 @@
+filename,source_url,downloaded_utc,content_type,notes
+AC_107-2A.pdf,https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC_107-2A.pdf,2026-02-19T12:22:00Z,application/pdf,Part 107 advisory circular
+LearningStatementReferenceGuide.pdf,https://www.faa.gov/training_testing/testing/LearningStatementReferenceGuide.pdf,2026-02-19T12:22:00Z,application/pdf,Learning statement mappings
+uas_testing_information.pdf,https://www.faa.gov/sites/faa.gov/files/training_testing/testing/uas_testing_information.pdf,2026-02-19T12:22:00Z,application/pdf,FAA test change summary
+testing_matrix.pdf,https://www.faa.gov/training_testing/testing/testing_matrix,2026-02-19T12:23:00Z,application/pdf,FAA testing matrix endpoint
+FAA-H-8083-28A_FAA_Web.pdf,https://www.faa.gov/sites/faa.gov/files/FAA-H-8083-28A_FAA_Web.pdf,2026-02-19T12:23:00Z,application/pdf,Aviation Weather Handbook
+faa-h-8083-25c.pdf,https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/faa-h-8083-25c.pdf,2026-02-19T12:23:00Z,application/pdf,Pilot's Handbook of Aeronautical Knowledge
+PHAK_Addendum_C.pdf,https://www.faa.gov/sites/faa.gov/files/PHAK_Addendum_C.pdf,2026-02-19T12:25:00Z,application/pdf,Current PHAK addendum
+sport_rec_private_akts.pdf,https://www.faa.gov/sites/faa.gov/files/training_testing/testing/supplements/sport_rec_private_akts.pdf,2026-02-19T12:24:00Z,application/pdf,AKTS figures supplement
+cug-complete_20260122.pdf,https://aeronav.faa.gov/user_guide/cug-complete_20260122.pdf,2026-02-19T12:23:00Z,application/pdf,Aeronautical Chart Users' Guide
+web_refs/ecfr_part_107.html,https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107,2026-02-19T12:24:00Z,text/html,Web-only reference no OCR
+web_refs/ecfr_part_89.html,https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-89,2026-02-19T12:24:00Z,text/html,Web-only reference no OCR
+web_refs/aim_index.html,https://www.faa.gov/air_traffic/publications/atpubs/aim_html/,2026-02-19T12:24:00Z,text/html,Web-only reference no OCR
+web_refs/phak_page.html,https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/phak,2026-02-19T12:24:00Z,text/html,Landing page snapshot
+web_refs/aero_guide_page.html,https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/aero_guide/,2026-02-19T12:24:00Z,text/html,Landing page snapshot

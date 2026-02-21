@@ -1,0 +1,201 @@
+{
+  "source_file": "LearningStatementReferenceGuide.pdf",
+  "source_path": "/Volumes/Developer/test/PDFtoMD/to_ocr/LearningStatementReferenceGuide.pdf",
+  "slug": "learningstatementreferenceguide",
+  "generated_utc": "2026-02-19T12:27:28.317536+00:00",
+  "relevance_rank": "P1",
+  "relevance_reason": "Maps missed question codes to remediation study content.",
+  "page_count": 25,
+  "total_text_chars": 63580,
+  "total_images_saved": 1,
+  "pages": [
+    {
+      "page": 1,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=1",
+      "char_count": 2276,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p001_img01_6005b7781346.jpeg",
+          "width": 375,
+          "height": 375,
+          "bbox": [
+            18.0,
+            54.0,
+            116.25,
+            152.25
+          ],
+          "bbox_area_ratio": 0.0199
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=2",
+      "char_count": 2280,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 3,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=3",
+      "char_count": 2827,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 4,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=4",
+      "char_count": 2776,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 5,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=5",
+      "char_count": 2704,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 6,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=6",
+      "char_count": 2612,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 7,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=7",
+      "char_count": 2780,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 8,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=8",
+      "char_count": 2909,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 9,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=9",
+      "char_count": 2704,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 10,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=10",
+      "char_count": 2533,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 11,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=11",
+      "char_count": 2726,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 12,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=12",
+      "char_count": 2769,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 13,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=13",
+      "char_count": 2841,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 14,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=14",
+      "char_count": 2770,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 15,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=15",
+      "char_count": 699,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 16,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=16",
+      "char_count": 2715,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 17,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=17",
+      "char_count": 1398,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 18,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=18",
+      "char_count": 2538,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 19,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=19",
+      "char_count": 2915,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 20,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=20",
+      "char_count": 2120,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 21,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=21",
+      "char_count": 3060,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 22,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=22",
+      "char_count": 3092,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 23,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=23",
+      "char_count": 1554,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 24,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=24",
+      "char_count": 3030,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 25,
+      "source_ref": "LearningStatementReferenceGuide.pdf#page=25",
+      "char_count": 2952,
+      "image_count": 0,
+      "images": []
+    }
+  ]
+}

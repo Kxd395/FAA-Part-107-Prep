@@ -1,0 +1,65 @@
+{
+  "source_file": "PHAK_Addendum_C.pdf",
+  "source_path": "/Volumes/Developer/test/PDFtoMD/to_ocr/PHAK_Addendum_C.pdf",
+  "slug": "phak-addendum-c",
+  "generated_utc": "2026-02-19T12:27:28.349595+00:00",
+  "relevance_rank": "P3",
+  "relevance_reason": "Broad pilot knowledge reference; use only Part 107-relevant sections.",
+  "page_count": 2,
+  "total_text_chars": 4672,
+  "total_images_saved": 3,
+  "pages": [
+    {
+      "page": 1,
+      "source_ref": "PHAK_Addendum_C.pdf#page=1",
+      "char_count": 2089,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p001_img01_6647be1ffda7.jpeg",
+          "width": 320,
+          "height": 272,
+          "bbox": [
+            193.02,
+            543.96,
+            367.2,
+            691.96
+          ],
+          "bbox_area_ratio": 0.0532
+        },
+        {
+          "file_name": "p001_img02_8cc6273c0e38.png",
+          "width": 217,
+          "height": 218,
+          "bbox": [
+            50.95,
+            54.0,
+            122.05,
+            125.25
+          ],
+          "bbox_area_ratio": 0.0105
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "source_ref": "PHAK_Addendum_C.pdf#page=2",
+      "char_count": 2583,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p002_img01_38d57f8f732c.jpeg",
+          "width": 656,
+          "height": 592,
+          "bbox": [
+            150.38,
+            417.87,
+            409.34,
+            651.57
+          ],
+          "bbox_area_ratio": 0.1249
+        }
+      ]
+    }
+  ]
+}

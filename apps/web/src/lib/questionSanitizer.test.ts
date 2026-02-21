@@ -44,4 +44,29 @@ describe("question sanitizer", () => {
     const text = "Topic text `image=p009_img01_5b91968bce71.png` `size=2341x196`";
     expect(sanitizeQuestionText(text)).toBe("Topic text");
   });
+
+  it("sanitizes explanation fields and suppresses ACS OCR strip image refs", () => {
+    const cleaned = sanitizeQuestion({
+      ...SAMPLE_QUESTION,
+      source_type: "acs_generated",
+      explanation_correct:
+        "UA.II.B.K1k corresponds to k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png)",
+      explanation_distractors: {
+        B: 'Wrong because of X. `image=p018_img01_5b91968bce71.png` `size=2341x196`',
+      },
+    });
+
+    expect(cleaned.image_ref).toBeNull();
+    expect(cleaned.explanation_correct).not.toContain("### Images");
+    expect(cleaned.explanation_distractors.B).not.toContain("image=");
+  });
+
+  it("normalizes existing relative image_ref values", () => {
+    const cleaned = sanitizeQuestion({
+      ...SAMPLE_QUESTION,
+      image_ref: "../images/uas-acsocr/p016_img01_5b91968bce71.png",
+    });
+
+    expect(cleaned.image_ref).toBe("/images/uas-acsocr/p016_img01_5b91968bce71.png");
+  });
 });

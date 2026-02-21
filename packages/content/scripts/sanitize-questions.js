@@ -66,7 +66,12 @@ function sanitizeFile(filePath) {
   let updatedCount = 0;
 
   for (const question of questions) {
-    const candidates = [question.question_text, ...(question.options || []).map((o) => o.text)];
+    const candidates = [
+      question.question_text,
+      question.explanation_correct,
+      ...(question.options || []).map((o) => o.text),
+      ...Object.values(question.explanation_distractors || {}),
+    ];
     const imageRef = candidates.map(extractImageRef).find(Boolean);
 
     const oldQuestionText = question.question_text;
@@ -79,8 +84,40 @@ function sanitizeFile(filePath) {
       if (oldOptionText !== option.text) updatedCount++;
     }
 
+    const oldCorrectExplanation = question.explanation_correct;
+    question.explanation_correct = sanitizeText(question.explanation_correct);
+    if (oldCorrectExplanation !== question.explanation_correct) updatedCount++;
+
+    if (question.explanation_distractors && typeof question.explanation_distractors === "object") {
+      for (const [key, value] of Object.entries(question.explanation_distractors)) {
+        const oldValue = String(value);
+        const nextValue = sanitizeText(oldValue);
+        if (nextValue !== oldValue) {
+          question.explanation_distractors[key] = nextValue;
+          updatedCount++;
+        }
+      }
+    }
+
+    if (typeof question.image_ref === "string") {
+      const normalizedExisting = toPublicImageRef(question.image_ref);
+      if (normalizedExisting !== question.image_ref) {
+        question.image_ref = normalizedExisting;
+        updatedCount++;
+      }
+    }
+
     if (!question.image_ref && imageRef) {
       question.image_ref = imageRef;
+      updatedCount++;
+    }
+
+    if (
+      question.source_type === "acs_generated" &&
+      typeof question.image_ref === "string" &&
+      question.image_ref.startsWith("/images/uas-acsocr/")
+    ) {
+      question.image_ref = null;
       updatedCount++;
     }
   }
@@ -90,8 +127,12 @@ function sanitizeFile(filePath) {
   const contaminatedRemaining = questions.reduce((count, q) => {
     let c = count;
     if (CONTAMINATION_PATTERN.test(q.question_text || "")) c++;
+    if (CONTAMINATION_PATTERN.test(q.explanation_correct || "")) c++;
     for (const o of q.options || []) {
       if (CONTAMINATION_PATTERN.test(o.text || "")) c++;
+    }
+    for (const value of Object.values(q.explanation_distractors || {})) {
+      if (CONTAMINATION_PATTERN.test(String(value))) c++;
     }
     return c;
   }, 0);

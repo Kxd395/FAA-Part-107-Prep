@@ -408,7 +408,7 @@
     "acs_code": "UA.III.A.K1",
     "source": "ACS Mastery (UA.III.A.K1)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p017_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "WX-ACS-012",
@@ -497,7 +497,7 @@
     "acs_code": "UA.III.A.K3",
     "source": "ACS Mastery (UA.III.A.K3)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p017_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "WX-ACS-014",
@@ -586,7 +586,7 @@
     "acs_code": "UA.III.A.K4",
     "source": "ACS Mastery (UA.III.A.K4)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p017_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "WX-ACS-016",
@@ -657,11 +657,11 @@
       }
     ],
     "correct_option_id": "D",
-    "explanation_correct": "UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS).",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "B": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS). ### Images ![Page 17 image](../images/uas-acsocr/p017_img01_5b91968bce71.png) - `image=p017_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS).",
+      "B": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS).",
+      "C": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS)."
     },
     "citation": "ACS UA.III.A.K5",
     "difficulty_level": 2,
@@ -675,7 +675,7 @@
     "acs_code": "UA.III.A.K5",
     "source": "ACS Mastery (UA.III.A.K5)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p017_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "WX-ACS-018",
@@ -720,7 +720,7 @@
     "acs_code": "UA.III.A.K5",
     "source": "ACS Mastery (UA.III.A.K5)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p017_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "WX-ACS-019",
@@ -765,7 +765,7 @@
     "acs_code": "UA.III.B.K1",
     "source": "ACS Mastery (UA.III.B.K1)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p018_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "WX-ACS-020",
@@ -854,7 +854,7 @@
     "acs_code": "UA.III.B.K1b",
     "source": "ACS Mastery (UA.III.B.K1b)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p018_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "WX-ACS-022",
@@ -1031,7 +1031,7 @@
     "acs_code": "UA.III.B.K1f",
     "source": "ACS Mastery (UA.III.B.K1f)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p018_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "WX-ACS-026",
@@ -1366,11 +1366,11 @@
       }
     ],
     "correct_option_id": "A",
-    "explanation_correct": "UA.III.B.K1k corresponds to: k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.III.B.K1k corresponds to: k. Lightning",
     "explanation_distractors": {
-      "B": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "D": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning ### Images ![Page 18 image](../images/uas-acsocr/p018_img01_5b91968bce71.png) - `image=p018_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "B": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning",
+      "C": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning",
+      "D": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning"
     },
     "citation": "ACS UA.III.B.K1k",
     "difficulty_level": 2,
@@ -1384,7 +1384,7 @@
     "acs_code": "UA.III.B.K1k",
     "source": "ACS Mastery (UA.III.B.K1k)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p018_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "WX-ACS-034",
@@ -1429,6 +1429,130 @@
     "acs_code": "UA.III.B.K1k",
     "source": "ACS Mastery (UA.III.B.K1k)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p018_img01_5b91968bce71.png"
+    "image_ref": null
+  },
+  {
+    "id": "WX-035",
+    "category": "Weather",
+    "subcategory": "Cloud Clearance",
+    "question_text": "When operating a small UAS near clouds, what are the minimum distance requirements under 14 CFR Part 107?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "500 ft below clouds and 1,000 ft horizontally"
+      },
+      {
+        "id": "B",
+        "text": "500 ft below clouds and 2,000 ft horizontally"
+      },
+      {
+        "id": "C",
+        "text": "1,000 ft below clouds and 2,000 ft horizontally"
+      },
+      {
+        "id": "D",
+        "text": "Clear of clouds — no specific distance required"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Under 14 CFR §107.51(c), a small UAS must remain at least 500 feet below the clouds and at least 2,000 feet horizontally from the clouds. This ensures visibility and separation from IFR traffic that may be descending through clouds.",
+    "explanation_distractors": {
+      "A": "The horizontal distance is 2,000 ft, not 1,000 ft.",
+      "C": "The vertical distance is 500 ft below, not 1,000 ft.",
+      "D": "Part 107 specifies exact cloud clearance distances — 'clear of clouds' is not sufficient."
+    },
+    "citation": "14 CFR §107.51",
+    "difficulty_level": 2,
+    "tags": [
+      "cloud-clearance",
+      "500-ft",
+      "2000-ft",
+      "visibility"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "Review.md"
+  },
+  {
+    "id": "WX-036",
+    "category": "Weather",
+    "subcategory": "Thunderstorms",
+    "question_text": "What is the second stage of a thunderstorm's life cycle?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Cumulus stage — characterized by strong updrafts"
+      },
+      {
+        "id": "B",
+        "text": "Mature stage — characterized by both updrafts and downdrafts, heaviest precipitation"
+      },
+      {
+        "id": "C",
+        "text": "Dissipating stage — characterized by downdrafts only"
+      },
+      {
+        "id": "D",
+        "text": "Anvil stage — characterized by the formation of an anvil cloud top"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "A thunderstorm has three stages: (1) Cumulus stage — strong updrafts build the storm; (2) Mature stage — the most dangerous stage, with both updrafts and downdrafts, heavy rain, lightning, hail, and turbulence; (3) Dissipating stage — downdrafts dominate and the storm weakens.",
+    "explanation_distractors": {
+      "A": "The cumulus stage is the FIRST stage, not the second.",
+      "C": "The dissipating stage is the THIRD (final) stage.",
+      "D": "The anvil top forms during the mature or dissipating stage but is not a named stage of the thunderstorm life cycle."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 2,
+    "tags": [
+      "thunderstorm",
+      "mature-stage",
+      "storm-lifecycle"
+    ],
+    "acs_code": "UA.III.B.K3",
+    "source": "Review.md"
+  },
+  {
+    "id": "WX-037",
+    "category": "Weather",
+    "subcategory": "Wind Shear",
+    "question_text": "What is wind shear, and why is it hazardous to small UAS operations?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Wind shear is a steady, constant wind that is easy to compensate for"
+      },
+      {
+        "id": "B",
+        "text": "Wind shear is a rapid change in wind speed or direction over a short distance, which can cause sudden loss of control"
+      },
+      {
+        "id": "C",
+        "text": "Wind shear only occurs above 10,000 ft MSL and is not relevant to UAS operations"
+      },
+      {
+        "id": "D",
+        "text": "Wind shear describes the rotation of wind in a hurricane"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Wind shear is a rapid change in wind velocity (speed or direction) over a short distance. It can occur horizontally or vertically and is especially hazardous during takeoff, landing, and low-altitude operations. A sudden wind shear can cause a sUAS to lose lift, gain unexpected altitude, or become uncontrollable.",
+    "explanation_distractors": {
+      "A": "Wind shear is the opposite — it is a sudden, unpredictable change, not a steady wind.",
+      "C": "Wind shear is most dangerous at low altitudes, making it directly relevant to sUAS operations.",
+      "D": "Wind shear is not specific to hurricanes — it occurs in many meteorological conditions."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 2,
+    "tags": [
+      "wind-shear",
+      "hazardous-weather",
+      "low-altitude"
+    ],
+    "acs_code": "UA.III.B.K2",
+    "source": "Review.md"
   }
 ]

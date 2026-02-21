@@ -127,10 +127,23 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
 
 interface CitationLinksProps {
   citation: string;
+  label?: string;
   onReferenceClick?: (ref: ResolvedReference) => void;
 }
 
-export default function CitationLinks({ citation, onReferenceClick }: CitationLinksProps) {
+const UAS_ACS_PDF_URL =
+  "https://www.faa.gov/sites/faa.gov/files/training_testing/testing/acs/uas_acs.pdf";
+
+function normalizeBrokenReference(ref: ResolvedReference): ResolvedReference {
+  if (ref.type !== "pdf") return ref;
+  if (!/^\/references\/acs/i.test(ref.url)) return ref;
+  return {
+    ...ref,
+    url: UAS_ACS_PDF_URL,
+  };
+}
+
+export default function CitationLinks({ citation, label = "📖 Reference:", onReferenceClick }: CitationLinksProps) {
   const [activeRef, setActiveRef] = useState<ResolvedReference | null>(null);
   const refs = parseCitation(citation);
 
@@ -140,7 +153,7 @@ export default function CitationLinks({ citation, onReferenceClick }: CitationLi
     // Fallback: just show the raw citation text
     return (
       <div className="mt-4 text-xs text-[var(--muted)]">
-        📖 Reference: {citation}
+        {label} {citation}
       </div>
     );
   }
@@ -148,18 +161,28 @@ export default function CitationLinks({ citation, onReferenceClick }: CitationLi
   return (
     <>
       <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-        <span className="text-[var(--muted)]">📖 Reference:</span>
+        <span className="text-[var(--muted)]">{label}</span>
         {refs.map((ref, i) => (
           <button
             key={`${ref.label}-${i}`}
             onClick={() => {
-              onReferenceClick?.(ref);
-              if (ref.type === "external" || (ref.type === "pdf" && !ref.url.startsWith("/"))) {
-                const url = ref.type === "pdf" && ref.page ? `${ref.url}#page=${ref.page}` : ref.url;
+              const normalizedRef = normalizeBrokenReference(ref);
+              onReferenceClick?.(normalizedRef);
+
+              const isEmbeddableLocalPdf =
+                normalizedRef.type === "pdf" &&
+                normalizedRef.url.startsWith("/") &&
+                /\.pdf($|[?#])/i.test(normalizedRef.url);
+
+              if (normalizedRef.type === "external" || (normalizedRef.type === "pdf" && !isEmbeddableLocalPdf)) {
+                const url =
+                  normalizedRef.type === "pdf" && normalizedRef.page
+                    ? `${normalizedRef.url}#page=${normalizedRef.page}`
+                    : normalizedRef.url;
                 window.open(url, "_blank", "noopener,noreferrer");
                 return;
               }
-              setActiveRef(ref);
+              setActiveRef(normalizedRef);
             }}
             className="inline-flex items-center gap-1 rounded-lg border border-brand-500/30 bg-brand-500/10 px-2.5 py-1 text-brand-400 hover:bg-brand-500/20 hover:text-brand-300 transition-colors cursor-pointer"
             title={ref.description}

@@ -909,7 +909,7 @@
     "acs_code": "UA.V.A.K4",
     "source": "ACS Mastery (UA.V.A.K4)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p020_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-025",
@@ -998,7 +998,7 @@
     "acs_code": "UA.V.A.K5",
     "source": "ACS Mastery (UA.V.A.K5)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p020_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-027",
@@ -1245,11 +1245,11 @@
       }
     ],
     "correct_option_id": "A",
-    "explanation_correct": "UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time.",
     "explanation_distractors": {
-      "B": "This is incorrect. UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "D": "This is incorrect. UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time. ### Images ![Page 20 image](../images/uas-acsocr/p020_img01_5b91968bce71.png) - `image=p020_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "B": "This is incorrect. UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time.",
+      "C": "This is incorrect. UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time.",
+      "D": "This is incorrect. UA.V.A.K8 corresponds to: Phraseology: altitudes, directions, speed, and time."
     },
     "citation": "ACS UA.V.A.K8",
     "difficulty_level": 2,
@@ -1263,7 +1263,7 @@
     "acs_code": "UA.V.A.K8",
     "source": "ACS Mastery (UA.V.A.K8)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p020_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-033",
@@ -1308,7 +1308,7 @@
     "acs_code": "UA.V.A.K8",
     "source": "ACS Mastery (UA.V.A.K8)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p020_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-034",
@@ -1705,7 +1705,7 @@
     "acs_code": "UA.V.B.K5",
     "source": "ACS Mastery (UA.V.B.K5)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p021_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-043",
@@ -1952,11 +1952,11 @@
       }
     ],
     "correct_option_id": "D",
-    "explanation_correct": "UA.V.B.K8 corresponds to: Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.V.B.K8 corresponds to: Airport and seaplane base lighting.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.V.B.K8 corresponds to: Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "B": "This is incorrect. UA.V.B.K8 corresponds to: Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.V.B.K8 corresponds to: Airport and seaplane base lighting. ### Images ![Page 21 image](../images/uas-acsocr/p021_img01_5b91968bce71.png) - `image=p021_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.V.B.K8 corresponds to: Airport and seaplane base lighting.",
+      "B": "This is incorrect. UA.V.B.K8 corresponds to: Airport and seaplane base lighting.",
+      "C": "This is incorrect. UA.V.B.K8 corresponds to: Airport and seaplane base lighting."
     },
     "citation": "ACS UA.V.B.K8",
     "difficulty_level": 2,
@@ -1970,7 +1970,7 @@
     "acs_code": "UA.V.B.K8",
     "source": "ACS Mastery (UA.V.B.K8)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p021_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-049",
@@ -2015,7 +2015,7 @@
     "acs_code": "UA.V.B.K8",
     "source": "ACS Mastery (UA.V.B.K8)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p021_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-050",
@@ -2148,7 +2148,7 @@
     "acs_code": "UA.V.C.K2a",
     "source": "ACS Mastery (UA.V.C.K2a)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p022_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-053",
@@ -2501,7 +2501,7 @@
     "acs_code": "UA.V.C.K3",
     "source": "ACS Mastery (UA.V.C.K3)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p022_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-061",
@@ -2590,7 +2590,7 @@
     "acs_code": "UA.V.C.K4",
     "source": "ACS Mastery (UA.V.C.K4)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p022_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-063",
@@ -2837,11 +2837,11 @@
       }
     ],
     "correct_option_id": "D",
-    "explanation_correct": "UA.V.C.K7 corresponds to: Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.V.C.K7 corresponds to: Procedures for operations at night.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.V.C.K7 corresponds to: Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "B": "This is incorrect. UA.V.C.K7 corresponds to: Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.V.C.K7 corresponds to: Procedures for operations at night. ### Images ![Page 22 image](../images/uas-acsocr/p022_img01_5b91968bce71.png) - `image=p022_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.V.C.K7 corresponds to: Procedures for operations at night.",
+      "B": "This is incorrect. UA.V.C.K7 corresponds to: Procedures for operations at night.",
+      "C": "This is incorrect. UA.V.C.K7 corresponds to: Procedures for operations at night."
     },
     "citation": "ACS UA.V.C.K7",
     "difficulty_level": 2,
@@ -2855,7 +2855,7 @@
     "acs_code": "UA.V.C.K7",
     "source": "ACS Mastery (UA.V.C.K7)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p022_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-069",
@@ -2900,7 +2900,7 @@
     "acs_code": "UA.V.C.K7",
     "source": "ACS Mastery (UA.V.C.K7)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p022_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-070",
@@ -2945,7 +2945,7 @@
     "acs_code": "UA.V.D.K1a",
     "source": "ACS Mastery (UA.V.D.K1a)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p023_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-071",
@@ -3034,7 +3034,7 @@
     "acs_code": "UA.V.D.K1b",
     "source": "ACS Mastery (UA.V.D.K1b)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p023_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-073",
@@ -3193,11 +3193,11 @@
       }
     ],
     "correct_option_id": "A",
-    "explanation_correct": "UA.V.D.K5 corresponds to: Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.V.D.K5 corresponds to: Hazard identification and risk assessment.",
     "explanation_distractors": {
-      "B": "This is incorrect. UA.V.D.K5 corresponds to: Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.V.D.K5 corresponds to: Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "D": "This is incorrect. UA.V.D.K5 corresponds to: Hazard identification and risk assessment. ### Images ![Page 23 image](../images/uas-acsocr/p023_img01_5b91968bce71.png) - `image=p023_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "B": "This is incorrect. UA.V.D.K5 corresponds to: Hazard identification and risk assessment.",
+      "C": "This is incorrect. UA.V.D.K5 corresponds to: Hazard identification and risk assessment.",
+      "D": "This is incorrect. UA.V.D.K5 corresponds to: Hazard identification and risk assessment."
     },
     "citation": "ACS UA.V.D.K5",
     "difficulty_level": 2,
@@ -3211,7 +3211,7 @@
     "acs_code": "UA.V.D.K5",
     "source": "ACS Mastery (UA.V.D.K5)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p023_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-077",
@@ -3256,7 +3256,7 @@
     "acs_code": "UA.V.D.K5",
     "source": "ACS Mastery (UA.V.D.K5)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p023_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-078",
@@ -3301,7 +3301,7 @@
     "acs_code": "UA.V.E.K1",
     "source": "ACS Mastery (UA.V.E.K1)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p024_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-079",
@@ -3654,7 +3654,7 @@
     "acs_code": "UA.V.E.K7",
     "source": "ACS Mastery (UA.V.E.K7)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p024_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-087",
@@ -3725,11 +3725,11 @@
       }
     ],
     "correct_option_id": "C",
-    "explanation_correct": "UA.V.E.K9 corresponds to: Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.V.E.K9 corresponds to: Night illusions.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.V.E.K9 corresponds to: Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "B": "This is incorrect. UA.V.E.K9 corresponds to: Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "D": "This is incorrect. UA.V.E.K9 corresponds to: Night illusions. ### Images ![Page 24 image](../images/uas-acsocr/p024_img01_5b91968bce71.png) - `image=p024_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.V.E.K9 corresponds to: Night illusions.",
+      "B": "This is incorrect. UA.V.E.K9 corresponds to: Night illusions.",
+      "D": "This is incorrect. UA.V.E.K9 corresponds to: Night illusions."
     },
     "citation": "ACS UA.V.E.K9",
     "difficulty_level": 2,
@@ -3743,7 +3743,7 @@
     "acs_code": "UA.V.E.K9",
     "source": "ACS Mastery (UA.V.E.K9)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p024_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-089",
@@ -3788,7 +3788,7 @@
     "acs_code": "UA.V.E.K9",
     "source": "ACS Mastery (UA.V.E.K9)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p024_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-090",
@@ -3833,7 +3833,7 @@
     "acs_code": "UA.V.F.K3",
     "source": "ACS Mastery (UA.V.F.K3)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p025_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-091",
@@ -4098,7 +4098,7 @@
     "acs_code": "UA.V.F.K6",
     "source": "ACS Mastery (UA.V.F.K6)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p025_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-097",
@@ -4169,11 +4169,11 @@
       }
     ],
     "correct_option_id": "B",
-    "explanation_correct": "UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "D": "This is incorrect. UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations. ### Images ![Page 25 image](../images/uas-acsocr/p025_img01_5b91968bce71.png) - `image=p025_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations.",
+      "C": "This is incorrect. UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations.",
+      "D": "This is incorrect. UA.V.F.K7 corresponds to: Manufacturer's Declaration of Compliance for Category 2 and 3 operations."
     },
     "citation": "ACS UA.V.F.K7",
     "difficulty_level": 2,
@@ -4187,7 +4187,7 @@
     "acs_code": "UA.V.F.K7",
     "source": "ACS Mastery (UA.V.F.K7)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p025_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "OPS-ACS-099",
@@ -4232,6 +4232,48 @@
     "acs_code": "UA.V.F.K7",
     "source": "ACS Mastery (UA.V.F.K7)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p025_img01_5b91968bce71.png"
+    "image_ref": null
+  },
+  {
+    "id": "OPS-100",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "What does a 'lost link' situation mean during a small UAS flight, and what is the required response?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The drone's video feed has been lost; the pilot may continue flight using GPS"
+      },
+      {
+        "id": "B",
+        "text": "Control link between the ground control station and aircraft is lost; the drone should follow its programmed lost-link procedure and land as soon as practicable"
+      },
+      {
+        "id": "C",
+        "text": "The ATC radio link is lost; the pilot must immediately land at the nearest airport"
+      },
+      {
+        "id": "D",
+        "text": "Lost link only applies to military drones — Part 107 aircraft are not required to have a lost-link procedure"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "A 'lost link' (also called lost communications) occurs when the control link between the Remote Pilot In Command and the small UAS is interrupted. The aircraft typically follows a pre-programmed lost-link procedure (hover, return-to-home, or land). The RPIC is responsible for establishing this procedure before flight to ensure the sUAS does not pose a hazard to other aircraft or people on the ground.",
+    "explanation_distractors": {
+      "A": "Lost link refers to the control link, not just the video/FPV feed.",
+      "C": "Small UAS are generally not in contact with ATC; the lost-link procedure governs the aircraft's autonomous response.",
+      "D": "Part 107 pilots are responsible for their aircraft's behavior at all times, including during lost-link events."
+    },
+    "citation": "14 CFR §107.19",
+    "difficulty_level": 2,
+    "tags": [
+      "lost-link",
+      "lost-comm",
+      "emergency-procedure",
+      "return-to-home"
+    ],
+    "acs_code": "UA.V.A.K3",
+    "source": "Review.md"
   }
 ]

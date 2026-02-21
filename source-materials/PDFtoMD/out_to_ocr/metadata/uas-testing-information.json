@@ -1,0 +1,33 @@
+{
+  "source_file": "uas_testing_information.pdf",
+  "source_path": "/Volumes/Developer/test/PDFtoMD/to_ocr/uas_testing_information.pdf",
+  "slug": "uas-testing-information",
+  "generated_utc": "2026-02-19T12:27:52.860495+00:00",
+  "relevance_rank": "P1",
+  "relevance_reason": "FAA summary of Remote ID/night/OOP testing updates.",
+  "page_count": 1,
+  "total_text_chars": 2399,
+  "total_images_saved": 1,
+  "pages": [
+    {
+      "page": 1,
+      "source_ref": "uas_testing_information.pdf#page=1",
+      "char_count": 2399,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p001_img01_8cc6273c0e38.png",
+          "width": 217,
+          "height": 218,
+          "bbox": [
+            68.95,
+            51.1,
+            140.05,
+            122.35
+          ],
+          "bbox_area_ratio": 0.0105
+        }
+      ]
+    }
+  ]
+}

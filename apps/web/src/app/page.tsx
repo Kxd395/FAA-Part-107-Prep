@@ -43,7 +43,7 @@ const FEATURES = [
 ];
 
 const STATS = [
-  { label: "Questions", value: "343", sub: "FAA ACS + official UAG sources" },
+  { label: "Questions", value: "362", sub: "FAA ACS + official UAG sources" },
   { label: "Pass Rate", value: "70%", sub: "42 of 60 to pass" },
   { label: "Time Limit", value: "2 hrs", sub: "120 minutes on exam day" },
   { label: "Updated", value: "2026", sub: "Remote ID & Ops Over People" },
@@ -79,6 +79,7 @@ const QUESTION_TYPE_OPTIONS: Array<{
 export default function HomePage() {
   const [practiceType, setPracticeType] = useState<QuestionTypeProfile>("real_exam");
   const practiceExamHref = useMemo(() => `/exam?type=${encodeURIComponent(practiceType)}`, [practiceType]);
+  const studyHref = useMemo(() => `/study?type=${encodeURIComponent(practiceType)}`, [practiceType]);
 
   return (
     <div className="space-y-16">
@@ -102,7 +103,7 @@ export default function HomePage() {
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
-            href="/study"
+            href={studyHref}
             className="rounded-xl bg-brand-600 px-8 py-3 font-semibold text-white transition-all hover:bg-brand-700 hover:scale-105"
           >
             Start Studying →
@@ -190,11 +191,11 @@ export default function HomePage() {
         </p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { name: "Regulations", icon: "⚖️", count: 147, sub: "Operating Rules, Registration, Remote ID, Night Ops, Ops Over People, Waivers" },
-            { name: "Airspace", icon: "🗺️", count: 51, sub: "Classification, Special Use, TFRs, MOAs, NOTAMs, ATC Authorization" },
-            { name: "Weather", icon: "🌤️", count: 34, sub: "METARs, TAFs, Density Altitude, Stable/Unstable Air, Wind Shear, Fog" },
-            { name: "Operations", icon: "🛩️", count: 99, sub: "Airport Ops, ADM, Emergency, Radio Comms, Physiology, Maintenance, CRM" },
-            { name: "Loading & Performance", icon: "⚙️", count: 12, sub: "Load Factors, Stalls, Weight & Balance, CG Limits, Performance Charts" },
+            { name: "Regulations", icon: "⚖️", count: 150, sub: "Operating Rules, Registration, Remote ID, Night Ops, Ops Over People, Waivers" },
+            { name: "Airspace", icon: "🗺️", count: 60, sub: "Classification, Special Use, TFRs, MOAs, NOTAMs, ATC Authorization" },
+            { name: "Weather", icon: "🌤️", count: 37, sub: "METARs, TAFs, Density Altitude, Stable/Unstable Air, Wind Shear, Fog" },
+            { name: "Operations", icon: "🛩️", count: 100, sub: "Airport Ops, ADM, Emergency, Radio Comms, Physiology, Maintenance, CRM" },
+            { name: "Loading & Performance", icon: "⚙️", count: 15, sub: "Load Factors, Stalls, Weight & Balance, CG Limits, Performance Charts" },
           ].map((topic) => (
             <div
               key={topic.name}
@@ -216,7 +217,7 @@ export default function HomePage() {
               </p>
               <div className="mt-3 flex gap-2">
                 <Link
-                  href={`/study?category=${encodeURIComponent(topic.name)}`}
+                  href={`/study?category=${encodeURIComponent(topic.name)}&type=${encodeURIComponent(practiceType)}`}
                   className="flex-1 rounded-lg bg-brand-600/80 py-2 text-center text-xs font-semibold text-white transition-all hover:bg-brand-600"
                 >
                   📖 Study

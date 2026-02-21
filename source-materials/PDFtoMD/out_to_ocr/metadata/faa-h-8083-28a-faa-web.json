@@ -1,0 +1,8379 @@
+{
+  "source_file": "FAA-H-8083-28A_FAA_Web.pdf",
+  "source_path": "/Volumes/Developer/test/PDFtoMD/to_ocr/FAA-H-8083-28A_FAA_Web.pdf",
+  "slug": "faa-h-8083-28a-faa-web",
+  "generated_utc": "2026-02-19T12:27:28.040569+00:00",
+  "relevance_rank": "P2",
+  "relevance_reason": "Current weather reference for coded weather and effects questions.",
+  "page_count": 539,
+  "total_text_chars": 939637,
+  "total_images_saved": 358,
+  "pages": [
+    {
+      "page": 1,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=1",
+      "char_count": 0,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 2,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=2",
+      "char_count": 134,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 3,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=3",
+      "char_count": 1887,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 4,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=4",
+      "char_count": 1224,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 5,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=5",
+      "char_count": 199,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 6,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=6",
+      "char_count": 2747,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 7,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=7",
+      "char_count": 541,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 8,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=8",
+      "char_count": 4337,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 9,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=9",
+      "char_count": 4849,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 10,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=10",
+      "char_count": 4975,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 11,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=11",
+      "char_count": 4956,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 12,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=12",
+      "char_count": 4938,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 13,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=13",
+      "char_count": 4918,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 14,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=14",
+      "char_count": 4835,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 15,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=15",
+      "char_count": 4958,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 16,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=16",
+      "char_count": 4919,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 17,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=17",
+      "char_count": 4816,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 18,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=18",
+      "char_count": 4507,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 19,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=19",
+      "char_count": 4679,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 20,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=20",
+      "char_count": 4690,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 21,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=21",
+      "char_count": 4578,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 22,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=22",
+      "char_count": 4623,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 23,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=23",
+      "char_count": 4712,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 24,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=24",
+      "char_count": 957,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 25,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=25",
+      "char_count": 2100,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p025_img01_c198564df266.png",
+          "width": 2054,
+          "height": 1762,
+          "bbox": [
+            61.2,
+            64.56,
+            554.04,
+            487.44
+          ],
+          "bbox_area_ratio": 0.43
+        }
+      ]
+    },
+    {
+      "page": 26,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=26",
+      "char_count": 89,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p026_img01_63acd5a88d73.png",
+          "width": 2054,
+          "height": 941,
+          "bbox": [
+            68.28,
+            59.28,
+            561.12,
+            285.12
+          ],
+          "bbox_area_ratio": 0.2296
+        }
+      ]
+    },
+    {
+      "page": 27,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=27",
+      "char_count": 344,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p027_img01_9e26000ded8d.png",
+          "width": 2054,
+          "height": 529,
+          "bbox": [
+            56.28,
+            65.28,
+            549.12,
+            192.12
+          ],
+          "bbox_area_ratio": 0.129
+        }
+      ]
+    },
+    {
+      "page": 28,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=28",
+      "char_count": 3677,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 29,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=29",
+      "char_count": 3173,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 30,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=30",
+      "char_count": 3409,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 31,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=31",
+      "char_count": 3362,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 32,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=32",
+      "char_count": 580,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 33,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=33",
+      "char_count": 988,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p033_img01_6b8c83060127.png",
+          "width": 2054,
+          "height": 1011,
+          "bbox": [
+            60.48,
+            66.48,
+            553.32,
+            309.12
+          ],
+          "bbox_area_ratio": 0.2467
+        }
+      ]
+    },
+    {
+      "page": 34,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=34",
+      "char_count": 3470,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 35,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=35",
+      "char_count": 3842,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 36,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=36",
+      "char_count": 3602,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 37,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=37",
+      "char_count": 3501,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 38,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=38",
+      "char_count": 3484,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 39,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=39",
+      "char_count": 3131,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 40,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=40",
+      "char_count": 2384,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 41,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=41",
+      "char_count": 2302,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 42,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=42",
+      "char_count": 1637,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 43,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=43",
+      "char_count": 1029,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 44,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=44",
+      "char_count": 1064,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 45,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=45",
+      "char_count": 1519,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 46,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=46",
+      "char_count": 2906,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 47,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=47",
+      "char_count": 2901,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 48,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=48",
+      "char_count": 2615,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 49,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=49",
+      "char_count": 1897,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 50,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=50",
+      "char_count": 2091,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 51,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=51",
+      "char_count": 1839,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 52,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=52",
+      "char_count": 2422,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 53,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=53",
+      "char_count": 1887,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 54,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=54",
+      "char_count": 1831,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 55,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=55",
+      "char_count": 2275,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 56,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=56",
+      "char_count": 2297,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 57,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=57",
+      "char_count": 2396,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 58,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=58",
+      "char_count": 2186,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 59,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=59",
+      "char_count": 2180,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 60,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=60",
+      "char_count": 2658,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 61,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=61",
+      "char_count": 2427,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 62,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=62",
+      "char_count": 2022,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 63,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=63",
+      "char_count": 1839,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 64,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=64",
+      "char_count": 1466,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 65,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=65",
+      "char_count": 1587,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 66,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=66",
+      "char_count": 1899,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 67,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=67",
+      "char_count": 1898,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 68,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=68",
+      "char_count": 993,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 69,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=69",
+      "char_count": 45,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p069_img01_16de1f98e923.png",
+          "width": 2054,
+          "height": 609,
+          "bbox": [
+            62.28,
+            65.88,
+            555.12,
+            211.92
+          ],
+          "bbox_area_ratio": 0.1485
+        }
+      ]
+    },
+    {
+      "page": 70,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=70",
+      "char_count": 678,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p070_img01_ce783b99a3ce.png",
+          "width": 2054,
+          "height": 731,
+          "bbox": [
+            60.48,
+            65.28,
+            553.32,
+            240.72
+          ],
+          "bbox_area_ratio": 0.1784
+        }
+      ]
+    },
+    {
+      "page": 71,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=71",
+      "char_count": 1683,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 72,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=72",
+      "char_count": 3367,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 73,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=73",
+      "char_count": 1728,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 74,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=74",
+      "char_count": 1146,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p074_img01_a938b53a2769.png",
+          "width": 579,
+          "height": 583,
+          "bbox": [
+            90.0,
+            72.0,
+            521.97,
+            506.95
+          ],
+          "bbox_area_ratio": 0.3876
+        }
+      ]
+    },
+    {
+      "page": 75,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=75",
+      "char_count": 542,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p075_img01_8634b6e79a62.png",
+          "width": 907,
+          "height": 699,
+          "bbox": [
+            90.0,
+            336.75,
+            521.95,
+            669.55
+          ],
+          "bbox_area_ratio": 0.2966
+        }
+      ]
+    },
+    {
+      "page": 76,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=76",
+      "char_count": 652,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p076_img01_326efde7fde5.png",
+          "width": 2054,
+          "height": 699,
+          "bbox": [
+            59.88,
+            65.28,
+            552.72,
+            232.92
+          ],
+          "bbox_area_ratio": 0.1705
+        }
+      ]
+    },
+    {
+      "page": 77,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=77",
+      "char_count": 3115,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 78,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=78",
+      "char_count": 926,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p078_img01_afc2f74e5b9c.png",
+          "width": 850,
+          "height": 614,
+          "bbox": [
+            135.75,
+            452.76,
+            476.08,
+            697.2
+          ],
+          "bbox_area_ratio": 0.1716
+        }
+      ]
+    },
+    {
+      "page": 79,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=79",
+      "char_count": 2751,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p079_img01_34209fbb61e1.jpeg",
+          "width": 200,
+          "height": 175,
+          "bbox": [
+            205.5,
+            420.02,
+            405.75,
+            595.52
+          ],
+          "bbox_area_ratio": 0.0725
+        }
+      ]
+    },
+    {
+      "page": 80,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=80",
+      "char_count": 1923,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p080_img01_51341e5e3087.png",
+          "width": 902,
+          "height": 587,
+          "bbox": [
+            141.75,
+            171.54,
+            469.5,
+            385.29
+          ],
+          "bbox_area_ratio": 0.1445
+        }
+      ]
+    },
+    {
+      "page": 81,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=81",
+      "char_count": 885,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p081_img01_46ed0738f117.jpeg",
+          "width": 962,
+          "height": 346,
+          "bbox": [
+            76.5,
+            76.5,
+            544.5,
+            244.5
+          ],
+          "bbox_area_ratio": 0.1622
+        }
+      ]
+    },
+    {
+      "page": 82,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=82",
+      "char_count": 1182,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 83,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=83",
+      "char_count": 1287,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p083_img01_99d6849f905f.png",
+          "width": 320,
+          "height": 240,
+          "bbox": [
+            186.0,
+            76.5,
+            426.0,
+            256.5
+          ],
+          "bbox_area_ratio": 0.0891
+        }
+      ]
+    },
+    {
+      "page": 84,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=84",
+      "char_count": 1503,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 85,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=85",
+      "char_count": 1863,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p085_img01_995421be153e.png",
+          "width": 733,
+          "height": 486,
+          "bbox": [
+            164.25,
+            76.5,
+            447.0,
+            264.75
+          ],
+          "bbox_area_ratio": 0.1098
+        }
+      ]
+    },
+    {
+      "page": 86,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=86",
+      "char_count": 1196,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p086_img01_25fddaccae37.png",
+          "width": 790,
+          "height": 504,
+          "bbox": [
+            78.0,
+            76.5,
+            534.6,
+            367.5
+          ],
+          "bbox_area_ratio": 0.2741
+        }
+      ]
+    },
+    {
+      "page": 87,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=87",
+      "char_count": 1154,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p087_img01_29a1d820b556.png",
+          "width": 907,
+          "height": 699,
+          "bbox": [
+            90.0,
+            76.5,
+            521.95,
+            409.3
+          ],
+          "bbox_area_ratio": 0.2966
+        }
+      ]
+    },
+    {
+      "page": 88,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=88",
+      "char_count": 90,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p088_img01_9a57c11081a8.png",
+          "width": 907,
+          "height": 699,
+          "bbox": [
+            90.0,
+            76.5,
+            521.95,
+            409.3
+          ],
+          "bbox_area_ratio": 0.2966
+        }
+      ]
+    },
+    {
+      "page": 89,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=89",
+      "char_count": 1225,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p089_img01_33d93ee15825.png",
+          "width": 2054,
+          "height": 1024,
+          "bbox": [
+            59.28,
+            65.88,
+            552.12,
+            311.52
+          ],
+          "bbox_area_ratio": 0.2498
+        }
+      ]
+    },
+    {
+      "page": 90,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=90",
+      "char_count": 1837,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p090_img01_340fb287f985.jpeg",
+          "width": 975,
+          "height": 465,
+          "bbox": [
+            76.5,
+            140.75,
+            544.45,
+            363.9
+          ],
+          "bbox_area_ratio": 0.2154
+        }
+      ]
+    },
+    {
+      "page": 91,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=91",
+      "char_count": 2025,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 92,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=92",
+      "char_count": 2441,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p092_img01_b00ea2107b96.png",
+          "width": 869,
+          "height": 357,
+          "bbox": [
+            76.5,
+            362.15,
+            544.5,
+            554.15
+          ],
+          "bbox_area_ratio": 0.1854
+        }
+      ]
+    },
+    {
+      "page": 93,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=93",
+      "char_count": 2205,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p093_img01_2ec81fe5daca.png",
+          "width": 840,
+          "height": 552,
+          "bbox": [
+            126.0,
+            189.04,
+            485.95,
+            423.89
+          ],
+          "bbox_area_ratio": 0.1744
+        }
+      ]
+    },
+    {
+      "page": 94,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=94",
+      "char_count": 1908,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p094_img01_e8ac53b21097.png",
+          "width": 908,
+          "height": 471,
+          "bbox": [
+            76.5,
+            160.04,
+            544.5,
+            401.54
+          ],
+          "bbox_area_ratio": 0.2332
+        }
+      ]
+    },
+    {
+      "page": 95,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=95",
+      "char_count": 526,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 96,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=96",
+      "char_count": 924,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p096_img01_ad03605f1540.png",
+          "width": 2054,
+          "height": 736,
+          "bbox": [
+            57.48,
+            65.28,
+            550.32,
+            241.92
+          ],
+          "bbox_area_ratio": 0.1796
+        }
+      ]
+    },
+    {
+      "page": 97,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=97",
+      "char_count": 1733,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p097_img01_6b501f482cd5.jpeg",
+          "width": 600,
+          "height": 544,
+          "bbox": [
+            126.0,
+            178.69,
+            485.95,
+            505.34
+          ],
+          "bbox_area_ratio": 0.2426
+        }
+      ]
+    },
+    {
+      "page": 98,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=98",
+      "char_count": 1817,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p098_img01_42c05eee29ea.jpeg",
+          "width": 535,
+          "height": 384,
+          "bbox": [
+            126.0,
+            139.1,
+            485.93,
+            398.0
+          ],
+          "bbox_area_ratio": 0.1923
+        }
+      ]
+    },
+    {
+      "page": 99,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=99",
+      "char_count": 842,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p099_img01_565fec83cc81.png",
+          "width": 959,
+          "height": 571,
+          "bbox": [
+            90.0,
+            76.5,
+            521.97,
+            333.05
+          ],
+          "bbox_area_ratio": 0.2286
+        },
+        {
+          "file_name": "p099_img02_d1dd7af07802.jpeg",
+          "width": 265,
+          "height": 175,
+          "bbox": [
+            162.0,
+            422.36,
+            449.98,
+            613.26
+          ],
+          "bbox_area_ratio": 0.1134
+        }
+      ]
+    },
+    {
+      "page": 100,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=100",
+      "char_count": 2000,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p100_img01_3945ed1f7b3e.jpeg",
+          "width": 962,
+          "height": 722,
+          "bbox": [
+            90.0,
+            247.94,
+            521.97,
+            572.44
+          ],
+          "bbox_area_ratio": 0.2892
+        }
+      ]
+    },
+    {
+      "page": 101,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=101",
+      "char_count": 1389,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p101_img01_d073dcebcea2.jpeg",
+          "width": 524,
+          "height": 327,
+          "bbox": [
+            90.0,
+            247.94,
+            521.93,
+            519.29
+          ],
+          "bbox_area_ratio": 0.2418
+        }
+      ]
+    },
+    {
+      "page": 102,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=102",
+      "char_count": 604,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p102_img01_b6e865d397c2.png",
+          "width": 408,
+          "height": 216,
+          "bbox": [
+            108.0,
+            76.5,
+            503.5,
+            285.88
+          ],
+          "bbox_area_ratio": 0.1708
+        },
+        {
+          "file_name": "p102_img02_ed72910f59c3.png",
+          "width": 882,
+          "height": 665,
+          "bbox": [
+            117.0,
+            409.45,
+            494.72,
+            693.8
+          ],
+          "bbox_area_ratio": 0.2216
+        }
+      ]
+    },
+    {
+      "page": 103,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=103",
+      "char_count": 1553,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 104,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=104",
+      "char_count": 1062,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p104_img01_44c154befa53.png",
+          "width": 2054,
+          "height": 909,
+          "bbox": [
+            58.08,
+            64.68,
+            550.92,
+            282.72
+          ],
+          "bbox_area_ratio": 0.2217
+        }
+      ]
+    },
+    {
+      "page": 105,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=105",
+      "char_count": 1895,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p105_img01_693ab2fe7080.png",
+          "width": 385,
+          "height": 391,
+          "bbox": [
+            198.0,
+            285.24,
+            413.98,
+            503.93
+          ],
+          "bbox_area_ratio": 0.0974
+        }
+      ]
+    },
+    {
+      "page": 106,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=106",
+      "char_count": 1551,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p106_img01_d8c6facf9d0a.jpeg",
+          "width": 309,
+          "height": 288,
+          "bbox": [
+            198.0,
+            76.5,
+            413.95,
+            278.0
+          ],
+          "bbox_area_ratio": 0.0898
+        }
+      ]
+    },
+    {
+      "page": 107,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=107",
+      "char_count": 879,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p107_img01_0a8f7324e414.jpeg",
+          "width": 960,
+          "height": 465,
+          "bbox": [
+            90.0,
+            76.5,
+            521.97,
+            285.9
+          ],
+          "bbox_area_ratio": 0.1866
+        }
+      ]
+    },
+    {
+      "page": 108,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=108",
+      "char_count": 825,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p108_img01_3be93732b406.jpeg",
+          "width": 495,
+          "height": 720,
+          "bbox": [
+            162.0,
+            76.5,
+            449.99,
+            495.4
+          ],
+          "bbox_area_ratio": 0.2489
+        }
+      ]
+    },
+    {
+      "page": 109,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=109",
+      "char_count": 1112,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p109_img01_cf696d1b88e8.png",
+          "width": 678,
+          "height": 566,
+          "bbox": [
+            180.0,
+            76.5,
+            431.97,
+            288.6
+          ],
+          "bbox_area_ratio": 0.1103
+        },
+        {
+          "file_name": "p109_img02_1b69372e1f50.png",
+          "width": 813,
+          "height": 351,
+          "bbox": [
+            126.0,
+            423.6,
+            485.9,
+            578.85
+          ],
+          "bbox_area_ratio": 0.1153
+        }
+      ]
+    },
+    {
+      "page": 110,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=110",
+      "char_count": 641,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p110_img01_f63732d5613c.png",
+          "width": 393,
+          "height": 381,
+          "bbox": [
+            198.0,
+            76.5,
+            413.98,
+            287.1
+          ],
+          "bbox_area_ratio": 0.0938
+        },
+        {
+          "file_name": "p110_img02_a3caae97db42.png",
+          "width": 381,
+          "height": 331,
+          "bbox": [
+            162.0,
+            423.6,
+            449.99,
+            674.15
+          ],
+          "bbox_area_ratio": 0.1489
+        }
+      ]
+    },
+    {
+      "page": 111,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=111",
+      "char_count": 913,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p111_img01_8ed469015846.jpeg",
+          "width": 594,
+          "height": 717,
+          "bbox": [
+            162.0,
+            305.58,
+            450.0,
+            653.08
+          ],
+          "bbox_area_ratio": 0.2065
+        }
+      ]
+    },
+    {
+      "page": 112,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=112",
+      "char_count": 1092,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p112_img01_77560320d751.png",
+          "width": 686,
+          "height": 557,
+          "bbox": [
+            194.25,
+            147.4,
+            417.44,
+            329.05
+          ],
+          "bbox_area_ratio": 0.0836
+        },
+        {
+          "file_name": "p112_img02_33d7952da3ac.png",
+          "width": 651,
+          "height": 638,
+          "bbox": [
+            212.25,
+            501.8,
+            399.65,
+            684.48
+          ],
+          "bbox_area_ratio": 0.0706
+        }
+      ]
+    },
+    {
+      "page": 113,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=113",
+      "char_count": 1403,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p113_img01_a4b96f64dbdd.png",
+          "width": 614,
+          "height": 589,
+          "bbox": [
+            162.0,
+            370.43,
+            449.96,
+            648.38
+          ],
+          "bbox_area_ratio": 0.1651
+        }
+      ]
+    },
+    {
+      "page": 114,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=114",
+      "char_count": 1482,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p114_img01_df4811b3d331.png",
+          "width": 696,
+          "height": 654,
+          "bbox": [
+            162.0,
+            290.73,
+            449.99,
+            561.88
+          ],
+          "bbox_area_ratio": 0.1611
+        }
+      ]
+    },
+    {
+      "page": 115,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=115",
+      "char_count": 2325,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p115_img01_2992d85990be.png",
+          "width": 962,
+          "height": 601,
+          "bbox": [
+            90.0,
+            76.5,
+            521.94,
+            347.1
+          ],
+          "bbox_area_ratio": 0.2411
+        }
+      ]
+    },
+    {
+      "page": 116,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=116",
+      "char_count": 3513,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 117,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=117",
+      "char_count": 725,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p117_img01_e33915c6277e.png",
+          "width": 640,
+          "height": 480,
+          "bbox": [
+            126.0,
+            76.5,
+            485.93,
+            347.6
+          ],
+          "bbox_area_ratio": 0.2013
+        }
+      ]
+    },
+    {
+      "page": 118,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=118",
+      "char_count": 411,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p118_img01_9e26000ded8d.png",
+          "width": 2054,
+          "height": 529,
+          "bbox": [
+            59.28,
+            64.08,
+            552.12,
+            190.92
+          ],
+          "bbox_area_ratio": 0.129
+        }
+      ]
+    },
+    {
+      "page": 119,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=119",
+      "char_count": 1898,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p119_img01_82889f9a44fe.jpeg",
+          "width": 250,
+          "height": 187,
+          "bbox": [
+            162.0,
+            228.64,
+            449.97,
+            444.19
+          ],
+          "bbox_area_ratio": 0.1281
+        }
+      ]
+    },
+    {
+      "page": 120,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=120",
+      "char_count": 1622,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p120_img01_67210648a1d4.jpeg",
+          "width": 419,
+          "height": 325,
+          "bbox": [
+            90.0,
+            76.5,
+            521.94,
+            411.85
+          ],
+          "bbox_area_ratio": 0.2988
+        }
+      ]
+    },
+    {
+      "page": 121,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=121",
+      "char_count": 1744,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p121_img01_7bede6b726cd.png",
+          "width": 219,
+          "height": 238,
+          "bbox": [
+            198.0,
+            195.69,
+            413.98,
+            429.34
+          ],
+          "bbox_area_ratio": 0.1041
+        }
+      ]
+    },
+    {
+      "page": 122,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=122",
+      "char_count": 1205,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p122_img01_bea0751ed27c.jpeg",
+          "width": 600,
+          "height": 240,
+          "bbox": [
+            90.0,
+            76.5,
+            522.0,
+            249.0
+          ],
+          "bbox_area_ratio": 0.1537
+        },
+        {
+          "file_name": "p122_img02_b0fd81078a4d.jpeg",
+          "width": 336,
+          "height": 193,
+          "bbox": [
+            162.0,
+            338.36,
+            449.92,
+            503.16
+          ],
+          "bbox_area_ratio": 0.0979
+        }
+      ]
+    },
+    {
+      "page": 123,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=123",
+      "char_count": 677,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p123_img01_8b6169ae80d0.jpeg",
+          "width": 260,
+          "height": 154,
+          "bbox": [
+            198.0,
+            76.5,
+            413.95,
+            206.95
+          ],
+          "bbox_area_ratio": 0.0581
+        }
+      ]
+    },
+    {
+      "page": 124,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=124",
+      "char_count": 1054,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p124_img01_7d42d4e6406c.png",
+          "width": 2071,
+          "height": 991,
+          "bbox": [
+            59.28,
+            65.88,
+            556.32,
+            303.72
+          ],
+          "bbox_area_ratio": 0.2439
+        }
+      ]
+    },
+    {
+      "page": 125,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=125",
+      "char_count": 2225,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p125_img01_02fdebe78d8d.png",
+          "width": 851,
+          "height": 261,
+          "bbox": [
+            90.0,
+            421.03,
+            521.86,
+            553.43
+          ],
+          "bbox_area_ratio": 0.118
+        }
+      ]
+    },
+    {
+      "page": 126,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=126",
+      "char_count": 1971,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p126_img01_328b8f7e9a8a.png",
+          "width": 858,
+          "height": 436,
+          "bbox": [
+            162.0,
+            76.5,
+            449.97,
+            223.6
+          ],
+          "bbox_area_ratio": 0.0874
+        },
+        {
+          "file_name": "p126_img02_af3545faced3.jpeg",
+          "width": 550,
+          "height": 136,
+          "bbox": [
+            144.0,
+            465.65,
+            467.98,
+            545.15
+          ],
+          "bbox_area_ratio": 0.0531
+        }
+      ]
+    },
+    {
+      "page": 127,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=127",
+      "char_count": 538,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p127_img01_bed95f399773.jpeg",
+          "width": 690,
+          "height": 722,
+          "bbox": [
+            126.0,
+            126.45,
+            485.99,
+            506.25
+          ],
+          "bbox_area_ratio": 0.2821
+        }
+      ]
+    },
+    {
+      "page": 128,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=128",
+      "char_count": 1134,
+      "image_count": 3,
+      "images": [
+        {
+          "file_name": "p128_img01_a3afe339c7f1.png",
+          "width": 834,
+          "height": 333,
+          "bbox": [
+            126.0,
+            76.5,
+            485.93,
+            218.65
+          ],
+          "bbox_area_ratio": 0.1056
+        },
+        {
+          "file_name": "p128_img02_fe8825e41f8a.png",
+          "width": 866,
+          "height": 218,
+          "bbox": [
+            126.0,
+            366.6,
+            485.9,
+            459.65
+          ],
+          "bbox_area_ratio": 0.0691
+        },
+        {
+          "file_name": "p128_img03_7cf2a2a9fadf.png",
+          "width": 866,
+          "height": 234,
+          "bbox": [
+            126.0,
+            548.96,
+            485.91,
+            646.91
+          ],
+          "bbox_area_ratio": 0.0727
+        }
+      ]
+    },
+    {
+      "page": 129,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=129",
+      "char_count": 1148,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p129_img01_9a3221fc7e6c.png",
+          "width": 847,
+          "height": 569,
+          "bbox": [
+            97.5,
+            260.59,
+            513.85,
+            540.82
+          ],
+          "bbox_area_ratio": 0.2407
+        }
+      ]
+    },
+    {
+      "page": 130,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=130",
+      "char_count": 947,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p130_img01_6315d80d13a5.png",
+          "width": 976,
+          "height": 295,
+          "bbox": [
+            98.25,
+            78.63,
+            513.45,
+            204.0
+          ],
+          "bbox_area_ratio": 0.1074
+        },
+        {
+          "file_name": "p130_img02_74318a9a5ff8.png",
+          "width": 864,
+          "height": 415,
+          "bbox": [
+            90.0,
+            328.45,
+            521.72,
+            535.2
+          ],
+          "bbox_area_ratio": 0.1841
+        }
+      ]
+    },
+    {
+      "page": 131,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=131",
+      "char_count": 818,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p131_img01_7c97017528cb.png",
+          "width": 974,
+          "height": 266,
+          "bbox": [
+            90.46,
+            79.01,
+            522.0,
+            196.86
+          ],
+          "bbox_area_ratio": 0.1049
+        },
+        {
+          "file_name": "p131_img02_2aaaca7e6f14.png",
+          "width": 962,
+          "height": 722,
+          "bbox": [
+            90.0,
+            320.95,
+            521.99,
+            646.45
+          ],
+          "bbox_area_ratio": 0.2901
+        }
+      ]
+    },
+    {
+      "page": 132,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=132",
+      "char_count": 1561,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p132_img01_e64fe2f3e84e.jpeg",
+          "width": 962,
+          "height": 662,
+          "bbox": [
+            90.0,
+            215.99,
+            522.0,
+            512.99
+          ],
+          "bbox_area_ratio": 0.2647
+        }
+      ]
+    },
+    {
+      "page": 133,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=133",
+      "char_count": 928,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p133_img01_ef57672cd12f.png",
+          "width": 963,
+          "height": 723,
+          "bbox": [
+            90.0,
+            76.5,
+            521.98,
+            399.1
+          ],
+          "bbox_area_ratio": 0.2875
+        }
+      ]
+    },
+    {
+      "page": 134,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=134",
+      "char_count": 548,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p134_img01_134eef7dc6f8.png",
+          "width": 962,
+          "height": 723,
+          "bbox": [
+            126.0,
+            76.5,
+            485.96,
+            347.05
+          ],
+          "bbox_area_ratio": 0.2009
+        }
+      ]
+    },
+    {
+      "page": 135,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=135",
+      "char_count": 1056,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p135_img01_312a0c141410.jpeg",
+          "width": 962,
+          "height": 663,
+          "bbox": [
+            90.0,
+            76.5,
+            521.96,
+            375.55
+          ],
+          "bbox_area_ratio": 0.2665
+        }
+      ]
+    },
+    {
+      "page": 136,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=136",
+      "char_count": 587,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p136_img01_bfdd8204a262.png",
+          "width": 962,
+          "height": 722,
+          "bbox": [
+            103.5,
+            76.5,
+            508.08,
+            378.8
+          ],
+          "bbox_area_ratio": 0.2523
+        },
+        {
+          "file_name": "p136_img02_384b34f912ac.jpeg",
+          "width": 538,
+          "height": 305,
+          "bbox": [
+            131.25,
+            498.15,
+            480.55,
+            696.18
+          ],
+          "bbox_area_ratio": 0.1427
+        }
+      ]
+    },
+    {
+      "page": 137,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=137",
+      "char_count": 1353,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p137_img01_dbd8ed45425f.png",
+          "width": 966,
+          "height": 722,
+          "bbox": [
+            90.0,
+            184.69,
+            521.99,
+            506.09
+          ],
+          "bbox_area_ratio": 0.2864
+        }
+      ]
+    },
+    {
+      "page": 138,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=138",
+      "char_count": 834,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p138_img01_1477dcd2bd31.png",
+          "width": 962,
+          "height": 722,
+          "bbox": [
+            90.0,
+            76.5,
+            521.99,
+            397.9
+          ],
+          "bbox_area_ratio": 0.2864
+        }
+      ]
+    },
+    {
+      "page": 139,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=139",
+      "char_count": 1066,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p139_img01_8ed9cbcf994e.png",
+          "width": 964,
+          "height": 722,
+          "bbox": [
+            90.0,
+            76.5,
+            521.97,
+            398.4
+          ],
+          "bbox_area_ratio": 0.2869
+        }
+      ]
+    },
+    {
+      "page": 140,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=140",
+      "char_count": 1274,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p140_img01_5b89f7e6babd.png",
+          "width": 324,
+          "height": 443,
+          "bbox": [
+            184.5,
+            72.0,
+            427.5,
+            404.25
+          ],
+          "bbox_area_ratio": 0.1666
+        }
+      ]
+    },
+    {
+      "page": 141,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=141",
+      "char_count": 684,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 142,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=142",
+      "char_count": 377,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p142_img01_c73ea76b2c83.png",
+          "width": 2054,
+          "height": 726,
+          "bbox": [
+            58.08,
+            65.28,
+            550.92,
+            239.52
+          ],
+          "bbox_area_ratio": 0.1772
+        }
+      ]
+    },
+    {
+      "page": 143,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=143",
+      "char_count": 1642,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 144,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=144",
+      "char_count": 1294,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p144_img01_225b58758d5d.png",
+          "width": 877,
+          "height": 428,
+          "bbox": [
+            126.0,
+            76.5,
+            485.97,
+            252.15
+          ],
+          "bbox_area_ratio": 0.1304
+        },
+        {
+          "file_name": "p144_img02_96b3db793f0e.png",
+          "width": 562,
+          "height": 251,
+          "bbox": [
+            126.0,
+            488.15,
+            485.92,
+            648.5
+          ],
+          "bbox_area_ratio": 0.1191
+        }
+      ]
+    },
+    {
+      "page": 145,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=145",
+      "char_count": 1444,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p145_img01_bf1791413b1b.jpeg",
+          "width": 964,
+          "height": 323,
+          "bbox": [
+            90.0,
+            228.14,
+            521.87,
+            372.79
+          ],
+          "bbox_area_ratio": 0.1289
+        },
+        {
+          "file_name": "p145_img02_d1af923f80b8.png",
+          "width": 888,
+          "height": 368,
+          "bbox": [
+            90.0,
+            495.09,
+            521.98,
+            674.39
+          ],
+          "bbox_area_ratio": 0.1598
+        }
+      ]
+    },
+    {
+      "page": 146,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=146",
+      "char_count": 2431,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p146_img01_bd274f095c9e.png",
+          "width": 962,
+          "height": 600,
+          "bbox": [
+            105.75,
+            447.02,
+            505.7,
+            695.27
+          ],
+          "bbox_area_ratio": 0.2048
+        }
+      ]
+    },
+    {
+      "page": 147,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=147",
+      "char_count": 3104,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 148,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=148",
+      "char_count": 608,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p148_img01_e1ddef9cf0a7.png",
+          "width": 962,
+          "height": 600,
+          "bbox": [
+            117.0,
+            76.5,
+            494.75,
+            313.04
+          ],
+          "bbox_area_ratio": 0.1843
+        },
+        {
+          "file_name": "p148_img02_fd141af23b3a.png",
+          "width": 963,
+          "height": 620,
+          "bbox": [
+            115.5,
+            449.1,
+            496.22,
+            695.15
+          ],
+          "bbox_area_ratio": 0.1933
+        }
+      ]
+    },
+    {
+      "page": 149,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=149",
+      "char_count": 1628,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p149_img01_a7d5d6ff5a6f.png",
+          "width": 963,
+          "height": 600,
+          "bbox": [
+            93.0,
+            329.83,
+            519.2,
+            596.21
+          ],
+          "bbox_area_ratio": 0.2342
+        }
+      ]
+    },
+    {
+      "page": 150,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=150",
+      "char_count": 1127,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p150_img01_cff694edacec.png",
+          "width": 600,
+          "height": 253,
+          "bbox": [
+            126.0,
+            191.34,
+            485.99,
+            343.04
+          ],
+          "bbox_area_ratio": 0.1127
+        },
+        {
+          "file_name": "p150_img02_901619331d17.png",
+          "width": 600,
+          "height": 253,
+          "bbox": [
+            126.0,
+            426.2,
+            485.99,
+            577.9
+          ],
+          "bbox_area_ratio": 0.1127
+        }
+      ]
+    },
+    {
+      "page": 151,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=151",
+      "char_count": 533,
+      "image_count": 3,
+      "images": [
+        {
+          "file_name": "p151_img01_d85cbf6a03e5.png",
+          "width": 600,
+          "height": 253,
+          "bbox": [
+            126.0,
+            76.5,
+            485.88,
+            227.4
+          ],
+          "bbox_area_ratio": 0.112
+        },
+        {
+          "file_name": "p151_img02_08726730ab26.png",
+          "width": 600,
+          "height": 253,
+          "bbox": [
+            126.0,
+            298.71,
+            485.88,
+            449.61
+          ],
+          "bbox_area_ratio": 0.112
+        },
+        {
+          "file_name": "p151_img03_dac5a156e3a3.png",
+          "width": 600,
+          "height": 253,
+          "bbox": [
+            126.0,
+            520.92,
+            485.99,
+            672.61
+          ],
+          "bbox_area_ratio": 0.1127
+        }
+      ]
+    },
+    {
+      "page": 152,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=152",
+      "char_count": 1373,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p152_img01_58afcfbf746e.png",
+          "width": 706,
+          "height": 641,
+          "bbox": [
+            144.0,
+            160.04,
+            467.95,
+            455.09
+          ],
+          "bbox_area_ratio": 0.1972
+        }
+      ]
+    },
+    {
+      "page": 153,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=153",
+      "char_count": 817,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p153_img01_4fcc0cd59166.png",
+          "width": 2054,
+          "height": 761,
+          "bbox": [
+            58.68,
+            65.28,
+            551.52,
+            247.92
+          ],
+          "bbox_area_ratio": 0.1857
+        }
+      ]
+    },
+    {
+      "page": 154,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=154",
+      "char_count": 1848,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p154_img01_08454d8b344f.png",
+          "width": 965,
+          "height": 724,
+          "bbox": [
+            90.0,
+            342.48,
+            521.99,
+            665.78
+          ],
+          "bbox_area_ratio": 0.2881
+        }
+      ]
+    },
+    {
+      "page": 155,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=155",
+      "char_count": 1852,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p155_img01_4248ea102219.png",
+          "width": 965,
+          "height": 724,
+          "bbox": [
+            90.0,
+            311.18,
+            521.99,
+            634.48
+          ],
+          "bbox_area_ratio": 0.2881
+        }
+      ]
+    },
+    {
+      "page": 156,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=156",
+      "char_count": 1445,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p156_img01_677673581bae.png",
+          "width": 965,
+          "height": 724,
+          "bbox": [
+            90.0,
+            208.34,
+            521.99,
+            531.64
+          ],
+          "bbox_area_ratio": 0.2881
+        }
+      ]
+    },
+    {
+      "page": 157,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=157",
+      "char_count": 1827,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 158,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=158",
+      "char_count": 1961,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p158_img01_921eafb07774.png",
+          "width": 932,
+          "height": 575,
+          "bbox": [
+            90.0,
+            76.5,
+            521.95,
+            343.6
+          ],
+          "bbox_area_ratio": 0.238
+        }
+      ]
+    },
+    {
+      "page": 159,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=159",
+      "char_count": 1000,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p159_img01_a4acbb38e0f2.jpeg",
+          "width": 341,
+          "height": 215,
+          "bbox": [
+            126.0,
+            76.5,
+            485.94,
+            305.05
+          ],
+          "bbox_area_ratio": 0.1697
+        },
+        {
+          "file_name": "p159_img02_eb2c6b3a9e9e.jpeg",
+          "width": 962,
+          "height": 338,
+          "bbox": [
+            90.0,
+            414.8,
+            522.0,
+            567.8
+          ],
+          "bbox_area_ratio": 0.1364
+        }
+      ]
+    },
+    {
+      "page": 160,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=160",
+      "char_count": 2240,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 161,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=161",
+      "char_count": 452,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 162,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=162",
+      "char_count": 550,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p162_img01_e2e33385e201.png",
+          "width": 2054,
+          "height": 644,
+          "bbox": [
+            61.08,
+            65.28,
+            553.92,
+            219.72
+          ],
+          "bbox_area_ratio": 0.157
+        }
+      ]
+    },
+    {
+      "page": 163,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=163",
+      "char_count": 2050,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 164,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=164",
+      "char_count": 606,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p164_img01_e192584243e7.png",
+          "width": 965,
+          "height": 724,
+          "bbox": [
+            90.0,
+            76.5,
+            521.99,
+            399.8
+          ],
+          "bbox_area_ratio": 0.2881
+        }
+      ]
+    },
+    {
+      "page": 165,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=165",
+      "char_count": 515,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p165_img01_04ba675f8d3c.png",
+          "width": 965,
+          "height": 724,
+          "bbox": [
+            90.0,
+            76.5,
+            521.99,
+            399.8
+          ],
+          "bbox_area_ratio": 0.2881
+        }
+      ]
+    },
+    {
+      "page": 166,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=166",
+      "char_count": 989,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p166_img01_5152ee52278d.png",
+          "width": 965,
+          "height": 724,
+          "bbox": [
+            90.0,
+            76.5,
+            521.99,
+            399.8
+          ],
+          "bbox_area_ratio": 0.2881
+        }
+      ]
+    },
+    {
+      "page": 167,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=167",
+      "char_count": 194,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p167_img01_c7ed9fe4eee4.png",
+          "width": 965,
+          "height": 724,
+          "bbox": [
+            90.0,
+            76.5,
+            521.99,
+            399.8
+          ],
+          "bbox_area_ratio": 0.2881
+        }
+      ]
+    },
+    {
+      "page": 168,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=168",
+      "char_count": 401,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p168_img01_e34ea08944cd.png",
+          "width": 677,
+          "height": 625,
+          "bbox": [
+            90.0,
+            72.0,
+            521.95,
+            470.9
+          ],
+          "bbox_area_ratio": 0.3555
+        }
+      ]
+    },
+    {
+      "page": 169,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=169",
+      "char_count": 1902,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p169_img01_fdea77407122.png",
+          "width": 962,
+          "height": 651,
+          "bbox": [
+            90.0,
+            178.69,
+            521.95,
+            472.89
+          ],
+          "bbox_area_ratio": 0.2622
+        }
+      ]
+    },
+    {
+      "page": 170,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=170",
+      "char_count": 1668,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p170_img01_52fce273260f.png",
+          "width": 965,
+          "height": 724,
+          "bbox": [
+            90.0,
+            113.8,
+            521.99,
+            437.1
+          ],
+          "bbox_area_ratio": 0.2881
+        }
+      ]
+    },
+    {
+      "page": 171,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=171",
+      "char_count": 1114,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p171_img01_9f551f1d59ea.png",
+          "width": 962,
+          "height": 651,
+          "bbox": [
+            90.0,
+            76.5,
+            521.95,
+            370.7
+          ],
+          "bbox_area_ratio": 0.2622
+        }
+      ]
+    },
+    {
+      "page": 172,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=172",
+      "char_count": 1586,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p172_img01_2ab512340119.png",
+          "width": 962,
+          "height": 723,
+          "bbox": [
+            90.0,
+            76.5,
+            521.94,
+            401.15
+          ],
+          "bbox_area_ratio": 0.2893
+        }
+      ]
+    },
+    {
+      "page": 173,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=173",
+      "char_count": 1775,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 174,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=174",
+      "char_count": 487,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p174_img01_22589c61d271.png",
+          "width": 2054,
+          "height": 576,
+          "bbox": [
+            59.28,
+            65.28,
+            552.12,
+            203.52
+          ],
+          "bbox_area_ratio": 0.1406
+        }
+      ]
+    },
+    {
+      "page": 175,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=175",
+      "char_count": 1980,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 176,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=176",
+      "char_count": 896,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p176_img01_a2383a8f4e30.png",
+          "width": 282,
+          "height": 571,
+          "bbox": [
+            198.0,
+            76.5,
+            414.0,
+            514.1
+          ],
+          "bbox_area_ratio": 0.195
+        }
+      ]
+    },
+    {
+      "page": 177,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=177",
+      "char_count": 947,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p177_img01_6ad4a45eb330.png",
+          "width": 511,
+          "height": 478,
+          "bbox": [
+            198.0,
+            76.5,
+            413.95,
+            279.75
+          ],
+          "bbox_area_ratio": 0.0906
+        },
+        {
+          "file_name": "p177_img02_9a0075c9d8a2.png",
+          "width": 490,
+          "height": 478,
+          "bbox": [
+            198.0,
+            397.45,
+            413.96,
+            609.2
+          ],
+          "bbox_area_ratio": 0.0943
+        }
+      ]
+    },
+    {
+      "page": 178,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=178",
+      "char_count": 858,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p178_img01_9524932a83d6.png",
+          "width": 499,
+          "height": 478,
+          "bbox": [
+            198.0,
+            126.45,
+            413.99,
+            334.75
+          ],
+          "bbox_area_ratio": 0.0928
+        },
+        {
+          "file_name": "p178_img02_54f8056dc98f.png",
+          "width": 499,
+          "height": 478,
+          "bbox": [
+            198.0,
+            419.95,
+            413.95,
+            625.75
+          ],
+          "bbox_area_ratio": 0.0917
+        }
+      ]
+    },
+    {
+      "page": 179,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=179",
+      "char_count": 2112,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p179_img01_d404a1a84eb9.jpeg",
+          "width": 881,
+          "height": 659,
+          "bbox": [
+            162.0,
+            252.29,
+            449.95,
+            467.64
+          ],
+          "bbox_area_ratio": 0.1279
+        }
+      ]
+    },
+    {
+      "page": 180,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=180",
+      "char_count": 350,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p180_img01_9e26000ded8d.png",
+          "width": 2054,
+          "height": 529,
+          "bbox": [
+            57.48,
+            65.28,
+            550.32,
+            192.12
+          ],
+          "bbox_area_ratio": 0.129
+        }
+      ]
+    },
+    {
+      "page": 181,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=181",
+      "char_count": 1188,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p181_img01_356d884fd44e.png",
+          "width": 271,
+          "height": 346,
+          "bbox": [
+            198.0,
+            255.59,
+            413.96,
+            533.99
+          ],
+          "bbox_area_ratio": 0.124
+        }
+      ]
+    },
+    {
+      "page": 182,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=182",
+      "char_count": 1096,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p182_img01_9dd14439e094.png",
+          "width": 1197,
+          "height": 941,
+          "bbox": [
+            90.0,
+            76.5,
+            521.97,
+            414.65
+          ],
+          "bbox_area_ratio": 0.3014
+        }
+      ]
+    },
+    {
+      "page": 183,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=183",
+      "char_count": 867,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p183_img01_bbea2cc2e85f.png",
+          "width": 902,
+          "height": 434,
+          "bbox": [
+            162.0,
+            84.03,
+            449.93,
+            222.88
+          ],
+          "bbox_area_ratio": 0.0825
+        },
+        {
+          "file_name": "p183_img02_678abbe3af08.png",
+          "width": 955,
+          "height": 489,
+          "bbox": [
+            126.0,
+            382.75,
+            478.25,
+            563.07
+          ],
+          "bbox_area_ratio": 0.131
+        }
+      ]
+    },
+    {
+      "page": 184,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=184",
+      "char_count": 1297,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p184_img01_cf3adee2aae6.png",
+          "width": 876,
+          "height": 549,
+          "bbox": [
+            126.0,
+            76.5,
+            486.0,
+            266.25
+          ],
+          "bbox_area_ratio": 0.1409
+        }
+      ]
+    },
+    {
+      "page": 185,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=185",
+      "char_count": 790,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p185_img01_024007e55e3e.png",
+          "width": 752,
+          "height": 452,
+          "bbox": [
+            90.0,
+            76.5,
+            522.0,
+            318.0
+          ],
+          "bbox_area_ratio": 0.2152
+        }
+      ]
+    },
+    {
+      "page": 186,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=186",
+      "char_count": 1583,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p186_img01_51effb7bfa98.jpeg",
+          "width": 976,
+          "height": 831,
+          "bbox": [
+            90.0,
+            76.5,
+            522.0,
+            443.96
+          ],
+          "bbox_area_ratio": 0.3275
+        }
+      ]
+    },
+    {
+      "page": 187,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=187",
+      "char_count": 1357,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p187_img01_82e288e337bb.jpeg",
+          "width": 976,
+          "height": 389,
+          "bbox": [
+            90.0,
+            177.54,
+            522.0,
+            349.77
+          ],
+          "bbox_area_ratio": 0.1535
+        }
+      ]
+    },
+    {
+      "page": 188,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=188",
+      "char_count": 1187,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p188_img01_3c7f0411708b.jpeg",
+          "width": 976,
+          "height": 389,
+          "bbox": [
+            90.0,
+            76.5,
+            522.0,
+            248.73
+          ],
+          "bbox_area_ratio": 0.1535
+        },
+        {
+          "file_name": "p188_img02_9a8b51e1b1ca.jpeg",
+          "width": 971,
+          "height": 389,
+          "bbox": [
+            92.0,
+            414.75,
+            522.0,
+            586.98
+          ],
+          "bbox_area_ratio": 0.1528
+        }
+      ]
+    },
+    {
+      "page": 189,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=189",
+      "char_count": 1360,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p189_img01_c0749ec1fd4e.jpeg",
+          "width": 976,
+          "height": 389,
+          "bbox": [
+            90.0,
+            76.5,
+            522.0,
+            248.73
+          ],
+          "bbox_area_ratio": 0.1535
+        },
+        {
+          "file_name": "p189_img02_e4628b5cc3b3.jpeg",
+          "width": 325,
+          "height": 124,
+          "bbox": [
+            117.0,
+            516.44,
+            494.4,
+            660.44
+          ],
+          "bbox_area_ratio": 0.1121
+        }
+      ]
+    },
+    {
+      "page": 190,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=190",
+      "char_count": 1295,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p190_img01_49b397943662.png",
+          "width": 392,
+          "height": 308,
+          "bbox": [
+            162.0,
+            203.99,
+            449.96,
+            429.94
+          ],
+          "bbox_area_ratio": 0.1342
+        }
+      ]
+    },
+    {
+      "page": 191,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=191",
+      "char_count": 602,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p191_img01_fef235dcfce8.png",
+          "width": 680,
+          "height": 680,
+          "bbox": [
+            161.85,
+            76.5,
+            449.85,
+            364.5
+          ],
+          "bbox_area_ratio": 0.1711
+        }
+      ]
+    },
+    {
+      "page": 192,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=192",
+      "char_count": 781,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p192_img01_e6f9a1fb35c4.png",
+          "width": 620,
+          "height": 620,
+          "bbox": [
+            162.0,
+            76.5,
+            450.0,
+            364.5
+          ],
+          "bbox_area_ratio": 0.1711
+        }
+      ]
+    },
+    {
+      "page": 193,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=193",
+      "char_count": 944,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p193_img01_6a3e1a2417c6.png",
+          "width": 699,
+          "height": 641,
+          "bbox": [
+            162.0,
+            76.5,
+            449.93,
+            340.7
+          ],
+          "bbox_area_ratio": 0.1569
+        }
+      ]
+    },
+    {
+      "page": 194,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=194",
+      "char_count": 480,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p194_img01_c8f4b7a0efa2.png",
+          "width": 719,
+          "height": 557,
+          "bbox": [
+            162.0,
+            76.5,
+            449.74,
+            299.25
+          ],
+          "bbox_area_ratio": 0.1322
+        },
+        {
+          "file_name": "p194_img02_b79407e1139e.jpeg",
+          "width": 546,
+          "height": 484,
+          "bbox": [
+            162.0,
+            436.1,
+            449.98,
+            691.5
+          ],
+          "bbox_area_ratio": 0.1517
+        }
+      ]
+    },
+    {
+      "page": 195,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=195",
+      "char_count": 1642,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p195_img01_9cc781305099.png",
+          "width": 769,
+          "height": 497,
+          "bbox": [
+            162.0,
+            295.4,
+            449.97,
+            483.35
+          ],
+          "bbox_area_ratio": 0.1117
+        }
+      ]
+    },
+    {
+      "page": 196,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=196",
+      "char_count": 1020,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p196_img01_3cd9fdcc17a2.jpeg",
+          "width": 690,
+          "height": 632,
+          "bbox": [
+            162.0,
+            184.76,
+            449.96,
+            448.51
+          ],
+          "bbox_area_ratio": 0.1567
+        }
+      ]
+    },
+    {
+      "page": 197,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=197",
+      "char_count": 975,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p197_img01_62017ecc262e.png",
+          "width": 603,
+          "height": 551,
+          "bbox": [
+            162.0,
+            76.5,
+            449.98,
+            339.65
+          ],
+          "bbox_area_ratio": 0.1563
+        }
+      ]
+    },
+    {
+      "page": 198,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=198",
+      "char_count": 219,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p198_img01_9e26000ded8d.png",
+          "width": 2054,
+          "height": 529,
+          "bbox": [
+            61.08,
+            63.48,
+            553.92,
+            190.32
+          ],
+          "bbox_area_ratio": 0.129
+        }
+      ]
+    },
+    {
+      "page": 199,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=199",
+      "char_count": 3342,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 200,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=200",
+      "char_count": 1071,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p200_img01_faef5d1c529c.png",
+          "width": 516,
+          "height": 322,
+          "bbox": [
+            126.0,
+            76.5,
+            486.0,
+            301.15
+          ],
+          "bbox_area_ratio": 0.1669
+        },
+        {
+          "file_name": "p200_img02_cf3bc3253caf.png",
+          "width": 522,
+          "height": 266,
+          "bbox": [
+            126.0,
+            499.7,
+            485.9,
+            683.1
+          ],
+          "bbox_area_ratio": 0.1362
+        }
+      ]
+    },
+    {
+      "page": 201,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=201",
+      "char_count": 1605,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p201_img01_52ab83e958d4.png",
+          "width": 267,
+          "height": 161,
+          "bbox": [
+            198.0,
+            177.04,
+            413.94,
+            306.44
+          ],
+          "bbox_area_ratio": 0.0576
+        },
+        {
+          "file_name": "p201_img02_715dfb6a4297.jpeg",
+          "width": 995,
+          "height": 657,
+          "bbox": [
+            126.0,
+            345.45,
+            485.94,
+            583.1
+          ],
+          "bbox_area_ratio": 0.1765
+        }
+      ]
+    },
+    {
+      "page": 202,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=202",
+      "char_count": 3868,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 203,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=203",
+      "char_count": 1101,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p203_img01_76d4ddb38adb.png",
+          "width": 529,
+          "height": 511,
+          "bbox": [
+            162.0,
+            76.5,
+            450.0,
+            354.7
+          ],
+          "bbox_area_ratio": 0.1653
+        }
+      ]
+    },
+    {
+      "page": 204,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=204",
+      "char_count": 535,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p204_img01_b6b3640bc5da.png",
+          "width": 478,
+          "height": 550,
+          "bbox": [
+            162.0,
+            76.5,
+            449.77,
+            407.62
+          ],
+          "bbox_area_ratio": 0.1966
+        }
+      ]
+    },
+    {
+      "page": 205,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=205",
+      "char_count": 1693,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p205_img01_24ed0f4afc6d.png",
+          "width": 503,
+          "height": 646,
+          "bbox": [
+            162.0,
+            76.5,
+            449.98,
+            446.35
+          ],
+          "bbox_area_ratio": 0.2197
+        }
+      ]
+    },
+    {
+      "page": 206,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=206",
+      "char_count": 2118,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p206_img01_4a4fbba65cd2.png",
+          "width": 534,
+          "height": 518,
+          "bbox": [
+            162.0,
+            76.5,
+            449.98,
+            355.85
+          ],
+          "bbox_area_ratio": 0.166
+        }
+      ]
+    },
+    {
+      "page": 207,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=207",
+      "char_count": 1979,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p207_img01_29478b600a26.png",
+          "width": 532,
+          "height": 518,
+          "bbox": [
+            162.0,
+            226.99,
+            449.98,
+            507.39
+          ],
+          "bbox_area_ratio": 0.1666
+        }
+      ]
+    },
+    {
+      "page": 208,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=208",
+      "char_count": 2236,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p208_img01_7f78ff1b1a7b.png",
+          "width": 624,
+          "height": 288,
+          "bbox": [
+            90.0,
+            157.74,
+            521.92,
+            357.09
+          ],
+          "bbox_area_ratio": 0.1776
+        }
+      ]
+    },
+    {
+      "page": 209,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=209",
+      "char_count": 1179,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p209_img01_5e4cdfc31479.png",
+          "width": 385,
+          "height": 625,
+          "bbox": [
+            183.0,
+            227.49,
+            429.4,
+            627.49
+          ],
+          "bbox_area_ratio": 0.2033
+        }
+      ]
+    },
+    {
+      "page": 210,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=210",
+      "char_count": 1878,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p210_img01_bc092193ad66.png",
+          "width": 304,
+          "height": 452,
+          "bbox": [
+            198.0,
+            265.44,
+            413.97,
+            586.69
+          ],
+          "bbox_area_ratio": 0.1431
+        }
+      ]
+    },
+    {
+      "page": 211,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=211",
+      "char_count": 2659,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p211_img01_436342a55254.jpeg",
+          "width": 1200,
+          "height": 671,
+          "bbox": [
+            96.0,
+            372.78,
+            515.43,
+            607.43
+          ],
+          "bbox_area_ratio": 0.2031
+        }
+      ]
+    },
+    {
+      "page": 212,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=212",
+      "char_count": 2208,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p212_img01_19f6f55d67af.jpeg",
+          "width": 1174,
+          "height": 884,
+          "bbox": [
+            113.25,
+            76.5,
+            498.1,
+            365.14
+          ],
+          "bbox_area_ratio": 0.2292
+        }
+      ]
+    },
+    {
+      "page": 213,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=213",
+      "char_count": 2165,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p213_img01_f9699b3e9eb9.png",
+          "width": 516,
+          "height": 318,
+          "bbox": [
+            90.0,
+            424.88,
+            522.0,
+            691.22
+          ],
+          "bbox_area_ratio": 0.2374
+        }
+      ]
+    },
+    {
+      "page": 214,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=214",
+      "char_count": 738,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p214_img01_805558a425c4.jpeg",
+          "width": 474,
+          "height": 353,
+          "bbox": [
+            126.0,
+            76.5,
+            485.98,
+            346.7
+          ],
+          "bbox_area_ratio": 0.2007
+        }
+      ]
+    },
+    {
+      "page": 215,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=215",
+      "char_count": 601,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p215_img01_3842db3d7cb7.png",
+          "width": 2054,
+          "height": 706,
+          "bbox": [
+            61.68,
+            64.08,
+            554.52,
+            233.52
+          ],
+          "bbox_area_ratio": 0.1723
+        }
+      ]
+    },
+    {
+      "page": 216,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=216",
+      "char_count": 2305,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p216_img01_552e3ca01ddd.jpeg",
+          "width": 700,
+          "height": 332,
+          "bbox": [
+            90.0,
+            350.78,
+            521.95,
+            555.68
+          ],
+          "bbox_area_ratio": 0.1826
+        }
+      ]
+    },
+    {
+      "page": 217,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=217",
+      "char_count": 2575,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p217_img01_889ce0942f0f.jpeg",
+          "width": 700,
+          "height": 332,
+          "bbox": [
+            90.0,
+            76.5,
+            521.95,
+            281.4
+          ],
+          "bbox_area_ratio": 0.1826
+        }
+      ]
+    },
+    {
+      "page": 218,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=218",
+      "char_count": 3612,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 219,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=219",
+      "char_count": 3795,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 220,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=220",
+      "char_count": 3798,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 221,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=221",
+      "char_count": 2240,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p221_img01_ef92f9e57a59.jpeg",
+          "width": 689,
+          "height": 582,
+          "bbox": [
+            162.0,
+            237.59,
+            450.0,
+            480.59
+          ],
+          "bbox_area_ratio": 0.1444
+        }
+      ]
+    },
+    {
+      "page": 222,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=222",
+      "char_count": 1376,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p222_img01_7d4e7e6698a0.jpeg",
+          "width": 684,
+          "height": 531,
+          "bbox": [
+            162.0,
+            113.8,
+            449.97,
+            337.5
+          ],
+          "bbox_area_ratio": 0.1329
+        }
+      ]
+    },
+    {
+      "page": 223,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=223",
+      "char_count": 771,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p223_img01_0c013906d0ea.jpeg",
+          "width": 690,
+          "height": 436,
+          "bbox": [
+            144.0,
+            76.5,
+            467.97,
+            281.15
+          ],
+          "bbox_area_ratio": 0.1368
+        },
+        {
+          "file_name": "p223_img02_a3c26f568ae0.jpeg",
+          "width": 688,
+          "height": 436,
+          "bbox": [
+            144.0,
+            366.41,
+            468.0,
+            571.51
+          ],
+          "bbox_area_ratio": 0.1371
+        }
+      ]
+    },
+    {
+      "page": 224,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=224",
+      "char_count": 2677,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 225,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=225",
+      "char_count": 1897,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p225_img01_6b141ef37a76.jpeg",
+          "width": 773,
+          "height": 506,
+          "bbox": [
+            76.5,
+            76.5,
+            544.34,
+            382.75
+          ],
+          "bbox_area_ratio": 0.2956
+        }
+      ]
+    },
+    {
+      "page": 226,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=226",
+      "char_count": 2300,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 227,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=227",
+      "char_count": 200,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p227_img01_ffba680aed77.jpeg",
+          "width": 640,
+          "height": 377,
+          "bbox": [
+            90.0,
+            76.5,
+            521.95,
+            330.55
+          ],
+          "bbox_area_ratio": 0.2264
+        },
+        {
+          "file_name": "p227_img02_7e898b6b0092.jpeg",
+          "width": 1152,
+          "height": 720,
+          "bbox": [
+            90.0,
+            369.41,
+            522.0,
+            639.41
+          ],
+          "bbox_area_ratio": 0.2406
+        }
+      ]
+    },
+    {
+      "page": 228,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=228",
+      "char_count": 3287,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 229,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=229",
+      "char_count": 305,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p229_img01_ab73545ccc30.png",
+          "width": 2054,
+          "height": 611,
+          "bbox": [
+            61.08,
+            62.88,
+            553.92,
+            209.52
+          ],
+          "bbox_area_ratio": 0.1491
+        }
+      ]
+    },
+    {
+      "page": 230,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=230",
+      "char_count": 1604,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p230_img01_2fba36cd71b7.jpeg",
+          "width": 553,
+          "height": 371,
+          "bbox": [
+            126.0,
+            380.78,
+            485.99,
+            622.29
+          ],
+          "bbox_area_ratio": 0.1794
+        }
+      ]
+    },
+    {
+      "page": 231,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=231",
+      "char_count": 2438,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p231_img01_279f7c73e29e.jpeg",
+          "width": 878,
+          "height": 447,
+          "bbox": [
+            144.0,
+            76.5,
+            467.93,
+            241.5
+          ],
+          "bbox_area_ratio": 0.1103
+        }
+      ]
+    },
+    {
+      "page": 232,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=232",
+      "char_count": 613,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p232_img01_e086cad67129.jpeg",
+          "width": 1196,
+          "height": 739,
+          "bbox": [
+            90.0,
+            76.5,
+            521.99,
+            343.4
+          ],
+          "bbox_area_ratio": 0.2379
+        },
+        {
+          "file_name": "p232_img02_d27cd6d99ccd.jpeg",
+          "width": 696,
+          "height": 405,
+          "bbox": [
+            126.0,
+            382.91,
+            486.0,
+            592.41
+          ],
+          "bbox_area_ratio": 0.1556
+        }
+      ]
+    },
+    {
+      "page": 233,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=233",
+      "char_count": 644,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p233_img01_4f5c25fa6233.jpeg",
+          "width": 566,
+          "height": 288,
+          "bbox": [
+            90.0,
+            76.5,
+            521.98,
+            295.6
+          ],
+          "bbox_area_ratio": 0.1953
+        },
+        {
+          "file_name": "p233_img02_544a091f609c.jpeg",
+          "width": 800,
+          "height": 600,
+          "bbox": [
+            126.0,
+            334.91,
+            485.98,
+            605.11
+          ],
+          "bbox_area_ratio": 0.2007
+        }
+      ]
+    },
+    {
+      "page": 234,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=234",
+      "char_count": 1782,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p234_img01_2c8ffc920441.jpeg",
+          "width": 574,
+          "height": 425,
+          "bbox": [
+            126.0,
+            252.79,
+            486.0,
+            519.34
+          ],
+          "bbox_area_ratio": 0.198
+        }
+      ]
+    },
+    {
+      "page": 235,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=235",
+      "char_count": 1139,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p235_img01_ce5a3be954dc.jpeg",
+          "width": 950,
+          "height": 649,
+          "bbox": [
+            126.0,
+            76.5,
+            485.95,
+            321.45
+          ],
+          "bbox_area_ratio": 0.1819
+        }
+      ]
+    },
+    {
+      "page": 236,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=236",
+      "char_count": 669,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p236_img01_ecda36f0ba47.jpeg",
+          "width": 540,
+          "height": 417,
+          "bbox": [
+            126.0,
+            76.5,
+            485.97,
+            354.85
+          ],
+          "bbox_area_ratio": 0.2067
+        },
+        {
+          "file_name": "p236_img02_c4ccac4a7bc5.jpeg",
+          "width": 684,
+          "height": 394,
+          "bbox": [
+            126.0,
+            489.95,
+            485.94,
+            697.3
+          ],
+          "bbox_area_ratio": 0.154
+        }
+      ]
+    },
+    {
+      "page": 237,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=237",
+      "char_count": 3663,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 238,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=238",
+      "char_count": 3539,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 239,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=239",
+      "char_count": 2399,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p239_img01_d2a41dc5ccd9.jpeg",
+          "width": 550,
+          "height": 411,
+          "bbox": [
+            126.0,
+            76.5,
+            485.93,
+            345.15
+          ],
+          "bbox_area_ratio": 0.1995
+        }
+      ]
+    },
+    {
+      "page": 240,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=240",
+      "char_count": 2202,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 241,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=241",
+      "char_count": 1568,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p241_img01_012b08af343f.png",
+          "width": 2054,
+          "height": 1396,
+          "bbox": [
+            61.08,
+            63.48,
+            553.92,
+            398.52
+          ],
+          "bbox_area_ratio": 0.3407
+        }
+      ]
+    },
+    {
+      "page": 242,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=242",
+      "char_count": 2270,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p242_img01_ccbadb29375b.jpeg",
+          "width": 393,
+          "height": 214,
+          "bbox": [
+            126.0,
+            432.02,
+            485.92,
+            629.22
+          ],
+          "bbox_area_ratio": 0.1464
+        }
+      ]
+    },
+    {
+      "page": 243,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=243",
+      "char_count": 1660,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p243_img01_469f0402e1f8.jpeg",
+          "width": 381,
+          "height": 215,
+          "bbox": [
+            126.0,
+            76.5,
+            485.92,
+            279.75
+          ],
+          "bbox_area_ratio": 0.1509
+        }
+      ]
+    },
+    {
+      "page": 244,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=244",
+      "char_count": 627,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p244_img01_720f447c7c52.jpeg",
+          "width": 1080,
+          "height": 722,
+          "bbox": [
+            126.0,
+            76.5,
+            485.94,
+            320.7
+          ],
+          "bbox_area_ratio": 0.1813
+        },
+        {
+          "file_name": "p244_img02_b156d76f4504.png",
+          "width": 398,
+          "height": 250,
+          "bbox": [
+            126.0,
+            431.3,
+            485.98,
+            659.5
+          ],
+          "bbox_area_ratio": 0.1695
+        }
+      ]
+    },
+    {
+      "page": 245,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=245",
+      "char_count": 1286,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p245_img01_9f9262e38ba4.png",
+          "width": 379,
+          "height": 221,
+          "bbox": [
+            162.0,
+            254.44,
+            449.94,
+            421.89
+          ],
+          "bbox_area_ratio": 0.0995
+        }
+      ]
+    },
+    {
+      "page": 246,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=246",
+      "char_count": 2168,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p246_img01_cf309597448e.png",
+          "width": 364,
+          "height": 474,
+          "bbox": [
+            198.0,
+            76.5,
+            413.99,
+            356.85
+          ],
+          "bbox_area_ratio": 0.1249
+        }
+      ]
+    },
+    {
+      "page": 247,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=247",
+      "char_count": 3086,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 248,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=248",
+      "char_count": 1867,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p248_img01_9a0a965fe596.png",
+          "width": 532,
+          "height": 328,
+          "bbox": [
+            126.0,
+            76.5,
+            485.94,
+            298.4
+          ],
+          "bbox_area_ratio": 0.1648
+        }
+      ]
+    },
+    {
+      "page": 249,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=249",
+      "char_count": 1743,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p249_img01_b7d5e1628f33.jpeg",
+          "width": 344,
+          "height": 328,
+          "bbox": [
+            162.0,
+            76.5,
+            450.0,
+            351.1
+          ],
+          "bbox_area_ratio": 0.1632
+        }
+      ]
+    },
+    {
+      "page": 250,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=250",
+      "char_count": 1223,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 251,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=251",
+      "char_count": 269,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p251_img01_231b6cab0644.png",
+          "width": 2054,
+          "height": 476,
+          "bbox": [
+            58.08,
+            65.88,
+            550.92,
+            180.12
+          ],
+          "bbox_area_ratio": 0.1162
+        }
+      ]
+    },
+    {
+      "page": 252,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=252",
+      "char_count": 3394,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 253,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=253",
+      "char_count": 4038,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 254,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=254",
+      "char_count": 3782,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 255,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=255",
+      "char_count": 1261,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p255_img01_0def796564fe.jpeg",
+          "width": 991,
+          "height": 723,
+          "bbox": [
+            90.0,
+            72.0,
+            521.97,
+            387.15
+          ],
+          "bbox_area_ratio": 0.2809
+        }
+      ]
+    },
+    {
+      "page": 256,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=256",
+      "char_count": 1983,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p256_img01_b0ee063db39b.jpeg",
+          "width": 993,
+          "height": 543,
+          "bbox": [
+            90.0,
+            72.0,
+            521.98,
+            308.2
+          ],
+          "bbox_area_ratio": 0.2105
+        }
+      ]
+    },
+    {
+      "page": 257,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=257",
+      "char_count": 2091,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p257_img01_4da7b781d356.jpeg",
+          "width": 889,
+          "height": 740,
+          "bbox": [
+            161.25,
+            426.02,
+            450.37,
+            667.67
+          ],
+          "bbox_area_ratio": 0.1441
+        }
+      ]
+    },
+    {
+      "page": 258,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=258",
+      "char_count": 613,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 259,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=259",
+      "char_count": 580,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p259_img01_ad03605f1540.png",
+          "width": 2054,
+          "height": 736,
+          "bbox": [
+            59.88,
+            66.48,
+            552.72,
+            243.12
+          ],
+          "bbox_area_ratio": 0.1796
+        }
+      ]
+    },
+    {
+      "page": 260,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=260",
+      "char_count": 1190,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p260_img01_ab02a610ded9.jpeg",
+          "width": 615,
+          "height": 608,
+          "bbox": [
+            126.0,
+            72.0,
+            485.98,
+            428.8
+          ],
+          "bbox_area_ratio": 0.265
+        }
+      ]
+    },
+    {
+      "page": 261,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=261",
+      "char_count": 3437,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 262,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=262",
+      "char_count": 3238,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 263,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=263",
+      "char_count": 2174,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 264,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=264",
+      "char_count": 746,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p264_img01_0bb88fc5cfb4.png",
+          "width": 2054,
+          "height": 801,
+          "bbox": [
+            59.88,
+            65.88,
+            552.72,
+            258.12
+          ],
+          "bbox_area_ratio": 0.1955
+        }
+      ]
+    },
+    {
+      "page": 265,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=265",
+      "char_count": 1419,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p265_img01_ed407a710fb8.jpeg",
+          "width": 861,
+          "height": 326,
+          "bbox": [
+            90.0,
+            203.99,
+            521.67,
+            366.6
+          ],
+          "bbox_area_ratio": 0.1448
+        }
+      ]
+    },
+    {
+      "page": 266,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=266",
+      "char_count": 2670,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p266_img01_1c79787fc5fe.jpeg",
+          "width": 848,
+          "height": 427,
+          "bbox": [
+            90.0,
+            76.5,
+            521.92,
+            293.5
+          ],
+          "bbox_area_ratio": 0.1934
+        }
+      ]
+    },
+    {
+      "page": 267,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=267",
+      "char_count": 988,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p267_img01_0c2c12195dd1.jpeg",
+          "width": 620,
+          "height": 347,
+          "bbox": [
+            108.0,
+            76.5,
+            503.93,
+            298.3
+          ],
+          "bbox_area_ratio": 0.1812
+        },
+        {
+          "file_name": "p267_img02_822eeb072c90.jpeg",
+          "width": 634,
+          "height": 353,
+          "bbox": [
+            108.0,
+            457.75,
+            503.92,
+            678.35
+          ],
+          "bbox_area_ratio": 0.1802
+        }
+      ]
+    },
+    {
+      "page": 268,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=268",
+      "char_count": 1648,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p268_img01_4c57686edff7.jpeg",
+          "width": 700,
+          "height": 438,
+          "bbox": [
+            108.0,
+            208.34,
+            503.94,
+            456.29
+          ],
+          "bbox_area_ratio": 0.2025
+        }
+      ]
+    },
+    {
+      "page": 269,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=269",
+      "char_count": 2244,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p269_img01_97bcb5b15a28.png",
+          "width": 854,
+          "height": 515,
+          "bbox": [
+            126.0,
+            76.5,
+            486.3,
+            294.99
+          ],
+          "bbox_area_ratio": 0.1624
+        }
+      ]
+    },
+    {
+      "page": 270,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=270",
+      "char_count": 2503,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 271,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=271",
+      "char_count": 1081,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p271_img01_8d23592949bc.png",
+          "width": 886,
+          "height": 550,
+          "bbox": [
+            90.0,
+            76.5,
+            521.94,
+            345.1
+          ],
+          "bbox_area_ratio": 0.2394
+        },
+        {
+          "file_name": "p271_img02_8a05d47a3d15.png",
+          "width": 576,
+          "height": 217,
+          "bbox": [
+            90.0,
+            528.9,
+            522.0,
+            691.65
+          ],
+          "bbox_area_ratio": 0.1451
+        }
+      ]
+    },
+    {
+      "page": 272,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=272",
+      "char_count": 142,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p272_img01_83f83e74a06f.png",
+          "width": 652,
+          "height": 346,
+          "bbox": [
+            126.0,
+            76.5,
+            485.98,
+            267.54
+          ],
+          "bbox_area_ratio": 0.1419
+        },
+        {
+          "file_name": "p272_img02_587026d31ba3.png",
+          "width": 589,
+          "height": 332,
+          "bbox": [
+            126.0,
+            306.41,
+            485.96,
+            509.31
+          ],
+          "bbox_area_ratio": 0.1507
+        }
+      ]
+    },
+    {
+      "page": 273,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=273",
+      "char_count": 1219,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p273_img01_e273fcdcabd1.png",
+          "width": 592,
+          "height": 315,
+          "bbox": [
+            126.0,
+            76.5,
+            485.99,
+            268.05
+          ],
+          "bbox_area_ratio": 0.1423
+        },
+        {
+          "file_name": "p273_img02_20a26a16a9fe.png",
+          "width": 562,
+          "height": 260,
+          "bbox": [
+            126.0,
+            383.15,
+            485.9,
+            549.65
+          ],
+          "bbox_area_ratio": 0.1236
+        }
+      ]
+    },
+    {
+      "page": 274,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=274",
+      "char_count": 1124,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p274_img01_ea609930201d.png",
+          "width": 827,
+          "height": 493,
+          "bbox": [
+            126.0,
+            76.5,
+            485.97,
+            291.75
+          ],
+          "bbox_area_ratio": 0.1599
+        }
+      ]
+    },
+    {
+      "page": 275,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=275",
+      "char_count": 1601,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p275_img01_2cefd8eb6ae1.png",
+          "width": 503,
+          "height": 182,
+          "bbox": [
+            126.0,
+            76.5,
+            485.69,
+            206.65
+          ],
+          "bbox_area_ratio": 0.0966
+        }
+      ]
+    },
+    {
+      "page": 276,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=276",
+      "char_count": 786,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p276_img01_0c40705f1416.png",
+          "width": 370,
+          "height": 265,
+          "bbox": [
+            162.0,
+            76.5,
+            449.97,
+            282.75
+          ],
+          "bbox_area_ratio": 0.1225
+        },
+        {
+          "file_name": "p276_img02_41830acc1964.png",
+          "width": 354,
+          "height": 285,
+          "bbox": [
+            162.0,
+            430.15,
+            449.98,
+            662.0
+          ],
+          "bbox_area_ratio": 0.1378
+        }
+      ]
+    },
+    {
+      "page": 277,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=277",
+      "char_count": 1292,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p277_img01_3886cec1c486.png",
+          "width": 538,
+          "height": 281,
+          "bbox": [
+            126.0,
+            126.45,
+            485.94,
+            314.45
+          ],
+          "bbox_area_ratio": 0.1396
+        },
+        {
+          "file_name": "p277_img02_c92a81cd090d.png",
+          "width": 506,
+          "height": 201,
+          "bbox": [
+            126.0,
+            483.4,
+            485.99,
+            626.4
+          ],
+          "bbox_area_ratio": 0.1062
+        }
+      ]
+    },
+    {
+      "page": 278,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=278",
+      "char_count": 1583,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p278_img01_764f353a5966.png",
+          "width": 335,
+          "height": 320,
+          "bbox": [
+            162.0,
+            113.8,
+            450.0,
+            388.9
+          ],
+          "bbox_area_ratio": 0.1635
+        }
+      ]
+    },
+    {
+      "page": 279,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=279",
+      "char_count": 779,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p279_img01_c3983fbacc1d.png",
+          "width": 324,
+          "height": 294,
+          "bbox": [
+            162.0,
+            76.5,
+            449.96,
+            337.8
+          ],
+          "bbox_area_ratio": 0.1552
+        },
+        {
+          "file_name": "p279_img02_aecec34427c4.png",
+          "width": 608,
+          "height": 215,
+          "bbox": [
+            126.0,
+            470.15,
+            485.99,
+            597.45
+          ],
+          "bbox_area_ratio": 0.0945
+        }
+      ]
+    },
+    {
+      "page": 280,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=280",
+      "char_count": 1897,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p280_img01_fc7fde968110.png",
+          "width": 520,
+          "height": 313,
+          "bbox": [
+            126.0,
+            239.64,
+            485.93,
+            456.29
+          ],
+          "bbox_area_ratio": 0.1609
+        }
+      ]
+    },
+    {
+      "page": 281,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=281",
+      "char_count": 2522,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p281_img01_0a26cb58baea.png",
+          "width": 589,
+          "height": 242,
+          "bbox": [
+            126.0,
+            404.43,
+            485.97,
+            552.33
+          ],
+          "bbox_area_ratio": 0.1098
+        }
+      ]
+    },
+    {
+      "page": 282,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=282",
+      "char_count": 3189,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 283,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=283",
+      "char_count": 2667,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 284,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=284",
+      "char_count": 3649,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 285,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=285",
+      "char_count": 2153,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 286,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=286",
+      "char_count": 706,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p286_img01_9d00cf5dd346.png",
+          "width": 2054,
+          "height": 794,
+          "bbox": [
+            61.08,
+            65.28,
+            553.92,
+            255.72
+          ],
+          "bbox_area_ratio": 0.1936
+        }
+      ]
+    },
+    {
+      "page": 287,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=287",
+      "char_count": 3563,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 288,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=288",
+      "char_count": 4095,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 289,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=289",
+      "char_count": 3756,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 290,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=290",
+      "char_count": 3760,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 291,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=291",
+      "char_count": 2612,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 292,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=292",
+      "char_count": 1729,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p292_img01_bdf100318340.png",
+          "width": 2054,
+          "height": 2724,
+          "bbox": [
+            62.28,
+            63.48,
+            555.12,
+            717.12
+          ],
+          "bbox_area_ratio": 0.6646
+        }
+      ]
+    },
+    {
+      "page": 293,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=293",
+      "char_count": 776,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p293_img01_8e0fde4fa13f.png",
+          "width": 2054,
+          "height": 1269,
+          "bbox": [
+            59.28,
+            65.88,
+            552.12,
+            370.32
+          ],
+          "bbox_area_ratio": 0.3096
+        }
+      ]
+    },
+    {
+      "page": 294,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=294",
+      "char_count": 2883,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 295,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=295",
+      "char_count": 2665,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 296,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=296",
+      "char_count": 2636,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 297,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=297",
+      "char_count": 2286,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 298,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=298",
+      "char_count": 2083,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 299,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=299",
+      "char_count": 1337,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p299_img01_804a42ce1e59.png",
+          "width": 907,
+          "height": 450,
+          "bbox": [
+            90.0,
+            428.97,
+            521.97,
+            643.22
+          ],
+          "bbox_area_ratio": 0.1909
+        }
+      ]
+    },
+    {
+      "page": 300,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=300",
+      "char_count": 1951,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 301,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=301",
+      "char_count": 1307,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p301_img01_8790a096d0e4.png",
+          "width": 1800,
+          "height": 1178,
+          "bbox": [
+            90.0,
+            76.5,
+            521.97,
+            359.0
+          ],
+          "bbox_area_ratio": 0.2518
+        }
+      ]
+    },
+    {
+      "page": 302,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=302",
+      "char_count": 3045,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 303,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=303",
+      "char_count": 3334,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 304,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=304",
+      "char_count": 1620,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 305,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=305",
+      "char_count": 3259,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 306,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=306",
+      "char_count": 2846,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 307,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=307",
+      "char_count": 1865,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p307_img01_44656421a802.png",
+          "width": 469,
+          "height": 352,
+          "bbox": [
+            120.75,
+            339.24,
+            491.51,
+            617.99
+          ],
+          "bbox_area_ratio": 0.2132
+        }
+      ]
+    },
+    {
+      "page": 308,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=308",
+      "char_count": 1619,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 309,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=309",
+      "char_count": 1428,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p309_img01_3f2ae5ee3100.jpeg",
+          "width": 1102,
+          "height": 644,
+          "bbox": [
+            90.0,
+            76.5,
+            521.94,
+            320.9
+          ],
+          "bbox_area_ratio": 0.2178
+        }
+      ]
+    },
+    {
+      "page": 310,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=310",
+      "char_count": 2464,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 311,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=311",
+      "char_count": 2442,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 312,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=312",
+      "char_count": 2643,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 313,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=313",
+      "char_count": 2863,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 314,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=314",
+      "char_count": 2185,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 315,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=315",
+      "char_count": 3146,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 316,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=316",
+      "char_count": 3237,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 317,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=317",
+      "char_count": 2573,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 318,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=318",
+      "char_count": 1800,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p318_img01_0814222d78e3.png",
+          "width": 907,
+          "height": 450,
+          "bbox": [
+            90.0,
+            446.11,
+            522.0,
+            659.55
+          ],
+          "bbox_area_ratio": 0.1902
+        }
+      ]
+    },
+    {
+      "page": 319,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=319",
+      "char_count": 2013,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 320,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=320",
+      "char_count": 1851,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 321,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=321",
+      "char_count": 2161,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 322,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=322",
+      "char_count": 2455,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 323,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=323",
+      "char_count": 2436,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 324,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=324",
+      "char_count": 2155,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 325,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=325",
+      "char_count": 2280,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 326,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=326",
+      "char_count": 2385,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 327,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=327",
+      "char_count": 830,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p327_img01_6bf7482ec062.png",
+          "width": 703,
+          "height": 803,
+          "bbox": [
+            128.25,
+            113.8,
+            484.1,
+            520.27
+          ],
+          "bbox_area_ratio": 0.2984
+        }
+      ]
+    },
+    {
+      "page": 328,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=328",
+      "char_count": 1364,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p328_img01_4ddd2db6c03d.png",
+          "width": 638,
+          "height": 538,
+          "bbox": [
+            126.0,
+            176.39,
+            485.97,
+            479.94
+          ],
+          "bbox_area_ratio": 0.2254
+        }
+      ]
+    },
+    {
+      "page": 329,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=329",
+      "char_count": 960,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p329_img01_1053df88e13a.jpeg",
+          "width": 837,
+          "height": 552,
+          "bbox": [
+            76.5,
+            228.64,
+            541.75,
+            534.94
+          ],
+          "bbox_area_ratio": 0.294
+        }
+      ]
+    },
+    {
+      "page": 330,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=330",
+      "char_count": 159,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p330_img01_2615e9756fd8.png",
+          "width": 1012,
+          "height": 676,
+          "bbox": [
+            76.5,
+            76.5,
+            544.5,
+            389.13
+          ],
+          "bbox_area_ratio": 0.3019
+        }
+      ]
+    },
+    {
+      "page": 331,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=331",
+      "char_count": 1663,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p331_img01_e646878a7113.png",
+          "width": 1011,
+          "height": 673,
+          "bbox": [
+            76.5,
+            76.5,
+            544.5,
+            388.06
+          ],
+          "bbox_area_ratio": 0.3008
+        }
+      ]
+    },
+    {
+      "page": 332,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=332",
+      "char_count": 2915,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 333,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=333",
+      "char_count": 1200,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p333_img01_7211a71b503c.png",
+          "width": 876,
+          "height": 892,
+          "bbox": [
+            143.25,
+            303.89,
+            468.15,
+            635.06
+          ],
+          "bbox_area_ratio": 0.222
+        }
+      ]
+    },
+    {
+      "page": 334,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=334",
+      "char_count": 136,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p334_img01_491acb729ddc.png",
+          "width": 875,
+          "height": 886,
+          "bbox": [
+            142.5,
+            76.5,
+            469.3,
+            407.65
+          ],
+          "bbox_area_ratio": 0.2233
+        }
+      ]
+    },
+    {
+      "page": 335,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=335",
+      "char_count": 935,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p335_img01_7eee03d7cc3b.png",
+          "width": 864,
+          "height": 892,
+          "bbox": [
+            145.5,
+            76.5,
+            466.4,
+            407.66
+          ],
+          "bbox_area_ratio": 0.2192
+        }
+      ]
+    },
+    {
+      "page": 336,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=336",
+      "char_count": 289,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p336_img01_5e7c05695239.jpeg",
+          "width": 746,
+          "height": 684,
+          "bbox": [
+            162.0,
+            76.5,
+            449.99,
+            340.55
+          ],
+          "bbox_area_ratio": 0.1569
+        },
+        {
+          "file_name": "p336_img02_d624b867b33b.png",
+          "width": 941,
+          "height": 525,
+          "bbox": [
+            90.0,
+            379.91,
+            521.95,
+            621.07
+          ],
+          "bbox_area_ratio": 0.2149
+        }
+      ]
+    },
+    {
+      "page": 337,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=337",
+      "char_count": 2232,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p337_img01_2241a962064a.png",
+          "width": 982,
+          "height": 491,
+          "bbox": [
+            90.0,
+            76.5,
+            522.0,
+            292.5
+          ],
+          "bbox_area_ratio": 0.1925
+        }
+      ]
+    },
+    {
+      "page": 338,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=338",
+      "char_count": 1261,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p338_img01_5480ea616da3.jpeg",
+          "width": 924,
+          "height": 647,
+          "bbox": [
+            90.0,
+            226.99,
+            521.94,
+            529.44
+          ],
+          "bbox_area_ratio": 0.2695
+        }
+      ]
+    },
+    {
+      "page": 339,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=339",
+      "char_count": 833,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p339_img01_a0ed5be4eb85.jpeg",
+          "width": 810,
+          "height": 527,
+          "bbox": [
+            72.0,
+            249.6,
+            540.0,
+            553.53
+          ],
+          "bbox_area_ratio": 0.2935
+        }
+      ]
+    },
+    {
+      "page": 340,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=340",
+      "char_count": 1378,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p340_img01_3ef8454d6ccb.png",
+          "width": 1433,
+          "height": 1006,
+          "bbox": [
+            104.25,
+            76.5,
+            507.94,
+            359.89
+          ],
+          "bbox_area_ratio": 0.236
+        }
+      ]
+    },
+    {
+      "page": 341,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=341",
+      "char_count": 1213,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p341_img01_8dcd3428f101.jpeg",
+          "width": 509,
+          "height": 315,
+          "bbox": [
+            93.75,
+            171.54,
+            518.85,
+            434.62
+          ],
+          "bbox_area_ratio": 0.2307
+        }
+      ]
+    },
+    {
+      "page": 342,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=342",
+      "char_count": 1201,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p342_img01_da66a78e807e.jpeg",
+          "width": 841,
+          "height": 643,
+          "bbox": [
+            90.0,
+            76.5,
+            521.95,
+            410.85
+          ],
+          "bbox_area_ratio": 0.298
+        }
+      ]
+    },
+    {
+      "page": 343,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=343",
+      "char_count": 821,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p343_img01_fe03cb3c94cf.jpeg",
+          "width": 840,
+          "height": 648,
+          "bbox": [
+            90.0,
+            170.39,
+            521.96,
+            503.64
+          ],
+          "bbox_area_ratio": 0.297
+        }
+      ]
+    },
+    {
+      "page": 344,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=344",
+      "char_count": 754,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p344_img01_f202732a98e2.jpeg",
+          "width": 838,
+          "height": 648,
+          "bbox": [
+            90.0,
+            76.5,
+            521.98,
+            410.55
+          ],
+          "bbox_area_ratio": 0.2977
+        }
+      ]
+    },
+    {
+      "page": 345,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=345",
+      "char_count": 1742,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p345_img01_843890a6fb76.jpeg",
+          "width": 838,
+          "height": 649,
+          "bbox": [
+            90.0,
+            304.03,
+            521.97,
+            638.58
+          ],
+          "bbox_area_ratio": 0.2982
+        }
+      ]
+    },
+    {
+      "page": 346,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=346",
+      "char_count": 3317,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 347,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=347",
+      "char_count": 551,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p347_img01_cfa2bdd557c0.png",
+          "width": 225,
+          "height": 411,
+          "bbox": [
+            234.0,
+            76.5,
+            377.98,
+            338.75
+          ],
+          "bbox_area_ratio": 0.0779
+        }
+      ]
+    },
+    {
+      "page": 348,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=348",
+      "char_count": 1294,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p348_img01_140d44a1e6ef.png",
+          "width": 1428,
+          "height": 1068,
+          "bbox": [
+            76.5,
+            76.5,
+            544.46,
+            426.45
+          ],
+          "bbox_area_ratio": 0.3379
+        }
+      ]
+    },
+    {
+      "page": 349,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=349",
+      "char_count": 317,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p349_img01_8067223eb997.jpeg",
+          "width": 1288,
+          "height": 717,
+          "bbox": [
+            76.5,
+            76.5,
+            537.22,
+            332.95
+          ],
+          "bbox_area_ratio": 0.2438
+        },
+        {
+          "file_name": "p349_img02_a2088ad4b605.jpeg",
+          "width": 545,
+          "height": 391,
+          "bbox": [
+            144.0,
+            372.41,
+            467.93,
+            604.81
+          ],
+          "bbox_area_ratio": 0.1553
+        }
+      ]
+    },
+    {
+      "page": 350,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=350",
+      "char_count": 203,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p350_img01_8694a97df690.jpeg",
+          "width": 646,
+          "height": 485,
+          "bbox": [
+            144.0,
+            76.5,
+            467.98,
+            319.7
+          ],
+          "bbox_area_ratio": 0.1626
+        },
+        {
+          "file_name": "p350_img02_6a20cdc0674c.jpeg",
+          "width": 637,
+          "height": 478,
+          "bbox": [
+            144.0,
+            358.91,
+            467.98,
+            580.21
+          ],
+          "bbox_area_ratio": 0.1479
+        }
+      ]
+    },
+    {
+      "page": 351,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=351",
+      "char_count": 1187,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p351_img01_1f4611694a76.jpeg",
+          "width": 412,
+          "height": 320,
+          "bbox": [
+            144.0,
+            76.5,
+            467.95,
+            328.15
+          ],
+          "bbox_area_ratio": 0.1682
+        }
+      ]
+    },
+    {
+      "page": 352,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=352",
+      "char_count": 1779,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p352_img01_91abe8886103.jpeg",
+          "width": 1193,
+          "height": 513,
+          "bbox": [
+            76.5,
+            76.5,
+            536.6,
+            277.75
+          ],
+          "bbox_area_ratio": 0.191
+        }
+      ]
+    },
+    {
+      "page": 353,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=353",
+      "char_count": 100,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p353_img01_6bee592c16ed.jpeg",
+          "width": 799,
+          "height": 457,
+          "bbox": [
+            76.5,
+            76.5,
+            544.5,
+            344.2
+          ],
+          "bbox_area_ratio": 0.2585
+        }
+      ]
+    },
+    {
+      "page": 354,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=354",
+      "char_count": 1029,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p354_img01_6fa6a9e30874.png",
+          "width": 2054,
+          "height": 1332,
+          "bbox": [
+            59.28,
+            65.88,
+            552.12,
+            385.44
+          ],
+          "bbox_area_ratio": 0.3249
+        }
+      ]
+    },
+    {
+      "page": 355,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=355",
+      "char_count": 2071,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p355_img01_890e024adb66.png",
+          "width": 1186,
+          "height": 306,
+          "bbox": [
+            72.0,
+            442.2,
+            540.0,
+            562.92
+          ],
+          "bbox_area_ratio": 0.1166
+        }
+      ]
+    },
+    {
+      "page": 356,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=356",
+      "char_count": 2074,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 357,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=357",
+      "char_count": 2089,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p357_img01_44258d25f679.png",
+          "width": 811,
+          "height": 531,
+          "bbox": [
+            126.0,
+            76.5,
+            485.94,
+            312.8
+          ],
+          "bbox_area_ratio": 0.1755
+        }
+      ]
+    },
+    {
+      "page": 358,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=358",
+      "char_count": 1765,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p358_img01_63c0e76eda03.png",
+          "width": 815,
+          "height": 531,
+          "bbox": [
+            126.0,
+            201.69,
+            485.98,
+            437.64
+          ],
+          "bbox_area_ratio": 0.1752
+        }
+      ]
+    },
+    {
+      "page": 359,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=359",
+      "char_count": 1078,
+      "image_count": 3,
+      "images": [
+        {
+          "file_name": "p359_img01_3f9b1af0db26.png",
+          "width": 288,
+          "height": 139,
+          "bbox": [
+            143.1,
+            253.06,
+            234.6,
+            298.06
+          ],
+          "bbox_area_ratio": 0.0085
+        },
+        {
+          "file_name": "p359_img02_5ae6eef57302.png",
+          "width": 257,
+          "height": 133,
+          "bbox": [
+            144.13,
+            305.56,
+            228.12,
+            349.06
+          ],
+          "bbox_area_ratio": 0.0075
+        },
+        {
+          "file_name": "p359_img03_61b1f306474b.png",
+          "width": 815,
+          "height": 531,
+          "bbox": [
+            126.0,
+            379.06,
+            485.98,
+            615.01
+          ],
+          "bbox_area_ratio": 0.1752
+        }
+      ]
+    },
+    {
+      "page": 360,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=360",
+      "char_count": 1448,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p360_img01_6100f79cd161.png",
+          "width": 905,
+          "height": 584,
+          "bbox": [
+            126.0,
+            189.69,
+            485.9,
+            421.39
+          ],
+          "bbox_area_ratio": 0.172
+        }
+      ]
+    },
+    {
+      "page": 361,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=361",
+      "char_count": 163,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p361_img01_5ff7087fb4ae.png",
+          "width": 920,
+          "height": 586,
+          "bbox": [
+            126.0,
+            76.5,
+            485.97,
+            309.55
+          ],
+          "bbox_area_ratio": 0.1731
+        },
+        {
+          "file_name": "p361_img02_b4f375a713ef.png",
+          "width": 751,
+          "height": 535,
+          "bbox": [
+            108.0,
+            374.21,
+            503.99,
+            656.31
+          ],
+          "bbox_area_ratio": 0.2305
+        }
+      ]
+    },
+    {
+      "page": 362,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=362",
+      "char_count": 152,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p362_img01_b5b3b4691f3e.png",
+          "width": 676,
+          "height": 475,
+          "bbox": [
+            108.0,
+            76.5,
+            503.99,
+            354.75
+          ],
+          "bbox_area_ratio": 0.2273
+        },
+        {
+          "file_name": "p362_img02_1992f733f9bd.png",
+          "width": 901,
+          "height": 630,
+          "bbox": [
+            108.0,
+            394.91,
+            503.99,
+            671.8
+          ],
+          "bbox_area_ratio": 0.2262
+        }
+      ]
+    },
+    {
+      "page": 363,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=363",
+      "char_count": 762,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p363_img01_0da105f38a59.png",
+          "width": 450,
+          "height": 255,
+          "bbox": [
+            162.0,
+            171.54,
+            450.0,
+            342.54
+          ],
+          "bbox_area_ratio": 0.1016
+        },
+        {
+          "file_name": "p363_img02_e4d49e3eb127.png",
+          "width": 588,
+          "height": 353,
+          "bbox": [
+            162.0,
+            381.95,
+            449.97,
+            555.9
+          ],
+          "bbox_area_ratio": 0.1033
+        }
+      ]
+    },
+    {
+      "page": 364,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=364",
+      "char_count": 1187,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p364_img01_c8055b0adf3f.png",
+          "width": 561,
+          "height": 294,
+          "bbox": [
+            162.0,
+            76.5,
+            449.94,
+            233.7
+          ],
+          "bbox_area_ratio": 0.0934
+        }
+      ]
+    },
+    {
+      "page": 365,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=365",
+      "char_count": 563,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p365_img01_0e3014b2aafa.png",
+          "width": 520,
+          "height": 513,
+          "bbox": [
+            162.0,
+            76.5,
+            449.98,
+            361.65
+          ],
+          "bbox_area_ratio": 0.1694
+        }
+      ]
+    },
+    {
+      "page": 366,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=366",
+      "char_count": 949,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p366_img01_16e284fc1c63.png",
+          "width": 424,
+          "height": 539,
+          "bbox": [
+            198.75,
+            76.5,
+            413.78,
+            349.85
+          ],
+          "bbox_area_ratio": 0.1213
+        }
+      ]
+    },
+    {
+      "page": 367,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=367",
+      "char_count": 416,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p367_img01_fa0c8bd7f7b9.png",
+          "width": 539,
+          "height": 337,
+          "bbox": [
+            162.0,
+            76.5,
+            449.93,
+            256.2
+          ],
+          "bbox_area_ratio": 0.1067
+        },
+        {
+          "file_name": "p367_img02_39402c7485e3.png",
+          "width": 334,
+          "height": 454,
+          "bbox": [
+            198.0,
+            365.66,
+            413.98,
+            653.05
+          ],
+          "bbox_area_ratio": 0.1281
+        }
+      ]
+    },
+    {
+      "page": 368,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=368",
+      "char_count": 1835,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 369,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=369",
+      "char_count": 373,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p369_img01_56edf4e476ff.jpeg",
+          "width": 806,
+          "height": 314,
+          "bbox": [
+            90.0,
+            120.95,
+            521.92,
+            289.1
+          ],
+          "bbox_area_ratio": 0.1498
+        },
+        {
+          "file_name": "p369_img02_ba9a27f4fcbd.png",
+          "width": 1094,
+          "height": 689,
+          "bbox": [
+            90.0,
+            328.36,
+            521.96,
+            600.41
+          ],
+          "bbox_area_ratio": 0.2424
+        }
+      ]
+    },
+    {
+      "page": 370,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=370",
+      "char_count": 1963,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p370_img01_692a339f0f7d.png",
+          "width": 800,
+          "height": 500,
+          "bbox": [
+            90.0,
+            147.4,
+            521.93,
+            417.6
+          ],
+          "bbox_area_ratio": 0.2408
+        }
+      ]
+    },
+    {
+      "page": 371,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=371",
+      "char_count": 837,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p371_img01_3bacf04ef18f.png",
+          "width": 872,
+          "height": 490,
+          "bbox": [
+            126.0,
+            145.1,
+            485.95,
+            346.95
+          ],
+          "bbox_area_ratio": 0.1499
+        }
+      ]
+    },
+    {
+      "page": 372,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=372",
+      "char_count": 1178,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p372_img01_eda0aae72b9b.png",
+          "width": 800,
+          "height": 600,
+          "bbox": [
+            90.0,
+            166.55,
+            521.99,
+            489.84
+          ],
+          "bbox_area_ratio": 0.2881
+        }
+      ]
+    },
+    {
+      "page": 373,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=373",
+      "char_count": 1279,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 374,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=374",
+      "char_count": 218,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p374_img01_944ba7c475ff.png",
+          "width": 772,
+          "height": 647,
+          "bbox": [
+            126.0,
+            76.5,
+            485.98,
+            378.35
+          ],
+          "bbox_area_ratio": 0.2242
+        }
+      ]
+    },
+    {
+      "page": 375,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=375",
+      "char_count": 1222,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p375_img01_d1eca7d85f13.png",
+          "width": 543,
+          "height": 235,
+          "bbox": [
+            90.0,
+            102.3,
+            521.91,
+            289.68
+          ],
+          "bbox_area_ratio": 0.167
+        },
+        {
+          "file_name": "p375_img02_5209ff935fb5.png",
+          "width": 541,
+          "height": 155,
+          "bbox": [
+            90.0,
+            424.3,
+            521.99,
+            548.39
+          ],
+          "bbox_area_ratio": 0.1106
+        }
+      ]
+    },
+    {
+      "page": 376,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=376",
+      "char_count": 1442,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p376_img01_2cfe7636542e.png",
+          "width": 693,
+          "height": 593,
+          "bbox": [
+            90.0,
+            177.54,
+            521.58,
+            546.85
+          ],
+          "bbox_area_ratio": 0.3288
+        }
+      ]
+    },
+    {
+      "page": 377,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=377",
+      "char_count": 2534,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 378,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=378",
+      "char_count": 1185,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p378_img01_1da7964d08fb.png",
+          "width": 762,
+          "height": 712,
+          "bbox": [
+            96.75,
+            76.5,
+            515.41,
+            467.68
+          ],
+          "bbox_area_ratio": 0.3379
+        }
+      ]
+    },
+    {
+      "page": 379,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=379",
+      "char_count": 1183,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p379_img01_de026196ea1e.png",
+          "width": 898,
+          "height": 730,
+          "bbox": [
+            90.0,
+            76.5,
+            521.96,
+            427.65
+          ],
+          "bbox_area_ratio": 0.3129
+        }
+      ]
+    },
+    {
+      "page": 380,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=380",
+      "char_count": 1492,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 381,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=381",
+      "char_count": 636,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p381_img01_45d286ea5237.png",
+          "width": 2054,
+          "height": 1602,
+          "bbox": [
+            53.04,
+            63.84,
+            545.88,
+            448.32
+          ],
+          "bbox_area_ratio": 0.3909
+        }
+      ]
+    },
+    {
+      "page": 382,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=382",
+      "char_count": 1533,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 383,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=383",
+      "char_count": 149,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p383_img01_0f0c043696c6.jpeg",
+          "width": 713,
+          "height": 456,
+          "bbox": [
+            126.0,
+            72.0,
+            486.0,
+            302.25
+          ],
+          "bbox_area_ratio": 0.171
+        },
+        {
+          "file_name": "p383_img02_36075a910bb9.png",
+          "width": 721,
+          "height": 565,
+          "bbox": [
+            126.0,
+            333.41,
+            485.95,
+            615.46
+          ],
+          "bbox_area_ratio": 0.2095
+        }
+      ]
+    },
+    {
+      "page": 384,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=384",
+      "char_count": 737,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p384_img01_47faa50065de.png",
+          "width": 726,
+          "height": 753,
+          "bbox": [
+            126.0,
+            72.0,
+            485.97,
+            445.35
+          ],
+          "bbox_area_ratio": 0.2773
+        }
+      ]
+    },
+    {
+      "page": 385,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=385",
+      "char_count": 2405,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 386,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=386",
+      "char_count": 1201,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 387,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=387",
+      "char_count": 2616,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 388,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=388",
+      "char_count": 2044,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 389,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=389",
+      "char_count": 903,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p389_img01_7f07b31601e4.png",
+          "width": 681,
+          "height": 420,
+          "bbox": [
+            126.0,
+            72.0,
+            485.98,
+            294.0
+          ],
+          "bbox_area_ratio": 0.1649
+        }
+      ]
+    },
+    {
+      "page": 390,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=390",
+      "char_count": 744,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p390_img01_783a8caf1520.png",
+          "width": 681,
+          "height": 399,
+          "bbox": [
+            126.0,
+            72.0,
+            485.92,
+            282.9
+          ],
+          "bbox_area_ratio": 0.1566
+        }
+      ]
+    },
+    {
+      "page": 391,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=391",
+      "char_count": 2126,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 392,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=392",
+      "char_count": 2174,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 393,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=393",
+      "char_count": 881,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p393_img01_91f68b676005.png",
+          "width": 670,
+          "height": 289,
+          "bbox": [
+            125.25,
+            76.5,
+            486.79,
+            232.45
+          ],
+          "bbox_area_ratio": 0.1163
+        }
+      ]
+    },
+    {
+      "page": 394,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=394",
+      "char_count": 3082,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 395,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=395",
+      "char_count": 3676,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 396,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=396",
+      "char_count": 2839,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 397,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=397",
+      "char_count": 2449,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 398,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=398",
+      "char_count": 1568,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 399,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=399",
+      "char_count": 1057,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p399_img01_067562300e44.png",
+          "width": 662,
+          "height": 685,
+          "bbox": [
+            117.75,
+            76.5,
+            493.5,
+            465.3
+          ],
+          "bbox_area_ratio": 0.3014
+        },
+        {
+          "file_name": "p399_img02_be45309c89bc.png",
+          "width": 1567,
+          "height": 1621,
+          "bbox": [
+            117.6,
+            76.44,
+            493.56,
+            465.36
+          ],
+          "bbox_area_ratio": 0.3017
+        }
+      ]
+    },
+    {
+      "page": 400,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=400",
+      "char_count": 1481,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 401,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=401",
+      "char_count": 1319,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 402,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=402",
+      "char_count": 1565,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p402_img01_ac8deaa13053.png",
+          "width": 592,
+          "height": 338,
+          "bbox": [
+            126.0,
+            76.5,
+            485.95,
+            281.08
+          ],
+          "bbox_area_ratio": 0.1519
+        }
+      ]
+    },
+    {
+      "page": 403,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=403",
+      "char_count": 1057,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p403_img01_a6d7f3c3dccd.png",
+          "width": 684,
+          "height": 282,
+          "bbox": [
+            126.0,
+            188.56,
+            485.89,
+            336.91
+          ],
+          "bbox_area_ratio": 0.1101
+        }
+      ]
+    },
+    {
+      "page": 404,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=404",
+      "char_count": 2291,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 405,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=405",
+      "char_count": 1468,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p405_img01_c4cbe90ede6d.jpeg",
+          "width": 1270,
+          "height": 657,
+          "bbox": [
+            76.5,
+            76.5,
+            544.5,
+            318.6
+          ],
+          "bbox_area_ratio": 0.2338
+        }
+      ]
+    },
+    {
+      "page": 406,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=406",
+      "char_count": 1077,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 407,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=407",
+      "char_count": 1101,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p407_img01_7c6e8681d832.png",
+          "width": 950,
+          "height": 812,
+          "bbox": [
+            90.0,
+            102.3,
+            521.96,
+            471.3
+          ],
+          "bbox_area_ratio": 0.3288
+        }
+      ]
+    },
+    {
+      "page": 408,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=408",
+      "char_count": 1749,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 409,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=409",
+      "char_count": 1347,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 410,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=410",
+      "char_count": 2279,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 411,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=411",
+      "char_count": 1600,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 412,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=412",
+      "char_count": 1676,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 413,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=413",
+      "char_count": 1570,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 414,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=414",
+      "char_count": 2664,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 415,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=415",
+      "char_count": 827,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 416,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=416",
+      "char_count": 1190,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p416_img01_bffe2c7a0e35.png",
+          "width": 2079,
+          "height": 1194,
+          "bbox": [
+            58.68,
+            64.08,
+            557.52,
+            350.52
+          ],
+          "bbox_area_ratio": 0.2948
+        }
+      ]
+    },
+    {
+      "page": 417,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=417",
+      "char_count": 1091,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 418,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=418",
+      "char_count": 2944,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 419,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=419",
+      "char_count": 3000,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 420,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=420",
+      "char_count": 1762,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 421,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=421",
+      "char_count": 571,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p421_img01_4302aceaabb0.jpeg",
+          "width": 989,
+          "height": 639,
+          "bbox": [
+            90.0,
+            126.45,
+            521.94,
+            405.55
+          ],
+          "bbox_area_ratio": 0.2487
+        }
+      ]
+    },
+    {
+      "page": 422,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=422",
+      "char_count": 779,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p422_img01_98fcceb78518.png",
+          "width": 900,
+          "height": 701,
+          "bbox": [
+            90.0,
+            76.5,
+            521.94,
+            412.8
+          ],
+          "bbox_area_ratio": 0.2997
+        }
+      ]
+    },
+    {
+      "page": 423,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=423",
+      "char_count": 1316,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 424,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=424",
+      "char_count": 2275,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 425,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=425",
+      "char_count": 2685,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 426,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=426",
+      "char_count": 3184,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 427,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=427",
+      "char_count": 1874,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 428,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=428",
+      "char_count": 2431,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 429,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=429",
+      "char_count": 1673,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 430,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=430",
+      "char_count": 3043,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 431,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=431",
+      "char_count": 3651,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 432,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=432",
+      "char_count": 2624,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 433,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=433",
+      "char_count": 2664,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 434,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=434",
+      "char_count": 1753,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 435,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=435",
+      "char_count": 1693,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 436,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=436",
+      "char_count": 2240,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 437,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=437",
+      "char_count": 3306,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 438,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=438",
+      "char_count": 2734,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 439,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=439",
+      "char_count": 125,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p439_img01_b79781d96086.png",
+          "width": 1500,
+          "height": 1050,
+          "bbox": [
+            108.0,
+            76.5,
+            503.96,
+            353.8
+          ],
+          "bbox_area_ratio": 0.2265
+        },
+        {
+          "file_name": "p439_img02_18209a8521a0.png",
+          "width": 1500,
+          "height": 1050,
+          "bbox": [
+            108.0,
+            393.41,
+            503.96,
+            670.71
+          ],
+          "bbox_area_ratio": 0.2265
+        }
+      ]
+    },
+    {
+      "page": 440,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=440",
+      "char_count": 2270,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 441,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=441",
+      "char_count": 1985,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 442,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=442",
+      "char_count": 940,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p442_img01_2ca41b26bb9e.png",
+          "width": 836,
+          "height": 585,
+          "bbox": [
+            126.0,
+            341.04,
+            486.0,
+            592.88
+          ],
+          "bbox_area_ratio": 0.187
+        }
+      ]
+    },
+    {
+      "page": 443,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=443",
+      "char_count": 1688,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 444,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=444",
+      "char_count": 1512,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 445,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=445",
+      "char_count": 1237,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p445_img01_3d8b52be43b2.jpeg",
+          "width": 512,
+          "height": 352,
+          "bbox": [
+            126.0,
+            76.5,
+            485.96,
+            324.1
+          ],
+          "bbox_area_ratio": 0.1839
+        }
+      ]
+    },
+    {
+      "page": 446,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=446",
+      "char_count": 1690,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 447,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=447",
+      "char_count": 885,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p447_img01_8d9cfb1198b2.jpeg",
+          "width": 829,
+          "height": 626,
+          "bbox": [
+            126.0,
+            72.0,
+            485.94,
+            343.8
+          ],
+          "bbox_area_ratio": 0.2018
+        }
+      ]
+    },
+    {
+      "page": 448,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=448",
+      "char_count": 1596,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 449,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=449",
+      "char_count": 1202,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p449_img01_d31620ead2e4.jpeg",
+          "width": 836,
+          "height": 521,
+          "bbox": [
+            126.0,
+            72.0,
+            485.98,
+            296.35
+          ],
+          "bbox_area_ratio": 0.1666
+        }
+      ]
+    },
+    {
+      "page": 450,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=450",
+      "char_count": 1883,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 451,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=451",
+      "char_count": 897,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p451_img01_dd8be8dd011f.png",
+          "width": 934,
+          "height": 661,
+          "bbox": [
+            105.0,
+            76.5,
+            507.2,
+            361.13
+          ],
+          "bbox_area_ratio": 0.2362
+        }
+      ]
+    },
+    {
+      "page": 452,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=452",
+      "char_count": 666,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p452_img01_dad49455542c.png",
+          "width": 940,
+          "height": 675,
+          "bbox": [
+            90.0,
+            76.5,
+            521.98,
+            386.7
+          ],
+          "bbox_area_ratio": 0.2765
+        }
+      ]
+    },
+    {
+      "page": 453,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=453",
+      "char_count": 682,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p453_img01_c9de49f14ba3.png",
+          "width": 1000,
+          "height": 701,
+          "bbox": [
+            90.0,
+            76.5,
+            521.95,
+            379.3
+          ],
+          "bbox_area_ratio": 0.2698
+        }
+      ]
+    },
+    {
+      "page": 454,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=454",
+      "char_count": 624,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p454_img01_75ca7783d930.png",
+          "width": 1000,
+          "height": 701,
+          "bbox": [
+            90.0,
+            76.5,
+            521.95,
+            379.3
+          ],
+          "bbox_area_ratio": 0.2698
+        }
+      ]
+    },
+    {
+      "page": 455,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=455",
+      "char_count": 1074,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p455_img01_b492ae9569ff.png",
+          "width": 931,
+          "height": 655,
+          "bbox": [
+            90.0,
+            76.5,
+            521.97,
+            380.4
+          ],
+          "bbox_area_ratio": 0.2708
+        }
+      ]
+    },
+    {
+      "page": 456,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=456",
+      "char_count": 2151,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 457,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=457",
+      "char_count": 104,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p457_img01_58a1409cbfb4.png",
+          "width": 1515,
+          "height": 2415,
+          "bbox": [
+            126.0,
+            76.5,
+            485.98,
+            649.75
+          ],
+          "bbox_area_ratio": 0.4257
+        }
+      ]
+    },
+    {
+      "page": 458,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=458",
+      "char_count": 2689,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 459,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=459",
+      "char_count": 1027,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p459_img01_baa46c8f8896.png",
+          "width": 487,
+          "height": 294,
+          "bbox": [
+            126.0,
+            76.5,
+            485.95,
+            293.8
+          ],
+          "bbox_area_ratio": 0.1614
+        }
+      ]
+    },
+    {
+      "page": 460,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=460",
+      "char_count": 876,
+      "image_count": 3,
+      "images": [
+        {
+          "file_name": "p460_img01_4ee290f12169.png",
+          "width": 674,
+          "height": 349,
+          "bbox": [
+            162.0,
+            72.0,
+            449.92,
+            221.1
+          ],
+          "bbox_area_ratio": 0.0886
+        },
+        {
+          "file_name": "p460_img02_221cf7936bd1.png",
+          "width": 674,
+          "height": 173,
+          "bbox": [
+            162.0,
+            227.16,
+            449.9,
+            301.0
+          ],
+          "bbox_area_ratio": 0.0439
+        },
+        {
+          "file_name": "p460_img03_ad8dc5454a1b.png",
+          "width": 432,
+          "height": 274,
+          "bbox": [
+            162.0,
+            422.01,
+            449.99,
+            604.75
+          ],
+          "bbox_area_ratio": 0.1086
+        }
+      ]
+    },
+    {
+      "page": 461,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=461",
+      "char_count": 1507,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p461_img01_98f1e9b5e58f.png",
+          "width": 684,
+          "height": 358,
+          "bbox": [
+            162.0,
+            147.24,
+            449.94,
+            297.94
+          ],
+          "bbox_area_ratio": 0.0895
+        },
+        {
+          "file_name": "p461_img02_c08680e6d1c2.png",
+          "width": 726,
+          "height": 557,
+          "bbox": [
+            162.0,
+            473.4,
+            449.96,
+            694.29
+          ],
+          "bbox_area_ratio": 0.1312
+        }
+      ]
+    },
+    {
+      "page": 462,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=462",
+      "char_count": 1640,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p462_img01_c595cb444f66.png",
+          "width": 721,
+          "height": 450,
+          "bbox": [
+            126.0,
+            134.64,
+            485.96,
+            359.24
+          ],
+          "bbox_area_ratio": 0.1668
+        }
+      ]
+    },
+    {
+      "page": 463,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=463",
+      "char_count": 932,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p463_img01_15b3cd68e91d.png",
+          "width": 979,
+          "height": 705,
+          "bbox": [
+            90.0,
+            76.5,
+            521.96,
+            387.55
+          ],
+          "bbox_area_ratio": 0.2772
+        }
+      ]
+    },
+    {
+      "page": 464,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=464",
+      "char_count": 1731,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 465,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=465",
+      "char_count": 225,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p465_img01_c9702c9c69ff.png",
+          "width": 864,
+          "height": 1078,
+          "bbox": [
+            90.0,
+            76.5,
+            522.0,
+            615.5
+          ],
+          "bbox_area_ratio": 0.4804
+        }
+      ]
+    },
+    {
+      "page": 466,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=466",
+      "char_count": 2722,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 467,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=467",
+      "char_count": 1361,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p467_img01_eacfbc7365ce.png",
+          "width": 676,
+          "height": 469,
+          "bbox": [
+            162.0,
+            96.65,
+            449.96,
+            296.45
+          ],
+          "bbox_area_ratio": 0.1187
+        }
+      ]
+    },
+    {
+      "page": 468,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=468",
+      "char_count": 971,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p468_img01_b49849863e02.png",
+          "width": 529,
+          "height": 370,
+          "bbox": [
+            180.0,
+            72.0,
+            431.95,
+            248.2
+          ],
+          "bbox_area_ratio": 0.0916
+        },
+        {
+          "file_name": "p468_img02_47971b63b1ed.png",
+          "width": 532,
+          "height": 352,
+          "bbox": [
+            180.0,
+            400.35,
+            432.0,
+            567.05
+          ],
+          "bbox_area_ratio": 0.0867
+        }
+      ]
+    },
+    {
+      "page": 469,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=469",
+      "char_count": 1100,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p469_img01_c599bee6219c.png",
+          "width": 346,
+          "height": 322,
+          "bbox": [
+            234.0,
+            72.0,
+            377.96,
+            205.95
+          ],
+          "bbox_area_ratio": 0.0398
+        },
+        {
+          "file_name": "p469_img02_8ae52fcbf09a.png",
+          "width": 344,
+          "height": 163,
+          "bbox": [
+            234.0,
+            300.12,
+            377.94,
+            368.3
+          ],
+          "bbox_area_ratio": 0.0202
+        }
+      ]
+    },
+    {
+      "page": 470,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=470",
+      "char_count": 1126,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p470_img01_ab6879d168ed.png",
+          "width": 940,
+          "height": 675,
+          "bbox": [
+            90.0,
+            76.5,
+            521.94,
+            386.3
+          ],
+          "bbox_area_ratio": 0.2761
+        }
+      ]
+    },
+    {
+      "page": 471,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=471",
+      "char_count": 967,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p471_img01_60e1275da280.jpeg",
+          "width": 836,
+          "height": 712,
+          "bbox": [
+            90.0,
+            261.09,
+            521.95,
+            628.99
+          ],
+          "bbox_area_ratio": 0.3279
+        }
+      ]
+    },
+    {
+      "page": 472,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=472",
+      "char_count": 2135,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 473,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=473",
+      "char_count": 1192,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p473_img01_5ff7087fb4ae.png",
+          "width": 920,
+          "height": 586,
+          "bbox": [
+            161.88,
+            76.5,
+            449.85,
+            260.55
+          ],
+          "bbox_area_ratio": 0.1093
+        }
+      ]
+    },
+    {
+      "page": 474,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=474",
+      "char_count": 1344,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p474_img01_645f7c84ebf9.png",
+          "width": 977,
+          "height": 591,
+          "bbox": [
+            90.0,
+            76.5,
+            521.96,
+            337.8
+          ],
+          "bbox_area_ratio": 0.2329
+        }
+      ]
+    },
+    {
+      "page": 475,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=475",
+      "char_count": 1412,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p475_img01_3ef6ebaa50ab.png",
+          "width": 729,
+          "height": 576,
+          "bbox": [
+            90.0,
+            76.5,
+            521.37,
+            417.35
+          ],
+          "bbox_area_ratio": 0.3033
+        }
+      ]
+    },
+    {
+      "page": 476,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=476",
+      "char_count": 1382,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 477,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=477",
+      "char_count": 1313,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p477_img01_c5bc5d8c98e8.png",
+          "width": 704,
+          "height": 592,
+          "bbox": [
+            90.0,
+            76.5,
+            521.79,
+            439.61
+          ],
+          "bbox_area_ratio": 0.3235
+        }
+      ]
+    },
+    {
+      "page": 478,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=478",
+      "char_count": 2943,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 479,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=479",
+      "char_count": 1387,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p479_img01_16718d205979.png",
+          "width": 761,
+          "height": 712,
+          "bbox": [
+            90.0,
+            76.5,
+            521.8,
+            480.5
+          ],
+          "bbox_area_ratio": 0.3599
+        }
+      ]
+    },
+    {
+      "page": 480,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=480",
+      "char_count": 1048,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p480_img01_6e50769407aa.png",
+          "width": 903,
+          "height": 687,
+          "bbox": [
+            90.0,
+            309.95,
+            521.98,
+            638.6
+          ],
+          "bbox_area_ratio": 0.2929
+        }
+      ]
+    },
+    {
+      "page": 481,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=481",
+      "char_count": 2815,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 482,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=482",
+      "char_count": 1209,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p482_img01_1d9bb3c31061.png",
+          "width": 815,
+          "height": 555,
+          "bbox": [
+            90.0,
+            267.38,
+            521.95,
+            561.53
+          ],
+          "bbox_area_ratio": 0.2621
+        }
+      ]
+    },
+    {
+      "page": 483,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=483",
+      "char_count": 3098,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 484,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=484",
+      "char_count": 1168,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p484_img01_83229c333840.png",
+          "width": 889,
+          "height": 565,
+          "bbox": [
+            90.0,
+            76.5,
+            521.97,
+            351.05
+          ],
+          "bbox_area_ratio": 0.2447
+        }
+      ]
+    },
+    {
+      "page": 485,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=485",
+      "char_count": 1350,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p485_img01_0fa4c41b1095.png",
+          "width": 985,
+          "height": 708,
+          "bbox": [
+            76.5,
+            76.5,
+            544.5,
+            412.9
+          ],
+          "bbox_area_ratio": 0.3248
+        }
+      ]
+    },
+    {
+      "page": 486,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=486",
+      "char_count": 1628,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p486_img01_1db9f401889c.png",
+          "width": 451,
+          "height": 419,
+          "bbox": [
+            126.0,
+            278.09,
+            485.99,
+            612.54
+          ],
+          "bbox_area_ratio": 0.2484
+        }
+      ]
+    },
+    {
+      "page": 487,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=487",
+      "char_count": 1412,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 488,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=488",
+      "char_count": 2105,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 489,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=489",
+      "char_count": 3231,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 490,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=490",
+      "char_count": 1828,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p490_img01_aaeb35924ad4.jpeg",
+          "width": 1024,
+          "height": 578,
+          "bbox": [
+            83.25,
+            220.99,
+            528.23,
+            471.29
+          ],
+          "bbox_area_ratio": 0.2298
+        }
+      ]
+    },
+    {
+      "page": 491,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=491",
+      "char_count": 1652,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p491_img01_60229577f44b.png",
+          "width": 900,
+          "height": 584,
+          "bbox": [
+            90.13,
+            195.69,
+            522.07,
+            475.99
+          ],
+          "bbox_area_ratio": 0.2498
+        }
+      ]
+    },
+    {
+      "page": 492,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=492",
+      "char_count": 2341,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 493,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=493",
+      "char_count": 2096,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 494,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=494",
+      "char_count": 510,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 495,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=495",
+      "char_count": 762,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p495_img01_8744f5142d00.png",
+          "width": 2106,
+          "height": 984,
+          "bbox": [
+            58.68,
+            66.48,
+            564.12,
+            302.52
+          ],
+          "bbox_area_ratio": 0.2461
+        }
+      ]
+    },
+    {
+      "page": 496,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=496",
+      "char_count": 2067,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p496_img01_9f153d460251.png",
+          "width": 898,
+          "height": 665,
+          "bbox": [
+            107.25,
+            386.43,
+            505.15,
+            681.07
+          ],
+          "bbox_area_ratio": 0.2419
+        }
+      ]
+    },
+    {
+      "page": 497,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=497",
+      "char_count": 2345,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 498,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=498",
+      "char_count": 362,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p498_img01_6a6e852b99d0.png",
+          "width": 928,
+          "height": 752,
+          "bbox": [
+            76.5,
+            132.45,
+            544.5,
+            511.7
+          ],
+          "bbox_area_ratio": 0.3662
+        }
+      ]
+    },
+    {
+      "page": 499,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=499",
+      "char_count": 1968,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p499_img01_363f8e20cef5.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            189.75,
+            478.38,
+            421.8,
+            676.39
+          ],
+          "bbox_area_ratio": 0.0948
+        }
+      ]
+    },
+    {
+      "page": 500,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=500",
+      "char_count": 2005,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p500_img01_efba21c58d7a.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.75,
+            236.47,
+            428.5,
+            447.07
+          ],
+          "bbox_area_ratio": 0.1063
+        }
+      ]
+    },
+    {
+      "page": 501,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=501",
+      "char_count": 1490,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p501_img01_974382efe270.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.75,
+            76.5,
+            428.51,
+            285.0
+          ],
+          "bbox_area_ratio": 0.1053
+        }
+      ]
+    },
+    {
+      "page": 502,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=502",
+      "char_count": 1311,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p502_img01_0b95c62dc34f.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.75,
+            76.5,
+            428.51,
+            284.65
+          ],
+          "bbox_area_ratio": 0.1051
+        }
+      ]
+    },
+    {
+      "page": 503,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=503",
+      "char_count": 1689,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p503_img01_46b05234b3e3.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.73,
+            76.5,
+            428.49,
+            285.05
+          ],
+          "bbox_area_ratio": 0.1053
+        }
+      ]
+    },
+    {
+      "page": 504,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=504",
+      "char_count": 1894,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p504_img01_ad75f3ebeb51.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.75,
+            76.5,
+            428.53,
+            285.95
+          ],
+          "bbox_area_ratio": 0.1058
+        }
+      ]
+    },
+    {
+      "page": 505,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=505",
+      "char_count": 2174,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p505_img01_172724e649c2.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.75,
+            76.5,
+            428.53,
+            285.95
+          ],
+          "bbox_area_ratio": 0.1058
+        }
+      ]
+    },
+    {
+      "page": 506,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=506",
+      "char_count": 1051,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p506_img01_f2914f69ffbf.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.75,
+            76.5,
+            428.53,
+            285.95
+          ],
+          "bbox_area_ratio": 0.1058
+        },
+        {
+          "file_name": "p506_img02_ad5d308d857b.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.75,
+            401.15,
+            428.54,
+            609.85
+          ],
+          "bbox_area_ratio": 0.1054
+        }
+      ]
+    },
+    {
+      "page": 507,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=507",
+      "char_count": 2466,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p507_img01_913bd3495ff7.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.75,
+            239.64,
+            428.54,
+            448.19
+          ],
+          "bbox_area_ratio": 0.1053
+        }
+      ]
+    },
+    {
+      "page": 508,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=508",
+      "char_count": 1339,
+      "image_count": 2,
+      "images": [
+        {
+          "file_name": "p508_img01_474d719ec21d.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            188.25,
+            195.69,
+            423.15,
+            395.96
+          ],
+          "bbox_area_ratio": 0.0971
+        },
+        {
+          "file_name": "p508_img02_59458993c12d.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            190.5,
+            498.7,
+            422.04,
+            695.85
+          ],
+          "bbox_area_ratio": 0.0942
+        }
+      ]
+    },
+    {
+      "page": 509,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=509",
+      "char_count": 2617,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p509_img01_207e58abf43c.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.75,
+            337.66,
+            428.54,
+            546.36
+          ],
+          "bbox_area_ratio": 0.1054
+        }
+      ]
+    },
+    {
+      "page": 510,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=510",
+      "char_count": 74,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p510_img01_e7f43ff96ab9.jpeg",
+          "width": 600,
+          "height": 512,
+          "bbox": [
+            183.75,
+            76.5,
+            428.52,
+            285.2
+          ],
+          "bbox_area_ratio": 0.1054
+        }
+      ]
+    },
+    {
+      "page": 511,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=511",
+      "char_count": 121,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p511_img01_881bc0006237.png",
+          "width": 640,
+          "height": 634,
+          "bbox": [
+            90.0,
+            123.25,
+            522.0,
+            551.2
+          ],
+          "bbox_area_ratio": 0.3814
+        }
+      ]
+    },
+    {
+      "page": 512,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=512",
+      "char_count": 458,
+      "image_count": 1,
+      "images": [
+        {
+          "file_name": "p512_img01_6d968ef846cc.png",
+          "width": 293,
+          "height": 613,
+          "bbox": [
+            200.25,
+            218.49,
+            412.15,
+            661.81
+          ],
+          "bbox_area_ratio": 0.1938
+        }
+      ]
+    },
+    {
+      "page": 513,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=513",
+      "char_count": 2568,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 514,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=514",
+      "char_count": 2269,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 515,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=515",
+      "char_count": 2050,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 516,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=516",
+      "char_count": 2178,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 517,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=517",
+      "char_count": 3195,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 518,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=518",
+      "char_count": 3190,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 519,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=519",
+      "char_count": 3006,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 520,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=520",
+      "char_count": 3078,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 521,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=521",
+      "char_count": 3141,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 522,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=522",
+      "char_count": 2791,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 523,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=523",
+      "char_count": 1868,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 524,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=524",
+      "char_count": 1512,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 525,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=525",
+      "char_count": 2497,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 526,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=526",
+      "char_count": 1052,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 527,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=527",
+      "char_count": 1130,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 528,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=528",
+      "char_count": 962,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 529,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=529",
+      "char_count": 958,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 530,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=530",
+      "char_count": 772,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 531,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=531",
+      "char_count": 994,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 532,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=532",
+      "char_count": 957,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 533,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=533",
+      "char_count": 953,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 534,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=534",
+      "char_count": 1085,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 535,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=535",
+      "char_count": 567,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 536,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=536",
+      "char_count": 576,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 537,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=537",
+      "char_count": 480,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 538,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=538",
+      "char_count": 2304,
+      "image_count": 0,
+      "images": []
+    },
+    {
+      "page": 539,
+      "source_ref": "FAA-H-8083-28A_FAA_Web.pdf#page=539",
+      "char_count": 1336,
+      "image_count": 0,
+      "images": []
+    }
+  ]
+}

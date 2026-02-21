@@ -614,7 +614,7 @@
     "acs_code": "UA.I.A.K3",
     "source": "ACS Mastery (UA.I.A.K3)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p008_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-017",
@@ -967,7 +967,7 @@
     "acs_code": "UA.I.A.K7",
     "source": "ACS Mastery (UA.I.A.K7)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p008_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-025",
@@ -1038,11 +1038,11 @@
       }
     ],
     "correct_option_id": "B",
-    "explanation_correct": "UA.I.A.K8 corresponds to: Previously manufactured sUAS. ### Images ![Page 8 image](../images/uas-acsocr/p008_img01_5b91968bce71.png) - `image=p008_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.I.A.K8 corresponds to: Previously manufactured sUAS.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.I.A.K8 corresponds to: Previously manufactured sUAS. ### Images ![Page 8 image](../images/uas-acsocr/p008_img01_5b91968bce71.png) - `image=p008_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.I.A.K8 corresponds to: Previously manufactured sUAS. ### Images ![Page 8 image](../images/uas-acsocr/p008_img01_5b91968bce71.png) - `image=p008_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "D": "This is incorrect. UA.I.A.K8 corresponds to: Previously manufactured sUAS. ### Images ![Page 8 image](../images/uas-acsocr/p008_img01_5b91968bce71.png) - `image=p008_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.I.A.K8 corresponds to: Previously manufactured sUAS.",
+      "C": "This is incorrect. UA.I.A.K8 corresponds to: Previously manufactured sUAS.",
+      "D": "This is incorrect. UA.I.A.K8 corresponds to: Previously manufactured sUAS."
     },
     "citation": "ACS UA.I.A.K8",
     "difficulty_level": 2,
@@ -1056,7 +1056,7 @@
     "acs_code": "UA.I.A.K8",
     "source": "ACS Mastery (UA.I.A.K8)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p008_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-027",
@@ -1101,7 +1101,7 @@
     "acs_code": "UA.I.A.K8",
     "source": "ACS Mastery (UA.I.A.K8)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p008_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-028",
@@ -2994,7 +2994,7 @@
     "acs_code": "UA.I.B.K21b",
     "source": "ACS Mastery (UA.I.B.K21b)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p009_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-071",
@@ -3329,11 +3329,11 @@
       }
     ],
     "correct_option_id": "B",
-    "explanation_correct": "UA.I.B.K23 corresponds to: Automated operations. ### Images ![Page 9 image](../images/uas-acsocr/p009_img01_5b91968bce71.png) - `image=p009_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.I.B.K23 corresponds to: Automated operations.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.I.B.K23 corresponds to: Automated operations. ### Images ![Page 9 image](../images/uas-acsocr/p009_img01_5b91968bce71.png) - `image=p009_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.I.B.K23 corresponds to: Automated operations. ### Images ![Page 9 image](../images/uas-acsocr/p009_img01_5b91968bce71.png) - `image=p009_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "D": "This is incorrect. UA.I.B.K23 corresponds to: Automated operations. ### Images ![Page 9 image](../images/uas-acsocr/p009_img01_5b91968bce71.png) - `image=p009_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.I.B.K23 corresponds to: Automated operations.",
+      "C": "This is incorrect. UA.I.B.K23 corresponds to: Automated operations.",
+      "D": "This is incorrect. UA.I.B.K23 corresponds to: Automated operations."
     },
     "citation": "ACS UA.I.B.K23",
     "difficulty_level": 2,
@@ -3347,7 +3347,7 @@
     "acs_code": "UA.I.B.K23",
     "source": "ACS Mastery (UA.I.B.K23)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p009_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-079",
@@ -3392,7 +3392,7 @@
     "acs_code": "UA.I.B.K23",
     "source": "ACS Mastery (UA.I.B.K23)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p009_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-080",
@@ -3789,7 +3789,7 @@
     "acs_code": "UA.I.C.K1",
     "source": "ACS Mastery (UA.I.C.K1)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p011_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-089",
@@ -3878,7 +3878,7 @@
     "acs_code": "UA.I.C.K2",
     "source": "ACS Mastery (UA.I.C.K2)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p011_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-091",
@@ -3967,7 +3967,7 @@
     "acs_code": "UA.I.C.K3",
     "source": "ACS Mastery (UA.I.C.K3)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p011_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-093",
@@ -4038,11 +4038,11 @@
       }
     ],
     "correct_option_id": "D",
-    "explanation_correct": "UA.I.C.K4 corresponds to: Aeronautical knowledge recency. ### Images ![Page 11 image](../images/uas-acsocr/p011_img01_5b91968bce71.png) - `image=p011_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.I.C.K4 corresponds to: Aeronautical knowledge recency.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.I.C.K4 corresponds to: Aeronautical knowledge recency. ### Images ![Page 11 image](../images/uas-acsocr/p011_img01_5b91968bce71.png) - `image=p011_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "B": "This is incorrect. UA.I.C.K4 corresponds to: Aeronautical knowledge recency. ### Images ![Page 11 image](../images/uas-acsocr/p011_img01_5b91968bce71.png) - `image=p011_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.I.C.K4 corresponds to: Aeronautical knowledge recency. ### Images ![Page 11 image](../images/uas-acsocr/p011_img01_5b91968bce71.png) - `image=p011_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.I.C.K4 corresponds to: Aeronautical knowledge recency.",
+      "B": "This is incorrect. UA.I.C.K4 corresponds to: Aeronautical knowledge recency.",
+      "C": "This is incorrect. UA.I.C.K4 corresponds to: Aeronautical knowledge recency."
     },
     "citation": "ACS UA.I.C.K4",
     "difficulty_level": 2,
@@ -4056,7 +4056,7 @@
     "acs_code": "UA.I.C.K4",
     "source": "ACS Mastery (UA.I.C.K4)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p011_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-095",
@@ -4101,7 +4101,7 @@
     "acs_code": "UA.I.C.K4",
     "source": "ACS Mastery (UA.I.C.K4)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p011_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-096",
@@ -4128,11 +4128,11 @@
       }
     ],
     "correct_option_id": "D",
-    "explanation_correct": "UA.I.D.K1 corresponds to: Waiver policy and requirements. ### Images ![Page 12 image](../images/uas-acsocr/p012_img01_5b91968bce71.png) - `image=p012_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.I.D.K1 corresponds to: Waiver policy and requirements.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.I.D.K1 corresponds to: Waiver policy and requirements. ### Images ![Page 12 image](../images/uas-acsocr/p012_img01_5b91968bce71.png) - `image=p012_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "B": "This is incorrect. UA.I.D.K1 corresponds to: Waiver policy and requirements. ### Images ![Page 12 image](../images/uas-acsocr/p012_img01_5b91968bce71.png) - `image=p012_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.I.D.K1 corresponds to: Waiver policy and requirements. ### Images ![Page 12 image](../images/uas-acsocr/p012_img01_5b91968bce71.png) - `image=p012_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.I.D.K1 corresponds to: Waiver policy and requirements.",
+      "B": "This is incorrect. UA.I.D.K1 corresponds to: Waiver policy and requirements.",
+      "C": "This is incorrect. UA.I.D.K1 corresponds to: Waiver policy and requirements."
     },
     "citation": "ACS UA.I.D.K1",
     "difficulty_level": 2,
@@ -4146,7 +4146,7 @@
     "acs_code": "UA.I.D.K1",
     "source": "ACS Mastery (UA.I.D.K1)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p012_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-097",
@@ -4191,7 +4191,7 @@
     "acs_code": "UA.I.D.K1",
     "source": "ACS Mastery (UA.I.D.K1)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p012_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-098",
@@ -4324,7 +4324,7 @@
     "acs_code": "UA.I.E.K2",
     "source": "ACS Mastery (UA.I.E.K2)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p013_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-101",
@@ -5205,7 +5205,7 @@
     "acs_code": "UA.I.E.K10",
     "source": "ACS Mastery (UA.I.E.K10)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p013_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-121",
@@ -5470,7 +5470,7 @@
     "acs_code": "UA.I.E.K13",
     "source": "ACS Mastery (UA.I.E.K13)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p013_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-127",
@@ -5805,11 +5805,11 @@
       }
     ],
     "correct_option_id": "C",
-    "explanation_correct": "UA.I.E.K17 corresponds to: Exposed rotating parts. ### Images ![Page 13 image](../images/uas-acsocr/p013_img01_5b91968bce71.png) - `image=p013_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.I.E.K17 corresponds to: Exposed rotating parts.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.I.E.K17 corresponds to: Exposed rotating parts. ### Images ![Page 13 image](../images/uas-acsocr/p013_img01_5b91968bce71.png) - `image=p013_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "B": "This is incorrect. UA.I.E.K17 corresponds to: Exposed rotating parts. ### Images ![Page 13 image](../images/uas-acsocr/p013_img01_5b91968bce71.png) - `image=p013_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "D": "This is incorrect. UA.I.E.K17 corresponds to: Exposed rotating parts. ### Images ![Page 13 image](../images/uas-acsocr/p013_img01_5b91968bce71.png) - `image=p013_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.I.E.K17 corresponds to: Exposed rotating parts.",
+      "B": "This is incorrect. UA.I.E.K17 corresponds to: Exposed rotating parts.",
+      "D": "This is incorrect. UA.I.E.K17 corresponds to: Exposed rotating parts."
     },
     "citation": "ACS UA.I.E.K17",
     "difficulty_level": 2,
@@ -5823,7 +5823,7 @@
     "acs_code": "UA.I.E.K17",
     "source": "ACS Mastery (UA.I.E.K17)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p013_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-135",
@@ -5868,7 +5868,7 @@
     "acs_code": "UA.I.E.K17",
     "source": "ACS Mastery (UA.I.E.K17)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p013_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-136",
@@ -6265,7 +6265,7 @@
     "acs_code": "UA.I.F.K6",
     "source": "ACS Mastery (UA.I.F.K6)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p014_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-145",
@@ -6336,11 +6336,11 @@
       }
     ],
     "correct_option_id": "C",
-    "explanation_correct": "UA.I.F.K7 corresponds to: Product labeling. ### Images ![Page 14 image](../images/uas-acsocr/p014_img01_5b91968bce71.png) - `image=p014_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.I.F.K7 corresponds to: Product labeling.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.I.F.K7 corresponds to: Product labeling. ### Images ![Page 14 image](../images/uas-acsocr/p014_img01_5b91968bce71.png) - `image=p014_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "B": "This is incorrect. UA.I.F.K7 corresponds to: Product labeling. ### Images ![Page 14 image](../images/uas-acsocr/p014_img01_5b91968bce71.png) - `image=p014_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "D": "This is incorrect. UA.I.F.K7 corresponds to: Product labeling. ### Images ![Page 14 image](../images/uas-acsocr/p014_img01_5b91968bce71.png) - `image=p014_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.I.F.K7 corresponds to: Product labeling.",
+      "B": "This is incorrect. UA.I.F.K7 corresponds to: Product labeling.",
+      "D": "This is incorrect. UA.I.F.K7 corresponds to: Product labeling."
     },
     "citation": "ACS UA.I.F.K7",
     "difficulty_level": 2,
@@ -6354,7 +6354,7 @@
     "acs_code": "UA.I.F.K7",
     "source": "ACS Mastery (UA.I.F.K7)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p014_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "REG-ACS-147",
@@ -6399,6 +6399,129 @@
     "acs_code": "UA.I.F.K7",
     "source": "ACS Mastery (UA.I.F.K7)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p014_img01_5b91968bce71.png"
+    "image_ref": null
+  },
+  {
+    "id": "REG-148",
+    "category": "Regulations",
+    "subcategory": "Operating Limitations",
+    "question_text": "According to 14 CFR part 107, what is the maximum altitude a small UAS is permitted to fly above ground level without a waiver?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "400 ft AGL"
+      },
+      {
+        "id": "B",
+        "text": "500 ft AGL"
+      },
+      {
+        "id": "C",
+        "text": "1,200 ft AGL"
+      },
+      {
+        "id": "D",
+        "text": "2,000 ft AGL"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Under 14 CFR §107.51(b), no person may operate a small unmanned aircraft higher than 400 feet above ground level unless operating within a 400-foot radius of a structure and not flying higher than 400 feet above the structure's highest point.",
+    "explanation_distractors": {
+      "B": "500 ft AGL is not the limit — 400 ft AGL is the Part 107 maximum without a waiver.",
+      "C": "1,200 ft AGL is not a Part 107 altitude limit.",
+      "D": "2,000 ft AGL far exceeds the Part 107 400 ft limit."
+    },
+    "citation": "14 CFR §107.51",
+    "difficulty_level": 1,
+    "tags": [
+      "altitude",
+      "400-ft",
+      "operating-limitations"
+    ],
+    "acs_code": "UA.I.B.K2",
+    "source": "Review.md"
+  },
+  {
+    "id": "REG-149",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "After receiving a Part 107 remote pilot certificate with a small UAS rating, how often must you complete recurrent training to maintain currency?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Every 12 calendar months"
+      },
+      {
+        "id": "B",
+        "text": "Every 24 calendar months"
+      },
+      {
+        "id": "C",
+        "text": "Every 36 calendar months"
+      },
+      {
+        "id": "D",
+        "text": "Only once — the initial training is sufficient"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Under 14 CFR §107.65, to maintain currency a remote pilot must pass a recurrent aeronautical knowledge test or complete an FAA-approved online training course every 24 calendar months.",
+    "explanation_distractors": {
+      "A": "12 months is too frequent — the requirement is every 24 calendar months.",
+      "C": "36 calendar months is too long — currency expires after 24 months.",
+      "D": "Initial training alone is not enough; recurrent training is required every 24 calendar months."
+    },
+    "citation": "14 CFR §107.65",
+    "difficulty_level": 1,
+    "tags": [
+      "recurrency",
+      "24-calendar-months",
+      "certification"
+    ],
+    "acs_code": "UA.I.A.K5",
+    "source": "Review.md"
+  },
+  {
+    "id": "REG-150",
+    "category": "Regulations",
+    "subcategory": "Operating Rules",
+    "question_text": "You are hired to take aerial photographs of a sporting event for commercial use. Which regulation applies to this operation?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Part 91 — General Operating and Flight Rules"
+      },
+      {
+        "id": "B",
+        "text": "Part 101 — Moored Balloons, Kites, Amateur Rockets, and Unmanned Free Balloons"
+      },
+      {
+        "id": "C",
+        "text": "Part 107 — Small Unmanned Aircraft Systems"
+      },
+      {
+        "id": "D",
+        "text": "Part 61 — Certification: Pilots, Flight Instructors, and Ground Instructors"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Commercial small UAS operations, including aerial photography for hire, are governed by 14 CFR Part 107. Any time you receive compensation for a UAS operation, Part 107 applies and you must hold a Remote Pilot Certificate.",
+    "explanation_distractors": {
+      "A": "Part 91 applies to manned aircraft operations, not commercial sUAS.",
+      "B": "Part 101 covers unmanned free balloons and hobby rockets, not commercial UAS operations.",
+      "D": "Part 61 governs manned aircraft pilot certification, not UAS operations."
+    },
+    "citation": "14 CFR §107.1",
+    "difficulty_level": 1,
+    "tags": [
+      "commercial-operations",
+      "part-107",
+      "aerial-photography"
+    ],
+    "acs_code": "UA.I.A.K1",
+    "source": "Review.md"
   }
 ]

@@ -184,7 +184,7 @@
     "acs_code": "UA.IV.A.K1",
     "source": "ACS Mastery (UA.IV.A.K1)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p019_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "LP-ACS-006",
@@ -275,7 +275,7 @@
     "acs_code": "UA.IV.A.K1a",
     "source": "ACS Mastery (UA.IV.A.K1a)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p019_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "LP-ACS-008",
@@ -366,7 +366,7 @@
     "acs_code": "UA.IV.A.K1b",
     "source": "ACS Mastery (UA.IV.A.K1b)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p019_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "LP-ACS-010",
@@ -438,11 +438,11 @@
       }
     ],
     "correct_option_id": "D",
-    "explanation_correct": "UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS. ### Images ![Page 19 image](../images/uas-acsocr/p019_img01_5b91968bce71.png) - `image=p019_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
+    "explanation_correct": "UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS.",
     "explanation_distractors": {
-      "A": "This is incorrect. UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS. ### Images ![Page 19 image](../images/uas-acsocr/p019_img01_5b91968bce71.png) - `image=p019_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "B": "This is incorrect. UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS. ### Images ![Page 19 image](../images/uas-acsocr/p019_img01_5b91968bce71.png) - `image=p019_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`",
-      "C": "This is incorrect. UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS. ### Images ![Page 19 image](../images/uas-acsocr/p019_img01_5b91968bce71.png) - `image=p019_img01_5b91968bce71.png` `size=2341x196` `bbox_area_ratio=0.0545`"
+      "A": "This is incorrect. UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS.",
+      "B": "This is incorrect. UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS.",
+      "C": "This is incorrect. UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS."
     },
     "citation": "ACS UA.IV.A.K2",
     "difficulty_level": 2,
@@ -457,7 +457,7 @@
     "acs_code": "UA.IV.A.K2",
     "source": "ACS Mastery (UA.IV.A.K2)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p019_img01_5b91968bce71.png"
+    "image_ref": null
   },
   {
     "id": "LP-ACS-012",
@@ -503,6 +503,132 @@
     "acs_code": "UA.IV.A.K2",
     "source": "ACS Mastery (UA.IV.A.K2)",
     "source_type": "acs_generated",
-    "image_ref": "/images/uas-acsocr/p019_img01_5b91968bce71.png"
+    "image_ref": null
+  },
+  {
+    "id": "LP-013",
+    "category": "Loading & Performance",
+    "subcategory": "Center of Gravity",
+    "question_text": "How does a drone with its center of gravity too far forward typically behave in flight?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "It tends to pitch up and may become difficult to control at high speeds"
+      },
+      {
+        "id": "B",
+        "text": "It tends to pitch down, requiring front motors to work harder to maintain level flight and climb"
+      },
+      {
+        "id": "C",
+        "text": "It drifts to one side due to asymmetric lift"
+      },
+      {
+        "id": "D",
+        "text": "It becomes more stable and easier to fly"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "When a drone's center of gravity (CG) is too far forward, the nose-heavy condition causes the aircraft to pitch down. The front motors must constantly work harder to counteract this tendency to maintain level flight and climb, reducing efficiency and flight time.",
+    "explanation_distractors": {
+      "A": "A forward CG causes a pitch-down tendency, not pitch-up.",
+      "C": "Lateral drift is caused by asymmetric loading, not a forward CG.",
+      "D": "An improper CG location reduces stability and performance — it does not improve handling."
+    },
+    "citation": "FAA-H-8083-25, Ch 10",
+    "difficulty_level": 2,
+    "tags": [
+      "center-of-gravity",
+      "forward-cg",
+      "pitch-down",
+      "loading"
+    ],
+    "acs_code": "UA.IV.A.K2",
+    "source": "Review.md"
+  },
+  {
+    "id": "LP-014",
+    "category": "Loading & Performance",
+    "subcategory": "Performance",
+    "question_text": "How does increasing drone weight affect stall speed and overall flight performance?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Higher weight decreases stall speed and improves stability"
+      },
+      {
+        "id": "B",
+        "text": "Higher weight has no effect on stall speed"
+      },
+      {
+        "id": "C",
+        "text": "Higher weight increases stall speed and negatively affects overall performance"
+      },
+      {
+        "id": "D",
+        "text": "Higher weight only affects battery life, not aerodynamic performance"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "A heavier aircraft requires more lift to maintain flight, which means it must fly at a higher angle of attack — leading to a higher stall speed. Greater weight also increases power required, reduces endurance and range, decreases climb performance, and generally degrades all aspects of flight performance.",
+    "explanation_distractors": {
+      "A": "Higher weight increases stall speed — the opposite of what this choice states.",
+      "B": "Weight directly determines the lift required and therefore directly affects stall speed.",
+      "D": "While battery life is affected by weight, the aerodynamic performance impacts are equally significant."
+    },
+    "citation": "FAA-H-8083-25, Ch 10",
+    "difficulty_level": 2,
+    "tags": [
+      "weight",
+      "stall-speed",
+      "performance",
+      "loading"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "Review.md"
+  },
+  {
+    "id": "LP-015",
+    "category": "Loading & Performance",
+    "subcategory": "Aerodynamics",
+    "question_text": "What is the definition of angle of attack?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The angle between the aircraft's longitudinal axis and the horizon"
+      },
+      {
+        "id": "B",
+        "text": "The angle between the aircraft's flight path and the horizon"
+      },
+      {
+        "id": "C",
+        "text": "The angle between the chord line of the wing or propeller blade and the relative wind"
+      },
+      {
+        "id": "D",
+        "text": "The angle of bank during a coordinated turn"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Angle of attack (AOA) is defined as the angle between the chord line of a wing or propeller blade and the direction of the relative wind (oncoming airflow). As AOA increases, lift increases — up to the critical angle of attack, beyond which the wing stalls.",
+    "explanation_distractors": {
+      "A": "That describes the pitch attitude of the aircraft, not angle of attack.",
+      "B": "That describes the flight path angle relative to the horizon, not angle of attack.",
+      "D": "Bank angle is an entirely different aerodynamic concept related to turning flight."
+    },
+    "citation": "FAA-H-8083-25, Ch 5",
+    "difficulty_level": 1,
+    "tags": [
+      "angle-of-attack",
+      "chord-line",
+      "relative-wind",
+      "aerodynamics"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "Review.md"
   }
 ]
