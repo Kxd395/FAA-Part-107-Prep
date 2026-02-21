@@ -55,19 +55,34 @@ const QUESTION_TYPE_OPTIONS: Array<{
   description: string;
 }> = [
   {
+    value: "confirmed_test",
+    title: "✅ Confirmed Test Questions",
+    description: "Only questions verified from the real FAA exam — Review.md, UAG, and SPA banks (70 questions).",
+  },
+  {
+    value: "all_random",
+    title: "🎲 All Questions (Random)",
+    description: "Full 362-question pool — confirmed test material plus ACS practice drills.",
+  },
+  {
+    value: "acs_practice",
+    title: "📚 ACS Practice Only",
+    description: "Only ACS-generated mastery drills. Excludes confirmed real-test questions.",
+  },
+  {
     value: "real_exam",
-    title: "Real Exam MCQ (Recommended)",
-    description: "Keeps standard FAA-style multiple-choice prompts and excludes ACS code-mapping drills.",
+    title: "Real Exam MCQ (Legacy)",
+    description: "Standard FAA-style MCQs only. Excludes ACS code-mapping drill format questions.",
   },
   {
     value: "weak_spots",
-    title: "Weak Spots Only",
+    title: "🔥 Weak Spots Only",
     description: "Targets realistic MCQs you miss most often.",
   },
 ];
 
 export default function HomePage() {
-  const [practiceType, setPracticeType] = useState<QuestionTypeProfile>("real_exam");
+  const [practiceType, setPracticeType] = useState<QuestionTypeProfile>("confirmed_test");
   const practiceExamHref = useMemo(() => `/exam?type=${encodeURIComponent(practiceType)}`, [practiceType]);
   const studyHref = useMemo(() => `/study?type=${encodeURIComponent(practiceType)}`, [practiceType]);
 
