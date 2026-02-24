@@ -51,6 +51,12 @@ export type {
   UseExamSessionOptions,
   UseExamSessionResult,
 } from "./examSession";
+export type {
+  AttemptOutcome,
+  AttemptConfidence,
+  QualityScore,
+  SessionQueueDecision,
+} from "./grading";
 
 // Engine
 export {
@@ -104,5 +110,11 @@ export {
   updateUserQuestionStats,
   selectAdaptiveQuestions,
 } from "./adaptive";
+export {
+  normalizeConfidence,
+  qualityFromOutcomeConfidence,
+  sessionQueueDecisionFromQuality,
+  nextIntervalDaysFromQuality,
+} from "./grading";
 export { useStudySession } from "./studySession";
 export { useExamSession } from "./examSession";

@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import Link from "next/link";
+import AppHeaderNav from "../components/AppHeaderNav";
 import "./globals.css";
+
+import { AuthProvider } from "../components/AuthProvider";
 
 export const metadata: Metadata = {
   title: "Part 107 Drone Exam Prep 2026",
@@ -39,52 +41,24 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased">
-        {/* Navigation Header */}
-        <header className="sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--background)]/80 backdrop-blur-xl">
-          <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl">🛩️</span>
-              <span className="text-lg font-bold tracking-tight">
-                Part 107 <span className="text-brand-500">Prep</span>
-              </span>
-            </Link>
-            <div className="flex items-center gap-6 text-sm text-[var(--muted)]">
-              <Link href="/study" className="hover:text-white transition-colors">
-                Study
-              </Link>
-              <Link href="/exam" className="hover:text-white transition-colors">
-                Exam
-              </Link>
-              <Link href="/flashcards" className="hover:text-white transition-colors">
-                Flashcards
-              </Link>
-              <Link href="/learn" className="hover:text-white transition-colors">
-                Learn
-              </Link>
-              <Link href="/missed" className="hover:text-white transition-colors">
-                Missed
-              </Link>
-              <Link href="/progress" className="hover:text-white transition-colors">
-                Progress
-              </Link>
-              <Link href="/charts" className="hover:text-white transition-colors">
-                Charts
-              </Link>
-            </div>
-          </nav>
-        </header>
+        <AuthProvider>
+          {/* Navigation Header */}
+          <header className="sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--background)]/80 backdrop-blur-xl">
+            <AppHeaderNav />
+          </header>
 
-        {/* Main Content */}
-        <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
+          {/* Main Content */}
+          <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
 
-        {/* Footer */}
-        <footer className="border-t border-[var(--card-border)] py-6 text-center text-xs text-[var(--muted)]">
-          <p>
-            Based on official FAA sources (FAA-G-8082-22, FAA-CT-8080-2H).
-            Updated for 2026 rules.
-          </p>
-          <p className="mt-1">Not affiliated with the FAA.</p>
-        </footer>
+          {/* Footer */}
+          <footer className="border-t border-[var(--card-border)] py-6 text-center text-xs text-[var(--muted)]">
+            <p>
+              Based on official FAA sources (FAA-G-8082-22, FAA-CT-8080-2H).
+              Updated for 2026 rules.
+            </p>
+            <p className="mt-1">Not affiliated with the FAA.</p>
+          </footer>
+        </AuthProvider>
       </body>
     </html>
   );

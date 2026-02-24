@@ -173,12 +173,13 @@ describe("adaptive stats updates", () => {
     expect(stats?.volatility).toBeGreaterThan(0);
   });
 
-  it("updates EMA and spacing interval based on correctness and speed", () => {
+  it("updates EMA and spacing interval based on outcome quality", () => {
     const first = updateUserQuestionStats({
       userId: "user-1",
       canonicalKey: "schedule",
       isCorrect: true,
       responseTimeMs: 12_000,
+      confidence: 5,
       answeredAtMs: 1_700_000_000_000,
     });
     const second = updateUserQuestionStats({
@@ -187,6 +188,7 @@ describe("adaptive stats updates", () => {
       previous: first,
       isCorrect: true,
       responseTimeMs: 120_000,
+      confidence: 3,
       answeredAtMs: 1_700_000_100_000,
     });
     const third = updateUserQuestionStats({
@@ -195,14 +197,18 @@ describe("adaptive stats updates", () => {
       previous: second,
       isCorrect: false,
       responseTimeMs: 40_000,
+      confidence: 5,
       answeredAtMs: 1_700_000_200_000,
     });
 
-    expect(first.intervalDays).toBe(2);
-    expect(second.intervalDays).toBe(3);
+    expect(first.intervalDays).toBe(4);
+    expect(second.intervalDays).toBe(8);
     expect(third.intervalDays).toBe(1);
     expect(third.wrongStreak).toBe(1);
     expect(third.correctStreak).toBe(0);
+    expect(first.lastQualityScore).toBe(5);
+    expect(second.lastQualityScore).toBe(4);
+    expect(third.lastQualityScore).toBe(0);
     expect(second.emaResponseTimeMs).not.toBeNull();
     expect(third.emaAccuracy).toBeGreaterThanOrEqual(0);
     expect(third.emaAccuracy).toBeLessThanOrEqual(1);

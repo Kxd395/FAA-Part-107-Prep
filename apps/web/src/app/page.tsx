@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   QUESTION_TYPE_PROFILE_LABELS,
   type QuestionTypeProfile,
 } from "@part107/core";
+import { useLearningEventLogger } from "../hooks/useLearningEventLogger";
+import { LOCAL_USER_ID } from "../lib/analyticsTaxonomy";
 
 const FEATURES = [
   {
@@ -106,9 +108,31 @@ const QUESTION_TYPE_OPTIONS: Array<{
 ];
 
 export default function HomePage() {
+  const { logEvent } = useLearningEventLogger(LOCAL_USER_ID);
   const [practiceType, setPracticeType] = useState<QuestionTypeProfile>("confirmed_test");
   const practiceExamHref = useMemo(() => `/exam?type=${encodeURIComponent(practiceType)}`, [practiceType]);
   const studyHref = useMemo(() => `/study?type=${encodeURIComponent(practiceType)}`, [practiceType]);
+
+  useEffect(() => {
+    logEvent({
+      type: "page_view",
+      mode: "home",
+      metadata: {
+        route: "/",
+      },
+    });
+  }, [logEvent]);
+
+  const logNavigation = (target: string, href: string) => {
+    logEvent({
+      type: "link_opened",
+      mode: "home",
+      metadata: {
+        target,
+        href,
+      },
+    });
+  };
 
   return (
     <div className="space-y-16">
@@ -133,12 +157,14 @@ export default function HomePage() {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
             href={studyHref}
+            onClick={() => logNavigation("hero_start_study", studyHref)}
             className="rounded-xl bg-brand-600 px-8 py-3 font-semibold text-white transition-all hover:bg-brand-700 hover:scale-105"
           >
             Start Studying →
           </Link>
           <Link
             href={practiceExamHref}
+            onClick={() => logNavigation("hero_take_exam", practiceExamHref)}
             className="rounded-xl border border-[var(--card-border)] px-8 py-3 font-semibold text-[var(--muted)] transition-all hover:border-white/30 hover:text-white"
           >
             Take Practice Exam
@@ -151,7 +177,19 @@ export default function HomePage() {
           <select
             id="practice-type"
             value={practiceType}
-            onChange={(event) => setPracticeType(event.target.value as QuestionTypeProfile)}
+            onChange={(event) => {
+              const value = event.target.value as QuestionTypeProfile;
+              setPracticeType(value);
+              logEvent({
+                type: "filter_changed",
+                mode: "home",
+                questionTypeProfile: value,
+                metadata: {
+                  filter: "practice_type",
+                  value,
+                },
+              });
+            }}
             className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-white focus:border-brand-500/60 focus:outline-none"
           >
             {QUESTION_TYPE_OPTIONS.map((option) => (
@@ -198,6 +236,7 @@ export default function HomePage() {
             <Link
               key={feature.title}
               href={feature.href}
+              onClick={() => logNavigation(`feature_${feature.title.toLowerCase().replaceAll(/\s+/g, "_")}`, feature.href)}
               className={`group rounded-2xl border border-[var(--card-border)] bg-gradient-to-br ${feature.color} p-6 transition-all hover:border-white/20 hover:scale-[1.02]`}
             >
               <div className="text-3xl">{feature.icon}</div>
@@ -250,12 +289,24 @@ export default function HomePage() {
               <div className="mt-3 flex gap-2">
                 <Link
                   href={`/study?category=${encodeURIComponent(topic.name)}&type=${encodeURIComponent(practiceType)}`}
+                  onClick={() =>
+                    logNavigation(
+                      `topic_study_${topic.name.toLowerCase().replaceAll(/\s+/g, "_")}`,
+                      `/study?category=${encodeURIComponent(topic.name)}&type=${encodeURIComponent(practiceType)}`
+                    )
+                  }
                   className="flex-1 rounded-lg bg-brand-600/80 py-2 text-center text-xs font-semibold text-white transition-all hover:bg-brand-600"
                 >
                   📖 Study
                 </Link>
                 <Link
                   href={`/exam?category=${encodeURIComponent(topic.name)}&type=${encodeURIComponent(practiceType)}`}
+                  onClick={() =>
+                    logNavigation(
+                      `topic_exam_${topic.name.toLowerCase().replaceAll(/\s+/g, "_")}`,
+                      `/exam?category=${encodeURIComponent(topic.name)}&type=${encodeURIComponent(practiceType)}`
+                    )
+                  }
                   className="flex-1 rounded-lg border border-[var(--card-border)] py-2 text-center text-xs font-semibold text-[var(--muted)] transition-all hover:border-white/30 hover:text-white"
                 >
                   🎯 Test

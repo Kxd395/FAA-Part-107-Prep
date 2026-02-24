@@ -23,6 +23,7 @@ export interface ExamReviewInput {
   question: Question;
   isCorrect: boolean;
   userAnswer?: OptionId | null;
+  confidence?: 1 | 2 | 3 | 4 | 5 | null;
 }
 
 interface RecordAnswerContext {
@@ -84,6 +85,7 @@ export function useAdaptiveQuestionStats(
           previous: prev[canonicalKey],
           isCorrect,
           responseTimeMs: context.responseTimeMs,
+          confidence: context.confidence ?? null,
           config: resolvedConfig,
           answeredAtMs,
         });
@@ -133,6 +135,7 @@ export function useAdaptiveQuestionStats(
             previous: next[canonicalKey],
             isCorrect: row.isCorrect,
             responseTimeMs: null,
+            confidence: row.confidence ?? null,
             config: resolvedConfig,
             answeredAtMs,
           });
@@ -150,7 +153,7 @@ export function useAdaptiveQuestionStats(
             quizId: context.quizId ?? null,
             topicTags: [row.question.category, row.question.subcategory, ...row.question.tags],
             difficulty: row.question.difficulty_level,
-            confidence: null,
+            confidence: row.confidence ?? null,
           });
         }
 

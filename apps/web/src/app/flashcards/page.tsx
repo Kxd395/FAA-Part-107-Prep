@@ -1,16 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+  canonicalQuestionKey,
   filterQuestionsByType,
+  qualityFromOutcomeConfidence,
+  sessionQueueDecisionFromQuality,
+  type AttemptConfidence,
   type Question,
   type QuestionTypeProfile,
+  type UserQuestionStats,
 } from "@part107/core";
 import { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
+import {
+  QuestionBankError,
+  QuestionBankLoading,
+  QuestionBankWarning,
+} from "../../components/QuestionBankState";
+import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
+import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
+import { reinsertQueueHeadWithGap } from "../../lib/queueReinsertion";
 import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
+import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
 
 // ─── Supported question‑type profiles ───
 const QUESTION_TYPE_OPTIONS: Array<{
@@ -45,81 +59,106 @@ const QUESTION_TYPE_OPTIONS: Array<{
   },
 ];
 
-// ─── Spaced-repetition localStorage helpers ───
-const SR_KEY = "part107_flashcard_sr";
+const UPCOMING_FALLBACK_COUNT = 20;
 
-interface SRRecord {
-  /** next review timestamp */
-  due: number;
-  /** interval in ms */
-  interval: number;
-  /** 1 = new, increasing with correct reviews */
-  ease: number;
+interface DeckPreview {
+  cards: Question[];
+  totalPool: number;
+  dueNowCount: number;
+  usingUpcomingFallback: boolean;
 }
 
-function loadSR(): Record<string, SRRecord> {
-  if (typeof window === "undefined") return {};
-  try {
-    return JSON.parse(localStorage.getItem(SR_KEY) ?? "{}");
-  } catch {
-    return {};
+function getQuestionSchedule(
+  question: Question,
+  statsByKey: Record<string, UserQuestionStats>,
+  includeChoicesInCanonicalKey: boolean
+): { dueAtMs: number; masteryScore: number } {
+  const key = canonicalQuestionKey(question, { includeChoices: includeChoicesInCanonicalKey });
+  const stats = statsByKey[key];
+  const parsedDue = Date.parse(stats?.nextDueAt ?? "");
+  return {
+    dueAtMs: Number.isFinite(parsedDue) ? parsedDue : 0,
+    masteryScore: typeof stats?.masteryScore === "number" ? stats.masteryScore : 0,
+  };
+}
+
+function buildDeckPreview(
+  questions: Question[],
+  statsByKey: Record<string, UserQuestionStats>,
+  includeChoicesInCanonicalKey: boolean
+): DeckPreview {
+  if (questions.length === 0) {
+    return {
+      cards: [],
+      totalPool: 0,
+      dueNowCount: 0,
+      usingUpcomingFallback: false,
+    };
   }
-}
 
-function saveSR(data: Record<string, SRRecord>) {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(SR_KEY, JSON.stringify(data));
-}
+  const nowMs = Date.now();
+  const ranked = [...questions].sort((a, b) => {
+    const aSchedule = getQuestionSchedule(a, statsByKey, includeChoicesInCanonicalKey);
+    const bSchedule = getQuestionSchedule(b, statsByKey, includeChoicesInCanonicalKey);
 
-function markKnown(questionId: string) {
-  const sr = loadSR();
-  const prev = sr[questionId] ?? { due: 0, interval: 60_000, ease: 1 };
-  const newInterval = Math.min(prev.interval * 2.5, 7 * 24 * 60 * 60 * 1000); // cap at 7 days
-  sr[questionId] = {
-    due: Date.now() + newInterval,
-    interval: newInterval,
-    ease: prev.ease + 1,
-  };
-  saveSR(sr);
-}
-
-function markStillLearning(questionId: string) {
-  const sr = loadSR();
-  sr[questionId] = {
-    due: Date.now() + 30_000, // re-show in 30 s
-    interval: 60_000,
-    ease: 1,
-  };
-  saveSR(sr);
-}
-
-function sortBySpacedRepetition<Q extends Question>(questions: Q[]): Q[] {
-  const sr = loadSR();
-  const now = Date.now();
-  return [...questions].sort((a, b) => {
-    const aDue = sr[a.id]?.due ?? 0;
-    const bDue = sr[b.id]?.due ?? 0;
-    // due/overdue questions first (lowest due-time first)
-    if (aDue <= now && bDue <= now) return aDue - bDue;
-    if (aDue <= now) return -1;
-    if (bDue <= now) return 1;
-    return aDue - bDue;
+    if (aSchedule.dueAtMs !== bSchedule.dueAtMs) {
+      return aSchedule.dueAtMs - bSchedule.dueAtMs;
+    }
+    if (aSchedule.masteryScore !== bSchedule.masteryScore) {
+      return aSchedule.masteryScore - bSchedule.masteryScore;
+    }
+    return a.id.localeCompare(b.id);
   });
+
+  const dueNow = ranked.filter(
+    (question) =>
+      getQuestionSchedule(question, statsByKey, includeChoicesInCanonicalKey).dueAtMs <= nowMs
+  );
+
+  if (dueNow.length > 0) {
+    return {
+      cards: dueNow,
+      totalPool: questions.length,
+      dueNowCount: dueNow.length,
+      usingUpcomingFallback: false,
+    };
+  }
+
+  return {
+    cards: ranked.slice(0, Math.min(UPCOMING_FALLBACK_COUNT, ranked.length)),
+    totalPool: questions.length,
+    dueNowCount: 0,
+    usingUpcomingFallback: true,
+  };
 }
 
 // ─── Component ───
 export default function FlashcardsPage() {
-  const { questions: allQuestions, loaded, loading, error, reload } = useQuestionBank();
+  const {
+    questions: allQuestions,
+    loaded,
+    loading,
+    error,
+    warning,
+    snapshotInfo,
+    reload,
+    clearSnapshot,
+  } = useQuestionBank();
   const adaptive = useAdaptiveQuestionStats();
+  const events = useLearningEventLogger(adaptive.userId);
 
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("confirmed_test");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [started, setStarted] = useState(false);
-  const [cardIndex, setCardIndex] = useState(0);
+  const [sessionCards, setSessionCards] = useState<Question[]>([]);
+  const [initialDeckSize, setInitialDeckSize] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [known, setKnown] = useState(0);
   const [learning, setLearning] = useState(0);
+  const [reviews, setReviews] = useState(0);
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
+  const questionShownAtRef = useRef(Date.now());
+  const completionLoggedRef = useRef(false);
 
   const filteredQuestions = useMemo(
     () =>
@@ -130,89 +169,253 @@ export default function FlashcardsPage() {
     [adaptive.config, adaptive.statsByKey, allQuestions, selectedQuestionType]
   );
 
-  const categoryQuestions = useMemo(() => {
+  const deckPreview = useMemo(() => {
     const pool =
       selectedCategory === "All"
         ? filteredQuestions
         : filteredQuestions.filter((q) => q.category === selectedCategory);
-    return sortBySpacedRepetition(pool);
-  }, [filteredQuestions, selectedCategory]);
+    return buildDeckPreview(
+      pool,
+      adaptive.statsByKey,
+      adaptive.config.includeChoicesInCanonicalKey
+    );
+  }, [
+    adaptive.config.includeChoicesInCanonicalKey,
+    adaptive.statsByKey,
+    filteredQuestions,
+    selectedCategory,
+  ]);
 
   const visibleCounts = useMemo(() => countQuestionsByCategory(filteredQuestions), [filteredQuestions]);
 
-  const currentCard = categoryQuestions[cardIndex] ?? null;
-  const total = categoryQuestions.length;
+  const totalSetupCards = deckPreview.cards.length;
+  const currentCard = sessionCards[0] ?? null;
+  const total = sessionCards.length;
 
-  const handleFlip = useCallback(() => setFlipped((f) => !f), []);
-
-  const handleKnowIt = useCallback(() => {
-    if (!currentCard) return;
-    markKnown(currentCard.id);
-    setKnown((n) => n + 1);
-    setFlipped(false);
-    setCardIndex((i) => i + 1);
-  }, [currentCard]);
-
-  const handleStillLearning = useCallback(() => {
-    if (!currentCard) return;
-    markStillLearning(currentCard.id);
-    setLearning((n) => n + 1);
-    setFlipped(false);
-    setCardIndex((i) => i + 1);
-  }, [currentCard]);
-
-  const restart = useCallback(() => {
-    setCardIndex(0);
+  const resetSession = useCallback(() => {
+    setInitialDeckSize(0);
     setKnown(0);
     setLearning(0);
+    setReviews(0);
     setFlipped(false);
+    setFigureRef(null);
+    setSessionCards([]);
+    completionLoggedRef.current = false;
   }, []);
+
+  const beginSession = useCallback(() => {
+    if (deckPreview.cards.length === 0) return;
+    setSessionCards(deckPreview.cards);
+    setInitialDeckSize(deckPreview.cards.length);
+    setKnown(0);
+    setLearning(0);
+    setReviews(0);
+    setFlipped(false);
+    setFigureRef(null);
+    setStarted(true);
+    completionLoggedRef.current = false;
+    events.logEvent({
+      type: "session_started",
+      mode: "flashcards",
+      category: selectedCategory,
+      questionTypeProfile: selectedQuestionType,
+      metadata: {
+        deckSize: deckPreview.cards.length,
+        totalPool: deckPreview.totalPool,
+        dueNowCount: deckPreview.dueNowCount,
+        usingUpcomingFallback: deckPreview.usingUpcomingFallback,
+      },
+    });
+  }, [deckPreview, events, selectedCategory, selectedQuestionType]);
+
+  const handleToggleCard = useCallback(() => setFlipped((prev) => !prev), []);
+  const handleShowQuestion = useCallback(() => setFlipped(false), []);
+
+  const handleRateCard = useCallback(
+    (rating: "know_it" | "still_learning", confidence: AttemptConfidence) => {
+      if (!currentCard) return;
+      const isCorrect = rating === "know_it";
+      const qualityScore = qualityFromOutcomeConfidence(
+        isCorrect ? "correct" : "incorrect",
+        confidence
+      );
+      const queueDecision = sessionQueueDecisionFromQuality(qualityScore);
+      const responseTimeMs = Math.max(0, Date.now() - questionShownAtRef.current);
+      recordLearningAttempt({
+        adaptive,
+        events,
+        question: currentCard,
+        learningMode: "flashcards",
+        attemptMode: "flashcard",
+        isCorrect,
+        selectedOptionId: null,
+        responseTimeMs,
+        confidence,
+        questionTypeProfile: selectedQuestionType,
+        metadata: {
+          rating,
+          qualityScore,
+          queueAction: queueDecision.removeFromQueue
+            ? "remove"
+            : `reinsert_${queueDecision.gapMin}-${queueDecision.gapMax}`,
+        },
+      });
+
+      if (!isCorrect) {
+        setLearning((n) => n + 1);
+      } else if (queueDecision.removeFromQueue) {
+        setKnown((n) => n + 1);
+      }
+      setReviews((n) => n + 1);
+      setFlipped(false);
+      setSessionCards((prev) => {
+        if (queueDecision.removeFromQueue) {
+          return prev.slice(1);
+        }
+        return reinsertQueueHeadWithGap(
+          prev,
+          queueDecision.gapMin ?? 2,
+          queueDecision.gapMax ?? 4
+        );
+      });
+    },
+    [adaptive, currentCard, events, selectedQuestionType]
+  );
+
+  const handleKnowIt = useCallback(() => {
+    handleRateCard("know_it", 3);
+  }, [handleRateCard]);
+
+  const handleKnowItConfident = useCallback(() => {
+    handleRateCard("know_it", 5);
+  }, [handleRateCard]);
+
+  const handleStillLearning = useCallback(() => {
+    handleRateCard("still_learning", 3);
+  }, [handleRateCard]);
+
+  const handleStillLearningConfident = useCallback(() => {
+    handleRateCard("still_learning", 5);
+  }, [handleRateCard]);
+
+  const handleSkip = useCallback(() => {
+    if (!currentCard) return;
+    events.logEvent({
+      type: "question_skipped",
+      mode: "flashcards",
+      questionId: currentCard.id,
+      category: currentCard.category,
+      subcategory: currentCard.subcategory,
+      questionTypeProfile: selectedQuestionType,
+    });
+    setFlipped(false);
+    setSessionCards((prev) => {
+      if (prev.length <= 1) return prev;
+      const [head, ...rest] = prev;
+      return [...rest, head];
+    });
+  }, [currentCard, events, selectedQuestionType]);
+
+  const restart = useCallback(() => {
+    setSessionCards(deckPreview.cards);
+    setInitialDeckSize(deckPreview.cards.length);
+    setKnown(0);
+    setLearning(0);
+    setReviews(0);
+    setFlipped(false);
+    setFigureRef(null);
+    completionLoggedRef.current = false;
+  }, [deckPreview.cards]);
 
   // Keyboard navigation
   useEffect(() => {
     if (!started) return;
     const handler = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const isInteractiveTarget =
+        !!target &&
+        (target.isContentEditable ||
+          ["INPUT", "TEXTAREA", "SELECT", "BUTTON", "A"].includes(target.tagName));
+      if (isInteractiveTarget) return;
+
       if (e.key === " " || e.key === "Enter") {
         e.preventDefault();
-        if (!flipped) {
-          setFlipped(true);
-        }
+        handleToggleCard();
+        return;
       }
-      if (flipped && (e.key === "ArrowRight" || e.key === "k")) handleKnowIt();
-      if (flipped && (e.key === "ArrowLeft" || e.key === "l")) handleStillLearning();
+      if (flipped && (e.key === "ArrowRight" || e.key === "k")) {
+        handleKnowIt();
+        return;
+      }
+      if (flipped && (e.key === "ArrowLeft" || e.key === "l")) {
+        handleStillLearning();
+      }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [flipped, handleKnowIt, handleStillLearning, started]);
+  }, [flipped, handleKnowIt, handleStillLearning, handleToggleCard, started]);
+
+  useEffect(() => {
+    if (!started || !currentCard) return;
+    questionShownAtRef.current = Date.now();
+    events.logEvent({
+      type: "question_shown",
+      mode: "flashcards",
+      questionId: currentCard.id,
+      category: currentCard.category,
+      subcategory: currentCard.subcategory,
+      questionTypeProfile: selectedQuestionType,
+    });
+  }, [currentCard, events, selectedQuestionType, started]);
+
+  useEffect(() => {
+    if (!started || total !== 0 || completionLoggedRef.current) return;
+    completionLoggedRef.current = true;
+    events.logEvent({
+      type: "session_completed",
+      mode: "flashcards",
+      category: selectedCategory,
+      questionTypeProfile: selectedQuestionType,
+      metadata: {
+        initialDeckSize,
+        known,
+        learning,
+        reviews,
+      },
+    });
+  }, [
+    events,
+    initialDeckSize,
+    known,
+    learning,
+    reviews,
+    selectedCategory,
+    selectedQuestionType,
+    started,
+    total,
+  ]);
 
   // ─── Loading / Error ───
   if (loading && !loaded) {
-    return (
-      <div className="flex items-center justify-center py-32">
-        <div className="text-[var(--muted)]">Loading question bank…</div>
-      </div>
-    );
+    return <QuestionBankLoading label="Loading question bank..." />;
   }
 
   if (error && !loaded) {
-    return (
-      <div className="mx-auto max-w-lg space-y-4 rounded-xl border border-incorrect/30 bg-incorrect/10 p-6 text-center">
-        <h1 className="text-xl font-bold text-incorrect">Couldn&apos;t load questions</h1>
-        <p className="text-sm text-[var(--muted)]">{error}</p>
-        <button
-          onClick={() => void reload()}
-          className="rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
-        >
-          Retry
-        </button>
-      </div>
-    );
+    return <QuestionBankError error={error} onRetry={() => void reload()} />;
   }
 
   // ─── Setup Screen ───
   if (!started) {
     return (
       <div className="mx-auto max-w-lg space-y-8 pt-8">
+        {warning && (
+          <QuestionBankWarning
+            warning={warning}
+            snapshotInfo={snapshotInfo}
+            onTryLive={() => void reload({ preferLive: true })}
+            onClearSnapshot={clearSnapshot}
+          />
+        )}
         <div className="text-center">
           <div className="text-5xl">🃏</div>
           <h1 className="mt-4 text-3xl font-bold">Flashcards</h1>
@@ -222,7 +425,15 @@ export default function FlashcardsPage() {
           </p>
         </div>
 
+        {deckPreview.usingUpcomingFallback && totalSetupCards > 0 && (
+          <div className="rounded-xl border border-brand-500/30 bg-brand-500/10 px-4 py-3 text-xs text-brand-300">
+            No cards are due right now. Showing the {totalSetupCards} soonest cards so you can keep
+            practicing.
+          </div>
+        )}
+
         {/* Question type selector */}
+        {totalSetupCards === 0 && <QuestionSelectionEmptyState context="flashcards" />}
         <div className="space-y-3">
           <div className="text-sm font-semibold text-white">Question Pool</div>
           <div className="grid gap-2">
@@ -280,22 +491,33 @@ export default function FlashcardsPage() {
         </div>
 
         <button
-          onClick={() => setStarted(true)}
-          disabled={categoryQuestions.length === 0}
+          onClick={beginSession}
+          disabled={totalSetupCards === 0}
           className="w-full rounded-xl bg-brand-600 py-4 text-lg font-semibold text-white transition-all hover:bg-brand-700 hover:scale-[1.02] disabled:opacity-60"
         >
-          Start Flashcards ({categoryQuestions.length} cards) →
+          Start Flashcards ({totalSetupCards} cards) →
         </button>
       </div>
     );
   }
 
   // ─── Complete Screen ───
-  if (cardIndex >= total) {
+  if (total === 0) {
     return (
       <div className="mx-auto max-w-lg space-y-6 pt-12 text-center">
+        {warning && (
+          <QuestionBankWarning
+            warning={warning}
+            snapshotInfo={snapshotInfo}
+            onTryLive={() => void reload({ preferLive: true })}
+            onClearSnapshot={clearSnapshot}
+          />
+        )}
         <div className="text-6xl">🎉</div>
         <h1 className="text-3xl font-bold">Deck Complete!</h1>
+        <p className="text-sm text-[var(--muted)]">
+          {reviews} review actions across {initialDeckSize} due cards.
+        </p>
         <div className="grid grid-cols-2 gap-4">
           <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-4">
             <div className="text-2xl font-bold text-green-400">{known}</div>
@@ -314,7 +536,10 @@ export default function FlashcardsPage() {
             Restart Deck
           </button>
           <button
-            onClick={() => { setStarted(false); restart(); }}
+            onClick={() => {
+              setStarted(false);
+              resetSession();
+            }}
             className="flex-1 rounded-xl border border-[var(--card-border)] py-3 font-semibold text-[var(--muted)] hover:text-white"
           >
             Change Topic
@@ -331,20 +556,28 @@ export default function FlashcardsPage() {
   }
 
   // ─── Card View ───
-  const progressPct = total > 0 ? Math.round((cardIndex / total) * 100) : 0;
+  const progressPct = initialDeckSize > 0 ? Math.round((known / initialDeckSize) * 100) : 0;
   const q = currentCard!;
 
   const correctOption = q.options.find((o) => o.id === q.correct_option_id);
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
+      {warning && (
+        <QuestionBankWarning
+          warning={warning}
+          snapshotInfo={snapshotInfo}
+          onTryLive={() => void reload({ preferLive: true })}
+          onClearSnapshot={clearSnapshot}
+        />
+      )}
       {/* Progress bar */}
       <div className="flex items-center justify-between text-sm text-[var(--muted)]">
         <span>
-          Card {cardIndex + 1} of {total}
+          Mastered {known} of {initialDeckSize}
         </span>
         <span>
-          ✅ {known} &nbsp; 📖 {learning}
+          Remaining {total} &nbsp; • &nbsp; 📖 {learning}
         </span>
       </div>
       <div className="h-2 rounded-full bg-[var(--card-border)]">
@@ -369,11 +602,21 @@ export default function FlashcardsPage() {
         </span>
       </div>
 
-      {/* Flip card */}
-      <div className="perspective-1000 min-h-[340px]" onClick={handleFlip}>
-        <div className={`card-inner min-h-[340px] cursor-pointer ${flipped ? "flipped" : ""}`}>
-          {/* Front — question */}
-          <div className="card-face rounded-2xl border border-[var(--card-border)] bg-[var(--card)] p-8">
+      {/* Card surface */}
+      <div className="min-h-[340px]">
+        {!flipped ? (
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={handleToggleCard}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleToggleCard();
+              }
+            }}
+            className="block min-h-[340px] w-full rounded-2xl border border-[var(--card-border)] bg-[var(--card)] p-8 text-left transition-all duration-200 hover:border-brand-500/40"
+          >
             <div className="mb-4 text-xs font-semibold uppercase tracking-wider text-brand-500">
               Question
             </div>
@@ -381,9 +624,15 @@ export default function FlashcardsPage() {
 
             {q.figure_reference && (
               <button
+                type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setFigureRef({ url: q.figure_reference!, label: q.figure_reference!, type: "image", description: q.figure_reference! });
+                  setFigureRef({
+                    url: q.figure_reference!,
+                    label: q.figure_reference!,
+                    type: "image",
+                    description: q.figure_reference!,
+                  });
                 }}
                 className="mt-4 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs text-cyan-400 hover:bg-cyan-500/20"
               >
@@ -395,14 +644,36 @@ export default function FlashcardsPage() {
               Tap or press Space to reveal answer
             </div>
           </div>
-
-          {/* Back — answer */}
-          <div className="card-face card-back rounded-2xl border border-green-500/30 bg-green-500/5 p-8 overflow-y-auto">
-            <div className="mb-4 text-xs font-semibold uppercase tracking-wider text-green-400">
-              Correct Answer
+        ) : (
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={handleToggleCard}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleToggleCard();
+              }
+            }}
+            className="min-h-[340px] cursor-pointer rounded-2xl border border-green-500/30 bg-[var(--card)] p-8 animate-slide-up"
+          >
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div className="text-xs font-semibold uppercase tracking-wider text-green-400">
+                Correct Answer
+              </div>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleShowQuestion();
+                }}
+                className="rounded-lg border border-[var(--card-border)] px-2.5 py-1 text-xs text-[var(--muted)] transition-colors hover:text-white"
+              >
+                Show Question
+              </button>
             </div>
             <div className="text-lg font-semibold text-green-400">
-              {q.correct_option_id}. {correctOption?.text}
+              {correctOption?.text ?? "Correct answer unavailable."}
             </div>
             <div className="mt-4 text-sm leading-relaxed text-[var(--foreground)]/90">
               {q.explanation_correct}
@@ -413,39 +684,70 @@ export default function FlashcardsPage() {
               </div>
             )}
           </div>
-        </div>
+        )}
       </div>
 
       {/* Action buttons — only visible when flipped */}
       {flipped && (
-        <div className="grid grid-cols-2 gap-4">
-          <button
-            onClick={handleStillLearning}
-            className="rounded-xl border border-amber-500/40 bg-amber-500/10 py-4 text-center font-semibold text-amber-400 transition-all hover:bg-amber-500/20 hover:scale-[1.02]"
-          >
-            📖 Still Learning
-            <span className="mt-1 block text-xs text-[var(--muted)]">← or L key</span>
-          </button>
-          <button
-            onClick={handleKnowIt}
-            className="rounded-xl border border-green-500/40 bg-green-500/10 py-4 text-center font-semibold text-green-400 transition-all hover:bg-green-500/20 hover:scale-[1.02]"
-          >
-            ✅ Know It
-            <span className="mt-1 block text-xs text-[var(--muted)]">→ or K key</span>
-          </button>
+        <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="relative">
+              <button
+                onClick={handleStillLearning}
+                className="w-full rounded-xl border border-amber-500/40 bg-amber-500/10 py-4 pr-12 text-center font-semibold text-amber-400 transition-all hover:scale-[1.02] hover:bg-amber-500/20"
+              >
+                📖 Still Learning
+                <span className="mt-1 block text-xs text-[var(--muted)]">← or L key</span>
+              </button>
+              <button
+                type="button"
+                aria-label="Still Learning with high confidence"
+                title="Still Learning with high confidence"
+                onClick={handleStillLearningConfident}
+                className="absolute right-2 top-2 rounded-md border border-amber-400/40 bg-amber-500/20 px-2 py-1 text-xs font-semibold text-amber-200 hover:bg-amber-500/30"
+              >
+                ☑
+              </button>
+            </div>
+            <div className="relative">
+              <button
+                onClick={handleKnowIt}
+                className="w-full rounded-xl border border-green-500/40 bg-green-500/10 py-4 pr-12 text-center font-semibold text-green-400 transition-all hover:scale-[1.02] hover:bg-green-500/20"
+              >
+                ✅ Know It
+                <span className="mt-1 block text-xs text-[var(--muted)]">→ or K key</span>
+              </button>
+              <button
+                type="button"
+                aria-label="Know It with high confidence"
+                title="Know It with high confidence"
+                onClick={handleKnowItConfident}
+                className="absolute right-2 top-2 rounded-md border border-green-400/40 bg-green-500/20 px-2 py-1 text-xs font-semibold text-green-200 hover:bg-green-500/30"
+              >
+                ☑
+              </button>
+            </div>
+          </div>
+          <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 p-3 text-center text-xs text-[var(--muted)]">
+            One click records confidence <code>3/5</code>. Tap <code>☑</code> for high confidence{" "}
+            <code>5/5</code>.
+          </div>
         </div>
       )}
 
       {/* Back to setup */}
       <div className="flex justify-between text-sm">
         <button
-          onClick={() => { setStarted(false); restart(); }}
+          onClick={() => {
+            setStarted(false);
+            resetSession();
+          }}
           className="text-[var(--muted)] hover:text-white transition-colors"
         >
           ← Change Topic
         </button>
         <button
-          onClick={() => { setFlipped(false); setCardIndex((i) => i + 1); }}
+          onClick={handleSkip}
           className="text-[var(--muted)] hover:text-white transition-colors"
         >
           Skip →

@@ -1,11 +1,13 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import {
   defaultLearningEventStore,
   type LearningEvent,
   type LearningEventStore,
 } from "../lib/learningEventStore";
+import { sendLearningEventToSink } from "../lib/analyticsSink";
+import { validateLearningEventInput } from "../lib/learningEventSchema";
 
 function generateEventId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -17,12 +19,19 @@ export function useLearningEventLogger(
 ) {
   const logEvent = useCallback(
     (event: Omit<LearningEvent, "id" | "userId" | "timestamp">) => {
-      store.append(userId, {
+      const validationError = validateLearningEventInput(event);
+      if (validationError) {
+        console.warn(`[learning-events] dropped invalid event: ${validationError}`);
+        return;
+      }
+      const nextEvent: LearningEvent = {
         ...event,
         id: generateEventId(),
         userId,
         timestamp: new Date().toISOString(),
-      });
+      };
+      store.append(userId, nextEvent);
+      void sendLearningEventToSink(nextEvent);
     },
     [store, userId]
   );
@@ -35,9 +44,12 @@ export function useLearningEventLogger(
     return store.load(userId);
   }, [store, userId]);
 
-  return {
-    logEvent,
-    clearEvents,
-    getEvents,
-  };
+  return useMemo(
+    () => ({
+      logEvent,
+      clearEvents,
+      getEvents,
+    }),
+    [clearEvents, getEvents, logEvent]
+  );
 }

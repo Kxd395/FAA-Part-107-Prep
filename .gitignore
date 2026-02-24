@@ -19,6 +19,7 @@ venv/
 .env
 .env.local
 .env.*.local
+client_secret_*.apps.googleusercontent.com.json
 
 # iOS/Xcode
 *.xcuserdata

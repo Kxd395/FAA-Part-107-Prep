@@ -40,10 +40,13 @@ FAA_107_Study_Guide/
 
 ```bash
 cd FAA_107_Study_Guide
+nvm use 20
 npm install
 npm run dev
 # → http://localhost:3000
 ```
+
+Note: this repo is validated on Node.js 20 LTS for stable Next.js 14 dev startup.
 
 Deploy to Vercel:
 ```bash

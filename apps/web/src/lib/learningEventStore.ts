@@ -1,20 +1,15 @@
-import type { OptionId, QuizMode } from "@part107/core";
+import type { OptionId } from "@part107/core";
+import type { LearningEventMode, LearningEventType } from "./analyticsTaxonomy";
 
 const STORAGE_KEY = "part107_learning_events_v1";
 const MAX_EVENTS_PER_USER = 5000;
-
-export type LearningEventType =
-  | "question_shown"
-  | "answer_submitted"
-  | "review_opened"
-  | "citation_clicked";
 
 export interface LearningEvent {
   id: string;
   userId: string;
   timestamp: string;
   type: LearningEventType;
-  mode: QuizMode;
+  mode: LearningEventMode;
   questionId?: string;
   category?: string;
   subcategory?: string;

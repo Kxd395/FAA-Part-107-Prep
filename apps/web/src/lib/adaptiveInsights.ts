@@ -13,10 +13,22 @@ export interface AdaptiveInsights {
   momentumPercent: number | null;
   averageRollingLast10Percent: number | null;
   averageRollingMomentumPercent: number | null;
+  confidenceAttemptCount: number;
+  averageConfidencePercent: number | null;
+  calibrationScorePercent: number | null;
+  overconfidenceRatePercent: number | null;
 }
 
 function roundPercent(value: number): number {
   return Math.round(value * 100);
+}
+
+function confidenceToProbability(confidence: 1 | 2 | 3 | 4 | 5): number {
+  if (confidence === 1) return 0.2;
+  if (confidence === 2) return 0.4;
+  if (confidence === 3) return 0.6;
+  if (confidence === 4) return 0.8;
+  return 0.95;
 }
 
 export function computeAdaptiveInsights({
@@ -74,6 +86,40 @@ export function computeAdaptiveInsights({
         )
       : null;
 
+  const confidenceAttempts = sortedAttempts.filter(
+    (attempt) => attempt.mode !== "flashcard" && attempt.confidence !== null
+  );
+  const confidenceAttemptCount = confidenceAttempts.length;
+  const averageConfidencePercent =
+    confidenceAttemptCount > 0
+      ? roundPercent(
+          confidenceAttempts.reduce((sum, attempt) => sum + (attempt.confidence ?? 0), 0) /
+            (confidenceAttemptCount * 5)
+        )
+      : null;
+
+  const calibrationScorePercent =
+    confidenceAttemptCount > 0
+      ? (() => {
+          const brier =
+            confidenceAttempts.reduce((sum, attempt) => {
+              const probability = confidenceToProbability(attempt.confidence as 1 | 2 | 3 | 4 | 5);
+              const outcome = attempt.correct ? 1 : 0;
+              return sum + (probability - outcome) ** 2;
+            }, 0) / confidenceAttemptCount;
+          return roundPercent(Math.max(0, 1 - brier));
+        })()
+      : null;
+
+  const confidentIncorrectCount = confidenceAttempts.filter(
+    (attempt) => !attempt.correct && (attempt.confidence ?? 0) >= 4
+  ).length;
+  const totalIncorrectWithConfidence = confidenceAttempts.filter((attempt) => !attempt.correct).length;
+  const overconfidenceRatePercent =
+    totalIncorrectWithConfidence > 0
+      ? roundPercent(confidentIncorrectCount / totalIncorrectWithConfidence)
+      : null;
+
   return {
     trackedQuestions: stats.length,
     dueNowCount,
@@ -86,5 +132,9 @@ export function computeAdaptiveInsights({
     momentumPercent,
     averageRollingLast10Percent,
     averageRollingMomentumPercent,
+    confidenceAttemptCount,
+    averageConfidencePercent,
+    calibrationScorePercent,
+    overconfidenceRatePercent,
   };
 }

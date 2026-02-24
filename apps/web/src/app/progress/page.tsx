@@ -1,14 +1,95 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { type ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 import { useProgress, SessionRecord } from "../../hooks/useProgress";
+import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { defaultAdaptiveStatsStore } from "../../lib/adaptiveStatsStore";
 import { computeAdaptiveInsights } from "../../lib/adaptiveInsights";
 import { defaultAttemptEventStore } from "../../lib/attemptEventStore";
-import { defaultLearningEventStore } from "../../lib/learningEventStore";
+import { defaultLearningEventStore, type LearningEvent } from "../../lib/learningEventStore";
+import { clearLearnDraft } from "../../lib/learnDraftStore";
+import {
+  ANALYTICS_EVENT_TYPES,
+  ANALYTICS_MODES,
+  LOCAL_USER_ID,
+  type LearningEventMode,
+  type LearningEventType,
+} from "../../lib/analyticsTaxonomy";
+import {
+  computeImportPreview,
+  resolveImportedData,
+  type ImportMergeMode,
+} from "../../lib/progressImportMerge";
+import { buildTelemetrySupportBundle, downloadJsonFile } from "../../lib/telemetrySupportBundle";
+import {
+  clearAnalyticsDeadLetterQueue,
+  getAnalyticsDeadLetterSummary,
+  retryAnalyticsDeadLetterQueue,
+} from "../../lib/analyticsSink";
 
-const LOCAL_USER_ID = "local-user";
+const PORTABLE_EXPORT_KEYS = [
+  "part107_progress",
+  "part107_adaptive_stats_v2",
+  "part107_attempt_events_v1",
+  "part107_learning_events_v1",
+  "part107_flashcard_sr",
+  "part107_learn_draft_v1",
+] as const;
+const SYNC_DEFAULT_USER_ID = "local-user";
+
+interface PortableProgressSnapshot {
+  version: 1;
+  exportedAt: string;
+  data: Record<string, string | null>;
+}
+
+interface LearningEventInsights {
+  events: LearningEvent[];
+  total: number;
+  byMode: Record<string, number>;
+  byType: Record<string, number>;
+  recent: LearningEvent[];
+}
+
+type TelemetryTimeWindow = "24h" | "7d" | "30d" | "all";
+type TelemetryFilterMode = LearningEventMode | "all";
+type TelemetryFilterType = LearningEventType | "all";
+
+interface LearnCompletionPoint {
+  timestamp: string;
+  round: number;
+  uniqueQuestions: number;
+  firstPassCorrect: number;
+  masteredCount: number;
+  firstPassPercent: number;
+  masteryPercent: number;
+}
+
+interface PreviewKeyConflict {
+  key: string;
+  incomingState: "missing" | "present";
+  currentState: "missing" | "present";
+  willChange: boolean;
+  sessionDelta?: string;
+}
+
+type KeyConflictResolution = "remote" | "local";
+
+type ResetScope = "all" | "progress" | "adaptive" | "telemetry";
+
+const RESET_SCOPES: Array<{ id: ResetScope; label: string; description: string }> = [
+  { id: "all", label: "All Data", description: "Progress, adaptive stats, telemetry, and learn draft." },
+  { id: "progress", label: "Progress Only", description: "Session history and dashboard metrics only." },
+  { id: "adaptive", label: "Adaptive Only", description: "Adaptive stats + flashcard schedule only." },
+  { id: "telemetry", label: "Telemetry Only", description: "Learning and attempt event streams only." },
+];
+
+const HISTORY_PAGE_SIZE = 15;
+const HISTORY_VIRTUALIZE_THRESHOLD = 250;
+const HISTORY_VIRTUAL_WINDOW_SIZE = 80;
+const HISTORY_ROW_ESTIMATE_PX = 108;
 
 // ─────────────────────────────────────────────
 // Helpers
@@ -39,14 +120,163 @@ function timeAgo(iso: string): string {
   });
 }
 
+function computeLearningEventInsights(events: LearningEvent[]): LearningEventInsights {
+  const byMode: Record<string, number> = {};
+  const byType: Record<string, number> = {};
+
+  for (const event of events) {
+    byMode[event.mode] = (byMode[event.mode] ?? 0) + 1;
+    byType[event.type] = (byType[event.type] ?? 0) + 1;
+  }
+
+  return {
+    events,
+    total: events.length,
+    byMode,
+    byType,
+    recent: [...events].slice(-12).reverse(),
+  };
+}
+
+function isLearningEventMode(value: string): value is LearningEventMode {
+  return (ANALYTICS_MODES as readonly string[]).includes(value);
+}
+
+function isLearningEventType(value: string): value is LearningEventType {
+  return (ANALYTICS_EVENT_TYPES as readonly string[]).includes(value);
+}
+
+function getMetadataNumber(
+  metadata: LearningEvent["metadata"],
+  key: string
+): number | null {
+  const value = metadata?.[key];
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string") {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  return null;
+}
+
+function computeWindowCutoff(window: TelemetryTimeWindow): number | null {
+  const now = Date.now();
+  if (window === "24h") return now - 24 * 60 * 60 * 1000;
+  if (window === "7d") return now - 7 * 24 * 60 * 60 * 1000;
+  if (window === "30d") return now - 30 * 24 * 60 * 60 * 1000;
+  return null;
+}
+
+function computeLearnCompletionTrend(events: LearningEvent[]): LearnCompletionPoint[] {
+  const trend: LearnCompletionPoint[] = [];
+
+  for (const event of events) {
+    if (event.mode !== "learn" || event.type !== "session_completed") continue;
+
+    const uniqueQuestions = getMetadataNumber(event.metadata, "uniqueQuestions");
+    const firstPassCorrect = getMetadataNumber(event.metadata, "firstPassCorrect");
+    const masteredCount = getMetadataNumber(event.metadata, "masteredCount");
+    const round = getMetadataNumber(event.metadata, "round") ?? trend.length + 1;
+
+    if (!uniqueQuestions || uniqueQuestions <= 0 || firstPassCorrect === null || masteredCount === null) {
+      continue;
+    }
+
+    trend.push({
+      timestamp: event.timestamp,
+      round: Math.max(1, Math.round(round)),
+      uniqueQuestions: Math.round(uniqueQuestions),
+      firstPassCorrect: Math.round(firstPassCorrect),
+      masteredCount: Math.round(masteredCount),
+      firstPassPercent: Math.round((firstPassCorrect / uniqueQuestions) * 100),
+      masteryPercent: Math.round((masteredCount / uniqueQuestions) * 100),
+    });
+  }
+
+  return trend
+    .sort((a, b) => Date.parse(a.timestamp) - Date.parse(b.timestamp))
+    .slice(Math.max(0, trend.length - 8));
+}
+
+function readCurrentLocalData(keys: readonly string[]): Record<string, string | null> {
+  if (typeof window === "undefined") return {};
+  const data: Record<string, string | null> = {};
+  for (const key of keys) {
+    data[key] = localStorage.getItem(key);
+  }
+  return data;
+}
+
+function tryParseSessionCount(raw: string | null): number | null {
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.length : null;
+  } catch {
+    return null;
+  }
+}
+
+function buildPreviewKeyConflicts(
+  snapshotData: Record<string, string | null>,
+  currentData: Record<string, string | null>,
+  resolvedData: Record<string, string | null>,
+  keys: readonly string[]
+): PreviewKeyConflict[] {
+  return keys.map((key) => {
+    const incoming = snapshotData[key] ?? null;
+    const current = currentData[key] ?? null;
+    const resolved = resolvedData[key] ?? null;
+    const incomingSessions = key === "part107_progress" ? tryParseSessionCount(incoming) : null;
+    const currentSessions = key === "part107_progress" ? tryParseSessionCount(current) : null;
+    const resolvedSessions = key === "part107_progress" ? tryParseSessionCount(resolved) : null;
+    const sessionDelta =
+      key === "part107_progress" &&
+        incomingSessions !== null &&
+        currentSessions !== null &&
+        resolvedSessions !== null
+        ? `${currentSessions} -> ${resolvedSessions} (incoming ${incomingSessions})`
+        : undefined;
+    return {
+      key,
+      incomingState: incoming === null ? "missing" : "present",
+      currentState: current === null ? "missing" : "present",
+      willChange: resolved !== current,
+      sessionDelta,
+    };
+  });
+}
+
 // ─────────────────────────────────────────────
 // Progress Page
 // ─────────────────────────────────────────────
 
 export default function ProgressPage() {
+  const { logEvent } = useLearningEventLogger(LOCAL_USER_ID);
   const { sessions, loaded, getStats, clearAll } = useProgress();
   const [showConfirmClear, setShowConfirmClear] = useState(false);
+  const [resetScope, setResetScope] = useState<ResetScope>("all");
   const [activeTab, setActiveTab] = useState<"overview" | "history" | "categories">("overview");
+  const [transferError, setTransferError] = useState<string | null>(null);
+  const [pendingImportSnapshot, setPendingImportSnapshot] = useState<PortableProgressSnapshot | null>(null);
+  const [pendingImportFileName, setPendingImportFileName] = useState<string | null>(null);
+  const [importMergeMode, setImportMergeMode] = useState<ImportMergeMode>("merge");
+  const [syncUserId, setSyncUserId] = useState(SYNC_DEFAULT_USER_ID);
+  const [syncToken, setSyncToken] = useState<string | null>(null);
+  const [syncStatus, setSyncStatus] = useState<string | null>(null);
+  const [syncUpdatedAt, setSyncUpdatedAt] = useState<string | null>(null);
+  const [syncPending, setSyncPending] = useState(false);
+  const { user } = useAuth();
+  const authenticatedUserId = user?.userId ?? null;
+  const [cloudPending, setCloudPending] = useState(false);
+  const [cloudStatus, setCloudStatus] = useState<string | null>(null);
+  const [cloudUpdatedAt, setCloudUpdatedAt] = useState<string | null>(null);
+  const [deadLetterSummary, setDeadLetterSummary] = useState(() => getAnalyticsDeadLetterSummary());
+  const [conflictResolutionByKey, setConflictResolutionByKey] = useState<
+    Record<string, KeyConflictResolution>
+  >({});
+  const importInputRef = useRef<HTMLInputElement | null>(null);
+  const autoLoadedAccountStateForUserRef = useRef<string | null>(null);
   const adaptiveInsights = useMemo(() => {
     if (!loaded) {
       return computeAdaptiveInsights({ statsByKey: {}, attempts: [] });
@@ -55,6 +285,79 @@ export default function ProgressPage() {
     const attempts = defaultAttemptEventStore.load(LOCAL_USER_ID);
     return computeAdaptiveInsights({ statsByKey, attempts });
   }, [loaded]);
+  const learningEventInsights = loaded
+    ? computeLearningEventInsights(defaultLearningEventStore.load(LOCAL_USER_ID))
+    : computeLearningEventInsights([]);
+
+  useEffect(() => {
+    logEvent({
+      type: "page_view",
+      mode: "progress",
+      metadata: { route: "/progress" },
+    });
+  }, [logEvent]);
+
+  useEffect(() => {
+    setDeadLetterSummary(getAnalyticsDeadLetterSummary());
+  }, [loaded]);
+
+  useEffect(() => {
+    setSyncToken(null);
+  }, [syncUserId]);
+
+
+
+  useEffect(() => {
+    if (!authenticatedUserId) return;
+    if (autoLoadedAccountStateForUserRef.current === authenticatedUserId) return;
+    autoLoadedAccountStateForUserRef.current = authenticatedUserId;
+
+    let cancelled = false;
+    const autoLoad = async () => {
+      setCloudPending(true);
+      setCloudStatus(null);
+      try {
+        const response = await fetch("/api/user/state");
+        const body = await response.json();
+        if (cancelled) return;
+        if (response.status === 404) {
+          setCloudStatus("No account state found yet. Save once to create it.");
+          return;
+        }
+        if (!response.ok) {
+          throw new Error(String(body?.error ?? "Failed to load account state"));
+        }
+        const snapshot: PortableProgressSnapshot = {
+          version: 1,
+          exportedAt: body.updatedAt ?? new Date().toISOString(),
+          data: body.data ?? {},
+        };
+        setPendingImportSnapshot(snapshot);
+        setPendingImportFileName(`account:${body.userId ?? authenticatedUserId ?? "user"}`);
+        setConflictResolutionByKey({});
+        setCloudUpdatedAt(body.updatedAt ?? null);
+        setCloudStatus("Loaded account state. Review import preview before applying.");
+        logEvent({
+          type: "control_clicked",
+          mode: "progress",
+          metadata: { action: "user_state_download", selectedMergeMode: importMergeMode },
+        });
+      } catch (error) {
+        if (!cancelled) {
+          setCloudStatus(error instanceof Error ? error.message : "Failed to load account state");
+        }
+      } finally {
+        if (!cancelled) {
+          setCloudPending(false);
+        }
+      }
+    };
+
+    void autoLoad();
+    return () => {
+      cancelled = true;
+    };
+  }, [authenticatedUserId, importMergeMode, logEvent]);
 
   if (!loaded) {
     return (
@@ -65,6 +368,344 @@ export default function ProgressPage() {
   }
 
   const stats = getStats();
+
+  const applyResetScope = (scope: ResetScope) => {
+    if (scope === "all" || scope === "progress") {
+      clearAll();
+    }
+    if (scope === "all" || scope === "adaptive") {
+      defaultAdaptiveStatsStore.clear(LOCAL_USER_ID);
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("part107_flashcard_sr");
+      }
+    }
+    if (scope === "all" || scope === "telemetry") {
+      defaultAttemptEventStore.clear(LOCAL_USER_ID);
+      defaultLearningEventStore.clear(LOCAL_USER_ID);
+    }
+    if (scope === "all") {
+      clearLearnDraft();
+    }
+  };
+
+  const handleExportData = () => {
+    if (typeof window === "undefined") return;
+
+    const data: Record<string, string | null> = {};
+    for (const key of PORTABLE_EXPORT_KEYS) {
+      data[key] = localStorage.getItem(key);
+    }
+
+    const payload: PortableProgressSnapshot = {
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      data,
+    };
+
+    downloadJsonFile(
+      `part107-progress-export-${new Date().toISOString().slice(0, 10)}.json`,
+      payload
+    );
+    setTransferError(null);
+    logEvent({
+      type: "control_clicked",
+      mode: "progress",
+      metadata: { action: "export_data", download: true },
+    });
+  };
+
+  const handleExportTelemetryBundle = () => {
+    const payload = buildTelemetrySupportBundle(LOCAL_USER_ID);
+    downloadJsonFile(
+      `part107-telemetry-support-${new Date().toISOString().slice(0, 10)}.json`,
+      payload
+    );
+    logEvent({
+      type: "control_clicked",
+      mode: "progress",
+      metadata: {
+        action: "export_support_telemetry",
+        learningEvents: payload.learningEvents.total,
+        attemptEvents: payload.attemptEvents.total,
+      },
+    });
+  };
+
+  const handleImportData = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file || typeof window === "undefined") return;
+
+    try {
+      const text = await file.text();
+      const parsed = JSON.parse(text) as PortableProgressSnapshot;
+      if (!parsed || parsed.version !== 1 || typeof parsed.data !== "object" || !parsed.data) {
+        throw new Error("Unsupported import format.");
+      }
+      setPendingImportSnapshot(parsed);
+      setPendingImportFileName(file.name);
+      setConflictResolutionByKey({});
+      setTransferError(null);
+      logEvent({
+        type: "import_previewed",
+        mode: "progress",
+        metadata: {
+          selectedMergeMode: importMergeMode,
+          previewKeys: PORTABLE_EXPORT_KEYS.filter((key) => parsed.data[key] !== undefined).length,
+        },
+      });
+    } catch (error) {
+      setTransferError(error instanceof Error ? error.message : "Failed to import progress data.");
+      setPendingImportSnapshot(null);
+      setPendingImportFileName(null);
+    } finally {
+      if (event.target) event.target.value = "";
+    }
+  };
+
+  const applyPendingImport = () => {
+    if (!pendingImportSnapshot || typeof window === "undefined") return;
+    const currentData = readCurrentLocalData(PORTABLE_EXPORT_KEYS);
+    const effectiveSnapshotData = { ...pendingImportSnapshot.data };
+    for (const key of PORTABLE_EXPORT_KEYS) {
+      if (conflictResolutionByKey[key] === "local") {
+        effectiveSnapshotData[key] = currentData[key] ?? null;
+      }
+    }
+    const { resolvedData, changedKeys } = resolveImportedData(
+      effectiveSnapshotData,
+      currentData,
+      PORTABLE_EXPORT_KEYS,
+      importMergeMode
+    );
+
+    for (const key of PORTABLE_EXPORT_KEYS) {
+      const value = resolvedData[key] ?? null;
+      if (value === null || value === undefined) {
+        localStorage.removeItem(key);
+      } else {
+        localStorage.setItem(key, value);
+      }
+    }
+
+    logEvent({
+      type: "import_applied",
+      mode: "progress",
+      metadata: {
+        selectedMergeMode: importMergeMode,
+        changedKeys: changedKeys.length,
+      },
+    });
+    setPendingImportSnapshot(null);
+    setPendingImportFileName(null);
+    setConflictResolutionByKey({});
+    setTransferError(null);
+    if (process.env.NODE_ENV !== "test") {
+      window.location.reload();
+    }
+  };
+
+  const cancelPendingImport = () => {
+    setPendingImportSnapshot(null);
+    setPendingImportFileName(null);
+    setConflictResolutionByKey({});
+    setTransferError(null);
+  };
+
+  const ensureSyncToken = async (forceRefresh = false): Promise<string | null> => {
+    if (!forceRefresh && syncToken) return syncToken;
+    const response = await fetch("/api/sync/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: syncUserId }),
+    });
+    const body = await response.json();
+    if (!response.ok) {
+      throw new Error(String(body?.error ?? "Failed to create sync session"));
+    }
+    const token = typeof body?.token === "string" ? body.token : null;
+    setSyncToken(token);
+    return token;
+  };
+
+  const withSyncAuthRetry = async (
+    run: (token: string | null) => Promise<Response>
+  ): Promise<Response> => {
+    let token = await ensureSyncToken(false);
+    let response = await run(token);
+    if (response.status !== 401) return response;
+
+    // Session token can expire; refresh once and retry.
+    setSyncToken(null);
+    token = await ensureSyncToken(true);
+    response = await run(token);
+    return response;
+  };
+
+  const uploadSyncSnapshot = async () => {
+    if (typeof window === "undefined") return;
+    setSyncPending(true);
+    setSyncStatus(null);
+    try {
+      const data = readCurrentLocalData(PORTABLE_EXPORT_KEYS);
+      const response = await withSyncAuthRetry(async (token) =>
+        fetch("/api/sync/upload", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-sync-user-id": syncUserId,
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({
+            userId: syncUserId,
+            mode: importMergeMode,
+            snapshot: {
+              version: 1,
+              exportedAt: new Date().toISOString(),
+              data,
+            },
+          }),
+        })
+      );
+      const body = await response.json();
+      if (!response.ok) {
+        throw new Error(String(body?.error ?? "Sync upload failed"));
+      }
+      setSyncUpdatedAt(body.updatedAt ?? new Date().toISOString());
+      setSyncStatus(`Uploaded successfully (${body.mergedSummary?.changedKeys?.length ?? 0} changed keys).`);
+      logEvent({
+        type: "control_clicked",
+        mode: "progress",
+        metadata: { action: "sync_upload", selectedMergeMode: importMergeMode },
+      });
+    } catch (error) {
+      setSyncStatus(error instanceof Error ? error.message : "Sync upload failed");
+    } finally {
+      setSyncPending(false);
+    }
+  };
+
+
+
+  const uploadUserState = async () => {
+    setCloudPending(true);
+    setCloudStatus(null);
+    try {
+      const response = await fetch("/api/user/state", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mode: importMergeMode,
+          data: readCurrentLocalData(PORTABLE_EXPORT_KEYS),
+        }),
+      });
+      const body = await response.json();
+      if (!response.ok) {
+        throw new Error(String(body?.error ?? "Failed to save account state"));
+      }
+      setCloudUpdatedAt(body.updatedAt ?? new Date().toISOString());
+      setCloudStatus(`Saved account state (${body.changedKeys?.length ?? 0} changed keys).`);
+      logEvent({
+        type: "control_clicked",
+        mode: "progress",
+        metadata: { action: "user_state_upload", selectedMergeMode: importMergeMode },
+      });
+    } catch (error) {
+      setCloudStatus(error instanceof Error ? error.message : "Failed to save account state");
+    } finally {
+      setCloudPending(false);
+    }
+  };
+
+  const downloadUserState = async () => {
+    setCloudPending(true);
+    setCloudStatus(null);
+    try {
+      const response = await fetch("/api/user/state");
+      const body = await response.json();
+      if (response.status === 404) {
+        setCloudStatus("No account state found yet. Save once to create it.");
+        return;
+      }
+      if (!response.ok) {
+        throw new Error(String(body?.error ?? "Failed to load account state"));
+      }
+      const snapshot: PortableProgressSnapshot = {
+        version: 1,
+        exportedAt: body.updatedAt ?? new Date().toISOString(),
+        data: body.data ?? {},
+      };
+      setPendingImportSnapshot(snapshot);
+      setPendingImportFileName(`account:${body.userId ?? authenticatedUserId ?? "user"}`);
+      setConflictResolutionByKey({});
+      setCloudUpdatedAt(body.updatedAt ?? null);
+      setCloudStatus("Loaded account state. Review import preview before applying.");
+      logEvent({
+        type: "control_clicked",
+        mode: "progress",
+        metadata: { action: "user_state_download", selectedMergeMode: importMergeMode },
+      });
+    } catch (error) {
+      setCloudStatus(error instanceof Error ? error.message : "Failed to load account state");
+    } finally {
+      setCloudPending(false);
+    }
+  };
+
+  const downloadSyncSnapshot = async () => {
+    if (typeof window === "undefined") return;
+    setSyncPending(true);
+    setSyncStatus(null);
+    try {
+      const response = await withSyncAuthRetry(async (token) =>
+        fetch(`/api/sync/download?userId=${encodeURIComponent(syncUserId)}`, {
+          headers: {
+            "x-sync-user-id": syncUserId,
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+        })
+      );
+      const body = await response.json();
+      if (response.status === 404) {
+        setSyncStatus("No remote snapshot found for this sync user.");
+        return;
+      }
+      if (!response.ok) {
+        throw new Error(String(body?.error ?? "Sync download failed"));
+      }
+      const snapshot = body.snapshot as PortableProgressSnapshot;
+      setPendingImportSnapshot(snapshot);
+      setPendingImportFileName(`sync:${syncUserId}`);
+      setConflictResolutionByKey({});
+      setSyncUpdatedAt(body.updatedAt ?? null);
+      setSyncStatus("Downloaded remote snapshot. Review conflict preview below before applying.");
+      logEvent({
+        type: "control_clicked",
+        mode: "progress",
+        metadata: { action: "sync_download", selectedMergeMode: importMergeMode },
+      });
+    } catch (error) {
+      setSyncStatus(error instanceof Error ? error.message : "Sync download failed");
+    } finally {
+      setSyncPending(false);
+    }
+  };
+
+  const retryDeadLetters = async () => {
+    await retryAnalyticsDeadLetterQueue();
+    setDeadLetterSummary(getAnalyticsDeadLetterSummary());
+  };
+
+  const clearDeadLetters = () => {
+    clearAnalyticsDeadLetterQueue();
+    setDeadLetterSummary(getAnalyticsDeadLetterSummary());
+  };
+
+  const nextRetryAtMs = deadLetterSummary.nextRetryAt
+    ? Date.parse(deadLetterSummary.nextRetryAt)
+    : null;
+  const deadLetterRetryBlocked =
+    deadLetterSummary.count === 0 ||
+    (typeof nextRetryAtMs === "number" && Number.isFinite(nextRetryAtMs) && nextRetryAtMs > Date.now());
 
   // ─── Empty State ───
   if (sessions.length === 0) {
@@ -80,12 +721,26 @@ export default function ProgressPage() {
         <div className="flex justify-center gap-3">
           <Link
             href="/study"
+            onClick={() =>
+              logEvent({
+                type: "link_opened",
+                mode: "progress",
+                metadata: { target: "empty_start_studying", href: "/study" },
+              })
+            }
             className="rounded-xl bg-brand-600 px-6 py-3 font-semibold text-white hover:bg-brand-700"
           >
             Start Studying
           </Link>
           <Link
             href="/exam"
+            onClick={() =>
+              logEvent({
+                type: "link_opened",
+                mode: "progress",
+                metadata: { target: "empty_take_exam", href: "/exam" },
+              })
+            }
             className="rounded-xl border border-[var(--card-border)] px-6 py-3 font-semibold text-[var(--muted)] hover:text-white"
           >
             Take an Exam
@@ -107,37 +762,353 @@ export default function ProgressPage() {
         </div>
         <div>
           {showConfirmClear ? (
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-[var(--muted)]">Are you sure?</span>
-              <button
-                onClick={() => {
-                  clearAll();
-                  defaultAdaptiveStatsStore.clear(LOCAL_USER_ID);
-                  defaultAttemptEventStore.clear(LOCAL_USER_ID);
-                  defaultLearningEventStore.clear(LOCAL_USER_ID);
-                  setShowConfirmClear(false);
-                }}
-                className="rounded-lg bg-incorrect/20 px-3 py-1.5 text-xs font-semibold text-incorrect hover:bg-incorrect/30"
-              >
-                Yes, Clear All
-              </button>
-              <button
-                onClick={() => setShowConfirmClear(false)}
-                className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white"
-              >
-                Cancel
-              </button>
+            <div className="w-full max-w-md space-y-2 rounded-xl border border-incorrect/30 bg-incorrect/10 p-3">
+              <div className="text-xs font-semibold uppercase tracking-wider text-incorrect">Danger Zone</div>
+              <div className="text-xs text-[var(--muted)]">Choose exactly what to reset. This cannot be undone.</div>
+              <div className="grid grid-cols-2 gap-2">
+                {RESET_SCOPES.map((scope) => (
+                  <button
+                    key={scope.id}
+                    onClick={() => {
+                      setResetScope(scope.id);
+                      logEvent({
+                        type: "filter_changed",
+                        mode: "progress",
+                        metadata: {
+                          filter: "reset_scope",
+                          value: scope.id,
+                        },
+                      });
+                    }}
+                    className={`rounded-lg border px-2 py-1.5 text-left text-xs ${resetScope === scope.id
+                      ? "border-incorrect/60 bg-incorrect/20 text-white"
+                      : "border-[var(--card-border)] text-[var(--muted)] hover:text-white"
+                      }`}
+                  >
+                    <div className="font-medium">{scope.label}</div>
+                    <div className="mt-0.5 text-[10px] opacity-80">{scope.description}</div>
+                  </button>
+                ))}
+              </div>
+              <div className="flex items-center gap-2 pt-1">
+                <button
+                  onClick={() => {
+                    logEvent({
+                      type: "control_clicked",
+                      mode: "progress",
+                      metadata: { action: "confirm_reset_data", scope: resetScope },
+                    });
+                    applyResetScope(resetScope);
+                    setShowConfirmClear(false);
+                  }}
+                  className="rounded-lg bg-incorrect/30 px-3 py-1.5 text-xs font-semibold text-incorrect hover:bg-incorrect/40"
+                >
+                  Yes, Reset {RESET_SCOPES.find((scope) => scope.id === resetScope)?.label ?? "Data"}
+                </button>
+                <button
+                  onClick={() => {
+                    logEvent({
+                      type: "control_clicked",
+                      mode: "progress",
+                      metadata: { action: "cancel_reset_data" },
+                    });
+                    setShowConfirmClear(false);
+                  }}
+                  className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           ) : (
-            <button
-              onClick={() => setShowConfirmClear(true)}
-              className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white"
-            >
-              Reset Data
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleExportData}
+                className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white"
+              >
+                Export Data
+              </button>
+              <button
+                onClick={() => {
+                  logEvent({
+                    type: "control_clicked",
+                    mode: "progress",
+                    metadata: { action: "open_import_picker" },
+                  });
+                  importInputRef.current?.click();
+                }}
+                className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white"
+              >
+                Import Data
+              </button>
+              <button
+                onClick={handleExportTelemetryBundle}
+                className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white"
+              >
+                Export Telemetry
+              </button>
+              <button
+                onClick={() => {
+                  logEvent({
+                    type: "control_clicked",
+                    mode: "progress",
+                    metadata: { action: "start_reset_data" },
+                  });
+                  setResetScope("all");
+                  setShowConfirmClear(true);
+                }}
+                className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white"
+              >
+                Reset Data
+              </button>
+              <input
+                ref={importInputRef}
+                type="file"
+                accept="application/json"
+                onChange={handleImportData}
+                className="hidden"
+              />
+            </div>
           )}
         </div>
       </div>
+
+      {transferError && (
+        <div className="rounded-lg border border-incorrect/30 bg-incorrect/10 px-4 py-2 text-sm text-incorrect">
+          Import failed: {transferError}
+        </div>
+      )}
+
+      {authenticatedUserId && (
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 mb-4">
+          <div className="text-sm font-semibold text-white mb-3">Account Data Sync</div>
+          <div className="flex flex-wrap items-end gap-3">
+            <button
+              onClick={() => void uploadUserState()}
+              disabled={cloudPending}
+              className="rounded-lg border border-[var(--card-border)] px-3 py-2 text-xs text-[var(--muted)] hover:text-white disabled:opacity-50"
+            >
+              Save Account State
+            </button>
+            <button
+              onClick={() => void downloadUserState()}
+              disabled={cloudPending}
+              className="rounded-lg border border-[var(--card-border)] px-3 py-2 text-xs text-[var(--muted)] hover:text-white disabled:opacity-50"
+            >
+              Load Account State
+            </button>
+          </div>
+          {(cloudStatus || cloudUpdatedAt) && (
+            <div className="mt-2 text-xs text-[var(--muted)]">
+              {cloudStatus && <div>{cloudStatus}</div>}
+              {cloudUpdatedAt && <div>Last account update: {new Date(cloudUpdatedAt).toLocaleString()}</div>}
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4">
+        <div className="flex flex-wrap items-end gap-3">
+          <div className="min-w-[180px] flex-1">
+            <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Sync User</div>
+            <input
+              value={syncUserId}
+              onChange={(event) => setSyncUserId(event.target.value.trim() || SYNC_DEFAULT_USER_ID)}
+              className="mt-1 w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-white"
+            />
+          </div>
+          <button
+            onClick={() => void uploadSyncSnapshot()}
+            disabled={syncPending}
+            className="rounded-lg border border-[var(--card-border)] px-3 py-2 text-xs text-[var(--muted)] hover:text-white disabled:opacity-50"
+          >
+            Upload to Sync
+          </button>
+          <button
+            onClick={() => void downloadSyncSnapshot()}
+            disabled={syncPending}
+            className="rounded-lg border border-[var(--card-border)] px-3 py-2 text-xs text-[var(--muted)] hover:text-white disabled:opacity-50"
+          >
+            Download from Sync
+          </button>
+        </div>
+        {(syncStatus || syncUpdatedAt) && (
+          <div className="mt-2 text-xs text-[var(--muted)]">
+            {syncStatus && <div>{syncStatus}</div>}
+            {syncUpdatedAt && <div>Last sync update: {new Date(syncUpdatedAt).toLocaleString()}</div>}
+          </div>
+        )}
+      </div>
+
+      <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4">
+        <div className="text-sm font-semibold text-white">Analytics Sink Dead-Letter Queue</div>
+        <div className="mt-1 text-xs text-[var(--muted)]">
+          Pending: {deadLetterSummary.count}
+          {deadLetterSummary.latestQueuedAt && (
+            <span> • Last queued {new Date(deadLetterSummary.latestQueuedAt).toLocaleString()}</span>
+          )}
+          {deadLetterSummary.nextRetryAt && (
+            <span> • Next retry {new Date(deadLetterSummary.nextRetryAt).toLocaleString()}</span>
+          )}
+        </div>
+        {deadLetterSummary.latestError && (
+          <div className="mt-1 text-xs text-amber-300">{deadLetterSummary.latestError}</div>
+        )}
+        <div className="mt-2 flex gap-2">
+          <button
+            onClick={() => void retryDeadLetters()}
+            disabled={deadLetterRetryBlocked}
+            className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Retry Queue
+          </button>
+          <button
+            onClick={clearDeadLetters}
+            className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white"
+          >
+            Clear Queue
+          </button>
+        </div>
+      </div>
+
+      {pendingImportSnapshot && (
+        <div className="rounded-xl border border-brand-500/30 bg-brand-500/10 p-4 text-sm">
+          <div className="font-semibold text-white">Import Preview</div>
+          <p className="mt-1 text-[var(--muted)]">
+            File: {pendingImportFileName ?? "snapshot.json"} • Exported{" "}
+            {new Date(pendingImportSnapshot.exportedAt).toLocaleString()}
+          </p>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div>
+              <div className="mb-1 text-xs uppercase tracking-wider text-[var(--muted)]">Merge Mode</div>
+              <div className="flex gap-2">
+                {(["merge", "overwrite"] as const).map((mode) => (
+                  <button
+                    key={mode}
+                    onClick={() => {
+                      setImportMergeMode(mode);
+                      logEvent({
+                        type: "filter_changed",
+                        mode: "progress",
+                        metadata: { filter: "import_mode", value: mode },
+                      });
+                    }}
+                    className={`rounded-lg px-3 py-1.5 text-xs font-medium ${importMergeMode === mode
+                      ? "bg-brand-500 text-white"
+                      : "border border-[var(--card-border)] text-[var(--muted)] hover:text-white"
+                      }`}
+                  >
+                    {mode === "merge" ? "Merge (Recommended)" : "Overwrite"}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="mb-1 text-xs uppercase tracking-wider text-[var(--muted)]">Preview</div>
+              {(() => {
+                const currentData = readCurrentLocalData(PORTABLE_EXPORT_KEYS);
+                const preview = computeImportPreview(
+                  pendingImportSnapshot.data,
+                  currentData,
+                  PORTABLE_EXPORT_KEYS,
+                  importMergeMode
+                );
+                const resolution = resolveImportedData(
+                  pendingImportSnapshot.data,
+                  currentData,
+                  PORTABLE_EXPORT_KEYS,
+                  importMergeMode
+                );
+                const conflicts = buildPreviewKeyConflicts(
+                  pendingImportSnapshot.data,
+                  currentData,
+                  resolution.resolvedData,
+                  PORTABLE_EXPORT_KEYS
+                );
+                const resolvingLocalCount = conflicts.filter(
+                  (conflict) => conflict.willChange && conflictResolutionByKey[conflict.key] === "local"
+                ).length;
+                const resolvingRemoteCount = conflicts.filter(
+                  (conflict) => conflict.willChange && (conflictResolutionByKey[conflict.key] ?? "remote") === "remote"
+                ).length;
+                return (
+                  <div className="space-y-2 text-xs text-[var(--muted)]">
+                    <div>
+                      Keys included: <span className="text-white">{preview.includedKeys.length}</span> •
+                      Keys changed: <span className="text-white">{preview.changedKeys.length}</span>
+                    </div>
+                    <div className="rounded border border-[var(--card-border)] bg-[var(--background)] px-2 py-1">
+                      Conflict winners:{" "}
+                      <span className="text-white">Local {resolvingLocalCount}</span> •{" "}
+                      <span className="text-white">Remote {resolvingRemoteCount}</span>
+                    </div>
+                    <div className="space-y-1">
+                      {conflicts.map((conflict) => (
+                        <div key={conflict.key} className="rounded border border-[var(--card-border)] px-2 py-1">
+                          <div className="text-white">{conflict.key}</div>
+                          <div>
+                            current: {conflict.currentState} • incoming: {conflict.incomingState} •
+                            {conflict.willChange ? " will change" : " unchanged"}
+                          </div>
+                          {conflict.sessionDelta && <div>sessions: {conflict.sessionDelta}</div>}
+                          {conflict.willChange && (
+                            <div className="mt-1 flex gap-1">
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setConflictResolutionByKey((prev) => ({
+                                    ...prev,
+                                    [conflict.key]: "remote",
+                                  }))
+                                }
+                                className={`rounded px-2 py-0.5 ${(conflictResolutionByKey[conflict.key] ?? "remote") === "remote"
+                                  ? "bg-brand-500 text-white"
+                                  : "border border-[var(--card-border)] text-[var(--muted)]"
+                                  }`}
+                              >
+                                Keep Remote
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setConflictResolutionByKey((prev) => ({
+                                    ...prev,
+                                    [conflict.key]: "local",
+                                  }))
+                                }
+                                className={`rounded px-2 py-0.5 ${conflictResolutionByKey[conflict.key] === "local"
+                                  ? "bg-brand-500 text-white"
+                                  : "border border-[var(--card-border)] text-[var(--muted)]"
+                                  }`}
+                              >
+                                Keep Local
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+          <div className="mt-3 flex gap-2">
+            <button
+              onClick={applyPendingImport}
+              className="rounded-lg bg-brand-600 px-3 py-2 text-xs font-semibold text-white hover:bg-brand-700"
+            >
+              Apply Import
+            </button>
+            <button
+              onClick={cancelPendingImport}
+              className="rounded-lg border border-[var(--card-border)] px-3 py-2 text-xs text-[var(--muted)] hover:text-white"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Stat Cards */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -176,12 +1147,18 @@ export default function ProgressPage() {
         {(["overview", "history", "categories"] as const).map((tab) => (
           <button
             key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`flex-1 rounded-lg py-2 text-sm font-medium transition-colors ${
-              activeTab === tab
-                ? "bg-brand-500/20 text-brand-400"
-                : "text-[var(--muted)] hover:text-white"
-            }`}
+            onClick={() => {
+              setActiveTab(tab);
+              logEvent({
+                type: "tab_changed",
+                mode: "progress",
+                metadata: { tab },
+              });
+            }}
+            className={`flex-1 rounded-lg py-2 text-sm font-medium transition-colors ${activeTab === tab
+              ? "bg-brand-500/20 text-brand-400"
+              : "text-[var(--muted)] hover:text-white"
+              }`}
           >
             {tab === "overview" ? "📈 Overview" : tab === "history" ? "📋 History" : "📂 Categories"}
           </button>
@@ -189,7 +1166,20 @@ export default function ProgressPage() {
       </div>
 
       {/* Tab Content */}
-      {activeTab === "overview" && <OverviewTab stats={stats} adaptiveInsights={adaptiveInsights} />}
+      {activeTab === "overview" && (
+        <OverviewTab
+          stats={stats}
+          adaptiveInsights={adaptiveInsights}
+          learningEventInsights={learningEventInsights}
+          onTelemetryFilterChange={(metadata) =>
+            logEvent({
+              type: "filter_changed",
+              mode: "progress",
+              metadata,
+            })
+          }
+        />
+      )}
       {activeTab === "history" && <HistoryTab sessions={sessions} />}
       {activeTab === "categories" && <CategoriesTab stats={stats} />}
     </div>
@@ -214,8 +1204,8 @@ function StatCard({
     accent === "correct"
       ? "text-correct"
       : accent === "incorrect"
-      ? "text-incorrect"
-      : "text-[var(--muted)]";
+        ? "text-incorrect"
+        : "text-[var(--muted)]";
   return (
     <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5">
       <div className="text-xs uppercase tracking-wider text-[var(--muted)]">
@@ -233,10 +1223,57 @@ function StatCard({
 function OverviewTab({
   stats,
   adaptiveInsights,
+  learningEventInsights,
+  onTelemetryFilterChange,
 }: {
   stats: ReturnType<ReturnType<typeof useProgress>["getStats"]>;
   adaptiveInsights: ReturnType<typeof computeAdaptiveInsights>;
+  learningEventInsights: LearningEventInsights;
+  onTelemetryFilterChange: (metadata: Record<string, string | number | boolean | null>) => void;
 }) {
+  const [selectedMode, setSelectedMode] = useState<TelemetryFilterMode>("all");
+  const [selectedType, setSelectedType] = useState<TelemetryFilterType>("all");
+  const [timeWindow, setTimeWindow] = useState<TelemetryTimeWindow>("7d");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredEvents = useMemo(() => {
+    const cutoffMs = computeWindowCutoff(timeWindow);
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+
+    return learningEventInsights.events.filter((event) => {
+      if (selectedMode !== "all" && event.mode !== selectedMode) return false;
+      if (selectedType !== "all" && event.type !== selectedType) return false;
+
+      if (cutoffMs !== null && Date.parse(event.timestamp) < cutoffMs) return false;
+
+      if (!normalizedQuery) return true;
+
+      const searchable = [
+        event.type,
+        event.mode,
+        event.questionId ?? "",
+        event.category ?? "",
+        event.subcategory ?? "",
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return searchable.includes(normalizedQuery);
+    });
+  }, [learningEventInsights.events, searchQuery, selectedMode, selectedType, timeWindow]);
+
+  const filteredInsights = useMemo(
+    () => computeLearningEventInsights(filteredEvents),
+    [filteredEvents]
+  );
+  const modeEntries = Object.entries(filteredInsights.byMode).sort((a, b) => b[1] - a[1]);
+  const typeEntries = Object.entries(filteredInsights.byType).sort((a, b) => b[1] - a[1]);
+  const recentFilteredEvents = useMemo(() => [...filteredEvents].slice(-12).reverse(), [filteredEvents]);
+  const learnCompletionTrend = useMemo(
+    () => computeLearnCompletionTrend(learningEventInsights.events),
+    [learningEventInsights.events]
+  );
+
   return (
     <div className="space-y-6">
       {adaptiveInsights.trackedQuestions > 0 && (
@@ -257,13 +1294,12 @@ function OverviewTab({
             <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
               <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Momentum</div>
               <div
-                className={`mt-1 text-2xl font-bold ${
-                  adaptiveInsights.momentumPercent === null
-                    ? "text-[var(--muted)]"
-                    : adaptiveInsights.momentumPercent >= 0
-                      ? "text-correct"
-                      : "text-incorrect"
-                }`}
+                className={`mt-1 text-2xl font-bold ${adaptiveInsights.momentumPercent === null
+                  ? "text-[var(--muted)]"
+                  : adaptiveInsights.momentumPercent >= 0
+                    ? "text-correct"
+                    : "text-incorrect"
+                  }`}
               >
                 {adaptiveInsights.momentumPercent === null
                   ? "—"
@@ -299,19 +1335,249 @@ function OverviewTab({
             <div>
               Avg rolling momentum:{" "}
               <span
-                className={`font-medium ${
-                  adaptiveInsights.averageRollingMomentumPercent === null
-                    ? "text-white"
-                    : adaptiveInsights.averageRollingMomentumPercent >= 0
-                      ? "text-correct"
-                      : "text-incorrect"
-                }`}
+                className={`font-medium ${adaptiveInsights.averageRollingMomentumPercent === null
+                  ? "text-white"
+                  : adaptiveInsights.averageRollingMomentumPercent >= 0
+                    ? "text-correct"
+                    : "text-incorrect"
+                  }`}
               >
                 {adaptiveInsights.averageRollingMomentumPercent === null
                   ? "—"
                   : `${adaptiveInsights.averageRollingMomentumPercent >= 0 ? "+" : ""}${adaptiveInsights.averageRollingMomentumPercent}`}
               </span>
             </div>
+            <div>
+              Avg confidence (quiz/exam):{" "}
+              <span className="font-medium text-white">
+                {adaptiveInsights.averageConfidencePercent !== null
+                  ? `${adaptiveInsights.averageConfidencePercent}%`
+                  : "—"}
+              </span>
+            </div>
+            <div>
+              Calibration score:{" "}
+              <span className="font-medium text-white">
+                {adaptiveInsights.calibrationScorePercent !== null
+                  ? `${adaptiveInsights.calibrationScorePercent}%`
+                  : "—"}
+              </span>
+            </div>
+            <div>
+              Overconfidence rate:{" "}
+              <span className="font-medium text-amber-300">
+                {adaptiveInsights.overconfidenceRatePercent !== null
+                  ? `${adaptiveInsights.overconfidenceRatePercent}%`
+                  : "—"}
+              </span>
+            </div>
+            <div>
+              Confidence samples:{" "}
+              <span className="font-medium text-white">{adaptiveInsights.confidenceAttemptCount}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {learningEventInsights.total > 0 && (
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
+          <h3 className="mb-4 font-semibold text-white">🛰️ Learning Event Activity</h3>
+          <div className="mb-4 grid gap-2 md:grid-cols-4">
+            <label className="space-y-1 text-xs text-[var(--muted)]">
+              <span className="block uppercase tracking-wider">Mode</span>
+              <select
+                value={selectedMode}
+                onChange={(event) => {
+                  const next = event.target.value;
+                  const safeMode: TelemetryFilterMode = isLearningEventMode(next) ? next : "all";
+                  setSelectedMode(safeMode);
+                  onTelemetryFilterChange({
+                    filter: "event_mode",
+                    selectedMode: safeMode,
+                  });
+                }}
+                className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-2 py-1.5 text-xs text-white"
+              >
+                <option value="all">All modes</option>
+                {ANALYTICS_MODES.map((mode) => (
+                  <option key={mode} value={mode}>
+                    {mode}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="space-y-1 text-xs text-[var(--muted)]">
+              <span className="block uppercase tracking-wider">Type</span>
+              <select
+                value={selectedType}
+                onChange={(event) => {
+                  const next = event.target.value;
+                  const safeType: TelemetryFilterType = isLearningEventType(next) ? next : "all";
+                  setSelectedType(safeType);
+                  onTelemetryFilterChange({
+                    filter: "event_type",
+                    selectedType: safeType,
+                  });
+                }}
+                className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-2 py-1.5 text-xs text-white"
+              >
+                <option value="all">All types</option>
+                {ANALYTICS_EVENT_TYPES.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="space-y-1 text-xs text-[var(--muted)]">
+              <span className="block uppercase tracking-wider">Window</span>
+              <select
+                value={timeWindow}
+                onChange={(event) => {
+                  const next = event.target.value as TelemetryTimeWindow;
+                  setTimeWindow(next);
+                  onTelemetryFilterChange({
+                    filter: "time_window",
+                    timeWindow: next,
+                  });
+                }}
+                className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-2 py-1.5 text-xs text-white"
+              >
+                <option value="24h">Last 24h</option>
+                <option value="7d">Last 7d</option>
+                <option value="30d">Last 30d</option>
+                <option value="all">All time</option>
+              </select>
+            </label>
+            <label className="space-y-1 text-xs text-[var(--muted)]">
+              <span className="block uppercase tracking-wider">Search</span>
+              <input
+                value={searchQuery}
+                onChange={(event) => {
+                  const next = event.target.value;
+                  setSearchQuery(next);
+                  onTelemetryFilterChange({
+                    filter: "search_query",
+                    searchLength: next.trim().length,
+                    hasQuery: next.trim().length > 0,
+                  });
+                }}
+                placeholder="question id, category, type"
+                className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-2 py-1.5 text-xs text-white placeholder:text-[var(--muted)]"
+              />
+            </label>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-3">
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Total Events</div>
+              <div className="mt-1 text-2xl font-bold text-white">{filteredInsights.total}</div>
+              <div className="mt-1 text-xs text-[var(--muted)]">
+                Filtered from {learningEventInsights.total} retained events
+              </div>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">By Mode</div>
+              <div className="mt-1 flex flex-wrap gap-1.5">
+                {modeEntries.slice(0, 4).map(([mode, count]) => (
+                  <span
+                    key={mode}
+                    className="rounded-full border border-[var(--card-border)] px-2 py-0.5 text-xs text-white"
+                  >
+                    {mode}: {count}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Top Event Types</div>
+              <div className="mt-1 space-y-1 text-xs text-[var(--muted)]">
+                {typeEntries.slice(0, 4).map(([type, count]) => (
+                  <div key={type} className="flex items-center justify-between">
+                    <span className="text-white">{type}</span>
+                    <span>{count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-3">
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
+              Recent Events
+            </div>
+            {recentFilteredEvents.length === 0 ? (
+              <div className="rounded border border-dashed border-[var(--card-border)] px-3 py-2 text-xs text-[var(--muted)]">
+                No events matched the selected filters.
+              </div>
+            ) : (
+              <div className="space-y-1.5">
+                {recentFilteredEvents.map((event) => (
+                  <div
+                    key={event.id}
+                    className="flex items-center gap-2 rounded border border-[var(--card-border)] px-2 py-1 text-xs"
+                  >
+                    <span className="rounded bg-brand-500/15 px-1.5 py-0.5 text-brand-300">
+                      {event.mode}
+                    </span>
+                    <span className="text-white">{event.type}</span>
+                    {event.questionId && (
+                      <span className="truncate text-[var(--muted)]">• {event.questionId}</span>
+                    )}
+                    <span className="ml-auto text-[var(--muted)]">{timeAgo(event.timestamp)}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {learnCompletionTrend.length > 0 && (
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
+          <h3 className="mb-3 font-semibold text-white">🎯 Learn First-Pass vs Mastery</h3>
+          <p className="mb-4 text-xs text-[var(--muted)]">
+            First-pass captures how often you were right immediately. Mastery captures eventual correctness after re-review.
+          </p>
+          <div className="space-y-3">
+            {learnCompletionTrend.map((point) => (
+              <div key={`${point.timestamp}-${point.round}`} className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-3">
+                <div className="mb-2 flex items-center justify-between text-xs text-[var(--muted)]">
+                  <span>
+                    {new Date(point.timestamp).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}{" "}
+                    • Round {point.round}
+                  </span>
+                  <span>{point.uniqueQuestions} questions</span>
+                </div>
+                <div className="space-y-2">
+                  <div>
+                    <div className="mb-1 flex items-center justify-between text-xs">
+                      <span className="text-[var(--muted)]">First-pass</span>
+                      <span className="text-white">
+                        {point.firstPassCorrect}/{point.uniqueQuestions} ({point.firstPassPercent}%)
+                      </span>
+                    </div>
+                    <div className="h-2 overflow-hidden rounded-full bg-[var(--card)]">
+                      <div className="h-full rounded-full bg-amber-400/70" style={{ width: `${point.firstPassPercent}%` }} />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="mb-1 flex items-center justify-between text-xs">
+                      <span className="text-[var(--muted)]">Mastery</span>
+                      <span className="text-white">
+                        {point.masteredCount}/{point.uniqueQuestions} ({point.masteryPercent}%)
+                      </span>
+                    </div>
+                    <div className="h-2 overflow-hidden rounded-full bg-[var(--card)]">
+                      <div className="h-full rounded-full bg-correct/70" style={{ width: `${point.masteryPercent}%` }} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
@@ -324,11 +1590,10 @@ function OverviewTab({
             {stats.recentTrend.map((point, i) => (
               <div key={i} className="group relative flex flex-1 flex-col items-center">
                 <div
-                  className={`w-full max-w-[32px] rounded-t transition-all ${
-                    point.percentage >= 70
-                      ? "bg-correct/60 group-hover:bg-correct"
-                      : "bg-incorrect/60 group-hover:bg-incorrect"
-                  }`}
+                  className={`w-full max-w-[32px] rounded-t transition-all ${point.percentage >= 70
+                    ? "bg-correct/60 group-hover:bg-correct"
+                    : "bg-incorrect/60 group-hover:bg-incorrect"
+                    }`}
                   style={{ height: `${Math.max(4, point.percentage)}%` }}
                 />
                 {/* Tooltip */}
@@ -410,155 +1675,219 @@ function OverviewTab({
 // ─────────────────────────────────────────────
 function HistoryTab({ sessions }: { sessions: SessionRecord[] }) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(HISTORY_PAGE_SIZE);
+  const [virtualStartIndex, setVirtualStartIndex] = useState(0);
+  const visibleSessions = sessions.slice(0, visibleCount);
+  const shouldVirtualize = sessions.length > HISTORY_VIRTUALIZE_THRESHOLD && expandedId === null;
+  const virtualEndIndex = Math.min(sessions.length, virtualStartIndex + HISTORY_VIRTUAL_WINDOW_SIZE);
+  const renderedSessions = shouldVirtualize
+    ? sessions.slice(virtualStartIndex, virtualEndIndex)
+    : visibleSessions;
+  const virtualTopSpacerPx = shouldVirtualize ? virtualStartIndex * HISTORY_ROW_ESTIMATE_PX : 0;
+  const virtualBottomSpacerPx = shouldVirtualize
+    ? Math.max(0, (sessions.length - virtualEndIndex) * HISTORY_ROW_ESTIMATE_PX)
+    : 0;
+
+  useEffect(() => {
+    setVisibleCount(HISTORY_PAGE_SIZE);
+    setExpandedId(null);
+    setVirtualStartIndex(0);
+  }, [sessions.length]);
 
   return (
     <div className="space-y-3">
-      {sessions.map((session) => {
-        const isExpanded = expandedId === session.id;
-        return (
-          <div
-            key={session.id}
-            className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden"
-          >
-            {/* Session Row */}
-            <button
-              onClick={() => setExpandedId(isExpanded ? null : session.id)}
-              className="w-full p-4 text-left hover:bg-white/[0.02] transition-colors"
+      {shouldVirtualize && (
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-2 text-[11px] text-[var(--muted)]">
+          Virtualized history view active for large dataset ({sessions.length} sessions). Expand any row to switch to full detail mode.
+        </div>
+      )}
+      <div
+        className={shouldVirtualize ? "space-y-3 max-h-[720px] overflow-y-auto pr-1" : "space-y-3"}
+        onScroll={(event) => {
+          if (!shouldVirtualize) return;
+          const target = event.currentTarget;
+          const nextStart = Math.max(
+            0,
+            Math.min(
+              sessions.length - HISTORY_VIRTUAL_WINDOW_SIZE,
+              Math.floor(target.scrollTop / HISTORY_ROW_ESTIMATE_PX)
+            )
+          );
+          if (nextStart !== virtualStartIndex) {
+            setVirtualStartIndex(nextStart);
+          }
+        }}
+      >
+        {shouldVirtualize && <div style={{ height: virtualTopSpacerPx }} />}
+        {renderedSessions.map((session, renderIndex) => {
+          const sessionIndex = shouldVirtualize ? virtualStartIndex + renderIndex : renderIndex;
+          const isExpanded = expandedId === session.id;
+          const detailsId = `history-session-details-${session.id}`;
+          return (
+            <div
+              key={session.id}
+              className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden"
             >
-              <div className="flex items-center gap-3">
-                {/* Mode Badge */}
-                <span
-                  className={`rounded-lg px-2.5 py-1 text-xs font-bold uppercase ${
-                    session.mode === "exam"
+              {/* Session Row */}
+              <button
+                onClick={() => {
+                  if (shouldVirtualize) {
+                    setVisibleCount(Math.max(visibleCount, sessionIndex + 1));
+                  }
+                  setExpandedId(isExpanded ? null : session.id);
+                }}
+                aria-expanded={isExpanded}
+                aria-controls={detailsId}
+                className="w-full p-4 text-left hover:bg-white/[0.02] transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  {/* Mode Badge */}
+                  <span
+                    className={`rounded-lg px-2.5 py-1 text-xs font-bold uppercase ${session.mode === "exam"
                       ? "bg-amber-500/10 text-amber-400"
                       : "bg-brand-500/10 text-brand-400"
-                  }`}
-                >
-                  {session.mode}
-                </span>
-
-                {session.mode === "exam" && session.questionTypeProfile && (
-                  <span className="rounded-lg border border-[var(--card-border)] px-2 py-1 text-[10px] uppercase tracking-wide text-[var(--muted)]">
-                    {session.questionTypeProfile.replaceAll("_", " ")}
+                      }`}
+                  >
+                    {session.mode}
                   </span>
-                )}
 
-                {/* Category (study only) */}
-                {session.mode === "study" && (
-                  <span className="text-sm text-[var(--muted)]">
-                    {session.category}
+                  {session.mode === "exam" && session.questionTypeProfile && (
+                    <span className="rounded-lg border border-[var(--card-border)] px-2 py-1 text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                      {session.questionTypeProfile.replaceAll("_", " ")}
+                    </span>
+                  )}
+
+                  {/* Category (study only) */}
+                  {session.mode === "study" && (
+                    <span className="text-sm text-[var(--muted)]">
+                      {session.category}
+                    </span>
+                  )}
+
+                  <div className="flex-1" />
+
+                  {/* Score */}
+                  <span
+                    className={`text-lg font-bold ${session.passed ? "text-correct" : "text-incorrect"
+                      }`}
+                  >
+                    {session.percentage}%
                   </span>
-                )}
 
-                <div className="flex-1" />
+                  {/* Pass/Fail */}
+                  <span className="text-sm">
+                    {session.passed ? "✅" : "❌"}
+                  </span>
 
-                {/* Score */}
-                <span
-                  className={`text-lg font-bold ${
-                    session.passed ? "text-correct" : "text-incorrect"
-                  }`}
-                >
-                  {session.percentage}%
-                </span>
+                  {/* Time */}
+                  <span className="text-xs text-[var(--muted)] w-20 text-right">
+                    {timeAgo(session.timestamp)}
+                  </span>
 
-                {/* Pass/Fail */}
-                <span className="text-sm">
-                  {session.passed ? "✅" : "❌"}
-                </span>
-
-                {/* Time */}
-                <span className="text-xs text-[var(--muted)] w-20 text-right">
-                  {timeAgo(session.timestamp)}
-                </span>
-
-                {/* Expand */}
-                <span className="text-[var(--muted)] text-sm">
-                  {isExpanded ? "▲" : "▼"}
-                </span>
-              </div>
-              <div className="mt-1 flex gap-4 text-xs text-[var(--muted)]">
-                <span>
-                  {session.score}/{session.total} correct
-                </span>
-                <span>⏱ {formatDuration(session.timeSpentMs)}</span>
-                <span>
-                  {new Date(session.timestamp).toLocaleDateString("en-US", {
-                    weekday: "short",
-                    month: "short",
-                    day: "numeric",
-                    hour: "numeric",
-                    minute: "2-digit",
-                  })}
-                </span>
-              </div>
-            </button>
-
-            {/* Expanded Detail */}
-            {isExpanded && (
-              <div className="border-t border-[var(--card-border)] bg-[var(--background)]/50 p-4">
-                <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
-                  Question Breakdown
+                  {/* Expand */}
+                  <span className="text-[var(--muted)] text-sm">
+                    {isExpanded ? "▲" : "▼"}
+                  </span>
                 </div>
-                <div className="grid gap-1.5 sm:grid-cols-2">
-                  {session.questions.map((q, i) => (
-                    <div
-                      key={q.questionId}
-                      className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm ${
-                        q.isCorrect
+                <div className="mt-1 flex gap-4 text-xs text-[var(--muted)]">
+                  <span>
+                    {session.score}/{session.total} correct
+                  </span>
+                  <span>⏱ {formatDuration(session.timeSpentMs)}</span>
+                  <span>
+                    {new Date(session.timestamp).toLocaleDateString("en-US", {
+                      weekday: "short",
+                      month: "short",
+                      day: "numeric",
+                      hour: "numeric",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                </div>
+              </button>
+
+              {/* Expanded Detail */}
+              {isExpanded && (
+                <div
+                  id={detailsId}
+                  className="border-t border-[var(--card-border)] bg-[var(--background)]/50 p-4"
+                >
+                  <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
+                    Question Breakdown
+                  </div>
+                  <div className="grid gap-1.5 sm:grid-cols-2">
+                    {session.questions.map((q, i) => (
+                      <div
+                        key={q.questionId}
+                        className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm ${q.isCorrect
                           ? "bg-correct/5 text-correct"
                           : "bg-incorrect/5 text-incorrect"
-                      }`}
-                    >
-                      <span className="font-mono text-xs">Q{i + 1}</span>
-                      <span className="flex-1 truncate text-xs text-[var(--muted)]">
-                        {q.category}
-                      </span>
-                      <span>{q.isCorrect ? "✓" : "✗"}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Per-category mini breakdown */}
-                <div className="mt-4">
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
-                    Category Summary
-                  </div>
-                  {(() => {
-                    const catMap = new Map<string, { c: number; t: number }>();
-                    for (const q of session.questions) {
-                      const e = catMap.get(q.category) ?? { c: 0, t: 0 };
-                      e.t++;
-                      if (q.isCorrect) e.c++;
-                      catMap.set(q.category, e);
-                    }
-                    return Array.from(catMap.entries()).map(([cat, { c, t }]) => (
-                      <div
-                        key={cat}
-                        className="flex items-center gap-2 text-sm py-0.5"
+                          }`}
                       >
-                        <span className="w-24 truncate text-xs text-[var(--muted)]">
-                          {cat}
+                        <span className="font-mono text-xs">Q{i + 1}</span>
+                        <span className="flex-1 truncate text-xs text-[var(--muted)]">
+                          {q.category}
                         </span>
-                        <div className="flex-1 overflow-hidden rounded-full bg-[var(--card)] h-2">
-                          <div
-                            className={`h-full rounded-full ${
-                              (c / t) * 100 >= 70 ? "bg-correct/60" : "bg-incorrect/60"
-                            }`}
-                            style={{ width: `${Math.round((c / t) * 100)}%` }}
-                          />
-                        </div>
-                        <span className="w-16 text-right text-xs text-[var(--muted)]">
-                          {c}/{t} ({Math.round((c / t) * 100)}%)
-                        </span>
+                        <span>{q.isCorrect ? "✓" : "✗"}</span>
                       </div>
-                    ));
-                  })()}
+                    ))}
+                  </div>
+
+                  {/* Per-category mini breakdown */}
+                  <div className="mt-4">
+                    <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
+                      Category Summary
+                    </div>
+                    {(() => {
+                      const catMap = new Map<string, { c: number; t: number }>();
+                      for (const q of session.questions) {
+                        const e = catMap.get(q.category) ?? { c: 0, t: 0 };
+                        e.t++;
+                        if (q.isCorrect) e.c++;
+                        catMap.set(q.category, e);
+                      }
+                      return Array.from(catMap.entries()).map(([cat, { c, t }]) => (
+                        <div
+                          key={cat}
+                          className="flex items-center gap-2 text-sm py-0.5"
+                        >
+                          <span className="w-24 truncate text-xs text-[var(--muted)]">
+                            {cat}
+                          </span>
+                          <div className="flex-1 overflow-hidden rounded-full bg-[var(--card)] h-2">
+                            <div
+                              className={`h-full rounded-full ${(c / t) * 100 >= 70 ? "bg-correct/60" : "bg-incorrect/60"
+                                }`}
+                              style={{ width: `${Math.round((c / t) * 100)}%` }}
+                            />
+                          </div>
+                          <span className="w-16 text-right text-xs text-[var(--muted)]">
+                            {c}/{t} ({Math.round((c / t) * 100)}%)
+                          </span>
+                        </div>
+                      ));
+                    })()}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-        );
-      })}
+              )}
+            </div>
+          );
+        })}
+        {shouldVirtualize && <div style={{ height: virtualBottomSpacerPx }} />}
+      </div>
+      {!shouldVirtualize && sessions.length > visibleSessions.length && (
+        <div className="flex items-center justify-between rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 text-xs">
+          <span className="text-[var(--muted)]">
+            Showing {visibleSessions.length} of {sessions.length} sessions
+          </span>
+          <button
+            onClick={() => setVisibleCount((prev) => Math.min(prev + HISTORY_PAGE_SIZE, sessions.length))}
+            className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-[var(--muted)] hover:text-white"
+          >
+            Load More
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -588,27 +1917,24 @@ function CategoriesTab({
       {stats.categoryBreakdown.map((cat) => (
         <div
           key={cat.category}
-          className={`rounded-xl border p-4 ${
-            cat.percentage >= 70
-              ? "border-[var(--card-border)] bg-[var(--card)]"
-              : "border-incorrect/20 bg-incorrect/5"
-          }`}
+          className={`rounded-xl border p-4 ${cat.percentage >= 70
+            ? "border-[var(--card-border)] bg-[var(--card)]"
+            : "border-incorrect/20 bg-incorrect/5"
+            }`}
         >
           <div className="flex items-center justify-between mb-2">
             <span className="font-medium text-white">{cat.category}</span>
             <span
-              className={`text-lg font-bold ${
-                cat.percentage >= 70 ? "text-correct" : "text-incorrect"
-              }`}
+              className={`text-lg font-bold ${cat.percentage >= 70 ? "text-correct" : "text-incorrect"
+                }`}
             >
               {cat.percentage}%
             </span>
           </div>
           <div className="overflow-hidden rounded-full bg-[var(--background)] h-3">
             <div
-              className={`h-full rounded-full transition-all ${
-                cat.percentage >= 70 ? "bg-correct/60" : "bg-incorrect/60"
-              }`}
+              className={`h-full rounded-full transition-all ${cat.percentage >= 70 ? "bg-correct/60" : "bg-incorrect/60"
+                }`}
               style={{ width: `${cat.percentage}%` }}
             />
           </div>

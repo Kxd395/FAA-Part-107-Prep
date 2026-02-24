@@ -1,4 +1,10 @@
 import type { Question } from "./types";
+import {
+  nextIntervalDaysFromQuality,
+  qualityFromOutcomeConfidence,
+  type AttemptConfidence,
+  type QualityScore,
+} from "./grading";
 
 export interface CanonicalKeyOptions {
   includeChoices?: boolean;
@@ -30,6 +36,8 @@ export interface UserQuestionStats {
   totalResponseTimeMs?: number;
   intervalDays?: number;
   nextDueAt?: string | null;
+  lastConfidence?: AttemptConfidence | null;
+  lastQualityScore?: QualityScore;
 }
 
 export interface AdaptiveQuizConfig {
@@ -290,6 +298,7 @@ export interface UpdateUserQuestionStatsInput {
   previous?: UserQuestionStats;
   isCorrect: boolean;
   responseTimeMs?: number | null;
+  confidence?: AttemptConfidence | null;
   config?: Partial<AdaptiveQuizConfig>;
   answeredAtMs?: number;
 }
@@ -300,6 +309,7 @@ export function updateUserQuestionStats({
   previous,
   isCorrect,
   responseTimeMs,
+  confidence,
   config = {},
   answeredAtMs = Date.now(),
 }: UpdateUserQuestionStatsInput): UserQuestionStats {
@@ -342,17 +352,16 @@ export function updateUserQuestionStats({
       : alpha * responseTimeValue + (1 - alpha) * previous.emaResponseTimeMs
     : (previous?.emaResponseTimeMs ?? null);
 
-  const previousInterval = clamp(
-    previous?.intervalDays ?? resolved.minIntervalDays,
+  const qualityScore = qualityFromOutcomeConfidence(
+    isCorrect ? "correct" : "incorrect",
+    confidence
+  );
+  const intervalDays = nextIntervalDaysFromQuality(
+    previous?.intervalDays,
+    qualityScore,
     resolved.minIntervalDays,
     resolved.maxIntervalDays
   );
-  let intervalDays = resolved.minIntervalDays;
-  if (isCorrect) {
-    const effectiveTime = safeResponseTimeMs ?? resolved.slowResponseTimeMs + 1;
-    const multiplier = effectiveTime <= resolved.fastResponseTimeMs ? 2 : 1.5;
-    intervalDays = clamp(previousInterval * multiplier, resolved.minIntervalDays, resolved.maxIntervalDays);
-  }
   const nextDueAt = new Date(answeredAtMs + intervalDays * 24 * 60 * 60 * 1000).toISOString();
 
   const nextBase: UserQuestionStats = {
@@ -381,6 +390,8 @@ export function updateUserQuestionStats({
     totalResponseTimeMs,
     intervalDays,
     nextDueAt,
+    lastConfidence: confidence ?? null,
+    lastQualityScore: qualityScore,
   };
 
   nextBase.masteryScore = computeMasteryScore(nextBase, resolved, answeredAtMs);

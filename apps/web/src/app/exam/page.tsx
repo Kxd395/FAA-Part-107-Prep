@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import {
+  type AttemptConfidence,
   FULL_EXAM_QUESTION_COUNT,
   REAL_EXAM_BLUEPRINT_TARGETS,
   QUESTION_TYPE_PROFILE_LABELS,
@@ -13,6 +14,12 @@ import {
   useExamSession,
 } from "@part107/core";
 import CitationLinks, { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
+import {
+  QuestionBankError,
+  QuestionBankLoading,
+  QuestionBankWarning,
+} from "../../components/QuestionBankState";
+import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
 import AnswerOptions from "../../components/quiz/AnswerOptions";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
@@ -22,8 +29,16 @@ import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useProgress, type QuestionResult } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { extractCitationText, mergeCitations } from "../../lib/citationContext";
+import {
+  buildOptionPresentation,
+  getDisplayLabelForOption,
+  getOptionTextById,
+} from "../../lib/optionPresentation";
+import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
 
 const PASSING_PERCENT = 70;
+const EXAM_DEFAULT_CONFIDENCE: AttemptConfidence = 3;
+const EXAM_CONFIDENT_CONFIDENCE: AttemptConfidence = 5;
 const SUPPORTED_QUESTION_TYPES: readonly QuestionTypeProfile[] = [
   "confirmed_test",
   "all_random",
@@ -103,7 +118,16 @@ function ExamPageClient() {
   const { saveSession } = useProgress();
   const adaptive = useAdaptiveQuestionStats();
   const events = useLearningEventLogger(adaptive.userId);
-  const { questions: allQuestions, loaded, loading, error, reload } = useQuestionBank();
+  const {
+    questions: allQuestions,
+    loaded,
+    loading,
+    error,
+    warning,
+    snapshotInfo,
+    reload,
+    clearSnapshot,
+  } = useQuestionBank();
   const exam = useExamSession({
     allQuestions,
     passPercent: PASSING_PERCENT,
@@ -118,6 +142,9 @@ function ExamPageClient() {
   const [sessionSaved, setSessionSaved] = useState(false);
   const [showNavigator, setShowNavigator] = useState(false);
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
+  const [answerConfidenceByQuestionId, setAnswerConfidenceByQuestionId] = useState<
+    Map<string, AttemptConfidence>
+  >(new Map());
   const lastReviewLoggedStartRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -129,6 +156,7 @@ function ExamPageClient() {
   useEffect(() => {
     if (exam.phase === "in-progress") {
       setSessionSaved(false);
+      setAnswerConfidenceByQuestionId(new Map());
     }
   }, [exam.phase, exam.startTime]);
 
@@ -172,22 +200,30 @@ function ExamPageClient() {
   ]);
 
   const handleAnswerSelect = useCallback(
-    (optionId: "A" | "B" | "C" | "D") => {
+    (optionId: "A" | "B" | "C" | "D", confidence: AttemptConfidence = EXAM_DEFAULT_CONFIDENCE) => {
       if (!exam.currentQuestion) return;
-      events.logEvent({
-        type: "answer_submitted",
-        mode: "exam",
-        questionId: exam.currentQuestion.id,
-        category: exam.currentQuestion.category,
-        subcategory: exam.currentQuestion.subcategory,
-        selectedOption: optionId,
-        correctOption: exam.currentQuestion.correct_option_id,
+      const responseTimeMs = 0;
+      setAnswerConfidenceByQuestionId((prev) => {
+        const next = new Map(prev);
+        next.set(exam.currentQuestion!.id, confidence);
+        return next;
+      });
+      recordLearningAttempt({
+        adaptive,
+        events,
+        question: exam.currentQuestion,
+        learningMode: "exam",
+        attemptMode: "mock",
         isCorrect: optionId === exam.currentQuestion.correct_option_id,
+        selectedOptionId: optionId,
+        responseTimeMs,
+        confidence,
         questionTypeProfile: exam.questionTypeProfile,
+        persistAdaptive: false,
       });
       exam.selectAnswer(optionId);
     },
-    [events, exam]
+    [adaptive, events, exam]
   );
 
   useEffect(() => {
@@ -198,6 +234,7 @@ function ExamPageClient() {
         question: row.question,
         isCorrect: row.isCorrect,
         userAnswer: row.userAnswer,
+        confidence: answerConfidenceByQuestionId.get(row.question.id) ?? null,
       })),
       Date.now(),
       { mode: "mock", quizId: String(exam.startTime) }
@@ -222,29 +259,14 @@ function ExamPageClient() {
     });
 
     setSessionSaved(true);
-  }, [adaptive, exam, saveSession, sessionSaved]);
+  }, [adaptive, answerConfidenceByQuestionId, exam, saveSession, sessionSaved]);
 
   if (loading && !loaded) {
-    return (
-      <div className="flex items-center justify-center py-32">
-        <div className="text-[var(--muted)]">Loading question bank…</div>
-      </div>
-    );
+    return <QuestionBankLoading label="Loading question bank..." />;
   }
 
   if (error && !loaded) {
-    return (
-      <div className="mx-auto max-w-lg space-y-4 rounded-xl border border-incorrect/30 bg-incorrect/10 p-6 text-center">
-        <h1 className="text-xl font-bold text-incorrect">Couldn&apos;t load questions</h1>
-        <p className="text-sm text-[var(--muted)]">{error}</p>
-        <button
-          onClick={() => void reload()}
-          className="rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
-        >
-          Retry
-        </button>
-      </div>
-    );
+    return <QuestionBankError error={error} onRetry={() => void reload()} />;
   }
 
   if (exam.phase === "setup") {
@@ -372,11 +394,7 @@ function ExamPageClient() {
           {preview.category === "All" ? "Begin Exam →" : `Begin ${preview.category} Test →`}
         </button>
 
-        {preview.questionCount === 0 && (
-          <div className="text-center text-sm text-[var(--muted)]">
-            No questions available for {QUESTION_TYPE_PROFILE_LABELS[preview.questionTypeProfile]} in this category.
-          </div>
-        )}
+        {preview.questionCount === 0 && <QuestionSelectionEmptyState context="exam" />}
 
         {preview.category !== "All" && (
           <Link
@@ -434,69 +452,94 @@ function ExamPageClient() {
           <h2 className="mb-4 text-xl font-bold">Question Review</h2>
           <div className="space-y-4">
             {exam.review.rows.map((result, i) => (
-              <div
-                key={result.question.id}
-                className={`rounded-xl border p-4 ${
-                  result.isCorrect ? "border-correct/20 bg-correct/5" : "border-incorrect/20 bg-incorrect/5"
-                }`}
-              >
-                <div className="flex items-center gap-2 text-sm">
-                  <span>{result.isCorrect ? "✅" : "❌"}</span>
-                  <span className="font-medium">Q{i + 1}</span>
-                  <span className="text-[var(--muted)]">
-                    {result.question.category} → {result.question.subcategory}
-                  </span>
-                </div>
+              (() => {
+                const reviewOptionPresentation = buildOptionPresentation(
+                  result.question,
+                  `exam:${exam.startTime}`
+                );
+                const userAnswerDisplayLabel = getDisplayLabelForOption(
+                  reviewOptionPresentation.displayLabelByOptionId,
+                  result.userAnswer
+                );
+                const correctDisplayLabel = reviewOptionPresentation.correctDisplayLabel;
+                const userAnswerText = getOptionTextById(result.question.options, result.userAnswer);
+                const correctAnswerText = getOptionTextById(
+                  result.question.options,
+                  result.question.correct_option_id
+                );
 
-                <p className="mt-2 text-sm">{result.question.question_text}</p>
+                return (
+                  <div
+                    key={result.question.id}
+                    className={`rounded-xl border p-4 ${
+                      result.isCorrect ? "border-correct/20 bg-correct/5" : "border-incorrect/20 bg-incorrect/5"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 text-sm">
+                      <span>{result.isCorrect ? "✅" : "❌"}</span>
+                      <span className="font-medium">Q{i + 1}</span>
+                      <span className="text-[var(--muted)]">
+                        {result.question.category} → {result.question.subcategory}
+                      </span>
+                    </div>
 
-                {!result.isCorrect && (
-                  <div className="mt-3 space-y-2 text-sm">
-                    <div className="text-incorrect">Your answer: {result.userAnswer ?? "Unanswered"}</div>
-                    <div className="text-correct">Correct: {result.question.correct_option_id}</div>
-                    <p className="text-gray-400">{result.question.explanation_correct}</p>
-                    <CitationLinks
-                      citation={result.question.citation}
-                      label="📖 Correct answer reference:"
-                      onReferenceClick={(ref) => {
-                        events.logEvent({
-                          type: "citation_clicked",
-                          mode: "exam",
-                          questionId: result.question.id,
-                          category: result.question.category,
-                          subcategory: result.question.subcategory,
-                          citationLabel: `correct:${ref.label}`,
-                          citationUrl: ref.url,
-                          questionTypeProfile: exam.questionTypeProfile,
-                        });
-                      }}
-                    />
-                    <CitationLinks
-                      citation={mergeCitations(
-                        result.question.citation,
-                        extractCitationText(
-                          result.userAnswer
-                            ? result.question.explanation_distractors[result.userAnswer]
-                            : undefined
-                        )
-                      )}
-                      label={`📖 Why "${result.userAnswer ?? "unanswered"}" reference:`}
-                      onReferenceClick={(ref) => {
-                        events.logEvent({
-                          type: "citation_clicked",
-                          mode: "exam",
-                          questionId: result.question.id,
-                          category: result.question.category,
-                          subcategory: result.question.subcategory,
-                          citationLabel: `selected:${result.userAnswer ?? "unanswered"}:${ref.label}`,
-                          citationUrl: ref.url,
-                          questionTypeProfile: exam.questionTypeProfile,
-                        });
-                      }}
-                    />
+                    <p className="mt-2 text-sm">{result.question.question_text}</p>
+
+                    {!result.isCorrect && (
+                      <div className="mt-3 space-y-2 text-sm">
+                        <div className="text-incorrect">
+                          Your answer: {userAnswerDisplayLabel}
+                          {userAnswerText ? ` — ${userAnswerText}` : ""}
+                        </div>
+                        <div className="text-correct">
+                          Correct: {correctDisplayLabel}
+                          {correctAnswerText ? ` — ${correctAnswerText}` : ""}
+                        </div>
+                        <p className="text-gray-400">{result.question.explanation_correct}</p>
+                        <CitationLinks
+                          citation={result.question.citation}
+                          label="📖 Correct answer reference:"
+                          onReferenceClick={(ref) => {
+                            events.logEvent({
+                              type: "citation_clicked",
+                              mode: "exam",
+                              questionId: result.question.id,
+                              category: result.question.category,
+                              subcategory: result.question.subcategory,
+                              citationLabel: `correct:${ref.label}`,
+                              citationUrl: ref.url,
+                              questionTypeProfile: exam.questionTypeProfile,
+                            });
+                          }}
+                        />
+                        <CitationLinks
+                          citation={mergeCitations(
+                            result.question.citation,
+                            extractCitationText(
+                              result.userAnswer
+                                ? result.question.explanation_distractors[result.userAnswer]
+                                : undefined
+                            )
+                          )}
+                          label={`📖 Why "${userAnswerDisplayLabel}" reference:`}
+                          onReferenceClick={(ref) => {
+                            events.logEvent({
+                              type: "citation_clicked",
+                              mode: "exam",
+                              questionId: result.question.id,
+                              category: result.question.category,
+                              subcategory: result.question.subcategory,
+                              citationLabel: `selected:${result.userAnswer ?? "unanswered"}:${ref.label}`,
+                              citationUrl: ref.url,
+                              questionTypeProfile: exam.questionTypeProfile,
+                            });
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                );
+              })()
             ))}
           </div>
         </div>
@@ -519,16 +562,33 @@ function ExamPageClient() {
     );
   }
 
+  const currentOptionPresentation = buildOptionPresentation(
+    exam.currentQuestion,
+    `exam:${exam.startTime}`
+  );
   const isTimeLow = exam.remainingMs < 10 * 60 * 1000;
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
+      {warning && (
+        <QuestionBankWarning
+          warning={warning}
+          snapshotInfo={snapshotInfo}
+          onTryLive={() => void reload({ preferLive: true })}
+          onClearSnapshot={clearSnapshot}
+        />
+      )}
       <ProgressHeader
         left={`Q ${exam.currentIndex + 1} / ${exam.questions.length} (${exam.answeredCount} answered)`}
         right={`⏱ ${formatClockTime(exam.remainingMs)}`}
         progress={exam.progressPercent}
         progressClassName={isTimeLow ? "bg-incorrect animate-pulse" : "bg-brand-500"}
       />
+      {isTimeLow && (
+        <p className="text-sm text-incorrect" role="alert" aria-live="assertive">
+          Time is low. Less than 10 minutes remain.
+        </p>
+      )}
 
       <div className="flex items-center gap-2">
         <span className="rounded-full bg-brand-500/10 px-3 py-1 text-xs font-medium text-brand-400">
@@ -539,10 +599,15 @@ function ExamPageClient() {
       <QuestionCard question={exam.currentQuestion} onOpenFigure={setFigureRef} />
 
       <AnswerOptions
-        options={exam.currentQuestion.options}
+        options={currentOptionPresentation.options}
         mode="exam"
         selectedOption={exam.currentAnswer}
+        displayLabelByOptionId={currentOptionPresentation.displayLabelByOptionId}
         onSelect={handleAnswerSelect}
+        onSelectWithConfidence={handleAnswerSelect}
+        showConfidenceSplit
+        defaultConfidence={EXAM_DEFAULT_CONFIDENCE}
+        confidentConfidence={EXAM_CONFIDENT_CONFIDENCE}
       />
 
       <div className="flex items-center gap-3">

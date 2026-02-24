@@ -1,14 +1,40 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   filterQuestionsByType,
+  qualityFromOutcomeConfidence,
+  sessionQueueDecisionFromQuality,
+  type AttemptConfidence,
+  type OptionId,
   type Question,
   type QuestionTypeProfile,
 } from "@part107/core";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
+import {
+  QuestionBankError,
+  QuestionBankLoading,
+  QuestionBankWarning,
+} from "../../components/QuestionBankState";
+import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
+import { useProgress } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
+import {
+  clearLearnDraft,
+  loadLearnDraft,
+  saveLearnDraft,
+  type LearnDraft,
+  type LearnDraftQuizResult,
+} from "../../lib/learnDraftStore";
+import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
+import {
+  buildOptionPresentation,
+  getDisplayLabelForOption,
+  getOptionTextById,
+} from "../../lib/optionPresentation";
+import { reinsertQueueHeadWithGap } from "../../lib/queueReinsertion";
 import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
+import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
 
 // ─── Question type options (shared pattern) ───
 const QUESTION_TYPE_OPTIONS: Array<{
@@ -24,6 +50,10 @@ const QUESTION_TYPE_OPTIONS: Array<{
 ];
 
 type LearnPhase = "setup" | "teach" | "quiz" | "result";
+const QUIZ_REINSERT_MIN_GAP = 2;
+const QUIZ_REINSERT_MAX_GAP = 5;
+const LEARN_QUIZ_ID_PREFIX = "learn-round";
+const LEARN_QUIZ_DEFAULT_CONFIDENCE: AttemptConfidence = 3;
 
 function shuffleArray<T>(arr: T[]): T[] {
   const copy = [...arr];
@@ -34,9 +64,55 @@ function shuffleArray<T>(arr: T[]): T[] {
   return copy;
 }
 
+interface LearnQuizSummary {
+  firstPassResults: LearnDraftQuizResult[];
+  latestResults: LearnDraftQuizResult[];
+  firstPassCorrect: number;
+  masteredCount: number;
+  uniqueQuestions: number;
+  attempts: number;
+}
+
+function summarizeLearnQuizResults(results: LearnDraftQuizResult[]): LearnQuizSummary {
+  const firstByQuestion = new Map<string, LearnDraftQuizResult>();
+  const latestByQuestion = new Map<string, LearnDraftQuizResult>();
+
+  for (const result of results) {
+    if (!firstByQuestion.has(result.questionId)) {
+      firstByQuestion.set(result.questionId, result);
+    }
+    latestByQuestion.set(result.questionId, result);
+  }
+
+  const firstPassResults = Array.from(firstByQuestion.values());
+  const latestResults = Array.from(latestByQuestion.values());
+  const firstPassCorrect = firstPassResults.filter((result) => result.correct).length;
+  const masteredCount = latestResults.filter((result) => result.correct).length;
+
+  return {
+    firstPassResults,
+    latestResults,
+    firstPassCorrect,
+    masteredCount,
+    uniqueQuestions: firstPassResults.length,
+    attempts: results.length,
+  };
+}
+
 export default function LearnPage() {
-  const { questions: allQuestions, loaded, loading, error, reload } = useQuestionBank();
+  const {
+    questions: allQuestions,
+    loaded,
+    loading,
+    error,
+    warning,
+    snapshotInfo,
+    reload,
+    clearSnapshot,
+  } = useQuestionBank();
   const adaptive = useAdaptiveQuestionStats();
+  const events = useLearningEventLogger(adaptive.userId);
+  const { saveSession } = useProgress();
 
   // Setup state
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("confirmed_test");
@@ -50,9 +126,16 @@ export default function LearnPage() {
   const [quizIndex, setQuizIndex] = useState(0);
   const [quizOrder, setQuizOrder] = useState<Question[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [selectedConfidence, setSelectedConfidence] = useState<AttemptConfidence | null>(null);
   const [showResult, setShowResult] = useState(false);
-  const [quizResults, setQuizResults] = useState<{ questionId: string; correct: boolean }[]>([]);
+  const [quizResults, setQuizResults] = useState<LearnDraftQuizResult[]>([]);
   const [round, setRound] = useState(1);
+  const [roundStartedAt, setRoundStartedAt] = useState<number>(Date.now());
+  const [resumeDraft, setResumeDraft] = useState<LearnDraft | null>(null);
+  const [draftHydrated, setDraftHydrated] = useState(false);
+  const [savedProgressSignature, setSavedProgressSignature] = useState<string | null>(null);
+  const quizQuestionShownAtRef = useRef(Date.now());
+  const completionEventSignatureRef = useRef<string | null>(null);
 
   // Filtering
   const filteredQuestions = useMemo(
@@ -71,6 +154,344 @@ export default function LearnPage() {
   }, [filteredQuestions, selectedCategory]);
 
   const visibleCounts = useMemo(() => countQuestionsByCategory(filteredQuestions), [filteredQuestions]);
+  const questionById = useMemo(
+    () => new Map(allQuestions.map((question) => [question.id, question])),
+    [allQuestions]
+  );
+  const teachQuestion = phase === "teach" ? (batch[teachIndex] ?? null) : null;
+  const quizQuestion = phase === "quiz" ? (quizOrder[0] ?? null) : null;
+  const teachOptionPresentation = useMemo(
+    () =>
+      teachQuestion
+        ? buildOptionPresentation(teachQuestion, `learn:${roundStartedAt}`)
+        : null,
+    [roundStartedAt, teachQuestion]
+  );
+  const quizOptionPresentation = useMemo(
+    () =>
+      quizQuestion ? buildOptionPresentation(quizQuestion, `learn:${roundStartedAt}`) : null,
+    [quizQuestion, roundStartedAt]
+  );
+
+  const buildProgressSignature = useCallback(
+    (results: LearnDraftQuizResult[]) => {
+      const summary = summarizeLearnQuizResults(results);
+      return `${round}:${summary.firstPassResults.length}:${summary.firstPassResults
+        .map((result) => `${result.questionId}:${result.userAnswer ?? "?"}`)
+        .join("|")}`;
+    },
+    [round]
+  );
+
+  const persistLearnProgress = useCallback(
+    (results: LearnDraftQuizResult[]) => {
+      const summary = summarizeLearnQuizResults(results);
+      if (summary.firstPassResults.length === 0) return;
+
+      const signature = buildProgressSignature(results);
+      if (savedProgressSignature === signature) return;
+
+      saveSession({
+        mode: "study",
+        category: selectedCategory,
+        questionTypeProfile: selectedQuestionType,
+        score: summary.firstPassCorrect,
+        total: summary.firstPassResults.length,
+        timeSpentMs: Math.max(0, Date.now() - roundStartedAt),
+        questions: summary.firstPassResults.map((result) => ({
+          questionId: result.questionId,
+          userAnswer: (result.userAnswer as OptionId | null) ?? null,
+          correctAnswer: result.correctAnswer as OptionId,
+          isCorrect: result.correct,
+          category: result.category,
+        })),
+      });
+      setSavedProgressSignature(signature);
+    },
+    [
+      buildProgressSignature,
+      roundStartedAt,
+      saveSession,
+      savedProgressSignature,
+      selectedCategory,
+      selectedQuestionType,
+    ]
+  );
+
+  const persistDraft = useCallback(
+    (
+      nextPhase: LearnPhase,
+      override: Partial<{
+        batch: Question[];
+        teachIndex: number;
+        quizOrder: Question[];
+        quizIndex: number;
+      selectedAnswer: string | null;
+      selectedConfidence: AttemptConfidence | null;
+      showResult: boolean;
+        quizResults: LearnDraftQuizResult[];
+        round: number;
+        roundStartedAt: number;
+      }> = {}
+    ) => {
+      if (nextPhase === "setup") return;
+
+      const draft: LearnDraft = {
+        version: 1,
+        updatedAt: new Date().toISOString(),
+        selectedQuestionType,
+        selectedCategory,
+        batchSize,
+        round: override.round ?? round,
+        phase: nextPhase,
+        batchIds: (override.batch ?? batch).map((q) => q.id),
+        teachIndex: override.teachIndex ?? teachIndex,
+        quizOrderIds: (override.quizOrder ?? quizOrder).map((q) => q.id),
+        quizIndex: override.quizIndex ?? quizIndex,
+        selectedAnswer: override.selectedAnswer ?? selectedAnswer,
+        selectedConfidence: override.selectedConfidence ?? selectedConfidence,
+        showResult: override.showResult ?? showResult,
+        quizResults: override.quizResults ?? quizResults,
+        roundStartedAt: override.roundStartedAt ?? roundStartedAt,
+      };
+
+      saveLearnDraft(draft);
+      setResumeDraft(draft);
+    },
+    [
+      batch,
+      batchSize,
+      quizIndex,
+      quizOrder,
+      quizResults,
+      round,
+      roundStartedAt,
+      selectedAnswer,
+      selectedConfidence,
+      selectedCategory,
+      selectedQuestionType,
+      showResult,
+      teachIndex,
+    ]
+  );
+
+  const handleDiscardSavedSession = useCallback(() => {
+    clearLearnDraft();
+    setResumeDraft(null);
+  }, []);
+
+  const handleResumeSavedSession = useCallback(() => {
+    if (!resumeDraft) return;
+
+    const restoredBatch = resumeDraft.batchIds
+      .map((id) => questionById.get(id))
+      .filter((question): question is Question => !!question);
+    const restoredQuizOrder = resumeDraft.quizOrderIds
+      .map((id) => questionById.get(id))
+      .filter((question): question is Question => !!question);
+
+    if (
+      restoredBatch.length !== resumeDraft.batchIds.length ||
+      restoredQuizOrder.length !== resumeDraft.quizOrderIds.length
+    ) {
+      clearLearnDraft();
+      setResumeDraft(null);
+      return;
+    }
+
+    setSelectedQuestionType(resumeDraft.selectedQuestionType);
+    setSelectedCategory(resumeDraft.selectedCategory);
+    setBatchSize(resumeDraft.batchSize);
+    setRound(resumeDraft.round);
+    setRoundStartedAt(resumeDraft.roundStartedAt);
+    setBatch(restoredBatch);
+    setTeachIndex(Math.max(0, Math.min(resumeDraft.teachIndex, Math.max(0, restoredBatch.length - 1))));
+    const resumeIndex = Math.max(0, Math.min(resumeDraft.quizIndex, Math.max(0, restoredQuizOrder.length - 1)));
+    const normalizedQuizQueue =
+      restoredQuizOrder.length === 0
+        ? restoredQuizOrder
+        : [...restoredQuizOrder.slice(resumeIndex), ...restoredQuizOrder.slice(0, resumeIndex)];
+    setQuizOrder(normalizedQuizQueue);
+    setQuizIndex(0);
+    setSelectedAnswer(resumeDraft.selectedAnswer);
+    setSelectedConfidence(resumeDraft.selectedConfidence ?? null);
+    setShowResult(resumeDraft.showResult);
+    setQuizResults(resumeDraft.quizResults);
+    setPhase(resumeDraft.phase);
+    events.logEvent({
+      type: "session_resumed",
+      mode: "learn",
+      category: resumeDraft.selectedCategory,
+      questionTypeProfile: resumeDraft.selectedQuestionType,
+      metadata: {
+        phase: resumeDraft.phase,
+        round: resumeDraft.round,
+        batchSize: resumeDraft.batchSize,
+        quizQueueSize: restoredQuizOrder.length,
+      },
+    });
+  }, [events, questionById, resumeDraft]);
+
+  const handleSaveAndExit = useCallback(() => {
+    events.logEvent({
+      type: "session_saved",
+      mode: "learn",
+      category: selectedCategory,
+      questionTypeProfile: selectedQuestionType,
+      metadata: {
+        phase,
+        round,
+        batchSize,
+        teachIndex,
+        quizQueueSize: quizOrder.length,
+        attempts: quizResults.length,
+      },
+    });
+    persistLearnProgress(quizResults);
+    persistDraft(phase);
+    setPhase("setup");
+  }, [
+    batchSize,
+    events,
+    persistDraft,
+    persistLearnProgress,
+    phase,
+    quizOrder.length,
+    quizResults,
+    round,
+    selectedCategory,
+    selectedQuestionType,
+    teachIndex,
+  ]);
+
+  const handleBackToSetup = useCallback(() => {
+    handleDiscardSavedSession();
+    setPhase("setup");
+    setBatch([]);
+    setTeachIndex(0);
+    setQuizOrder([]);
+    setQuizIndex(0);
+    setSelectedAnswer(null);
+    setSelectedConfidence(null);
+    setShowResult(false);
+    setQuizResults([]);
+    setRound(1);
+    setRoundStartedAt(Date.now());
+    setSavedProgressSignature(null);
+  }, [handleDiscardSavedSession]);
+
+  useEffect(() => {
+    if (!loaded || draftHydrated) return;
+    setResumeDraft(loadLearnDraft());
+    setDraftHydrated(true);
+  }, [draftHydrated, loaded]);
+
+  useEffect(() => {
+    if (!draftHydrated || phase === "setup") return;
+    persistDraft(phase);
+  }, [
+    batch,
+    draftHydrated,
+    persistDraft,
+    phase,
+    quizIndex,
+    quizOrder,
+    quizResults,
+    round,
+    roundStartedAt,
+    selectedAnswer,
+    selectedConfidence,
+    showResult,
+    teachIndex,
+  ]);
+
+  useEffect(() => {
+    if (phase !== "result") return;
+    persistLearnProgress(quizResults);
+  }, [persistLearnProgress, phase, quizResults]);
+
+  useEffect(() => {
+    if (phase !== "teach") return;
+    const current = batch[teachIndex];
+    if (!current) return;
+
+    events.logEvent({
+      type: "question_shown",
+      mode: "learn",
+      questionId: current.id,
+      category: current.category,
+      subcategory: current.subcategory,
+      questionTypeProfile: selectedQuestionType,
+      metadata: {
+        phase: "teach",
+        round,
+        teachIndex,
+      },
+    });
+  }, [batch, events, phase, round, selectedQuestionType, teachIndex]);
+
+  useEffect(() => {
+    if (phase !== "quiz" || showResult || quizOrder.length === 0) return;
+    quizQuestionShownAtRef.current = Date.now();
+    const current = quizOrder[0];
+    if (!current) return;
+
+    events.logEvent({
+      type: "question_shown",
+      mode: "learn",
+      questionId: current.id,
+      category: current.category,
+      subcategory: current.subcategory,
+      questionTypeProfile: selectedQuestionType,
+      metadata: {
+        phase: "quiz",
+        round,
+        quizQueueSize: quizOrder.length,
+      },
+    });
+  }, [events, phase, quizOrder, round, selectedQuestionType, showResult]);
+
+  useEffect(() => {
+    if (phase !== "quiz" || !showResult) return;
+    const current = quizOrder[0];
+    if (!current) return;
+
+    events.logEvent({
+      type: "review_opened",
+      mode: "learn",
+      questionId: current.id,
+      category: current.category,
+      subcategory: current.subcategory,
+      isCorrect: selectedAnswer === current.correct_option_id,
+      questionTypeProfile: selectedQuestionType,
+      metadata: {
+        phase: "quiz",
+        round,
+      },
+    });
+  }, [events, phase, quizOrder, round, selectedAnswer, selectedQuestionType, showResult]);
+
+  useEffect(() => {
+    if (phase !== "result") return;
+    const summary = summarizeLearnQuizResults(quizResults);
+    const signature = `${round}:${summary.uniqueQuestions}:${summary.firstPassCorrect}:${summary.masteredCount}:${summary.attempts}`;
+    if (completionEventSignatureRef.current === signature) return;
+    completionEventSignatureRef.current = signature;
+
+    events.logEvent({
+      type: "session_completed",
+      mode: "learn",
+      category: selectedCategory,
+      questionTypeProfile: selectedQuestionType,
+      metadata: {
+        round,
+        firstPassCorrect: summary.firstPassCorrect,
+        masteredCount: summary.masteredCount,
+        uniqueQuestions: summary.uniqueQuestions,
+        attempts: summary.attempts,
+      },
+    });
+  }, [events, phase, quizResults, round, selectedCategory, selectedQuestionType]);
 
   // Start a new learn round
   const startRound = useCallback(
@@ -80,70 +501,204 @@ export default function LearnPage() {
       if (nextBatch.length === 0) return;
       setBatch(nextBatch);
       setTeachIndex(0);
+      setQuizOrder([]);
+      setQuizIndex(0);
+      setSelectedAnswer(null);
+      setSelectedConfidence(null);
+      setShowResult(false);
+      setQuizResults([]);
       setPhase("teach");
       setRound(roundNum);
+      setRoundStartedAt(Date.now());
+      setSavedProgressSignature(null);
+      completionEventSignatureRef.current = null;
+      events.logEvent({
+        type: "session_started",
+        mode: "learn",
+        category: selectedCategory,
+        questionTypeProfile: selectedQuestionType,
+        metadata: {
+          round: roundNum,
+          batchSize,
+          roundQuestionCount: nextBatch.length,
+          availableQuestionCount: categoryQuestions.length,
+        },
+      });
     },
-    [batchSize, categoryQuestions]
+    [batchSize, categoryQuestions, events, selectedCategory, selectedQuestionType]
   );
 
   const startQuizPhase = useCallback(() => {
     setQuizOrder(shuffleArray(batch));
     setQuizIndex(0);
     setSelectedAnswer(null);
+    setSelectedConfidence(null);
     setShowResult(false);
     setQuizResults([]);
     setPhase("quiz");
   }, [batch]);
 
-  const handleQuizAnswer = useCallback(
-    (optionId: string) => {
-      if (showResult) return;
-      setSelectedAnswer(optionId);
+  const skipTeachQuestion = useCallback(() => {
+    const current = batch[teachIndex];
+    if (current) {
+      events.logEvent({
+        type: "question_skipped",
+        mode: "learn",
+        questionId: current.id,
+        category: current.category,
+        subcategory: current.subcategory,
+        questionTypeProfile: selectedQuestionType,
+        metadata: {
+          phase: "teach",
+          round,
+        },
+      });
+    }
+    if (batch.length <= 1) return;
+    setBatch((prev) => {
+      if (teachIndex < 0 || teachIndex >= prev.length) return prev;
+      const next = [...prev];
+      const [skipped] = next.splice(teachIndex, 1);
+      if (!skipped) return prev;
+      next.push(skipped);
+      return next;
+    });
+    setTeachIndex((prev) => (prev >= batch.length - 1 ? 0 : prev));
+  }, [batch, events, round, selectedQuestionType, teachIndex]);
+
+  const submitQuizAnswerWithConfidence = useCallback(
+    (confidence: AttemptConfidence) => {
+      if (showResult || !selectedAnswer) return;
+      setSelectedConfidence(confidence);
       setShowResult(true);
-      const q = quizOrder[quizIndex];
+      const q = quizOrder[0];
+      if (!q) return;
+      const isCorrect = selectedAnswer === q.correct_option_id;
+      const qualityScore = qualityFromOutcomeConfidence(
+        isCorrect ? "correct" : "incorrect",
+        confidence
+      );
+      const responseTimeMs = Math.max(0, Date.now() - quizQuestionShownAtRef.current);
+      recordLearningAttempt({
+        adaptive,
+        events,
+        question: q,
+        learningMode: "learn",
+        attemptMode: "quiz",
+        isCorrect,
+        selectedOptionId: selectedAnswer as OptionId,
+        responseTimeMs,
+        quizId: `${LEARN_QUIZ_ID_PREFIX}-${round}`,
+        confidence,
+        questionTypeProfile: selectedQuestionType,
+        metadata: {
+          round,
+          quizQueueSize: quizOrder.length,
+          qualityScore,
+        },
+      });
       setQuizResults((prev) => [
         ...prev,
-        { questionId: q.id, correct: optionId === q.correct_option_id },
+        {
+          questionId: q.id,
+          correct: isCorrect,
+          userAnswer: selectedAnswer,
+          correctAnswer: q.correct_option_id,
+          category: q.category,
+        },
       ]);
     },
-    [quizIndex, quizOrder, showResult]
+    [adaptive, events, quizOrder, round, selectedAnswer, selectedQuestionType, showResult]
   );
 
-  const nextQuizQuestion = useCallback(() => {
-    if (quizIndex + 1 >= quizOrder.length) {
-      setPhase("result");
-    } else {
-      setQuizIndex((i) => i + 1);
-      setSelectedAnswer(null);
-      setShowResult(false);
+  const skipQuizQuestion = useCallback(() => {
+    if (showResult || quizOrder.length <= 1) return;
+    const current = quizOrder[0];
+    if (current) {
+      events.logEvent({
+        type: "question_skipped",
+        mode: "learn",
+        questionId: current.id,
+        category: current.category,
+        subcategory: current.subcategory,
+        questionTypeProfile: selectedQuestionType,
+        metadata: {
+          phase: "quiz",
+          round,
+          quizQueueSize: quizOrder.length,
+        },
+      });
     }
-  }, [quizIndex, quizOrder.length]);
+
+    setQuizOrder((prev) => {
+      const [skipped, ...rest] = prev;
+      if (!skipped) return prev;
+      return [...rest, skipped];
+    });
+    setQuizIndex(0);
+    setSelectedAnswer(null);
+    setSelectedConfidence(null);
+    setShowResult(false);
+  }, [events, quizOrder, round, selectedQuestionType, showResult]);
+
+  const advanceQuizQueue = useCallback(() => {
+    if (!showResult) return;
+    const currentQuestion = quizOrder[0];
+    if (!currentQuestion) return;
+
+    const wasCorrect = selectedAnswer === currentQuestion.correct_option_id;
+    const qualityScore = qualityFromOutcomeConfidence(
+      wasCorrect ? "correct" : "incorrect",
+      selectedConfidence
+    );
+    const queueDecision = sessionQueueDecisionFromQuality(qualityScore);
+
+    if (queueDecision.removeFromQueue && quizOrder.length <= 1) {
+      setQuizOrder([]);
+      setQuizIndex(0);
+      setSelectedAnswer(null);
+      setSelectedConfidence(null);
+      setShowResult(false);
+      setPhase("result");
+      return;
+    }
+
+    setQuizOrder((prev) =>
+      queueDecision.removeFromQueue
+        ? prev.slice(1)
+        : reinsertQueueHeadWithGap(
+            prev,
+            queueDecision.gapMin ?? QUIZ_REINSERT_MIN_GAP,
+            queueDecision.gapMax ?? QUIZ_REINSERT_MAX_GAP
+          )
+    );
+    setQuizIndex(0);
+    setSelectedAnswer(null);
+    setSelectedConfidence(null);
+    setShowResult(false);
+  }, [quizOrder, selectedAnswer, selectedConfidence, showResult]);
 
   // ─── Loading / Error ───
   if (loading && !loaded) {
-    return (
-      <div className="flex items-center justify-center py-32">
-        <div className="text-[var(--muted)]">Loading question bank…</div>
-      </div>
-    );
+    return <QuestionBankLoading label="Loading question bank..." />;
   }
 
   if (error && !loaded) {
-    return (
-      <div className="mx-auto max-w-lg space-y-4 rounded-xl border border-incorrect/30 bg-incorrect/10 p-6 text-center">
-        <h1 className="text-xl font-bold text-incorrect">Couldn&apos;t load questions</h1>
-        <p className="text-sm text-[var(--muted)]">{error}</p>
-        <button onClick={() => void reload()} className="rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">
-          Retry
-        </button>
-      </div>
-    );
+    return <QuestionBankError error={error} onRetry={() => void reload()} />;
   }
 
   // ─── Setup ───
   if (phase === "setup") {
     return (
       <div className="mx-auto max-w-lg space-y-8 pt-8">
+        {warning && (
+          <QuestionBankWarning
+            warning={warning}
+            snapshotInfo={snapshotInfo}
+            onTryLive={() => void reload({ preferLive: true })}
+            onClearSnapshot={clearSnapshot}
+          />
+        )}
         <div className="text-center">
           <div className="text-5xl">🧠</div>
           <h1 className="mt-4 text-3xl font-bold">Learn Mode</h1>
@@ -153,7 +708,32 @@ export default function LearnPage() {
           </p>
         </div>
 
+        {resumeDraft && (
+          <div className="rounded-xl border border-brand-500/30 bg-brand-500/10 p-4 text-sm">
+            <div className="font-semibold text-white">Saved Learn Session Found</div>
+            <p className="mt-1 text-[var(--muted)]">
+              Phase: {resumeDraft.phase} - Round {resumeDraft.round} - Updated{" "}
+              {new Date(resumeDraft.updatedAt).toLocaleString()}
+            </p>
+            <div className="mt-3 flex gap-3">
+              <button
+                onClick={handleResumeSavedSession}
+                className="rounded-lg bg-brand-600 px-3 py-2 font-semibold text-white hover:bg-brand-700"
+              >
+                Resume Session
+              </button>
+              <button
+                onClick={handleDiscardSavedSession}
+                className="rounded-lg border border-[var(--card-border)] px-3 py-2 text-[var(--muted)] hover:text-white"
+              >
+                Discard Saved Session
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Batch size */}
+        {categoryQuestions.length === 0 && <QuestionSelectionEmptyState context="learn" />}
         <div className="space-y-2">
           <div className="text-sm font-semibold text-white">Questions per Round</div>
           <div className="flex gap-2">
@@ -227,7 +807,10 @@ export default function LearnPage() {
         </div>
 
         <button
-          onClick={() => startRound(1)}
+          onClick={() => {
+            handleDiscardSavedSession();
+            startRound(1);
+          }}
           disabled={categoryQuestions.length === 0}
           className="w-full rounded-xl bg-brand-600 py-4 text-lg font-semibold text-white transition-all hover:bg-brand-700 hover:scale-[1.02] disabled:opacity-60"
         >
@@ -244,6 +827,14 @@ export default function LearnPage() {
 
     return (
       <div className="mx-auto max-w-2xl space-y-6">
+        {warning && (
+          <QuestionBankWarning
+            warning={warning}
+            snapshotInfo={snapshotInfo}
+            onTryLive={() => void reload({ preferLive: true })}
+            onClearSnapshot={clearSnapshot}
+          />
+        )}
         {/* Header */}
         <div className="flex items-center justify-between text-sm text-[var(--muted)]">
           <span>
@@ -275,8 +866,9 @@ export default function LearnPage() {
 
           {/* All options with correct highlighted */}
           <div className="space-y-2">
-            {q.options.map((opt) => {
+            {(teachOptionPresentation?.options ?? q.options).map((opt) => {
               const isCorrect = opt.id === q.correct_option_id;
+              const displayLabel = teachOptionPresentation?.displayLabelByOptionId[opt.id] ?? opt.id;
               return (
                 <div
                   key={opt.id}
@@ -286,7 +878,7 @@ export default function LearnPage() {
                       : "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)]"
                   }`}
                 >
-                  <span className="font-semibold">{opt.id}.</span> {opt.text}
+                  <span className="font-semibold">{displayLabel}.</span> {opt.text}
                   {isCorrect && <span className="ml-2">✅</span>}
                 </div>
               );
@@ -309,13 +901,19 @@ export default function LearnPage() {
               <div className="text-xs font-semibold uppercase tracking-wider text-amber-400">
                 Why other answers are wrong
               </div>
-              {Object.entries(q.explanation_distractors).map(([id, text]) =>
-                text ? (
-                  <div key={id} className="text-sm text-[var(--muted)]">
-                    <span className="font-semibold text-amber-300">{id}.</span> {text}
+              {(teachOptionPresentation?.options ?? q.options).map((opt) => {
+                if (opt.id === q.correct_option_id) return null;
+                const distractorExplanation = q.explanation_distractors[opt.id];
+                if (!distractorExplanation) return null;
+                const displayLabel = teachOptionPresentation?.displayLabelByOptionId[opt.id] ?? opt.id;
+
+                return (
+                  <div key={opt.id} className="text-sm text-[var(--muted)]">
+                    <span className="font-semibold text-amber-300">{displayLabel}.</span>{" "}
+                    {distractorExplanation}
                   </div>
-                ) : null
-              )}
+                );
+              })}
             </div>
           )}
 
@@ -328,30 +926,46 @@ export default function LearnPage() {
         </div>
 
         {/* Navigation */}
-        <div className="flex gap-3">
-          {teachIndex > 0 && (
+        <div className="space-y-3">
+          <div className="flex gap-3">
+            {teachIndex > 0 && (
+              <button
+                onClick={() => setTeachIndex((i) => i - 1)}
+                className="flex-1 rounded-xl border border-[var(--card-border)] py-3 font-semibold text-[var(--muted)] hover:text-white"
+              >
+                ← Previous
+              </button>
+            )}
+            {teachIndex < batch.length - 1 ? (
+              <button
+                onClick={() => setTeachIndex((i) => i + 1)}
+                className="flex-1 rounded-xl bg-brand-600 py-3 font-semibold text-white hover:bg-brand-700"
+              >
+                Next →
+              </button>
+            ) : (
+              <button
+                onClick={startQuizPhase}
+                className="flex-1 rounded-xl bg-purple-600 py-3 font-semibold text-white hover:bg-purple-700"
+              >
+                🧪 Now Quiz Me on These →
+              </button>
+            )}
+          </div>
+          <div className="flex gap-3">
             <button
-              onClick={() => setTeachIndex((i) => i - 1)}
-              className="flex-1 rounded-xl border border-[var(--card-border)] py-3 font-semibold text-[var(--muted)] hover:text-white"
+              onClick={skipTeachQuestion}
+              className="flex-1 rounded-xl border border-[var(--card-border)] py-2.5 text-sm text-[var(--muted)] hover:text-white"
             >
-              ← Previous
+              Skip for now →
             </button>
-          )}
-          {teachIndex < batch.length - 1 ? (
             <button
-              onClick={() => setTeachIndex((i) => i + 1)}
-              className="flex-1 rounded-xl bg-brand-600 py-3 font-semibold text-white hover:bg-brand-700"
+              onClick={handleSaveAndExit}
+              className="flex-1 rounded-xl border border-brand-500/30 bg-brand-500/10 py-2.5 text-sm font-medium text-brand-300 hover:bg-brand-500/20"
             >
-              Next →
+              Save & Exit
             </button>
-          ) : (
-            <button
-              onClick={startQuizPhase}
-              className="flex-1 rounded-xl bg-purple-600 py-3 font-semibold text-white hover:bg-purple-700"
-            >
-              🧪 Now Quiz Me on These →
-            </button>
-          )}
+          </div>
         </div>
       </div>
     );
@@ -359,17 +973,44 @@ export default function LearnPage() {
 
   // ─── Quiz Phase ───
   if (phase === "quiz") {
-    const q = quizOrder[quizIndex];
-    const progress = ((quizIndex + 1) / quizOrder.length) * 100;
+    const q = quizOrder[0];
+    const masteredCount = Math.max(0, batch.length - quizOrder.length);
+    const progress = batch.length > 0 ? (masteredCount / batch.length) * 100 : 0;
+    const isCurrentCorrect = !!q && selectedAnswer === q.correct_option_id;
+
+    if (!q) {
+      return (
+        <div className="mx-auto max-w-lg space-y-4 rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6 text-center">
+          <h1 className="text-xl font-semibold text-white">Quiz Queue Empty</h1>
+          <p className="text-sm text-[var(--muted)]">
+            No quiz items remain in this round. Continue to results.
+          </p>
+          <button
+            onClick={() => setPhase("result")}
+            className="rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
+          >
+            See Results →
+          </button>
+        </div>
+      );
+    }
 
     return (
       <div className="mx-auto max-w-2xl space-y-6">
+        {warning && (
+          <QuestionBankWarning
+            warning={warning}
+            snapshotInfo={snapshotInfo}
+            onTryLive={() => void reload({ preferLive: true })}
+            onClearSnapshot={clearSnapshot}
+          />
+        )}
         <div className="flex items-center justify-between text-sm text-[var(--muted)]">
           <span>
-            🧪 Quiz {quizIndex + 1} of {quizOrder.length}
+            🧪 Mastered {masteredCount} of {batch.length}
           </span>
           <span className="rounded-full bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-400">
-            Round {round} — Quiz
+            Round {round} — Remaining {quizOrder.length}
           </span>
         </div>
         <div className="h-2 rounded-full bg-[var(--card-border)]">
@@ -385,9 +1026,10 @@ export default function LearnPage() {
           <div className="text-lg leading-relaxed text-white">{q.question_text}</div>
 
           <div className="space-y-2">
-            {q.options.map((opt) => {
+            {(quizOptionPresentation?.options ?? q.options).map((opt) => {
               const isCorrect = opt.id === q.correct_option_id;
               const isSelected = opt.id === selectedAnswer;
+              const displayLabel = quizOptionPresentation?.displayLabelByOptionId[opt.id] ?? opt.id;
               let className =
                 "rounded-xl border px-4 py-3 text-sm text-left w-full transition-all ";
 
@@ -400,23 +1042,53 @@ export default function LearnPage() {
                   className += "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)] opacity-50";
                 }
               } else {
-                className +=
-                  "border-[var(--card-border)] bg-[var(--card)] text-white hover:border-brand-500/40 cursor-pointer";
+                className += isSelected
+                  ? "border-brand-500/50 bg-brand-500/10 text-white"
+                  : "border-[var(--card-border)] bg-[var(--card)] text-white hover:border-brand-500/40 cursor-pointer";
               }
 
               return (
-                <button key={opt.id} onClick={() => handleQuizAnswer(opt.id)} className={className} disabled={showResult}>
-                  <span className="font-semibold">{opt.id}.</span> {opt.text}
-                  {showResult && isCorrect && <span className="ml-2">✅</span>}
-                  {showResult && isSelected && !isCorrect && <span className="ml-2">❌</span>}
-                </button>
+                <div key={opt.id} className="relative">
+                  <button
+                    onClick={() => {
+                      if (showResult) return;
+                      setSelectedAnswer(opt.id);
+                      setSelectedConfidence(null);
+                    }}
+                    className={className}
+                    disabled={showResult}
+                  >
+                    <span className="font-semibold">{displayLabel}.</span> {opt.text}
+                    {showResult && isCorrect && <span className="ml-2">✅</span>}
+                    {showResult && isSelected && !isCorrect && <span className="ml-2">❌</span>}
+                  </button>
+                </div>
               );
             })}
           </div>
 
+          {!showResult && selectedAnswer && (
+            <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
+              <div className="text-sm font-semibold text-white">How confident are you? (before reveal)</div>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <button
+                    key={value}
+                    onClick={() => submitQuizAnswerWithConfidence(value as AttemptConfidence)}
+                    className="rounded-lg border border-purple-400/40 bg-purple-500/10 px-3 py-1.5 text-sm text-purple-200 hover:bg-purple-500/20"
+                  >
+                    {value}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Feedback after answering */}
           {showResult && (
             <div
+              role="status"
+              aria-live="polite"
               className={`rounded-xl border p-4 text-sm ${
                 selectedAnswer === q.correct_option_id
                   ? "border-green-500/30 bg-green-500/10 text-green-300"
@@ -428,23 +1100,66 @@ export default function LearnPage() {
                   <strong>Correct!</strong> {q.explanation_correct}
                 </div>
               ) : (
-                <div>
-                  <strong>Incorrect.</strong>{" "}
-                  {q.explanation_distractors[selectedAnswer as keyof typeof q.explanation_distractors] ??
-                    "That's not the right answer."}{" "}
-                  The correct answer is <strong>{q.correct_option_id}</strong>: {q.explanation_correct}
-                </div>
+                (() => {
+                  const selectedDisplayLabel = getDisplayLabelForOption(
+                    quizOptionPresentation?.displayLabelByOptionId ?? {},
+                    (selectedAnswer as OptionId | null) ?? null
+                  );
+                  const correctDisplayLabel =
+                    quizOptionPresentation?.correctDisplayLabel ?? q.correct_option_id;
+                  const correctAnswerText = getOptionTextById(q.options, q.correct_option_id);
+
+                  return (
+                    <div>
+                      <strong>Incorrect.</strong>{" "}
+                      {q.explanation_distractors[selectedAnswer as keyof typeof q.explanation_distractors] ??
+                        "That's not the right answer."}{" "}
+                      The correct answer is <strong>{correctDisplayLabel}</strong>
+                      {correctAnswerText ? ` (${correctAnswerText})` : ""}.{" "}
+                      {selectedAnswer ? `You picked ${selectedDisplayLabel}. ` : ""}
+                      {q.explanation_correct}
+                    </div>
+                  );
+                })()
               )}
             </div>
           )}
         </div>
 
+        <div className="flex gap-3">
+          {!showResult && (
+            <button
+              onClick={skipQuizQuestion}
+              disabled={!!selectedAnswer}
+              className="flex-1 rounded-xl border border-[var(--card-border)] py-2.5 text-sm text-[var(--muted)] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Skip for now →
+            </button>
+          )}
+          <button
+            onClick={handleSaveAndExit}
+            className="flex-1 rounded-xl border border-brand-500/30 bg-brand-500/10 py-2.5 text-sm font-medium text-brand-300 hover:bg-brand-500/20"
+          >
+            Save & Exit
+          </button>
+        </div>
+
+        {showResult && (
+          <div className="text-center text-xs text-[var(--muted)]">
+            Confidence recorded: {selectedConfidence ?? LEARN_QUIZ_DEFAULT_CONFIDENCE}/5
+          </div>
+        )}
+
         {showResult && (
           <button
-            onClick={nextQuizQuestion}
+            onClick={advanceQuizQueue}
             className="w-full rounded-xl bg-brand-600 py-3 font-semibold text-white hover:bg-brand-700"
           >
-            {quizIndex + 1 >= quizOrder.length ? "See Results →" : "Next Question →"}
+            {isCurrentCorrect
+              ? quizOrder.length <= 1
+                ? "See Results →"
+                : "Next Question →"
+              : "Still Learning — Review Again →"}
           </button>
         )}
       </div>
@@ -452,47 +1167,72 @@ export default function LearnPage() {
   }
 
   // ─── Result Phase ───
-  const correctCount = quizResults.filter((r) => r.correct).length;
-  const totalCount = quizResults.length;
-  const pct = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
-  const allCorrect = correctCount === totalCount;
+  const summary = summarizeLearnQuizResults(quizResults);
+  const firstPassTotal = batch.length > 0 ? batch.length : summary.uniqueQuestions;
+  const firstPassCorrect = summary.firstPassCorrect;
+  const firstPassPct = firstPassTotal > 0 ? Math.round((firstPassCorrect / firstPassTotal) * 100) : 0;
+  const masteredTotal = batch.length > 0 ? batch.length : summary.uniqueQuestions;
+  const masteredCount = summary.masteredCount;
+  const masteredPct = masteredTotal > 0 ? Math.round((masteredCount / masteredTotal) * 100) : 0;
+  const retryCount = Math.max(0, summary.attempts - summary.uniqueQuestions);
+  const perfectFirstPass = firstPassTotal > 0 && firstPassCorrect === firstPassTotal;
+  const allMastered = masteredTotal > 0 && masteredCount === masteredTotal;
 
   return (
     <div className="mx-auto max-w-lg space-y-6 pt-8 text-center">
-      <div className="text-6xl">{allCorrect ? "🎉" : pct >= 70 ? "👍" : "📚"}</div>
+      {warning && (
+        <QuestionBankWarning
+          warning={warning}
+          snapshotInfo={snapshotInfo}
+          onTryLive={() => void reload({ preferLive: true })}
+          onClearSnapshot={clearSnapshot}
+        />
+      )}
+      <div className="text-6xl">{perfectFirstPass ? "🎉" : allMastered ? "💪" : firstPassPct >= 70 ? "👍" : "📚"}</div>
       <h1 className="text-3xl font-bold">
-        {allCorrect ? "Perfect Round!" : pct >= 70 ? "Good Job!" : "Keep Practicing!"}
+        {perfectFirstPass ? "Perfect First Pass!" : allMastered ? "Mastered After Review!" : firstPassPct >= 70 ? "Good Progress!" : "Keep Practicing!"}
       </h1>
       <p className="text-[var(--muted)]">
-        Round {round}: You got <strong>{correctCount}</strong> of <strong>{totalCount}</strong> correct (
-        {pct}%)
+        Round {round}: First-pass <strong>{firstPassCorrect}</strong> of <strong>{firstPassTotal}</strong>{" "}
+        ({firstPassPct}%). Eventual mastery <strong>{masteredCount}</strong> of{" "}
+        <strong>{masteredTotal}</strong> ({masteredPct}%).
       </p>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-4">
-          <div className="text-2xl font-bold text-green-400">{correctCount}</div>
-          <div className="text-sm text-[var(--muted)]">Correct</div>
+          <div className="text-2xl font-bold text-green-400">{firstPassCorrect}</div>
+          <div className="text-sm text-[var(--muted)]">First-pass Correct</div>
         </div>
-        <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
-          <div className="text-2xl font-bold text-red-400">{totalCount - correctCount}</div>
-          <div className="text-sm text-[var(--muted)]">Missed</div>
+        <div className="rounded-xl border border-brand-500/30 bg-brand-500/10 p-4">
+          <div className="text-2xl font-bold text-brand-300">{masteredCount}</div>
+          <div className="text-sm text-[var(--muted)]">Mastered</div>
+        </div>
+        <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4">
+          <div className="text-2xl font-bold text-amber-300">{retryCount}</div>
+          <div className="text-sm text-[var(--muted)]">Retries</div>
         </div>
       </div>
 
       <div className="flex gap-3">
-        {!allCorrect && (
+        {!allMastered && (
           <button
             onClick={() => {
-              // Re-teach just the missed ones
-              const missedIds = new Set(quizResults.filter((r) => !r.correct).map((r) => r.questionId));
+              // Re-teach only currently unmastered items (latest outcome incorrect).
+              const missedIds = new Set(
+                summary.latestResults
+                  .filter((result) => !result.correct)
+                  .map((result) => result.questionId)
+              );
               const missedBatch = batch.filter((q) => missedIds.has(q.id));
               setBatch(missedBatch);
               setTeachIndex(0);
               setPhase("teach");
+              setRoundStartedAt(Date.now());
+              setSavedProgressSignature(null);
             }}
             className="flex-1 rounded-xl bg-amber-600 py-3 font-semibold text-white hover:bg-amber-700"
           >
-            📖 Re-learn Missed ({totalCount - correctCount})
+            📖 Re-learn Missed ({masteredTotal - masteredCount})
           </button>
         )}
         <button
@@ -504,12 +1244,20 @@ export default function LearnPage() {
         </button>
       </div>
 
-      <button
-        onClick={() => setPhase("setup")}
-        className="block w-full text-sm text-[var(--muted)] hover:text-white transition-colors"
-      >
-        ← Back to Setup
-      </button>
+      <div className="space-y-2">
+        <button
+          onClick={handleSaveAndExit}
+          className="w-full rounded-xl border border-brand-500/30 bg-brand-500/10 py-2.5 text-sm font-medium text-brand-300 hover:bg-brand-500/20"
+        >
+          Save & Exit
+        </button>
+        <button
+          onClick={handleBackToSetup}
+          className="block w-full text-sm text-[var(--muted)] hover:text-white transition-colors"
+        >
+          ← Back to Setup
+        </button>
+      </div>
     </div>
   );
 }

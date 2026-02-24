@@ -3,7 +3,7 @@ import type { OptionId } from "@part107/core";
 const STORAGE_KEY = "part107_attempt_events_v1";
 const MAX_EVENTS_PER_USER = 20000;
 
-export type AttemptMode = "pretest" | "practice" | "quiz" | "mock";
+export type AttemptMode = "pretest" | "practice" | "flashcard" | "quiz" | "mock";
 
 export interface AttemptEvent {
   attemptId: string;

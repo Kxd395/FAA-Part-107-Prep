@@ -1,19 +1,12 @@
 import { STUDY_CATEGORIES, type Question, type StudyCategory } from "@part107/core";
+import {
+  parseQuestionApiResponse,
+  type QuestionApiResponse,
+} from "./questionContracts";
 
 export type AppQuestion = Question;
 export { STUDY_CATEGORIES };
 export type { StudyCategory };
-
-export interface QuestionApiResponse {
-  questions: AppQuestion[];
-  meta: {
-    total: number;
-    category: string;
-    shuffled: boolean;
-    limit: number | null;
-    source: "remote" | "local";
-  };
-}
 
 interface FetchQuestionsOptions {
   category?: string;
@@ -45,7 +38,7 @@ export async function fetchQuestions({
     throw new Error(`Failed to fetch questions (${response.status})`);
   }
 
-  return (await response.json()) as QuestionApiResponse;
+  return parseQuestionApiResponse(await response.json());
 }
 
 export function countQuestionsByCategory(allQuestions: readonly AppQuestion[]) {

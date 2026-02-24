@@ -9,6 +9,7 @@ import {
 import type { ProgressQuestionResult } from "./progress";
 import { filterQuestionsByCategory, normalizeCategory, shuffleQuestions, type StudyCategory } from "./quiz";
 import type { OptionId, Question } from "./types";
+import type { AttemptConfidence } from "./grading";
 
 export type StudyAnswerState = "unanswered" | "correct" | "incorrect";
 
@@ -25,6 +26,7 @@ export interface UseStudySessionOptions<Q extends Question = Question> {
       selectedOption: OptionId;
       isCorrect: boolean;
       answeredAt: string;
+      confidence?: AttemptConfidence | null;
     }) => void;
   };
 }
@@ -48,7 +50,13 @@ export interface UseStudySessionResult<Q extends Question = Question> {
   questionResults: ProgressQuestionResult[];
   progressPercent: number;
   startQuiz: (categoryInput?: string | StudyCategory) => void;
-  answerQuestion: (optionId: OptionId) => void;
+  answerQuestion: (
+    optionId: OptionId,
+    context?: {
+      confidence?: AttemptConfidence | null;
+    }
+  ) => void;
+  skipQuestion: () => void;
   nextQuestion: () => void;
   restartQuiz: () => void;
   resetToSetup: () => void;
@@ -109,7 +117,12 @@ export function useStudySession<Q extends Question = Question>({
   }, [currentIndex, questions, quizStarted]);
 
   const answerQuestion = useCallback(
-    (optionId: OptionId) => {
+    (
+      optionId: OptionId,
+      context?: {
+        confidence?: AttemptConfidence | null;
+      }
+    ) => {
       if (answerState !== "unanswered" || !currentQuestion) return;
 
       const isCorrect = optionId === currentQuestion.correct_option_id;
@@ -141,6 +154,7 @@ export function useStudySession<Q extends Question = Question>({
           selectedOption: optionId,
           isCorrect,
           answeredAt: new Date().toISOString(),
+          confidence: context?.confidence ?? null,
         });
       }
     },
@@ -154,6 +168,31 @@ export function useStudySession<Q extends Question = Question>({
     setAnswerState("unanswered");
     setCurrentIndex((prev) => (prev < questions.length - 1 ? prev + 1 : questions.length));
   }, [questions.length]);
+
+  const skipQuestion = useCallback(() => {
+    if (answerState !== "unanswered" || questions.length === 0) return;
+
+    // If this is the last visible question, skipping ends the session.
+    if (currentIndex >= questions.length - 1) {
+      setSelectedOption(null);
+      setAnswerState("unanswered");
+      setCurrentIndex(questions.length);
+      return;
+    }
+
+    // Move skipped question to the end so the user can return to it later.
+    setQuestions((prev) => {
+      if (currentIndex < 0 || currentIndex >= prev.length - 1) return prev;
+      const next = [...prev];
+      const [skipped] = next.splice(currentIndex, 1);
+      if (!skipped) return prev;
+      next.push(skipped);
+      return next;
+    });
+
+    setSelectedOption(null);
+    setAnswerState("unanswered");
+  }, [answerState, currentIndex, questions.length]);
 
   const resetToSetup = useCallback(() => {
     setQuizStarted(false);
@@ -184,6 +223,7 @@ export function useStudySession<Q extends Question = Question>({
     progressPercent,
     startQuiz,
     answerQuestion,
+    skipQuestion,
     nextQuestion,
     restartQuiz,
     resetToSetup,

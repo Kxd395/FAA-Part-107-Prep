@@ -46,4 +46,82 @@ describe("AnswerOptions", () => {
     expect(screen.getAllByText("✓").length).toBeGreaterThan(0);
     expect(screen.getAllByText("✗").length).toBeGreaterThan(0);
   });
+
+  it("renders custom display labels while preserving underlying option ids", async () => {
+    const onSelect = vi.fn();
+    const user = userEvent.setup();
+
+    render(
+      <AnswerOptions
+        options={[...options]}
+        mode="exam"
+        selectedOption={null}
+        displayLabelByOptionId={{ A: "C", B: "A", C: "B" }}
+        onSelect={onSelect}
+      />
+    );
+
+    expect(screen.getByRole("button", { name: /C Option A/i })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /C Option A/i }));
+    expect(onSelect).toHaveBeenCalledWith("A");
+  });
+
+  it("supports split confidence actions", async () => {
+    const onSelect = vi.fn();
+    const onSelectWithConfidence = vi.fn();
+    const user = userEvent.setup();
+
+    render(
+      <AnswerOptions
+        options={[...options]}
+        mode="study"
+        selectedOption={null}
+        answerState="unanswered"
+        onSelect={onSelect}
+        onSelectWithConfidence={onSelectWithConfidence}
+        showConfidenceSplit
+        defaultConfidence={3}
+        confidentConfidence={5}
+      />
+    );
+
+    const optionAButtons = screen.getAllByRole("button", { name: /Option A/i });
+    await user.click(optionAButtons[optionAButtons.length - 1]);
+    expect(onSelectWithConfidence).toHaveBeenCalledWith("A", 3);
+
+    await user.click(screen.getByRole("button", { name: /Answer A with high confidence/i }));
+    expect(onSelectWithConfidence).toHaveBeenCalledWith("A", 5);
+    expect(onSelect).not.toHaveBeenCalled();
+  });
+
+  it("supports high-only split confidence mode", async () => {
+    const onSelect = vi.fn();
+    const onSelectWithConfidence = vi.fn();
+    const user = userEvent.setup();
+
+    render(
+      <AnswerOptions
+        options={[...options]}
+        mode="study"
+        selectedOption={null}
+        answerState="unanswered"
+        onSelect={onSelect}
+        onSelectWithConfidence={onSelectWithConfidence}
+        showConfidenceSplit
+        splitConfidenceMode="high_only"
+        confidentConfidence={5}
+      />
+    );
+
+    const optionAButtons = screen.getAllByRole("button", { name: /Option A/i });
+    await user.click(optionAButtons[optionAButtons.length - 1]);
+    expect(onSelect).toHaveBeenCalledWith("A");
+    expect(onSelectWithConfidence).not.toHaveBeenCalled();
+
+    const highConfidenceButtons = screen.getAllByRole("button", {
+      name: /Answer A with high confidence/i,
+    });
+    await user.click(highConfidenceButtons[highConfidenceButtons.length - 1]);
+    expect(onSelectWithConfidence).toHaveBeenCalledWith("A", 5);
+  });
 });

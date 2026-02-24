@@ -2,16 +2,24 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   QUESTION_TYPE_PROFILE_LABELS,
   filterQuestionsByType,
   normalizeCategory,
   normalizeQuestionTypeProfile,
+  type OptionId,
+  type AttemptConfidence,
   type QuestionTypeProfile,
   useStudySession,
 } from "@part107/core";
 import CitationLinks, { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
+import {
+  QuestionBankError,
+  QuestionBankLoading,
+  QuestionBankWarning,
+} from "../../components/QuestionBankState";
+import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
 import AnswerOptions from "../../components/quiz/AnswerOptions";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
@@ -21,7 +29,12 @@ import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useProgress } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { extractCitationText, mergeCitations } from "../../lib/citationContext";
+import {
+  buildOptionPresentation,
+  getDisplayLabelForOption,
+} from "../../lib/optionPresentation";
 import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
+import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
 
 const SUPPORTED_QUESTION_TYPES: readonly QuestionTypeProfile[] = [
   "confirmed_test",
@@ -103,7 +116,7 @@ function StudyPageClient() {
     parsedQuestionType
   );
   const { saveSession } = useProgress();
-  const { questions: allQuestions, loaded, loading, error, reload } = useQuestionBank();
+  const { questions: allQuestions, loaded, loading, error, warning, snapshotInfo, reload, clearSnapshot } = useQuestionBank();
   const adaptive = useAdaptiveQuestionStats();
   const events = useLearningEventLogger(adaptive.userId);
   const filteredQuestions = useMemo(
@@ -123,22 +136,18 @@ function StudyPageClient() {
       userId: adaptive.userId,
       userStatsByKey: adaptive.statsByKey,
       config: adaptive.config,
-      onQuestionEvaluated: ({ question, selectedOption, isCorrect }) => {
-        adaptive.recordAnswer(question, isCorrect, Date.now(), {
-          mode: "practice",
+      onQuestionEvaluated: ({ question, selectedOption, isCorrect, confidence }) => {
+        recordLearningAttempt({
+          adaptive,
+          events,
+          question,
+          learningMode: "study",
+          attemptMode: "practice",
+          isCorrect,
           selectedOptionId: selectedOption,
           responseTimeMs: Math.max(0, Date.now() - questionShownAtRef.current),
-          quizId: null,
-        });
-        events.logEvent({
-          type: "answer_submitted",
-          mode: "study",
-          questionId: question.id,
-          category: question.category,
-          subcategory: question.subcategory,
-          selectedOption,
-          correctOption: question.correct_option_id,
-          isCorrect,
+          confidence: confidence ?? null,
+          questionTypeProfile: selectedQuestionType,
         });
       },
     },
@@ -146,6 +155,37 @@ function StudyPageClient() {
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const autoStarted = useRef(false);
   const [sessionSaved, setSessionSaved] = useState(false);
+  const [pendingStudyAnswer, setPendingStudyAnswer] = useState<OptionId | null>(null);
+  const [lastRecordedConfidence, setLastRecordedConfidence] = useState<AttemptConfidence | null>(null);
+
+  const persistSession = useCallback(() => {
+    if (sessionSaved || study.questionResults.length === 0) return;
+
+    saveSession({
+      mode: "study",
+      category: study.selectedCategory,
+      questionTypeProfile: selectedQuestionType,
+      score: study.score.correct,
+      total: study.score.total,
+      timeSpentMs: Date.now() - study.sessionStartTime,
+      questions: study.questionResults,
+    });
+    setSessionSaved(true);
+  }, [
+    saveSession,
+    selectedQuestionType,
+    sessionSaved,
+    study.questionResults,
+    study.score.correct,
+    study.score.total,
+    study.selectedCategory,
+    study.sessionStartTime,
+  ]);
+
+  const handleSaveAndExit = useCallback(() => {
+    persistSession();
+    study.resetToSetup();
+  }, [persistSession, study]);
 
   useEffect(() => {
     const nextType = normalizeSelectableQuestionTypeProfile(questionTypeParam);
@@ -188,18 +228,14 @@ function StudyPageClient() {
   }, [study.quizStarted, study.isComplete, study.sessionStartTime]);
 
   useEffect(() => {
-    if (!study.isComplete || sessionSaved || study.questionResults.length === 0) return;
+    setPendingStudyAnswer(null);
+    setLastRecordedConfidence(null);
+  }, [study.currentQuestion?.id]);
 
-    saveSession({
-      mode: "study",
-      category: study.selectedCategory,
-      score: study.score.correct,
-      total: study.score.total,
-      timeSpentMs: Date.now() - study.sessionStartTime,
-      questions: study.questionResults,
-    });
-    setSessionSaved(true);
-  }, [saveSession, sessionSaved, study]);
+  useEffect(() => {
+    if (!study.isComplete) return;
+    persistSession();
+  }, [persistSession, study.isComplete]);
 
   useEffect(() => {
     if (study.answerState === "unanswered" || !study.currentQuestion) return;
@@ -215,26 +251,11 @@ function StudyPageClient() {
   }, [events, study.answerState, study.currentQuestion]);
 
   if (loading && !loaded) {
-    return (
-      <div className="flex items-center justify-center py-32">
-        <div className="text-[var(--muted)]">Loading question bank…</div>
-      </div>
-    );
+    return <QuestionBankLoading label="Loading question bank..." />;
   }
 
   if (error && !loaded) {
-    return (
-      <div className="mx-auto max-w-lg space-y-4 rounded-xl border border-incorrect/30 bg-incorrect/10 p-6 text-center">
-        <h1 className="text-xl font-bold text-incorrect">Couldn&apos;t load questions</h1>
-        <p className="text-sm text-[var(--muted)]">{error}</p>
-        <button
-          onClick={() => void reload()}
-          className="rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
-        >
-          Retry
-        </button>
-      </div>
-    );
+    return <QuestionBankError error={error} onRetry={() => void reload()} />;
   }
 
   if (!study.quizStarted) {
@@ -253,6 +274,7 @@ function StudyPageClient() {
             back to Real Exam MCQ.
           </div>
         )}
+        {filteredQuestions.length === 0 && <QuestionSelectionEmptyState context="study" />}
 
         <div className="space-y-3">
           <div className="text-sm font-semibold text-white">Question Type</div>
@@ -355,6 +377,14 @@ function StudyPageClient() {
       ? study.currentQuestion.explanation_distractors[study.selectedOption] ??
         "This answer does not match the correct regulation."
       : null;
+  const optionPresentation = buildOptionPresentation(
+    study.currentQuestion,
+    `study:${study.sessionStartTime}`
+  );
+  const selectedOptionDisplayLabel = getDisplayLabelForOption(
+    optionPresentation.displayLabelByOptionId,
+    study.selectedOption
+  );
   const selectedAnswerCitation = mergeCitations(
     study.currentQuestion.citation,
     extractCitationText(selectedDistractorExplanation)
@@ -362,6 +392,14 @@ function StudyPageClient() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
+      {warning && (
+        <QuestionBankWarning
+          warning={warning}
+          snapshotInfo={snapshotInfo}
+          onTryLive={() => void reload({ preferLive: true })}
+          onClearSnapshot={clearSnapshot}
+        />
+      )}
       <ProgressHeader
         left={`Question ${study.currentIndex + 1} of ${study.questions.length}`}
         right={rightLabel}
@@ -387,17 +425,73 @@ function StudyPageClient() {
       <QuestionCard question={study.currentQuestion} onOpenFigure={setFigureRef} />
 
       <AnswerOptions
-        options={study.currentQuestion.options}
+        options={optionPresentation.options}
         mode="study"
-        selectedOption={study.selectedOption}
+        selectedOption={study.selectedOption ?? pendingStudyAnswer}
         correctOptionId={study.currentQuestion.correct_option_id}
+        displayLabelByOptionId={optionPresentation.displayLabelByOptionId}
         answerState={study.answerState}
-        onSelect={study.answerQuestion}
+        onSelect={(optionId) => {
+          if (study.answerState !== "unanswered") return;
+          setPendingStudyAnswer(optionId);
+        }}
+        onSelectWithConfidence={(optionId, confidence) => {
+          if (study.answerState !== "unanswered") return;
+          study.answerQuestion(optionId, { confidence });
+          setLastRecordedConfidence(confidence);
+          setPendingStudyAnswer(null);
+        }}
+        showConfidenceSplit
+        splitConfidenceMode="high_only"
+        confidentConfidence={5}
         disabled={study.answerState !== "unanswered"}
       />
 
+      {study.answerState === "unanswered" && pendingStudyAnswer && (
+        <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 p-4">
+          <div className="text-sm font-semibold text-white">How confident are you? (before reveal)</div>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {[1, 2, 3, 4, 5].map((value) => (
+              <button
+                key={value}
+                onClick={() => {
+                  const confidence = value as AttemptConfidence;
+                  study.answerQuestion(pendingStudyAnswer, { confidence });
+                  setLastRecordedConfidence(confidence);
+                  setPendingStudyAnswer(null);
+                }}
+                className="rounded-lg border border-brand-400/40 bg-brand-500/10 px-3 py-1.5 text-sm text-brand-200 hover:bg-brand-500/20"
+              >
+                {value}
+              </button>
+            ))}
+          </div>
+          <div className="mt-2 text-xs text-[var(--muted)]">
+            Tip: click the <code>☑</code> on any answer for a one-click high-confidence submit.
+          </div>
+        </div>
+      )}
+
+      <div className="flex items-center justify-between gap-3">
+        <button
+          onClick={study.skipQuestion}
+          disabled={study.answerState !== "unanswered" || !!pendingStudyAnswer}
+          className="rounded-xl border border-[var(--card-border)] px-4 py-2.5 text-sm text-[var(--muted)] transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          Skip for now →
+        </button>
+        <button
+          onClick={handleSaveAndExit}
+          className="rounded-xl border border-brand-500/30 bg-brand-500/10 px-4 py-2.5 text-sm font-medium text-brand-300 transition-colors hover:bg-brand-500/20"
+        >
+          {study.questionResults.length > 0 ? "Save & Exit" : "Exit"}
+        </button>
+      </div>
+
       {study.answerState !== "unanswered" && (
         <div
+          role="status"
+          aria-live="polite"
           className={`rounded-xl border p-6 ${
             study.answerState === "correct"
               ? "border-correct/30 bg-correct/5"
@@ -416,7 +510,7 @@ function StudyPageClient() {
           {study.answerState === "incorrect" && study.selectedOption && (
             <div className="mt-4 rounded-lg border border-incorrect/20 bg-incorrect/5 p-4">
               <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-incorrect">
-                Why &quot;{study.selectedOption}&quot; is wrong:
+                Why &quot;{selectedOptionDisplayLabel}&quot; is wrong:
               </div>
               <p className="text-sm text-gray-400">{selectedDistractorExplanation}</p>
             </div>
@@ -441,7 +535,7 @@ function StudyPageClient() {
           {study.answerState === "incorrect" && study.selectedOption && (
             <CitationLinks
               citation={selectedAnswerCitation}
-              label={`📖 Why "${study.selectedOption}" reference:`}
+              label={`📖 Why "${selectedOptionDisplayLabel}" reference:`}
               onReferenceClick={(ref) => {
                 events.logEvent({
                   type: "citation_clicked",
@@ -462,6 +556,11 @@ function StudyPageClient() {
           >
             {study.currentIndex < study.questions.length - 1 ? "Next Question →" : "See Results"}
           </button>
+          {lastRecordedConfidence && (
+            <div className="mt-2 text-center text-xs text-[var(--muted)]">
+              Confidence recorded: {lastRecordedConfidence}/5
+            </div>
+          )}
         </div>
       )}
 

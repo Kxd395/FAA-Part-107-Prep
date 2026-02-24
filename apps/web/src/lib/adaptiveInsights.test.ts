@@ -61,6 +61,8 @@ describe("computeAdaptiveInsights", () => {
     expect(insights.last10AccuracyPercent).toBe(100);
     expect(insights.previous10AccuracyPercent).toBe(50);
     expect(insights.momentumPercent).toBe(50);
+    expect(insights.confidenceAttemptCount).toBe(0);
+    expect(insights.calibrationScorePercent).toBeNull();
   });
 
   it("computes due and at-risk counts from adaptive stats", () => {
@@ -98,5 +100,27 @@ describe("computeAdaptiveInsights", () => {
     expect(insights.dueNowCount).toBe(1);
     expect(insights.dueWithin24hCount).toBe(1);
     expect(insights.atRiskCount).toBe(1);
+    expect(insights.averageConfidencePercent).toBeNull();
+  });
+
+  it("computes confidence and calibration metrics from objective attempts", () => {
+    const attempts: AttemptEvent[] = [
+      makeAttempt({ attemptId: "a1", correct: true, confidence: 5, mode: "practice" }),
+      makeAttempt({ attemptId: "a2", correct: true, confidence: 4, mode: "quiz" }),
+      makeAttempt({ attemptId: "a3", correct: false, confidence: 5, mode: "mock" }),
+      makeAttempt({ attemptId: "a4", correct: false, confidence: 2, mode: "practice" }),
+      makeAttempt({ attemptId: "a5", correct: true, confidence: 5, mode: "flashcard" }),
+    ];
+
+    const insights = computeAdaptiveInsights({
+      statsByKey: {},
+      attempts,
+      nowMs: Date.UTC(2026, 1, 20),
+    });
+
+    expect(insights.confidenceAttemptCount).toBe(4);
+    expect(insights.averageConfidencePercent).toBe(80);
+    expect(insights.calibrationScorePercent).toBeGreaterThan(0);
+    expect(insights.overconfidenceRatePercent).toBe(50);
   });
 });

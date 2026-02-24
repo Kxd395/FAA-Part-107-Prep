@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useId, useRef } from "react";
 import { parseCitation, type CitationReference } from "@part107/core";
 
 export type ResolvedReference = CitationReference;
@@ -13,13 +13,68 @@ interface ReferenceModalProps {
 }
 
 export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
-  // Close on Escape
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previousActiveElementRef = useRef<HTMLElement | null>(null);
+  const titleId = useId();
+  const descriptionId = useId();
+
+  // Close on Escape + trap tab focus within modal
   useEffect(() => {
+    previousActiveElementRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const panel = panelRef.current;
+      if (!panel) return;
+
+      const focusable = Array.from(
+        panel.querySelectorAll<HTMLElement>(
+          'a[href],button:not([disabled]),textarea,input,select,[tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((element) => !element.hasAttribute("disabled") && element.tabIndex >= 0);
+
+      if (focusable.length === 0) {
+        e.preventDefault();
+        panel.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+      if (e.shiftKey) {
+        if (!active || active === first || !panel.contains(active)) {
+          e.preventDefault();
+          last.focus();
+        }
+        return;
+      }
+
+      if (!active || active === last || !panel.contains(active)) {
+        e.preventDefault();
+        first.focus();
+      }
     };
+
     document.addEventListener("keydown", handleKey);
-    return () => document.removeEventListener("keydown", handleKey);
+    const frame = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      document.removeEventListener("keydown", handleKey);
+      previousActiveElementRef.current?.focus();
+    };
   }, [onClose]);
 
   // Prevent scroll on body while modal is open
@@ -44,16 +99,25 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        aria-hidden="true"
         onClick={onClose}
       />
 
       {/* Modal Panel */}
-      <div className="relative z-10 w-full max-w-4xl mx-4 max-h-[85vh] rounded-t-2xl sm:rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-2xl flex flex-col animate-slide-up">
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+        tabIndex={-1}
+        className="relative z-10 w-full max-w-4xl mx-4 max-h-[85vh] rounded-t-2xl sm:rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-2xl flex flex-col animate-slide-up"
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--card-border)]">
           <div>
-            <h3 className="text-sm font-semibold text-white">{ref_.label}</h3>
-            <p className="text-xs text-[var(--muted)]">{ref_.description}</p>
+            <h3 id={titleId} className="text-sm font-semibold text-white">{ref_.label}</h3>
+            <p id={descriptionId} className="text-xs text-[var(--muted)]">{ref_.description}</p>
           </div>
           <div className="flex items-center gap-2">
             {/* Open in new tab */}
@@ -66,7 +130,9 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
               Open in Tab ↗
             </a>
             <button
+              ref={closeButtonRef}
               onClick={onClose}
+              aria-label="Close reference modal"
               className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/10 text-[var(--muted)] hover:text-white transition-colors"
             >
               ✕

@@ -8,7 +8,9 @@ import weatherData from "../../../../../../packages/content/questions/weather.js
 import operationsData from "../../../../../../packages/content/questions/operations.json";
 import loadingPerformanceData from "../../../../../../packages/content/questions/loading_performance.json";
 import { normalizeAcsCodeOnlyQuestions } from "../../../lib/acsQuestionNormalizer";
+import { parseRemoteQuestionSourcePayload } from "../../../lib/questionContracts";
 import { sanitizeQuestion } from "../../../lib/questionSanitizer";
+import { consumeRateLimit, rateLimitHeaders } from "../../../lib/server/rateLimit";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -50,14 +52,22 @@ async function loadRemoteQuestions(url: string): Promise<Question[]> {
     throw new Error(`Failed to load remote questions: ${response.status} ${response.statusText}`);
   }
 
-  const payload = await response.json();
-  if (Array.isArray(payload)) return payload as Question[];
-  if (payload && Array.isArray(payload.questions)) return payload.questions as Question[];
-
-  throw new Error("Remote question source must be an array or an object with questions[]");
+  return parseRemoteQuestionSourcePayload(await response.json());
 }
 
 export async function GET(request: NextRequest) {
+  const rl = consumeRateLimit(request, {
+    key: "api:questions",
+    capacity: 180,
+    windowMs: 60_000,
+  });
+  if (!rl.ok) {
+    return NextResponse.json(
+      { error: "Too many question requests" },
+      { status: 429, headers: rateLimitHeaders(rl) }
+    );
+  }
+
   try {
     const categoryRaw = request.nextUrl.searchParams.get("category");
     const normalizedCategory = normalizeCategory(categoryRaw) ?? "All";
@@ -93,6 +103,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(payload, {
       headers: {
         "Cache-Control": "no-store, max-age=0",
+        ...rateLimitHeaders(rl),
       },
     });
   } catch (error) {
@@ -100,7 +111,7 @@ export async function GET(request: NextRequest) {
       {
         error: error instanceof Error ? error.message : "Failed to load questions",
       },
-      { status: 500 }
+      { status: 500, headers: rateLimitHeaders(rl) }
     );
   }
 }

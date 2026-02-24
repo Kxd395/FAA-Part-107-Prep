@@ -1,11 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { type Question } from "@part107/core";
+import { useEffect, useMemo, useState } from "react";
+import { type OptionId, type Question } from "@part107/core";
 import { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
+import {
+  QuestionBankError,
+  QuestionBankLoading,
+  QuestionBankWarning,
+} from "../../components/QuestionBankState";
+import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { useProgress } from "../../hooks/useProgress";
+import { LOCAL_USER_ID } from "../../lib/analyticsTaxonomy";
+import {
+  buildOptionPresentation,
+  getDisplayLabelForOption,
+} from "../../lib/optionPresentation";
 import { STUDY_CATEGORIES } from "../../lib/questionBank";
 
 /**
@@ -21,14 +32,39 @@ interface MissedEntry {
   yourAnswer: string | null;
 }
 
+const MISSED_PAGE_SIZE = 20;
+const MISSED_VIRTUALIZE_THRESHOLD = 300;
+const MISSED_VIRTUAL_WINDOW_SIZE = 90;
+const MISSED_ROW_ESTIMATE_PX = 124;
+
 export default function MissedPage() {
-  const { questions: allQuestions, loaded, loading, error, reload } = useQuestionBank();
+  const { logEvent } = useLearningEventLogger(LOCAL_USER_ID);
+  const {
+    questions: allQuestions,
+    loaded,
+    loading,
+    error,
+    warning,
+    snapshotInfo,
+    reload,
+    clearSnapshot,
+  } = useQuestionBank();
   const { sessions, loaded: progressLoaded } = useProgress();
 
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const [sortBy, setSortBy] = useState<"count" | "recent">("count");
+  const [visibleCount, setVisibleCount] = useState(MISSED_PAGE_SIZE);
+  const [virtualStartIndex, setVirtualStartIndex] = useState(0);
+
+  useEffect(() => {
+    logEvent({
+      type: "page_view",
+      mode: "missed",
+      metadata: { route: "/missed" },
+    });
+  }, [logEvent]);
 
   // Build a map of missed questions from all session history
   const missedEntries = useMemo(() => {
@@ -91,6 +127,22 @@ export default function MissedPage() {
     }
     return entries;
   }, [missedEntries, selectedCategory, sortBy]);
+  const visibleEntries = filteredEntries.slice(0, visibleCount);
+  const shouldVirtualize = filteredEntries.length > MISSED_VIRTUALIZE_THRESHOLD && expandedId === null;
+  const virtualEndIndex = Math.min(filteredEntries.length, virtualStartIndex + MISSED_VIRTUAL_WINDOW_SIZE);
+  const renderedEntries = shouldVirtualize
+    ? filteredEntries.slice(virtualStartIndex, virtualEndIndex)
+    : visibleEntries;
+  const virtualTopSpacerPx = shouldVirtualize ? virtualStartIndex * MISSED_ROW_ESTIMATE_PX : 0;
+  const virtualBottomSpacerPx = shouldVirtualize
+    ? Math.max(0, (filteredEntries.length - virtualEndIndex) * MISSED_ROW_ESTIMATE_PX)
+    : 0;
+
+  useEffect(() => {
+    setVisibleCount(MISSED_PAGE_SIZE);
+    setExpandedId(null);
+    setVirtualStartIndex(0);
+  }, [selectedCategory, sortBy, missedEntries.length]);
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -103,23 +155,11 @@ export default function MissedPage() {
 
   // ─── Loading ───
   if ((loading && !loaded) || !progressLoaded) {
-    return (
-      <div className="flex items-center justify-center py-32">
-        <div className="text-[var(--muted)]">Loading…</div>
-      </div>
-    );
+    return <QuestionBankLoading label="Loading question bank..." />;
   }
 
   if (error && !loaded) {
-    return (
-      <div className="mx-auto max-w-lg space-y-4 rounded-xl border border-incorrect/30 bg-incorrect/10 p-6 text-center">
-        <h1 className="text-xl font-bold text-incorrect">Couldn&apos;t load questions</h1>
-        <p className="text-sm text-[var(--muted)]">{error}</p>
-        <button onClick={() => void reload()} className="rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">
-          Retry
-        </button>
-      </div>
-    );
+    return <QuestionBankError error={error} onRetry={() => void reload()} />;
   }
 
   // ─── Empty state ───
@@ -134,12 +174,26 @@ export default function MissedPage() {
         <div className="flex gap-3 justify-center">
           <Link
             href="/study"
+            onClick={() =>
+              logEvent({
+                type: "link_opened",
+                mode: "missed",
+                metadata: { target: "empty_start_studying", href: "/study" },
+              })
+            }
             className="rounded-xl bg-brand-600 px-6 py-3 font-semibold text-white hover:bg-brand-700"
           >
             Start Studying
           </Link>
           <Link
             href="/exam"
+            onClick={() =>
+              logEvent({
+                type: "link_opened",
+                mode: "missed",
+                metadata: { target: "empty_take_exam", href: "/exam" },
+              })
+            }
             className="rounded-xl border border-[var(--card-border)] px-6 py-3 font-semibold text-[var(--muted)] hover:text-white"
           >
             Take Exam
@@ -151,6 +205,14 @@ export default function MissedPage() {
 
   return (
     <div className="space-y-8">
+      {warning && (
+        <QuestionBankWarning
+          warning={warning}
+          snapshotInfo={snapshotInfo}
+          onTryLive={() => void reload({ preferLive: true })}
+          onClearSnapshot={clearSnapshot}
+        />
+      )}
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold">❌ Missed Questions Review</h1>
@@ -165,7 +227,14 @@ export default function MissedPage() {
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold text-[var(--muted)]">Sort:</span>
           <button
-            onClick={() => setSortBy("count")}
+            onClick={() => {
+              setSortBy("count");
+              logEvent({
+                type: "filter_changed",
+                mode: "missed",
+                metadata: { filter: "sort", value: "count" },
+              });
+            }}
             className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
               sortBy === "count" ? "bg-brand-500 text-white" : "bg-[var(--card)] text-[var(--muted)] hover:text-white"
             }`}
@@ -173,7 +242,14 @@ export default function MissedPage() {
             Most Missed
           </button>
           <button
-            onClick={() => setSortBy("recent")}
+            onClick={() => {
+              setSortBy("recent");
+              logEvent({
+                type: "filter_changed",
+                mode: "missed",
+                metadata: { filter: "sort", value: "recent" },
+              });
+            }}
             className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
               sortBy === "recent" ? "bg-brand-500 text-white" : "bg-[var(--card)] text-[var(--muted)] hover:text-white"
             }`}
@@ -186,7 +262,14 @@ export default function MissedPage() {
       {/* Category filter */}
       <div className="flex flex-wrap gap-2">
         <button
-          onClick={() => setSelectedCategory("All")}
+          onClick={() => {
+            setSelectedCategory("All");
+            logEvent({
+              type: "filter_changed",
+              mode: "missed",
+              metadata: { filter: "category", value: "All" },
+            });
+          }}
           className={`rounded-full px-4 py-1.5 text-xs font-medium transition-colors ${
             selectedCategory === "All"
               ? "bg-brand-500 text-white"
@@ -201,7 +284,15 @@ export default function MissedPage() {
           return (
             <button
               key={cat}
-              onClick={() => setSelectedCategory(cat)}
+              onClick={() => {
+                setSelectedCategory(cat);
+                logEvent({
+                  type: "filter_changed",
+                  mode: "missed",
+                  category: cat,
+                  metadata: { filter: "category", value: cat },
+                });
+              }}
               className={`rounded-full px-4 py-1.5 text-xs font-medium transition-colors ${
                 selectedCategory === cat
                   ? "bg-brand-500 text-white"
@@ -215,14 +306,43 @@ export default function MissedPage() {
       </div>
 
       {/* Question list */}
-      <div className="space-y-3">
-        {filteredEntries.map((entry) => {
+      {shouldVirtualize && (
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-2 text-[11px] text-[var(--muted)]">
+          Virtualized missed view active for large dataset ({filteredEntries.length} entries). Expand a row to switch to full detail mode.
+        </div>
+      )}
+      <div
+        className={shouldVirtualize ? "space-y-3 max-h-[720px] overflow-y-auto pr-1" : "space-y-3"}
+        onScroll={(event) => {
+          if (!shouldVirtualize) return;
+          const target = event.currentTarget;
+          const nextStart = Math.max(
+            0,
+            Math.min(
+              filteredEntries.length - MISSED_VIRTUAL_WINDOW_SIZE,
+              Math.floor(target.scrollTop / MISSED_ROW_ESTIMATE_PX)
+            )
+          );
+          if (nextStart !== virtualStartIndex) {
+            setVirtualStartIndex(nextStart);
+          }
+        }}
+      >
+        {shouldVirtualize && <div style={{ height: virtualTopSpacerPx }} />}
+        {renderedEntries.map((entry, renderIndex) => {
           const q = entry.question;
+          const entryIndex = shouldVirtualize ? virtualStartIndex + renderIndex : renderIndex;
           const isExpanded = expandedId === q.id;
+          const detailsId = `missed-details-${q.id}`;
+          const optionPresentation = buildOptionPresentation(q, "missed:review");
           const correctOpt = q.options.find((o) => o.id === q.correct_option_id);
           const yourOpt = entry.yourAnswer
             ? q.options.find((o) => o.id === entry.yourAnswer)
             : null;
+          const yourAnswerDisplayLabel = getDisplayLabelForOption(
+            optionPresentation.displayLabelByOptionId,
+            entry.yourAnswer as OptionId | null
+          );
 
           return (
             <div
@@ -231,7 +351,24 @@ export default function MissedPage() {
             >
               {/* Collapsed header — always visible */}
               <button
-                onClick={() => setExpandedId(isExpanded ? null : q.id)}
+                onClick={() => {
+                  if (shouldVirtualize) {
+                    setVisibleCount(Math.max(visibleCount, entryIndex + 1));
+                  }
+                  setExpandedId(isExpanded ? null : q.id);
+                  logEvent({
+                    type: "control_clicked",
+                    mode: "missed",
+                    questionId: q.id,
+                    category: q.category,
+                    subcategory: q.subcategory,
+                    metadata: {
+                      action: isExpanded ? "collapse_question" : "expand_question",
+                    },
+                  });
+                }}
+                aria-expanded={isExpanded}
+                aria-controls={detailsId}
                 className="flex w-full items-start gap-4 p-5 text-left"
               >
                 <div className="flex-1 space-y-1">
@@ -255,13 +392,13 @@ export default function MissedPage() {
 
               {/* Expanded details */}
               {isExpanded && (
-                <div className="border-t border-[var(--card-border)] p-5 space-y-4">
+                <div id={detailsId} className="border-t border-[var(--card-border)] p-5 space-y-4">
                   {/* Your wrong answer */}
                   {yourOpt && (
                     <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3">
                       <div className="text-xs font-semibold text-red-400 mb-1">Your Answer</div>
                       <div className="text-sm text-red-300">
-                        {entry.yourAnswer}. {yourOpt.text}
+                        {yourAnswerDisplayLabel}. {yourOpt.text}
                       </div>
                       {entry.yourAnswer &&
                         q.explanation_distractors[entry.yourAnswer as keyof typeof q.explanation_distractors] && (
@@ -276,15 +413,16 @@ export default function MissedPage() {
                   <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-3">
                     <div className="text-xs font-semibold text-green-400 mb-1">Correct Answer</div>
                     <div className="text-sm text-green-300">
-                      {q.correct_option_id}. {correctOpt?.text}
+                      {optionPresentation.correctDisplayLabel}. {correctOpt?.text}
                     </div>
                   </div>
 
                   {/* All options */}
                   <div className="space-y-2">
-                    {q.options.map((opt) => {
+                    {optionPresentation.options.map((opt) => {
                       const isCorrect = opt.id === q.correct_option_id;
                       const wasYours = opt.id === entry.yourAnswer;
+                      const displayLabel = optionPresentation.displayLabelByOptionId[opt.id] ?? opt.id;
                       return (
                         <div
                           key={opt.id}
@@ -296,7 +434,7 @@ export default function MissedPage() {
                               : "border-[var(--card-border)] text-[var(--muted)]"
                           }`}
                         >
-                          <span className="font-semibold">{opt.id}.</span> {opt.text}
+                          <span className="font-semibold">{displayLabel}.</span> {opt.text}
                           {isCorrect && " ✅"}
                           {wasYours && !isCorrect && " ❌"}
                         </div>
@@ -324,14 +462,23 @@ export default function MissedPage() {
                   {/* Figure reference */}
                   {q.figure_reference && (
                     <button
-                      onClick={() =>
+                      onClick={() => {
+                        logEvent({
+                          type: "citation_clicked",
+                          mode: "missed",
+                          questionId: q.id,
+                          category: q.category,
+                          subcategory: q.subcategory,
+                          citationLabel: q.figure_reference!,
+                          citationUrl: q.figure_reference!,
+                        });
                         setFigureRef({
                           url: q.figure_reference!,
                           label: q.figure_reference!,
                           type: "image",
                           description: q.figure_reference!,
-                        })
-                      }
+                        });
+                      }}
                       className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs text-cyan-400 hover:bg-cyan-500/20"
                     >
                       📊 View {q.figure_reference}
@@ -342,7 +489,24 @@ export default function MissedPage() {
             </div>
           );
         })}
+        {shouldVirtualize && <div style={{ height: virtualBottomSpacerPx }} />}
       </div>
+
+      {!shouldVirtualize && filteredEntries.length > visibleEntries.length && (
+        <div className="flex items-center justify-between rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 text-xs">
+          <span className="text-[var(--muted)]">
+            Showing {visibleEntries.length} of {filteredEntries.length} missed questions
+          </span>
+          <button
+            onClick={() =>
+              setVisibleCount((prev) => Math.min(prev + MISSED_PAGE_SIZE, filteredEntries.length))
+            }
+            className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-[var(--muted)] hover:text-white"
+          >
+            Load More
+          </button>
+        </div>
+      )}
 
       {filteredEntries.length === 0 && (
         <div className="text-center py-12 text-[var(--muted)]">

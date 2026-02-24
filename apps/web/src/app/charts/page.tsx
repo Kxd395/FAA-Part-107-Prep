@@ -1,4 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect } from "react";
+import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
+import { LOCAL_USER_ID } from "../../lib/analyticsTaxonomy";
 
 const FIGURES = [20, 21, 22, 23, 26, 59] as const;
 const FAA_REFERENCE_LINKS = {
@@ -10,6 +15,16 @@ const FAA_REFERENCE_LINKS = {
 } as const;
 
 export default function ChartsPage() {
+  const { logEvent } = useLearningEventLogger(LOCAL_USER_ID);
+
+  useEffect(() => {
+    logEvent({
+      type: "page_view",
+      mode: "charts",
+      metadata: { route: "/charts" },
+    });
+  }, [logEvent]);
+
   return (
     <div className="space-y-6">
       <div>
@@ -26,6 +41,17 @@ export default function ChartsPage() {
             href={`/figures/figure-${figure}.png`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              logEvent({
+                type: "link_opened",
+                mode: "charts",
+                metadata: {
+                  target: "figure_open",
+                  figure,
+                  href: `/figures/figure-${figure}.png`,
+                },
+              })
+            }
             className="group overflow-hidden rounded-xl border border-[var(--card-border)] bg-[var(--card)] transition-colors hover:border-brand-500/50"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -47,19 +73,65 @@ export default function ChartsPage() {
       <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-sm text-[var(--muted)]">
         <p>Additional FAA references:</p>
         <div className="mt-2 flex flex-wrap gap-3 text-brand-400">
-          <a href={FAA_REFERENCE_LINKS.uasAcs} target="_blank" rel="noopener noreferrer">
+          <a
+            href={FAA_REFERENCE_LINKS.uasAcs}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              logEvent({
+                type: "citation_clicked",
+                mode: "charts",
+                citationLabel: "uas_acs_pdf",
+                citationUrl: FAA_REFERENCE_LINKS.uasAcs,
+              })
+            }
+          >
             UAS ACS (PDF)
           </a>
-          <a href={FAA_REFERENCE_LINKS.ac107_2a} target="_blank" rel="noopener noreferrer">
+          <a
+            href={FAA_REFERENCE_LINKS.ac107_2a}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              logEvent({
+                type: "citation_clicked",
+                mode: "charts",
+                citationLabel: "ac_107_2a_pdf",
+                citationUrl: FAA_REFERENCE_LINKS.ac107_2a,
+              })
+            }
+          >
             AC 107-2A (PDF)
           </a>
-          <a href={FAA_REFERENCE_LINKS.remotePilotStudyGuide} target="_blank" rel="noopener noreferrer">
+          <a
+            href={FAA_REFERENCE_LINKS.remotePilotStudyGuide}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              logEvent({
+                type: "citation_clicked",
+                mode: "charts",
+                citationLabel: "remote_pilot_study_guide_pdf",
+                citationUrl: FAA_REFERENCE_LINKS.remotePilotStudyGuide,
+              })
+            }
+          >
             Remote Pilot Study Guide (PDF)
           </a>
         </div>
       </div>
 
-      <Link href="/study" className="inline-block text-sm text-brand-400 hover:text-brand-300">
+      <Link
+        href="/study"
+        onClick={() =>
+          logEvent({
+            type: "link_opened",
+            mode: "charts",
+            metadata: { target: "back_to_study", href: "/study" },
+          })
+        }
+        className="inline-block text-sm text-brand-400 hover:text-brand-300"
+      >
         ← Back to Study Mode
       </Link>
     </div>
