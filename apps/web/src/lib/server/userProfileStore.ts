@@ -2,7 +2,8 @@ import crypto from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const PROFILE_DIR = path.join(process.cwd(), ".data");
+const isVercel = process.env.VERCEL === "1";
+const PROFILE_DIR = isVercel ? "/tmp/.data" : path.join(process.cwd(), ".data");
 const PROFILE_FILE = path.join(PROFILE_DIR, "user-profiles-v1.json");
 
 export interface UserProfile {
