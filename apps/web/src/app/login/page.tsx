@@ -108,45 +108,79 @@ function LoginContent() {
     }
   };
 
-  const initializeGoogleAuth = () => {
-    // Check if the script loaded properly. The user needs to supply the client ID.
+  // Load Google GIS Script dynamically
+  useEffect(() => {
     const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-    if (!clientId && process.env.NODE_ENV !== "development") {
-      console.warn("NEXT_PUBLIC_GOOGLE_CLIENT_ID is not configured");
+    
+    if (!clientId) {
+      if (process.env.NODE_ENV !== "development") {
+        console.warn("NEXT_PUBLIC_GOOGLE_CLIENT_ID is not configured");
+      }
+      return;
     }
 
-    if (clientId && window.google?.accounts?.id && googleButtonRef.current) {
-      window.google.accounts.id.initialize({
-        client_id: clientId,
-        callback: async (response: GoogleCredentialResponse) => {
-          setLoading(true);
-          setStatus("Signing in with Google...");
-          try {
-            const res = await fetch("/api/auth/google", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ credential: response.credential }),
-            });
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || "Failed to sign in with Google");
-            await refreshSession();
-          } catch (err) {
-            setStatus(err instanceof Error ? err.message : "Google sign in failed");
-            setLoading(false);
-          }
-        },
-      });
-      window.google.accounts.id.renderButton(googleButtonRef.current, {
-        theme: "outline",
-        size: "large",
-        width: 320,
-      });
+    const scriptId = "google-gis-script";
+    if (document.getElementById(scriptId)) {
+      // Script already loaded, just render
+      if (window.google?.accounts?.id && googleButtonRef.current) {
+        renderGoogleButton(clientId);
+      }
+      return;
     }
+
+    const script = document.createElement("script");
+    script.id = scriptId;
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      if (window.google?.accounts?.id && googleButtonRef.current) {
+        renderGoogleButton(clientId);
+      }
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup script on unmount if needed, though usually fine to leave
+      // const existingScript = document.getElementById(scriptId);
+      // if (existingScript) document.body.removeChild(existingScript);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const renderGoogleButton = (clientId: string) => {
+    if (!window.google?.accounts?.id || !googleButtonRef.current) return;
+    
+    window.google.accounts.id.initialize({
+      client_id: clientId,
+      callback: async (response: GoogleCredentialResponse) => {
+        setLoading(true);
+        setStatus("Signing in with Google...");
+        try {
+          const res = await fetch("/api/auth/google", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ credential: response.credential }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Failed to sign in with Google");
+          await refreshSession();
+        } catch (err) {
+          setStatus(err instanceof Error ? err.message : "Google sign in failed");
+          setLoading(false);
+        }
+      },
+    });
+    
+    window.google.accounts.id.renderButton(googleButtonRef.current, {
+      theme: "outline",
+      size: "large",
+      width: 320,
+    });
   };
 
   return (
     <div className="mx-auto max-w-sm mt-12 mb-12 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-8">
-      <Script src="https://accounts.google.com/gsi/client" strategy="lazyOnload" onLoad={initializeGoogleAuth} />
       <h1 className="text-2xl font-bold mb-6 text-center">Sign In</h1>
 
       {/* Google Sign-In */}
