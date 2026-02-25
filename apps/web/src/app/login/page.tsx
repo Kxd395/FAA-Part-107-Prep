@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "../../hooks/useAuth";
-import Script from "next/script";
 
 interface GoogleCredentialResponse {
   credential?: string;
@@ -111,7 +110,7 @@ function LoginContent() {
   // Load Google GIS Script dynamically
   useEffect(() => {
     const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-    
+
     if (!clientId) {
       if (process.env.NODE_ENV !== "development") {
         console.warn("NEXT_PUBLIC_GOOGLE_CLIENT_ID is not configured");
@@ -145,12 +144,12 @@ function LoginContent() {
       // const existingScript = document.getElementById(scriptId);
       // if (existingScript) document.body.removeChild(existingScript);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderGoogleButton = (clientId: string) => {
     if (!window.google?.accounts?.id || !googleButtonRef.current) return;
-    
+
     window.google.accounts.id.initialize({
       client_id: clientId,
       callback: async (response: GoogleCredentialResponse) => {
@@ -171,7 +170,7 @@ function LoginContent() {
         }
       },
     });
-    
+
     window.google.accounts.id.renderButton(googleButtonRef.current, {
       theme: "outline",
       size: "large",
