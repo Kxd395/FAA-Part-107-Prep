@@ -112,18 +112,34 @@ export async function POST(request: NextRequest) {
     const rawMessage = error instanceof Error ? error.message : "";
     const audienceMismatch =
       /audience|recipient|wrong recipient|token used too late/i.test(rawMessage);
+    const missingAuthSecret = /APP_AUTH_SECRET must be configured/i.test(rawMessage);
+    const missingGoogleClientId = /No \"client_id\" configured|client[_ ]?id/i.test(rawMessage);
+    const statusCode = missingAuthSecret ? 500 : 401;
+    const code = missingAuthSecret
+      ? "APP_AUTH_SECRET_MISSING"
+      : audienceMismatch
+        ? "GOOGLE_AUDIENCE_MISMATCH"
+        : missingGoogleClientId
+          ? "GOOGLE_CLIENT_ID_MISSING"
+          : "GOOGLE_AUTH_FAILED";
     const errorMessage =
-      process.env.NODE_ENV === "production"
-        ? "Failed to authenticate with Google"
-        : audienceMismatch
+      missingAuthSecret
+        ? "Server authentication is not configured."
+        : process.env.NODE_ENV === "production"
+          ? audienceMismatch
+            ? "Google sign-in configuration mismatch."
+            : "Failed to authenticate with Google"
+          : audienceMismatch
           ? "Google token audience mismatch. Ensure NEXT_PUBLIC_GOOGLE_CLIENT_ID and GOOGLE_CLIENT_ID match, and add this origin to Google OAuth Authorized JavaScript origins."
-          : rawMessage
-            ? `Failed to authenticate with Google: ${rawMessage}`
-            : "Failed to authenticate with Google";
+          : missingGoogleClientId
+            ? "Google client ID is missing. Configure NEXT_PUBLIC_GOOGLE_CLIENT_ID and GOOGLE_CLIENT_ID."
+            : rawMessage
+              ? `Failed to authenticate with Google: ${rawMessage}`
+              : "Failed to authenticate with Google";
 
     return NextResponse.json(
-      { error: errorMessage },
-      { status: 401, headers: rateLimitHeaders(rl) }
+      { error: errorMessage, code },
+      { status: statusCode, headers: rateLimitHeaders(rl) }
     );
   }
 }

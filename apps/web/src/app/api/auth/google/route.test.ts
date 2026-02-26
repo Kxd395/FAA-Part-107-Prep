@@ -114,6 +114,43 @@ describe("POST /api/auth/google", () => {
     expect(response.status).toBe(401);
     const body = await response.json();
     expect(body.error).toMatch(/audience mismatch/i);
+    expect(body.code).toBe("GOOGLE_AUDIENCE_MISMATCH");
     consoleSpy.mockRestore();
+  });
+
+  it("returns explicit server-misconfig code when APP_AUTH_SECRET is missing", async () => {
+    const env = process.env as Record<string, string | undefined>;
+    const previousNodeEnv = env.NODE_ENV;
+    const previousAuthSecret = process.env.APP_AUTH_SECRET;
+    try {
+      env.NODE_ENV = "production";
+      delete process.env.APP_AUTH_SECRET;
+      verifyIdTokenMock.mockResolvedValue({
+        getPayload: () => ({
+          email: "pilot@example.com",
+          email_verified: true,
+        }),
+      });
+
+      const response = await POST(
+        new NextRequest("http://localhost/api/auth/google", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ credential: "id-token" }),
+        })
+      );
+
+      expect(response.status).toBe(500);
+      const body = await response.json();
+      expect(body.code).toBe("APP_AUTH_SECRET_MISSING");
+      expect(body.error).toMatch(/not configured/i);
+    } finally {
+      env.NODE_ENV = previousNodeEnv;
+      if (previousAuthSecret === undefined) {
+        delete process.env.APP_AUTH_SECRET;
+      } else {
+        process.env.APP_AUTH_SECRET = previousAuthSecret;
+      }
+    }
   });
 });
