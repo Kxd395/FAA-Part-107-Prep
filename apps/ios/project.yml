@@ -1,0 +1,44 @@
+name: Part107Prep
+options:
+  minimumXcodeGenVersion: 2.38.0
+  deploymentTarget:
+    iOS: '17.0'
+settings:
+  base:
+    SWIFT_VERSION: '6.0'
+    PRODUCT_BUNDLE_IDENTIFIER: com.kxd395.part107prep
+    INFOPLIST_KEY_CFBundleDisplayName: Part107 Prep
+    CURRENT_PROJECT_VERSION: 1
+    MARKETING_VERSION: 0.1.0
+packages: {}
+targets:
+  Part107Prep:
+    type: application
+    platform: iOS
+    sources:
+      - path: Part107Prep
+        excludes:
+          - ViewModels
+          - Models
+    resources:
+      - Part107Prep/Resources
+    settings:
+      base:
+        PRODUCT_NAME: Part107Prep
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_STYLE: Automatic
+    scheme:
+      testTargets:
+        - Part107PrepTests
+  Part107PrepTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Part107PrepTests
+    dependencies:
+      - target: Part107Prep
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
