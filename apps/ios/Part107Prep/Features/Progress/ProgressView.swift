@@ -6,6 +6,11 @@ struct ProgressView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
+                HStack {
+                    Text("Progress")
+                        .font(.title3.weight(.semibold))
+                    Spacer()
+                }
                 Text("Performance & Confidence")
                     .font(.title3.weight(.semibold))
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -34,7 +39,7 @@ struct ProgressView: View {
                 Spacer()
             }
             .padding()
-            .navigationTitle("Progress")
+            .safeAreaPadding(.bottom, 110)
             .foregroundStyle(BrandColor.textPrimary)
             .brandScreen()
         }

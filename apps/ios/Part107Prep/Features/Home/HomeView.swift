@@ -23,17 +23,7 @@ struct HomeView: View {
                     }
                 }
                 .padding()
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    HStack(spacing: 8) {
-                        Image(systemName: "airplane")
-                        Text("Part 107 Prep")
-                            .font(.headline.weight(.semibold))
-                    }
-                    .foregroundStyle(BrandColor.textPrimary)
-                }
+                .safeAreaPadding(.bottom, 110)
             }
             .foregroundStyle(BrandColor.textPrimary)
             .brandScreen()
@@ -42,6 +32,12 @@ struct HomeView: View {
 
     private var heroSection: some View {
         VStack(spacing: 10) {
+            HStack(spacing: 8) {
+                Image(systemName: "airplane")
+                Text("Part 107 Prep")
+                    .font(.title3.weight(.semibold))
+            }
+            .foregroundStyle(BrandColor.textPrimary)
             Text("Updated for 2026 FAA Rules")
                 .brandChip(active: true)
             Text("Pass Your Part 107 Exam")

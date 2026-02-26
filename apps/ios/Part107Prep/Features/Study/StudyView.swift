@@ -8,6 +8,11 @@ struct StudyView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 14) {
+                    HStack {
+                        Text("Study Mode")
+                            .font(.title3.weight(.semibold))
+                        Spacer()
+                    }
                     topBar
                     progressTrack
                     categorySelector
@@ -26,14 +31,7 @@ struct StudyView: View {
                     }
                 }
                 .padding()
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Study Mode")
-                        .font(.headline.weight(.semibold))
-                        .foregroundStyle(BrandColor.textPrimary)
-                }
+                .safeAreaPadding(.bottom, 110)
             }
             .foregroundStyle(BrandColor.textPrimary)
             .brandScreen()
