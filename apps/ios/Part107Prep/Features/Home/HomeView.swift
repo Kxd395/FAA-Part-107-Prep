@@ -7,81 +7,157 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 20) {
-                    VStack(spacing: 8) {
-                        Text("Part 107 Prep")
-                            .font(.largeTitle.weight(.bold))
-                        Text("Shared backend + local fallback ready")
-                            .foregroundStyle(BrandColor.textMuted)
-                    }
-                    .padding(.top, 24)
-
-                    statRow
-
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Sync")
-                            .font(.headline)
-                        Text(appState.syncStatus)
-                            .font(.footnote)
-                            .foregroundStyle(BrandColor.textMuted)
-                        TextField("Dev user id", text: $devUserId)
-                            .textInputAutocapitalization(.never)
-                            .autocorrectionDisabled()
-                            .textFieldStyle(.roundedBorder)
-                        HStack {
-                            Button("Sign In (Dev)") {
-                                Task { await appState.signInForDevelopment(userId: devUserId) }
-                            }
-                            .buttonStyle(PrimaryBrandButton())
-                            Button("Sign Out") {
-                                Task { await appState.signOut() }
-                            }
-                            .buttonStyle(SecondaryBrandButton())
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .brandCard()
-
-                    if let loadedAt = appState.loadedAt {
-                        Text("Last sync: \(loadedAt.formatted(date: .omitted, time: .shortened))")
-                            .font(.footnote)
-                            .foregroundStyle(BrandColor.textMuted)
-                    }
-
+                VStack(spacing: 18) {
+                    heroSection
+                    actionRow
+                    selectorCard
+                    statsGrid
+                    howItWorks
+                    syncCard
                     if let error = appState.lastError {
                         Text(error)
                             .font(.footnote)
-                            .foregroundStyle(.red)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
+                            .foregroundStyle(Color.red.opacity(0.95))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .brandCard()
                     }
                 }
                 .padding()
             }
-            .navigationTitle("Home")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "airplane")
+                        Text("Part 107 Prep")
+                            .font(.headline.weight(.semibold))
+                    }
+                    .foregroundStyle(BrandColor.textPrimary)
+                }
+            }
             .foregroundStyle(BrandColor.textPrimary)
             .brandScreen()
         }
     }
 
-    private var statRow: some View {
-        HStack(spacing: 12) {
-            statCell(title: "Questions", value: "\(appState.questionCount)")
-            statCell(title: "Pass", value: "70%")
-            statCell(title: "Exam", value: "60 Q")
+    private var heroSection: some View {
+        VStack(spacing: 10) {
+            Text("Updated for 2026 FAA Rules")
+                .brandChip(active: true)
+            Text("Pass Your Part 107 Exam")
+                .font(.system(size: 34, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
+            Text("Free FAA Remote Pilot prep with instant feedback, detailed explanations, and high-res charts.")
+                .font(.callout)
+                .foregroundStyle(BrandColor.textMuted)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 14)
+    }
+
+    private var actionRow: some View {
+        HStack(spacing: 10) {
+            NavigationLink("Start Studying", destination: StudyView(viewModel: appState.studyVM))
+                .buttonStyle(PrimaryBrandButton())
+            NavigationLink("Practice Exam", destination: ExamView())
+                .buttonStyle(SecondaryBrandButton())
         }
     }
 
-    private func statCell(title: String, value: String) -> some View {
-        VStack(spacing: 4) {
-            Text(value)
+    private var selectorCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Practice Question Type")
+                .font(.caption)
+                .foregroundStyle(BrandColor.textMuted)
+            HStack(spacing: 8) {
+                Text("Confirmed Test Questions")
+                    .brandChip(active: true)
+                Text("All Questions")
+                    .brandChip()
+            }
+            Text("Selected: Confirmed Test Questions")
+                .font(.footnote)
+                .foregroundStyle(BrandColor.textPrimary)
+            Text("UAG format is 60 questions, 2.0 hours, 70% passing.")
+                .font(.footnote)
+                .foregroundStyle(BrandColor.textMuted)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .brandCard()
+    }
+
+    private var statsGrid: some View {
+        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+            statCard(title: "Questions", value: "\(appState.questionCount)", subtitle: "Live loaded bank")
+            statCard(title: "Pass Rate", value: "70%", subtitle: "42 of 60 to pass")
+            statCard(title: "Time Limit", value: "2 hrs", subtitle: "120 minutes")
+            statCard(title: "Updated", value: "2026", subtitle: "Source-pack audit year")
+        }
+    }
+
+    private var howItWorks: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("How It Works")
                 .font(.title3.weight(.semibold))
+            FeatureCard(
+                title: "Study Mode",
+                subtitle: "Answer questions with instant feedback and explanation after each answer.",
+                gradient: [BrandColor.card, Color(red: 26 / 255, green: 56 / 255, blue: 106 / 255)],
+                icon: "book.closed"
+            )
+            FeatureCard(
+                title: "Exam Mode",
+                subtitle: "60 questions, 2 hours, final score report and review pass.",
+                gradient: [Color(red: 40 / 255, green: 32 / 255, blue: 84 / 255), Color(red: 66 / 255, green: 39 / 255, blue: 113 / 255)],
+                icon: "target"
+            )
+            FeatureCard(
+                title: "Flashcards",
+                subtitle: "Spaced repetition that resurfaces cards you still struggle with.",
+                gradient: [Color(red: 52 / 255, green: 29 / 255, blue: 69 / 255), Color(red: 93 / 255, green: 39 / 255, blue: 89 / 255)],
+                icon: "rectangle.stack"
+            )
+        }
+    }
+
+    private var syncCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Sync")
+                .font(.headline)
+            Text(appState.syncStatus)
+                .font(.footnote)
+                .foregroundStyle(BrandColor.textMuted)
+            TextField("Dev user id", text: $devUserId)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .textFieldStyle(.roundedBorder)
+            HStack(spacing: 10) {
+                Button("Sign In (Dev)") {
+                    Task { await appState.signInForDevelopment(userId: devUserId) }
+                }
+                .buttonStyle(PrimaryBrandButton())
+                Button("Sign Out") {
+                    Task { await appState.signOut() }
+                }
+                .buttonStyle(SecondaryBrandButton())
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .brandCard()
+    }
+
+    private func statCard(title: String, value: String, subtitle: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(value)
+                .font(.title2.weight(.bold))
             Text(title)
+                .font(.subheadline.weight(.medium))
+            Text(subtitle)
                 .font(.caption)
                 .foregroundStyle(BrandColor.textMuted)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 12)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .brandCard()
     }
 }

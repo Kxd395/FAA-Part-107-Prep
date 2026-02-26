@@ -6,11 +6,19 @@ struct ProgressView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
+                Text("Performance & Confidence")
+                    .font(.title3.weight(.semibold))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
                 if let summary = appState.scoringSummary {
                     statRow(title: "Answers", value: "\(summary.answerCount)")
                     statRow(title: "Correct", value: "\(summary.correctCount)")
                     statRow(title: "First Answer Accuracy", value: "\(summary.firstAnswerAccuracyPercent)%")
                     statRow(title: "Final Answer Accuracy", value: "\(summary.finalAnswerAccuracyPercent)%")
+                    statRow(
+                        title: "Confidence Delta",
+                        value: String(format: "%.1f", summary.confidenceCalibrationDelta)
+                    )
                 } else {
                     ContentUnavailableView(
                         "No Synced Stats Yet",

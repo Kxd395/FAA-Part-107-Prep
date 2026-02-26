@@ -6,72 +6,103 @@ struct StudyView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 16) {
-                categoryPicker
+            ScrollView {
+                VStack(spacing: 14) {
+                    topBar
+                    progressTrack
+                    categorySelector
 
-                if let question = viewModel.currentQuestion {
-                    questionCard(question)
-                    options(question)
-
-                    HStack(spacing: 12) {
-                        Button("Next") {
-                            viewModel.nextQuestion()
-                            Task { await appState.persistStudyDraft() }
-                        }
-                        .buttonStyle(PrimaryBrandButton())
-
-                        Button("Restart") {
-                            viewModel.startOver()
-                            Task { await appState.persistStudyDraft() }
-                        }
-                        .buttonStyle(SecondaryBrandButton())
+                    if let question = viewModel.currentQuestion {
+                        questionCard(question)
+                        options(question)
+                        actionRow
+                    } else {
+                        ContentUnavailableView(
+                            "No Questions",
+                            systemImage: "tray",
+                            description: Text("No matching questions loaded.")
+                        )
+                        .brandCard()
                     }
-                } else {
-                    ContentUnavailableView("No Questions", systemImage: "tray", description: Text("No matching questions loaded."))
                 }
-
-                Spacer()
+                .padding()
             }
-            .padding()
-            .navigationTitle("Study")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Study Mode")
+                        .font(.headline.weight(.semibold))
+                        .foregroundStyle(BrandColor.textPrimary)
+                }
+            }
             .foregroundStyle(BrandColor.textPrimary)
             .brandScreen()
             .onChange(of: viewModel.selectedCategory) { _ in
                 Task { await appState.persistStudyDraft() }
             }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Text("\(viewModel.currentIndex + 1)/\(max(viewModel.filteredQuestions.count, 1))")
-                        .font(.footnote)
-                        .foregroundStyle(BrandColor.textMuted)
+        }
+    }
+
+    private var topBar: some View {
+        HStack {
+            Text("Question \(viewModel.currentIndex + 1) of \(max(viewModel.filteredQuestions.count, 1))")
+                .font(.subheadline)
+                .foregroundStyle(BrandColor.textMuted)
+            Spacer()
+            Text("Score: \(viewModel.correctCount)/\(max(viewModel.attemptedCount, 1))")
+                .font(.subheadline.weight(.semibold))
+        }
+    }
+
+    private var progressTrack: some View {
+        let total = max(1, viewModel.filteredQuestions.count)
+        let progress = CGFloat(viewModel.currentIndex + 1) / CGFloat(total)
+        return GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(BrandColor.cardAlt)
+                    .frame(height: 8)
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(BrandColor.primary)
+                    .frame(width: max(8, geo.size.width * progress), height: 8)
+            }
+        }
+        .frame(height: 8)
+    }
+
+    private var categorySelector: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Category")
+                .font(.caption)
+                .foregroundStyle(BrandColor.textMuted)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    chipButton("All", isActive: viewModel.selectedCategory == nil) {
+                        viewModel.applyCategory(nil)
+                    }
+                    ForEach(StudyCategory.allCases) { category in
+                        chipButton(category.rawValue, isActive: viewModel.selectedCategory == category) {
+                            viewModel.applyCategory(category)
+                        }
+                    }
                 }
             }
         }
-    }
-
-    private var categoryPicker: some View {
-        Picker("Category", selection: Binding(
-            get: { viewModel.selectedCategory },
-            set: { viewModel.applyCategory($0) }
-        )) {
-            Text("All").tag(StudyCategory?.none)
-            ForEach(StudyCategory.allCases) { category in
-                Text(category.rawValue).tag(StudyCategory?.some(category))
-            }
-        }
-        .pickerStyle(.menu)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .brandCard()
     }
 
     private func questionCard(_ question: Question) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(question.category.rawValue)
-                .font(.caption)
-                .foregroundStyle(BrandColor.textMuted)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 8) {
+                Text(question.category.rawValue)
+                    .brandChip(active: true)
+                Text(question.subcategory)
+                    .brandChip()
+            }
             Text(question.questionText)
-                .font(.headline)
-            Text("Score: \(viewModel.scorePercent())%")
-                .font(.caption)
-                .foregroundStyle(BrandColor.textMuted)
+                .font(.title3.weight(.medium))
+                .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .brandCard()
@@ -88,19 +119,20 @@ struct StudyView: View {
                         await appState.refreshScoringSummary()
                     }
                 } label: {
-                    HStack {
+                    HStack(spacing: 12) {
                         Text(option.id)
-                            .font(.subheadline.weight(.semibold))
-                            .frame(width: 28, height: 28)
+                            .font(.subheadline.weight(.bold))
+                            .frame(width: 30, height: 30)
                             .background(BrandColor.backgroundAlt)
                             .clipShape(Circle())
                         Text(option.text)
+                            .font(.body)
                             .multilineTextAlignment(.leading)
                         Spacer()
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(backgroundColor(question: question, optionId: option.id))
+                    .background(optionBackground(question: question, optionId: option.id))
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
                             .stroke(BrandColor.border, lineWidth: 1)
@@ -116,14 +148,37 @@ struct StudyView: View {
                     .font(.footnote)
                     .foregroundStyle(BrandColor.textMuted)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .brandCard()
             }
         }
     }
 
-    private func backgroundColor(question: Question, optionId: String) -> Color {
-        guard viewModel.isAnswerSubmitted else { return BrandColor.card.opacity(0.92) }
+    private var actionRow: some View {
+        HStack(spacing: 10) {
+            Button("Next") {
+                viewModel.nextQuestion()
+                Task { await appState.persistStudyDraft() }
+            }
+            .buttonStyle(PrimaryBrandButton())
+
+            Button("Restart") {
+                viewModel.startOver()
+                Task { await appState.persistStudyDraft() }
+            }
+            .buttonStyle(SecondaryBrandButton())
+        }
+    }
+
+    private func optionBackground(question: Question, optionId: String) -> Color {
+        guard viewModel.isAnswerSubmitted else { return BrandColor.card.opacity(0.95) }
         if optionId == question.correctOptionId { return BrandColor.success }
         if optionId == viewModel.selectedOptionId { return BrandColor.danger }
-        return BrandColor.card.opacity(0.92)
+        return BrandColor.card.opacity(0.95)
+    }
+
+    private func chipButton(_ title: String, isActive: Bool, action: @escaping () -> Void) -> some View {
+        Button(title, action: action)
+            .buttonStyle(.plain)
+            .brandChip(active: isActive)
     }
 }
