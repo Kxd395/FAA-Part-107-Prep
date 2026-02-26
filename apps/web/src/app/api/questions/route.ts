@@ -10,6 +10,8 @@ import loadingPerformanceData from "../../../../../../packages/content/questions
 import { normalizeAcsCodeOnlyQuestions } from "../../../lib/acsQuestionNormalizer";
 import { parseRemoteQuestionSourcePayload } from "../../../lib/questionContracts";
 import { sanitizeQuestion } from "../../../lib/questionSanitizer";
+import { loadCarringtonStrictQuestionBank } from "../../../lib/server/carringtonQuestionBank";
+import { loadPart107QuestionBank } from "../../../lib/server/part107QuestionBank";
 import { consumeRateLimit, rateLimitHeaders } from "../../../lib/server/rateLimit";
 
 export const dynamic = "force-dynamic";
@@ -32,7 +34,85 @@ const LOCAL_QUESTIONS: Question[] = [
   ...(weatherData as Question[]),
   ...(operationsData as Question[]),
   ...(loadingPerformanceData as Question[]),
+  ...loadPart107QuestionBank(),
+  ...loadCarringtonStrictQuestionBank(),
 ];
+
+function slug(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
+function semanticTokenFingerprint(text: string): string {
+  const STOP_WORDS = new Set([
+    "the",
+    "a",
+    "an",
+    "and",
+    "or",
+    "to",
+    "of",
+    "for",
+    "in",
+    "on",
+    "at",
+    "with",
+    "under",
+    "part",
+    "what",
+    "which",
+    "when",
+    "where",
+    "how",
+    "is",
+    "are",
+    "does",
+    "must",
+    "may",
+    "can",
+    "should",
+    "would",
+    "be",
+    "by",
+    "from",
+    "that",
+  ]);
+  const tokens = text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter((token) => token.length >= 3 && !STOP_WORDS.has(token));
+  const unique = Array.from(new Set(tokens));
+  unique.sort((a, b) => a.localeCompare(b));
+  return unique.slice(0, 8).join("_");
+}
+
+function deriveConceptKey(question: Question): string | null {
+  if (typeof question.concept_key === "string" && question.concept_key.trim()) {
+    return question.concept_key.trim();
+  }
+
+  const topic = slug(question.subcategory || question.category || "general");
+  if (question.acs_code && question.acs_code.trim()) {
+    return `acs:${question.acs_code.trim().toUpperCase()}|${topic}`;
+  }
+
+  const citation = `${question.citation ?? ""} ${question.source ?? ""}`.trim();
+  const cfr = citation.match(/14\s*cfr(?:\s*part)?\s*(?:§\s*)?(\d+(?:\.\d+)?)/i);
+  if (cfr) {
+    return `cfr:${cfr[1]}|${topic}`;
+  }
+
+  const fingerprint = semanticTokenFingerprint(question.question_text ?? "");
+  if (fingerprint) {
+    return `sem:${topic}|${fingerprint}`;
+  }
+
+  return `sem:${topic}|${slug(question.id || "unknown")}`;
+}
 
 function parseBoolean(input: string | null): boolean {
   if (!input) return false;
@@ -80,8 +160,12 @@ export async function GET(request: NextRequest) {
       : LOCAL_QUESTIONS;
     const sanitizedQuestions = baseQuestions.map((question) => sanitizeQuestion(question));
     const normalizedQuestions = normalizeAcsCodeOnlyQuestions(sanitizedQuestions);
+    const conceptEnrichedQuestions = normalizedQuestions.map((question) => ({
+      ...question,
+      concept_key: deriveConceptKey(question),
+    }));
 
-    let questions = filterQuestionsByCategory(normalizedQuestions, normalizedCategory);
+    let questions = filterQuestionsByCategory(conceptEnrichedQuestions, normalizedCategory);
     if (shouldShuffle) {
       questions = shuffleQuestions(questions);
     }
