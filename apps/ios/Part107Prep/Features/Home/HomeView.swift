@@ -49,9 +49,6 @@ struct HomeView: View {
             .foregroundStyle(BrandColor.textPrimary)
             Text("Updated for 2026 FAA Rules")
                 .brandChip(active: true)
-            Text("Pass Your Part 107 Exam")
-                .font(.system(size: isPadLayout ? 72 : 30, weight: .bold, design: .rounded))
-                .multilineTextAlignment(.center)
             Text("Free FAA Remote Pilot prep with instant feedback, detailed explanations, and high-res charts.")
                 .font(.callout)
                 .foregroundStyle(BrandColor.textMuted)
@@ -142,7 +139,7 @@ struct HomeView: View {
                 .font(.title3.weight(.semibold))
             LazyVGrid(
                 columns: isPadLayout
-                    ? [GridItem(.flexible()), GridItem(.flexible())]
+                    ? [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
                     : [GridItem(.flexible())],
                 spacing: isPadLayout ? 12 : 8
             ) {
