@@ -6,15 +6,16 @@ struct HomeView: View {
     @State private var devUserId: String = "pilot_user_1"
 
     private var isPadLayout: Bool { horizontalSizeClass == .regular }
+    private var contentWidth: CGFloat { isPadLayout ? 1240 : 560 }
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: isPadLayout ? 20 : 14) {
-                    VStack(spacing: isPadLayout ? 18 : 12) {
+                VStack(spacing: isPadLayout ? 14 : 12) {
+                    VStack(spacing: isPadLayout ? 12 : 10) {
                         heroSection
                         actionRow
-                        selectorCard
+                        iPadTopRow
                         statsGrid
                         howItWorks
                         syncCard
@@ -26,11 +27,11 @@ struct HomeView: View {
                                 .brandCard()
                         }
                     }
-                    .frame(maxWidth: isPadLayout ? 1100 : 560)
+                    .frame(maxWidth: contentWidth)
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.horizontal, isPadLayout ? 24 : 12)
-                .padding(.top, isPadLayout ? 8 : 2)
+                .padding(.horizontal, isPadLayout ? 18 : 12)
+                .padding(.top, isPadLayout ? 6 : 2)
                 .safeAreaPadding(.bottom, isPadLayout ? 48 : 92)
             }
             .foregroundStyle(BrandColor.textPrimary)
@@ -49,7 +50,7 @@ struct HomeView: View {
             Text("Updated for 2026 FAA Rules")
                 .brandChip(active: true)
             Text("Pass Your Part 107 Exam")
-                .font(.system(size: isPadLayout ? 52 : 30, weight: .bold, design: .rounded))
+                .font(.system(size: isPadLayout ? 72 : 30, weight: .bold, design: .rounded))
                 .multilineTextAlignment(.center)
             Text("Free FAA Remote Pilot prep with instant feedback, detailed explanations, and high-res charts.")
                 .font(.callout)
@@ -57,7 +58,7 @@ struct HomeView: View {
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
-        .padding(.top, 14)
+        .padding(.top, isPadLayout ? 6 : 10)
     }
 
     private var actionRow: some View {
@@ -67,7 +68,20 @@ struct HomeView: View {
             NavigationLink("Practice Exam", destination: ExamView())
                 .buttonStyle(SecondaryBrandButton())
         }
-        .frame(maxWidth: isPadLayout ? 680 : .infinity)
+        .frame(maxWidth: isPadLayout ? 920 : .infinity)
+    }
+
+    private var iPadTopRow: some View {
+        Group {
+            if isPadLayout {
+                HStack(spacing: 10) {
+                    selectorCard
+                    quickFactsCard
+                }
+            } else {
+                selectorCard
+            }
+        }
     }
 
     private var selectorCard: some View {
@@ -92,8 +106,29 @@ struct HomeView: View {
         .brandCard()
     }
 
+    private var quickFactsCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Session Defaults")
+                .font(.caption)
+                .foregroundStyle(BrandColor.textMuted)
+            HStack(spacing: 8) {
+                Text("Batch 20").brandChip(active: true)
+                Text("Exam 60").brandChip()
+                Text("Goal 70%").brandChip()
+            }
+            Text("Study + exam setup mirrors web defaults.")
+                .font(.footnote)
+                .foregroundStyle(BrandColor.textMuted)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .brandCard()
+    }
+
     private var statsGrid: some View {
-        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: isPadLayout ? 14 : 8) {
+        let columns = isPadLayout
+            ? [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+            : [GridItem(.flexible()), GridItem(.flexible())]
+        return LazyVGrid(columns: columns, spacing: isPadLayout ? 10 : 8) {
             statCard(title: "Questions", value: "\(appState.questionCount)", subtitle: "Live loaded bank")
             statCard(title: "Pass Rate", value: "70%", subtitle: "42 of 60 to pass")
             statCard(title: "Time Limit", value: "2 hrs", subtitle: "120 minutes")
@@ -115,19 +150,22 @@ struct HomeView: View {
                     title: "Study Mode",
                     subtitle: "Answer questions with instant feedback and explanation after each answer.",
                     gradient: [BrandColor.card, Color(red: 26 / 255, green: 56 / 255, blue: 106 / 255)],
-                    icon: "book.closed"
+                    icon: "book.closed",
+                    minHeight: isPadLayout ? 98 : 112
                 )
                 FeatureCard(
                     title: "Exam Mode",
                     subtitle: "60 questions, 2 hours, final score report and review pass.",
                     gradient: [Color(red: 40 / 255, green: 32 / 255, blue: 84 / 255), Color(red: 66 / 255, green: 39 / 255, blue: 113 / 255)],
-                    icon: "target"
+                    icon: "target",
+                    minHeight: isPadLayout ? 98 : 112
                 )
                 FeatureCard(
                     title: "Flashcards",
                     subtitle: "Spaced repetition that resurfaces cards you still struggle with.",
                     gradient: [Color(red: 52 / 255, green: 29 / 255, blue: 69 / 255), Color(red: 93 / 255, green: 39 / 255, blue: 89 / 255)],
-                    icon: "rectangle.stack"
+                    icon: "rectangle.stack",
+                    minHeight: isPadLayout ? 98 : 112
                 )
             }
         }
@@ -162,7 +200,7 @@ struct HomeView: View {
     private func statCard(title: String, value: String, subtitle: String) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(value)
-                .font(.title2.weight(.bold))
+                .font(isPadLayout ? .title3.weight(.bold) : .title2.weight(.bold))
             Text(title)
                 .font(.subheadline.weight(.medium))
             Text(subtitle)

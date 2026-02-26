@@ -64,6 +64,7 @@ struct FeatureCard: View {
     let subtitle: String
     let gradient: [Color]
     let icon: String
+    let minHeight: CGFloat
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -77,7 +78,7 @@ struct FeatureCard: View {
                 .foregroundStyle(BrandColor.textMuted)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .frame(maxWidth: .infinity, minHeight: 118, alignment: .leading)
+        .frame(maxWidth: .infinity, minHeight: minHeight, alignment: .leading)
         .padding()
         .background(
             LinearGradient(colors: gradient, startPoint: .topLeading, endPoint: .bottomTrailing)
