@@ -45,14 +45,22 @@ final class StudySessionViewModel: ObservableObject {
         resetSessionProgress()
     }
 
-    func submitAnswer(_ optionId: String) {
-        guard let question = currentQuestion, !isAnswerSubmitted else { return }
+    struct SubmitResult {
+        let question: Question
+        let selectedOptionId: String
+        let isCorrect: Bool
+    }
+
+    func submitAnswer(_ optionId: String) -> SubmitResult? {
+        guard let question = currentQuestion, !isAnswerSubmitted else { return nil }
         selectedOptionId = optionId
         isAnswerSubmitted = true
         attemptedCount += 1
-        if question.correctOptionId == optionId {
+        let isCorrect = question.correctOptionId == optionId
+        if isCorrect {
             correctCount += 1
         }
+        return SubmitResult(question: question, selectedOptionId: optionId, isCorrect: isCorrect)
     }
 
     func nextQuestion() {
@@ -64,6 +72,37 @@ final class StudySessionViewModel: ObservableObject {
 
     func startOver() {
         resetSessionProgress()
+    }
+
+    func snapshot() -> StudyDraftSnapshot {
+        StudyDraftSnapshot(
+            category: selectedCategory?.rawValue,
+            currentIndex: currentIndex,
+            selectedOptionId: selectedOptionId,
+            isAnswerSubmitted: isAnswerSubmitted,
+            correctCount: correctCount,
+            attemptedCount: attemptedCount,
+            updatedAt: ISO8601DateFormatter().string(from: Date())
+        )
+    }
+
+    func restore(from snapshot: StudyDraftSnapshot) {
+        if let categoryName = snapshot.category,
+           let restoredCategory = StudyCategory(rawValue: categoryName) {
+            applyCategory(restoredCategory)
+        } else {
+            applyCategory(nil)
+        }
+
+        if filteredQuestions.isEmpty {
+            return
+        }
+
+        currentIndex = max(0, min(snapshot.currentIndex, filteredQuestions.count - 1))
+        selectedOptionId = snapshot.selectedOptionId
+        isAnswerSubmitted = snapshot.isAnswerSubmitted
+        correctCount = max(0, snapshot.correctCount)
+        attemptedCount = max(0, snapshot.attemptedCount)
     }
 
     func scorePercent() -> Int {

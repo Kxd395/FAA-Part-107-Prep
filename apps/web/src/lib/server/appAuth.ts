@@ -83,15 +83,33 @@ export function getAuthTtlSeconds(): number {
   return AUTH_TTL_SECONDS;
 }
 
+function getTokenFromAuthorizationHeader(request: NextRequest): string {
+  const authorization = request.headers.get("authorization")?.trim() ?? "";
+  if (!authorization) return "";
+  const match = authorization.match(/^Bearer\s+(.+)$/i);
+  return match?.[1]?.trim() ?? "";
+}
+
+function getSessionTokenFromRequest(request: NextRequest): string {
+  const cookieToken = request.cookies.get(AUTH_COOKIE_NAME)?.value ?? "";
+  if (cookieToken) return cookieToken;
+
+  const bearerToken = getTokenFromAuthorizationHeader(request);
+  if (bearerToken) return bearerToken;
+
+  const headerToken = request.headers.get("x-part107-auth-token")?.trim() ?? "";
+  return headerToken;
+}
+
 export function getAuthenticatedUserId(request: NextRequest): string | null {
-  const token = request.cookies.get(AUTH_COOKIE_NAME)?.value ?? "";
+  const token = getSessionTokenFromRequest(request);
   if (!token) return null;
   const payload = verifyAppSessionToken(token);
   return payload?.uid ?? null;
 }
 
 export function getAuthenticatedSession(request: NextRequest): AuthPayload | null {
-  const token = request.cookies.get(AUTH_COOKIE_NAME)?.value ?? "";
+  const token = getSessionTokenFromRequest(request);
   if (!token) return null;
   return verifyAppSessionToken(token);
 }

@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct StudyView: View {
+    @EnvironmentObject private var appState: AppState
     @ObservedObject var viewModel: StudySessionViewModel
 
     var body: some View {
@@ -15,11 +16,13 @@ struct StudyView: View {
                     HStack(spacing: 12) {
                         Button("Next") {
                             viewModel.nextQuestion()
+                            Task { await appState.persistStudyDraft() }
                         }
                         .buttonStyle(.borderedProminent)
 
                         Button("Restart") {
                             viewModel.startOver()
+                            Task { await appState.persistStudyDraft() }
                         }
                         .buttonStyle(.bordered)
                     }
@@ -31,6 +34,9 @@ struct StudyView: View {
             }
             .padding()
             .navigationTitle("Study")
+            .onChange(of: viewModel.selectedCategory) { _ in
+                Task { await appState.persistStudyDraft() }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Text("\(viewModel.currentIndex + 1)/\(max(viewModel.filteredQuestions.count, 1))")
@@ -75,7 +81,12 @@ struct StudyView: View {
         VStack(spacing: 10) {
             ForEach(question.options) { option in
                 Button {
-                    viewModel.submitAnswer(option.id)
+                    guard let result = viewModel.submitAnswer(option.id) else { return }
+                    Task {
+                        await appState.trackAnswer(result: result)
+                        await appState.persistStudyDraft()
+                        await appState.refreshScoringSummary()
+                    }
                 } label: {
                     HStack {
                         Text(option.id)

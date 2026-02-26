@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var appState: AppState
+    @State private var devUserId: String = "pilot_user_1"
 
     var body: some View {
         NavigationStack {
@@ -16,6 +17,32 @@ struct HomeView: View {
                     .padding(.top, 24)
 
                     statRow
+
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Sync")
+                            .font(.headline)
+                        Text(appState.syncStatus)
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                        TextField("Dev user id", text: $devUserId)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                            .textFieldStyle(.roundedBorder)
+                        HStack {
+                            Button("Sign In (Dev)") {
+                                Task { await appState.signInForDevelopment(userId: devUserId) }
+                            }
+                            .buttonStyle(.borderedProminent)
+                            Button("Sign Out") {
+                                Task { await appState.signOut() }
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(.thinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
 
                     if let loadedAt = appState.loadedAt {
                         Text("Last sync: \(loadedAt.formatted(date: .omitted, time: .shortened))")
