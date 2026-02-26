@@ -4,6 +4,30 @@ import { clearRateLimitStoreForTests } from "../../../lib/server/rateLimit";
 
 import { GET } from "./route";
 
+function normalizeOptionText(value: unknown): string {
+  return String(value ?? "")
+    .toLowerCase()
+    .replace(/^[a-d][).:-]\s*/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function questionSignature(question: {
+  question_text?: unknown;
+  options?: Array<{ text?: unknown }>;
+  correct_option_id?: unknown;
+}): string {
+  const stem = String(question.question_text ?? "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+  const options = Array.isArray(question.options)
+    ? question.options.map((option) => normalizeOptionText(option?.text))
+    : [];
+  const answer = String(question.correct_option_id ?? "").trim().toUpperCase();
+  return [stem, ...options, answer].join("||");
+}
+
 describe("GET /api/questions", () => {
   const originalEnv = process.env.QUESTION_SOURCE_URL;
 
@@ -24,6 +48,31 @@ describe("GET /api/questions", () => {
     expect(Array.isArray(body.questions)).toBe(true);
     expect(body.questions.length).toBeLessThanOrEqual(5);
     expect(body.meta.source).toBe("local");
+  });
+
+  it("defaults to strict-only Carrington with no duplicate IDs/signatures", async () => {
+    delete process.env.QUESTION_SOURCE_URL;
+    const response = await GET(new NextRequest("http://localhost/api/questions?category=All"));
+    const body = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(body.meta.source).toBe("local");
+    expect(body.questions.length).toBeGreaterThanOrEqual(250);
+    expect(body.questions.length).toBeLessThanOrEqual(320);
+
+    const nonStrictCarrington = body.questions.filter((question: { source?: string }) =>
+      String(question.source ?? "").toLowerCase().startsWith("carrington-question-bank") &&
+      !String(question.source ?? "").toLowerCase().startsWith("carrington-question-bank-strict")
+    );
+    expect(nonStrictCarrington).toHaveLength(0);
+
+    const ids = body.questions.map((question: { id?: string }) => question.id);
+    expect(new Set(ids).size).toBe(ids.length);
+
+    const signatures = body.questions.map((question: { question_text?: string; options?: Array<{ text?: string }>; correct_option_id?: string }) =>
+      questionSignature(question)
+    );
+    expect(new Set(signatures).size).toBe(signatures.length);
   });
 
   it("returns 500 for malformed remote payload", async () => {

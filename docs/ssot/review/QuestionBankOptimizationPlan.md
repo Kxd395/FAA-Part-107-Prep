@@ -4,20 +4,25 @@ Generated: 2026-02-26
 
 ## Executive Summary
 
-- The current API default pool is **622 questions**.
-- The `622` is correct and comes from:
+- Historical default API pool was **622 questions**.
+- That `622` came from:
   - Core JSON packs: `77`
   - Part107 bank: `100`
   - Carrington bank: `342`
   - Carrington strict bank: `103`
 - There are **103 exact duplicates** in the served pool.
 - Root cause: `carrington` and `carrington_strict` are both loaded at the same time, and strict entries are duplicates of Carrington question stems/options/answers.
+- Current implemented default is **280 questions**:
+  - Core JSON packs: `77`
+  - Part107 bank: `100`
+  - Carrington strict bank: `103`
+  - Full Carrington bank (`342`) is archived from default delivery.
 
 ## Audit Findings
 
-## 1) Why the app reports 622
+## 1) Why the app used to report 622
 
-The questions API currently builds one combined local array containing all four banks:
+The questions API previously built one combined local array containing all four banks:
 
 - Core (`packages/content/questions/*.json`)
 - `part107_question_bank.json`
@@ -28,7 +33,7 @@ This sums to `77 + 100 + 342 + 103 = 622`.
 
 ## 2) Duplicate profile
 
-- Total rows in current combined pool: `622`
+- Total rows in historical combined pool: `622`
 - Unique by exact question signature (stem + options + answer): `519`
 - Duplicates removed by exact de-duplication: `103`
 - Duplicate groups: `103`
@@ -47,23 +52,21 @@ Impact:
 
 ## Recommended Direction
 
-Use **one active source pack at a time** for user-facing sessions, and never merge strict + non-strict into a single default pool.
+Use **one active Carrington variant at a time** for user-facing sessions, and never merge strict + non-strict in a default pool.
 
-Recommended default policy:
-- Keep default pool as `core + part107 + carrington` (519 unique now).
-- Make `carrington_strict` opt-in profile only.
-
-Alternative policy:
-- Replace `carrington` with `carrington_strict` for a smaller, curated default (`280` total rows).
+Implemented default policy:
+- Keep default pool as `core + part107 + carrington_strict` (`280` total rows).
+- Archive full `carrington` from default delivery.
 
 ## Phased Plan
 
 ## Phase 0: Immediate Safety Fix (same day)
 
-1. Stop loading `carrington_strict` in the default local pool.
-2. Add API guard test: served question IDs must be unique.
-3. Add API guard test: no exact duplicate question signatures in default pool.
-4. Emit `meta.rawTotal` and `meta.servedTotal` in `/api/questions` for transparency.
+1. Stop loading full `carrington` in the default local pool.
+2. Keep `carrington_strict` as the only Carrington default source pack.
+3. Add API guard test: served question IDs must be unique.
+4. Add API guard test: no exact duplicate question signatures in default pool.
+5. Emit `meta.rawTotal` and `meta.servedTotal` in `/api/questions` for transparency.
 
 Exit criteria:
 - Default `All` pool has no exact duplicates.
@@ -108,8 +111,8 @@ Exit criteria:
 Product/Content needs to decide:
 
 1. Default learning mode:
-   - `core + part107 + carrington` (broader, 519 unique), or
-   - `core + part107 + carrington_strict` (tighter, 280 total).
+   - `core + part107 + carrington_strict` (implemented, 280 total), or
+   - `core + part107 + carrington` (broader, 519 unique, currently archived from default).
 2. Should strict be user-selectable only, or internal only?
 3. Should mixed-pack mode ever be exposed to end users?
 
