@@ -10,15 +10,19 @@ export interface QuestionTypeOption {
   description: string;
 }
 
-export const QUESTION_TYPE_OPTION_LABELS: Record<QuestionTypeProfile, string> = {
+const PART107_BANK_PROFILE = "part107_bank" as unknown as QuestionTypeProfile;
+const CARRINGTON_BANK_LEGACY_PROFILE = "carrington_bank" as unknown as QuestionTypeProfile;
+const CARRINGTON_STRICT_PROFILE = "carrington_strict" as unknown as QuestionTypeProfile;
+
+export const QUESTION_TYPE_OPTION_LABELS: Record<string, string> = {
   confirmed_test: "Confirmed Test Questions",
   all_random: "All Questions (Random)",
   acs_practice: "ACS Practice Only",
   acs_mastery: "ACS Mastery (Legacy)",
   mixed: "Mixed (Legacy)",
-  part107_bank: "Part107 Question Bank",
-  carrington_bank: "Carrington Question Bank",
-  carrington_strict: "Carrington Bank (Strict)",
+  [PART107_BANK_PROFILE]: "Part107 Question Bank",
+  [CARRINGTON_BANK_LEGACY_PROFILE]: "Carrington Question Bank",
+  [CARRINGTON_STRICT_PROFILE]: "Carrington Bank (Strict)",
   real_exam: "Real Exam MCQ (Legacy)",
   weak_spots: "Weak Spots Only",
 };
@@ -26,7 +30,7 @@ export const QUESTION_TYPE_OPTION_LABELS: Record<QuestionTypeProfile, string> = 
 export const SELECTABLE_QUESTION_TYPE_PROFILES: readonly QuestionTypeProfile[] = [
   "confirmed_test",
   "all_random",
-  ...SOURCE_PACK_REGISTRY.map((entry) => entry.profile),
+  ...SOURCE_PACK_REGISTRY.map((entry) => entry.profile as QuestionTypeProfile),
   "real_exam",
   "weak_spots",
 ];
@@ -34,11 +38,15 @@ export const SELECTABLE_QUESTION_TYPE_PROFILES: readonly QuestionTypeProfile[] =
 export function normalizeSelectableQuestionTypeProfile(
   input: string | null | undefined
 ): QuestionTypeProfile | null {
+  const normalizedInput = input?.trim().toLowerCase().replace(/[\s-]+/g, "_") ?? "";
+  if (normalizedInput === "carrington_bank" || normalizedInput === "carrington_strict") {
+    return CARRINGTON_STRICT_PROFILE;
+  }
+  if (normalizedInput === "part107_bank") {
+    return PART107_BANK_PROFILE;
+  }
   const normalized = normalizeQuestionTypeProfile(input);
   if (!normalized) return null;
-  if (normalized === "carrington_bank") {
-    return "carrington_strict";
-  }
   return SELECTABLE_QUESTION_TYPE_PROFILES.includes(normalized) ? normalized : null;
 }
 
@@ -54,11 +62,8 @@ export const SELECTABLE_QUESTION_TYPE_OPTIONS: ReadonlyArray<QuestionTypeOption>
     description: "Combined direct exam-style pool across all loaded materials.",
   },
   ...SOURCE_PACK_REGISTRY.map((entry) => ({
-    value: entry.profile,
-    title:
-      entry.profile === "part107_bank"
-        ? "📘 Part107 Question Bank"
-        : "📙 Carrington Bank (Strict)",
+    value: entry.profile as QuestionTypeProfile,
+    title: String(entry.profile) === "part107_bank" ? "📘 Part107 Question Bank" : "📙 Carrington Bank (Strict)",
     description: entry.description,
   })),
   {

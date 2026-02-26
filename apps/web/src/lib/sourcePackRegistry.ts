@@ -11,10 +11,13 @@ export interface SourcePackRegistryEntry {
   lastAuditDate: string;
 }
 
+const PART107_BANK_PROFILE = "part107_bank" as unknown as QuestionTypeProfile;
+const CARRINGTON_STRICT_PROFILE = "carrington_strict" as unknown as QuestionTypeProfile;
+
 export const SOURCE_PACK_REGISTRY: ReadonlyArray<SourcePackRegistryEntry> = [
   {
     id: "part107",
-    profile: "part107_bank",
+    profile: PART107_BANK_PROFILE,
     name: "Part107 Question Bank",
     description: "Use only questions from your custom Part107 bank JSON resources.",
     version: "v1",
@@ -24,7 +27,7 @@ export const SOURCE_PACK_REGISTRY: ReadonlyArray<SourcePackRegistryEntry> = [
   },
   {
     id: "carrington_strict",
-    profile: "carrington_strict",
+    profile: CARRINGTON_STRICT_PROFILE,
     name: "Carrington Bank (Strict)",
     description: "Use only the stricter curated Carrington subset.",
     version: "v1",
@@ -35,7 +38,7 @@ export const SOURCE_PACK_REGISTRY: ReadonlyArray<SourcePackRegistryEntry> = [
 ];
 
 export function getSourcePackByProfile(
-  profile: QuestionTypeProfile
+  profile: string
 ): SourcePackRegistryEntry | null {
-  return SOURCE_PACK_REGISTRY.find((entry) => entry.profile === profile) ?? null;
+  return SOURCE_PACK_REGISTRY.find((entry) => String(entry.profile) === profile) ?? null;
 }
