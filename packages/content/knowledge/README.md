@@ -10,6 +10,7 @@ Canonical runtime files:
 - `carrington_question_bank.json` (retained for tooling/legacy profile support)
 - `combined_question_bank.canonical.json` (normalized merged runtime bank)
 - `knokegeupdate_question_bank.curated.json` (curated non-regulation supplement imported from `knokegeUpdate/more questions.docx`)
+- `runtime_question_bank.json` (single runtime artifact consumed by `/api/questions` local mode)
 
 Canonical local category packs:
 
@@ -24,8 +25,10 @@ Notes:
 - App loaders prefer this folder first.
 - Loaders keep a fallback to `docs/ssot/review/*` for backward compatibility.
 - Review reports and extraction scripts may still write to `docs/ssot/review`.
-- `/api/questions` local mode serves canonical + curated supplement (deduped/gated by loader).
+- `/api/questions` local mode serves `runtime_question_bank.json` first.
 - Regenerate canonical merged bank with:
   - `npm run build:combined-canonical --workspace=@part107/content`
 - Regenerate knokegeUpdate supplement with:
   - `npm run build:knokegeupdate-supplement --workspace=@part107/content`
+- Regenerate runtime artifact with:
+  - `npm run build:runtime-bank --workspace=@part107/content`

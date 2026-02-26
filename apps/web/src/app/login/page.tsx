@@ -162,8 +162,11 @@ function LoginContent() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ credential: response.credential }),
           });
-          const data = await res.json();
-          if (!res.ok) throw new Error(data.error || "Failed to sign in with Google");
+          const data = (await res.json()) as { error?: string; code?: string };
+          if (!res.ok) {
+            const baseMessage = data.error || "Failed to sign in with Google";
+            throw new Error(data.code ? `${baseMessage} [${data.code}]` : baseMessage);
+          }
           await refreshSession();
         } catch (err) {
           setStatus(err instanceof Error ? err.message : "Google sign in failed");

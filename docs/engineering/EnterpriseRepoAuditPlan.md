@@ -88,6 +88,16 @@ This plan covers engineering standards, CI governance, type safety gates, test r
   - question issue triage summary route auth/response shape
   - progress triage panel rendering against `/api/user/question-issues/summary`
 
+9. Runtime bank and auth reliability hardening
+- Added a single runtime question-bank artifact:
+  - `packages/content/knowledge/runtime_question_bank.json`
+- Added runtime artifact build/check script:
+  - `packages/content/scripts/build-runtime-question-bank.js`
+  - validation gate now enforces runtime artifact freshness (`--check`).
+- Updated API question contract test to avoid stale fixed-size assumptions and track runtime-scale bounds.
+- Updated login Google error surfacing to include server diagnostic code (e.g. `GOOGLE_AUDIENCE_MISMATCH`, `APP_AUTH_SECRET_MISSING`).
+- Untracked mutable runtime `.data` files from git index and added workspace ignore for `apps/web/.data/`.
+
 ## Remaining Optimization Backlog
 
 ### P1 (Next)

@@ -120,6 +120,14 @@ function dedupeQuestions(questions: Question[], webPublicDir: string): Question[
 export function loadCombinedQuestionBank(): Question[] {
   const repoRoot = path.resolve(process.cwd(), "../..");
   const webPublicDir = path.join(repoRoot, "apps/web/public");
+  const runtimeArtifactPath = path.join(
+    repoRoot,
+    "packages/content/knowledge/runtime_question_bank.json"
+  );
+  const runtimeArtifact = loadQuestionArray(runtimeArtifactPath);
+  if (runtimeArtifact && runtimeArtifact.length > 0) {
+    return runtimeArtifact;
+  }
   const baseCandidates = [
     path.join(repoRoot, "packages/content/knowledge/combined_question_bank.canonical.json"),
     path.join(repoRoot, "docs/ssot/review/knokegeUpdate/combined_question_bank.json"),

@@ -58,7 +58,7 @@ describe("GET /api/questions", () => {
     expect(response.status).toBe(200);
     expect(body.meta.source).toBe("local");
     expect(body.questions.length).toBeGreaterThanOrEqual(100);
-    expect(body.questions.length).toBeLessThanOrEqual(130);
+    expect(body.questions.length).toBeLessThanOrEqual(500);
 
     const nonStrictCarrington = body.questions.filter((question: { source?: string }) =>
       String(question.source ?? "").toLowerCase().startsWith("carrington-question-bank") &&

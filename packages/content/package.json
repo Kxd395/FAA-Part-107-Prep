@@ -8,7 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "validate": "node scripts/validate-questions.js && node scripts/audit-figure-context.js && node scripts/audit-carrington-citations.js && node scripts/audit-collection-health.js && node scripts/audit-deck-overlap.js",
+    "validate": "node scripts/validate-questions.js && node scripts/build-runtime-question-bank.js --check && node scripts/audit-figure-context.js && node scripts/audit-carrington-citations.js && node scripts/audit-collection-health.js && node scripts/audit-deck-overlap.js",
     "audit:figures": "node scripts/audit-figure-context.js",
     "audit:carrington": "node scripts/audit-carrington-citations.js",
     "audit:collection-health": "node scripts/audit-collection-health.js",
@@ -19,6 +19,7 @@
     "import:remote-pilot-images": "node scripts/import-remote-pilot-images.js",
     "build:combined-canonical": "node scripts/build-combined-canonical-bank.js",
     "build:knokegeupdate-supplement": "node scripts/build-knokegeupdate-supplement.js",
+    "build:runtime-bank": "node scripts/build-runtime-question-bank.js",
     "stats": "node scripts/question-stats.js",
     "sanitize": "node scripts/sanitize-questions.js"
   },
