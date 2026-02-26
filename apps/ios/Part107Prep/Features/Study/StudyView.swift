@@ -2,36 +2,44 @@ import SwiftUI
 
 struct StudyView: View {
     @EnvironmentObject private var appState: AppState
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @ObservedObject var viewModel: StudySessionViewModel
+
+    private var isPadLayout: Bool { horizontalSizeClass == .regular }
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 14) {
-                    HStack {
-                        Text("Study Mode")
-                            .font(.title3.weight(.semibold))
-                        Spacer()
-                    }
-                    topBar
-                    progressTrack
-                    categorySelector
+                VStack(spacing: isPadLayout ? 18 : 12) {
+                    VStack(spacing: isPadLayout ? 16 : 12) {
+                        HStack {
+                            Text("Study Mode")
+                                .font(isPadLayout ? .title2.weight(.semibold) : .title3.weight(.semibold))
+                            Spacer()
+                        }
+                        topBar
+                        progressTrack
+                        categorySelector
 
-                    if let question = viewModel.currentQuestion {
-                        questionCard(question)
-                        options(question)
-                        actionRow
-                    } else {
-                        ContentUnavailableView(
-                            "No Questions",
-                            systemImage: "tray",
-                            description: Text("No matching questions loaded.")
-                        )
-                        .brandCard()
+                        if let question = viewModel.currentQuestion {
+                            questionCard(question)
+                            options(question)
+                            actionRow
+                        } else {
+                            ContentUnavailableView(
+                                "No Questions",
+                                systemImage: "tray",
+                                description: Text("No matching questions loaded.")
+                            )
+                            .brandCard()
+                        }
                     }
+                    .frame(maxWidth: isPadLayout ? 980 : 560)
                 }
-                .padding()
-                .safeAreaPadding(.bottom, 110)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, isPadLayout ? 24 : 12)
+                .padding(.top, isPadLayout ? 8 : 2)
+                .safeAreaPadding(.bottom, isPadLayout ? 48 : 92)
             }
             .foregroundStyle(BrandColor.textPrimary)
             .brandScreen()
@@ -99,7 +107,7 @@ struct StudyView: View {
                     .brandChip()
             }
             Text(question.questionText)
-                .font(.title3.weight(.medium))
+                .font(isPadLayout ? .title2.weight(.medium) : .title3.weight(.medium))
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -124,7 +132,7 @@ struct StudyView: View {
                             .background(BrandColor.backgroundAlt)
                             .clipShape(Circle())
                         Text(option.text)
-                            .font(.body)
+                            .font(isPadLayout ? .title3 : .body)
                             .multilineTextAlignment(.leading)
                         Spacer()
                     }

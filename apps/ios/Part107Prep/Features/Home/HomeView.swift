@@ -2,28 +2,36 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var appState: AppState
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var devUserId: String = "pilot_user_1"
+
+    private var isPadLayout: Bool { horizontalSizeClass == .regular }
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 18) {
-                    heroSection
-                    actionRow
-                    selectorCard
-                    statsGrid
-                    howItWorks
-                    syncCard
-                    if let error = appState.lastError {
-                        Text(error)
-                            .font(.footnote)
-                            .foregroundStyle(Color.red.opacity(0.95))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .brandCard()
+                VStack(spacing: isPadLayout ? 20 : 14) {
+                    VStack(spacing: isPadLayout ? 18 : 12) {
+                        heroSection
+                        actionRow
+                        selectorCard
+                        statsGrid
+                        howItWorks
+                        syncCard
+                        if let error = appState.lastError {
+                            Text(error)
+                                .font(.footnote)
+                                .foregroundStyle(Color.red.opacity(0.95))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .brandCard()
+                        }
                     }
+                    .frame(maxWidth: isPadLayout ? 1100 : 560)
                 }
-                .padding()
-                .safeAreaPadding(.bottom, 110)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, isPadLayout ? 24 : 12)
+                .padding(.top, isPadLayout ? 8 : 2)
+                .safeAreaPadding(.bottom, isPadLayout ? 48 : 92)
             }
             .foregroundStyle(BrandColor.textPrimary)
             .brandScreen()
@@ -41,7 +49,7 @@ struct HomeView: View {
             Text("Updated for 2026 FAA Rules")
                 .brandChip(active: true)
             Text("Pass Your Part 107 Exam")
-                .font(.system(size: 34, weight: .bold, design: .rounded))
+                .font(.system(size: isPadLayout ? 52 : 30, weight: .bold, design: .rounded))
                 .multilineTextAlignment(.center)
             Text("Free FAA Remote Pilot prep with instant feedback, detailed explanations, and high-res charts.")
                 .font(.callout)
@@ -59,6 +67,7 @@ struct HomeView: View {
             NavigationLink("Practice Exam", destination: ExamView())
                 .buttonStyle(SecondaryBrandButton())
         }
+        .frame(maxWidth: isPadLayout ? 680 : .infinity)
     }
 
     private var selectorCard: some View {
@@ -84,7 +93,7 @@ struct HomeView: View {
     }
 
     private var statsGrid: some View {
-        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: isPadLayout ? 14 : 8) {
             statCard(title: "Questions", value: "\(appState.questionCount)", subtitle: "Live loaded bank")
             statCard(title: "Pass Rate", value: "70%", subtitle: "42 of 60 to pass")
             statCard(title: "Time Limit", value: "2 hrs", subtitle: "120 minutes")
@@ -96,24 +105,31 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text("How It Works")
                 .font(.title3.weight(.semibold))
-            FeatureCard(
-                title: "Study Mode",
-                subtitle: "Answer questions with instant feedback and explanation after each answer.",
-                gradient: [BrandColor.card, Color(red: 26 / 255, green: 56 / 255, blue: 106 / 255)],
-                icon: "book.closed"
-            )
-            FeatureCard(
-                title: "Exam Mode",
-                subtitle: "60 questions, 2 hours, final score report and review pass.",
-                gradient: [Color(red: 40 / 255, green: 32 / 255, blue: 84 / 255), Color(red: 66 / 255, green: 39 / 255, blue: 113 / 255)],
-                icon: "target"
-            )
-            FeatureCard(
-                title: "Flashcards",
-                subtitle: "Spaced repetition that resurfaces cards you still struggle with.",
-                gradient: [Color(red: 52 / 255, green: 29 / 255, blue: 69 / 255), Color(red: 93 / 255, green: 39 / 255, blue: 89 / 255)],
-                icon: "rectangle.stack"
-            )
+            LazyVGrid(
+                columns: isPadLayout
+                    ? [GridItem(.flexible()), GridItem(.flexible())]
+                    : [GridItem(.flexible())],
+                spacing: isPadLayout ? 12 : 8
+            ) {
+                FeatureCard(
+                    title: "Study Mode",
+                    subtitle: "Answer questions with instant feedback and explanation after each answer.",
+                    gradient: [BrandColor.card, Color(red: 26 / 255, green: 56 / 255, blue: 106 / 255)],
+                    icon: "book.closed"
+                )
+                FeatureCard(
+                    title: "Exam Mode",
+                    subtitle: "60 questions, 2 hours, final score report and review pass.",
+                    gradient: [Color(red: 40 / 255, green: 32 / 255, blue: 84 / 255), Color(red: 66 / 255, green: 39 / 255, blue: 113 / 255)],
+                    icon: "target"
+                )
+                FeatureCard(
+                    title: "Flashcards",
+                    subtitle: "Spaced repetition that resurfaces cards you still struggle with.",
+                    gradient: [Color(red: 52 / 255, green: 29 / 255, blue: 69 / 255), Color(red: 93 / 255, green: 39 / 255, blue: 89 / 255)],
+                    icon: "rectangle.stack"
+                )
+            }
         }
     }
 
