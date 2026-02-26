@@ -71,24 +71,38 @@ function normalizeImageRef(value: string | null | undefined): string | null {
 }
 
 export function loadCarringtonQuestionBank(): Question[] {
-  return loadCarringtonBankFile("docs/ssot/review/carrington_question_bank.json", "carrington-question-bank");
+  return loadCarringtonBankFile(
+    [
+      "packages/content/knowledge/carrington_question_bank.json",
+      "docs/ssot/review/carrington_question_bank.json",
+    ],
+    "carrington-question-bank"
+  );
 }
 
 export function loadCarringtonStrictQuestionBank(): Question[] {
   return loadCarringtonBankFile(
-    "docs/ssot/review/carrington_question_bank.strict.json",
+    [
+      "packages/content/knowledge/carrington_question_bank.strict.json",
+      "docs/ssot/review/carrington_question_bank.strict.json",
+    ],
     "carrington-question-bank-strict"
   );
 }
 
-function loadCarringtonBankFile(relativePath: string, sourceName: string): Question[] {
+function loadCarringtonBankFile(relativePaths: string[], sourceName: string): Question[] {
   const repoRoot = path.resolve(process.cwd(), "../..");
-  const bankPath = path.join(repoRoot, relativePath);
 
   let bank: RawQuestion[] = [];
-  try {
-    bank = loadJsonFile<RawQuestion[]>(bankPath);
-  } catch {
+  for (const relativePath of relativePaths) {
+    try {
+      bank = loadJsonFile<RawQuestion[]>(path.join(repoRoot, relativePath));
+      break;
+    } catch {
+      // try next candidate
+    }
+  }
+  if (bank.length === 0) {
     return [];
   }
 

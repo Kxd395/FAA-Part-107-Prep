@@ -76,20 +76,35 @@ function normalizeImageRef(value: string | null | undefined): string | null {
 
 export function loadPart107QuestionBank(): Question[] {
   const repoRoot = path.resolve(process.cwd(), "../..");
-  const bankPath = path.join(repoRoot, "docs/ssot/review/part107_question_bank.json");
-  const imageNeedPath = path.join(repoRoot, "docs/ssot/review/part107_images_needed.json");
+  const bankPathCandidates = [
+    path.join(repoRoot, "packages/content/knowledge/part107_question_bank.json"),
+    path.join(repoRoot, "docs/ssot/review/part107_question_bank.json"),
+  ];
+  const imageNeedPathCandidates = [
+    path.join(repoRoot, "packages/content/knowledge/part107_images_needed.json"),
+    path.join(repoRoot, "docs/ssot/review/part107_images_needed.json"),
+  ];
 
   let bank: RawQuestion[] = [];
   let imageNeeds: RawImageNeed[] = [];
-  try {
-    bank = loadJsonFile<RawQuestion[]>(bankPath);
-  } catch {
+  for (const bankPath of bankPathCandidates) {
+    try {
+      bank = loadJsonFile<RawQuestion[]>(bankPath);
+      break;
+    } catch {
+      // try next candidate
+    }
+  }
+  if (bank.length === 0) {
     return [];
   }
-  try {
-    imageNeeds = loadJsonFile<RawImageNeed[]>(imageNeedPath);
-  } catch {
-    imageNeeds = [];
+  for (const imageNeedPath of imageNeedPathCandidates) {
+    try {
+      imageNeeds = loadJsonFile<RawImageNeed[]>(imageNeedPath);
+      break;
+    } catch {
+      // try next candidate
+    }
   }
 
   const imageNeedById = new Map<number, RawImageNeed>(imageNeeds.map((row) => [row.id, row]));
@@ -134,4 +149,3 @@ export function loadPart107QuestionBank(): Question[] {
     })
     .filter((q): q is Question => Boolean(q));
 }
-
