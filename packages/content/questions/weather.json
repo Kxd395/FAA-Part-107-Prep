@@ -332,10 +332,10 @@
         "text": "230° magnetic at 25 knots."
       }
     ],
-    "correct_option_id": "B",
-    "explanation_correct": "The Winds and Temperatures Aloft Forecast shows the wind for STL at 9,000 feet as 2325, meaning 230° true at 25 knots. Winds aloft forecasts always use true north for direction.",
+    "correct_option_id": "A",
+    "explanation_correct": "The Winds and Temperatures Aloft Forecast shows the wind for STL at 9,000 feet as 2332+02, meaning 230° true at 32 knots (temperature +2°C). Winds aloft forecasts always use true north for direction.",
     "explanation_distractors": {
-      "A": "32 knots is not the correct speed reading for the 9,000 foot level at STL.",
+      "B": "2325+07 is the STL value at 6,000 feet, not 9,000 feet.",
       "C": "Winds aloft forecasts reference true north, not magnetic north."
     },
     "citation": "FAA-CT-8080-2H, Figure 17; AIM 7-1-27",

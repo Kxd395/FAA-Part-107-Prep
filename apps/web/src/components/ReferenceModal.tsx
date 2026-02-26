@@ -1,11 +1,25 @@
 "use client";
 
-import { useState, useEffect, useCallback, useId, useRef } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useId,
+  useRef,
+  type PointerEvent as ReactPointerEvent,
+  type WheelEvent as ReactWheelEvent,
+} from "react";
 import { parseCitation, type CitationReference } from "@part107/core";
 
 export type ResolvedReference = CitationReference;
 
-// ─── Modal Component ─────────────────────────────────────────────
+const MIN_ZOOM = 0.5;
+const MAX_ZOOM = 4;
+const ZOOM_STEP = 0.15;
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value));
+}
 
 interface ReferenceModalProps {
   ref_: ResolvedReference;
@@ -19,7 +33,16 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
   const titleId = useId();
   const descriptionId = useId();
 
-  // Close on Escape + trap tab focus within modal
+  const [panelOffset, setPanelOffset] = useState({ x: 0, y: 0 });
+  const panelDragStateRef = useRef<{ pointerId: number; startX: number; startY: number; originX: number; originY: number } | null>(null);
+
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const [zoom, setZoom] = useState(1);
+  const [naturalWidth, setNaturalWidth] = useState(0);
+  const [interactionMode, setInteractionMode] = useState<"select" | "pan">("select");
+  const panDragStateRef = useRef<{ pointerId: number; startX: number; startY: number; scrollLeft: number; scrollTop: number } | null>(null);
+  const [isPanning, setIsPanning] = useState(false);
+
   useEffect(() => {
     previousActiveElementRef.current =
       document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -77,7 +100,6 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
     };
   }, [onClose]);
 
-  // Prevent scroll on body while modal is open
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -85,7 +107,59 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
     };
   }, []);
 
-  // Helper to build iframe src; append page fragment for PDFs when available
+  useEffect(() => {
+    const handlePointerMove = (event: PointerEvent) => {
+      const panelDrag = panelDragStateRef.current;
+      if (panelDrag && panelDrag.pointerId === event.pointerId) {
+        setPanelOffset({
+          x: panelDrag.originX + (event.clientX - panelDrag.startX),
+          y: panelDrag.originY + (event.clientY - panelDrag.startY),
+        });
+      }
+
+      const panDrag = panDragStateRef.current;
+      if (panDrag && panDrag.pointerId === event.pointerId) {
+        const viewport = viewportRef.current;
+        if (!viewport) return;
+
+        const dx = event.clientX - panDrag.startX;
+        const dy = event.clientY - panDrag.startY;
+        viewport.scrollLeft = panDrag.scrollLeft - dx;
+        viewport.scrollTop = panDrag.scrollTop - dy;
+        event.preventDefault();
+      }
+    };
+
+    const handlePointerUp = (event: PointerEvent) => {
+      if (panelDragStateRef.current?.pointerId === event.pointerId) {
+        panelDragStateRef.current = null;
+      }
+      if (panDragStateRef.current?.pointerId === event.pointerId) {
+        panDragStateRef.current = null;
+        setIsPanning(false);
+      }
+    };
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+    window.addEventListener("pointercancel", handlePointerUp);
+
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+      window.removeEventListener("pointercancel", handlePointerUp);
+    };
+  }, []);
+
+  useEffect(() => {
+    setPanelOffset({ x: 0, y: 0 });
+    setZoom(1);
+    setNaturalWidth(0);
+    setInteractionMode("select");
+    panDragStateRef.current = null;
+    setIsPanning(false);
+  }, [ref_.url, ref_.type]);
+
   const buildIframeSrc = (r: ResolvedReference) => {
     if (r.type === "pdf") {
       if (r.page) return `${r.url}#page=${r.page}`;
@@ -94,16 +168,70 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
     return r.url;
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        aria-hidden="true"
-        onClick={onClose}
-      />
+  const applyFitWidth = useCallback(
+    (widthOverride?: number) => {
+      const viewport = viewportRef.current;
+      const width = widthOverride ?? naturalWidth;
+      if (!viewport || width <= 0) return;
 
-      {/* Modal Panel */}
+      const target = clamp((viewport.clientWidth - 16) / width, MIN_ZOOM, MAX_ZOOM);
+      setZoom(target);
+      viewport.scrollLeft = 0;
+    },
+    [naturalWidth]
+  );
+
+  const openInTabUrl = ref_.type === "pdf" && ref_.page ? `${ref_.url}#page=${ref_.page}` : ref_.url;
+
+  const handleHeaderPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0) return;
+
+    const target = event.target as HTMLElement;
+    if (target.closest("button,a,input,textarea,select")) return;
+
+    panelDragStateRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      originX: panelOffset.x,
+      originY: panelOffset.y,
+    };
+  };
+
+  const handleViewerWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+
+    if (!event.metaKey && !event.ctrlKey) return;
+
+    event.preventDefault();
+    const direction = event.deltaY < 0 ? 1 : -1;
+    setZoom((current) => clamp(current + direction * ZOOM_STEP, MIN_ZOOM, MAX_ZOOM));
+  };
+
+  const handleViewerPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (interactionMode !== "pan" || event.button !== 0) return;
+
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    const hasOverflow = viewport.scrollWidth > viewport.clientWidth || viewport.scrollHeight > viewport.clientHeight;
+    if (!hasOverflow) return;
+
+    panDragStateRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      scrollLeft: viewport.scrollLeft,
+      scrollTop: viewport.scrollTop,
+    };
+    setIsPanning(true);
+    event.preventDefault();
+  };
+
+  return (
+    <div className="fixed inset-0 z-50">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" aria-hidden="true" onClick={onClose} />
+
       <div
         ref={panelRef}
         role="dialog"
@@ -111,18 +239,60 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
         tabIndex={-1}
-        className="relative z-10 w-full max-w-4xl mx-4 max-h-[85vh] rounded-t-2xl sm:rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-2xl flex flex-col animate-slide-up"
+        onWheelCapture={(event) => event.stopPropagation()}
+        className="absolute left-1/2 top-1/2 z-10 w-[min(95vw,64rem)] rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-2xl flex flex-col"
+        style={{
+          maxHeight: "calc(100vh - 2rem)",
+          transform: `translate(calc(-50% + ${panelOffset.x}px), calc(-50% + ${panelOffset.y}px))`,
+        }}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--card-border)]">
-          <div>
-            <h3 id={titleId} className="text-sm font-semibold text-white">{ref_.label}</h3>
-            <p id={descriptionId} className="text-xs text-[var(--muted)]">{ref_.description}</p>
+        <div
+          className="flex items-center justify-between gap-3 px-5 py-3 border-b border-[var(--card-border)] cursor-move"
+          onPointerDown={handleHeaderPointerDown}
+        >
+          <div className="min-w-0">
+            <h3 id={titleId} className="text-sm font-semibold text-white truncate">{ref_.label}</h3>
+            <p id={descriptionId} className="text-xs text-[var(--muted)] truncate">{ref_.description}</p>
           </div>
           <div className="flex items-center gap-2">
-            {/* Open in new tab */}
+            {ref_.type === "image" && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setZoom((current) => clamp(current - ZOOM_STEP, MIN_ZOOM, MAX_ZOOM))}
+                  className="rounded-lg border border-[var(--card-border)] px-2.5 py-1.5 text-xs text-[var(--muted)] hover:text-white hover:border-brand-500/50 transition-colors"
+                >
+                  Zoom -
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setZoom((current) => clamp(current + ZOOM_STEP, MIN_ZOOM, MAX_ZOOM))}
+                  className="rounded-lg border border-[var(--card-border)] px-2.5 py-1.5 text-xs text-[var(--muted)] hover:text-white hover:border-brand-500/50 transition-colors"
+                >
+                  Zoom +
+                </button>
+                <button
+                  type="button"
+                  onClick={() => applyFitWidth()}
+                  className="rounded-lg border border-[var(--card-border)] px-2.5 py-1.5 text-xs text-[var(--muted)] hover:text-white hover:border-brand-500/50 transition-colors"
+                >
+                  Fit Width
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setInteractionMode((mode) => (mode === "pan" ? "select" : "pan"))}
+                  className={`rounded-lg border px-2.5 py-1.5 text-xs transition-colors ${
+                    interactionMode === "pan"
+                      ? "border-brand-500/60 bg-brand-500/20 text-brand-200"
+                      : "border-[var(--card-border)] text-[var(--muted)] hover:text-white hover:border-brand-500/50"
+                  }`}
+                >
+                  {interactionMode === "pan" ? "Hand On" : "Hand Off"}
+                </button>
+              </>
+            )}
             <a
-              href={ref_.type === "pdf" && ref_.page ? `${ref_.url}#page=${ref_.page}` : ref_.url}
+              href={openInTabUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white hover:border-brand-500/50 transition-colors"
@@ -140,40 +310,48 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
           </div>
         </div>
 
-        {/* Content */}
-        <div className="flex-1 min-h-0 overflow-hidden">
+        <div className="flex-1 min-h-0 overflow-auto bg-[var(--background)]">
           {ref_.type === "image" ? (
-            <div className="p-4 overflow-auto h-full flex items-center justify-center bg-[var(--background)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={ref_.url}
-                alt={ref_.label}
-                onError={(e) => {
-                  const t = e.currentTarget as HTMLImageElement;
-                  t.style.display = "none";
-                  const msg = document.createElement("div");
-                  msg.className = "text-sm text-[var(--muted)] p-4";
-                  msg.textContent = "Image failed to load.";
-                  t.parentElement?.appendChild(msg);
-                }}
-                className="max-w-full max-h-full object-contain rounded-lg"
-              />
+            <div
+              ref={viewportRef}
+              className={`h-full min-h-[50vh] overflow-auto p-4 ${interactionMode === "pan" ? (isPanning ? "cursor-grabbing" : "cursor-grab") : "cursor-default"}`}
+              onWheel={handleViewerWheel}
+              onPointerDown={handleViewerPointerDown}
+            >
+              <div className="inline-block" style={{ width: naturalWidth > 0 ? `${Math.round(naturalWidth * zoom)}px` : "auto" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={ref_.url}
+                  alt={ref_.label}
+                  draggable={false}
+                  onLoad={(event) => {
+                    const image = event.currentTarget;
+                    setNaturalWidth(image.naturalWidth);
+                    applyFitWidth(image.naturalWidth);
+                  }}
+                  onError={(event) => {
+                    const target = event.currentTarget;
+                    target.style.display = "none";
+                    const message = document.createElement("div");
+                    message.className = "text-sm text-[var(--muted)] p-4";
+                    message.textContent = "Image failed to load.";
+                    target.parentElement?.appendChild(message);
+                  }}
+                  className="block rounded-lg max-w-none h-auto"
+                  style={{ width: naturalWidth > 0 ? `${Math.round(naturalWidth * zoom)}px` : "100%" }}
+                />
+              </div>
             </div>
           ) : ref_.url.startsWith("/") ? (
-            <iframe
-              src={buildIframeSrc(ref_)}
-              title={ref_.description}
-              className="w-full h-full min-h-[60vh]"
-              style={{ border: "none" }}
-            />
+            <div className="h-full min-h-[60vh] overflow-auto" onWheelCapture={(event) => event.stopPropagation()}>
+              <iframe src={buildIframeSrc(ref_)} title={ref_.description} className="w-full h-[75vh]" style={{ border: "none" }} />
+            </div>
           ) : (
-            <div className="h-full min-h-[60vh] flex items-center justify-center p-6 bg-[var(--background)]">
+            <div className="h-full min-h-[60vh] flex items-center justify-center p-6">
               <div className="max-w-md text-center space-y-3">
-                <p className="text-sm text-[var(--muted)]">
-                  This reference cannot be embedded here. Open it in a new browser tab.
-                </p>
+                <p className="text-sm text-[var(--muted)]">This reference cannot be embedded here. Open it in a new browser tab.</p>
                 <a
-                  href={ref_.type === "pdf" && ref_.page ? `${ref_.url}#page=${ref_.page}` : ref_.url}
+                  href={openInTabUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center rounded-lg border border-brand-500/40 bg-brand-500/10 px-4 py-2 text-sm text-brand-300 hover:bg-brand-500/20"
@@ -188,8 +366,6 @@ export function ReferenceModal({ ref_, onClose }: ReferenceModalProps) {
     </div>
   );
 }
-
-// ─── Clickable Citation Component ────────────────────────────────
 
 interface CitationLinksProps {
   citation: string;
@@ -208,7 +384,6 @@ export default function CitationLinks({
   const handleClose = useCallback(() => setActiveRef(null), []);
 
   if (refs.length === 0) {
-    // Fallback: just show the raw citation text
     return (
       <div className="mt-4 text-xs text-[var(--muted)]">
         {label} {citation}
@@ -253,10 +428,7 @@ export default function CitationLinks({
         ))}
       </div>
 
-      {/* PDF / Image Modal */}
-      {activeRef && (
-        <ReferenceModal ref_={activeRef} onClose={handleClose} />
-      )}
+      {activeRef && <ReferenceModal ref_={activeRef} onClose={handleClose} />}
     </>
   );
 }

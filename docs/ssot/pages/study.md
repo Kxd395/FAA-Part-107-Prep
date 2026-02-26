@@ -6,7 +6,7 @@
 - Owner (eng): @kevindialmb
 - Owner (product): @kevindialmb (acting)
 - Owner (design): @kevindialmb (acting)
-- Last updated: 2026-02-25
+- Last updated: 2026-02-26
 - Related tickets/PRs: N/A (no linked ticket in repo)
 
 ## Purpose
@@ -99,6 +99,7 @@ Mobile:
 - Setup presets for `Session Length` and `Timed Drill` (question-limit + optional timer override per run), persisted per active user in local storage
 - In-session confidence selector (1-5) is always visible while unanswered; main answer click submits with selected confidence, and split `☑` on each answer submits high-confidence (`5/5`) in one click
 - `QuestionCard`, `AnswerOptions`, `ProgressHeader`, `SessionSummaryCard`, `CitationLinks`, `ReferenceModal`
+  - `ReferenceModal` now supports header-only drag, contained body scroll, wheel propagation blocking, image pan/select mode toggle, and image zoom controls (`Zoom +/-`, `Fit Width`)
 
 ## Interactive elements inventory (every control)
 | Control ID | Label | Type | Visible when | Enabled when | On action | API calls | State changes | Errors | Analytics |
@@ -126,6 +127,8 @@ Mobile:
 | `study.result.progress` | View Progress Dashboard | link | completion | always | navigate `/progress` | none | route change | none | none |
 | `study.question.figure` | Figure preview / open | button | current question has image/figure ref | always | open reference modal | none | `figureRef` set/clear | image load fallback shown in card | none |
 | `study.citation.ref[*]` | Citation chip | button | citation parse yields refs | always | open modal or new tab | none | modal open state | external/open failure delegated to browser | `citation_clicked` |
+| `study.modal.zoom_in` / `study.modal.zoom_out` / `study.modal.fit_width` | Zoom + / Zoom - / Fit Width | button | modal open for image refs | always | adjust image scale and fit-to-viewport width | none | modal-local zoom state | none | none |
+| `study.modal.mode_toggle` | Hand On / Hand Off | button | modal open for image refs | always | switch between pan mode and select mode | none | modal-local interaction mode | none | none |
 | `study.modal.close` | Close (X / backdrop / Esc) | button/backdrop/key | modal open | always | close modal | none | modal state reset | none | none |
 
 ## Page state model
