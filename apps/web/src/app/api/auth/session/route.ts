@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { startApiRequest } from "../../../../lib/server/apiRequest";
 import {
   getAuthCookieName,
   getAuthTtlSeconds,
@@ -13,8 +14,9 @@ export const revalidate = 0;
 export const runtime = "nodejs";
 
 export async function GET(request: NextRequest) {
+  const tracker = startApiRequest(request, "/api/auth/session");
   const session = getAuthenticatedSession(request);
-  return NextResponse.json({
+  return tracker.json({
     authenticated: !!session,
     userId: session?.uid ?? null,
     email: session?.email ?? null,
@@ -23,11 +25,12 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const tracker = startApiRequest(request, "/api/auth/session");
   // Dev-only backdoor: allows direct username sign-in for testing.
   // In production, use /api/auth/magic-link + /api/auth/verify instead.
   if (String(process.env.NODE_ENV) === "production") {
-    return NextResponse.json(
-      { error: "Direct sign-in is disabled. Use magic link authentication." },
+    return tracker.json(
+      { error: "Direct sign-in is disabled. Use magic link authentication.", requestId: tracker.requestId },
       { status: 403 }
     );
   }
@@ -38,8 +41,8 @@ export async function POST(request: NextRequest) {
     windowMs: 60_000,
   });
   if (!rl.ok) {
-    return NextResponse.json(
-      { error: "Too many auth session requests" },
+    return tracker.json(
+      { error: "Too many auth session requests", requestId: tracker.requestId },
       { status: 429, headers: rateLimitHeaders(rl) }
     );
   }
@@ -47,17 +50,18 @@ export async function POST(request: NextRequest) {
   const body = (await request.json().catch(() => ({}))) as { userId?: string };
   const userId = body.userId?.trim() ?? "";
   if (!isValidUserId(userId)) {
-    return NextResponse.json(
+    return tracker.json(
       {
         error:
           "userId must be 3-64 chars using letters, numbers, dot, underscore, or hyphen",
+        requestId: tracker.requestId,
       },
       { status: 400, headers: rateLimitHeaders(rl) }
     );
   }
 
   const token = issueAppSessionToken(userId);
-  const response = NextResponse.json(
+  const response = tracker.json(
     { authenticated: true, userId, expiresInSeconds: getAuthTtlSeconds() },
     { headers: rateLimitHeaders(rl) }
   );
@@ -73,8 +77,10 @@ export async function POST(request: NextRequest) {
   return response;
 }
 
-export async function DELETE() {
-  const response = NextResponse.json({ authenticated: false, userId: null });
+export async function DELETE(request?: NextRequest) {
+  const response = request
+    ? startApiRequest(request, "/api/auth/session").json({ authenticated: false, userId: null })
+    : NextResponse.json({ authenticated: false, userId: null });
   response.cookies.set({
     name: getAuthCookieName(),
     value: "",

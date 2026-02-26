@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { OAuth2Client } from "google-auth-library";
+import { startApiRequest } from "../../../../lib/server/apiRequest";
 import { consumeRateLimit, rateLimitHeaders } from "../../../../lib/server/rateLimit";
 import { findOrCreateUserByEmail, updateUserProfile } from "../../../../lib/server/userProfileStore";
 import {
@@ -14,14 +15,15 @@ export const revalidate = 0;
 export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
+  const tracker = startApiRequest(request, "/api/auth/google");
   const rl = consumeRateLimit(request, {
     key: "api:auth:google",
     capacity: 30,
     windowMs: 60_000,
   });
   if (!rl.ok) {
-    return NextResponse.json(
-      { error: "Too many sign-in requests" },
+    return tracker.json(
+      { error: "Too many sign-in requests", requestId: tracker.requestId },
       { status: 429, headers: rateLimitHeaders(rl) }
     );
   }
@@ -33,8 +35,8 @@ export async function POST(request: NextRequest) {
     )
   );
   if (configuredAudiences.length === 0) {
-    return NextResponse.json(
-      { error: "Google sign-in is not configured on this server." },
+    return tracker.json(
+      { error: "Google sign-in is not configured on this server.", requestId: tracker.requestId },
       { status: 501, headers: rateLimitHeaders(rl) }
     );
   }
@@ -43,8 +45,8 @@ export async function POST(request: NextRequest) {
   const credential = body.credential?.trim() ?? "";
 
   if (!credential) {
-    return NextResponse.json(
-      { error: "Google credential token is required" },
+    return tracker.json(
+      { error: "Google credential token is required", requestId: tracker.requestId },
       { status: 400, headers: rateLimitHeaders(rl) }
     );
   }
@@ -58,8 +60,8 @@ export async function POST(request: NextRequest) {
 
     const payload = ticket.getPayload();
     if (!payload || !payload.email || !payload.email_verified) {
-      return NextResponse.json(
-        { error: "Invalid Google token or email not verified" },
+      return tracker.json(
+        { error: "Invalid Google token or email not verified", requestId: tracker.requestId },
         { status: 401, headers: rateLimitHeaders(rl) }
       );
     }
@@ -81,7 +83,7 @@ export async function POST(request: NextRequest) {
       displayName: displayNameToUse,
     });
 
-    const response = NextResponse.json(
+    const response = tracker.json(
       {
         authenticated: true,
         userId: profile.id,
@@ -91,20 +93,10 @@ export async function POST(request: NextRequest) {
       },
       { headers: rateLimitHeaders(rl) }
     );
-
-    response.cookies.set({
-      name: getAuthCookieName(),
-      value: sessionToken,
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-      maxAge: getAuthTtlSeconds(),
-    });
-
-    return response;
+    return setSessionCookie(response, sessionToken);
   } catch (error) {
     serverLogger.error("Google authentication failure", {
+      requestId: tracker.requestId,
       route: "/api/auth/google",
       method: request.method,
       error,
@@ -137,9 +129,22 @@ export async function POST(request: NextRequest) {
               ? `Failed to authenticate with Google: ${rawMessage}`
               : "Failed to authenticate with Google";
 
-    return NextResponse.json(
-      { error: errorMessage, code },
+    return tracker.json(
+      { error: errorMessage, code, requestId: tracker.requestId },
       { status: statusCode, headers: rateLimitHeaders(rl) }
     );
   }
+}
+
+function setSessionCookie(response: NextResponse, token: string): NextResponse {
+  response.cookies.set({
+      name: getAuthCookieName(),
+      value: token,
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: getAuthTtlSeconds(),
+    });
+  return response;
 }

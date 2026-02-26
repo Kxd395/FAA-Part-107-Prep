@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { REQUEST_ID_HEADER, getOrCreateRequestId } from "./lib/server/requestId";
 
 // The routes that require authentication
 const PROTECTED_ROUTES = [
@@ -21,12 +22,21 @@ const PROTECTED_API_ROUTES = [
 
 export function proxy(request: NextRequest) {
     const { pathname, search } = request.nextUrl;
+    const requestId = getOrCreateRequestId(request.headers);
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set(REQUEST_ID_HEADER, requestId);
 
     const isProtectedRoute = PROTECTED_ROUTES.some((route) => pathname === route || pathname.startsWith(`${route}/`));
     const isProtectedApiRoute = PROTECTED_API_ROUTES.some((route) => pathname.startsWith(route));
 
     if (!isProtectedRoute && !isProtectedApiRoute) {
-        return NextResponse.next();
+        const response = NextResponse.next({
+            request: {
+                headers: requestHeaders,
+            },
+        });
+        response.headers.set(REQUEST_ID_HEADER, requestId);
+        return response;
     }
 
     // Next.js middleware runs on Edge Runtime. node:crypto is not available.
@@ -37,16 +47,26 @@ export function proxy(request: NextRequest) {
     // Not authenticated
     if (!token) {
         if (isProtectedApiRoute) {
-            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+            const response = NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+            response.headers.set(REQUEST_ID_HEADER, requestId);
+            return response;
         }
 
         // Redirect to login with returnUrl
         const returnUrl = encodeURIComponent(`${pathname}${search}`);
         const loginUrl = new URL(`/login?returnUrl=${returnUrl}`, request.url);
-        return NextResponse.redirect(loginUrl);
+        const response = NextResponse.redirect(loginUrl);
+        response.headers.set(REQUEST_ID_HEADER, requestId);
+        return response;
     }
 
-    return NextResponse.next();
+    const response = NextResponse.next({
+        request: {
+            headers: requestHeaders,
+        },
+    });
+    response.headers.set(REQUEST_ID_HEADER, requestId);
+    return response;
 }
 
 export const config = {

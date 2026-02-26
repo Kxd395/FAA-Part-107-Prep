@@ -5,6 +5,7 @@ import type { Question } from "@part107/core/types";
 import { normalizeAcsCodeOnlyQuestions } from "../../../lib/acsQuestionNormalizer";
 import { parseRemoteQuestionSourcePayload } from "../../../lib/questionContracts";
 import { sanitizeQuestion } from "../../../lib/questionSanitizer";
+import { startApiRequest } from "../../../lib/server/apiRequest";
 import { loadCarringtonStrictQuestionBank } from "../../../lib/server/carringtonQuestionBank";
 import { loadCombinedQuestionBank } from "../../../lib/server/combinedQuestionBank";
 import { serverLogger } from "../../../lib/server/logger";
@@ -132,14 +133,15 @@ async function loadRemoteQuestions(url: string): Promise<Question[]> {
 }
 
 export async function GET(request: NextRequest) {
+  const tracker = startApiRequest(request, "/api/questions");
   const rl = consumeRateLimit(request, {
     key: "api:questions",
     capacity: 180,
     windowMs: 60_000,
   });
   if (!rl.ok) {
-    return NextResponse.json(
-      { error: "Too many question requests" },
+    return tracker.json(
+      { error: "Too many question requests", requestId: tracker.requestId },
       { status: 429, headers: rateLimitHeaders(rl) }
     );
   }
@@ -180,7 +182,7 @@ export async function GET(request: NextRequest) {
       },
     };
 
-    return NextResponse.json(payload, {
+    return tracker.json(payload, {
       headers: {
         "Cache-Control": "no-store, max-age=0",
         ...rateLimitHeaders(rl),
@@ -188,13 +190,15 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     serverLogger.error("Question API request failed", {
+      requestId: tracker.requestId,
       route: "/api/questions",
       method: request.method,
       error,
     });
-    return NextResponse.json(
+    return tracker.json(
       {
         error: error instanceof Error ? error.message : "Failed to load questions",
+        requestId: tracker.requestId,
       },
       { status: 500, headers: rateLimitHeaders(rl) }
     );

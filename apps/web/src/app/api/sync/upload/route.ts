@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { startApiRequest } from "../../../../lib/server/apiRequest";
+import { serverLogger } from "../../../../lib/server/logger";
 import { authenticateSyncRequest } from "../../../../lib/server/syncAuth";
 import { mergeAndSaveSnapshot, type SyncSnapshotEnvelope } from "../../../../lib/server/syncStore";
 import { consumeRateLimit, rateLimitHeaders } from "../../../../lib/server/rateLimit";
@@ -33,18 +35,25 @@ function isSnapshotEnvelope(value: unknown): value is SyncSnapshotEnvelope {
 }
 
 export async function POST(request: NextRequest) {
+  const tracker = startApiRequest(request, "/api/sync/upload");
   const rl = consumeRateLimit(request, {
     key: "api:sync:upload",
     capacity: 60,
     windowMs: 60_000,
   });
   if (!rl.ok) {
-    return NextResponse.json({ error: "Too many sync upload requests" }, { status: 429, headers: rateLimitHeaders(rl) });
+    return tracker.json(
+      { error: "Too many sync upload requests", requestId: tracker.requestId },
+      { status: 429, headers: rateLimitHeaders(rl) }
+    );
   }
 
   const auth = authenticateSyncRequest(request);
   if (!auth.ok || !auth.userId) {
-    return NextResponse.json({ error: auth.error ?? "Unauthorized" }, { status: auth.status, headers: rateLimitHeaders(rl) });
+    return tracker.json(
+      { error: auth.error ?? "Unauthorized", requestId: tracker.requestId },
+      { status: auth.status, headers: rateLimitHeaders(rl) }
+    );
   }
 
   try {
@@ -55,16 +64,28 @@ export async function POST(request: NextRequest) {
     };
 
     if (payload.userId !== auth.userId) {
-      return NextResponse.json({ error: "Payload userId does not match authenticated user" }, { status: 403 });
+      return tracker.json(
+        { error: "Payload userId does not match authenticated user", requestId: tracker.requestId },
+        { status: 403, headers: rateLimitHeaders(rl) }
+      );
     }
     if (payload.mode !== "merge" && payload.mode !== "overwrite") {
-      return NextResponse.json({ error: "mode must be merge or overwrite" }, { status: 400 });
+      return tracker.json(
+        { error: "mode must be merge or overwrite", requestId: tracker.requestId },
+        { status: 400, headers: rateLimitHeaders(rl) }
+      );
     }
     if (!isSnapshotEnvelope(payload.snapshot)) {
-      return NextResponse.json({ error: "snapshot payload is invalid" }, { status: 400 });
+      return tracker.json(
+        { error: "snapshot payload is invalid", requestId: tracker.requestId },
+        { status: 400, headers: rateLimitHeaders(rl) }
+      );
     }
     if (payload.snapshot.signature && !verifySyncSnapshotSignature(payload.snapshot)) {
-      return NextResponse.json({ error: "snapshot signature is invalid" }, { status: 400, headers: rateLimitHeaders(rl) });
+      return tracker.json(
+        { error: "snapshot signature is invalid", requestId: tracker.requestId },
+        { status: 400, headers: rateLimitHeaders(rl) }
+      );
     }
 
     const result = await mergeAndSaveSnapshot({
@@ -73,7 +94,7 @@ export async function POST(request: NextRequest) {
       snapshot: payload.snapshot,
     });
 
-    return NextResponse.json(
+    return tracker.json(
       {
         accepted: result.accepted,
         mergedSummary: result.mergedSummary,
@@ -82,8 +103,14 @@ export async function POST(request: NextRequest) {
       { headers: rateLimitHeaders(rl) }
     );
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "sync upload failed" },
+    serverLogger.error("Sync upload request failed", {
+      requestId: tracker.requestId,
+      route: "/api/sync/upload",
+      method: request.method,
+      error,
+    });
+    return tracker.json(
+      { error: error instanceof Error ? error.message : "sync upload failed", requestId: tracker.requestId },
       { status: 500, headers: rateLimitHeaders(rl) }
     );
   }

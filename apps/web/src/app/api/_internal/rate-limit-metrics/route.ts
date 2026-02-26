@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { startApiRequest } from "../../../../lib/server/apiRequest";
 import { getRateLimitMetrics } from "../../../../lib/server/rateLimit";
+import { getRouteMetrics } from "../../../../lib/server/routeMetrics";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export const runtime = "nodejs";
 
 export async function GET(request: NextRequest) {
+  const tracker = startApiRequest(request, "/api/_internal/rate-limit-metrics");
   const requiredToken = process.env.INTERNAL_METRICS_TOKEN?.trim();
   if (requiredToken) {
     const authorization = request.headers.get("authorization");
@@ -14,11 +17,15 @@ export async function GET(request: NextRequest) {
         ? authorization.slice(7).trim()
         : "";
     if (!bearer || bearer !== requiredToken) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return tracker.json({ error: "Unauthorized", requestId: tracker.requestId }, { status: 401 });
     }
   }
-  return NextResponse.json({
+  return tracker.json({
     generatedAt: new Date().toISOString(),
-    metrics: getRateLimitMetrics(),
+    requestId: tracker.requestId,
+    metrics: {
+      rateLimit: getRateLimitMetrics(),
+      routes: getRouteMetrics(),
+    },
   });
 }

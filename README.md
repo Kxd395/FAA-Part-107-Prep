@@ -46,7 +46,7 @@ npm run dev
 # → http://localhost:3000
 ```
 
-Note: this repo is validated on Node.js 20 LTS for stable Next.js 14 dev startup.
+Note: this repo is validated on Node.js 20 LTS with Next.js 16 runtime in the web app.
 
 Deploy to Vercel:
 ```bash
@@ -61,7 +61,10 @@ npm install
 npm run lint
 npm run test
 npm run build
+npm --prefix apps/web run perf:smoke -- --url http://localhost:3000 --requests 40 --concurrency 5
 ```
+
+For `perf:smoke`, run the app (`npm run dev`) in another terminal first.
 
 ### Content Pipeline (Generate Questions from PDFs)
 
@@ -229,16 +232,16 @@ This is separate from session-level progress history and can be swapped to a bac
 
 ## Question Bank
 
-Current bank: **343 questions** across 5 active categories.
-The bank includes curated exam-style items and ACS mastery items.
+Current runtime bank artifact: **173 questions** (validated by `npm run validate:content`) across 5 active categories.
+The broader source corpus can be larger, but only runtime-validated questions are shipped to the app.
 
 | Category | Count | Status |
 |----------|-------|--------|
-| Regulations | 147 | ✅ Active |
-| Airspace | 51 | ✅ Active |
-| Weather | 34 | ✅ Active |
-| Operations | 99 | ✅ Active |
-| Loading & Performance | 12 | ✅ Active |
+| Regulations | 79 | ✅ Active |
+| Airspace | 27 | ✅ Active |
+| Weather | 30 | ✅ Active |
+| Operations | 30 | ✅ Active |
+| Loading & Performance | 7 | ✅ Active |
 | Emergency Procedures | — | 🔲 Generate |
 | CRM | — | 🔲 Generate |
 | Radio Comms | — | 🔲 Generate |
@@ -279,7 +282,7 @@ All content is based on official FAA public domain sources:
 
 ## Tech Stack
 
-- **Web:** Next.js 14, TypeScript, Tailwind CSS → Vercel
+- **Web:** Next.js 16, TypeScript, Tailwind CSS → Vercel
 - **iOS/Mac:** SwiftUI, Swift 5.9+ → App Store
 - **Content:** JSON question bank (shared between platforms)
 - **AI:** Claude API (content generation + AI Tutor)

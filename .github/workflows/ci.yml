@@ -32,6 +32,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Auth config validation
+        run: npm --prefix apps/web run auth:check -- --strict --production
+        env:
+          APP_AUTH_SECRET: ci-app-auth-secret
+          MAGIC_LINK_SECRET: ci-magic-link-secret
+          APP_BASE_URL: https://example.com
+          GOOGLE_CLIENT_ID: ci-google-client-id.apps.googleusercontent.com
+          NEXT_PUBLIC_GOOGLE_CLIENT_ID: ci-google-client-id.apps.googleusercontent.com
+
       - name: Lint
         run: npm run lint
 
@@ -46,6 +55,12 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          APP_AUTH_SECRET: ci-app-auth-secret
+          MAGIC_LINK_SECRET: ci-magic-link-secret
+          APP_BASE_URL: https://example.com
+          GOOGLE_CLIENT_ID: ci-google-client-id.apps.googleusercontent.com
+          NEXT_PUBLIC_GOOGLE_CLIENT_ID: ci-google-client-id.apps.googleusercontent.com
 
       - name: Validate content
         run: npm run validate:content

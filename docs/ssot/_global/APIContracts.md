@@ -2,6 +2,7 @@
 
 Rules:
 - No invented endpoints. If unknown, mark UNKNOWN.
+- API responses include `x-request-id` response header for request correlation.
 
 ## Endpoint: Get Questions
 - Method: `GET`
@@ -158,11 +159,38 @@ Rules:
   - If `INTERNAL_METRICS_TOKEN` is unset, endpoint is ungated (debug-only)
 - Response (`200`) shape:
   - `generatedAt: string`
-  - `metrics: Record<string, { allowed: number; blocked: number }>`
+  - `requestId: string`
+  - `metrics.rateLimit: Record<string, { allowed: number; blocked: number }>`
+  - `metrics.routes: Record<string, { requests: number; status2xx: number; status3xx: number; status4xx: number; status5xx: number; totalDurationMs: number; averageDurationMs: number; maxDurationMs: number }>`
 - Error codes:
   - `401` missing/invalid metrics bearer token (when token is configured)
 - Notes:
   - Exposes in-memory counters for configured limiter keys (for example `api:questions`, `api:sync:upload`, `api:sync:download`, `api:sync:session`).
+  - Includes lightweight route latency/status counters keyed by method + route.
+
+## Endpoint: Internal Auth Config Health
+- Method: `GET`
+- Path: `/api/_internal/auth-config`
+- Auth:
+  - If `INTERNAL_METRICS_TOKEN` is configured, requires `Authorization: Bearer <token>`
+  - If `INTERNAL_METRICS_TOKEN` is unset, endpoint is ungated (debug-only)
+- Query params:
+  - `strict` (optional boolean-like; when true warnings also fail readiness)
+  - `production` (optional boolean-like; when true enforces production-only checks)
+- Response (`200`) shape:
+  - `requestId: string`
+  - `generatedAt: string`
+  - `ok: true`
+  - `strict: boolean`
+  - `checks: AuthConfigIssue[]` (can be empty)
+- Response (`500`) shape:
+  - `requestId: string`
+  - `generatedAt: string`
+  - `ok: false`
+  - `strict: boolean`
+  - `checks: AuthConfigIssue[]`
+- Error codes:
+  - `401` missing/invalid metrics bearer token (when token is configured)
 
 ## Endpoint: App Auth Session
 - Method: `GET`

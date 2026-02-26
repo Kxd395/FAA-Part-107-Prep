@@ -10,14 +10,16 @@
     "dev": "node ../../tools/check-node-version.js && bash ../../tools/clear-next-cache.sh && NODE_OPTIONS=--dns-result-order=ipv4first next dev --hostname localhost --port 3000",
     "dev:fast": "next dev",
     "dev:clean": "node ../../tools/check-node-version.js && bash ../../tools/clear-next-cache.sh && NODE_OPTIONS=--dns-result-order=ipv4first next dev --hostname localhost --port 3000",
-    "build": "next build",
+    "build": "npm run auth:check -- --production && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest --run",
     "test:coverage": "vitest --run --coverage",
     "test:watch": "vitest",
-    "supabase:check": "node scripts/check-supabase-persistence.mjs"
+    "supabase:check": "node scripts/check-supabase-persistence.mjs",
+    "auth:check": "node scripts/check-auth-config.mjs",
+    "perf:smoke": "node scripts/perf-smoke.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.0",

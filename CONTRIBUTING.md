@@ -26,6 +26,7 @@ Before opening a PR, run:
 npm run lint
 npm run typecheck
 npm run test
+npm --prefix apps/web run auth:check -- --strict --production
 npm run build
 npm run validate:content
 ```

@@ -100,13 +100,26 @@ This plan covers engineering standards, CI governance, type safety gates, test r
 - Refactored Progress page by extracting issue-triage UI into:
   - `apps/web/src/components/progress/IssueTriagePanel.tsx`
 
+10. Runtime observability and auth-config fail-fast
+- Added request ID propagation (`x-request-id`) in proxy/middleware.
+- Added API request tracker helper and route-level metric counters:
+  - `apps/web/src/lib/server/apiRequest.ts`
+  - `apps/web/src/lib/server/routeMetrics.ts`
+- Extended internal metrics route to expose both rate-limit and route metrics.
+- Added internal auth config health route:
+  - `GET /api/_internal/auth-config`
+- Added deployment-time auth config check script:
+  - `apps/web/scripts/check-auth-config.mjs`
+- Wired web build to run auth checks before `next build`.
+- Added lightweight API latency/error smoke baseline script:
+  - `npm --prefix apps/web run perf:smoke -- --url <base-url>`
+
 ## Remaining Optimization Backlog
 
 ### P1 (Next)
 
 1. Runtime observability expansion
-- Add request correlation IDs in API responses/log context.
-- Add lightweight error-rate counters per API route.
+- Add lightweight error-rate alerting on top of the new route counters.
 
 ### P2 (After P1)
 
