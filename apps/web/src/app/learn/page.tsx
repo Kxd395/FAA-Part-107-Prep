@@ -20,8 +20,9 @@ import {
 import { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
 import QuestionTypeOptionsGrid from "../../components/QuestionTypeOptionsGrid";
 import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
-import ConfidencePanel from "../../components/quiz/ConfidencePanel";
+import AnswerOptions from "../../components/quiz/AnswerOptions";
 import QuestionCard from "../../components/quiz/QuestionCard";
+import QuestionIssueReporter from "../../components/quiz/QuestionIssueReporter";
 import { useProgress } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 import {
@@ -60,6 +61,10 @@ function shuffleArray<T>(arr: T[]): T[] {
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
+}
+
+function toOptionId(value: string | null): OptionId | null {
+  return value === "A" || value === "B" || value === "C" || value === "D" ? value : null;
 }
 
 interface LearnQuizSummary {
@@ -125,9 +130,6 @@ export default function LearnPage() {
   const [quizIndex, setQuizIndex] = useState(0);
   const [quizOrder, setQuizOrder] = useState<Question[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [answerConfidence, setAnswerConfidence] = useState<AttemptConfidence>(
-    LEARN_QUIZ_DEFAULT_CONFIDENCE
-  );
   const [selectedConfidence, setSelectedConfidence] = useState<AttemptConfidence | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [quizResults, setQuizResults] = useState<LearnDraftQuizResult[]>([]);
@@ -348,7 +350,6 @@ export default function LearnPage() {
     setQuizIndex(0);
     setSelectedAnswer(resumeDraft.selectedAnswer);
     setSelectedConfidence(resumeDraft.selectedConfidence ?? null);
-    setAnswerConfidence(resumeDraft.selectedConfidence ?? LEARN_QUIZ_DEFAULT_CONFIDENCE);
     setShowResult(resumeDraft.showResult);
     setQuizResults(resumeDraft.quizResults);
     setPhase(resumeDraft.phase);
@@ -606,7 +607,7 @@ export default function LearnPage() {
   }, [batch, events, round, selectedQuestionType, teachIndex]);
 
   const submitQuizAnswerWithConfidence = useCallback(
-    (optionId: string, confidence: AttemptConfidence = answerConfidence) => {
+    (optionId: string, confidence: AttemptConfidence = LEARN_QUIZ_DEFAULT_CONFIDENCE) => {
       if (showResult) return;
       setSelectedConfidence(confidence);
       setSelectedAnswer(optionId);
@@ -648,7 +649,7 @@ export default function LearnPage() {
         },
       ]);
     },
-    [adaptive, answerConfidence, events, quizOrder, round, selectedQuestionType, showResult]
+    [adaptive, events, quizOrder, round, selectedQuestionType, showResult]
   );
 
   const skipQuizQuestion = useCallback(() => {
@@ -799,6 +800,7 @@ export default function LearnPage() {
           options={QUESTION_TYPE_OPTIONS}
           selectedQuestionType={selectedQuestionType}
           onSelectQuestionType={setSelectedQuestionType}
+          variant="compact"
         />
 
         {/* Category */}
@@ -1052,72 +1054,44 @@ export default function LearnPage() {
             </span>
           </div>
           <QuestionCard question={q} onOpenFigure={setFigureRef} />
+          <QuestionIssueReporter
+            mode="learn"
+            question={q}
+            selectedOptionId={toOptionId(selectedAnswer)}
+            questionTypeProfile={selectedQuestionType}
+            confidence={selectedConfidence ?? LEARN_QUIZ_DEFAULT_CONFIDENCE}
+          />
 
-          <div className="space-y-2">
-            {(quizOptionPresentation?.options ?? q.options).map((opt) => {
-              const isCorrect = opt.id === q.correct_option_id;
-              const isSelected = opt.id === selectedAnswer;
-              const displayLabel = quizOptionPresentation?.displayLabelByOptionId[opt.id] ?? opt.id;
-              let className =
-                "rounded-xl border px-4 py-3 text-sm text-left w-full transition-all ";
-
-              if (showResult) {
-                if (isCorrect) {
-                  className += "border-green-500/50 bg-green-500/10 text-green-300";
-                } else if (isSelected && !isCorrect) {
-                  className += "border-red-500/50 bg-red-500/10 text-red-300";
-                } else {
-                  className += "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)] opacity-50";
-                }
-              } else {
-                className += isSelected
-                  ? "border-brand-500/50 bg-brand-500/10 text-white"
-                  : "border-[var(--card-border)] bg-[var(--card)] text-white hover:border-brand-500/40 cursor-pointer";
-              }
-
-              return (
-                <div key={opt.id} className="relative">
-                  <button
-                    onClick={() => {
-                      if (showResult) return;
-                      submitQuizAnswerWithConfidence(opt.id, answerConfidence);
-                    }}
-                    className={className}
-                    disabled={showResult}
-                  >
-                    <span className="font-semibold">{displayLabel}.</span> {opt.text}
-                    {showResult && isCorrect && <span className="ml-2">✅</span>}
-                    {showResult && isSelected && !isCorrect && <span className="ml-2">❌</span>}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
+          <AnswerOptions
+            options={quizOptionPresentation?.options ?? q.options}
+            mode="study"
+            selectedOption={toOptionId(selectedAnswer)}
+            correctOptionId={q.correct_option_id}
+            displayLabelByOptionId={quizOptionPresentation?.displayLabelByOptionId}
+            answerState={
+              showResult
+                ? selectedAnswer === q.correct_option_id
+                  ? "correct"
+                  : "incorrect"
+                : "unanswered"
+            }
+            onSelect={(optionId) => {
+              submitQuizAnswerWithConfidence(optionId, LEARN_QUIZ_DEFAULT_CONFIDENCE);
+            }}
+            onSelectWithConfidence={(optionId, confidence) => {
+              submitQuizAnswerWithConfidence(optionId, confidence);
+            }}
+            showConfidenceSplit
+            splitConfidenceMode="full"
+            defaultConfidence={LEARN_QUIZ_DEFAULT_CONFIDENCE}
+            disabled={showResult}
+          />
 
           {(quizOptionPresentation?.options.length ?? q.options.length) < q.options.length && (
             <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-xs text-[var(--muted)]">
               Practice mode is showing 3 options for this question to reduce memorization.
             </div>
           )}
-
-          <ConfidencePanel
-            title={
-              <>
-                Confidence for next answer: <code>{answerConfidence}/5</code>
-              </>
-            }
-            value={answerConfidence}
-            onChange={setAnswerConfidence}
-            containerClassName="p-4"
-            titleClassName="text-sm font-semibold text-white"
-            selectorClassName="mt-2 flex flex-wrap gap-2"
-            selectorSize="md"
-            hint={
-              showResult
-                ? "Adjust this before Next/Review Again to set your upcoming confidence."
-                : "This confidence is applied when you select an answer."
-            }
-          />
 
           {/* Feedback after answering */}
           {showResult && (

@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
+import type { Question } from "@part107/core";
 import {
   buildOptionPresentation,
   getDisplayLabelForOption,
   getOptionTextById,
 } from "./optionPresentation";
 
-const question = {
+const question: Pick<Question, "id" | "options" | "correct_option_id"> = {
   id: "Q1",
   options: [
     { id: "A", text: "Alpha" },
@@ -14,7 +15,7 @@ const question = {
     { id: "D", text: "Delta" },
   ],
   correct_option_id: "C",
-} as const;
+};
 
 describe("optionPresentation", () => {
   it("creates a stable order for the same context and question", () => {

@@ -165,29 +165,24 @@ describe("LearnPage draft resume flow", () => {
     await user.click(await screen.findByRole("button", { name: /Resume Session/i }));
     expect(await screen.findByText(/Round 1 — Remaining/i)).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /figure-20/i })).toBeInTheDocument();
-    expect(screen.getByText(/Confidence for next answer:/i)).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: /^2$/i }));
-    expect(screen.getByText("2/5", { selector: "code" })).toBeInTheDocument();
+    expect(screen.queryByText(/Confidence for next answer:/i)).not.toBeInTheDocument();
+    await user.click(screen.getAllByRole("button", { name: /Answer .* as Not Sure/i })[0]);
+    expect(await screen.findByText(/Confidence recorded: 1\/5/i)).toBeInTheDocument();
 
     await user.click(screen.getAllByRole("button", { name: /Save & Exit/i })[0]);
     expect(await screen.findByRole("heading", { name: /^Learn Mode$/i })).toBeInTheDocument();
     expect(screen.getByText(/Saved Learn Session Found/i)).toBeInTheDocument();
   });
 
-  it("keeps confidence editable while review is visible", async () => {
+  it("records quick-confidence answer selections in quiz mode", async () => {
     const user = userEvent.setup();
     seedLearnDraft();
 
     render(<LearnPage />);
     await user.click(await screen.findByRole("button", { name: /Resume Session/i }));
-    await user.click(screen.getByRole("button", { name: /B1/i }));
-
+    await user.click(screen.getByRole("button", { name: /Answer A as Confident/i }));
     expect(await screen.findByText(/Confidence recorded:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Confidence for next answer:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Adjust this before Next\/Review Again/i)).toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: /^5$/i }));
-    expect(screen.getByText("5/5", { selector: "code" })).toBeInTheDocument();
+    expect(screen.getByText(/Confidence recorded: 5\/5/i)).toBeInTheDocument();
   });
 
   it("supports figure modal open/close parity for keyboard and mobile viewport", async () => {

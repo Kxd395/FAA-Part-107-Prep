@@ -6,6 +6,7 @@ Draft contract for cross-device continuity of:
 - adaptive stats (`part107_adaptive_stats_v2`)
 - learning events (`part107_learning_events_v1`)
 - attempt events (`part107_attempt_events_v1`)
+- question collections (`part107_question_collections_v1`)
 
 ## Current baseline
 - Export/import exists as manual transfer from `/progress`.

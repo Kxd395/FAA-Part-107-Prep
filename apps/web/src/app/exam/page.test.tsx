@@ -2,7 +2,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import ExamPage from "./page";
-import type { Question } from "@part107/core";
+import type { Category, Question } from "@part107/core";
 import { writeExamStrictConfirmedOnly } from "../../lib/examGuardrailStore";
 import { writeExamSetupPresetSelection } from "../../lib/sessionPresetStore";
 import { writeBookmarkedQuestionIds } from "../../lib/questionCollectionStore";
@@ -11,6 +11,8 @@ import { writeLearningPreferences } from "../../lib/learningPreferencesStore";
 
 const mocks = vi.hoisted(() => ({
   searchParams: new URLSearchParams(),
+  logEvent: vi.fn(),
+  recordLearningAttempt: vi.fn(),
   attemptEvents: [] as Array<{
     attemptId: string;
     userId: string;
@@ -28,7 +30,7 @@ const mocks = vi.hoisted(() => ({
   }>,
 }));
 
-function makeQuestion(id: string, category: string = "Regulations"): Question {
+function makeQuestion(id: string, category: Category = "Regulations"): Question {
   return {
     id,
     category,
@@ -94,14 +96,20 @@ vi.mock("../../hooks/useActiveUserId", () => ({
 
 vi.mock("../../hooks/useLearningEventLogger", () => ({
   useLearningEventLogger: () => ({
-    logEvent: vi.fn(),
+    logEvent: mocks.logEvent,
   }),
+}));
+
+vi.mock("../../lib/learningAttemptPipeline", () => ({
+  recordLearningAttempt: (...args: unknown[]) => mocks.recordLearningAttempt(...args),
 }));
 
 describe("ExamPage", () => {
   beforeEach(() => {
     mocks.searchParams = new URLSearchParams();
     mocks.attemptEvents = [];
+    mocks.logEvent.mockReset();
+    mocks.recordLearningAttempt.mockReset();
     localStorage.clear();
   });
 
@@ -122,16 +130,13 @@ describe("ExamPage", () => {
     expect(await screen.findByText(/Question type .*invalid_profile.* is not available/i)).toBeInTheDocument();
   });
 
-  it("shows in-session confidence controls before answering", async () => {
+  it("uses answer-level confidence quick actions without duplicate selector", async () => {
     const user = userEvent.setup();
     render(<ExamPage />);
 
     await user.click(await screen.findByRole("button", { name: /Begin Exam/i }));
-    expect(screen.getByText(/Confidence for next answer:/i)).toBeInTheDocument();
-    expect(screen.getByText("3/5", { selector: "code" })).toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: /^2$/i }));
-    expect(screen.getByText("2/5", { selector: "code" })).toBeInTheDocument();
+    expect(screen.queryByText(/Confidence for next answer:/i)).not.toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /Answer .* as Not Sure/i }).length).toBeGreaterThan(0);
   });
 
   it("supports timer preset override from setup", async () => {
@@ -330,5 +335,44 @@ describe("ExamPage", () => {
     expect(
       screen.getByText(/Practice mode is showing 3 options for this question to reduce memorization/i)
     ).toBeInTheDocument();
+  });
+
+  it("records answer attempts on first submit and answer changes", async () => {
+    const user = userEvent.setup();
+    render(<ExamPage />);
+
+    await user.click(await screen.findByRole("button", { name: /Begin Exam/i }));
+    await user.click(screen.getByRole("button", { name: /Answer A as Not Sure/i }));
+    await user.click(screen.getByRole("button", { name: /Answer B as Confident/i }));
+
+    expect(mocks.recordLearningAttempt).toHaveBeenCalledTimes(2);
+    const firstAttempt = mocks.recordLearningAttempt.mock.calls[0]?.[0] as {
+      selectedOptionId?: string;
+      metadata?: { firstSubmission?: boolean; answerChanged?: boolean };
+      learningMode?: string;
+    };
+    const secondAttempt = mocks.recordLearningAttempt.mock.calls[1]?.[0] as {
+      selectedOptionId?: string;
+      metadata?: { firstSubmission?: boolean; answerChanged?: boolean };
+      learningMode?: string;
+    };
+
+    expect(mocks.recordLearningAttempt.mock.calls[0]?.[0]).toMatchObject({
+      learningMode: "exam",
+      metadata: {
+        firstSubmission: true,
+        answerChanged: false,
+      },
+    });
+    expect(mocks.recordLearningAttempt.mock.calls[1]?.[0]).toMatchObject({
+      learningMode: "exam",
+      metadata: {
+        firstSubmission: false,
+        answerChanged: true,
+      },
+    });
+    expect(firstAttempt.selectedOptionId).toBeTruthy();
+    expect(secondAttempt.selectedOptionId).toBeTruthy();
+    expect(secondAttempt.selectedOptionId).not.toBe(firstAttempt.selectedOptionId);
   });
 });

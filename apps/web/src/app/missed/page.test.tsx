@@ -136,6 +136,9 @@ describe("MissedPage", () => {
         metadata: { filter: "sort", value: "recent" },
       })
     );
+
+    fireEvent.click(screen.getByRole("button", { name: /Question Q-1/i }));
+    expect(screen.getByRole("button", { name: /Report issue/i })).toBeInTheDocument();
   });
 
   it("adds visible missed questions to selected collection", async () => {

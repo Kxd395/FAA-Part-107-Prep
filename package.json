@@ -1,14 +1,22 @@
 {
   "name": "faa-107-study-guide",
   "private": true,
+  "engines": {
+    "node": ">=20 <23",
+    "npm": ">=10"
+  },
   "workspaces": ["apps/web", "packages/core", "packages/content"],
   "scripts": {
     "dev": "npm --prefix apps/web run dev",
     "build": "npm --prefix apps/web run build",
     "start": "npm --prefix apps/web run start",
     "lint": "npm --prefix apps/web run lint",
+    "typecheck": "npm --prefix apps/web run typecheck && npm run typecheck --workspace=@part107/core",
     "test": "npm --prefix apps/web run test && npm run test --workspace=@part107/core -- --run",
+    "coverage": "npm run test:coverage --workspace=part107-web && npm run test:coverage --workspace=@part107/core",
     "build:core": "npm run build --workspace=@part107/core",
-    "validate:content": "npm run validate --workspace=@part107/content"
+    "validate:content": "npm run validate --workspace=@part107/content",
+    "audit:prod": "npm audit --omit=dev",
+    "ci:verify": "npm run lint && npm run typecheck && npm run test && npm run coverage && npm run build && npm run validate:content"
   }
 }

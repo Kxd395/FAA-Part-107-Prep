@@ -6,7 +6,7 @@
 - Owner (eng): @kevindialmb
 - Owner (product): @kevindialmb (acting)
 - Owner (design): @kevindialmb (acting)
-- Last updated: 2026-02-24
+- Last updated: 2026-02-25
 - Related tickets/PRs: N/A (no linked ticket in repo)
 
 ## Purpose
@@ -32,6 +32,7 @@
 - Deep link:
   - `category` (normalized category)
   - `type` (question type profile)
+  - `collection=<all|bookmarks|named-id>` (limit pool to selected collection)
   - `focus=weak` (forces `weak_spots` profile)
 - Post-auth redirect: Not applicable
 
@@ -86,14 +87,17 @@ Mobile:
 +------------------------------+
 
 ## Components inventory
-- `useQuestionBank` (question fetch, load/error state)
+- `useQuestionBank` (question fetch, load/error state; includes external `Part107` and `Carrington` source-pack adapters)
 - `useStudySession` (study state machine)
 - `useAdaptiveQuestionStats` (adaptive scoring and attempt logging)
 - `useLearningEventLogger` (interaction telemetry)
 - `recordLearningAttempt` pipeline utility (single path for adaptive attempt write + `answer_submitted` telemetry)
 - `useProgress` (session persistence)
 - `optionPresentation` utility (deterministic per-session option-order randomization with remapped display labels)
-- Two-step grading in quiz flow with optional fast path: select answer first, then choose confidence (1-5) before reveal; optional split `☑` on each answer submits high-confidence (`5/5`) in one click
+- `questionTypePreferenceStore` (per-user default question-type hydration + persistence across Home/Study/Exam)
+- `questionCollectionStore` (per-user bookmark + named collection management, collection filter normalization)
+- Setup presets for `Session Length` and `Timed Drill` (question-limit + optional timer override per run), persisted per active user in local storage
+- In-session confidence selector (1-5) is always visible while unanswered; main answer click submits with selected confidence, and split `☑` on each answer submits high-confidence (`5/5`) in one click
 - `QuestionCard`, `AnswerOptions`, `ProgressHeader`, `SessionSummaryCard`, `CitationLinks`, `ReferenceModal`
 
 ## Interactive elements inventory (every control)
@@ -103,11 +107,18 @@ Mobile:
 | `study.warning.try_live` | Try Live Source | button | warning banner shown (cached snapshot fallback) | always | force a live-only reload without snapshot fallback | `GET /api/questions?category=All` | refreshes load state and clears warning on success | remains on warning/error if live fetch fails | none |
 | `study.warning.clear_snapshot` | Clear Cached Snapshot | button | warning banner shown (cached snapshot fallback) | always | clear local cached question snapshot so next load must use live source | none | removes `part107_question_bank_snapshot_v1` | if live source remains unavailable, next load may show error instead of fallback warning | none |
 | `study.setup.question_type[*]` | Question Type option | button | setup phase | always | set selected profile | none | `selectedQuestionType` | invalid URL type shows warning banner | none |
+| `study.setup.collection_warning` | Invalid collection warning | banner | setup phase with unsupported `collection` query | n/a | informs fallback to all questions | none | none | warning copy only | none |
+| `study.setup.collection_badge` | Collection filter active | banner | setup phase when non-`all` collection is selected | n/a | indicates filtered pool + saved count | none | none | empty-state may still occur if selected collection has no matching pool questions | none |
+| `study.setup.collection_select` | Active Filter | select | setup phase | always | switch active collection filter (`all`, bookmarks, named collections) | none | `selectedCollectionFilter` | invalid/deleted query id falls back to `all` with warning | none |
+| `study.setup.collection_create` | Create Collection | input + button | setup phase | non-empty valid name | create a new named collection and make it active filter | none | `part107_question_collections_v1[:<userId>]`, `selectedCollectionFilter` | invalid/blank name shows notice | none |
+| `study.setup.length_preset[*]` | Session Length preset | button | setup phase | always | select per-run question cap preset (`all`, `60`, `40`, `20`, `10`, `5`) | none | `selectedLengthPresetId` | none | none |
+| `study.setup.timer_preset[*]` | Timed Drill preset | button | setup phase | always | select per-run timer override (untimed/5m/10m/15m) | none | `selectedTimerPresetId` | none | none |
 | `study.setup.category[*]` | Category card | button | setup phase | always | start quiz for category | none | `quizStarted`, `questions`, score reset | zero-question outcome leads to immediate completion UI | none |
-| `study.answer.option[*]` | randomized A/B/C/D answer choice | button | quiz in-progress | `answerState == unanswered` | select pending answer candidate only (no grading yet) | none | `pendingStudyAnswer` set | no server error path | none |
-| `study.answer.option_confident[*]` | `☑` high-confidence answer | split button | quiz in-progress | `answerState == unanswered` | submit answer immediately with confidence `5/5` and reveal feedback | none | grading + scoring transitions immediately; `pendingStudyAnswer` cleared | no server error path | `answer_submitted` (`metadata.confidence=5`) |
-| `study.answer.confidence[*]` | Confidence 1..5 | button group | quiz in-progress and pending answer selected | always | submit pending answer with selected confidence and reveal feedback | none | `selectedOption`, `answerState`, score, questionResults, `lastRecordedConfidence` | no server error path | `answer_submitted` (`metadata.confidence`) |
-| `study.action.skip` | Skip for now | button | quiz in-progress | `answerState == unanswered` and no pending selected answer | move current unanswered question to end of queue | none | `questions` reorder, index stays on next unseen item | none | none |
+| `study.question.bookmark` | Bookmark / Bookmarked | button | quiz in-progress | always | toggle current question in bookmark collection | none | `part107_question_collections_v1[:<userId>]` + local bookmark state | none | none |
+| `study.answer.option[*]` | randomized A/B/C/D answer choice | button | quiz in-progress | `answerState == unanswered` | submit selected answer immediately with current selected confidence and reveal feedback | none | `selectedOption`, `answerState`, score, questionResults, `lastRecordedConfidence` | no server error path | `answer_submitted` (`metadata.confidence`) |
+| `study.answer.option_confident[*]` | `☑` high-confidence answer | split button | quiz in-progress | `answerState == unanswered` | submit answer immediately with confidence `5/5` and reveal feedback | none | grading + scoring transitions immediately; sets `lastRecordedConfidence=5` | no server error path | `answer_submitted` (`metadata.confidence=5`) |
+| `study.answer.confidence[*]` | Confidence 1..5 | button group | quiz in-progress and unanswered | always | set confidence for the next main answer click | none | `answerConfidence` updates | no server error path | none |
+| `study.action.skip` | Skip for now | button | quiz in-progress | `answerState == unanswered` | move current unanswered question to end of queue | none | `questions` reorder, index stays on next unseen item | none | none |
 | `study.action.save_exit` | Save & Exit / Exit | button | quiz in-progress | always | persist partial results (if any) then return to setup | none | optional `saveSession`, `sessionSaved=true`, `quizStarted=false` | none | none |
 | `study.feedback.next` | Next Question / See Results | button | after answer | always | move next or complete | none | index and answer state transitions | none | `question_shown` on next render |
 | `study.result.try_again` | Try Again | button | completion | always | restart current category quiz | none | session reset + new question set | none | none |
@@ -133,11 +144,12 @@ State transitions:
 - loading -> error (conditions: fetch failure and no cached load)
 - error -> loading (trigger: Retry)
 - ready_setup -> ready_quiz_unanswered (trigger: `startQuiz`)
-- ready_quiz_unanswered -> ready_quiz_unanswered (trigger: select pending answer candidate)
-- ready_quiz_unanswered -> ready_quiz_answered (trigger: confirm confidence and submit answer, or split `☑` high-confidence submit)
+- ready_quiz_unanswered -> ready_quiz_unanswered (trigger: set confidence 1..5)
+- ready_quiz_unanswered -> ready_quiz_answered (trigger: submit answer via main option click with selected confidence, or split `☑` high-confidence submit)
 - ready_quiz_unanswered -> ready_quiz_unanswered (trigger: `skipQuestion`; skipped item moves to tail)
 - ready_quiz_answered -> ready_quiz_unanswered (trigger: `nextQuestion`, not last)
 - ready_quiz_answered -> complete (trigger: `nextQuestion` on last question)
+- ready_quiz_unanswered -> complete (trigger: timed drill reaches zero)
 - complete -> ready_quiz_unanswered (trigger: `restartQuiz`)
 - ready_quiz_unanswered -> ready_setup (trigger: `Save & Exit` / `Exit`)
 - ready_quiz_answered -> ready_setup (trigger: `Save & Exit`)
@@ -150,9 +162,11 @@ State transitions:
 - Optional data:
   - Adaptive stats for weighted selection
   - Learning event and attempt stores
+  - Per-user preferred question type (default setup profile when no explicit query override)
+  - Per-user collections (bookmarks + named) for optional setup filtering and in-session bookmark toggles
 - Data sources:
   - API (`useQuestionBank`)
-  - localStorage (`part107_adaptive_stats_v2`, `part107_attempt_events_v1`, `part107_learning_events_v1`, `part107_progress`)
+  - localStorage (`part107_adaptive_stats_v2`, `part107_attempt_events_v1`, `part107_learning_events_v1`, `part107_progress`, `part107_study_setup_v1:<userId>`, `part107_default_question_type_v1:<userId>`, `part107_question_collections_v1[:<userId>]`)
 - Partial-save behavior:
   - In-progress `Save & Exit` writes answered subset to `part107_progress`.
   - If no answered questions exist, `Exit` returns to setup without persistence.
@@ -173,12 +187,20 @@ State transitions:
 
 ## Validation and input rules
 - `type` query param normalized and restricted to supported list:
-  - `confirmed_test`, `all_random`, `acs_practice`, `real_exam`, `weak_spots`
-- Unsupported `type` shows warning and fallback profile.
+  - `confirmed_test`, `all_random`, `part107_bank`, `carrington_bank`, `carrington_strict`, `real_exam`, `weak_spots`
+- Unsupported `type` shows warning and falls back to `confirmed_test` (Confirmed Test Questions).
+- `collection` query param supports `all`, `bookmarks`, and named collection IDs (unknown IDs show warning + fallback to `all`).
+- If `type` is omitted and `focus=weak` is not set, setup hydrates from per-user preferred question type.
 - `category` query param normalized via `normalizeCategory`; invalid values fallback to `All` on autostart path.
+- Setup presets apply run-scoped settings:
+  - Session length presets cap per-run question count (`all`, `60`, `40`, `20`, `10`, `5`).
+  - Timed drill presets apply optional countdown override (`untimed`, `5m`, `10m`, `15m`).
+  - Preset selections are hydrated and persisted per active user id.
 - Option order is shuffled per session and rendered with remapped display labels (`A-D`) while grading still uses underlying source option IDs.
-- Confidence is captured before reveal via either explicit choice (`1..5`) after selection or split `☑` high-confidence submit (`5/5`), then persisted to adaptive attempt events.
+- Study now renders exactly 3 answer choices per question (`1` correct + `2` distractors) when source data contains 4 options; selection is deterministic within a session and randomized between sessions.
+- Confidence is captured before reveal via the persistent in-session selector (`1..5`) or split `☑` high-confidence submit (`5/5`), then persisted to adaptive attempt events.
 - Input sanitization for question content is done server-side in API route.
+- Adaptive canonicalization uses `concept_key` when present so paraphrased equivalents from different sources share mastery history.
 
 ## Destructive actions
 - Confirmations required: None

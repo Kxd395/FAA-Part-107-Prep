@@ -1,0 +1,13 @@
+# Default owners
+* @Kxd395
+
+# App and API
+/apps/web/ @Kxd395
+
+# Shared packages
+/packages/core/ @Kxd395
+/packages/content/ @Kxd395
+
+# Documentation and workflows
+/docs/ @Kxd395
+/.github/ @Kxd395

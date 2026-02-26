@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
+import type { AttemptEvent } from "./attemptEventStore";
 import { computeResponseTimeTelemetry } from "./responseTimeTelemetry";
 
 describe("computeResponseTimeTelemetry", () => {
   it("computes null/zero rates and percentiles", () => {
-    const attempts = Array.from({ length: 25 }, (_, index) => ({
+    const attempts: AttemptEvent[] = Array.from({ length: 25 }, (_, index) => ({
       attemptId: `a-${index}`,
       userId: "pilot",
       questionKey: `k-${index}`,

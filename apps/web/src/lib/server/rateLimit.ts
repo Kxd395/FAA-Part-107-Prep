@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+import { serverLogger } from "./logger";
 
 interface Bucket {
   tokens: number;
@@ -83,8 +84,10 @@ export function consumeRateLimit(
     metric.blocked += 1;
     getMetricStore().set(config.key, metric);
     if (metric.blocked % 25 === 0) {
-      // Alert-like local signal for operational visibility.
-      console.warn(`[rate-limit] key=${config.key} blocked=${metric.blocked}`);
+      serverLogger.warn("Rate limit threshold reached", {
+        key: config.key,
+        blocked: metric.blocked,
+      });
     }
     return {
       ok: false,

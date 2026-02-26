@@ -6,13 +6,14 @@
 - Owner (eng): @kevindialmb
 - Owner (product): @kevindialmb (acting)
 - Owner (design): @kevindialmb (acting)
-- Last updated: 2026-02-24
+- Last updated: 2026-02-25
 - Related tickets/PRs: N/A (no linked ticket in repo)
 
 ## Purpose
 - What user problem this page solves: Visibility into accuracy trends, weak spots, session history, and local telemetry/debug signals.
 - Success criteria (measurable):
   - User can inspect aggregate performance and per-session details.
+  - User can inspect response-time telemetry QA baselines (P50/P95, null/zero anomaly rates).
   - User can inspect telemetry activity with filters (mode/type/window/search).
   - User can export/import local progress payloads safely with preview + merge mode.
   - User can export a redacted telemetry support bundle.
@@ -86,6 +87,7 @@ Mobile:
 - `defaultAdaptiveStatsStore`, `defaultAttemptEventStore`, `defaultLearningEventStore`
 - `computeAdaptiveInsights`
   - includes confidence-derived metrics from objective attempts: average confidence, calibration score (Brier-based), and overconfidence rate
+- `computeResponseTimeTelemetry` (response-time percentile + null/zero anomaly diagnostics by mode)
 - `computeLearningEventInsights`, `computeLearnCompletionTrend` (in-file helpers)
 - `computeImportPreview`, `resolveImportedData` (`progressImportMerge.ts`)
 - Local UI state:
@@ -189,6 +191,7 @@ State transitions:
 - Merge mode values constrained to `merge|overwrite`.
 - Telemetry filters constrained to known analytics taxonomy values + `all`.
 - Confidence metrics exclude flashcard attempts because flashcards are self-rated and not objectively graded.
+- Response-time QA panel computes P50/P95 plus null/zero anomaly checks (overall + by mode) from `part107_attempt_events_v1`.
 
 ## Destructive actions
 - Confirmations required: yes (two-step reset + explicit scope selection).

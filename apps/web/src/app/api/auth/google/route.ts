@@ -7,6 +7,7 @@ import {
     getAuthTtlSeconds,
     issueAppSessionToken,
 } from "../../../../lib/server/appAuth";
+import { serverLogger } from "../../../../lib/server/logger";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -103,7 +104,11 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (error) {
-    console.error("Google Auth Error:", error);
+    serverLogger.error("Google authentication failure", {
+      route: "/api/auth/google",
+      method: request.method,
+      error,
+    });
     const rawMessage = error instanceof Error ? error.message : "";
     const audienceMismatch =
       /audience|recipient|wrong recipient|token used too late/i.test(rawMessage);

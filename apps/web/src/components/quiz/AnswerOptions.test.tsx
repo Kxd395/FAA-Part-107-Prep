@@ -89,7 +89,10 @@ describe("AnswerOptions", () => {
     await user.click(optionAButtons[optionAButtons.length - 1]);
     expect(onSelectWithConfidence).toHaveBeenCalledWith("A", 3);
 
-    await user.click(screen.getByRole("button", { name: /Answer A with high confidence/i }));
+    await user.click(screen.getByRole("button", { name: /Answer A as Not Sure/i }));
+    expect(onSelectWithConfidence).toHaveBeenCalledWith("A", 1);
+
+    await user.click(screen.getByRole("button", { name: /Answer A as Confident/i }));
     expect(onSelectWithConfidence).toHaveBeenCalledWith("A", 5);
     expect(onSelect).not.toHaveBeenCalled();
   });

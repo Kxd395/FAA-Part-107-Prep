@@ -13,6 +13,7 @@ const SYNC_KEYS = [
   "part107_learning_events_v1",
   "part107_flashcard_sr",
   "part107_learn_draft_v1",
+  "part107_question_collections_v1",
 ] as const;
 
 export interface SyncSnapshotEnvelope {

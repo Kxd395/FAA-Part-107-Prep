@@ -1,0 +1,11 @@
+--- README.md
++++ README.md
+@@ -14,3 +14,8 @@
+ - App loaders prefer this folder first.
+ - Loaders keep a fallback to `docs/ssot/review/*` for backward compatibility.
+ - Review reports and extraction scripts may still write to `docs/ssot/review`.
++
++Generated artifacts:
++
++- `combined_question_bank.json` (generated 2026-02-26): Part107 bank plus selected Carrington questions (NOTAM/TFR and METAR/TAF decoding). Carrington imports are assigned IDs 101-112.
++- `combined_bank_dedupe_report.md` (generated 2026-02-26): Included/excluded mapping and rationale.

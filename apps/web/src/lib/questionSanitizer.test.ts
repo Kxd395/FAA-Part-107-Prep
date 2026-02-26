@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
+import type { Question } from "@part107/core";
 import { extractImageRefFromText, sanitizeQuestion, sanitizeQuestionText } from "./questionSanitizer";
 
-const SAMPLE_QUESTION = {
+const SAMPLE_QUESTION: Question = {
   id: "AIR-ACS-051",
   category: "Airspace",
   subcategory: "Airspace Operations",
@@ -23,7 +24,7 @@ const SAMPLE_QUESTION = {
   difficulty_level: 2,
   tags: [],
   source_type: "acs_generated",
-} as const;
+};
 
 describe("question sanitizer", () => {
   it("extracts markdown image refs to public paths", () => {

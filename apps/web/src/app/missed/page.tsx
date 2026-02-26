@@ -9,6 +9,7 @@ import {
   QuestionBankLoading,
   QuestionBankWarning,
 } from "../../components/QuestionBankState";
+import QuestionIssueReporter from "../../components/quiz/QuestionIssueReporter";
 import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
@@ -607,6 +608,13 @@ export default function MissedPage() {
                       📊 View {q.figure_reference ?? "Figure"}
                     </button>
                   )}
+
+                  <QuestionIssueReporter
+                    mode="missed"
+                    question={q}
+                    selectedOptionId={(entry.yourAnswer as OptionId | null) ?? null}
+                    confidence={null}
+                  />
                 </div>
               )}
             </div>

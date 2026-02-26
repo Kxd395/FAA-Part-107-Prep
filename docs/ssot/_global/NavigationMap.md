@@ -14,6 +14,7 @@ All current web routes discovered from `apps/web/src/app/**/page.tsx`.
    +--> [/missed]
    +--> [/progress]
    +--> [/charts]
+   +--> [/profile]
 
 Home (`/`) deep-links:
 
@@ -47,6 +48,7 @@ Rules in code today:
   - `/exam` parses `category`, `type` query params.
   - Unsupported params are ignored or downgraded with warning UI.
 - Post-auth redirect rules:
-  - `/login?token=...` verifies link and keeps user on `/login` with CTA to continue.
+  - `/login` immediately redirects authenticated users to sanitized `returnUrl` (or `/`).
+  - `/login?token=...` verifies link, refreshes auth session, then follows sanitized `returnUrl` redirect flow.
   - Header exposes global `Sign In`/`Sign Out` based on `/api/auth/session` state.
 - 404 behavior: UNKNOWN (no custom `not-found.tsx` found).

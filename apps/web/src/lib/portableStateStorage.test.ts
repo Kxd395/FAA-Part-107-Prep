@@ -8,6 +8,7 @@ const PORTABLE_KEYS = [
   "part107_learning_events_v1",
   "part107_flashcard_sr",
   "part107_learn_draft_v1",
+  "part107_question_collections_v1",
 ] as const;
 
 describe("portableStateStorage", () => {
@@ -38,6 +39,25 @@ describe("portableStateStorage", () => {
 
     expect(flashcard.q1?.due).toBe(123);
     expect(draft.version).toBe(1);
+  });
+
+  it("reads question collections from user-scoped key", () => {
+    localStorage.setItem(
+      "part107_question_collections_v1:pilot-a",
+      JSON.stringify({
+        version: 2,
+        bookmarks: ["Q-1"],
+        customCollections: [],
+      })
+    );
+
+    const payload = readPortableStateForUser(PORTABLE_KEYS, "pilot-a");
+    const collections = JSON.parse(payload.part107_question_collections_v1 ?? "{}") as {
+      version?: number;
+      bookmarks?: string[];
+    };
+    expect(collections.version).toBe(2);
+    expect(collections.bookmarks).toEqual(["Q-1"]);
   });
 
   it("reads only target-user bucket for shared adaptive/attempt/learning payloads", () => {
@@ -142,6 +162,7 @@ describe("portableStateStorage", () => {
       }),
       part107_flashcard_sr: null,
       part107_learn_draft_v1: null,
+      part107_question_collections_v1: null,
     });
 
     const adaptive = JSON.parse(localStorage.getItem("part107_adaptive_stats_v2") ?? "{}") as {
@@ -181,6 +202,7 @@ describe("portableStateStorage", () => {
       part107_learning_events_v1: null,
       part107_flashcard_sr: null,
       part107_learn_draft_v1: null,
+      part107_question_collections_v1: null,
     });
 
     const attempts = JSON.parse(localStorage.getItem("part107_attempt_events_v1") ?? "{}") as {
@@ -198,10 +220,16 @@ describe("portableStateStorage", () => {
       part107_learning_events_v1: null,
       part107_flashcard_sr: JSON.stringify({ q1: { due: 999 } }),
       part107_learn_draft_v1: JSON.stringify({ version: 1, updatedAt: "2026-02-26T00:00:00.000Z" }),
+      part107_question_collections_v1: JSON.stringify({
+        version: 2,
+        bookmarks: ["Q-1"],
+        customCollections: [],
+      }),
     });
 
     expect(localStorage.getItem("part107_flashcard_sr:pilot-a")).toContain("q1");
     expect(localStorage.getItem("part107_learn_draft_v1:pilot-a")).toContain("updatedAt");
+    expect(localStorage.getItem("part107_question_collections_v1:pilot-a")).toContain("bookmarks");
 
     writePortableStateForUser(PORTABLE_KEYS, "pilot-a", {
       part107_progress: null,
@@ -210,9 +238,11 @@ describe("portableStateStorage", () => {
       part107_learning_events_v1: null,
       part107_flashcard_sr: null,
       part107_learn_draft_v1: null,
+      part107_question_collections_v1: null,
     });
 
     expect(localStorage.getItem("part107_flashcard_sr:pilot-a")).toBeNull();
     expect(localStorage.getItem("part107_learn_draft_v1:pilot-a")).toBeNull();
+    expect(localStorage.getItem("part107_question_collections_v1:pilot-a")).toBeNull();
   });
 });

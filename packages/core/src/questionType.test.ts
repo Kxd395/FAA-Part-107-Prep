@@ -187,6 +187,18 @@ describe("questionType", () => {
     ).toEqual(["q-carr-ok"]);
   });
 
+  it("treats canonical part107 source as confirmed_test while preserving strict-source exclusion", () => {
+    const part107 = makeQuestion("q-part107", "Part107 canonical", {
+      source: "part107-question-bank",
+    });
+    const carringtonStrict = makeQuestion("q-carr-strict", "Carrington strict canonical", {
+      source: "carrington-question-bank-strict",
+    });
+
+    expect(filterQuestionsByType([part107, carringtonStrict], "confirmed_test").map((q) => q.id))
+      .toEqual(["q-part107"]);
+  });
+
   it("excludes ACS code-mapping drills from weak_spots when realistic MCQs are available", () => {
     const realistic = makeQuestion("q-real", "What should a remote PIC verify before takeoff?");
     const acs = makeQuestion("q-acs", "Which ACS knowledge code matches this topic: \"Operations near airports.\"?", {

@@ -1,0 +1,285 @@
+{
+  "all_extracted_questions": [
+    {
+      "question_number": "1",
+      "question": "Which federal agency is responsible for regulating and overseeing civil aviation in the United States?",
+      "A": "The National Transportation Safety Board (NTSB)",
+      "B": "The Federal Aviation Administration (FAA)",
+      "C": "The Department of Homeland Security (DHS)",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "2",
+      "question": "Which unmanned aircraft qualifies as a small unmanned aircraft operated under 14 CFR Part 107?",
+      "A": "A drone weighing 55 pounds or more at takeoff, including payload",
+      "B": "A drone weighing less than 55 pounds at takeoff, including everything on board",
+      "C": "Any drone regardless of weight if flown below 400 feet AGL",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "3",
+      "question": "Which Title of the Code of Federal Regulations (CFR) applies specifically to the operation of small unmanned aircraft systems (sUAS)?",
+      "A": "Title 14 — Aeronautics and Space",
+      "B": "Title 49 — Transportation",
+      "C": "Title 47 — Telecommunications",
+      "correct_answer": "A"
+    },
+    {
+      "question_number": "4",
+      "question": "Who is required to complete the TRUST (The Recreational UAS Safety Test)?",
+      "A": "All remote pilots operating under 14 CFR Part 107",
+      "B": "Individuals flying drones strictly for recreational purposes",
+      "C": "Anyone operating a drone that weighs more than 55 pounds",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "5",
+      "question": "A remote pilot conducts a drone flight in exchange for services instead of money. How is this operation classified?",
+      "A": "Recreational, because no money was exchanged",
+      "B": "Commercial, because the flight was conducted in exchange for services",
+      "C": "Recreational, if the drone weighs less than 55 pounds",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "6",
+      "question": "Which of the following is a requirement to be eligible to take the FAA Part 107 Remote Pilot Knowledge Test?",
+      "A": "Good physical condition is the only requirement",
+      "B": "Be at least 16 years of age",
+      "C": "Be able to speak any language fluently",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "7",
+      "question": "A remote pilot changes their permanent mailing address. What is required?",
+      "A": "Update the address in IACRA within 30 days",
+      "B": "Report the change at the next certificate renewal",
+      "C": "No action is required",
+      "correct_answer": "A"
+    },
+    {
+      "question_number": "9",
+      "question": "According to 14 CFR §107.35, how many small unmanned aircraft may a remote pilot in command operate at one time?",
+      "A": "One small unmanned aircraft",
+      "B": "More than one small unmanned aircraft if automation is used",
+      "C": "More than one small unmanned aircraft when operating in Class G airspace",
+      "correct_answer": "A"
+    },
+    {
+      "question_number": "10",
+      "question": "During a Part 107 operation, may a visual observer (VO) assume control of the small unmanned aircraft during flight?",
+      "A": "Yes, at any time, if the remote pilot in command authorizes it",
+      "B": "Yes, but only in an emergency situation",
+      "C": "No, a visual observer may not manipulate the flight controls",
+      "correct_answer": "C"
+    },
+    {
+      "question_number": "11",
+      "question": "In small unmanned aircraft operations, what best describes the control station?",
+      "A": "The physical location where the remote pilot stands while monitoring the flight",
+      "B": "The ground-based control equipment used by the remote pilot to operate the small unmanned aircraft at the pilot’s location",
+      "C": "The launch and recovery area designated for the sUAS operation",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "13",
+      "question": "A recreational drone pilot wants to fly above 400 feet AGL while operating over a tall structure. What is the correct FAA rule?",
+      "A": "The pilot may fly up to 400 feet above the structure",
+      "B": "The pilot must remain at or below 400 feet AGL",
+      "C": "The pilot may exceed 400 feet AGL with FAA authorization",
+      "correct_answer": "A"
+    },
+    {
+      "question_number": "14",
+      "question": "Which statement is correct regarding a small UAS operation during an in-flight emergency?",
+      "A": "The remote pilot in command must immediately terminate the flight, regardless of surrounding hazards.",
+      "B": "The remote pilot in command may deviate from Part 107 rules to avoid collision with a manned aircraft.",
+      "C": "The remote pilot in command must get ATC approval before deviating from a rule.",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "15",
+      "question": "When requested by the FAA, within how many days must a remote pilot provide required records or reports?",
+      "A": "10 calendar days",
+      "B": "30 calendar days",
+      "C": "60 calendar days",
+      "correct_answer": "A"
+    },
+    {
+      "question_number": "16",
+      "question": "A remote pilot observes a hot air balloon approaching the operating area. What action is required?",
+      "A": "Continue the operation because hot air balloons have limited maneuverability.",
+      "B": "Yield the right-of-way and maneuver the sUAS to remain well clear.",
+      "C": "Wait 5 minutes, then ascend above the balloon to avoid the collision.",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "17",
+      "question": "Under 14 CFR Part 107, property damage must be reported to the FAA within 10 calendar days if the damage is:",
+      "A": "$500 of property damage",
+      "B": "More than $500, excluding damage to the small unmanned aircraft",
+      "C": "$500 or more, including damage to the small unmanned aircraft",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "18",
+      "question": "Under 14 CFR Part 107, what is the maximum allowable groundspeed of a small unmanned aircraft?",
+      "A": "87 statute miles (100 knots)",
+      "B": "87 miles per hour (100 knots)",
+      "C": "87 knots (100 miles per hour)",
+      "correct_answer": "C"
+    },
+    {
+      "question_number": "19",
+      "question": "For a drone to be considered a small unmanned aircraft (sUAS) under Part 107, it must weigh:",
+      "A": "Less than 55 pounds at takeoff, including all payload and batteries",
+      "B": "55 pounds or less at takeoff, excluding payload",
+      "C": "55 pounds or more with everything on board",
+      "correct_answer": "A"
+    },
+    {
+      "question_number": "20",
+      "question": "A drone must be registered with the FAA if it weighs:",
+      "A": "Less than 250 grams, including everything onboard",
+      "B": "250 grams or more, including everything onboard",
+      "C": "0.55 pounds or more with everything on board",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "21",
+      "question": "What is the minimum age required to register a drone with the FAA?",
+      "A": "13 years old",
+      "B": "16 years old",
+      "C": "18 years old",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "22",
+      "question": "When is a Remote ID system required for a small unmanned aircraft operating in the United States?",
+      "A": "Only when operating in controlled airspace",
+      "B": "For all operations unless the aircraft qualifies for a Remote ID exemption",
+      "C": "Only for recreational operations",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "23",
+      "question": "You purchased an older drone that does not have Standard Remote ID and weighs more than 250 grams. What is required to legally fly the drone in Class G airspace?",
+      "A": "A Remote ID broadcast module",
+      "B": "Authorization from the FAA",
+      "C": "An internet connection to transmit Remote ID data",
+      "correct_answer": "A"
+    },
+    {
+      "question_number": "24",
+      "question": "What location allows a drone to be operated without needing Remote ID?",
+      "A": "Within Class G airspace below 400 feet AGL",
+      "B": "Inside an FAA-Recognized Identification Area (FRIA)",
+      "C": "Within controlled airspace with ATC authorization",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "25",
+      "question": "What is situational awareness in small unmanned aircraft operations?",
+      "A": "The ability to focus only on the aircraft’s camera feed",
+      "B": "Understanding what is happening around the aircraft and how it may affect the flight",
+      "C": "Knowing the maximum allowable flight altitude",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "27",
+      "question": "If you are planning to fly your small unmanned aircraft and the cloud ceiling is 600 feet AGL, what is the maximum altitude you may legally fly?",
+      "A": "400 feet AGL",
+      "B": "500 feet AGL",
+      "C": "100 feet AGL",
+      "correct_answer": "A"
+    },
+    {
+      "question_number": "28",
+      "question": "When may a remote pilot operate a small unmanned aircraft during civil twilight?",
+      "A": "With anti-collision lights visible for 3 SM",
+      "B": "With anti-collision lights visible for at least 3 SM and flashing",
+      "C": "With anti-collision lights flashing and visible for 1 statute mile",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "36",
+      "question": "Which specific categories under 14 CFR Part 107 operations over people do not require a Means of Compliance (MOC) and Declaration of Compliance (DOC)?",
+      "A": "Category 2 and Category 3",
+      "B": "Category 1 only",
+      "C": "Category 1 and Category 4",
+      "correct_answer": "C"
+    },
+    {
+      "question_number": "37",
+      "question": "Under 14 CFR Part 107, when may a remote pilot operate a small UAS over a moving vehicle?",
+      "A": "When the sUAS is over a closed or restricted site",
+      "B": "When people are not directly participating in the operation",
+      "C": "When the aircraft weighs more than 55 pounds",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "38",
+      "question": "A remote pilot is conducting a small unmanned aircraft operation over open farmland. A visual observer (VO) is assisting the remote pilot by tracking the aircraft using binoculars to maintain visual line of sight. Is this operation compliant with Part 107?",
+      "A": "Yes, a visual observer may use binoculars to maintain visual line of sight",
+      "B": "Yes, as long as the remote pilot can see the aircraft at all times",
+      "C": "No, a visual observer must maintain visual line of sight using unaided vision",
+      "correct_answer": "C"
+    },
+    {
+      "question_number": "41",
+      "question": "A visual observer (VO) sees a manned aircraft approaching the small unmanned aircraft but fails to notify the remote pilot in command (RPIC). What is the RPIC's responsibility in this situation?",
+      "A": "The RPIC is still responsible for avoiding the manned aircraft and must take immediate action",
+      "B": "The VO's failure relieves the RPIC of responsibility",
+      "C": "The RPIC may continue the operation since the VO saw the aircraft",
+      "correct_answer": "A"
+    },
+    {
+      "question_number": "42",
+      "question": "After the preflight briefing, the remote pilot in command (RPIC) realizes they forgot to inform the crew that the small unmanned aircraft will not use obstacle avoidance systems due to the nature of the operation. What should the RPIC do?",
+      "A": "Proceed with the operation since the crew is already briefed",
+      "B": "Stop and update the briefing to ensure the crew understands the limitation",
+      "C": "Rely on the crew to notice obstacles and adjust accordingly",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "43",
+      "question": "A remote pilot in command plans to conduct a small UAS operation at night under Part 107. Which statement is correct?",
+      "A": "Night operations require an FAA waiver",
+      "B": "Night operations are prohibited under Part 107",
+      "C": "Night operations are permitted without a waiver if §107.29 requirements are met",
+      "correct_answer": "C"
+    },
+    {
+      "question_number": "44",
+      "question": "A remote pilot plans to fly a small UAS 15 minutes after sunset. Which equipment is required?",
+      "A": "Navigation lights visible for 1 statute mile",
+      "B": "Steady white position lights",
+      "C": "Flashing anti-collision lights visible for 3 statute miles",
+      "correct_answer": "C"
+    },
+    {
+      "question_number": "45",
+      "question": "For Part 107 operations, civil twilight is defined as which of the following time periods?",
+      "A": "When the sun is between 0° and 6° below the horizon",
+      "B": "30 minutes before sunrise and 30 minutes after sunset",
+      "C": "Any time the sky is partially illuminated",
+      "correct_answer": "B"
+    },
+    {
+      "question_number": "46",
+      "question": "Who is responsible for ensuring a small UAS is properly equipped for night or civil twilight operations?",
+      "A": "The aircraft manufacturer",
+      "B": "Air traffic control",
+      "C": "The remote pilot in command",
+      "correct_answer": "C"
+    },
+    {
+      "question_number": "47",
+      "question": "Under 14 CFR § 89.130, what must an operator of a foreign-registered unmanned aircraft do before operating in U.S. airspace?",
+      "A": "Register the aircraft with the FAA under Part 48",
+      "B": "Obtain a Confirmation of Identification and keep it at the control station",
+      "C": "Display the aircraft’s registration number on the exterior",
+      "correct_answer": "B"
+    }
+  ],
+  "note": "All questions and options extracted exactly as they appear in the screenshots. Correct answers are only included where the sunglasses emoji (😎) was visibly next to the choice in the image. Duplicates of the same question (e.g. multiple #16 hot air balloon screenshots) have been consolidated. This covers every unique question from all 50+ images you provided."
+}

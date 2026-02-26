@@ -24,9 +24,9 @@ import QuestionTypeOptionsGrid from "../../components/QuestionTypeOptionsGrid";
 import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
 import ActionBar from "../../components/quiz/ActionBar";
 import AnswerOptions from "../../components/quiz/AnswerOptions";
-import ConfidencePanel from "../../components/quiz/ConfidencePanel";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
+import QuestionIssueReporter from "../../components/quiz/QuestionIssueReporter";
 import SessionButton from "../../components/quiz/SessionButton";
 import SessionSummaryCard from "../../components/quiz/SessionSummaryCard";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
@@ -82,7 +82,6 @@ import { readLearningPreferences, writeLearningPreferences } from "../../lib/lea
 
 const PASSING_PERCENT = 70;
 const EXAM_DEFAULT_CONFIDENCE: AttemptConfidence = 3;
-const EXAM_CONFIDENT_CONFIDENCE: AttemptConfidence = 5;
 const EXAM_LENGTH_PRESETS = [
   { id: "full", label: "Full (up to 60)", questionLimit: null as number | null },
   { id: "half", label: "Half (30)", questionLimit: 30 },
@@ -189,7 +188,6 @@ function ExamPageClient() {
   const [sessionSaved, setSessionSaved] = useState(false);
   const [showNavigator, setShowNavigator] = useState(false);
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
-  const [answerConfidence, setAnswerConfidence] = useState<AttemptConfidence>(EXAM_DEFAULT_CONFIDENCE);
   const [answerConfidenceByQuestionId, setAnswerConfidenceByQuestionId] = useState<
     Map<string, AttemptConfidence>
   >(new Map());
@@ -337,7 +335,6 @@ function ExamPageClient() {
   useEffect(() => {
     if (exam.phase === "in-progress") {
       setSessionSaved(false);
-      setAnswerConfidence(EXAM_DEFAULT_CONFIDENCE);
       setAnswerConfidenceByQuestionId(new Map());
       setFlaggedReviewPassActive(false);
     }
@@ -396,10 +393,12 @@ function ExamPageClient() {
   const handleAnswerSelect = useCallback(
     (optionId: "A" | "B" | "C" | "D", confidence: AttemptConfidence = EXAM_DEFAULT_CONFIDENCE) => {
       if (!exam.currentQuestion) return;
+      const questionId = exam.currentQuestion.id;
+      const isFirstSubmissionForQuestion = !exam.answers.has(questionId);
       const responseTimeMs = Math.max(0, Date.now() - questionShownAtRef.current);
       setAnswerConfidenceByQuestionId((prev) => {
         const next = new Map(prev);
-        next.set(exam.currentQuestion!.id, confidence);
+        next.set(questionId, confidence);
         return next;
       });
       recordLearningAttempt({
@@ -413,8 +412,28 @@ function ExamPageClient() {
         responseTimeMs,
         confidence,
         questionTypeProfile: exam.questionTypeProfile,
+        metadata: {
+          firstSubmission: isFirstSubmissionForQuestion,
+          answerChanged: !isFirstSubmissionForQuestion,
+        },
         persistAdaptive: false,
       });
+      if (!isFirstSubmissionForQuestion) {
+        events.logEvent({
+          type: "control_clicked",
+          mode: "exam",
+          questionId: exam.currentQuestion.id,
+          category: exam.currentQuestion.category,
+          subcategory: exam.currentQuestion.subcategory,
+          questionTypeProfile: exam.questionTypeProfile,
+          metadata: {
+            control: "answer_changed",
+            selectedOption: optionId,
+            confidence,
+            responseTimeMs,
+          },
+        });
+      }
       exam.selectAnswer(optionId);
     },
     [adaptive, events, exam]
@@ -828,6 +847,7 @@ function ExamPageClient() {
           options={QUESTION_TYPE_OPTIONS}
           selectedQuestionType={selectedQuestionType}
           onSelectQuestionType={setSelectedQuestionType}
+          variant="compact"
           note={
             <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
               Real UAG format is multiple-choice only. ACS/learning codes are shown on your AKTR after testing for remediation, not as a live question format.
@@ -1181,6 +1201,7 @@ function ExamPageClient() {
     `exam:${exam.startTime}`
   );
   const isTimeLow = exam.remainingMs < 10 * 60 * 1000;
+  const currentQuestionConfidence = answerConfidenceByQuestionId.get(exam.currentQuestion.id) ?? 3;
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -1229,15 +1250,12 @@ function ExamPageClient() {
       </div>
 
       <QuestionCard question={exam.currentQuestion} onOpenFigure={setFigureRef} />
-
-      <ConfidencePanel
-        title={
-          <>
-            Confidence for next answer: <code>{answerConfidence}/5</code>
-          </>
-        }
-        value={answerConfidence}
-        onChange={setAnswerConfidence}
+      <QuestionIssueReporter
+        mode="exam"
+        question={exam.currentQuestion}
+        selectedOptionId={exam.currentAnswer}
+        questionTypeProfile={exam.questionTypeProfile}
+        confidence={currentQuestionConfidence}
       />
 
       <AnswerOptions
@@ -1245,12 +1263,14 @@ function ExamPageClient() {
         mode="exam"
         selectedOption={exam.currentAnswer}
         displayLabelByOptionId={currentOptionPresentation.displayLabelByOptionId}
-        onSelect={(optionId) => handleAnswerSelect(optionId, answerConfidence)}
+        onSelect={(optionId) => handleAnswerSelect(optionId, EXAM_DEFAULT_CONFIDENCE)}
         onSelectWithConfidence={handleAnswerSelect}
         showConfidenceSplit
         defaultConfidence={EXAM_DEFAULT_CONFIDENCE}
-        confidentConfidence={EXAM_CONFIDENT_CONFIDENCE}
       />
+      <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-3 py-2 text-xs text-[var(--muted)]">
+        You can change answers any time before submit. Only your final selection is graded.
+      </div>
 
       {currentOptionPresentation.options.length < exam.currentQuestion.options.length && (
         <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-3 py-2 text-xs text-[var(--muted)]">

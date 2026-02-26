@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { serverLogger } from "./logger";
 import { requireSecret } from "./requiredSecret";
 
 const MAGIC_LINK_TTL_SECONDS = 15 * 60; // 15 minutes
@@ -224,11 +225,10 @@ export async function sendMagicLink(
     return { sent: true };
   }
 
-  // Dev mode: log to console
-  console.log("\n─── Magic Link (dev) ───");
-  console.log(`  Email: ${email}`);
-  console.log(`  URL:   ${verifyUrl}`);
-  console.log("────────────────────────\n");
+  serverLogger.info("Magic link generated in development mode", {
+    email,
+    verifyUrl,
+  });
 
   return { sent: true, devUrl: verifyUrl };
 }

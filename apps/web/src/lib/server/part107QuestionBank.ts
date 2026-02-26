@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import type { OptionId, Question } from "@part107/core";
+import { isUnresolvedFigurePlaceholderText } from "../figurePlaceholder";
 
 type RawQuestion = {
   id: number;
@@ -119,10 +120,16 @@ export function loadPart107QuestionBank(): Question[] {
       const reference = raw.reference?.trim() || "Part 107 Question Bank";
       const imageNeed = imageNeedById.get(raw.id);
       const imageRef = normalizeImageRef(raw.image_url);
-      const figureText =
+      const candidateFigureText =
         raw.image_required || imageNeed
           ? (imageNeed?.image_description ?? raw.image_description ?? "").trim() || null
           : null;
+      const unresolvedPlaceholderFigure =
+        !imageRef && isUnresolvedFigurePlaceholderText(candidateFigureText);
+      const figureText = unresolvedPlaceholderFigure ? null : candidateFigureText;
+      if (raw.image_required && !imageRef && !figureText) {
+        return null;
+      }
 
       return {
         id: `P107-${String(raw.id).padStart(3, "0")}`,

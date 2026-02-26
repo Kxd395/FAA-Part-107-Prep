@@ -61,14 +61,16 @@ describe("passwordAuth.ts", () => {
         expect(secondResult).toBeNull();
     });
 
-    it("should log magic link to console when sending in non-production", async () => {
+    it("should emit a structured log when sending in non-production", async () => {
         const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => { });
 
         const result = await sendMagicLink("dev@example.com", "http://localhost:3000");
 
         expect(result.sent).toBe(true);
         expect(result.devUrl).toBeDefined();
-        expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("Magic Link (dev)"));
+        expect(consoleSpy).toHaveBeenCalledWith(
+            expect.stringContaining("\"message\":\"Magic link generated in development mode\"")
+        );
 
         consoleSpy.mockRestore();
     });

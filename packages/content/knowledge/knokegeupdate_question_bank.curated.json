@@ -1,0 +1,422 @@
+[
+  {
+    "id": "KUP-010",
+    "category": "Operations",
+    "subcategory": "During A Part",
+    "question_text": "During a Part 107 operation, may a visual observer (VO) assume control of the small unmanned aircraft during flight?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Yes, at any time, if the remote pilot in command authorizes it"
+      },
+      {
+        "id": "B",
+        "text": "Yes, but only in an emergency situation"
+      },
+      {
+        "id": "C",
+        "text": "No, a visual observer may not manipulate the flight controls"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Answer sourced from FAA Remote Pilot Study Guide.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote Pilot Study Guide",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "operations"
+    ],
+    "concept_key": "kup:operations|during_a_part_107_operation_may_a_visual"
+  },
+  {
+    "id": "KUP-011",
+    "category": "Operations",
+    "subcategory": "In Small Unmanned",
+    "question_text": "In small unmanned aircraft operations, what best describes the control station?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The physical location where the remote pilot stands while monitoring the flight"
+      },
+      {
+        "id": "B",
+        "text": "The ground-based control equipment used by the remote pilot to operate the small unmanned aircraft at the pilot's location"
+      },
+      {
+        "id": "C",
+        "text": "The launch and recovery area designated for the sUAS operation"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA Remote Pilot Study Guide.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote Pilot Study Guide",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "operations"
+    ],
+    "concept_key": "kup:operations|in_small_unmanned_aircraft_operations_what_best_describes"
+  },
+  {
+    "id": "KUP-014",
+    "category": "Operations",
+    "subcategory": "Which Statement Is",
+    "question_text": "Which statement is correct regarding a small UAS operation during an in-flight emergency?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The remote pilot in command must immediately terminate the flight, regardless of surrounding hazards."
+      },
+      {
+        "id": "B",
+        "text": "The remote pilot in command may deviate from Part 107 rules to avoid collision with a manned aircraft."
+      },
+      {
+        "id": "C",
+        "text": "The remote pilot in command must get ATC approval before deviating from a rule."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA Remote Pilot Study Guide.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote Pilot Study Guide",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "operations"
+    ],
+    "concept_key": "kup:operations|which_statement_is_correct_regarding_a_small_uas"
+  },
+  {
+    "id": "KUP-023",
+    "category": "Airspace",
+    "subcategory": "You Purchased An",
+    "question_text": "You purchased an older drone that does not have Standard Remote ID and weighs more than 250 grams. What is required to legally fly the drone in Class G airspace?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "A Remote ID broadcast module"
+      },
+      {
+        "id": "B",
+        "text": "Authorization from the FAA"
+      },
+      {
+        "id": "C",
+        "text": "An internet connection to transmit Remote ID data"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR Part 89.",
+    "explanation_distractors": {},
+    "citation": "14 CFR Part 89",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "airspace"
+    ],
+    "concept_key": "kup:airspace|you_purchased_an_older_drone_that_does_not"
+  },
+  {
+    "id": "KUP-027",
+    "category": "Weather",
+    "subcategory": "If You Are",
+    "question_text": "If you are planning to fly your small unmanned aircraft and the cloud ceiling is 600 feet AGL, what is the maximum altitude you may legally fly?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "400 feet AGL"
+      },
+      {
+        "id": "B",
+        "text": "500 feet AGL"
+      },
+      {
+        "id": "C",
+        "text": "100 feet AGL"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA Remote Pilot Study Guide.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote Pilot Study Guide",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "weather"
+    ],
+    "concept_key": "kup:weather|if_you_are_planning_to_fly_your_small"
+  },
+  {
+    "id": "KUP-028",
+    "category": "Weather",
+    "subcategory": "When May A",
+    "question_text": "When may a remote pilot operate a small unmanned aircraft during civil twilight?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "With anti-collision lights visible for 3 SM"
+      },
+      {
+        "id": "B",
+        "text": "With anti-collision lights visible for at least 3 SM and flashing"
+      },
+      {
+        "id": "C",
+        "text": "With anti-collision lights flashing and visible for 1 statute mile"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR Sec. 107.29.",
+    "explanation_distractors": {},
+    "citation": "14 CFR Sec. 107.29",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "weather"
+    ],
+    "concept_key": "kup:weather|when_may_a_remote_pilot_operate_a_small"
+  },
+  {
+    "id": "KUP-038",
+    "category": "Operations",
+    "subcategory": "A Remote Pilot",
+    "question_text": "A remote pilot is conducting a small unmanned aircraft operation over open farmland. A visual observer (VO) is assisting the remote pilot by tracking the aircraft using binoculars to maintain visual line of sight. Is this operation compliant with Part 107?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Yes, a visual observer may use binoculars to maintain visual line of sight"
+      },
+      {
+        "id": "B",
+        "text": "Yes, as long as the remote pilot can see the aircraft at all times"
+      },
+      {
+        "id": "C",
+        "text": "No, a visual observer must maintain visual line of sight using unaided vision"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Answer sourced from FAA Remote Pilot Study Guide.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote Pilot Study Guide",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "operations"
+    ],
+    "concept_key": "kup:operations|a_remote_pilot_is_conducting_a_small_unmanned"
+  },
+  {
+    "id": "KUP-041",
+    "category": "Operations",
+    "subcategory": "A Visual Observer",
+    "question_text": "A visual observer (VO) sees a manned aircraft approaching the small unmanned aircraft but fails to notify the remote pilot in command (RPIC). What is the RPIC's responsibility in this situation?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The RPIC is still responsible for avoiding the manned aircraft and must take immediate action"
+      },
+      {
+        "id": "B",
+        "text": "The VO's failure relieves the RPIC of responsibility"
+      },
+      {
+        "id": "C",
+        "text": "The RPIC may continue the operation since the VO saw the aircraft"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA Remote Pilot Study Guide.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote Pilot Study Guide",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "operations"
+    ],
+    "concept_key": "kup:operations|a_visual_observer_vo_sees_a_manned_aircraft"
+  },
+  {
+    "id": "KUP-042",
+    "category": "Operations",
+    "subcategory": "After The Preflight",
+    "question_text": "After the preflight briefing, the remote pilot in command (RPIC) realizes they forgot to inform the crew that the small unmanned aircraft will not use obstacle avoidance systems due to the nature of the operation. What should the RPIC do?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Proceed with the operation since the crew is already briefed"
+      },
+      {
+        "id": "B",
+        "text": "Stop and update the briefing to ensure the crew understands the limitation"
+      },
+      {
+        "id": "C",
+        "text": "Rely on the crew to notice obstacles and adjust accordingly"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA Remote Pilot Study Guide.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote Pilot Study Guide",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "operations"
+    ],
+    "concept_key": "kup:operations|after_the_preflight_briefing_the_remote_pilot_in"
+  },
+  {
+    "id": "KUP-045",
+    "category": "Weather",
+    "subcategory": "For Part 107",
+    "question_text": "For Part 107 operations, civil twilight is defined as which of the following time periods?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "When the sun is between 0 degrees and 6 degrees below the horizon"
+      },
+      {
+        "id": "B",
+        "text": "30 minutes before sunrise and 30 minutes after sunset"
+      },
+      {
+        "id": "C",
+        "text": "Any time the sky is partially illuminated"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR Sec. 107.29.",
+    "explanation_distractors": {},
+    "citation": "14 CFR Sec. 107.29",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "weather"
+    ],
+    "concept_key": "kup:weather|for_part_107_operations_civil_twilight_is_defined"
+  },
+  {
+    "id": "KUP-046",
+    "category": "Weather",
+    "subcategory": "Who Is Responsible",
+    "question_text": "Who is responsible for ensuring a small UAS is properly equipped for night or civil twilight operations?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The aircraft manufacturer"
+      },
+      {
+        "id": "B",
+        "text": "Air traffic control"
+      },
+      {
+        "id": "C",
+        "text": "The remote pilot in command"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Answer sourced from 14 CFR Sec. 107.29.",
+    "explanation_distractors": {},
+    "citation": "14 CFR Sec. 107.29",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "weather"
+    ],
+    "concept_key": "kup:weather|who_is_responsible_for_ensuring_a_small_uas"
+  },
+  {
+    "id": "KUP-047",
+    "category": "Airspace",
+    "subcategory": "Under 14 Cfr",
+    "question_text": "Under 14 CFR Sec. 89.130, what must an operator of a foreign-registered unmanned aircraft do before operating in U.S. airspace?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Register the aircraft with the FAA under Part 48"
+      },
+      {
+        "id": "B",
+        "text": "Obtain a Confirmation of Identification and keep it at the control station"
+      },
+      {
+        "id": "C",
+        "text": "Display the aircraft's registration number on the exterior"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR Sec. 89.130.",
+    "explanation_distractors": {},
+    "citation": "14 CFR Sec. 89.130",
+    "difficulty_level": 2,
+    "source": "knokegeupdate-docx-supplement",
+    "source_type": "resource_pack",
+    "tags": [
+      "knokegeupdate-supplement",
+      "airspace"
+    ],
+    "concept_key": "kup:airspace|under_14_cfr_sec_89_130_what_must"
+  }
+]

@@ -50,15 +50,15 @@ describe("GET /api/questions", () => {
     expect(body.meta.source).toBe("local");
   });
 
-  it("defaults to strict-only Carrington with no duplicate IDs/signatures", async () => {
+  it("returns canonical local bank with no duplicate IDs/signatures", async () => {
     delete process.env.QUESTION_SOURCE_URL;
     const response = await GET(new NextRequest("http://localhost/api/questions?category=All"));
     const body = await response.json();
 
     expect(response.status).toBe(200);
     expect(body.meta.source).toBe("local");
-    expect(body.questions.length).toBeGreaterThanOrEqual(250);
-    expect(body.questions.length).toBeLessThanOrEqual(320);
+    expect(body.questions.length).toBeGreaterThanOrEqual(100);
+    expect(body.questions.length).toBeLessThanOrEqual(130);
 
     const nonStrictCarrington = body.questions.filter((question: { source?: string }) =>
       String(question.source ?? "").toLowerCase().startsWith("carrington-question-bank") &&

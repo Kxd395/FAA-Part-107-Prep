@@ -7,6 +7,7 @@ const DEAD_LETTER_BACKOFF_BASE_MS = 5_000;
 const DEAD_LETTER_BACKOFF_MAX_MS = 10 * 60 * 1000;
 
 const ALLOWED_METADATA_KEYS = new Set([
+  "confidence",
   "phase",
   "round",
   "batchSize",
@@ -44,6 +45,8 @@ const ALLOWED_METADATA_KEYS = new Set([
   "href",
   "figure",
   "hasQuery",
+  "firstSubmission",
+  "answerChanged",
 ]);
 
 export interface SinkEventPayload {
@@ -82,7 +85,9 @@ function sinkEnabled(): boolean {
 }
 
 function sinkUrl(): string {
-  return process.env.NEXT_PUBLIC_ANALYTICS_SINK_URL?.trim() ?? "";
+  const configured = process.env.NEXT_PUBLIC_ANALYTICS_SINK_URL?.trim() ?? "";
+  if (configured.length > 0) return configured;
+  return "/api/user/learning-events";
 }
 
 function sinkToken(): string {
@@ -120,7 +125,7 @@ export function sanitizeLearningEventForSink(event: LearningEvent): SinkEventPay
 }
 
 export function isAnalyticsSinkEnabled(): boolean {
-  return sinkEnabled() && sinkUrl().length > 0;
+  return sinkEnabled();
 }
 
 function loadDeadLetterQueue(): DeadLetterEvent[] {
@@ -168,10 +173,8 @@ async function sleep(ms: number): Promise<void> {
 }
 
 async function postToSink(payload: SinkEventPayload): Promise<void> {
-  const url = sinkUrl();
-  if (!url) return;
   const token = sinkToken();
-  await fetch(url, {
+  const response = await fetch(sinkUrl(), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -180,6 +183,12 @@ async function postToSink(payload: SinkEventPayload): Promise<void> {
     body: JSON.stringify(payload),
     keepalive: true,
   });
+
+  // Drop non-retriable client-status responses (validation/auth), retry only on
+  // transport failures and server-side throttling/errors.
+  if (response.status >= 500 || response.status === 429) {
+    throw new Error(`sink response status ${response.status}`);
+  }
 }
 
 async function sendWithRetry(payload: SinkEventPayload): Promise<{ ok: true } | { ok: false; error: unknown; retries: number }> {

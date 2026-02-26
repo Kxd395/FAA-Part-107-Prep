@@ -21,6 +21,7 @@ import QuestionTypeOptionsGrid from "../../components/QuestionTypeOptionsGrid";
 import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
 import ActionBar from "../../components/quiz/ActionBar";
 import ConfidencePanel from "../../components/quiz/ConfidencePanel";
+import QuestionIssueReporter from "../../components/quiz/QuestionIssueReporter";
 import SessionButton from "../../components/quiz/SessionButton";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
 import { useActiveUserId } from "../../hooks/useActiveUserId";
@@ -385,17 +386,9 @@ export default function FlashcardsPage() {
     handleRateCard("know_it", ratingConfidence);
   }, [handleRateCard, ratingConfidence]);
 
-  const handleKnowItConfident = useCallback(() => {
-    handleRateCard("know_it", 5);
-  }, [handleRateCard]);
-
   const handleStillLearning = useCallback(() => {
     handleRateCard("still_learning", ratingConfidence);
   }, [handleRateCard, ratingConfidence]);
-
-  const handleStillLearningConfident = useCallback(() => {
-    handleRateCard("still_learning", 5);
-  }, [handleRateCard]);
 
   const handleSkip = useCallback(() => {
     if (!currentCard) return;
@@ -560,6 +553,7 @@ export default function FlashcardsPage() {
           options={QUESTION_TYPE_OPTIONS}
           selectedQuestionType={selectedQuestionType}
           onSelectQuestionType={setSelectedQuestionType}
+          variant="compact"
         />
 
         {/* Category selector */}
@@ -936,57 +930,45 @@ export default function FlashcardsPage() {
         }
         value={ratingConfidence}
         onChange={setRatingConfidence}
+        selectorMode="triad"
+        selectorSize="md"
+        selectorClassName="mt-2 flex flex-wrap justify-center gap-2"
         hint={
           flipped
-            ? "Use this confidence for your next Know It/Still Learning click."
-            : "Set confidence now, then flip the card and rate."
+            ? "Use NS/N/C for your next Know It/Still Learning click."
+            : "Set NS/N/C now, then flip the card and rate."
         }
+      />
+
+      <QuestionIssueReporter
+        mode="flashcards"
+        question={q}
+        selectedOptionId={null}
+        questionTypeProfile={selectedQuestionType}
+        confidence={ratingConfidence}
       />
 
       {/* Action buttons — only visible when flipped */}
       {flipped && (
         <div className="space-y-2">
           <div className="grid grid-cols-2 gap-4">
-            <div className="relative">
-              <button
-                onClick={handleStillLearning}
-                className="w-full rounded-xl border border-amber-500/40 bg-amber-500/10 py-4 pr-12 text-center font-semibold text-amber-400 transition-all hover:scale-[1.02] hover:bg-amber-500/20"
-              >
-                📖 Still Learning
-                <span className="mt-1 block text-xs text-[var(--muted)]">← or L key</span>
-              </button>
-              <button
-                type="button"
-                aria-label="Still Learning with high confidence"
-                title="Still Learning with high confidence"
-                onClick={handleStillLearningConfident}
-                className="absolute right-2 top-2 rounded-md border border-amber-400/40 bg-amber-500/20 px-2 py-1 text-xs font-semibold text-amber-200 hover:bg-amber-500/30"
-              >
-                ☑
-              </button>
-            </div>
-            <div className="relative">
-              <button
-                onClick={handleKnowIt}
-                className="w-full rounded-xl border border-green-500/40 bg-green-500/10 py-4 pr-12 text-center font-semibold text-green-400 transition-all hover:scale-[1.02] hover:bg-green-500/20"
-              >
-                ✅ Know It
-                <span className="mt-1 block text-xs text-[var(--muted)]">→ or K key</span>
-              </button>
-              <button
-                type="button"
-                aria-label="Know It with high confidence"
-                title="Know It with high confidence"
-                onClick={handleKnowItConfident}
-                className="absolute right-2 top-2 rounded-md border border-green-400/40 bg-green-500/20 px-2 py-1 text-xs font-semibold text-green-200 hover:bg-green-500/30"
-              >
-                ☑
-              </button>
-            </div>
+            <button
+              onClick={handleStillLearning}
+              className="w-full rounded-xl border border-amber-500/40 bg-amber-500/10 py-4 text-center font-semibold text-amber-400 transition-all hover:scale-[1.02] hover:bg-amber-500/20"
+            >
+              📖 Still Learning
+              <span className="mt-1 block text-xs text-[var(--muted)]">← or L key</span>
+            </button>
+            <button
+              onClick={handleKnowIt}
+              className="w-full rounded-xl border border-green-500/40 bg-green-500/10 py-4 text-center font-semibold text-green-400 transition-all hover:scale-[1.02] hover:bg-green-500/20"
+            >
+              ✅ Know It
+              <span className="mt-1 block text-xs text-[var(--muted)]">→ or K key</span>
+            </button>
           </div>
           <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 p-3 text-center text-xs text-[var(--muted)]">
-            One click records your selected confidence. Tap <code>☑</code> for one-click high
-            confidence <code>5/5</code>.
+            One click records your selected confidence with each rating.
           </div>
         </div>
       )}

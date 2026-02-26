@@ -2,9 +2,23 @@
   "name": "@part107/content",
   "version": "1.0.0",
   "description": "Part 107 Exam Prep — Shared Question Bank, Categories, and Figure References",
+  "engines": {
+    "node": ">=20 <23",
+    "npm": ">=10"
+  },
   "main": "index.js",
   "scripts": {
-    "validate": "node scripts/validate-questions.js",
+    "validate": "node scripts/validate-questions.js && node scripts/audit-figure-context.js && node scripts/audit-carrington-citations.js && node scripts/audit-collection-health.js && node scripts/audit-deck-overlap.js",
+    "audit:figures": "node scripts/audit-figure-context.js",
+    "audit:carrington": "node scripts/audit-carrington-citations.js",
+    "audit:collection-health": "node scripts/audit-collection-health.js",
+    "audit:overlap": "node scripts/audit-deck-overlap.js",
+    "extract:carrington": "node scripts/extract-carrington-questions.js",
+    "trim:carrington": "node scripts/trim-carrington-bank.js",
+    "trim:carrington:strict": "node scripts/trim-carrington-bank.js --strict",
+    "import:remote-pilot-images": "node scripts/import-remote-pilot-images.js",
+    "build:combined-canonical": "node scripts/build-combined-canonical-bank.js",
+    "build:knokegeupdate-supplement": "node scripts/build-knokegeupdate-supplement.js",
     "stats": "node scripts/question-stats.js",
     "sanitize": "node scripts/sanitize-questions.js"
   },

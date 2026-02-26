@@ -15,6 +15,7 @@ const SYNC_KEYS = [
   "part107_learning_events_v1",
   "part107_flashcard_sr",
   "part107_learn_draft_v1",
+  "part107_question_collections_v1",
 ] as const;
 
 function authCookie(userId: string): string {
@@ -74,6 +75,7 @@ describe("sync roundtrip flow", () => {
               part107_learning_events_v1: null,
               part107_flashcard_sr: null,
               part107_learn_draft_v1: null,
+              part107_question_collections_v1: null,
             },
           },
         }),
@@ -103,6 +105,7 @@ describe("sync roundtrip flow", () => {
       part107_learning_events_v1: null,
       part107_flashcard_sr: null,
       part107_learn_draft_v1: null,
+      part107_question_collections_v1: null,
     };
     const resolved = resolveImportedData(
       downloadBody.snapshot.data,

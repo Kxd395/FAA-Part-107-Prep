@@ -8,7 +8,6 @@ import {
   QUESTION_TYPE_PROFILE_LABELS,
   filterQuestionsByType,
   normalizeCategory,
-  type AttemptConfidence,
   type QuestionTypeProfile,
   useStudySession,
 } from "@part107/core";
@@ -22,9 +21,9 @@ import QuestionTypeOptionsGrid from "../../components/QuestionTypeOptionsGrid";
 import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
 import ActionBar from "../../components/quiz/ActionBar";
 import AnswerOptions from "../../components/quiz/AnswerOptions";
-import ConfidencePanel from "../../components/quiz/ConfidencePanel";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
+import QuestionIssueReporter from "../../components/quiz/QuestionIssueReporter";
 import SessionButton from "../../components/quiz/SessionButton";
 import SessionSummaryCard from "../../components/quiz/SessionSummaryCard";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
@@ -187,8 +186,7 @@ function StudyPageClient() {
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const autoStarted = useRef(false);
   const [sessionSaved, setSessionSaved] = useState(false);
-  const [answerConfidence, setAnswerConfidence] = useState<AttemptConfidence>(3);
-  const [lastRecordedConfidence, setLastRecordedConfidence] = useState<AttemptConfidence | null>(null);
+  const [lastRecordedConfidence, setLastRecordedConfidence] = useState<1 | 2 | 3 | 4 | 5 | null>(null);
   const [selectedLengthPresetId, setSelectedLengthPresetId] = useState<(typeof STUDY_LENGTH_PRESETS)[number]["id"]>("full");
   const [selectedTimerPresetId, setSelectedTimerPresetId] = useState<(typeof STUDY_TIMER_PRESETS)[number]["id"]>("off");
   const [presetHydratedForUserId, setPresetHydratedForUserId] = useState<string | null>(null);
@@ -434,6 +432,7 @@ function StudyPageClient() {
           options={QUESTION_TYPE_OPTIONS}
           selectedQuestionType={selectedQuestionType}
           onSelectQuestionType={setSelectedQuestionType}
+          variant="compact"
           note={
             <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
               Selected:{" "}
@@ -893,6 +892,13 @@ function StudyPageClient() {
       </div>
 
       <QuestionCard question={study.currentQuestion} onOpenFigure={setFigureRef} />
+      <QuestionIssueReporter
+        mode="study"
+        question={study.currentQuestion}
+        selectedOptionId={study.selectedOption}
+        questionTypeProfile={selectedQuestionType}
+        confidence={lastRecordedConfidence ?? 3}
+      />
 
       <AnswerOptions
         options={optionPresentation.options}
@@ -903,8 +909,8 @@ function StudyPageClient() {
         answerState={study.answerState}
         onSelect={(optionId) => {
           if (study.answerState !== "unanswered") return;
-          study.answerQuestion(optionId, { confidence: answerConfidence });
-          setLastRecordedConfidence(answerConfidence);
+          study.answerQuestion(optionId, { confidence: 3 });
+          setLastRecordedConfidence(3);
         }}
         onSelectWithConfidence={(optionId, confidence) => {
           if (study.answerState !== "unanswered") return;
@@ -912,7 +918,8 @@ function StudyPageClient() {
           setLastRecordedConfidence(confidence);
         }}
         showConfidenceSplit
-        splitConfidenceMode="high_only"
+        splitConfidenceMode="full"
+        defaultConfidence={3}
         confidentConfidence={5}
         disabled={study.answerState !== "unanswered"}
       />
@@ -922,30 +929,6 @@ function StudyPageClient() {
           Practice mode is showing 3 options for this question to reduce memorization.
         </div>
       )}
-
-      <ConfidencePanel
-        title={
-          <>
-            Confidence for next answer: <code>{answerConfidence}/5</code>
-          </>
-        }
-        value={answerConfidence}
-        onChange={setAnswerConfidence}
-        containerClassName="p-4"
-        titleClassName="text-sm font-semibold text-white"
-        selectorClassName="mt-2 flex flex-wrap gap-2"
-        selectorSize="md"
-        hint={
-          study.answerState === "unanswered" ? (
-            <>
-              Tip: click the <code>☑</code> on any answer for one-click high confidence{" "}
-              <code>5/5</code>.
-            </>
-          ) : (
-            "Set confidence now before continuing to the next question."
-          )
-        }
-      />
 
       <ActionBar>
         <SessionButton

@@ -99,7 +99,7 @@ function normalizeStudyCategoryValue(value: string): StudyCategory {
 
 export default function HomePage() {
   const activeUserId = useActiveUserId();
-  const { questions: allQuestions } = useQuestionBank();
+  const { questions: allQuestions, source: questionSource } = useQuestionBank();
   const { logEvent } = useLearningEventLogger(activeUserId);
   const [practiceType, setPracticeType] = useState<QuestionTypeProfile>("confirmed_test");
   const [defaultStudyCategory, setDefaultStudyCategory] = useState<StudyCategory>("All");
@@ -118,7 +118,16 @@ export default function HomePage() {
   const totalQuestions = topicCounts.All ?? allQuestions.length;
   const stats = useMemo(
     () => [
-      { label: "Questions", value: String(totalQuestions), sub: "Live loaded question bank" },
+      {
+        label: "Questions",
+        value: String(totalQuestions),
+        sub:
+          questionSource === "remote"
+            ? "Live loaded question bank (remote source)"
+            : questionSource === "local"
+              ? "Live loaded question bank (local source)"
+              : "Live loaded question bank",
+      },
       {
         label: "Pass Rate",
         value: `${EXAM_DEFAULTS.PASSING_PERCENT}%`,
@@ -127,7 +136,7 @@ export default function HomePage() {
       { label: "Time Limit", value: `${EXAM_HOURS} hrs`, sub: `${EXAM_MINUTES} minutes on exam day` },
       { label: "Updated", value: String(LATEST_SOURCE_PACK_AUDIT_YEAR), sub: "Source-pack audit year" },
     ],
-    [totalQuestions]
+    [questionSource, totalQuestions]
   );
   const practiceExamHref = useMemo(() => {
     const params = new URLSearchParams({ type: practiceType });

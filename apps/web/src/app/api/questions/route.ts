@@ -2,15 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { filterQuestionsByCategory, normalizeCategory, shuffleQuestions } from "@part107/core/quiz";
 import type { Question } from "@part107/core/types";
 
-import regulationsData from "../../../../../../packages/content/questions/regulations.json";
-import airspaceData from "../../../../../../packages/content/questions/airspace.json";
-import weatherData from "../../../../../../packages/content/questions/weather.json";
-import operationsData from "../../../../../../packages/content/questions/operations.json";
-import loadingPerformanceData from "../../../../../../packages/content/questions/loading_performance.json";
 import { normalizeAcsCodeOnlyQuestions } from "../../../lib/acsQuestionNormalizer";
 import { parseRemoteQuestionSourcePayload } from "../../../lib/questionContracts";
 import { sanitizeQuestion } from "../../../lib/questionSanitizer";
 import { loadCarringtonStrictQuestionBank } from "../../../lib/server/carringtonQuestionBank";
+import { loadCombinedQuestionBank } from "../../../lib/server/combinedQuestionBank";
+import { serverLogger } from "../../../lib/server/logger";
 import { loadPart107QuestionBank } from "../../../lib/server/part107QuestionBank";
 import { consumeRateLimit, rateLimitHeaders } from "../../../lib/server/rateLimit";
 
@@ -28,14 +25,12 @@ type QuestionApiPayload = {
   };
 };
 
+const CURATED_COMBINED_QUESTIONS = loadCombinedQuestionBank();
+
 const LOCAL_QUESTIONS: Question[] = [
-  ...(regulationsData as Question[]),
-  ...(airspaceData as Question[]),
-  ...(weatherData as Question[]),
-  ...(operationsData as Question[]),
-  ...(loadingPerformanceData as Question[]),
-  ...loadPart107QuestionBank(),
-  ...loadCarringtonStrictQuestionBank(),
+  ...(CURATED_COMBINED_QUESTIONS.length > 0
+    ? CURATED_COMBINED_QUESTIONS
+    : [...loadPart107QuestionBank(), ...loadCarringtonStrictQuestionBank()]),
 ];
 
 function slug(value: string): string {
@@ -192,6 +187,11 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
+    serverLogger.error("Question API request failed", {
+      route: "/api/questions",
+      method: request.method,
+      error,
+    });
     return NextResponse.json(
       {
         error: error instanceof Error ? error.message : "Failed to load questions",

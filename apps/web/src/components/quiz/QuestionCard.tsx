@@ -2,6 +2,7 @@ import type { Question } from "@part107/core";
 import { useEffect, useState } from "react";
 import type { ResolvedReference } from "../ReferenceModal";
 import { resolveFigureImageUrl } from "../../lib/figureImage";
+import { isUnresolvedFigurePlaceholderText } from "../../lib/figurePlaceholder";
 
 function formatFigureLabel(figureRef: string | null): string {
   if (!figureRef) return "Figure";
@@ -17,6 +18,8 @@ export default function QuestionCard({ question, onOpenFigure }: QuestionCardPro
   const [imageFailed, setImageFailed] = useState(false);
   const figureLabel = formatFigureLabel(question.figure_reference);
   const imageRef = resolveFigureImageUrl(question);
+  const hasPlaceholderFigureText = isUnresolvedFigurePlaceholderText(question.figure_text);
+  const figureTextToRender = hasPlaceholderFigureText ? null : question.figure_text;
 
   useEffect(() => {
     setImageFailed(false);
@@ -52,20 +55,22 @@ export default function QuestionCard({ question, onOpenFigure }: QuestionCardPro
         </button>
       )}
 
-      {(imageFailed || !imageRef) && question.figure_text && (
+      {(imageFailed || !imageRef) && figureTextToRender && (
         <div className="mt-4 rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
           <p className="mb-2 text-xs font-medium text-[var(--muted)] uppercase tracking-wide">
             📊 {figureLabel}
           </p>
           <pre className="text-sm leading-relaxed text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto">
-            {question.figure_text}
+            {figureTextToRender}
           </pre>
         </div>
       )}
 
-      {question.figure_reference && (imageFailed || !imageRef) && !question.figure_text && (
+      {(question.figure_reference || hasPlaceholderFigureText) &&
+        (imageFailed || !imageRef) &&
+        !figureTextToRender && (
         <div className="mt-4 rounded-lg border border-dashed border-[var(--card-border)] bg-[var(--background)] p-4 text-center text-sm text-[var(--muted)]">
-          📊 Refer to {figureLabel}
+          📊 Figure unavailable for this question in the current build.
         </div>
       )}
     </div>

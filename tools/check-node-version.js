@@ -6,16 +6,21 @@ if (!Number.isFinite(major)) {
   process.exit(0);
 }
 
-if (major >= 22) {
+if (major < 20 || major >= 23) {
   console.error(
     [
       "",
       `Detected Node.js ${process.versions.node}.`,
-      "This repo is validated on Node.js 20 LTS for stable Next.js 14 dev startup.",
-      "Switch to Node 20 and run `npm run dev` again.",
+      "This repo supports Node.js 20.x and 22.x.",
+      "Switch to Node 20 or 22 and run `npm run dev` again.",
       "",
     ].join("\n")
   );
   process.exit(1);
 }
 
+if (major !== 20) {
+  console.warn(
+    `Detected Node.js ${process.versions.node}. Node.js 20.x is the primary validated baseline for local development.`
+  );
+}

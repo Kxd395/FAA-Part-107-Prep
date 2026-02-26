@@ -4,6 +4,7 @@ import {
   PROGRESS_STORAGE_KEY,
   userScopedStorageKey,
 } from "./progressStorage";
+import { QUESTION_COLLECTION_STORAGE_KEY } from "./questionCollectionStore";
 
 const USER_SCOPED_PAYLOAD_CONFIG = {
   part107_adaptive_stats_v2: 2,
@@ -109,7 +110,8 @@ function resolveLocalStorageKey(portableKey: string, userId: string): string {
   if (
     portableKey === PROGRESS_STORAGE_KEY ||
     portableKey === FLASHCARD_SR_STORAGE_KEY ||
-    portableKey === LEARN_DRAFT_STORAGE_KEY
+    portableKey === LEARN_DRAFT_STORAGE_KEY ||
+    portableKey === QUESTION_COLLECTION_STORAGE_KEY
   ) {
     return userScopedStorageKey(portableKey, userId);
   }

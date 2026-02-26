@@ -104,20 +104,14 @@ describe("StudyPage", () => {
     expect(await screen.findByText(/Question type .*invalid_profile.* is not available/i)).toBeInTheDocument();
   });
 
-  it("shows in-session confidence controls and applies selected value", async () => {
+  it("uses answer-level confidence quick actions in-session", async () => {
     const user = userEvent.setup();
     render(<StudyPage />);
 
     await user.click(await screen.findByRole("button", { name: /All .*questions available/i }));
-    expect(screen.getByText(/Confidence for next answer:/i)).toBeInTheDocument();
-    expect(screen.getByText("3/5", { selector: "code" })).toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: /^2$/i }));
-    expect(screen.getByText("2/5", { selector: "code" })).toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: /Option A/i }));
-    expect(await screen.findByText(/Confidence recorded: 2\/5/i)).toBeInTheDocument();
-    expect(screen.getByText(/Confidence for next answer:/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Confidence for next answer:/i)).not.toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /Answer A as Not Sure/i }));
+    expect(await screen.findByText(/Confidence recorded: 1\/5/i)).toBeInTheDocument();
   });
 
   it("supports timed drill preset and shows countdown in session header", async () => {

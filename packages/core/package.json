@@ -2,21 +2,30 @@
   "name": "@part107/core",
   "version": "1.0.0",
   "description": "Part 107 Exam Prep — Shared quiz engine, scoring, and session logic",
+  "engines": {
+    "node": ">=20 <23",
+    "npm": ">=10"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "typecheck": "tsc --noEmit",
     "dev": "tsc --watch",
-    "test": "vitest"
+    "test": "vitest",
+    "test:coverage": "vitest --run --coverage"
   },
   "dependencies": {
     "@types/react": "^18.3.0",
-    "react": "^18.3.0"
+    "react": "^18.0.0 || ^19.0.0"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.1.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "jsdom": "^25.0.1",
     "typescript": "^5.4.0",
     "vitest": "^2.0.0"
   },

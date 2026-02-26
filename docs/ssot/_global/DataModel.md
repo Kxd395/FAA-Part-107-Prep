@@ -13,12 +13,17 @@
 - Optional fields:
   - `figure_reference`, `image_ref`, `figure_text`
   - `source_type`, `source`, `tags`, `year_updated`
+  - `concept_key` (cross-source semantic grouping key for adaptive ML canonicalization)
 - Relationships:
   - Referenced by `ProgressQuestionResult.questionId`
   - Referenced by adaptive stats via canonical key hash
   - Referenced by attempt and learning events
 - Ownership/lifecycle:
   - Source files under `packages/content/questions/*.json`
+  - External source-pack file `packages/content/knowledge/part107_question_bank.json` (adapted in API layer)
+  - External source-pack file `packages/content/knowledge/carrington_question_bank.strict.json` (adapted in API layer)
+  - External figure-context helper `packages/content/knowledge/part107_images_needed.json`
+  - Legacy fallback paths under `docs/ssot/review/*` retained for compatibility
   - Transformed by sanitizer/normalizer in API route
   - Immutable in client runtime (read-only)
 
@@ -51,6 +56,7 @@
 - Relationships:
   - Updated by study, exam, learn-quiz, and flashcard rating pipelines
   - Used by question selection (`weak_spots`, adaptive selection)
+  - Canonicalization uses `concept_key` first when available so paraphrased questions from different source packs update a shared mastery record
 - Ownership/lifecycle:
   - Loaded on client start
   - Updated on every graded answer/review
@@ -110,6 +116,21 @@
   - Cleared explicitly by discard/back-to-setup actions
   - Validated on resume; discarded if question IDs cannot be resolved
 
+### Entity: QuestionCollections
+- Purpose: User-scoped bookmark and named question sets used by setup filters and bulk missed-question actions.
+- Identifier:
+  - system collection IDs: `all`, `bookmarks`
+  - custom collection IDs: normalized slug (`[a-z0-9-]+`) per user
+- Storage: `localStorage` key `part107_question_collections_v1:<userId>`.
+- Core fields:
+  - `version` (`2`)
+  - `bookmarks: string[]`
+  - `customCollections[]` with:
+    - `id`, `name`, `questionIds[]`, `createdAt`, `updatedAt`
+- Ownership/lifecycle:
+  - Updated by Study/Exam bookmark toggles and collection create/edit/remove flows.
+  - Included in progress export/import snapshots and server user-state/sync tracked keys.
+
 ### Entity: QuestionBankSnapshot
 - Purpose: Client-side fallback copy of most recent successful `/api/questions` payload.
 - Identifier: single record under a fixed localStorage key.
@@ -142,6 +163,7 @@
   - `part107_learning_events_v1`
   - `part107_flashcard_sr` (legacy compatibility key)
   - `part107_learn_draft_v1`
+  - `part107_question_collections_v1`
 - Ownership/lifecycle:
   - Exported on demand from Progress page
   - Imported from Progress page with selectable conflict mode:
@@ -221,6 +243,7 @@
     - `part107_learning_events_v1`
     - `part107_flashcard_sr`
     - `part107_learn_draft_v1`
+    - `part107_question_collections_v1`
 - Ownership/lifecycle:
   - Upserted by `PUT /api/user/state` in `merge|overwrite` mode.
   - No-op upserts (no changed keys) preserve prior `updatedAt`.
@@ -251,6 +274,30 @@
 - Ownership/lifecycle:
   - Upserted on each successful sync upload merge.
   - Read by sync download endpoint.
+
+### Entity: LearningAnalyticsEvent (server)
+- Purpose: Server-ingested analytics row used for backend scoring summaries and ML feature extraction.
+- Identifier: `id` (event ID).
+- Storage:
+  - file-backed JSON store at `apps/web/.data/learning-analytics-v1.json` (in-memory cache on server process).
+- Core fields:
+  - `id`, `userId`, `timestamp`, `type`, `mode`
+  - optional `questionId`, `category`, `subcategory`, `isCorrect`, `questionTypeProfile`, `metadata`
+- Ownership/lifecycle:
+  - Written by `POST /api/user/learning-events`.
+  - Deduped by event ID per user.
+  - Retention cap: 20,000 events per user.
+
+### Entity: LearningScoringSummary
+- Purpose: Pre-aggregated scoring metrics for dashboard and ML calibration checks.
+- Identifier: computed view (no persisted ID).
+- Source:
+  - derived from server `LearningAnalyticsEvent` rows in `GET /api/user/scoring/summary`.
+- Core fields:
+  - `answerCount`, `correctCount`, `accuracyPercent`
+  - `uniqueQuestionCount`, `firstAnswerAccuracyPercent`, `finalAnswerAccuracyPercent`, `answerChangeRatePercent`
+  - `confidenceCount`, `calibrationScorePercent`, `overconfidenceRatePercent`
+  - `byMode`
 
 ### Entity: TelemetrySupportBundle (redacted export)
 - Purpose: User-downloadable debugging payload that excludes question text/IDs and answer selections.

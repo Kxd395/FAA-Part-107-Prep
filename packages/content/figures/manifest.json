@@ -3,6 +3,38 @@
   "source_pdf": "sport_rec_private_akts.pdf",
   "figures": [
     {
+      "id": "figure-2",
+      "title": "Load Factor Chart",
+      "description": "Chart used to read load factor by bank angle",
+      "page_range": "Figure 2",
+      "file": "figures/figure-2.png",
+      "used_by_categories": ["Loading & Performance"]
+    },
+    {
+      "id": "figure-12",
+      "title": "Aviation Routine Weather Reports (METAR)",
+      "description": "METAR examples used for weather decoding questions",
+      "page_range": "Figure 12",
+      "file": "figures/figure-12.png",
+      "used_by_categories": ["Weather"]
+    },
+    {
+      "id": "figure-15",
+      "title": "Terminal Aerodrome Forecasts (TAF)",
+      "description": "TAF examples used for validity-period and weather forecast interpretation",
+      "page_range": "Figure 15",
+      "file": "figures/figure-15.png",
+      "used_by_categories": ["Weather"]
+    },
+    {
+      "id": "figure-17",
+      "title": "Winds and Temperatures Aloft Forecast",
+      "description": "Forecast product used for winds aloft decoding questions",
+      "page_range": "Figure 17",
+      "file": "figures/figure-17.png",
+      "used_by_categories": ["Weather"]
+    },
+    {
       "id": "figure-20",
       "title": "Sectional Chart Excerpt — Airport Area",
       "description": "Shows airport symbols, airspace boundaries, and surrounding features",

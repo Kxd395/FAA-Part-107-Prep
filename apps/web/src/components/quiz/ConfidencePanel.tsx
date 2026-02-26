@@ -11,6 +11,7 @@ interface ConfidencePanelProps {
   titleClassName?: string;
   selectorClassName?: string;
   selectorSize?: "sm" | "md";
+  selectorMode?: "five" | "triad";
 }
 
 export default function ConfidencePanel({
@@ -22,6 +23,7 @@ export default function ConfidencePanel({
   titleClassName = "text-center text-xs font-medium text-[var(--muted)]",
   selectorClassName,
   selectorSize = "sm",
+  selectorMode = "five",
 }: ConfidencePanelProps) {
   return (
     <div className={`rounded-xl border border-brand-500/20 bg-brand-500/5 ${containerClassName}`}>
@@ -31,6 +33,7 @@ export default function ConfidencePanel({
         onChange={onChange}
         className={selectorClassName}
         size={selectorSize}
+        mode={selectorMode}
       />
       {hint && <div className="mt-2 text-xs text-[var(--muted)]">{hint}</div>}
     </div>

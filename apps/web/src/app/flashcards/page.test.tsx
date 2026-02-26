@@ -78,13 +78,14 @@ describe("FlashcardsPage", () => {
     expect(
       screen.getByText(/What must a remote pilot do before entering Class C airspace\?/i)
     ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Report issue/i })).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /Tap or press Space to reveal answer/i }));
     expect(screen.getByText(/Correct Answer/i)).toBeInTheDocument();
     expect(screen.getByText(/ATC authorization is required\./i)).toBeInTheDocument();
 
     await user.click(screen.getByText(/Show Question/i, { selector: "button" }));
-    expect(screen.getByText(/Question/i)).toBeInTheDocument();
+    expect(screen.getByText(/^Question$/i)).toBeInTheDocument();
     expect(
       screen.getByText(/What must a remote pilot do before entering Class C airspace\?/i)
     ).toBeInTheDocument();
@@ -105,19 +106,7 @@ describe("FlashcardsPage", () => {
     expect(screen.getAllByText(/Deck Complete!/i).length).toBeGreaterThan(0);
   });
 
-  it("supports optional high-confidence split rating actions", async () => {
-    const user = userEvent.setup();
-    render(<FlashcardsPage />);
-
-    await user.click(screen.getByRole("button", { name: /All Questions/i }));
-    await user.click(screen.getByRole("button", { name: /Start Flashcards/i }));
-    await user.click(screen.getByRole("button", { name: /Tap or press Space to reveal answer/i }));
-
-    await user.click(screen.getByRole("button", { name: /Know It with high confidence/i }));
-    expect(screen.getAllByText(/Deck Complete!/i).length).toBeGreaterThan(0);
-  });
-
-  it("shows confidence selector before reveal and applies selected confidence", async () => {
+  it("shows triad confidence selector before reveal and applies selected confidence", async () => {
     const user = userEvent.setup();
     mocks.recordAnswer.mockReset();
     render(<FlashcardsPage />);
@@ -126,8 +115,8 @@ describe("FlashcardsPage", () => {
     await user.click(screen.getByRole("button", { name: /Start Flashcards/i }));
 
     expect(screen.getByText(/Confidence for next rating:/i)).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: /^2$/i }));
-    expect(screen.getByText("2/5", { selector: "code" })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /^Not Sure$/i }));
+    expect(screen.getByText("1/5", { selector: "code" })).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /Tap or press Space to reveal answer/i }));
     await user.click(screen.getByRole("button", { name: /^✅ Know It/i }));
@@ -136,7 +125,7 @@ describe("FlashcardsPage", () => {
       true,
       expect.any(Number),
       expect.objectContaining({
-        confidence: 2,
+        confidence: 1,
       })
     );
   });

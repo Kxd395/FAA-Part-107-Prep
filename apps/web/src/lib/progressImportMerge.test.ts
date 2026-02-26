@@ -8,6 +8,7 @@ const KEYS = [
   "part107_learning_events_v1",
   "part107_flashcard_sr",
   "part107_learn_draft_v1",
+  "part107_question_collections_v1",
 ] as const;
 
 describe("progressImportMerge", () => {
@@ -19,6 +20,7 @@ describe("progressImportMerge", () => {
       part107_learning_events_v1: null,
       part107_flashcard_sr: null,
       part107_learn_draft_v1: null,
+      part107_question_collections_v1: null,
     };
     const incoming = {
       ...current,
@@ -42,6 +44,7 @@ describe("progressImportMerge", () => {
       part107_learning_events_v1: null,
       part107_flashcard_sr: null,
       part107_learn_draft_v1: null,
+      part107_question_collections_v1: null,
     };
     const incoming = {
       ...current,
@@ -74,6 +77,7 @@ describe("progressImportMerge", () => {
       part107_learning_events_v1: null,
       part107_flashcard_sr: null,
       part107_learn_draft_v1: null,
+      part107_question_collections_v1: null,
     };
     const incoming = {
       ...current,
@@ -103,6 +107,7 @@ describe("progressImportMerge", () => {
       part107_learning_events_v1: null,
       part107_flashcard_sr: null,
       part107_learn_draft_v1: null,
+      part107_question_collections_v1: null,
     };
     const incoming = {
       ...current,

@@ -51,9 +51,8 @@ describe("auth session route", () => {
   });
 
   it("clears session cookie on delete", async () => {
-    const response = await DELETE(new NextRequest("http://localhost/api/auth/session", { method: "DELETE" }));
+    const response = await DELETE();
     expect(response.status).toBe(200);
     expect(response.headers.get("set-cookie")).toContain("part107_auth=");
   });
 });
-

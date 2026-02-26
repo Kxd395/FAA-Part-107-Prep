@@ -34,6 +34,10 @@ export const QUESTION_TYPE_PROFILE_LABELS: Record<QuestionTypeProfile, string> =
 // ---------------------------------------------------------------------------
 const CONFIRMED_SOURCE_PREFIXES = ["review.md", "uag", "spa"];
 const CONFIRMED_TAG = "confirmed-test-eligible";
+const CONFIRMED_CANONICAL_SOURCE_PREFIXES = [
+  "part107-question-bank",
+  "carrington-question-bank-strict",
+];
 
 /**
  * Returns `true` when a question's `source` field indicates it came from a
@@ -43,6 +47,9 @@ export function isConfirmedTestQuestion(question: Question): boolean {
   const src = (question.source ?? "").trim().toLowerCase();
   if (!src) return false;
   if (CONFIRMED_SOURCE_PREFIXES.some((prefix) => src.startsWith(prefix))) {
+    return true;
+  }
+  if (CONFIRMED_CANONICAL_SOURCE_PREFIXES.some((prefix) => src.startsWith(prefix))) {
     return true;
   }
   if (src.startsWith("carrington-question-bank")) {

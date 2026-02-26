@@ -1,4 +1,9 @@
-import { canonicalQuestionKey, type Question, type UserQuestionStats } from "@part107/core";
+import {
+  canonicalQuestionKey,
+  type Category,
+  type Question,
+  type UserQuestionStats,
+} from "@part107/core";
 import { beforeEach, describe, expect, it } from "vitest";
 import {
   applyLapseHandlingToQueueDecision,
@@ -8,7 +13,7 @@ import {
   type FlashcardSchedulerSettings,
 } from "./flashcardScheduler";
 
-function makeQuestion(id: string, category: string = "Airspace"): Question {
+function makeQuestion(id: string, category: Category = "Airspace"): Question {
   return {
     id,
     category,

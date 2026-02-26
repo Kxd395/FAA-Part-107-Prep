@@ -39,6 +39,7 @@ describe("user state route", () => {
             part107_learning_events_v1: null,
             part107_flashcard_sr: null,
             part107_learn_draft_v1: null,
+            part107_question_collections_v1: null,
           },
         }),
       })

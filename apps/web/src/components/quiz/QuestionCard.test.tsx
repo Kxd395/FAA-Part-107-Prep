@@ -2,11 +2,12 @@ import { cleanup, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach } from "vitest";
 import { describe, expect, it, vi } from "vitest";
+import type { Question } from "@part107/core";
 import QuestionCard from "./QuestionCard";
 
 afterEach(() => cleanup());
 
-const baseQuestion = {
+const baseQuestion: Question = {
   id: "Q-1",
   category: "Regulations",
   subcategory: "General",
@@ -23,7 +24,7 @@ const baseQuestion = {
   citation: "14 CFR §107.31",
   difficulty_level: 2,
   tags: [],
-} as const;
+};
 
 describe("QuestionCard", () => {
   it("opens figure modal payload when image is clicked", async () => {
@@ -57,6 +58,40 @@ describe("QuestionCard", () => {
     );
 
     expect(getByText("KMDW 121853Z ...")).toBeInTheDocument();
+  });
+
+  it("does not render unresolved placeholder figure instructions", () => {
+    const { queryByText, getByText } = render(
+      <QuestionCard
+        question={{
+          ...baseQuestion,
+          figure_reference: null,
+          image_ref: undefined,
+          figure_text: "Insert the chart excerpt from your course.",
+        }}
+        onOpenFigure={vi.fn()}
+      />
+    );
+
+    expect(queryByText(/Insert the chart excerpt/i)).not.toBeInTheDocument();
+    expect(getByText(/Figure unavailable for this question in the current build/i)).toBeInTheDocument();
+  });
+
+  it("suppresses figure-prefixed unresolved placeholder instructions", () => {
+    const { queryByText, getByText } = render(
+      <QuestionCard
+        question={{
+          ...baseQuestion,
+          figure_reference: null,
+          image_ref: undefined,
+          figure_text: "FIGURE\nInsert the chart excerpt from your course.",
+        }}
+        onOpenFigure={vi.fn()}
+      />
+    );
+
+    expect(queryByText(/Insert the chart excerpt/i)).not.toBeInTheDocument();
+    expect(getByText(/Figure unavailable for this question in the current build/i)).toBeInTheDocument();
   });
 
   it("falls back to figure_reference image path when image_ref is missing", async () => {
