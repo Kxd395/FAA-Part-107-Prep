@@ -33,6 +33,19 @@ function makeQuestion(id: string, prompt: string, optionB: string = "Option B"):
 }
 
 describe("adaptive dedupe", () => {
+  it("uses concept_key to merge phrasing variants", () => {
+    const q1 = {
+      ...makeQuestion("q1", "What must you do before operating in Class C airspace?"),
+      concept_key: "cfr:107.41|airspace_authorization",
+    };
+    const q2 = {
+      ...makeQuestion("q2", "Before flying in Class C, what authorization is required?"),
+      concept_key: "cfr:107.41|airspace_authorization",
+    };
+
+    expect(canonicalQuestionKey(q1)).toBe(canonicalQuestionKey(q2));
+  });
+
   it("removes duplicates with normalized prompt differences", () => {
     const q1 = makeQuestion("q1", "What   is   required before flight?");
     const q2 = makeQuestion("q2", "  what is required before FLIGHT? ");

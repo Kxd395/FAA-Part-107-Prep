@@ -98,4 +98,24 @@ describe("QuestionCard", () => {
       })
     );
   });
+
+  it("routes chapter figure references through the remote pilot image path", async () => {
+    const onOpenFigure = vi.fn();
+    const user = userEvent.setup();
+
+    const { getByRole } = render(
+      <QuestionCard
+        question={{ ...baseQuestion, image_ref: null, figure_reference: "figure-2-4", figure_text: undefined }}
+        onOpenFigure={onOpenFigure}
+      />
+    );
+
+    await user.click(getByRole("button"));
+    expect(onOpenFigure).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: "image",
+        url: "/figures/rpsg-2016/rpsg2016-figure-2-4.jpeg",
+      })
+    );
+  });
 });

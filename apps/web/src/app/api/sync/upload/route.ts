@@ -8,10 +8,28 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export const runtime = "nodejs";
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) return false;
+  const prototype = Object.getPrototypeOf(value);
+  return prototype === Object.prototype || prototype === null;
+}
+
+function isSnapshotDataMap(value: unknown): value is Record<string, string | null> {
+  if (!isPlainObject(value)) return false;
+  return Object.values(value).every((entry) => entry === null || typeof entry === "string");
+}
+
 function isSnapshotEnvelope(value: unknown): value is SyncSnapshotEnvelope {
-  if (typeof value !== "object" || value === null) return false;
-  const candidate = value as SyncSnapshotEnvelope;
-  return candidate.version === 1 && typeof candidate.exportedAt === "string" && typeof candidate.data === "object";
+  if (!isPlainObject(value)) return false;
+  const candidate = value as Record<string, unknown>;
+  const data = candidate.data;
+  const signature = candidate.signature;
+  return (
+    candidate.version === 1 &&
+    typeof candidate.exportedAt === "string" &&
+    isSnapshotDataMap(data) &&
+    (signature === undefined || typeof signature === "string")
+  );
 }
 
 export async function POST(request: NextRequest) {

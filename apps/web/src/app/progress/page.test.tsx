@@ -102,6 +102,15 @@ afterEach(() => {
 });
 
 describe("Progress import flows", () => {
+  it("renders session momentum analytics (daily streak and trend windows)", async () => {
+    render(<ProgressPage />);
+
+    expect(await screen.findByText(/Session Momentum/i)).toBeInTheDocument();
+    expect(screen.getByText(/Current Daily Streak/i)).toBeInTheDocument();
+    expect(screen.getByText(/Daily Trend \(30 days\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Weekly Trend \(8 weeks\)/i)).toBeInTheDocument();
+  });
+
   it("applies merge mode by default and keeps newest duplicate session", async () => {
     const user = userEvent.setup();
     localStorage.setItem(
@@ -421,5 +430,35 @@ describe("Progress import flows", () => {
     expect(await screen.findByText(/Conflict winners:/i)).toBeInTheDocument();
     expect(await screen.findByText(/Local 0/i)).toBeInTheDocument();
     expect(await screen.findByText(/Remote 1/i)).toBeInTheDocument();
+  });
+
+  it("shows response-time telemetry QA summary and anomaly alert", async () => {
+    localStorage.setItem(
+      "part107_attempt_events_v1",
+      JSON.stringify({
+        version: 1,
+        users: {
+          "local-user": Array.from({ length: 24 }, (_, index) => ({
+            attemptId: `a-${index}`,
+            userId: "local-user",
+            questionKey: `k-${index}`,
+            questionId: `Q-${index}`,
+            timestamp: "2026-02-24T00:00:00.000Z",
+            mode: index % 2 === 0 ? "practice" : "mock",
+            correct: index % 3 === 0,
+            responseTimeMs: index < 5 ? null : index < 8 ? 0 : 1500 + index * 20,
+            selectedOptionId: "A",
+            quizId: null,
+            topicTags: ["Regulations"],
+            difficulty: 2,
+            confidence: 3,
+          })),
+        },
+      })
+    );
+
+    render(<ProgressPage />);
+    expect(await screen.findByText(/Response-Time Telemetry QA/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Telemetry anomaly detected/i)).toBeInTheDocument();
   });
 });

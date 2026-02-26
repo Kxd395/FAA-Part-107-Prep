@@ -1,13 +1,17 @@
 import { NextRequest } from "next/server";
 import { beforeEach, describe, expect, it } from "vitest";
 import { clearRateLimitStoreForTests } from "../../../../lib/server/rateLimit";
-import { createMagicLinkToken } from "../../../../lib/server/passwordAuth";
+import {
+  clearMagicLinkConsumeStoreForTests,
+  createMagicLinkToken,
+} from "../../../../lib/server/passwordAuth";
 import { clearUserProfileStoreForTests } from "../../../../lib/server/userProfileStore";
 import { POST } from "./route";
 
 describe("POST /api/auth/verify", () => {
   beforeEach(async () => {
     clearRateLimitStoreForTests();
+    await clearMagicLinkConsumeStoreForTests();
     await clearUserProfileStoreForTests();
   });
 
@@ -36,5 +40,26 @@ describe("POST /api/auth/verify", () => {
     expect(body.authenticated).toBe(true);
     expect(body.email).toBe("pilot@example.com");
     expect(response.headers.get("set-cookie")).toContain("part107_auth=");
+  });
+
+  it("rejects replayed magic-link token", async () => {
+    const token = createMagicLinkToken("pilot@example.com");
+    const firstResponse = await POST(
+      new NextRequest("http://localhost/api/auth/verify", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ token }),
+      })
+    );
+    expect(firstResponse.status).toBe(200);
+
+    const secondResponse = await POST(
+      new NextRequest("http://localhost/api/auth/verify", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ token }),
+      })
+    );
+    expect(secondResponse.status).toBe(401);
   });
 });

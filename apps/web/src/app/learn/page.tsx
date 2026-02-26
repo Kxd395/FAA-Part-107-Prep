@@ -11,12 +11,17 @@ import {
   type QuestionTypeProfile,
 } from "@part107/core";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
+import { useActiveUserId } from "../../hooks/useActiveUserId";
 import {
   QuestionBankError,
   QuestionBankLoading,
   QuestionBankWarning,
 } from "../../components/QuestionBankState";
+import { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
+import QuestionTypeOptionsGrid from "../../components/QuestionTypeOptionsGrid";
 import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
+import ConfidencePanel from "../../components/quiz/ConfidencePanel";
+import QuestionCard from "../../components/quiz/QuestionCard";
 import { useProgress } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 import {
@@ -35,19 +40,12 @@ import {
 import { reinsertQueueHeadWithGap } from "../../lib/queueReinsertion";
 import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
 import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
-
-// ─── Question type options (shared pattern) ───
-const QUESTION_TYPE_OPTIONS: Array<{
-  value: QuestionTypeProfile;
-  title: string;
-  description: string;
-}> = [
-  { value: "confirmed_test", title: "✅ Confirmed Test Questions", description: "Only real-exam questions (70)." },
-  { value: "all_random", title: "🎲 All Questions", description: "Full 362-question pool." },
-  { value: "acs_practice", title: "📚 ACS Practice Only", description: "292 ACS mastery drills." },
-  { value: "real_exam", title: "Real Exam MCQ", description: "Excludes ACS drill format." },
-  { value: "weak_spots", title: "🔥 Weak Spots", description: "Questions you still struggle with." },
-];
+import { SELECTABLE_QUESTION_TYPE_OPTIONS as QUESTION_TYPE_OPTIONS } from "../../lib/questionTypeOptions";
+import {
+  readPreferredQuestionType,
+  writePreferredQuestionType,
+} from "../../lib/questionTypePreferenceStore";
+import { readLearningPreferences, writeLearningPreferences } from "../../lib/learningPreferencesStore";
 
 type LearnPhase = "setup" | "teach" | "quiz" | "result";
 const QUIZ_REINSERT_MIN_GAP = 2;
@@ -110,9 +108,10 @@ export default function LearnPage() {
     reload,
     clearSnapshot,
   } = useQuestionBank();
-  const adaptive = useAdaptiveQuestionStats();
+  const activeUserId = useActiveUserId();
+  const adaptive = useAdaptiveQuestionStats(activeUserId);
   const events = useLearningEventLogger(adaptive.userId);
-  const { saveSession } = useProgress();
+  const { saveSession } = useProgress(activeUserId);
 
   // Setup state
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("confirmed_test");
@@ -126,6 +125,9 @@ export default function LearnPage() {
   const [quizIndex, setQuizIndex] = useState(0);
   const [quizOrder, setQuizOrder] = useState<Question[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [answerConfidence, setAnswerConfidence] = useState<AttemptConfidence>(
+    LEARN_QUIZ_DEFAULT_CONFIDENCE
+  );
   const [selectedConfidence, setSelectedConfidence] = useState<AttemptConfidence | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [quizResults, setQuizResults] = useState<LearnDraftQuizResult[]>([]);
@@ -133,9 +135,39 @@ export default function LearnPage() {
   const [roundStartedAt, setRoundStartedAt] = useState<number>(Date.now());
   const [resumeDraft, setResumeDraft] = useState<LearnDraft | null>(null);
   const [draftHydrated, setDraftHydrated] = useState(false);
+  const [prefsHydratedForUserId, setPrefsHydratedForUserId] = useState<string | null>(null);
   const [savedProgressSignature, setSavedProgressSignature] = useState<string | null>(null);
+  const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const quizQuestionShownAtRef = useRef(Date.now());
   const completionEventSignatureRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const preferred = readPreferredQuestionType(activeUserId);
+    if (preferred) {
+      setSelectedQuestionType(preferred);
+    }
+  }, [activeUserId]);
+
+  useEffect(() => {
+    const preferences = readLearningPreferences(activeUserId);
+    setBatchSize(preferences.defaultLearnBatchSize);
+    setPrefsHydratedForUserId(activeUserId);
+  }, [activeUserId]);
+
+  useEffect(() => {
+    if (prefsHydratedForUserId !== activeUserId) return;
+    if (phase !== "setup") return;
+    const current = readLearningPreferences(activeUserId);
+    if (current.defaultLearnBatchSize === batchSize) return;
+    writeLearningPreferences(activeUserId, {
+      ...current,
+      defaultLearnBatchSize: batchSize,
+    });
+  }, [activeUserId, batchSize, phase, prefsHydratedForUserId]);
+
+  useEffect(() => {
+    writePreferredQuestionType(activeUserId, selectedQuestionType);
+  }, [activeUserId, selectedQuestionType]);
 
   // Filtering
   const filteredQuestions = useMemo(
@@ -255,10 +287,11 @@ export default function LearnPage() {
         roundStartedAt: override.roundStartedAt ?? roundStartedAt,
       };
 
-      saveLearnDraft(draft);
+      saveLearnDraft(draft, activeUserId);
       setResumeDraft(draft);
     },
     [
+      activeUserId,
       batch,
       batchSize,
       quizIndex,
@@ -276,9 +309,9 @@ export default function LearnPage() {
   );
 
   const handleDiscardSavedSession = useCallback(() => {
-    clearLearnDraft();
+    clearLearnDraft(activeUserId);
     setResumeDraft(null);
-  }, []);
+  }, [activeUserId]);
 
   const handleResumeSavedSession = useCallback(() => {
     if (!resumeDraft) return;
@@ -294,7 +327,7 @@ export default function LearnPage() {
       restoredBatch.length !== resumeDraft.batchIds.length ||
       restoredQuizOrder.length !== resumeDraft.quizOrderIds.length
     ) {
-      clearLearnDraft();
+      clearLearnDraft(activeUserId);
       setResumeDraft(null);
       return;
     }
@@ -315,6 +348,7 @@ export default function LearnPage() {
     setQuizIndex(0);
     setSelectedAnswer(resumeDraft.selectedAnswer);
     setSelectedConfidence(resumeDraft.selectedConfidence ?? null);
+    setAnswerConfidence(resumeDraft.selectedConfidence ?? LEARN_QUIZ_DEFAULT_CONFIDENCE);
     setShowResult(resumeDraft.showResult);
     setQuizResults(resumeDraft.quizResults);
     setPhase(resumeDraft.phase);
@@ -330,7 +364,7 @@ export default function LearnPage() {
         quizQueueSize: restoredQuizOrder.length,
       },
     });
-  }, [events, questionById, resumeDraft]);
+  }, [activeUserId, events, questionById, resumeDraft]);
 
   const handleSaveAndExit = useCallback(() => {
     events.logEvent({
@@ -381,10 +415,15 @@ export default function LearnPage() {
   }, [handleDiscardSavedSession]);
 
   useEffect(() => {
+    setDraftHydrated(false);
+    setResumeDraft(null);
+  }, [activeUserId]);
+
+  useEffect(() => {
     if (!loaded || draftHydrated) return;
-    setResumeDraft(loadLearnDraft());
+    setResumeDraft(loadLearnDraft(activeUserId));
     setDraftHydrated(true);
-  }, [draftHydrated, loaded]);
+  }, [activeUserId, draftHydrated, loaded]);
 
   useEffect(() => {
     if (!draftHydrated || phase === "setup") return;
@@ -567,13 +606,14 @@ export default function LearnPage() {
   }, [batch, events, round, selectedQuestionType, teachIndex]);
 
   const submitQuizAnswerWithConfidence = useCallback(
-    (confidence: AttemptConfidence) => {
-      if (showResult || !selectedAnswer) return;
+    (optionId: string, confidence: AttemptConfidence = answerConfidence) => {
+      if (showResult) return;
       setSelectedConfidence(confidence);
+      setSelectedAnswer(optionId);
       setShowResult(true);
       const q = quizOrder[0];
       if (!q) return;
-      const isCorrect = selectedAnswer === q.correct_option_id;
+      const isCorrect = optionId === q.correct_option_id;
       const qualityScore = qualityFromOutcomeConfidence(
         isCorrect ? "correct" : "incorrect",
         confidence
@@ -586,7 +626,7 @@ export default function LearnPage() {
         learningMode: "learn",
         attemptMode: "quiz",
         isCorrect,
-        selectedOptionId: selectedAnswer as OptionId,
+        selectedOptionId: optionId as OptionId,
         responseTimeMs,
         quizId: `${LEARN_QUIZ_ID_PREFIX}-${round}`,
         confidence,
@@ -602,13 +642,13 @@ export default function LearnPage() {
         {
           questionId: q.id,
           correct: isCorrect,
-          userAnswer: selectedAnswer,
+          userAnswer: optionId,
           correctAnswer: q.correct_option_id,
           category: q.category,
         },
       ]);
     },
-    [adaptive, events, quizOrder, round, selectedAnswer, selectedQuestionType, showResult]
+    [adaptive, answerConfidence, events, quizOrder, round, selectedQuestionType, showResult]
   );
 
   const skipQuizQuestion = useCallback(() => {
@@ -754,25 +794,12 @@ export default function LearnPage() {
         </div>
 
         {/* Question type */}
-        <div className="space-y-3">
-          <div className="text-sm font-semibold text-white">Question Pool</div>
-          <div className="grid gap-2">
-            {QUESTION_TYPE_OPTIONS.map((opt) => (
-              <button
-                key={opt.value}
-                onClick={() => setSelectedQuestionType(opt.value)}
-                className={`rounded-xl border px-4 py-3 text-left transition-colors ${
-                  selectedQuestionType === opt.value
-                    ? "border-brand-500/60 bg-brand-500/10"
-                    : "border-[var(--card-border)] bg-[var(--card)] hover:border-brand-500/30"
-                }`}
-              >
-                <div className="text-sm font-semibold text-white">{opt.title}</div>
-                <div className="mt-1 text-xs text-[var(--muted)]">{opt.description}</div>
-              </button>
-            ))}
-          </div>
-        </div>
+        <QuestionTypeOptionsGrid
+          title="Question Pool"
+          options={QUESTION_TYPE_OPTIONS}
+          selectedQuestionType={selectedQuestionType}
+          onSelectQuestionType={setSelectedQuestionType}
+        />
 
         {/* Category */}
         <div className="space-y-3">
@@ -861,7 +888,7 @@ export default function LearnPage() {
                 </span>
               )}
             </div>
-            <div className="text-lg leading-relaxed text-white">{q.question_text}</div>
+            <QuestionCard question={q} onOpenFigure={setFigureRef} />
           </div>
 
           {/* All options with correct highlighted */}
@@ -967,6 +994,7 @@ export default function LearnPage() {
             </button>
           </div>
         </div>
+        {figureRef && <ReferenceModal ref_={figureRef} onClose={() => setFigureRef(null)} />}
       </div>
     );
   }
@@ -1023,7 +1051,7 @@ export default function LearnPage() {
               {q.category}
             </span>
           </div>
-          <div className="text-lg leading-relaxed text-white">{q.question_text}</div>
+          <QuestionCard question={q} onOpenFigure={setFigureRef} />
 
           <div className="space-y-2">
             {(quizOptionPresentation?.options ?? q.options).map((opt) => {
@@ -1052,8 +1080,7 @@ export default function LearnPage() {
                   <button
                     onClick={() => {
                       if (showResult) return;
-                      setSelectedAnswer(opt.id);
-                      setSelectedConfidence(null);
+                      submitQuizAnswerWithConfidence(opt.id, answerConfidence);
                     }}
                     className={className}
                     disabled={showResult}
@@ -1067,22 +1094,30 @@ export default function LearnPage() {
             })}
           </div>
 
-          {!showResult && selectedAnswer && (
-            <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
-              <div className="text-sm font-semibold text-white">How confident are you? (before reveal)</div>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {[1, 2, 3, 4, 5].map((value) => (
-                  <button
-                    key={value}
-                    onClick={() => submitQuizAnswerWithConfidence(value as AttemptConfidence)}
-                    className="rounded-lg border border-purple-400/40 bg-purple-500/10 px-3 py-1.5 text-sm text-purple-200 hover:bg-purple-500/20"
-                  >
-                    {value}
-                  </button>
-                ))}
-              </div>
+          {(quizOptionPresentation?.options.length ?? q.options.length) < q.options.length && (
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-xs text-[var(--muted)]">
+              Practice mode is showing 3 options for this question to reduce memorization.
             </div>
           )}
+
+          <ConfidencePanel
+            title={
+              <>
+                Confidence for next answer: <code>{answerConfidence}/5</code>
+              </>
+            }
+            value={answerConfidence}
+            onChange={setAnswerConfidence}
+            containerClassName="p-4"
+            titleClassName="text-sm font-semibold text-white"
+            selectorClassName="mt-2 flex flex-wrap gap-2"
+            selectorSize="md"
+            hint={
+              showResult
+                ? "Adjust this before Next/Review Again to set your upcoming confidence."
+                : "This confidence is applied when you select an answer."
+            }
+          />
 
           {/* Feedback after answering */}
           {showResult && (
@@ -1162,6 +1197,7 @@ export default function LearnPage() {
               : "Still Learning — Review Again →"}
           </button>
         )}
+        {figureRef && <ReferenceModal ref_={figureRef} onClose={() => setFigureRef(null)} />}
       </div>
     );
   }

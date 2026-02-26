@@ -8,6 +8,9 @@ export const QUESTION_TYPE_PROFILES = [
   "weak_spots",
   "confirmed_test",
   "all_random",
+  "part107_bank",
+  "carrington_bank",
+  "carrington_strict",
   "acs_practice",
 ] as const;
 
@@ -20,6 +23,9 @@ export const QUESTION_TYPE_PROFILE_LABELS: Record<QuestionTypeProfile, string> =
   weak_spots: "Weak Spots Only",
   confirmed_test: "Confirmed Test Questions",
   all_random: "All Questions (Random)",
+  part107_bank: "Part107 Question Bank",
+  carrington_bank: "Carrington Question Bank",
+  carrington_strict: "Carrington Question Bank (Strict)",
   acs_practice: "ACS Practice Only",
 };
 
@@ -27,6 +33,7 @@ export const QUESTION_TYPE_PROFILE_LABELS: Record<QuestionTypeProfile, string> =
 // Source-based helpers
 // ---------------------------------------------------------------------------
 const CONFIRMED_SOURCE_PREFIXES = ["review.md", "uag", "spa"];
+const CONFIRMED_TAG = "confirmed-test-eligible";
 
 /**
  * Returns `true` when a question's `source` field indicates it came from a
@@ -35,7 +42,29 @@ const CONFIRMED_SOURCE_PREFIXES = ["review.md", "uag", "spa"];
 export function isConfirmedTestQuestion(question: Question): boolean {
   const src = (question.source ?? "").trim().toLowerCase();
   if (!src) return false;
-  return CONFIRMED_SOURCE_PREFIXES.some((prefix) => src.startsWith(prefix));
+  if (CONFIRMED_SOURCE_PREFIXES.some((prefix) => src.startsWith(prefix))) {
+    return true;
+  }
+  if (src.startsWith("carrington-question-bank")) {
+    const tags = question.tags ?? [];
+    return tags.some((tag) => tag.trim().toLowerCase() === CONFIRMED_TAG);
+  }
+  return false;
+}
+
+function isPart107BankQuestion(question: Question): boolean {
+  const src = (question.source ?? "").trim().toLowerCase();
+  return src.startsWith("part107-question-bank");
+}
+
+function isCarringtonBankQuestion(question: Question): boolean {
+  const src = (question.source ?? "").trim().toLowerCase();
+  return src.startsWith("carrington-question-bank");
+}
+
+function isCarringtonStrictQuestion(question: Question): boolean {
+  const src = (question.source ?? "").trim().toLowerCase();
+  return src.startsWith("carrington-question-bank-strict");
 }
 
 export function normalizeQuestionTypeProfile(input: string | null | undefined): QuestionTypeProfile | null {
@@ -70,32 +99,51 @@ export function filterQuestionsByType<Q extends Question = Question>(
   profile: QuestionTypeProfile,
   options: FilterQuestionsByTypeOptions = {}
 ): Q[] {
+  const strictOnlySourceFiltered =
+    profile === "carrington_strict"
+      ? [...questions]
+      : questions.filter((question) => !isCarringtonStrictQuestion(question));
+
   if (profile === "mixed") {
-    return [...questions];
+    return [...strictOnlySourceFiltered];
   }
 
   if (profile === "all_random") {
-    return [...questions];
+    return [...strictOnlySourceFiltered];
   }
 
   if (profile === "confirmed_test") {
-    return questions.filter((question) => isConfirmedTestQuestion(question));
+    return strictOnlySourceFiltered.filter((question) => isConfirmedTestQuestion(question));
+  }
+
+  if (profile === "part107_bank") {
+    return strictOnlySourceFiltered.filter((question) => isPart107BankQuestion(question));
+  }
+
+  if (profile === "carrington_bank") {
+    return strictOnlySourceFiltered.filter(
+      (question) => isCarringtonBankQuestion(question) && !isCarringtonStrictQuestion(question)
+    );
+  }
+
+  if (profile === "carrington_strict") {
+    return questions.filter((question) => isCarringtonStrictQuestion(question));
   }
 
   if (profile === "acs_practice") {
-    return questions.filter((question) => !isConfirmedTestQuestion(question));
+    return strictOnlySourceFiltered.filter((question) => !isConfirmedTestQuestion(question));
   }
 
   if (profile === "real_exam") {
-    return questions.filter((question) => !isAcsCodeMatchingQuestion(question));
+    return strictOnlySourceFiltered.filter((question) => !isAcsCodeMatchingQuestion(question));
   }
 
   if (profile === "acs_mastery") {
-    return questions.filter((question) => isAcsCodeMatchingQuestion(question));
+    return strictOnlySourceFiltered.filter((question) => isAcsCodeMatchingQuestion(question));
   }
 
-  const realisticPool = questions.filter((question) => !isAcsCodeMatchingQuestion(question));
-  const pool = realisticPool.length > 0 ? realisticPool : [...questions];
+  const realisticPool = strictOnlySourceFiltered.filter((question) => !isAcsCodeMatchingQuestion(question));
+  const pool = realisticPool.length > 0 ? realisticPool : [...strictOnlySourceFiltered];
   const statsByKey = options.userStatsByKey ?? {};
   const weak: Q[] = [];
   const unseen: Q[] = [];

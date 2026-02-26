@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useActiveUserId } from "../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../hooks/useLearningEventLogger";
-import { LOCAL_USER_ID, type LearningEventMode } from "../lib/analyticsTaxonomy";
+import { type LearningEventMode } from "../lib/analyticsTaxonomy";
 import { useAuth } from "../hooks/useAuth";
 
 const NAV_ITEMS = [
@@ -32,7 +33,8 @@ function modeFromPathname(pathname: string | null): LearningEventMode {
 export default function AppHeaderNav() {
   const pathname = usePathname();
   const router = useRouter();
-  const { logEvent } = useLearningEventLogger(LOCAL_USER_ID);
+  const activeUserId = useActiveUserId();
+  const { logEvent } = useLearningEventLogger(activeUserId);
   const currentMode = modeFromPathname(pathname);
 
   const { user, signOut, loading } = useAuth();

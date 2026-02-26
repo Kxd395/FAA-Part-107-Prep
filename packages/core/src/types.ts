@@ -29,6 +29,11 @@ export interface Question {
   acs_code?: string;
   source_type?: string;
   source?: string;
+  concept_key?: string | null;
+  source_pdf?: string | null;
+  source_figure?: string | null;
+  source_page?: number | null;
+  source_locator?: string | null;
   tags: string[];
   year_updated?: number;
 }

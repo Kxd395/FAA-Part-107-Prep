@@ -4,6 +4,8 @@
 .DS_Store
 node_modules/
 .next/
+.next.bak*/
+.next.bak.*/
 .vercel/
 out/
 dist/
@@ -36,6 +38,7 @@ DerivedData/
 
 # Large PDFs served locally (not for git/Vercel)
 apps/web/public/pdfs/
+apps/web/.data/
 source-materials/
 
 # OS

@@ -1,6 +1,7 @@
 import type { OptionId, Question, QuestionOption } from "@part107/core";
 
 const DISPLAY_LABELS: readonly OptionId[] = ["A", "B", "C", "D"];
+const DEFAULT_PRESENTED_OPTION_COUNT = 3;
 
 export interface PresentedOption extends QuestionOption {
   displayLabel: OptionId;
@@ -43,12 +44,41 @@ function shuffleDeterministic<T>(items: readonly T[], seed: number): T[] {
   return output;
 }
 
+function selectPresentedOptions(
+  question: Pick<Question, "id" | "options" | "correct_option_id">,
+  contextKey: string,
+  maxOptions: number
+): QuestionOption[] {
+  if (question.options.length <= maxOptions) {
+    return [...question.options];
+  }
+
+  const correct = question.options.find((option) => option.id === question.correct_option_id);
+  const distractors = question.options.filter((option) => option.id !== question.correct_option_id);
+  if (!correct || distractors.length === 0) {
+    return [...question.options].slice(0, maxOptions);
+  }
+
+  const shuffledDistractors = shuffleDeterministic(
+    distractors,
+    hashString(`${contextKey}:${question.id}:distractors`)
+  );
+  const selectedDistractors = shuffledDistractors.slice(0, Math.max(0, maxOptions - 1));
+  return [correct, ...selectedDistractors];
+}
+
 export function buildOptionPresentation(
   question: Pick<Question, "id" | "options" | "correct_option_id">,
-  contextKey: string
+  contextKey: string,
+  maxOptions: number = DEFAULT_PRESENTED_OPTION_COUNT
 ): OptionPresentation {
+  const selected = selectPresentedOptions(
+    question,
+    contextKey,
+    Math.max(2, Math.min(4, maxOptions))
+  );
   const shuffled = shuffleDeterministic(
-    question.options,
+    selected,
     hashString(`${contextKey}:${question.id}:options`)
   );
 

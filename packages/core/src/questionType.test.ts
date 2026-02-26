@@ -124,6 +124,69 @@ describe("questionType", () => {
     expect(weakOnly.map((q) => q.id)).toEqual(["q1"]);
   });
 
+  it("filters part107_bank questions by source marker", () => {
+    const bank = makeQuestion("q-bank", "Bank question", {
+      source: "part107-question-bank",
+    });
+    const core = makeQuestion("q-core", "Core question", {
+      source: "Review.md",
+    });
+
+    expect(filterQuestionsByType([bank, core], "part107_bank").map((q) => q.id)).toEqual([
+      "q-bank",
+    ]);
+  });
+
+  it("filters carrington_bank questions by source marker", () => {
+    const bank = makeQuestion("q-carr", "Carrington question", {
+      source: "carrington-question-bank",
+    });
+    const strict = makeQuestion("q-carr-strict", "Carrington strict", {
+      source: "carrington-question-bank-strict",
+    });
+    const core = makeQuestion("q-core", "Core question", {
+      source: "Review.md",
+    });
+
+    expect(filterQuestionsByType([bank, strict, core], "carrington_bank").map((q) => q.id)).toEqual([
+      "q-carr",
+    ]);
+    expect(filterQuestionsByType([bank, strict, core], "carrington_strict").map((q) => q.id)).toEqual([
+      "q-carr-strict",
+    ]);
+  });
+
+  it("excludes strict-source rows from broad pools unless strict profile is selected", () => {
+    const strict = makeQuestion("q-carr-strict", "Carrington strict", {
+      source: "carrington-question-bank-strict",
+    });
+    const normal = makeQuestion("q-normal", "Normal", {
+      source: "review.md",
+    });
+
+    expect(filterQuestionsByType([strict, normal], "all_random").map((q) => q.id)).toEqual([
+      "q-normal",
+    ]);
+  });
+
+  it("allows carrington rows in confirmed_test only when explicitly tagged eligible", () => {
+    const carringtonEligible = makeQuestion("q-carr-ok", "Carrington eligible", {
+      source: "carrington-question-bank",
+      tags: ["confirmed-test-eligible"],
+    });
+    const carringtonNotEligible = makeQuestion("q-carr-no", "Carrington not eligible", {
+      source: "carrington-question-bank",
+      tags: [],
+    });
+
+    expect(
+      filterQuestionsByType(
+        [carringtonEligible, carringtonNotEligible],
+        "confirmed_test"
+      ).map((q) => q.id)
+    ).toEqual(["q-carr-ok"]);
+  });
+
   it("excludes ACS code-mapping drills from weak_spots when realistic MCQs are available", () => {
     const realistic = makeQuestion("q-real", "What should a remote PIC verify before takeoff?");
     const acs = makeQuestion("q-acs", "Which ACS knowledge code matches this topic: \"Operations near airports.\"?", {

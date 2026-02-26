@@ -28,7 +28,6 @@ interface PersistedUserState {
 }
 
 declare global {
-  // eslint-disable-next-line no-var
   var __part107UserStateCache__: PersistedUserState | undefined;
 }
 

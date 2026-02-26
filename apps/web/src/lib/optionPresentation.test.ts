@@ -24,7 +24,8 @@ describe("optionPresentation", () => {
     expect(first.options.map((option) => option.id)).toEqual(
       second.options.map((option) => option.id)
     );
-    expect(first.options.map((option) => option.displayLabel)).toEqual(["A", "B", "C", "D"]);
+    expect(first.options).toHaveLength(3);
+    expect(first.options.map((option) => option.displayLabel)).toEqual(["A", "B", "C"]);
   });
 
   it("maps the correct answer to the displayed label", () => {
@@ -62,5 +63,12 @@ describe("optionPresentation", () => {
     expect(examOne.correctDisplayLabel).toBe(
       examOne.displayLabelByOptionId[question.correct_option_id]
     );
+  });
+
+  it("always includes the correct option when reducing to 3 choices", () => {
+    const presentation = buildOptionPresentation(question, "study:reduced");
+    const optionIds = presentation.options.map((option) => option.id);
+    expect(optionIds).toContain(question.correct_option_id);
+    expect(optionIds).toHaveLength(3);
   });
 });

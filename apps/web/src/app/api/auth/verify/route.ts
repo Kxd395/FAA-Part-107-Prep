@@ -5,7 +5,7 @@ import {
     issueAppSessionToken,
 } from "../../../../lib/server/appAuth";
 import { consumeRateLimit, rateLimitHeaders } from "../../../../lib/server/rateLimit";
-import { verifyMagicLinkToken } from "../../../../lib/server/passwordAuth";
+import { consumeMagicLinkToken } from "../../../../lib/server/passwordAuth";
 import { findOrCreateUserByEmail } from "../../../../lib/server/userProfileStore";
 
 export const dynamic = "force-dynamic";
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
         );
     }
 
-    const result = verifyMagicLinkToken(token);
+    const result = await consumeMagicLinkToken(token);
     if (!result) {
         return NextResponse.json(
             { error: "Invalid or expired magic link. Please request a new one." },

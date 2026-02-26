@@ -24,7 +24,6 @@ interface PersistedProfileStore {
 }
 
 declare global {
-    // eslint-disable-next-line no-var
     var __part107UserProfileCache__: PersistedProfileStore | undefined;
 }
 

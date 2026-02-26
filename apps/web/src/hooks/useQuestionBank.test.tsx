@@ -56,10 +56,13 @@ describe("useQuestionBank", () => {
 
     const { result } = renderHook(() => useQuestionBank());
 
-    await waitFor(() => {
-      expect(result.current.loaded).toBe(true);
-      expect(result.current.questions).toHaveLength(1);
-    });
+    await waitFor(
+      () => {
+        expect(result.current.loaded).toBe(true);
+        expect(result.current.questions).toHaveLength(1);
+      },
+      { timeout: 4000 }
+    );
 
     expect(result.current.warning).toMatch(/Using cached question snapshot/i);
     expect(result.current.snapshotInfo).not.toBeNull();

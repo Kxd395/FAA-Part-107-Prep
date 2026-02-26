@@ -47,9 +47,7 @@ const REMOTE_BREAKER_FAILURE_THRESHOLD = 3;
 const REMOTE_BREAKER_COOLDOWN_MS = 30_000;
 
 declare global {
-  // eslint-disable-next-line no-var
   var __part107SyncCache__: PersistedSyncState | undefined;
-  // eslint-disable-next-line no-var
   var __part107SyncRemoteBreaker__:
     | {
         failures: number;

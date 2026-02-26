@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { consumeRateLimit, rateLimitHeaders } from "../../../../lib/server/rateLimit";
 import { isValidEmail, sendMagicLink } from "../../../../lib/server/passwordAuth";
+import { resolveMagicLinkBaseUrl } from "../../../../lib/server/appOrigin";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -30,9 +31,13 @@ export async function POST(request: NextRequest) {
     }
 
     try {
-        const protocol = request.headers.get("x-forwarded-proto") || "http";
-        const host = request.headers.get("host") || "localhost:3000";
-        const baseUrl = `${protocol}://${host}`;
+        const baseUrl = resolveMagicLinkBaseUrl(request);
+        if (!baseUrl) {
+            return NextResponse.json(
+                { error: "Magic link origin is not configured" },
+                { status: 500, headers: rateLimitHeaders(rl) }
+            );
+        }
 
         const result = await sendMagicLink(email, baseUrl);
 

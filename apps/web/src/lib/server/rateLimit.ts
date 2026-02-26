@@ -23,9 +23,7 @@ interface RateLimitResult {
 }
 
 declare global {
-  // eslint-disable-next-line no-var
   var __part107RateLimitStore__: Map<string, Bucket> | undefined;
-  // eslint-disable-next-line no-var
   var __part107RateLimitMetrics__: Map<string, RateMetric> | undefined;
 }
 

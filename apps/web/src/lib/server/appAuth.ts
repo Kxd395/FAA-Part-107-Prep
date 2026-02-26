@@ -1,19 +1,15 @@
 import crypto from "node:crypto";
 import type { NextRequest } from "next/server";
+import { requireSecret } from "./requiredSecret";
 
 const AUTH_COOKIE_NAME = "part107_auth";
 const AUTH_TTL_SECONDS = 60 * 60 * 24 * 7;
-const DEFAULT_DEV_AUTH_SECRET = "part107-dev-auth-secret";
 
 export interface AuthPayload {
   uid: string;
   exp: number;
   email?: string;
   displayName?: string;
-}
-
-function getAuthSecret(): string {
-  return process.env.APP_AUTH_SECRET?.trim() || DEFAULT_DEV_AUTH_SECRET;
 }
 
 function base64UrlEncode(value: string): string {
@@ -44,7 +40,10 @@ export function issueAppSessionToken(
     ...(options?.displayName ? { displayName: options.displayName } : {}),
   };
   const encodedPayload = base64UrlEncode(JSON.stringify(payload));
-  const signature = sign(encodedPayload, getAuthSecret());
+  const signature = sign(
+    encodedPayload,
+    requireSecret("APP_AUTH_SECRET", "part107-test-auth-secret")
+  );
   return `app.${encodedPayload}.${signature}`;
 }
 
@@ -54,7 +53,10 @@ export function verifyAppSessionToken(token: string): AuthPayload | null {
   if (parts.length !== 3) return null;
   const encodedPayload = parts[1];
   const actualSignature = parts[2];
-  const expectedSignature = sign(encodedPayload, getAuthSecret());
+  const expectedSignature = sign(
+    encodedPayload,
+    requireSecret("APP_AUTH_SECRET", "part107-test-auth-secret")
+  );
   if (
     expectedSignature.length !== actualSignature.length ||
     !crypto.timingSafeEqual(Buffer.from(expectedSignature), Buffer.from(actualSignature))
@@ -93,4 +95,3 @@ export function getAuthenticatedSession(request: NextRequest): AuthPayload | nul
   if (!token) return null;
   return verifyAppSessionToken(token);
 }
-

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   canonicalQuestionKey,
   dedupeQuestions,
@@ -46,10 +46,20 @@ export interface UseStudySessionResult<Q extends Question = Question> {
   score: StudyScore;
   quizStarted: boolean;
   isComplete: boolean;
+  timedOut: boolean;
+  isTimedDrill: boolean;
+  timeLimitMs: number;
+  remainingMs: number;
   sessionStartTime: number;
   questionResults: ProgressQuestionResult[];
   progressPercent: number;
-  startQuiz: (categoryInput?: string | StudyCategory) => void;
+  startQuiz: (
+    categoryInput?: string | StudyCategory,
+    options?: {
+      questionLimit?: number | null;
+      timeLimitMs?: number | null;
+    }
+  ) => void;
   answerQuestion: (
     optionId: OptionId,
     context?: {
@@ -76,26 +86,51 @@ export function useStudySession<Q extends Question = Question>({
   const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
   const [questionResults, setQuestionResults] = useState<ProgressQuestionResult[]>([]);
   const [quizStarted, setQuizStarted] = useState(false);
+  const [timeLimitMs, setTimeLimitMs] = useState(0);
+  const [remainingMs, setRemainingMs] = useState(0);
+  const [timedOut, setTimedOut] = useState(false);
+  const [lastStartOptions, setLastStartOptions] = useState<{
+    questionLimit?: number | null;
+    timeLimitMs?: number | null;
+  }>({});
 
   const startQuiz = useCallback(
-    (categoryInput?: string | StudyCategory) => {
+    (
+      categoryInput?: string | StudyCategory,
+      options?: {
+        questionLimit?: number | null;
+        timeLimitMs?: number | null;
+      }
+    ) => {
       const normalized = normalizeCategory(categoryInput ?? selectedCategory) ?? "All";
       const filtered = filterQuestionsByCategory(allQuestions, normalized) as Q[];
+      const parsedLimit =
+        typeof options?.questionLimit === "number" &&
+        Number.isFinite(options.questionLimit) &&
+        options.questionLimit > 0
+          ? Math.floor(options.questionLimit)
+          : null;
+      const desiredCount = parsedLimit ? Math.min(parsedLimit, filtered.length) : filtered.length;
 
-      const targetCount = filtered.length;
       let nextQuestions: Q[];
       if (adaptive?.userId) {
         nextQuestions = selectAdaptiveQuestions({
           userId: adaptive.userId,
-          desiredQuizSize: targetCount,
+          desiredQuizSize: desiredCount,
           fullQuestionBank: filtered,
           userStatsByKey: adaptive.userStatsByKey,
           config: adaptive.config,
         }).questions as Q[];
       } else {
         const deduped = dedupeQuestions(filtered);
-        nextQuestions = shuffleQuestions(deduped.questions as Q[]);
+        nextQuestions = shuffleQuestions(deduped.questions as Q[]).slice(0, desiredCount);
       }
+      const parsedTimeLimitMs =
+        typeof options?.timeLimitMs === "number" &&
+        Number.isFinite(options.timeLimitMs) &&
+        options.timeLimitMs > 0
+          ? Math.floor(options.timeLimitMs)
+          : 0;
 
       setSelectedCategory(normalized);
       setQuestions(nextQuestions);
@@ -106,6 +141,13 @@ export function useStudySession<Q extends Question = Question>({
       setSessionStartTime(Date.now());
       setQuestionResults([]);
       setQuizStarted(true);
+      setTimeLimitMs(parsedTimeLimitMs);
+      setRemainingMs(parsedTimeLimitMs);
+      setTimedOut(false);
+      setLastStartOptions({
+        questionLimit: parsedLimit,
+        timeLimitMs: parsedTimeLimitMs > 0 ? parsedTimeLimitMs : null,
+      });
     },
     [adaptive, allQuestions, selectedCategory]
   );
@@ -196,13 +238,36 @@ export function useStudySession<Q extends Question = Question>({
 
   const resetToSetup = useCallback(() => {
     setQuizStarted(false);
+    setTimeLimitMs(0);
+    setRemainingMs(0);
+    setTimedOut(false);
   }, []);
 
   const restartQuiz = useCallback(() => {
-    startQuiz(selectedCategory);
-  }, [selectedCategory, startQuiz]);
+    startQuiz(selectedCategory, lastStartOptions);
+  }, [lastStartOptions, selectedCategory, startQuiz]);
 
+  const isTimedDrill = quizStarted && timeLimitMs > 0;
   const isComplete = quizStarted && questions.length > 0 && currentIndex >= questions.length;
+  useEffect(() => {
+    if (!isTimedDrill || isComplete) return;
+
+    const updateRemaining = () => {
+      const nextRemaining = Math.max(0, timeLimitMs - (Date.now() - sessionStartTime));
+      setRemainingMs(nextRemaining);
+      if (nextRemaining === 0) {
+        setTimedOut(true);
+        setSelectedOption(null);
+        setAnswerState("unanswered");
+        setCurrentIndex((prev) => (prev < questions.length ? questions.length : prev));
+      }
+    };
+
+    updateRemaining();
+    const timer = setInterval(updateRemaining, 1_000);
+    return () => clearInterval(timer);
+  }, [isComplete, isTimedDrill, questions.length, sessionStartTime, timeLimitMs]);
+
   const progressPercent =
     questions.length > 0
       ? Math.min(100, (Math.min(currentIndex + 1, questions.length) / questions.length) * 100)
@@ -218,6 +283,10 @@ export function useStudySession<Q extends Question = Question>({
     score,
     quizStarted,
     isComplete,
+    timedOut,
+    isTimedDrill,
+    timeLimitMs,
+    remainingMs,
     sessionStartTime,
     questionResults,
     progressPercent,

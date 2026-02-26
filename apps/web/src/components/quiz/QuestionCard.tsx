@@ -1,6 +1,7 @@
 import type { Question } from "@part107/core";
 import { useEffect, useState } from "react";
 import type { ResolvedReference } from "../ReferenceModal";
+import { resolveFigureImageUrl } from "../../lib/figureImage";
 
 function formatFigureLabel(figureRef: string | null): string {
   if (!figureRef) return "Figure";
@@ -15,12 +16,7 @@ interface QuestionCardProps {
 export default function QuestionCard({ question, onOpenFigure }: QuestionCardProps) {
   const [imageFailed, setImageFailed] = useState(false);
   const figureLabel = formatFigureLabel(question.figure_reference);
-  const normalizedQuestionImageRef =
-    typeof question.image_ref === "string" ? question.image_ref.trim() : question.image_ref;
-  const fallbackFigureImage = question.figure_reference
-    ? `/figures/${question.figure_reference}.png`
-    : null;
-  const imageRef = normalizedQuestionImageRef || fallbackFigureImage;
+  const imageRef = resolveFigureImageUrl(question);
 
   useEffect(() => {
     setImageFailed(false);
