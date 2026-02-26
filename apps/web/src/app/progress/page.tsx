@@ -5,6 +5,9 @@ import { type ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } f
 import { useAuth } from "../../hooks/useAuth";
 import { useProgress, SessionRecord } from "../../hooks/useProgress";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
+import IssueTriagePanel, {
+  type QuestionIssueTriageSummary,
+} from "../../components/progress/IssueTriagePanel";
 import { defaultAdaptiveStatsStore } from "../../lib/adaptiveStatsStore";
 import { computeAdaptiveInsights } from "../../lib/adaptiveInsights";
 import { defaultAttemptEventStore } from "../../lib/attemptEventStore";
@@ -120,37 +123,6 @@ interface SessionActivityInsights {
   activeDays: number;
 }
 
-type QuestionIssueMode = "study" | "exam" | "learn" | "flashcards" | "missed" | "unknown";
-
-interface QuestionIssueTriageRow {
-  questionId: string;
-  questionText: string;
-  category: string;
-  subcategory: string;
-  reportCount: number;
-  latestReportAt: string;
-  latestNote: string;
-  byMode: Record<QuestionIssueMode, number>;
-}
-
-interface QuestionIssueTriageSummary {
-  totalReports: number;
-  uniqueQuestionCount: number;
-  latestReportAt: string | null;
-  byMode: Record<QuestionIssueMode, number>;
-  byCategory: Record<string, number>;
-  topQuestions: QuestionIssueTriageRow[];
-}
-
-const ISSUE_TRIAGE_MODE_ORDER: QuestionIssueMode[] = [
-  "study",
-  "exam",
-  "learn",
-  "flashcards",
-  "missed",
-  "unknown",
-];
-
 // ─────────────────────────────────────────────
 // Helpers
 // ─────────────────────────────────────────────
@@ -178,12 +150,6 @@ function timeAgo(iso: string): string {
     month: "short",
     day: "numeric",
   });
-}
-
-function formatIssueMode(mode: QuestionIssueMode): string {
-  if (mode === "flashcards") return "Flashcards";
-  if (mode === "unknown") return "Unknown";
-  return mode.charAt(0).toUpperCase() + mode.slice(1);
 }
 
 function computeLearningEventInsights(events: LearningEvent[]): LearningEventInsights {
@@ -498,19 +464,6 @@ export default function ProgressPage() {
   const learningEventInsights = loaded
     ? computeLearningEventInsights(defaultLearningEventStore.load(activeUserId))
     : computeLearningEventInsights([]);
-  const issueModeBreakdown = useMemo(() => {
-    if (!issueTriageSummary) return [];
-    return ISSUE_TRIAGE_MODE_ORDER.map((mode) => ({
-      mode,
-      count: issueTriageSummary.byMode[mode] ?? 0,
-    })).filter((entry) => entry.count > 0);
-  }, [issueTriageSummary]);
-  const issueCategoryBreakdown = useMemo(() => {
-    if (!issueTriageSummary) return [];
-    return Object.entries(issueTriageSummary.byCategory)
-      .sort((left, right) => right[1] - left[1])
-      .slice(0, 6);
-  }, [issueTriageSummary]);
 
   const loadIssueTriageSummary = useCallback(async () => {
     if (!authenticatedUserId) {
@@ -561,6 +514,16 @@ export default function ProgressPage() {
     },
     [activeUserId, logEvent]
   );
+  const handleOpenIssueBookmarkQueue = useCallback(() => {
+    logEvent({
+      type: "link_opened",
+      mode: "progress",
+      metadata: {
+        target: "issue_triage_open_bookmark_queue",
+        href: "/study?collection=bookmarks&type=confirmed_test",
+      },
+    });
+  }, [logEvent]);
 
   useEffect(() => {
     logEvent({
@@ -1251,132 +1214,15 @@ export default function ProgressPage() {
       </div>
 
       {authenticatedUserId && (
-        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <div className="text-sm font-semibold text-white">Issue Triage</div>
-              <div className="mt-1 text-xs text-[var(--muted)]">
-                Prioritize question fixes based on submitted in-question issue reports.
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Link
-                href="/study?collection=bookmarks&type=confirmed_test"
-                onClick={() =>
-                  logEvent({
-                    type: "link_opened",
-                    mode: "progress",
-                    metadata: { target: "issue_triage_open_bookmark_queue", href: "/study?collection=bookmarks&type=confirmed_test" },
-                  })
-                }
-                className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white"
-              >
-                Open Bookmark Queue
-              </Link>
-              <button
-                type="button"
-                onClick={() => void loadIssueTriageSummary()}
-                disabled={issueTriagePending}
-                className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                Refresh Issues
-              </button>
-            </div>
-          </div>
-          {issueTriageQueueStatus && (
-            <div className="mt-2 rounded-lg border border-brand-500/30 bg-brand-500/10 px-3 py-2 text-xs text-brand-200">
-              {issueTriageQueueStatus}
-            </div>
-          )}
-          {issueTriagePending && (
-            <div className="mt-3 text-xs text-[var(--muted)]">Loading issue triage…</div>
-          )}
-          {!issueTriagePending && issueTriageError && (
-            <div className="mt-3 rounded-lg border border-incorrect/30 bg-incorrect/10 px-3 py-2 text-xs text-incorrect">
-              Issue triage unavailable: {issueTriageError}
-            </div>
-          )}
-          {!issueTriagePending && !issueTriageError && issueTriageSummary && (
-            <div className="mt-3 space-y-3">
-              <div className="grid gap-2 sm:grid-cols-3">
-                <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2">
-                  <div className="text-[10px] uppercase tracking-wider text-[var(--muted)]">Total Reports</div>
-                  <div className="text-lg font-semibold text-white">{issueTriageSummary.totalReports}</div>
-                </div>
-                <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2">
-                  <div className="text-[10px] uppercase tracking-wider text-[var(--muted)]">Questions Flagged</div>
-                  <div className="text-lg font-semibold text-white">{issueTriageSummary.uniqueQuestionCount}</div>
-                </div>
-                <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2">
-                  <div className="text-[10px] uppercase tracking-wider text-[var(--muted)]">Last Report</div>
-                  <div className="text-lg font-semibold text-white">
-                    {issueTriageSummary.latestReportAt ? timeAgo(issueTriageSummary.latestReportAt) : "none"}
-                  </div>
-                </div>
-              </div>
-              {issueModeBreakdown.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {issueModeBreakdown.map((entry) => (
-                    <span
-                      key={entry.mode}
-                      className="rounded-full border border-[var(--card-border)] px-2 py-0.5 text-[11px] text-[var(--muted)]"
-                    >
-                      {formatIssueMode(entry.mode)}: {entry.count}
-                    </span>
-                  ))}
-                </div>
-              )}
-              {issueCategoryBreakdown.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {issueCategoryBreakdown.map(([category, count]) => (
-                    <span
-                      key={category}
-                      className="rounded-full border border-brand-500/25 bg-brand-500/10 px-2 py-0.5 text-[11px] text-brand-200"
-                    >
-                      {category}: {count}
-                    </span>
-                  ))}
-                </div>
-              )}
-              <div>
-                <div className="text-xs font-semibold text-white">Top Reported Questions</div>
-                {issueTriageSummary.topQuestions.length === 0 ? (
-                  <div className="mt-1 text-xs text-[var(--muted)]">No issue reports submitted yet.</div>
-                ) : (
-                  <ul className="mt-2 space-y-2">
-                    {issueTriageSummary.topQuestions.map((row) => (
-                      <li
-                        key={row.questionId}
-                        className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2"
-                      >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="min-w-0 space-y-0.5">
-                            <div className="text-[11px] text-[var(--muted)]">
-                              {row.questionId} • {row.category}
-                            </div>
-                            <div className="text-sm text-white">{row.questionText}</div>
-                            <div className="truncate text-xs text-[var(--muted)]">Latest note: {row.latestNote}</div>
-                          </div>
-                          <div className="shrink-0 text-right text-xs">
-                            <div className="font-semibold text-white">{row.reportCount} reports</div>
-                            <div className="text-[var(--muted)]">{timeAgo(row.latestReportAt)}</div>
-                            <button
-                              type="button"
-                              onClick={() => queueIssueQuestionForReview(row.questionId)}
-                              className="mt-1 rounded border border-[var(--card-border)] px-2 py-1 text-[11px] text-[var(--muted)] hover:text-white"
-                            >
-                              Queue for Review
-                            </button>
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
+        <IssueTriagePanel
+          summary={issueTriageSummary}
+          pending={issueTriagePending}
+          error={issueTriageError}
+          queueStatus={issueTriageQueueStatus}
+          onRefresh={() => void loadIssueTriageSummary()}
+          onQueueQuestion={queueIssueQuestionForReview}
+          onOpenBookmarkQueue={handleOpenIssueBookmarkQueue}
+        />
       )}
 
       {pendingImportSnapshot && (

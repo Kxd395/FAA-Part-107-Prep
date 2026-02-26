@@ -97,6 +97,8 @@ This plan covers engineering standards, CI governance, type safety gates, test r
 - Updated API question contract test to avoid stale fixed-size assumptions and track runtime-scale bounds.
 - Updated login Google error surfacing to include server diagnostic code (e.g. `GOOGLE_AUDIENCE_MISMATCH`, `APP_AUTH_SECRET_MISSING`).
 - Untracked mutable runtime `.data` files from git index and added workspace ignore for `apps/web/.data/`.
+- Refactored Progress page by extracting issue-triage UI into:
+  - `apps/web/src/components/progress/IssueTriagePanel.tsx`
 
 ## Remaining Optimization Backlog
 
