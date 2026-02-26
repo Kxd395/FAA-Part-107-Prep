@@ -6,7 +6,7 @@
 - Owner (eng): @kevindialmb
 - Owner (product): @kevindialmb (acting)
 - Owner (design): @kevindialmb (acting)
-- Last updated: 2026-02-24
+- Last updated: 2026-02-26
 - Related tickets/PRs: N/A (no linked ticket in repo)
 
 ## Purpose
@@ -75,8 +75,10 @@ Mobile:
 - `useQuestionBank`
 - `useProgress`
 - Local derived data maps (`missMap`, `categoryCounts`)
+- `questionCollectionStore` (bulk add/remove visible missed questions to bookmarks or named collections)
 - `optionPresentation` utility (stable display-label remap so review letters match rendered option order)
 - `ReferenceModal`
+- `QuestionIssueReporter` (inline one-line issue submit per expanded question)
 
 ## Interactive elements inventory (every control)
 | Control ID | Label | Type | Visible when | Enabled when | On action | API calls | State changes | Errors | Analytics |
@@ -88,10 +90,16 @@ Mobile:
 | `missed.empty.exam` | Take Exam | link | no missed entries | always | navigate `/exam` | none | route change | none | `link_opened` |
 | `missed.sort.count` | Most Missed | button | non-empty state | always | sort by miss count desc | none | `sortBy=count` | none | `filter_changed` |
 | `missed.sort.recent` | Most Recent | button | non-empty state | always | sort by latest miss timestamp | none | `sortBy=recent` | none | `filter_changed` |
+| `missed.collection.select` | Collection selector | select | non-empty state | always | choose destination collection (`bookmarks` or named) for bulk actions | none | `selectedCollectionId` | none | none |
+| `missed.collection.add_visible` | Add Visible | button | non-empty state | always | add currently filtered missed question IDs into selected collection | none | collection store write + notice text | none | `control_clicked` |
+| `missed.collection.remove_visible` | Remove Visible | button | non-empty state | always | remove currently filtered missed question IDs from selected collection | none | collection store write + notice text | none | `control_clicked` |
+| `missed.collection.create` | Create Collection | input + button | non-empty state | non-empty valid name | create named collection and select it | none | collection store write + notice text | invalid/blank name notice | none |
 | `missed.filter.category[*]` | Category chip | button | non-empty state | always | filter entries by category | none | `selectedCategory` | none | `filter_changed` |
 | `missed.entry.toggle[*]` | Expand/collapse row | button | non-empty list | always | expand selected question details | none | `expandedId` | none | `control_clicked` |
 | `missed.list.load_more` | Load More | button | filtered list larger than visible page | always | reveal next page of missed entries | none | `visibleCount += 20` | none | none |
-| `missed.entry.figure` | View figure | button | expanded row with figure ref | always | open reference modal | none | `figureRef` | browser image load fallback | `citation_clicked` |
+| `missed.entry.figure` | View figure | button | expanded row with `figure_reference` or `image_ref` | always | resolve image URL (`image_ref` first, else `/figures/<figure_reference>.png`) and open reference modal | none | `figureRef` | modal load-failure UI on missing assets | `citation_clicked` |
+| `missed.entry.issue.toggle` | Report issue | button | expanded row | always | show/hide one-line issue input for current question | none | local reporter panel open/close state | none surfaced | none |
+| `missed.entry.issue.submit` | Send | button | expanded row and reporter open | one-line note present | submit issue report for selected missed question | `POST /api/user/question-issues` | none | inline submit error text | none |
 | `missed.modal.close` | Close modal | button/backdrop/key | modal open | always | close modal | none | modal state clear | none | none |
 
 ## Page state model
@@ -120,7 +128,7 @@ State transitions:
 - Optional data: none
 - Data sources:
   - API `/api/questions`
-  - localStorage `part107_progress`
+  - localStorage `part107_progress`, `part107_question_collections_v1[:<userId>]`
 - Cache invalidation rules: computed map recalculated when sessions/questions change.
 - Stale data tolerance: high; local progress can be manually modified.
 

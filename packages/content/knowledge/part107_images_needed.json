@@ -1,0 +1,37 @@
+[
+  {
+    "id": 67,
+    "question": "Using the provided sectional chart excerpt, what does a MAGENTA airport symbol generally indicate?",
+    "image_description": "Insert a sectional chart excerpt showing at least one magenta airport symbol (non-towered airport) and nearby features for context."
+  },
+  {
+    "id": 68,
+    "question": "Using the provided sectional chart excerpt, what does a BLUE airport symbol indicate?",
+    "image_description": "Insert the chart excerpt from your course (the one labeled like 'Figure 25 DFW' or equivalent) showing at least one blue airport symbol and surrounding airspace markings."
+  },
+  {
+    "id": 69,
+    "question": "Based on the provided sectional chart excerpt, which statement is TRUE about operations for a Part 107 pilot?",
+    "image_description": "Insert a sectional chart excerpt that depicts controlled airspace (Class B, C, D, or Class E surface area)."
+  },
+  {
+    "id": 70,
+    "question": "On the provided METAR/TAF style weather report image, which element represents prevailing visibility?",
+    "image_description": "Insert a sample METAR or TAF printout image used in FAA knowledge tests. It must include a visibility element (for example '3SM')."
+  },
+  {
+    "id": 71,
+    "question": "Using the provided chart/schematic, what is the correct cloud clearance requirement for Part 107 operations?",
+    "image_description": "Insert a simple cloud clearance diagram showing a drone relative to clouds (vertical and horizontal separation)."
+  },
+  {
+    "id": 99,
+    "question": "On the provided chart excerpt, which airspace class is depicted by the dashed blue circle around an airport?",
+    "image_description": "Insert a sectional chart excerpt showing a dashed blue circle (Class D surface area) around an airport."
+  },
+  {
+    "id": 100,
+    "question": "Using the provided chart excerpt, what does a dashed magenta circle generally indicate?",
+    "image_description": "Insert a sectional chart excerpt showing a dashed magenta circle (Class E surface area) around an airport."
+  }
+]

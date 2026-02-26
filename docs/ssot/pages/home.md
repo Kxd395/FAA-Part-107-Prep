@@ -6,7 +6,7 @@
 - Owner (eng): @kevindialmb
 - Owner (product): @kevindialmb (acting)
 - Owner (design): @kevindialmb (acting)
-- Last updated: 2026-02-24
+- Last updated: 2026-02-25
 - Related tickets/PRs: N/A (no linked ticket in repo)
 
 ## Purpose
@@ -73,8 +73,9 @@ Mobile:
 
 ## Components inventory
 - `next/link` links for all navigation actions
-- Local state: `practiceType` (`useState`)
-- Derived hrefs: `studyHref`, `practiceExamHref` (`useMemo`)
+- `useQuestionBank` for live loaded-bank counts
+- Local state: `practiceType` (`useState`, hydrated from per-user preference storage)
+- Derived hrefs: `studyHref`, `practiceExamHref`, `studyBookmarksHref`, `examBookmarksHref` (`useMemo`)
 
 ## Interactive elements inventory (every control)
 | Control ID | Label | Type | Visible when | Enabled when | On action | API calls | State changes | Errors | Analytics |
@@ -82,6 +83,8 @@ Mobile:
 | `home.cta.start_studying` | Start Studying | link/button | always | always | Navigate to `/study?type=<practiceType>` | none | none | none | `link_opened` |
 | `home.cta.take_exam` | Take Practice Exam | link/button | always | always | Navigate to `/exam?type=<practiceType>` | none | none | none | `link_opened` |
 | `home.select.practice_type` | Practice Question Type | select | always | always | Update selected profile | none | `practiceType` updates | none | `filter_changed` |
+| `home.quick.study_bookmarks` | Study Bookmarks | link | always | always | Navigate to `/study?collection=bookmarks&type=<practiceType>` | none | none | none | `link_opened` |
+| `home.quick.exam_bookmarks` | Exam from Bookmarks | link | always | always | Navigate to `/exam?collection=bookmarks&type=<practiceType>` | none | none | none | `link_opened` |
 | `home.card.feature[*]` | Feature card | link | always | always | Navigate to feature route | none | none | none | `link_opened` |
 | `home.card.topic.study[*]` | Study (topic) | link | always | always | Navigate with topic+type query | none | none | none | `link_opened` |
 | `home.card.topic.test[*]` | Test (topic) | link | always | always | Navigate with topic+type query | none | none | none | `link_opened` |
@@ -97,19 +100,25 @@ State transitions:
 - ready -> ready (trigger: practice type select change)
 
 ## Data dependencies
-- Required data: None remote; static constants in page module.
-- Optional data: None.
-- Data sources: in-file arrays (`FEATURES`, `STATS`, topic list).
-- Cache invalidation rules: Not applicable.
-- Stale data tolerance: Static content may drift from actual backend/question totals (currently manual values).
+- Required data: Loaded question bank for dynamic total/topic counts.
+- Optional data: Per-user preferred question type.
+- Data sources:
+  - API (`useQuestionBank` -> `/api/questions`)
+  - localStorage (`part107_default_question_type_v1[:<userId>]`)
+  - in-file arrays (`FEATURES`, topic descriptions, source-pack registry metadata)
+  - core exam defaults (`EXAM_DEFAULTS`, `FULL_EXAM_QUESTION_COUNT`) for pass/time stat cards
+- Cache invalidation rules: Question load follows `useQuestionBank` live/snapshot policies.
+- Stale data tolerance: Question counts and exam-policy stat cards now derive from loaded/core constants; feature/topic copy remains static.
 
 ## API calls and contracts
 List calls made by this page only.
-- None.
+- `GET /api/questions?category=All` via `useQuestionBank`.
 
 ## Validation and input rules
-- `practiceType` values constrained to `QuestionTypeProfile` enum options in code.
+- `practiceType` values constrained to `QuestionTypeProfile` enum options in code (including `part107_bank`, `carrington_bank`, and `carrington_strict` for source-pack-only routing).
+- If present, per-user preferred question type is normalized against selectable profile list before hydration.
 - Route query params are URL-encoded for category and type links.
+- Bookmark collection quick links include `collection=bookmarks` and current `type`.
 - Error text / sanitize rules: None beyond controlled select values.
 
 ## Destructive actions
@@ -197,13 +206,12 @@ List calls made by this page only.
 - Default behavior when flag off: Not applicable
 
 ## Open questions (UNKNOWN)
-- Should home metrics (question counts, pass stats) be computed dynamically instead of hardcoded?
 - Is there a requirement for breadcrumb rendering in global layout?
 
 ## Risks and mitigations
-- Risk: Hardcoded counts drift from real content totals.
-  - Impact: User trust degradation and inconsistent messaging.
-  - Mitigation: Derive counts from content build output or API metadata.
+- Risk: Static copy metrics (non-question stats) can drift from policy changes.
+  - Impact: Messaging inconsistency.
+  - Mitigation: Move remaining static stat copy to governed content/config source.
 
 ## Future enhancements
 - Add localization support for labels and copy.

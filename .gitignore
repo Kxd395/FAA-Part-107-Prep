@@ -4,10 +4,16 @@
 .DS_Store
 node_modules/
 .next/
+.next.bak*/
+.next.bak.*/
 .vercel/
 out/
 dist/
 build/
+*.tsbuildinfo
+coverage/
+apps/web/coverage/
+packages/core/coverage/
 
 # Python
 __pycache__/
@@ -36,6 +42,7 @@ DerivedData/
 
 # Large PDFs served locally (not for git/Vercel)
 apps/web/public/pdfs/
+apps/web/.data/
 source-materials/
 
 # OS

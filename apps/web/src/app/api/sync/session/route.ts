@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getAuthenticatedUserId } from "../../../../lib/server/appAuth";
 import { issueSyncSessionToken } from "../../../../lib/server/syncToken";
 import { consumeRateLimit, rateLimitHeaders } from "../../../../lib/server/rateLimit";
 
@@ -16,22 +17,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Too many sync session requests" }, { status: 429, headers: rateLimitHeaders(rl) });
   }
 
+  const authenticatedUserId = getAuthenticatedUserId(request);
+  if (!authenticatedUserId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: rateLimitHeaders(rl) });
+  }
+
   const secret = process.env.SYNC_SIGNING_SECRET?.trim();
   if (!secret) {
-    return NextResponse.json({ token: null, mode: "header-user-id" }, { headers: rateLimitHeaders(rl) });
+    return NextResponse.json(
+      { token: null, mode: "header-user-id", userId: authenticatedUserId },
+      { headers: rateLimitHeaders(rl) }
+    );
   }
 
-  const body = (await request.json().catch(() => ({}))) as { userId?: string };
-  const userId = body.userId?.trim();
-  if (!userId) {
-    return NextResponse.json({ error: "userId is required" }, { status: 400, headers: rateLimitHeaders(rl) });
-  }
-
-  const token = issueSyncSessionToken(userId, secret);
+  const token = issueSyncSessionToken(authenticatedUserId, secret);
   return NextResponse.json(
     {
       token,
       mode: "signed-token",
+      userId: authenticatedUserId,
       expiresInSeconds: 3600,
     },
     { headers: rateLimitHeaders(rl) }

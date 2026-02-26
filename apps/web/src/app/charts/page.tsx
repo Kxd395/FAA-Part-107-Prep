@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
+import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
-import { LOCAL_USER_ID } from "../../lib/analyticsTaxonomy";
 
 const FIGURES = [20, 21, 22, 23, 26, 59] as const;
 const FAA_REFERENCE_LINKS = {
@@ -15,7 +15,8 @@ const FAA_REFERENCE_LINKS = {
 } as const;
 
 export default function ChartsPage() {
-  const { logEvent } = useLearningEventLogger(LOCAL_USER_ID);
+  const activeUserId = useActiveUserId();
+  const { logEvent } = useLearningEventLogger(activeUserId);
 
   useEffect(() => {
     logEvent({

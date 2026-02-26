@@ -107,6 +107,9 @@ Desktop/mobile:
 - Magic-link and verify routes are rate-limited.
 - Verify rejects invalid/expired tokens.
 - Google route verifies token audience/email verification server-side and is rate-limited.
+- `returnUrl` is sanitized client-side to same-origin relative paths before redirecting authenticated users.
+- Magic-link base URL now resolves from configured app origins (`APP_BASE_URL`/`APP_ALLOWED_ORIGINS`) with localhost-only fallback outside production.
+- App auth + magic-link signing now require explicit secrets outside test (`APP_AUTH_SECRET`, `MAGIC_LINK_SECRET`), with no non-test fallback defaults.
 
 ## Test plan
 - Route tests: `google`, `magic-link`, `verify` APIs.

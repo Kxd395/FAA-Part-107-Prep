@@ -191,6 +191,10 @@ export function canonicalQuestionKey(
   question: Question,
   options: CanonicalKeyOptions = {}
 ): string {
+  if (typeof question.concept_key === "string" && question.concept_key.trim().length > 0) {
+    return hashFnv1a(`concept::${normalizeText(question.concept_key)}`);
+  }
+
   const includeChoices = options.includeChoices ?? true;
   const parts = [normalizeText(question.question_text)];
   if (includeChoices) {

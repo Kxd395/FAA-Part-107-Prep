@@ -6,7 +6,7 @@
 - Owner (eng): @kevindialmb
 - Owner (product): @kevindialmb (acting)
 - Owner (design): @kevindialmb (acting)
-- Last updated: 2026-02-24
+- Last updated: 2026-02-25
 - Related tickets/PRs: N/A (no linked ticket in repo)
 
 ## Purpose
@@ -76,16 +76,17 @@ Mobile:
 +------------------------------+
 
 ## Components inventory
-- `useQuestionBank`
+- `useQuestionBank` (includes external `Part107 Question Bank` source-pack adapter)
 - `useAdaptiveQuestionStats` (filtering + graded learn quiz attempts)
 - `useLearningEventLogger` (learn lifecycle and question-level interaction events)
 - `recordLearningAttempt` pipeline utility for quiz answer commits (adaptive attempt + `answer_submitted`)
 - `useProgress` (persist first-pass question outcomes)
 - `learnDraftStore` (`part107_learn_draft_v1`) for save/resume
+- `questionTypePreferenceStore` for per-user default question-pool hydration/persistence
 - Local state machine: `phase` (`setup|teach|quiz|result`)
 - Utility: in-file `shuffleArray`, queue reinsertion helper, learn result summarizer
 - `optionPresentation` utility (deterministic per-round option-order randomization with display-label remap)
-- Two-step quiz grading: select answer first, then explicitly choose confidence (1-5) before reveal/queue commit
+- Quiz confidence selector (`1..5`) is visible before answer reveal and applied immediately when an answer is selected
 
 ## Interactive elements inventory (every control)
 | Control ID | Label | Type | Visible when | Enabled when | On action | API calls | State changes | Errors | Analytics |
@@ -104,8 +105,8 @@ Mobile:
 | `learn.teach.skip` | Skip for now | button | teach | `batch.length > 1` | move current teach item to end | none | `batch` reorder, `teachIndex` adjusted | no-op when single-item batch | `question_skipped` (`metadata.phase=teach`) |
 | `learn.teach.save_exit` | Save & Exit | button | teach | always | save draft and return setup | none | draft persisted, phase->setup | none | `session_saved` |
 | `learn.teach.start_quiz` | Now Quiz Me on These | button | teach at last item | always | enter quiz phase | none | phase->quiz, quiz order shuffle | none | none |
-| `learn.quiz.answer[*]` | randomized answer option | button | quiz | `showResult == false` | select answer candidate only (no scoring yet) | none | `selectedAnswer` updated; `selectedConfidence` cleared | none | none |
-| `learn.quiz.confidence[*]` | Confidence 1..5 | button group | quiz and answer selected and not revealed | always | commit selected answer with explicit confidence and reveal feedback | none | selectedConfidence set, quizResults append, adaptive + attempt-event update, showResult | none | `answer_submitted` (`metadata.confidence`, `metadata.qualityScore`) |
+| `learn.quiz.answer[*]` | randomized answer option | button | quiz | `showResult == false` | commit selected answer with current confidence and reveal feedback | none | `selectedAnswer`, `selectedConfidence`, `quizResults`, adaptive + attempt-event update, `showResult=true` | none | `answer_submitted` (`metadata.confidence`, `metadata.qualityScore`) |
+| `learn.quiz.confidence[*]` | Confidence 1..5 | button group | quiz and not revealed | always | set confidence used by next answer click | none | `answerConfidence` updates | none | none |
 | `learn.quiz.skip` | Skip for now | button | quiz | `showResult == false` and `quizOrder.length > 1` and no pending selected answer | move current quiz item to queue tail | none | `quizOrder` reorder (head->tail) | no-op when single-item order | `question_skipped` (`metadata.phase=quiz`) |
 | `learn.quiz.save_exit` | Save & Exit | button | quiz | always | save partial progress + draft, return setup | none | progress may persist answered subset; phase->setup | none | `session_saved` |
 | `learn.quiz.next` | Next Question / Still Learning — Review Again / See Results | button | quiz after answer | always | commit outcome to queue | none | correct => dequeue head; incorrect => reinsert head 2-5 positions later; phase->result when queue empties; result summary recalculated | none | `review_opened` precedes this action after answer |
@@ -134,6 +135,7 @@ State transitions:
 - teach -> teach (`skipTeachQuestion`)
 - teach -> setup (`Save & Exit`)
 - quiz -> quiz (`skipQuizQuestion`, head moved to tail)
+- quiz -> quiz (confidence selection update while unanswered)
 - quiz -> quiz (answer committed; quality score decides dequeue vs reinsertion gap)
 - quiz -> result (quality decision dequeues final queue item)
 - quiz -> setup (`Save & Exit`)
@@ -142,12 +144,13 @@ State transitions:
 
 ## Data dependencies
 - Required data: question bank
-- Optional data: adaptive stats for `filterQuestionsByType`
+- Optional data: adaptive stats for `filterQuestionsByType`; per-user preferred question type
 - Data sources:
   - API `/api/questions`
   - localStorage adaptive stats (read/write)
   - localStorage attempt events (write via adaptive hook)
   - localStorage learning events (write via learning-event logger)
+  - localStorage preferred question type: `part107_default_question_type_v1[:<userId>]`
 - localStorage learn draft:
   - `part107_learn_draft_v1` (save/resume state for `teach|quiz|result`)
 - localStorage progress:
@@ -174,10 +177,13 @@ State transitions:
 
 ## Validation and input rules
 - Question-type options constrained to hardcoded profile list.
+  - includes `part107_bank`, `carrington_bank`, and `carrington_strict` for source-pack-only learn rounds
 - Batch size constrained to fixed set `[3,5,10,15,20]`.
 - Category constrained to `All` + `STUDY_CATEGORIES` values.
 - Teach and quiz options are rendered in deterministic shuffled order per round with local display labels (`A-D`) while correctness logic uses source option IDs.
-- Quiz confidence is now an explicit required choice (`1..5`) made after answer selection and before feedback reveal.
+- Teach and quiz now render exactly 3 answer choices per question (`1` correct + `2` distractors) when source data contains 4 options; selection is deterministic within a round and randomized between rounds/sessions.
+- Quiz confidence selector is always visible during unanswered quiz state; selected value (`1..5`) is applied on answer click and persisted with the attempt.
+- Adaptive canonicalization uses `concept_key` when present so paraphrased equivalents from different sources share mastery history.
 
 ## Destructive actions
 - Confirmations required: none

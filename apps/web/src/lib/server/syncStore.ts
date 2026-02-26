@@ -13,6 +13,7 @@ const SYNC_KEYS = [
   "part107_learning_events_v1",
   "part107_flashcard_sr",
   "part107_learn_draft_v1",
+  "part107_question_collections_v1",
 ] as const;
 
 export interface SyncSnapshotEnvelope {
@@ -47,9 +48,7 @@ const REMOTE_BREAKER_FAILURE_THRESHOLD = 3;
 const REMOTE_BREAKER_COOLDOWN_MS = 30_000;
 
 declare global {
-  // eslint-disable-next-line no-var
   var __part107SyncCache__: PersistedSyncState | undefined;
-  // eslint-disable-next-line no-var
   var __part107SyncRemoteBreaker__:
     | {
         failures: number;

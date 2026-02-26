@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useEffect, useState, ReactNode, useCallback } from "react";
+import { migrateLegacyLocalUserStateToUser } from "../lib/localUserStateMigration";
 
 export interface AuthUser {
     userId: string;
@@ -28,6 +29,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             if (res.ok) {
                 const data = await res.json();
                 if (data.authenticated && data.userId) {
+                    try {
+                        migrateLegacyLocalUserStateToUser(data.userId);
+                    } catch (migrationError) {
+                        console.error("Failed to migrate legacy local state", migrationError);
+                    }
                     setUser({
                         userId: data.userId,
                         email: data.email ?? null,

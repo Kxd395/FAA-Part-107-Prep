@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { POST as createSyncSession } from "./session/route";
 import { POST as syncUpload } from "./upload/route";
 import { GET as syncDownload } from "./download/route";
+import { issueAppSessionToken } from "../../../lib/server/appAuth";
 import { clearRateLimitStoreForTests } from "../../../lib/server/rateLimit";
 import { clearSyncStoreForTests } from "../../../lib/server/syncStore";
 import { resolveImportedData } from "../../../lib/progressImportMerge";
@@ -14,7 +15,13 @@ const SYNC_KEYS = [
   "part107_learning_events_v1",
   "part107_flashcard_sr",
   "part107_learn_draft_v1",
+  "part107_question_collections_v1",
 ] as const;
+
+function authCookie(userId: string): string {
+  const token = issueAppSessionToken(userId);
+  return `part107_auth=${token}`;
+}
 
 describe("sync roundtrip flow", () => {
   const originalSigningSecret = process.env.SYNC_SIGNING_SECRET;
@@ -33,8 +40,11 @@ describe("sync roundtrip flow", () => {
     const sessionResponse = await createSyncSession(
       new NextRequest("http://localhost/api/sync/session", {
         method: "POST",
-        headers: { "content-type": "application/json", "x-forwarded-for": "roundtrip-ip" },
-        body: JSON.stringify({ userId: "roundtrip-user" }),
+        headers: {
+          "content-type": "application/json",
+          "x-forwarded-for": "roundtrip-ip",
+          cookie: authCookie("roundtrip-user"),
+        },
       })
     );
     expect(sessionResponse.status).toBe(200);
@@ -65,6 +75,7 @@ describe("sync roundtrip flow", () => {
               part107_learning_events_v1: null,
               part107_flashcard_sr: null,
               part107_learn_draft_v1: null,
+              part107_question_collections_v1: null,
             },
           },
         }),
@@ -94,6 +105,7 @@ describe("sync roundtrip flow", () => {
       part107_learning_events_v1: null,
       part107_flashcard_sr: null,
       part107_learn_draft_v1: null,
+      part107_question_collections_v1: null,
     };
     const resolved = resolveImportedData(
       downloadBody.snapshot.data,

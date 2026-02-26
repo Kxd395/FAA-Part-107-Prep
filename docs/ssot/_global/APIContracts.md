@@ -24,7 +24,17 @@ Rules:
   - Invalid response shape throws and enters retry/fallback path.
 - Data source behavior:
   - Uses `QUESTION_SOURCE_URL` env var when present (server fetch with `cache: no-store`)
-  - Falls back to bundled JSON files when env var absent
+  - Falls back to local bundled JSON files plus external source-pack adapter when env var absent:
+    - `packages/content/questions/*.json`
+    - `packages/content/knowledge/part107_question_bank.json`
+    - `packages/content/knowledge/carrington_question_bank.strict.json`
+    - `packages/content/knowledge/part107_images_needed.json` (image-description augmentation for image-required items)
+    - Legacy fallback paths retained for compatibility:
+      - `docs/ssot/review/part107_question_bank.json`
+      - `docs/ssot/review/carrington_question_bank.strict.json`
+      - `docs/ssot/review/part107_images_needed.json`
+  - Local canonical loader drops unresolved figure-placeholder rows (for example `figure_text` starting with `Insert ...` but no `image_ref`/`figure_reference`) to avoid unanswerable prompts in live sessions.
+  - API enriches each question with derived `concept_key` when not provided by source data
 - Pagination rules:
   - No cursor/page support
   - Optional hard cut via `limit`
@@ -65,6 +75,11 @@ Rules:
   - `userId: string` (must match authenticated sync user)
   - `mode: "merge" | "overwrite"`
   - `snapshot: { version: 1; exportedAt: string; data: Record<string, string | null>; signature?: string }`
+- Runtime envelope guards:
+  - `snapshot` must be a plain object
+  - `snapshot.data` must be a non-null plain object
+  - `snapshot.data` values must be only `string` or `null`
+  - `snapshot.signature` (when present) must be `string`
 - Response (`200`) shape:
   - `accepted: boolean`
   - `mergedSummary.changedKeys: string[]`
@@ -75,7 +90,7 @@ Rules:
   - Server signs persisted snapshots when `SYNC_SNAPSHOT_HMAC_SECRET` is configured.
 - Merge behavior:
   - Reuses progress/adaptive/telemetry merge engine from `progressImportMerge`.
-  - Supported keys: `part107_progress`, `part107_adaptive_stats_v2`, `part107_attempt_events_v1`, `part107_learning_events_v1`, `part107_flashcard_sr`, `part107_learn_draft_v1`.
+  - Supported keys: `part107_progress`, `part107_adaptive_stats_v2`, `part107_attempt_events_v1`, `part107_learning_events_v1`, `part107_flashcard_sr`, `part107_learn_draft_v1`, `part107_question_collections_v1`.
 - Error codes:
   - `429` rate limit exceeded
   - `401` missing/invalid sync auth token/header
@@ -159,6 +174,8 @@ Rules:
   - `userId: string | null`
   - `email: string | null`
   - `displayName: string | null`
+- Server requirements:
+  - `APP_AUTH_SECRET` must be configured outside `NODE_ENV=test`.
 
 ## Endpoint: App Auth Login
 - Method: `POST`
@@ -173,6 +190,8 @@ Rules:
   - `expiresInSeconds: number`
 - Cookie behavior:
   - Sets `part107_auth` (`httpOnly`, `sameSite=lax`, `path=/`, `maxAge=7d`)
+- Server requirements:
+  - `APP_AUTH_SECRET` must be configured outside `NODE_ENV=test`.
 - Error codes:
   - `400` invalid `userId`
   - `403` disabled in production (magic-link flow required)
@@ -201,6 +220,12 @@ Rules:
 - Response (`200`) shape:
   - `sent: true`
   - `devUrl?: string` (non-production only, returned when email provider is not configured)
+- Server requirements:
+  - `MAGIC_LINK_SECRET` must be configured outside `NODE_ENV=test`.
+- Origin resolution requirements:
+  - Uses explicit configured app origins from `APP_BASE_URL` (preferred) or `APP_ALLOWED_ORIGINS` allowlist.
+  - If no origin config exists, only non-production localhost/loopback header-derived origins are accepted.
+  - Returns `500` when no valid origin can be resolved.
 - Error codes:
   - `400` invalid email
   - `429` rate limit exceeded
@@ -244,8 +269,9 @@ Rules:
 - Cookie behavior:
   - Sets `part107_auth` (`httpOnly`, `sameSite=lax`, `path=/`, `maxAge=7d`)
 - Server requirements:
-  - `GOOGLE_CLIENT_ID` must be configured
-  - Token is verified with Google SDK against configured audience
+  - At least one of `GOOGLE_CLIENT_ID` or `NEXT_PUBLIC_GOOGLE_CLIENT_ID` must be configured
+  - Recommended: set both to the same OAuth client id to avoid audience mismatch
+  - Token is verified with Google SDK against all configured audiences
 - Error codes:
   - `400` missing credential
   - `401` invalid/unverified Google token
@@ -307,6 +333,9 @@ Rules:
 - Error codes:
   - `401` unauthorized
   - `429` rate limit exceeded
+- Persistence behavior:
+  - Uses Supabase table `part107_user_state` when server persistence is configured.
+  - Falls back to local file store (`apps/web/.data/user-state-v1.json`) on config/schema/connectivity failure.
 - Rate limits:
   - In-memory per-IP limiter: `120` requests/minute
 
@@ -325,6 +354,7 @@ Rules:
   - `part107_learning_events_v1`
   - `part107_flashcard_sr`
   - `part107_learn_draft_v1`
+  - `part107_question_collections_v1`
 - Response (`200`) shape:
   - `userId: string`
   - `updatedAt: string`
@@ -335,5 +365,130 @@ Rules:
   - `400` invalid `mode` or `data`
   - `401` unauthorized
   - `429` rate limit exceeded
+- Persistence behavior:
+  - Uses Supabase table `part107_user_state` when server persistence is configured.
+  - Falls back to local file store (`apps/web/.data/user-state-v1.json`) on config/schema/connectivity failure.
 - Rate limits:
   - In-memory per-IP limiter: `60` requests/minute
+
+## Endpoint: User Learning Event Ingestion
+- Method: `POST`
+- Path: `/api/user/learning-events`
+- Auth:
+  - Required `part107_auth` signed cookie
+- Request body:
+  - `event: { id: string; timestamp: string; type: string; mode: string; ... }`
+  - Server normalizes/sanitizes optional fields and metadata primitives.
+- Behavior:
+  - Persists per-user analytics row in Supabase table `part107_learning_events` when configured.
+  - Falls back to local server learning-analytics store (`apps/web/.data/learning-analytics-v1.json`) on config/schema/connectivity failure.
+  - `userId` from auth token is authoritative (client-provided `userId` ignored).
+- Response (`202`) shape:
+  - `accepted: true`
+  - `eventId: string`
+- Error codes:
+  - `400` invalid payload
+  - `401` unauthorized
+  - `429` rate limit exceeded
+- Rate limits:
+  - In-memory per-IP limiter: `600` requests/minute
+
+## Endpoint: Question Issue Report Ingestion
+- Method: `POST`
+- Path: `/api/user/question-issues`
+- Auth:
+  - Required `part107_auth` signed cookie
+- Request body:
+  - `report: {`
+    - `mode: "study" | "exam" | "learn" | "flashcards" | "missed" | string`
+    - `questionId: string`
+    - `questionText: string`
+    - `category: string`
+    - `subcategory: string`
+    - `options: Array<{ id: "A" | "B" | "C" | "D"; text: string }>`
+    - `correctOptionId: "A" | "B" | "C" | "D"`
+    - `selectedOptionId?: "A" | "B" | "C" | "D" | null`
+    - `note: string` (single-line, max `280` chars)
+    - `questionTypeProfile?: string | null`
+    - `source?: string | null`
+    - `sourceType?: string | null`
+    - `confidence?: 1 | 2 | 3 | 4 | 5 | null`
+    - `metadata?: Record<string, string | number | boolean | null>`
+  - `}`
+- Behavior:
+  - Persists per-user issue report in Supabase table `part107_question_issues` when configured.
+  - Falls back to local server store (`apps/web/.data/question-issues-v1.json`) on config/schema/connectivity failure.
+  - `userId` and `createdAt` are server-authored.
+- Response (`202`) shape:
+  - `accepted: true`
+  - `issueId: string`
+- Error codes:
+  - `400` invalid payload
+  - `401` unauthorized
+  - `429` rate limit exceeded
+- Rate limits:
+  - In-memory per-IP limiter: `90` requests/minute
+
+## Endpoint: Question Issue Triage Summary
+- Method: `GET`
+- Path: `/api/user/question-issues/summary`
+- Auth:
+  - Required `part107_auth` signed cookie
+- Query params:
+  - `limit` (optional integer; defaults to `25`, max `100`)
+- Response (`200`) shape:
+  - `userId: string`
+  - `limit: number`
+  - `generatedAt: string`
+  - `summary: {`
+    - `totalReports: number`
+    - `uniqueQuestionCount: number`
+    - `latestReportAt: string | null`
+    - `byMode: Record<"study" | "exam" | "learn" | "flashcards" | "missed" | "unknown", number>`
+    - `byCategory: Record<string, number>`
+    - `topQuestions: Array<{`
+      - `questionId: string`
+      - `questionText: string`
+      - `category: string`
+      - `subcategory: string`
+      - `reportCount: number`
+      - `latestReportAt: string`
+      - `latestNote: string`
+      - `byMode: Record<"study" | "exam" | "learn" | "flashcards" | "missed" | "unknown", number>`
+    - `}>`
+  - `}`
+- Error codes:
+  - `401` unauthorized
+  - `429` rate limit exceeded
+- Rate limits:
+  - In-memory per-IP limiter: `120` requests/minute
+
+## Endpoint: User Scoring Summary
+- Method: `GET`
+- Path: `/api/user/scoring/summary`
+- Auth:
+  - Required `part107_auth` signed cookie
+- Query params:
+  - `window=24h|7d|30d|all` (defaults to `30d`)
+- Response (`200`) shape:
+  - `userId: string`
+  - `window: "24h" | "7d" | "30d" | "all"`
+  - `generatedAt: string`
+  - `summary: {`
+    - `answerCount: number`
+    - `correctCount: number`
+    - `accuracyPercent: number | null`
+    - `uniqueQuestionCount: number`
+    - `firstAnswerAccuracyPercent: number | null`
+    - `finalAnswerAccuracyPercent: number | null`
+    - `answerChangeRatePercent: number | null`
+    - `confidenceCount: number`
+    - `calibrationScorePercent: number | null`
+    - `overconfidenceRatePercent: number | null`
+    - `byMode: Record<string, number>`
+  - `}`
+- Error codes:
+  - `401` unauthorized
+  - `429` rate limit exceeded
+- Rate limits:
+  - In-memory per-IP limiter: `120` requests/minute

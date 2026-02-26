@@ -9,15 +9,24 @@ import {
   QuestionBankLoading,
   QuestionBankWarning,
 } from "../../components/QuestionBankState";
+import QuestionIssueReporter from "../../components/quiz/QuestionIssueReporter";
+import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { useProgress } from "../../hooks/useProgress";
-import { LOCAL_USER_ID } from "../../lib/analyticsTaxonomy";
+import { resolveFigureImageUrl } from "../../lib/figureImage";
 import {
   buildOptionPresentation,
   getDisplayLabelForOption,
 } from "../../lib/optionPresentation";
 import { STUDY_CATEGORIES } from "../../lib/questionBank";
+import {
+  addQuestionsToCollection,
+  createQuestionCollection,
+  listQuestionCollections,
+  removeQuestionsFromCollection,
+  type QuestionCollectionFilter,
+} from "../../lib/questionCollectionStore";
 
 /**
  * Missed Questions Review — browse every question you've gotten wrong,
@@ -38,7 +47,8 @@ const MISSED_VIRTUAL_WINDOW_SIZE = 90;
 const MISSED_ROW_ESTIMATE_PX = 124;
 
 export default function MissedPage() {
-  const { logEvent } = useLearningEventLogger(LOCAL_USER_ID);
+  const activeUserId = useActiveUserId();
+  const { logEvent } = useLearningEventLogger(activeUserId);
   const {
     questions: allQuestions,
     loaded,
@@ -49,7 +59,7 @@ export default function MissedPage() {
     reload,
     clearSnapshot,
   } = useQuestionBank();
-  const { sessions, loaded: progressLoaded } = useProgress();
+  const { sessions, loaded: progressLoaded } = useProgress(activeUserId);
 
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -57,6 +67,13 @@ export default function MissedPage() {
   const [sortBy, setSortBy] = useState<"count" | "recent">("count");
   const [visibleCount, setVisibleCount] = useState(MISSED_PAGE_SIZE);
   const [virtualStartIndex, setVirtualStartIndex] = useState(0);
+  const [availableCollections, setAvailableCollections] = useState<
+    Array<{ id: string; name: string; questionCount: number; system: boolean }>
+  >([]);
+  const [selectedCollectionId, setSelectedCollectionId] =
+    useState<QuestionCollectionFilter>("bookmarks");
+  const [newCollectionName, setNewCollectionName] = useState("");
+  const [collectionNotice, setCollectionNotice] = useState<string | null>(null);
 
   useEffect(() => {
     logEvent({
@@ -65,6 +82,10 @@ export default function MissedPage() {
       metadata: { route: "/missed" },
     });
   }, [logEvent]);
+
+  useEffect(() => {
+    setAvailableCollections(listQuestionCollections(activeUserId));
+  }, [activeUserId]);
 
   // Build a map of missed questions from all session history
   const missedEntries = useMemo(() => {
@@ -257,7 +278,108 @@ export default function MissedPage() {
             Most Recent
           </button>
         </div>
+
+        <div className="flex flex-wrap items-center gap-2">
+          <select
+            value={selectedCollectionId}
+            onChange={(event) => setSelectedCollectionId(event.target.value)}
+            className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-3 py-1.5 text-xs text-white"
+          >
+            {availableCollections.map((collection) => (
+              <option key={collection.id} value={collection.id}>
+                {collection.name} ({collection.questionCount})
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={() => {
+              const questionIds = filteredEntries.map((entry) => entry.question.id);
+              const added = addQuestionsToCollection(activeUserId, selectedCollectionId, questionIds);
+              setAvailableCollections(listQuestionCollections(activeUserId));
+              setCollectionNotice(
+                added > 0
+                  ? `Added ${added} question${added === 1 ? "" : "s"} to collection.`
+                  : "No new questions were added."
+              );
+              logEvent({
+                type: "control_clicked",
+                mode: "missed",
+                metadata: {
+                  action: "bulk_add_collection",
+                  collectionId: selectedCollectionId,
+                  size: questionIds.length,
+                  added,
+                },
+              });
+            }}
+            className="rounded-lg border border-brand-500/40 bg-brand-500/10 px-3 py-1.5 text-xs font-medium text-brand-300 hover:bg-brand-500/20"
+          >
+            Add Visible
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              const questionIds = filteredEntries.map((entry) => entry.question.id);
+              const removed = removeQuestionsFromCollection(
+                activeUserId,
+                selectedCollectionId,
+                questionIds
+              );
+              setAvailableCollections(listQuestionCollections(activeUserId));
+              setCollectionNotice(
+                removed > 0
+                  ? `Removed ${removed} question${removed === 1 ? "" : "s"} from collection.`
+                  : "No matching questions to remove."
+              );
+              logEvent({
+                type: "control_clicked",
+                mode: "missed",
+                metadata: {
+                  action: "bulk_remove_collection",
+                  collectionId: selectedCollectionId,
+                  size: questionIds.length,
+                  removed,
+                },
+              });
+            }}
+            className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-3 py-1.5 text-xs font-medium text-[var(--muted)] hover:text-white"
+          >
+            Remove Visible
+          </button>
+        </div>
       </div>
+
+      <div className="flex flex-wrap items-center gap-2">
+        <input
+          value={newCollectionName}
+          onChange={(event) => setNewCollectionName(event.target.value)}
+          placeholder="Create collection"
+          className="min-w-[220px] flex-1 rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-3 py-2 text-xs text-white placeholder:text-[var(--muted)]"
+        />
+        <button
+          type="button"
+          onClick={() => {
+            const created = createQuestionCollection(activeUserId, newCollectionName);
+            if (!created) {
+              setCollectionNotice("Collection name is required.");
+              return;
+            }
+            setNewCollectionName("");
+            setAvailableCollections(listQuestionCollections(activeUserId));
+            setSelectedCollectionId(created.id);
+            setCollectionNotice(`Created collection "${created.name}".`);
+          }}
+          className="rounded-lg border border-brand-500/40 bg-brand-500/10 px-3 py-2 text-xs font-medium text-brand-300 hover:bg-brand-500/20"
+        >
+          Create Collection
+        </button>
+      </div>
+      {collectionNotice && (
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-3 py-2 text-xs text-[var(--muted)]">
+          {collectionNotice}
+        </div>
+      )}
 
       {/* Category filter */}
       <div className="flex flex-wrap gap-2">
@@ -460,30 +582,39 @@ export default function MissedPage() {
                   )}
 
                   {/* Figure reference */}
-                  {q.figure_reference && (
+                  {(q.figure_reference || q.image_ref) && (
                     <button
                       onClick={() => {
+                        const imageUrl = resolveFigureImageUrl(q);
+                        if (!imageUrl) return;
                         logEvent({
                           type: "citation_clicked",
                           mode: "missed",
                           questionId: q.id,
                           category: q.category,
                           subcategory: q.subcategory,
-                          citationLabel: q.figure_reference!,
-                          citationUrl: q.figure_reference!,
+                          citationLabel: q.figure_reference ?? "Figure",
+                          citationUrl: imageUrl,
                         });
                         setFigureRef({
-                          url: q.figure_reference!,
-                          label: q.figure_reference!,
+                          url: imageUrl,
+                          label: q.figure_reference ?? "Figure",
                           type: "image",
-                          description: q.figure_reference!,
+                          description: q.figure_reference ?? "Question figure",
                         });
                       }}
                       className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs text-cyan-400 hover:bg-cyan-500/20"
                     >
-                      📊 View {q.figure_reference}
+                      📊 View {q.figure_reference ?? "Figure"}
                     </button>
                   )}
+
+                  <QuestionIssueReporter
+                    mode="missed"
+                    question={q}
+                    selectedOptionId={(entry.yourAnswer as OptionId | null) ?? null}
+                    confidence={null}
+                  />
                 </div>
               )}
             </div>

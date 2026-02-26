@@ -33,7 +33,8 @@
       "turbulence"
     ],
     "acs_code": "UA.III.B.K1d",
-    "source": "UAG Q1"
+    "source": "UAG Q1",
+    "concept_key": "acs:UA.III.B.K1D|weather_theory|wx_001"
   },
   {
     "id": "WX-002",
@@ -69,7 +70,8 @@
       "performance"
     ],
     "acs_code": "UA.III.B.K1a",
-    "source": "UAG Q4"
+    "source": "UAG Q4",
+    "concept_key": "acs:UA.III.B.K1A|density_altitude|wx_002"
   },
   {
     "id": "WX-003",
@@ -106,7 +108,12 @@
       "aviation-weather"
     ],
     "acs_code": "UA.III.A.K2",
-    "source": "UAG Q25"
+    "source": "UAG Q25",
+    "source_pdf": "FAA-CT-8080-2H (Airman Knowledge Testing Supplement)",
+    "source_figure": "figure-12",
+    "source_page": null,
+    "source_locator": "Figure 12",
+    "concept_key": "acs:UA.III.A.K2|weather_reports|wx_003"
   },
   {
     "id": "WX-004",
@@ -143,7 +150,12 @@
       "true-north"
     ],
     "acs_code": "UA.III.A.K2",
-    "source": "UAG Q26"
+    "source": "UAG Q26",
+    "source_pdf": "FAA-CT-8080-2H (Airman Knowledge Testing Supplement)",
+    "source_figure": "figure-12",
+    "source_page": null,
+    "source_locator": "Figure 12",
+    "concept_key": "acs:UA.III.A.K2|weather_reports|wx_004"
   },
   {
     "id": "WX-005",
@@ -179,7 +191,8 @@
       "precipitation"
     ],
     "acs_code": "UA.III.B.K1c",
-    "source": "UAG Q38"
+    "source": "UAG Q38",
+    "concept_key": "acs:UA.III.B.K1C|weather_theory|wx_005"
   },
   {
     "id": "WX-006",
@@ -216,7 +229,8 @@
       "stable-air"
     ],
     "acs_code": "UA.III.B.K1j",
-    "source": "UAG Q39"
+    "source": "UAG Q39",
+    "concept_key": "acs:UA.III.B.K1J|weather_theory|wx_006"
   },
   {
     "id": "WX-007",
@@ -252,7 +266,8 @@
       "wind-speed"
     ],
     "acs_code": "UA.III.B.K1j",
-    "source": "SPA Q6"
+    "source": "SPA Q6",
+    "concept_key": "acs:UA.III.B.K1J|wind_shear|wx_007"
   },
   {
     "id": "WX-008",
@@ -289,7 +304,12 @@
       "weather-reports"
     ],
     "acs_code": "UA.III.A.K2",
-    "source": "SPA Q7"
+    "source": "SPA Q7",
+    "source_pdf": "FAA-CT-8080-2H (Airman Knowledge Testing Supplement)",
+    "source_figure": "figure-15",
+    "source_page": null,
+    "source_locator": "Figure 15",
+    "concept_key": "acs:UA.III.A.K2|weather_reports|wx_008"
   },
   {
     "id": "WX-009",
@@ -326,7 +346,12 @@
       "true-north"
     ],
     "acs_code": "UA.III.A.K2",
-    "source": "SPA Q8"
+    "source": "SPA Q8",
+    "source_pdf": "FAA-CT-8080-2H (Airman Knowledge Testing Supplement)",
+    "source_figure": "figure-17",
+    "source_page": null,
+    "source_locator": "Figure 17",
+    "concept_key": "acs:UA.III.A.K2|weather_reports|wx_009"
   },
   {
     "id": "WX-010",
@@ -363,1073 +388,8 @@
       "humidity"
     ],
     "acs_code": "UA.III.B.K1a",
-    "source": "SPA Q27"
-  },
-  {
-    "id": "WX-ACS-011",
-    "category": "Weather",
-    "subcategory": "Sources of Weather",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.A.K1?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "Aviation routine weather reports (METAR)."
-      },
-      {
-        "id": "B",
-        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS)."
-      },
-      {
-        "id": "C",
-        "text": "Terminal aerodrome forecasts (TAF)."
-      },
-      {
-        "id": "D",
-        "text": "Internet weather briefing and sources of weather available for flight planning purposes."
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "UA.III.A.K1 corresponds to: Internet weather briefing and sources of weather available for flight planning purposes.",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.III.A.K1 corresponds to: Internet weather briefing and sources of weather available for flight planning purposes.",
-      "B": "This is incorrect. UA.III.A.K1 corresponds to: Internet weather briefing and sources of weather available for flight planning purposes.",
-      "C": "This is incorrect. UA.III.A.K1 corresponds to: Internet weather briefing and sources of weather available for flight planning purposes."
-    },
-    "citation": "ACS UA.III.A.K1",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-a-k1",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.A.K1",
-    "source": "ACS Mastery (UA.III.A.K1)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "WX-ACS-012",
-    "category": "Weather",
-    "subcategory": "Sources of Weather",
-    "question_text": "Which ACS knowledge code matches this topic: \"Internet weather briefing and sources of weather available for flight planning purposes.\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.A.K2"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.A.K1"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.A.K4"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.A.K3"
-      }
-    ],
-    "correct_option_id": "B",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.A.K1.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K1.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K1.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K1."
-    },
-    "citation": "ACS UA.III.A.K1",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-a-k1",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.A.K1",
-    "source": "ACS Mastery (UA.III.A.K1)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-013",
-    "category": "Weather",
-    "subcategory": "Sources of Weather",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.A.K3?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "Weather charts."
-      },
-      {
-        "id": "B",
-        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS)."
-      },
-      {
-        "id": "C",
-        "text": "Aviation routine weather reports (METAR)."
-      },
-      {
-        "id": "D",
-        "text": "Terminal aerodrome forecasts (TAF)."
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "UA.III.A.K3 corresponds to: Terminal aerodrome forecasts (TAF).",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.III.A.K3 corresponds to: Terminal aerodrome forecasts (TAF).",
-      "B": "This is incorrect. UA.III.A.K3 corresponds to: Terminal aerodrome forecasts (TAF).",
-      "C": "This is incorrect. UA.III.A.K3 corresponds to: Terminal aerodrome forecasts (TAF)."
-    },
-    "citation": "ACS UA.III.A.K3",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-a-k3",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.A.K3",
-    "source": "ACS Mastery (UA.III.A.K3)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "WX-ACS-014",
-    "category": "Weather",
-    "subcategory": "Sources of Weather",
-    "question_text": "Which ACS knowledge code matches this topic: \"Terminal aerodrome forecasts (TAF).\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.A.K3"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.A.K1"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.A.K5"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.A.K4"
-      }
-    ],
-    "correct_option_id": "A",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.A.K3.",
-    "explanation_distractors": {
-      "B": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K3.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K3.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K3."
-    },
-    "citation": "ACS UA.III.A.K3",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-a-k3",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.A.K3",
-    "source": "ACS Mastery (UA.III.A.K3)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-015",
-    "category": "Weather",
-    "subcategory": "Sources of Weather",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.A.K4?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "Weather charts."
-      },
-      {
-        "id": "B",
-        "text": "Internet weather briefing and sources of weather available for flight planning purposes."
-      },
-      {
-        "id": "C",
-        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS)."
-      },
-      {
-        "id": "D",
-        "text": "Terminal aerodrome forecasts (TAF)."
-      }
-    ],
-    "correct_option_id": "A",
-    "explanation_correct": "UA.III.A.K4 corresponds to: Weather charts.",
-    "explanation_distractors": {
-      "B": "This is incorrect. UA.III.A.K4 corresponds to: Weather charts.",
-      "C": "This is incorrect. UA.III.A.K4 corresponds to: Weather charts.",
-      "D": "This is incorrect. UA.III.A.K4 corresponds to: Weather charts."
-    },
-    "citation": "ACS UA.III.A.K4",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-a-k4",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.A.K4",
-    "source": "ACS Mastery (UA.III.A.K4)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "WX-ACS-016",
-    "category": "Weather",
-    "subcategory": "Sources of Weather",
-    "question_text": "Which ACS knowledge code matches this topic: \"Weather charts.\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.A.K2"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.A.K3"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.A.K5"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.A.K4"
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.A.K4.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K4.",
-      "B": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K4.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K4."
-    },
-    "citation": "ACS UA.III.A.K4",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-a-k4",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.A.K4",
-    "source": "ACS Mastery (UA.III.A.K4)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-017",
-    "category": "Weather",
-    "subcategory": "Sources of Weather",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.A.K5?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "Weather charts."
-      },
-      {
-        "id": "B",
-        "text": "Aviation routine weather reports (METAR)."
-      },
-      {
-        "id": "C",
-        "text": "Internet weather briefing and sources of weather available for flight planning purposes."
-      },
-      {
-        "id": "D",
-        "text": "Automated surface observing systems (ASOS) and automated weather observing systems (AWOS)."
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS).",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS).",
-      "B": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS).",
-      "C": "This is incorrect. UA.III.A.K5 corresponds to: Automated surface observing systems (ASOS) and automated weather observing systems (AWOS)."
-    },
-    "citation": "ACS UA.III.A.K5",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-a-k5",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.A.K5",
-    "source": "ACS Mastery (UA.III.A.K5)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "WX-ACS-018",
-    "category": "Weather",
-    "subcategory": "Sources of Weather",
-    "question_text": "Which ACS knowledge code matches this topic: \"Automated surface observing systems (ASOS) and automated weather observing systems (AWOS).",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.A.K2"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.A.K5"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.A.K4"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.A.K1"
-      }
-    ],
-    "correct_option_id": "B",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.A.K5.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K5.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K5.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.A.K5."
-    },
-    "citation": "ACS UA.III.A.K5",
-    "difficulty_level": 3,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-a-k5",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.A.K5",
-    "source": "ACS Mastery (UA.III.A.K5)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "WX-ACS-019",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "d. Air masses and fronts"
-      },
-      {
-        "id": "B",
-        "text": "k. Lightning"
-      },
-      {
-        "id": "C",
-        "text": "i. Fog"
-      },
-      {
-        "id": "D",
-        "text": "Weather factors and their effects on performance."
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "UA.III.B.K1 corresponds to: Weather factors and their effects on performance.",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.III.B.K1 corresponds to: Weather factors and their effects on performance.",
-      "B": "This is incorrect. UA.III.B.K1 corresponds to: Weather factors and their effects on performance.",
-      "C": "This is incorrect. UA.III.B.K1 corresponds to: Weather factors and their effects on performance."
-    },
-    "citation": "ACS UA.III.B.K1",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "part-107",
-      "ua-iii-b-k1",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1",
-    "source": "ACS Mastery (UA.III.B.K1)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "WX-ACS-020",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"Weather factors and their effects on performance.\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.B.K1j"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.B.K1"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.B.K1a"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.B.K1k"
-      }
-    ],
-    "correct_option_id": "B",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1."
-    },
-    "citation": "ACS UA.III.B.K1",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "part-107",
-      "ua-iii-b-k1",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1",
-    "source": "ACS Mastery (UA.III.B.K1)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-021",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1b?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "a. Density altitude"
-      },
-      {
-        "id": "B",
-        "text": "k. Lightning"
-      },
-      {
-        "id": "C",
-        "text": "j. Ceiling and visibility"
-      },
-      {
-        "id": "D",
-        "text": "b. Wind and currents"
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "UA.III.B.K1b corresponds to: b. Wind and currents",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.III.B.K1b corresponds to: b. Wind and currents",
-      "B": "This is incorrect. UA.III.B.K1b corresponds to: b. Wind and currents",
-      "C": "This is incorrect. UA.III.B.K1b corresponds to: b. Wind and currents"
-    },
-    "citation": "ACS UA.III.B.K1b",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1b",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1b",
-    "source": "ACS Mastery (UA.III.B.K1b)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "WX-ACS-022",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"b. Wind and currents\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.B.K1d"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.B.K1b"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.B.K1f"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.B.K1j"
-      }
-    ],
-    "correct_option_id": "B",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1b.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1b.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1b.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1b."
-    },
-    "citation": "ACS UA.III.B.K1b",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1b",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1b",
-    "source": "ACS Mastery (UA.III.B.K1b)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-023",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1e?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "j. Ceiling and visibility"
-      },
-      {
-        "id": "B",
-        "text": "e. Thunderstorms and microbursts"
-      },
-      {
-        "id": "C",
-        "text": "Weather factors and their effects on performance."
-      },
-      {
-        "id": "D",
-        "text": "f. Tornadoes"
-      }
-    ],
-    "correct_option_id": "B",
-    "explanation_correct": "UA.III.B.K1e corresponds to: e. Thunderstorms and microbursts",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.III.B.K1e corresponds to: e. Thunderstorms and microbursts",
-      "C": "This is incorrect. UA.III.B.K1e corresponds to: e. Thunderstorms and microbursts",
-      "D": "This is incorrect. UA.III.B.K1e corresponds to: e. Thunderstorms and microbursts"
-    },
-    "citation": "ACS UA.III.B.K1e",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1e",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1e",
-    "source": "ACS Mastery (UA.III.B.K1e)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-024",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"e. Thunderstorms and microbursts\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.B.K1"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.B.K1e"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.B.K1d"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.B.K1a"
-      }
-    ],
-    "correct_option_id": "B",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1e.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1e.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1e.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1e."
-    },
-    "citation": "ACS UA.III.B.K1e",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1e",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1e",
-    "source": "ACS Mastery (UA.III.B.K1e)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-025",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1f?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "e. Thunderstorms and microbursts"
-      },
-      {
-        "id": "B",
-        "text": "d. Air masses and fronts"
-      },
-      {
-        "id": "C",
-        "text": "f. Tornadoes"
-      },
-      {
-        "id": "D",
-        "text": "k. Lightning"
-      }
-    ],
-    "correct_option_id": "C",
-    "explanation_correct": "UA.III.B.K1f corresponds to: f. Tornadoes",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.III.B.K1f corresponds to: f. Tornadoes",
-      "B": "This is incorrect. UA.III.B.K1f corresponds to: f. Tornadoes",
-      "D": "This is incorrect. UA.III.B.K1f corresponds to: f. Tornadoes"
-    },
-    "citation": "ACS UA.III.B.K1f",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1f",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1f",
-    "source": "ACS Mastery (UA.III.B.K1f)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "WX-ACS-026",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"f. Tornadoes\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.B.K1e"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.B.K1f"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.B.K1j"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.B.K1c"
-      }
-    ],
-    "correct_option_id": "B",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1f.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1f.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1f.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1f."
-    },
-    "citation": "ACS UA.III.B.K1f",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1f",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1f",
-    "source": "ACS Mastery (UA.III.B.K1f)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-027",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1g?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "d. Air masses and fronts"
-      },
-      {
-        "id": "B",
-        "text": "f. Tornadoes"
-      },
-      {
-        "id": "C",
-        "text": "b. Wind and currents"
-      },
-      {
-        "id": "D",
-        "text": "g. Icing"
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "UA.III.B.K1g corresponds to: g. Icing",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.III.B.K1g corresponds to: g. Icing",
-      "B": "This is incorrect. UA.III.B.K1g corresponds to: g. Icing",
-      "C": "This is incorrect. UA.III.B.K1g corresponds to: g. Icing"
-    },
-    "citation": "ACS UA.III.B.K1g",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1g",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1g",
-    "source": "ACS Mastery (UA.III.B.K1g)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-028",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"g. Icing\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.B.K1f"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.B.K1g"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.B.K1j"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.B.K1b"
-      }
-    ],
-    "correct_option_id": "B",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1g.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1g.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1g.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1g."
-    },
-    "citation": "ACS UA.III.B.K1g",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1g",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1g",
-    "source": "ACS Mastery (UA.III.B.K1g)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-029",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1h?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "b. Wind and currents"
-      },
-      {
-        "id": "B",
-        "text": "Weather factors and their effects on performance."
-      },
-      {
-        "id": "C",
-        "text": "d. Air masses and fronts"
-      },
-      {
-        "id": "D",
-        "text": "h. Hail"
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "UA.III.B.K1h corresponds to: h. Hail",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.III.B.K1h corresponds to: h. Hail",
-      "B": "This is incorrect. UA.III.B.K1h corresponds to: h. Hail",
-      "C": "This is incorrect. UA.III.B.K1h corresponds to: h. Hail"
-    },
-    "citation": "ACS UA.III.B.K1h",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1h",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1h",
-    "source": "ACS Mastery (UA.III.B.K1h)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-030",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"h. Hail\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.B.K1h"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.B.K1j"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.B.K1c"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.B.K1"
-      }
-    ],
-    "correct_option_id": "A",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1h.",
-    "explanation_distractors": {
-      "B": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1h.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1h.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1h."
-    },
-    "citation": "ACS UA.III.B.K1h",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1h",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1h",
-    "source": "ACS Mastery (UA.III.B.K1h)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-031",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1i?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "h. Hail"
-      },
-      {
-        "id": "B",
-        "text": "d. Air masses and fronts"
-      },
-      {
-        "id": "C",
-        "text": "i. Fog"
-      },
-      {
-        "id": "D",
-        "text": "c. Atmospheric stability, pressure, and temperature"
-      }
-    ],
-    "correct_option_id": "C",
-    "explanation_correct": "UA.III.B.K1i corresponds to: i. Fog",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.III.B.K1i corresponds to: i. Fog",
-      "B": "This is incorrect. UA.III.B.K1i corresponds to: i. Fog",
-      "D": "This is incorrect. UA.III.B.K1i corresponds to: i. Fog"
-    },
-    "citation": "ACS UA.III.B.K1i",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1i",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1i",
-    "source": "ACS Mastery (UA.III.B.K1i)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-032",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"i. Fog\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.B.K1b"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.B.K1j"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.B.K1i"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.B.K1g"
-      }
-    ],
-    "correct_option_id": "C",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1i.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1i.",
-      "B": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1i.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1i."
-    },
-    "citation": "ACS UA.III.B.K1i",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "ua-iii-b-k1i",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1i",
-    "source": "ACS Mastery (UA.III.B.K1i)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "WX-ACS-033",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.III.B.K1k?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "k. Lightning"
-      },
-      {
-        "id": "B",
-        "text": "i. Fog"
-      },
-      {
-        "id": "C",
-        "text": "Weather factors and their effects on performance."
-      },
-      {
-        "id": "D",
-        "text": "a. Density altitude"
-      }
-    ],
-    "correct_option_id": "A",
-    "explanation_correct": "UA.III.B.K1k corresponds to: k. Lightning",
-    "explanation_distractors": {
-      "B": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning",
-      "C": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning",
-      "D": "This is incorrect. UA.III.B.K1k corresponds to: k. Lightning"
-    },
-    "citation": "ACS UA.III.B.K1k",
-    "difficulty_level": 2,
-    "tags": [
-      "ua-iii-b-k1k",
-      "acs-mastery",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1k",
-    "source": "ACS Mastery (UA.III.B.K1k)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "WX-ACS-034",
-    "category": "Weather",
-    "subcategory": "Effects of Weather on Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"k. Lightning",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.III.B.K1k"
-      },
-      {
-        "id": "B",
-        "text": "UA.III.B.K1a"
-      },
-      {
-        "id": "C",
-        "text": "UA.III.B.K1i"
-      },
-      {
-        "id": "D",
-        "text": "UA.III.B.K1c"
-      }
-    ],
-    "correct_option_id": "A",
-    "explanation_correct": "The matching knowledge code for this topic is UA.III.B.K1k.",
-    "explanation_distractors": {
-      "B": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1k.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1k.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.III.B.K1k."
-    },
-    "citation": "ACS UA.III.B.K1k",
-    "difficulty_level": 3,
-    "tags": [
-      "ua-iii-b-k1k",
-      "acs-mastery",
-      "part-107",
-      "weather",
-      "meteorology"
-    ],
-    "acs_code": "UA.III.B.K1k",
-    "source": "ACS Mastery (UA.III.B.K1k)",
-    "source_type": "acs_generated",
-    "image_ref": null
+    "source": "SPA Q27",
+    "concept_key": "acs:UA.III.B.K1A|density_altitude|wx_010"
   },
   {
     "id": "WX-035",
@@ -1471,7 +431,8 @@
       "visibility"
     ],
     "acs_code": "UA.III.A.K1",
-    "source": "Review.md"
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.A.K1|cloud_clearance|wx_035"
   },
   {
     "id": "WX-036",
@@ -1512,7 +473,8 @@
       "storm-lifecycle"
     ],
     "acs_code": "UA.III.B.K3",
-    "source": "Review.md"
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.B.K3|thunderstorms|wx_036"
   },
   {
     "id": "WX-037",
@@ -1553,6 +515,7 @@
       "low-altitude"
     ],
     "acs_code": "UA.III.B.K2",
-    "source": "Review.md"
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.B.K2|wind_shear|wx_037"
   }
 ]

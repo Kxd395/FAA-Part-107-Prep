@@ -1,0 +1,3970 @@
+[
+  {
+    "id": "P107-001",
+    "category": "Regulations",
+    "subcategory": "Basics",
+    "question_text": "Who is the FAA?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Federal Aviation Administration"
+      },
+      {
+        "id": "B",
+        "text": "Federal Air Association"
+      },
+      {
+        "id": "C",
+        "text": "Flight Aviation Agency"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from General knowledge.",
+    "explanation_distractors": {},
+    "citation": "General knowledge",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "basics"
+    ],
+    "concept_key": "merged:basics|general_knowledge"
+  },
+  {
+    "id": "P107-002",
+    "category": "Regulations",
+    "subcategory": "Basics",
+    "question_text": "What does 14 CFR Part 107 regulate?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Commercial operations of small unmanned aircraft systems (sUAS)"
+      },
+      {
+        "id": "B",
+        "text": "Only hobby and recreational drone flights"
+      },
+      {
+        "id": "C",
+        "text": "Military unmanned aircraft operations"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR Part 107.",
+    "explanation_distractors": {},
+    "citation": "14 CFR Part 107",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "basics"
+    ],
+    "concept_key": "cfr:107|basics"
+  },
+  {
+    "id": "P107-003",
+    "category": "Regulations",
+    "subcategory": "Definitions",
+    "question_text": "Under Part 107, a 'small unmanned aircraft' is one that weighs:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Less than 55 pounds at takeoff, including everything onboard/attached"
+      },
+      {
+        "id": "B",
+        "text": "Less than 250 grams at takeoff"
+      },
+      {
+        "id": "C",
+        "text": "Less than 100 pounds at takeoff"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.3 Definitions (small unmanned aircraft).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.3 Definitions (small unmanned aircraft)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "definitions"
+    ],
+    "concept_key": "cfr:107.3|definitions"
+  },
+  {
+    "id": "P107-004",
+    "category": "Regulations",
+    "subcategory": "Definitions",
+    "question_text": "In sUAS terminology, a 'control station' is best described as:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The facility where the drone is stored between flights"
+      },
+      {
+        "id": "B",
+        "text": "The interface used by the remote pilot to control the sUAS"
+      },
+      {
+        "id": "C",
+        "text": "Any airport control tower"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.3 (control station).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.3 (control station)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "definitions"
+    ],
+    "concept_key": "cfr:107.3|definitions"
+  },
+  {
+    "id": "P107-005",
+    "category": "Regulations",
+    "subcategory": "Responsibilities",
+    "question_text": "Under Part 107, the Remote Pilot in Command (RPIC) is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The person who paid for the drone"
+      },
+      {
+        "id": "B",
+        "text": "Directly responsible for and the final authority for the operation"
+      },
+      {
+        "id": "C",
+        "text": "Only responsible if an accident occurs"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.19(b).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.19(b)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "responsibilities"
+    ],
+    "concept_key": "cfr:107.19|responsibilities"
+  },
+  {
+    "id": "P107-006",
+    "category": "Regulations",
+    "subcategory": "Recreational vs Part 107",
+    "question_text": "Recreational flyers flying under the Exception for Limited Recreational Operations must:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Pass TRUST and carry proof of passage when flying"
+      },
+      {
+        "id": "B",
+        "text": "Hold a Remote Pilot Certificate under Part 107"
+      },
+      {
+        "id": "C",
+        "text": "Register only if the drone is over 55 pounds"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA TRUST FAQ / 49 U.S.C. 44809.",
+    "explanation_distractors": {},
+    "citation": "FAA TRUST FAQ / 49 U.S.C. 44809",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "recreational_vs_part_107"
+    ],
+    "concept_key": "merged:recreational_vs_part_107|faa_trust_faq_49_u_s_c_44809"
+  },
+  {
+    "id": "P107-007",
+    "category": "Regulations",
+    "subcategory": "Recreational vs Part 107",
+    "question_text": "If a flight is conducted 'in furtherance of a business' (compensation or hire), the operation generally falls under:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The recreational exception only"
+      },
+      {
+        "id": "B",
+        "text": "Part 107 (or another applicable operating rule), not the recreational exception"
+      },
+      {
+        "id": "C",
+        "text": "No FAA rules apply"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA guidance: Become a Certificated Remote Pilot.",
+    "explanation_distractors": {},
+    "citation": "FAA guidance: Become a Certificated Remote Pilot",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "recreational_vs_part_107"
+    ],
+    "concept_key": "merged:recreational_vs_part_107|faa_guidance_become_a_certificated_remote_pilot"
+  },
+  {
+    "id": "P107-008",
+    "category": "Regulations",
+    "subcategory": "Registration",
+    "question_text": "A drone registered under the recreational exception can be used for Part 107 operations if the pilot has a Part 107 certificate.",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "True"
+      },
+      {
+        "id": "B",
+        "text": "False"
+      },
+      {
+        "id": "C",
+        "text": "Only if the drone is under 250 grams"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA How to Register Your Drone.",
+    "explanation_distractors": {},
+    "citation": "FAA How to Register Your Drone",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "registration"
+    ],
+    "concept_key": "merged:registration|faa_how_to_register_your_drone"
+  },
+  {
+    "id": "P107-009",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "Minimum age to obtain a Part 107 Remote Pilot Certificate is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "13"
+      },
+      {
+        "id": "B",
+        "text": "16"
+      },
+      {
+        "id": "C",
+        "text": "18"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA Become a Certificated Remote Pilot.",
+    "explanation_distractors": {},
+    "citation": "FAA Become a Certificated Remote Pilot",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "merged:certification|faa_become_a_certificated_remote_pilot"
+  },
+  {
+    "id": "P107-010",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "One eligibility requirement for a Part 107 Remote Pilot Certificate is that you must:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Be able to read, speak, write, and understand English"
+      },
+      {
+        "id": "B",
+        "text": "Hold a driver's license"
+      },
+      {
+        "id": "C",
+        "text": "Own a drone before testing"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA Become a Certificated Remote Pilot.",
+    "explanation_distractors": {},
+    "citation": "FAA Become a Certificated Remote Pilot",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "merged:certification|faa_become_a_certificated_remote_pilot"
+  },
+  {
+    "id": "P107-011",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "Before scheduling the Part 107 knowledge test, you must first obtain an FTN by registering on:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "IACRA"
+      },
+      {
+        "id": "B",
+        "text": "LAANC"
+      },
+      {
+        "id": "C",
+        "text": "B4UFLY"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA Become a Certificated Remote Pilot.",
+    "explanation_distractors": {},
+    "citation": "FAA Become a Certificated Remote Pilot",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "merged:certification|faa_become_a_certificated_remote_pilot"
+  },
+  {
+    "id": "P107-012",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "The FAA initial Part 107 knowledge test is titled:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Unmanned Aircraft General - Small (UAG)"
+      },
+      {
+        "id": "B",
+        "text": "Remote ID General (RIG)"
+      },
+      {
+        "id": "C",
+        "text": "Aeronautical Weather Basics (AWB)"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA Become a Certificated Remote Pilot.",
+    "explanation_distractors": {},
+    "citation": "FAA Become a Certificated Remote Pilot",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "merged:certification|faa_become_a_certificated_remote_pilot"
+  },
+  {
+    "id": "P107-013",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "A passed Airman Knowledge Test Report (AKTR) used to apply for a Remote Pilot Certificate is valid for:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "6 calendar months"
+      },
+      {
+        "id": "B",
+        "text": "24 calendar months"
+      },
+      {
+        "id": "C",
+        "text": "5 years"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from UAS ACS Appendix 3 / FAA UAS ACS.",
+    "explanation_distractors": {},
+    "citation": "UAS ACS Appendix 3 / FAA UAS ACS",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "merged:certification|uas_acs_appendix_3_faa_uas_acs"
+  },
+  {
+    "id": "P107-014",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "Part 107 'aeronautical knowledge recency' must be maintained within the previous:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "12 calendar months"
+      },
+      {
+        "id": "B",
+        "text": "24 calendar months"
+      },
+      {
+        "id": "C",
+        "text": "36 calendar months"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.65.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.65",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "cfr:107.65|certification"
+  },
+  {
+    "id": "P107-015",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "After moving to a new permanent mailing address, a Remote Pilot Certificate holder may not exercise privileges after 30 days unless they:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Notify the FAA of the address change"
+      },
+      {
+        "id": "B",
+        "text": "Retake the knowledge test"
+      },
+      {
+        "id": "C",
+        "text": "Buy a new drone"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.77(c).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.77(c)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "cfr:107.77|certification"
+  },
+  {
+    "id": "P107-016",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "When exercising the privileges of a remote pilot certificate, the remote pilot must have the certificate and identification:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Only available at home"
+      },
+      {
+        "id": "B",
+        "text": "In physical possession and readily accessible"
+      },
+      {
+        "id": "C",
+        "text": "Uploaded to social media"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.7(a)(1).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.7(a)(1)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "cfr:107.7|certification"
+  },
+  {
+    "id": "P107-017",
+    "category": "Regulations",
+    "subcategory": "Crew and roles",
+    "question_text": "A person may manipulate the flight controls or act as RPIC/VO for more than one unmanned aircraft at the same time.",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "True"
+      },
+      {
+        "id": "B",
+        "text": "False"
+      },
+      {
+        "id": "C",
+        "text": "Only with a waiver"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.35.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.35",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "crew_and_roles"
+    ],
+    "concept_key": "cfr:107.35|crew_and_roles"
+  },
+  {
+    "id": "P107-018",
+    "category": "Regulations",
+    "subcategory": "Crew and roles",
+    "question_text": "Who may manipulate the flight controls of a small UAS under Part 107?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Only a person with a remote pilot certificate, OR a person under the direct supervision of an RPIC who can immediately take control"
+      },
+      {
+        "id": "B",
+        "text": "Any visual observer, regardless of certification"
+      },
+      {
+        "id": "C",
+        "text": "Any person as long as the drone stays under 200 ft AGL"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.12.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.12",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "crew_and_roles"
+    ],
+    "concept_key": "cfr:107.12|crew_and_roles"
+  },
+  {
+    "id": "P107-019",
+    "category": "Regulations",
+    "subcategory": "Crew and roles",
+    "question_text": "If the RPIC becomes incapacitated mid-flight, a visual observer (VO) may take over the controls if:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The VO has a Part 107 remote pilot certificate, or is under direct supervision of an RPIC who can immediately take control"
+      },
+      {
+        "id": "B",
+        "text": "The VO has binoculars"
+      },
+      {
+        "id": "C",
+        "text": "The VO has previously flown the drone recreationally"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.12.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.12",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "crew_and_roles"
+    ],
+    "concept_key": "cfr:107.12|crew_and_roles"
+  },
+  {
+    "id": "P107-020",
+    "category": "Regulations",
+    "subcategory": "VLOS",
+    "question_text": "Part 107 visual line of sight (VLOS) requires the aircraft be seen with vision unaided by any device other than:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Binoculars"
+      },
+      {
+        "id": "B",
+        "text": "Corrective lenses (glasses/contacts)"
+      },
+      {
+        "id": "C",
+        "text": "A video downlink"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.31(a).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.31(a)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "vlos"
+    ],
+    "concept_key": "cfr:107.31|vlos"
+  },
+  {
+    "id": "P107-021",
+    "category": "Regulations",
+    "subcategory": "VLOS",
+    "question_text": "Under Part 107 VLOS requirements, the RPIC/VO must be able to determine all of the following EXCEPT:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The aircraft's attitude, altitude, and direction of flight"
+      },
+      {
+        "id": "B",
+        "text": "Whether the aircraft is endangering life or property"
+      },
+      {
+        "id": "C",
+        "text": "The drone's battery serial number"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Answer sourced from 14 CFR 107.31(a).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.31(a)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "vlos"
+    ],
+    "concept_key": "cfr:107.31|vlos"
+  },
+  {
+    "id": "P107-022",
+    "category": "Weather",
+    "subcategory": "Weather and visibility",
+    "question_text": "The minimum flight visibility (as observed from the control station) required by Part 107 is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "1 statute mile"
+      },
+      {
+        "id": "B",
+        "text": "3 statute miles"
+      },
+      {
+        "id": "C",
+        "text": "5 statute miles"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.51(c).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.51(c)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "weather_and_visibility"
+    ],
+    "concept_key": "cfr:107.51|weather_and_visibility"
+  },
+  {
+    "id": "P107-023",
+    "category": "Weather",
+    "subcategory": "Weather and visibility",
+    "question_text": "Minimum cloud clearance under Part 107 is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "500 ft below and 2,000 ft horizontally"
+      },
+      {
+        "id": "B",
+        "text": "1,000 ft below and 1,000 ft horizontally"
+      },
+      {
+        "id": "C",
+        "text": "Clear of clouds only"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.51(d).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.51(d)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "weather_and_visibility"
+    ],
+    "concept_key": "cfr:107.51|weather_and_visibility"
+  },
+  {
+    "id": "P107-024",
+    "category": "Regulations",
+    "subcategory": "Operating limitations",
+    "question_text": "Maximum groundspeed for a small unmanned aircraft under Part 107 is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "87 knots (100 mph)"
+      },
+      {
+        "id": "B",
+        "text": "55 knots (63 mph)"
+      },
+      {
+        "id": "C",
+        "text": "120 knots (138 mph)"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.51(a).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.51(a)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operating_limitations"
+    ],
+    "concept_key": "cfr:107.51|operating_limitations"
+  },
+  {
+    "id": "P107-025",
+    "category": "Regulations",
+    "subcategory": "Operating limitations",
+    "question_text": "Standard maximum altitude under Part 107 is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "200 ft AGL"
+      },
+      {
+        "id": "B",
+        "text": "400 ft AGL"
+      },
+      {
+        "id": "C",
+        "text": "500 ft AGL"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.51(b).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.51(b)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operating_limitations"
+    ],
+    "concept_key": "cfr:107.51|operating_limitations"
+  },
+  {
+    "id": "P107-026",
+    "category": "Regulations",
+    "subcategory": "Operating limitations",
+    "question_text": "If a building is 400 ft tall, Part 107 allows the sUAS to fly up to:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "400 ft AGL total"
+      },
+      {
+        "id": "B",
+        "text": "800 ft AGL, if within 400 ft radius of the structure"
+      },
+      {
+        "id": "C",
+        "text": "1,200 ft AGL if the drone is registered"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.51(b).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.51(b)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operating_limitations"
+    ],
+    "concept_key": "cfr:107.51|operating_limitations"
+  },
+  {
+    "id": "P107-027",
+    "category": "Regulations",
+    "subcategory": "Recreational vs Part 107",
+    "question_text": "Under the recreational exception, the maximum altitude in Class G airspace (absent an alternative ceiling) is generally:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "400 ft AGL"
+      },
+      {
+        "id": "B",
+        "text": "400 ft above the top of any structure"
+      },
+      {
+        "id": "C",
+        "text": "Unlimited altitude if below 55 lbs"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 49 U.S.C. 44809(a)(6).",
+    "explanation_distractors": {},
+    "citation": "49 U.S.C. 44809(a)(6)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "recreational_vs_part_107"
+    ],
+    "concept_key": "merged:recreational_vs_part_107|49_u_s_c_44809_a_6"
+  },
+  {
+    "id": "P107-028",
+    "category": "Airspace",
+    "subcategory": "Airspace",
+    "question_text": "Part 107 requires prior ATC authorization to operate in:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Class G airspace"
+      },
+      {
+        "id": "B",
+        "text": "Class B, C, D, or within the lateral boundaries of the surface area of Class E designated for an airport"
+      },
+      {
+        "id": "C",
+        "text": "Only in Special Use Airspace"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.41.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.41",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace"
+    ],
+    "concept_key": "cfr:107.41|airspace"
+  },
+  {
+    "id": "P107-029",
+    "category": "Regulations",
+    "subcategory": "Right of way",
+    "question_text": "A hot air balloon is considered:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Not an aircraft"
+      },
+      {
+        "id": "B",
+        "text": "A manned aircraft"
+      },
+      {
+        "id": "C",
+        "text": "An unmanned aircraft"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.37 (yield to all aircraft).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.37 (yield to all aircraft)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "right_of_way"
+    ],
+    "concept_key": "cfr:107.37|right_of_way"
+  },
+  {
+    "id": "P107-030",
+    "category": "Regulations",
+    "subcategory": "Right of way",
+    "question_text": "Under Part 107 right-of-way rules, a small unmanned aircraft must yield to:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Only airplanes and helicopters"
+      },
+      {
+        "id": "B",
+        "text": "All aircraft, airborne vehicles, and launch and reentry vehicles"
+      },
+      {
+        "id": "C",
+        "text": "Only aircraft in controlled airspace"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.37(a).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.37(a)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "right_of_way"
+    ],
+    "concept_key": "cfr:107.37|right_of_way"
+  },
+  {
+    "id": "P107-031",
+    "category": "Regulations",
+    "subcategory": "Right of way",
+    "question_text": "In Part 107, 'yielding the right of way' means the small UAS:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "May hover in place until the other aircraft passes"
+      },
+      {
+        "id": "B",
+        "text": "Must give way and may not pass over, under, or ahead unless well clear"
+      },
+      {
+        "id": "C",
+        "text": "May continue its planned route if under 100 ft AGL"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.37(a).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.37(a)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "right_of_way"
+    ],
+    "concept_key": "cfr:107.37|right_of_way"
+  },
+  {
+    "id": "P107-032",
+    "category": "Operations",
+    "subcategory": "Emergency",
+    "question_text": "During an in-flight emergency requiring immediate action, the RPIC may:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Deviate from any rule of Part 107 to the extent necessary to meet that emergency"
+      },
+      {
+        "id": "B",
+        "text": "Deviate only from altitude rules"
+      },
+      {
+        "id": "C",
+        "text": "Never deviate from Part 107 rules"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.21(a).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.21(a)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "emergency"
+    ],
+    "concept_key": "cfr:107.21|emergency"
+  },
+  {
+    "id": "P107-033",
+    "category": "Operations",
+    "subcategory": "Emergency",
+    "question_text": "If the RPIC deviates from Part 107 rules due to an in-flight emergency, a written report must be sent:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Immediately after landing"
+      },
+      {
+        "id": "B",
+        "text": "Only upon request of the Administrator"
+      },
+      {
+        "id": "C",
+        "text": "Within 10 days no matter what"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.21(b).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.21(b)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "emergency"
+    ],
+    "concept_key": "cfr:107.21|emergency"
+  },
+  {
+    "id": "P107-034",
+    "category": "Regulations",
+    "subcategory": "Accident reporting",
+    "question_text": "Part 107 requires reporting to the FAA within 10 calendar days for an operation that involves:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Any scratch to the drone"
+      },
+      {
+        "id": "B",
+        "text": "Serious injury or any loss of consciousness"
+      },
+      {
+        "id": "C",
+        "text": "Any flight over 200 ft AGL"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.9(a).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.9(a)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "accident_reporting"
+    ],
+    "concept_key": "cfr:107.9|accident_reporting"
+  },
+  {
+    "id": "P107-035",
+    "category": "Regulations",
+    "subcategory": "Accident reporting",
+    "question_text": "Part 107 requires reporting within 10 calendar days if property damage (other than the sUAS) is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Exactly $500"
+      },
+      {
+        "id": "B",
+        "text": "More than $500 to repair, OR more than $500 fair market value in total loss"
+      },
+      {
+        "id": "C",
+        "text": "Any amount if the drone is under 250 grams"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.9(b).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.9(b)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "accident_reporting"
+    ],
+    "concept_key": "cfr:107.9|accident_reporting"
+  },
+  {
+    "id": "P107-036",
+    "category": "Regulations",
+    "subcategory": "Hazardous materials",
+    "question_text": "Under Part 107, a small unmanned aircraft may carry hazardous material:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "If the RPIC has a waiver"
+      },
+      {
+        "id": "B",
+        "text": "Never"
+      },
+      {
+        "id": "C",
+        "text": "Only below 100 ft AGL"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.36.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.36",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "hazardous_materials"
+    ],
+    "concept_key": "cfr:107.36|hazardous_materials"
+  },
+  {
+    "id": "P107-037",
+    "category": "Regulations",
+    "subcategory": "Operating from moving vehicles",
+    "question_text": "Operating a small UAS from a moving aircraft is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Allowed if below 400 ft AGL"
+      },
+      {
+        "id": "B",
+        "text": "Prohibited"
+      },
+      {
+        "id": "C",
+        "text": "Allowed with VO present"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.25(a).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.25(a)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operating_from_moving_vehicles"
+    ],
+    "concept_key": "cfr:107.25|operating_from_moving_vehicles"
+  },
+  {
+    "id": "P107-038",
+    "category": "Regulations",
+    "subcategory": "Operating from moving vehicles",
+    "question_text": "Operating a small UAS from a moving land or water-borne vehicle is allowed only when the operation is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Over a sparsely populated area and not transporting another person's property for compensation or hire"
+      },
+      {
+        "id": "B",
+        "text": "Over any populated area if below 100 ft AGL"
+      },
+      {
+        "id": "C",
+        "text": "For recreational purposes only"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.25(b).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.25(b)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operating_from_moving_vehicles"
+    ],
+    "concept_key": "cfr:107.25|operating_from_moving_vehicles"
+  },
+  {
+    "id": "P107-039",
+    "category": "Regulations",
+    "subcategory": "Registration",
+    "question_text": "For Part 107 operations, FAA drone registration is required:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Only if the drone weighs 0.55 lb (250 g) or more"
+      },
+      {
+        "id": "B",
+        "text": "For all drones flown under Part 107, regardless of weight"
+      },
+      {
+        "id": "C",
+        "text": "Only if operating in controlled airspace"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA How to Register Your Drone / AIM 11-2-1.",
+    "explanation_distractors": {},
+    "citation": "FAA How to Register Your Drone / AIM 11-2-1",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "registration"
+    ],
+    "concept_key": "merged:registration|faa_how_to_register_your_drone_aim_11_2_1"
+  },
+  {
+    "id": "P107-040",
+    "category": "Regulations",
+    "subcategory": "Registration",
+    "question_text": "Drone registration under Part 107 is generally valid for:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "1 year"
+      },
+      {
+        "id": "B",
+        "text": "3 years"
+      },
+      {
+        "id": "C",
+        "text": "5 years"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA How to Register Your Drone.",
+    "explanation_distractors": {},
+    "citation": "FAA How to Register Your Drone",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "registration"
+    ],
+    "concept_key": "merged:registration|faa_how_to_register_your_drone"
+  },
+  {
+    "id": "P107-041",
+    "category": "Regulations",
+    "subcategory": "Registration",
+    "question_text": "The minimum age to register a drone online in DroneZone is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "13"
+      },
+      {
+        "id": "B",
+        "text": "16"
+      },
+      {
+        "id": "C",
+        "text": "18"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA How to Register Your Drone.",
+    "explanation_distractors": {},
+    "citation": "FAA How to Register Your Drone",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "registration"
+    ],
+    "concept_key": "merged:registration|faa_how_to_register_your_drone"
+  },
+  {
+    "id": "P107-042",
+    "category": "Regulations",
+    "subcategory": "Registration",
+    "question_text": "Under Part 48 marking requirements, the registration number must be:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Inside the battery compartment"
+      },
+      {
+        "id": "B",
+        "text": "On an external surface and legible"
+      },
+      {
+        "id": "C",
+        "text": "Only on the drone case, not the aircraft"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 48.205(c).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 48.205(c)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "registration"
+    ],
+    "concept_key": "cfr:48.205|registration"
+  },
+  {
+    "id": "P107-043",
+    "category": "Regulations",
+    "subcategory": "Remote ID",
+    "question_text": "Remote ID is best described as:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "A requirement to paint the drone bright colors"
+      },
+      {
+        "id": "B",
+        "text": "A digital license plate broadcast by the drone"
+      },
+      {
+        "id": "C",
+        "text": "A requirement to have cellular service"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA Remote ID overview.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote ID overview",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "remote_id"
+    ],
+    "concept_key": "merged:remote_id|faa_remote_id_overview"
+  },
+  {
+    "id": "P107-044",
+    "category": "Regulations",
+    "subcategory": "Remote ID",
+    "question_text": "Drones which are required to be registered or are registered must:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Broadcast Remote ID (unless operating in a FRIA or meeting another compliance method)"
+      },
+      {
+        "id": "B",
+        "text": "Never broadcast anything"
+      },
+      {
+        "id": "C",
+        "text": "Broadcast Remote ID only in controlled airspace"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA How to Register Your Drone / FAA Remote ID.",
+    "explanation_distractors": {},
+    "citation": "FAA How to Register Your Drone / FAA Remote ID",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "remote_id"
+    ],
+    "concept_key": "merged:remote_id|faa_how_to_register_your_drone_faa_remote_id"
+  },
+  {
+    "id": "P107-045",
+    "category": "Regulations",
+    "subcategory": "Remote ID",
+    "question_text": "If your drone does not have Standard Remote ID built-in, one compliance option is to:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Attach a Remote ID broadcast module (if allowed for your operation)"
+      },
+      {
+        "id": "B",
+        "text": "Use binoculars so you can see it farther"
+      },
+      {
+        "id": "C",
+        "text": "Fly only above 400 ft AGL"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA Remote ID compliance options.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote ID compliance options",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "remote_id"
+    ],
+    "concept_key": "merged:remote_id|faa_remote_id_compliance_options"
+  },
+  {
+    "id": "P107-046",
+    "category": "Regulations",
+    "subcategory": "Remote ID",
+    "question_text": "A FRIA is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "A repair shop for drones"
+      },
+      {
+        "id": "B",
+        "text": "A defined geographic area where drones can be flown without Remote ID equipment (with conditions)"
+      },
+      {
+        "id": "C",
+        "text": "A type of controlled airspace"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA FRIA page.",
+    "explanation_distractors": {},
+    "citation": "FAA FRIA page",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "remote_id"
+    ],
+    "concept_key": "merged:remote_id|faa_fria_page"
+  },
+  {
+    "id": "P107-047",
+    "category": "Regulations",
+    "subcategory": "Remote ID",
+    "question_text": "To fly a drone without Remote ID equipment inside a FRIA, both the drone and the pilot must be:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Anywhere in the city that contains the FRIA"
+      },
+      {
+        "id": "B",
+        "text": "Within the FRIA boundaries throughout the operation, and the pilot must maintain VLOS"
+      },
+      {
+        "id": "C",
+        "text": "In Class G airspace only"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA FRIA page.",
+    "explanation_distractors": {},
+    "citation": "FAA FRIA page",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "remote_id"
+    ],
+    "concept_key": "merged:remote_id|faa_fria_page"
+  },
+  {
+    "id": "P107-048",
+    "category": "Regulations",
+    "subcategory": "Remote ID",
+    "question_text": "Only which groups are eligible to request the establishment of a FRIA?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Any individual drone pilot"
+      },
+      {
+        "id": "B",
+        "text": "FAA-recognized Community Based Organizations (CBOs) and educational institutions"
+      },
+      {
+        "id": "C",
+        "text": "Only local police departments"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA FRIA page.",
+    "explanation_distractors": {},
+    "citation": "FAA FRIA page",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "remote_id"
+    ],
+    "concept_key": "merged:remote_id|faa_fria_page"
+  },
+  {
+    "id": "P107-049",
+    "category": "Regulations",
+    "subcategory": "Night operations",
+    "question_text": "For Part 107, civil twilight (except for Alaska) is defined as:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "30 minutes before sunrise to sunrise, and sunset to 30 minutes after sunset"
+      },
+      {
+        "id": "B",
+        "text": "One hour before sunrise to one hour after sunset"
+      },
+      {
+        "id": "C",
+        "text": "The period when the sun is 12 degrees below the horizon"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.29(c).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.29(c)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "night_operations"
+    ],
+    "concept_key": "cfr:107.29|night_operations"
+  },
+  {
+    "id": "P107-050",
+    "category": "Regulations",
+    "subcategory": "Night operations",
+    "question_text": "During civil twilight operations under Part 107, anti-collision lighting must be visible for at least:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "1 statute mile"
+      },
+      {
+        "id": "B",
+        "text": "3 statute miles"
+      },
+      {
+        "id": "C",
+        "text": "5 statute miles"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.29(b).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.29(b)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "night_operations"
+    ],
+    "concept_key": "cfr:107.29|night_operations"
+  },
+  {
+    "id": "P107-051",
+    "category": "Regulations",
+    "subcategory": "Night operations",
+    "question_text": "Under Part 107, the RPIC may reduce the intensity of anti-collision lighting if:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "It is distracting and reducing intensity is in the interest of safety"
+      },
+      {
+        "id": "B",
+        "text": "The drone is below 50 ft AGL"
+      },
+      {
+        "id": "C",
+        "text": "The operation is recreational"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.29(a)(2) and (b).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.29(a)(2) and (b)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "night_operations"
+    ],
+    "concept_key": "cfr:107.29|night_operations"
+  },
+  {
+    "id": "P107-052",
+    "category": "Regulations",
+    "subcategory": "Night operations",
+    "question_text": "In Alaska, the period of civil twilight is defined by:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The Air Almanac"
+      },
+      {
+        "id": "B",
+        "text": "The local airport manager"
+      },
+      {
+        "id": "C",
+        "text": "The drone manufacturer"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.29(c)(3).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.29(c)(3)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "night_operations"
+    ],
+    "concept_key": "cfr:107.29|night_operations"
+  },
+  {
+    "id": "P107-053",
+    "category": "Regulations",
+    "subcategory": "Waivers",
+    "question_text": "A Part 107 waiver is best described as:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Permission from the FAA to deviate from certain Part 107 regulations under approved conditions"
+      },
+      {
+        "id": "B",
+        "text": "A replacement for drone registration"
+      },
+      {
+        "id": "C",
+        "text": "A document that allows flying in any airspace without authorization"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.200 (waivers).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.200 (waivers)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "waivers"
+    ],
+    "concept_key": "cfr:107.200|waivers"
+  },
+  {
+    "id": "P107-054",
+    "category": "Regulations",
+    "subcategory": "Operations over people",
+    "question_text": "To conduct Category 1 operations over people, the small unmanned aircraft must weigh:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "0.55 pounds or less on takeoff and throughout the operation, including everything attached"
+      },
+      {
+        "id": "B",
+        "text": "Less than 55 pounds"
+      },
+      {
+        "id": "C",
+        "text": "More than 0.55 pounds but less than 10 pounds"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.110(a)(1).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.110(a)(1)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operations_over_people"
+    ],
+    "concept_key": "cfr:107.110|operations_over_people"
+  },
+  {
+    "id": "P107-055",
+    "category": "Regulations",
+    "subcategory": "Operations over people",
+    "question_text": "For Category 1 operations, the small unmanned aircraft must NOT contain:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "A camera"
+      },
+      {
+        "id": "B",
+        "text": "Exposed rotating parts that would lacerate human skin upon impact"
+      },
+      {
+        "id": "C",
+        "text": "A GPS receiver"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.110(a)(2).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.110(a)(2)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operations_over_people"
+    ],
+    "concept_key": "cfr:107.110|operations_over_people"
+  },
+  {
+    "id": "P107-056",
+    "category": "Regulations",
+    "subcategory": "Operations over people",
+    "question_text": "Category 2 small unmanned aircraft are designed so they will not cause injury equivalent to or greater than:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "11 foot-pounds of kinetic energy"
+      },
+      {
+        "id": "B",
+        "text": "25 foot-pounds of kinetic energy"
+      },
+      {
+        "id": "C",
+        "text": "50 foot-pounds of kinetic energy"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.120(a)(1).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.120(a)(1)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operations_over_people"
+    ],
+    "concept_key": "cfr:107.120|operations_over_people"
+  },
+  {
+    "id": "P107-057",
+    "category": "Regulations",
+    "subcategory": "Operations over people",
+    "question_text": "Category 3 operations over people generally have which additional restriction?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "They may not operate over open-air assemblies of human beings"
+      },
+      {
+        "id": "B",
+        "text": "They require no Remote ID"
+      },
+      {
+        "id": "C",
+        "text": "They are allowed anywhere if under 100 ft AGL"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.125(b).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.125(b)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operations_over_people"
+    ],
+    "concept_key": "cfr:107.125|operations_over_people"
+  },
+  {
+    "id": "P107-058",
+    "category": "Regulations",
+    "subcategory": "Operations over people",
+    "question_text": "Category 4 operations over people require the small unmanned aircraft to have:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "A Remote ID broadcast module"
+      },
+      {
+        "id": "B",
+        "text": "An airworthiness certificate issued under part 21"
+      },
+      {
+        "id": "C",
+        "text": "A parachute"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.140(b)(1).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.140(b)(1)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operations_over_people"
+    ],
+    "concept_key": "cfr:107.140|operations_over_people"
+  },
+  {
+    "id": "P107-059",
+    "category": "Regulations",
+    "subcategory": "Operations over moving vehicles",
+    "question_text": "Operating over moving vehicles under Part 107 is restricted. For Category 1-3 operations, the sUAS must either remain within a closed or restricted-access site OR:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Not maintain sustained flight over moving vehicles"
+      },
+      {
+        "id": "B",
+        "text": "Always maintain sustained flight over vehicles"
+      },
+      {
+        "id": "C",
+        "text": "Fly only at night"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.145(b)(2).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.145(b)(2)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operations_over_moving_vehicles"
+    ],
+    "concept_key": "cfr:107.145|operations_over_moving_vehicles"
+  },
+  {
+    "id": "P107-060",
+    "category": "Regulations",
+    "subcategory": "Operating limitations",
+    "question_text": "Under Part 107, the total weight limit (at takeoff, including payload) for a small unmanned aircraft is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Less than 55 pounds"
+      },
+      {
+        "id": "B",
+        "text": "Less than 0.55 pounds"
+      },
+      {
+        "id": "C",
+        "text": "Less than 100 pounds"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.3 (small unmanned aircraft).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.3 (small unmanned aircraft)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operating_limitations"
+    ],
+    "concept_key": "cfr:107.3|operating_limitations"
+  },
+  {
+    "id": "P107-061",
+    "category": "Weather",
+    "subcategory": "Weather and visibility",
+    "question_text": "If the cloud ceiling is 600 ft AGL, what is the maximum altitude you may fly under Part 107 (assuming you must remain 500 ft below clouds)?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "100 ft AGL"
+      },
+      {
+        "id": "B",
+        "text": "600 ft AGL"
+      },
+      {
+        "id": "C",
+        "text": "1,100 ft AGL"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.51(d)(1).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.51(d)(1)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "weather_and_visibility"
+    ],
+    "concept_key": "cfr:107.51|weather_and_visibility"
+  },
+  {
+    "id": "P107-062",
+    "category": "Regulations",
+    "subcategory": "Aeromedical factors",
+    "question_text": "The IMSAFE checklist is primarily used to evaluate a pilot's:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Fitness to fly (illness, medication, stress, alcohol, fatigue, emotion/eating)"
+      },
+      {
+        "id": "B",
+        "text": "Drone battery chemistry"
+      },
+      {
+        "id": "C",
+        "text": "GPS signal strength"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from Aviation best practices (commonly taught).",
+    "explanation_distractors": {},
+    "citation": "Aviation best practices (commonly taught)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "aeromedical_factors"
+    ],
+    "concept_key": "merged:aeromedical_factors|aviation_best_practices_commonly_taught"
+  },
+  {
+    "id": "P107-063",
+    "category": "Regulations",
+    "subcategory": "Alcohol and drugs",
+    "question_text": "Under Part 107, a person acting as RPIC, VO, or manipulating the controls must comply with alcohol and drug provisions of:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "14 CFR 91.17 and 91.19"
+      },
+      {
+        "id": "B",
+        "text": "49 CFR 171.8 only"
+      },
+      {
+        "id": "C",
+        "text": "14 CFR 61.57 only"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.27.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.27",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "alcohol_and_drugs"
+    ],
+    "concept_key": "cfr:107.27|alcohol_and_drugs"
+  },
+  {
+    "id": "P107-064",
+    "category": "Regulations",
+    "subcategory": "Alcohol and drugs",
+    "question_text": "The alcohol concentration limit commonly referenced in the regulations for acting as a crewmember (and incorporated by Part 107 via 107.27) is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "0.02"
+      },
+      {
+        "id": "B",
+        "text": "0.04"
+      },
+      {
+        "id": "C",
+        "text": "0.08"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 91.17 (via 107.27).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 91.17 (via 107.27)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "alcohol_and_drugs"
+    ],
+    "concept_key": "cfr:91.17|alcohol_and_drugs"
+  },
+  {
+    "id": "P107-065",
+    "category": "Regulations",
+    "subcategory": "International operations",
+    "question_text": "Operators of foreign-registered drones with FAA Remote ID in the U.S. are required to submit a Notice of Identification (NOI) and obtain a:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Confirmation of Identification (CID) to maintain at the control station"
+      },
+      {
+        "id": "B",
+        "text": "LAANC authorization for every flight"
+      },
+      {
+        "id": "C",
+        "text": "TSA security badge"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 89.130 / FAA NOI page.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 89.130 / FAA NOI page",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "international_operations"
+    ],
+    "concept_key": "cfr:89.130|international_operations"
+  },
+  {
+    "id": "P107-066",
+    "category": "Regulations",
+    "subcategory": "International operations",
+    "question_text": "A Confirmation of Identification (CID) for a foreign-registered drone:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Has the effect of U.S. aircraft registration"
+      },
+      {
+        "id": "B",
+        "text": "Does not have the effect of U.S. aircraft registration"
+      },
+      {
+        "id": "C",
+        "text": "Replaces the need for Remote ID"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 89.130(b)(2).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 89.130(b)(2)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "international_operations"
+    ],
+    "concept_key": "cfr:89.130|international_operations"
+  },
+  {
+    "id": "P107-067",
+    "category": "Airspace",
+    "subcategory": "Airspace charts (image-based)",
+    "question_text": "Using the provided sectional chart excerpt, what does a MAGENTA airport symbol generally indicate?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": "Insert a sectional chart excerpt showing at least one magenta airport symbol (non-towered airport) and nearby features for context.",
+    "options": [
+      {
+        "id": "A",
+        "text": "An airport without an operating control tower"
+      },
+      {
+        "id": "B",
+        "text": "An airport with an operating control tower"
+      },
+      {
+        "id": "C",
+        "text": "A restricted area"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA sectional chart symbology / Knowledge Testing Supplement.",
+    "explanation_distractors": {},
+    "citation": "FAA sectional chart symbology / Knowledge Testing Supplement",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace_charts_image_based"
+    ],
+    "concept_key": "merged:airspace_charts_image_based|faa_sectional_chart_symbology_knowledge_testing_supplement"
+  },
+  {
+    "id": "P107-068",
+    "category": "Airspace",
+    "subcategory": "Airspace charts (image-based)",
+    "question_text": "Using the provided sectional chart excerpt, what does a BLUE airport symbol indicate?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": "Insert the chart excerpt from your course (the one labeled like 'Figure 25 DFW' or equivalent) showing at least one blue airport symbol and surrounding airspace markings.",
+    "options": [
+      {
+        "id": "A",
+        "text": "An airport with an operating control tower"
+      },
+      {
+        "id": "B",
+        "text": "A heliport only"
+      },
+      {
+        "id": "C",
+        "text": "A seaplane base only"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA sectional chart legend / Knowledge Testing Supplement.",
+    "explanation_distractors": {},
+    "citation": "FAA sectional chart legend / Knowledge Testing Supplement",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace_charts_image_based"
+    ],
+    "concept_key": "merged:airspace_charts_image_based|faa_sectional_chart_legend_knowledge_testing_supplement"
+  },
+  {
+    "id": "P107-069",
+    "category": "Airspace",
+    "subcategory": "Airspace charts (image-based)",
+    "question_text": "Based on the provided sectional chart excerpt, which statement is TRUE about operations for a Part 107 pilot?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": "Insert a sectional chart excerpt that depicts controlled airspace (Class B, C, D, or Class E surface area).",
+    "options": [
+      {
+        "id": "A",
+        "text": "Operating in the depicted Class B/C/D or Class E surface area requires prior ATC authorization"
+      },
+      {
+        "id": "B",
+        "text": "Operating there never requires authorization if under 200 ft AGL"
+      },
+      {
+        "id": "C",
+        "text": "Authorization is only needed at night"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.41 + sectional chart.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.41 + sectional chart",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace_charts_image_based"
+    ],
+    "concept_key": "cfr:107.41|airspace_charts_image_based"
+  },
+  {
+    "id": "P107-070",
+    "category": "Weather",
+    "subcategory": "Weather (image-based)",
+    "question_text": "On the provided METAR/TAF style weather report image, which element represents prevailing visibility?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": "Insert a sample METAR or TAF printout image used in FAA knowledge tests. It must include a visibility element (for example '3SM').",
+    "options": [
+      {
+        "id": "A",
+        "text": "A value ending in 'SM' (statute miles) indicating visibility"
+      },
+      {
+        "id": "B",
+        "text": "The altimeter setting group (starts with 'A' followed by four digits)"
+      },
+      {
+        "id": "C",
+        "text": "The station identifier (a four-letter ICAO code, commonly starting with 'K' in the U.S.)"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA Knowledge Test Supplement (METAR/TAF example).",
+    "explanation_distractors": {},
+    "citation": "FAA Knowledge Test Supplement (METAR/TAF example)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "weather_image_based"
+    ],
+    "concept_key": "merged:weather_image_based|faa_knowledge_test_supplement_metar_taf_example"
+  },
+  {
+    "id": "P107-071",
+    "category": "Weather",
+    "subcategory": "Weather (image-based)",
+    "question_text": "Using the provided chart/schematic, what is the correct cloud clearance requirement for Part 107 operations?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": "Insert a simple cloud clearance diagram showing a drone relative to clouds (vertical and horizontal separation).",
+    "options": [
+      {
+        "id": "A",
+        "text": "500 ft below and 2,000 ft horizontally"
+      },
+      {
+        "id": "B",
+        "text": "1,000 ft above and 1,000 ft horizontally"
+      },
+      {
+        "id": "C",
+        "text": "Clear of clouds only"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.51(d) + diagram.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.51(d) + diagram",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "weather_image_based"
+    ],
+    "concept_key": "cfr:107.51|weather_image_based"
+  },
+  {
+    "id": "P107-072",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "Does a Part 107 Remote Pilot Certificate have an expiration date printed on it?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Yes, it expires every 24 months"
+      },
+      {
+        "id": "B",
+        "text": "No, the certificate is permanent unless revoked, but you must maintain aeronautical knowledge recency"
+      },
+      {
+        "id": "C",
+        "text": "Yes, it expires every 3 years"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA Part 107 certificate expiration FAQ / 14 CFR 107.65.",
+    "explanation_distractors": {},
+    "citation": "FAA Part 107 certificate expiration FAQ / 14 CFR 107.65",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "cfr:107.65|certification"
+  },
+  {
+    "id": "P107-073",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "After completing the FAA's online recurrent training to maintain Part 107 currency, does the FAA issue a new remote pilot certificate?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Yes, a new certificate is mailed automatically"
+      },
+      {
+        "id": "B",
+        "text": "No, the certificate does not expire; you keep proof of completion as evidence of currency"
+      },
+      {
+        "id": "C",
+        "text": "Yes, but only if requested"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA recurrent training certificate FAQ.",
+    "explanation_distractors": {},
+    "citation": "FAA recurrent training certificate FAQ",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "merged:certification|faa_recurrent_training_certificate_faq"
+  },
+  {
+    "id": "P107-074",
+    "category": "Regulations",
+    "subcategory": "Responsibilities",
+    "question_text": "Under Part 107, the RPIC must ensure that in the event of a loss of control, the sUAS will pose:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "No hazard to other people, aircraft, or property"
+      },
+      {
+        "id": "B",
+        "text": "No undue hazard to other people, aircraft, or property"
+      },
+      {
+        "id": "C",
+        "text": "Only a hazard to property, not people"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.19(c).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.19(c)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "responsibilities"
+    ],
+    "concept_key": "cfr:107.19|responsibilities"
+  },
+  {
+    "id": "P107-075",
+    "category": "Regulations",
+    "subcategory": "Authorizations vs waivers",
+    "question_text": "Which statement best describes the difference between 'authorization' and 'waiver' in Part 107?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Authorization is for controlled airspace access; a waiver is permission to deviate from certain Part 107 rules"
+      },
+      {
+        "id": "B",
+        "text": "They are the same thing"
+      },
+      {
+        "id": "C",
+        "text": "A waiver is for airspace; authorization is for night operations only"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.41 and 107.200.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.41 and 107.200",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "authorizations_vs_waivers"
+    ],
+    "concept_key": "cfr:107.41|authorizations_vs_waivers"
+  },
+  {
+    "id": "P107-076",
+    "category": "Airspace",
+    "subcategory": "Airspace",
+    "question_text": "A Part 107 pilot requesting to operate in controlled airspace generally requests authorization through:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "LAANC or FAADroneZone"
+      },
+      {
+        "id": "B",
+        "text": "The National Weather Service"
+      },
+      {
+        "id": "C",
+        "text": "The TSA website"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA Air Traffic publications (LAANC/DroneZone).",
+    "explanation_distractors": {},
+    "citation": "FAA Air Traffic publications (LAANC/DroneZone)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace"
+    ],
+    "concept_key": "merged:airspace|faa_air_traffic_publications_laanc_dronezone"
+  },
+  {
+    "id": "P107-077",
+    "category": "Regulations",
+    "subcategory": "Operating rules",
+    "question_text": "Under Part 107, operating a small UAS in a careless or reckless manner is:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Allowed if you are under 100 ft AGL"
+      },
+      {
+        "id": "B",
+        "text": "Prohibited"
+      },
+      {
+        "id": "C",
+        "text": "Allowed if no one complains"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.23.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.23",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operating_rules"
+    ],
+    "concept_key": "cfr:107.23|operating_rules"
+  },
+  {
+    "id": "P107-078",
+    "category": "Operations",
+    "subcategory": "Preflight",
+    "question_text": "Before each flight under Part 107, the RPIC must:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Conduct preflight familiarization, inspection, and actions needed to ensure the aircraft is in a condition for safe operation"
+      },
+      {
+        "id": "B",
+        "text": "Only check the battery level"
+      },
+      {
+        "id": "C",
+        "text": "File a flight plan with ATC"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.49.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.49",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "preflight"
+    ],
+    "concept_key": "cfr:107.49|preflight"
+  },
+  {
+    "id": "P107-079",
+    "category": "Regulations",
+    "subcategory": "Operations over people",
+    "question_text": "A small unmanned aircraft may not be operated over a human being unless:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The human being is wearing a helmet"
+      },
+      {
+        "id": "B",
+        "text": "The operation meets the requirements for operations over human beings (Category 1-4 or other applicable rule)"
+      },
+      {
+        "id": "C",
+        "text": "The flight is recreational"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR Subpart D (107.110-107.140).",
+    "explanation_distractors": {},
+    "citation": "14 CFR Subpart D (107.110-107.140)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operations_over_people"
+    ],
+    "concept_key": "merged:operations_over_people|14_cfr_subpart_d_107_110_107_140"
+  },
+  {
+    "id": "P107-080",
+    "category": "Regulations",
+    "subcategory": "Night operations",
+    "question_text": "Under Part 107, an operation may be conducted at night only if:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The drone has anti-collision lights visible for at least 3 SM and the RPIC has completed the required knowledge test or training (as applicable)"
+      },
+      {
+        "id": "B",
+        "text": "The drone stays under 50 ft AGL"
+      },
+      {
+        "id": "C",
+        "text": "The operation is in Class G airspace"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.29(a).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.29(a)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "night_operations"
+    ],
+    "concept_key": "cfr:107.29|night_operations"
+  },
+  {
+    "id": "P107-081",
+    "category": "Regulations",
+    "subcategory": "Night operations",
+    "question_text": "For regulatory definitions, 'night' generally means:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Sunset to sunrise"
+      },
+      {
+        "id": "B",
+        "text": "End of evening civil twilight to beginning of morning civil twilight (as published in the Air Almanac, local time)"
+      },
+      {
+        "id": "C",
+        "text": "30 minutes after sunset to 30 minutes before sunrise"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 1.1 (Night).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 1.1 (Night)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "night_operations"
+    ],
+    "concept_key": "cfr:1.1|night_operations"
+  },
+  {
+    "id": "P107-082",
+    "category": "Regulations",
+    "subcategory": "Night operations",
+    "question_text": "Civil twilight and night are the same thing.",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "True"
+      },
+      {
+        "id": "B",
+        "text": "False"
+      },
+      {
+        "id": "C",
+        "text": "Only in Alaska"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 1.1 and 14 CFR 107.29.",
+    "explanation_distractors": {},
+    "citation": "14 CFR 1.1 and 14 CFR 107.29",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "night_operations"
+    ],
+    "concept_key": "cfr:1.1|night_operations"
+  },
+  {
+    "id": "P107-083",
+    "category": "Regulations",
+    "subcategory": "Remote ID",
+    "question_text": "A Remote ID broadcast module has an additional operating limitation in FAA guidance: the pilot must be able to:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Fly beyond VLOS"
+      },
+      {
+        "id": "B",
+        "text": "See the drone at all times during flight (VLOS)"
+      },
+      {
+        "id": "C",
+        "text": "Operate without registration"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA Remote ID overview.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote ID overview",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "remote_id"
+    ],
+    "concept_key": "merged:remote_id|faa_remote_id_overview"
+  },
+  {
+    "id": "P107-084",
+    "category": "Regulations",
+    "subcategory": "Remote ID",
+    "question_text": "Standard Remote ID drones and drones equipped with a Remote ID broadcast module may fly in a FRIA, but they must:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Turn off Remote ID while inside the FRIA"
+      },
+      {
+        "id": "B",
+        "text": "Continue to broadcast Remote ID information"
+      },
+      {
+        "id": "C",
+        "text": "Only fly at night"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from FAA FRIA page.",
+    "explanation_distractors": {},
+    "citation": "FAA FRIA page",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "remote_id"
+    ],
+    "concept_key": "merged:remote_id|faa_fria_page"
+  },
+  {
+    "id": "P107-085",
+    "category": "Regulations",
+    "subcategory": "Remote ID",
+    "question_text": "If you have a drone without Remote ID and you are NOT in a FRIA, which action is a legal way to comply with Remote ID requirements?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Attach a Remote ID broadcast module, if eligible"
+      },
+      {
+        "id": "B",
+        "text": "Ignore the rule if flying under 200 ft"
+      },
+      {
+        "id": "C",
+        "text": "Operate only on weekends"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA Remote ID compliance options.",
+    "explanation_distractors": {},
+    "citation": "FAA Remote ID compliance options",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "remote_id"
+    ],
+    "concept_key": "merged:remote_id|faa_remote_id_compliance_options"
+  },
+  {
+    "id": "P107-086",
+    "category": "Airspace",
+    "subcategory": "Airspace",
+    "question_text": "The National Airspace System (NAS) refers to:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Only controlled airspace"
+      },
+      {
+        "id": "B",
+        "text": "The network of U.S. airspace, airports, navigation facilities, and related systems"
+      },
+      {
+        "id": "C",
+        "text": "Only Class G airspace"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from General aviation knowledge.",
+    "explanation_distractors": {},
+    "citation": "General aviation knowledge",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace"
+    ],
+    "concept_key": "merged:airspace|general_aviation_knowledge"
+  },
+  {
+    "id": "P107-087",
+    "category": "Airspace",
+    "subcategory": "Airspace and altitude",
+    "question_text": "AGL stands for:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Above Ground Level"
+      },
+      {
+        "id": "B",
+        "text": "Above Geographic Latitude"
+      },
+      {
+        "id": "C",
+        "text": "Airspace Guidance Limit"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from General aviation knowledge.",
+    "explanation_distractors": {},
+    "citation": "General aviation knowledge",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace_and_altitude"
+    ],
+    "concept_key": "merged:airspace_and_altitude|general_aviation_knowledge"
+  },
+  {
+    "id": "P107-088",
+    "category": "Airspace",
+    "subcategory": "Airspace and altitude",
+    "question_text": "MSL stands for:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Mean Sea Level"
+      },
+      {
+        "id": "B",
+        "text": "Maximum Safe Limit"
+      },
+      {
+        "id": "C",
+        "text": "Measured Surface Level"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from General aviation knowledge.",
+    "explanation_distractors": {},
+    "citation": "General aviation knowledge",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace_and_altitude"
+    ],
+    "concept_key": "merged:airspace_and_altitude|general_aviation_knowledge"
+  },
+  {
+    "id": "P107-089",
+    "category": "Airspace",
+    "subcategory": "Airspace and altitude",
+    "question_text": "Which is TRUE about AGL vs MSL?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "AGL is measured from sea level; MSL is measured from the ground"
+      },
+      {
+        "id": "B",
+        "text": "AGL is measured from the ground directly below; MSL is measured from sea level"
+      },
+      {
+        "id": "C",
+        "text": "AGL and MSL are identical"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from General aviation knowledge.",
+    "explanation_distractors": {},
+    "citation": "General aviation knowledge",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace_and_altitude"
+    ],
+    "concept_key": "merged:airspace_and_altitude|general_aviation_knowledge"
+  },
+  {
+    "id": "P107-090",
+    "category": "Weather",
+    "subcategory": "Weather and visibility",
+    "question_text": "Part 107 visibility and cloud clearance rules are based on conditions observed from the:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Nearest airport weather station only"
+      },
+      {
+        "id": "B",
+        "text": "Location of the control station"
+      },
+      {
+        "id": "C",
+        "text": "Pilot's home address"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.51(c).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.51(c)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "weather_and_visibility"
+    ],
+    "concept_key": "cfr:107.51|weather_and_visibility"
+  },
+  {
+    "id": "P107-091",
+    "category": "Operations",
+    "subcategory": "Emergency",
+    "question_text": "If a Part 107 operation requires deviation for emergency, the deviation must be:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Only for 30 seconds"
+      },
+      {
+        "id": "B",
+        "text": "Only to the extent necessary to meet the emergency"
+      },
+      {
+        "id": "C",
+        "text": "Never allowed"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.21(a).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.21(a)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "emergency"
+    ],
+    "concept_key": "cfr:107.21|emergency"
+  },
+  {
+    "id": "P107-092",
+    "category": "Regulations",
+    "subcategory": "Waivers",
+    "question_text": "Part 107 certificate waivers are intended for operations that can show:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Risk mitigation to maintain an equivalent level of safety"
+      },
+      {
+        "id": "B",
+        "text": "Higher profits"
+      },
+      {
+        "id": "C",
+        "text": "New drone hardware only"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA waiver guidance (general).",
+    "explanation_distractors": {},
+    "citation": "FAA waiver guidance (general)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "waivers"
+    ],
+    "concept_key": "merged:waivers|faa_waiver_guidance_general"
+  },
+  {
+    "id": "P107-093",
+    "category": "Regulations",
+    "subcategory": "Night operations",
+    "question_text": "The person most responsible for ensuring the sUAS is properly equipped for night or civil twilight operations is the:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Visual observer"
+      },
+      {
+        "id": "B",
+        "text": "Remote pilot in command (RPIC)"
+      },
+      {
+        "id": "C",
+        "text": "Drone manufacturer"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.19 (RPIC responsibility) and 107.29 (equipment).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.19 (RPIC responsibility) and 107.29 (equipment)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "night_operations"
+    ],
+    "concept_key": "cfr:107.19|night_operations"
+  },
+  {
+    "id": "P107-094",
+    "category": "Regulations",
+    "subcategory": "Human factors",
+    "question_text": "Which medical/physiological concept is most associated with night vision in the human eye?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Cones"
+      },
+      {
+        "id": "B",
+        "text": "Rods"
+      },
+      {
+        "id": "C",
+        "text": "The cornea only"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from General aviation physiology.",
+    "explanation_distractors": {},
+    "citation": "General aviation physiology",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "human_factors"
+    ],
+    "concept_key": "merged:human_factors|general_aviation_physiology"
+  },
+  {
+    "id": "P107-095",
+    "category": "Regulations",
+    "subcategory": "Human factors",
+    "question_text": "Myopia is best described as:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Nearsightedness"
+      },
+      {
+        "id": "B",
+        "text": "Farsightedness"
+      },
+      {
+        "id": "C",
+        "text": "Distortion from irregular cornea"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from General aviation physiology.",
+    "explanation_distractors": {},
+    "citation": "General aviation physiology",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "human_factors"
+    ],
+    "concept_key": "merged:human_factors|general_aviation_physiology"
+  },
+  {
+    "id": "P107-096",
+    "category": "Regulations",
+    "subcategory": "Human factors",
+    "question_text": "Astigmatism is best described as:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Nearsightedness"
+      },
+      {
+        "id": "B",
+        "text": "Farsightedness"
+      },
+      {
+        "id": "C",
+        "text": "Distortion due to irregular curvature (blurred/distorted vision)"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Answer sourced from General aviation physiology.",
+    "explanation_distractors": {},
+    "citation": "General aviation physiology",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "human_factors"
+    ],
+    "concept_key": "merged:human_factors|general_aviation_physiology"
+  },
+  {
+    "id": "P107-097",
+    "category": "Regulations",
+    "subcategory": "Operations over people",
+    "question_text": "Under Part 107 Category 1 rules, sustained flight over open-air assemblies is prohibited unless the operation meets Remote ID requirements referenced in:",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "14 CFR Part 89"
+      },
+      {
+        "id": "B",
+        "text": "14 CFR Part 61"
+      },
+      {
+        "id": "C",
+        "text": "14 CFR Part 135"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from 14 CFR 107.110(b).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.110(b)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "operations_over_people"
+    ],
+    "concept_key": "cfr:107.110|operations_over_people"
+  },
+  {
+    "id": "P107-098",
+    "category": "Regulations",
+    "subcategory": "Certification",
+    "question_text": "Under Part 107, who may request the RPIC's remote pilot certificate and identification for inspection?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Only the drone manufacturer"
+      },
+      {
+        "id": "B",
+        "text": "The Administrator, NTSB, law enforcement, or TSA representative"
+      },
+      {
+        "id": "C",
+        "text": "Only the local airport manager"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from 14 CFR 107.7(a)(2).",
+    "explanation_distractors": {},
+    "citation": "14 CFR 107.7(a)(2)",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "certification"
+    ],
+    "concept_key": "cfr:107.7|certification"
+  },
+  {
+    "id": "P107-099",
+    "category": "Airspace",
+    "subcategory": "Airspace charts (image-based)",
+    "question_text": "On the provided chart excerpt, which airspace class is depicted by the dashed blue circle around an airport?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": "Insert a sectional chart excerpt showing a dashed blue circle (Class D surface area) around an airport.",
+    "options": [
+      {
+        "id": "A",
+        "text": "Class D surface area"
+      },
+      {
+        "id": "B",
+        "text": "Class C surface area"
+      },
+      {
+        "id": "C",
+        "text": "Class A airspace"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA sectional chart symbology / Knowledge Testing Supplement.",
+    "explanation_distractors": {},
+    "citation": "FAA sectional chart symbology / Knowledge Testing Supplement",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace_charts_image_based"
+    ],
+    "concept_key": "merged:airspace_charts_image_based|faa_sectional_chart_symbology_knowledge_testing_supplement"
+  },
+  {
+    "id": "P107-100",
+    "category": "Airspace",
+    "subcategory": "Airspace charts (image-based)",
+    "question_text": "Using the provided chart excerpt, what does a dashed magenta circle generally indicate?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": "Insert a sectional chart excerpt showing a dashed magenta circle (Class E surface area) around an airport.",
+    "options": [
+      {
+        "id": "A",
+        "text": "Class E surface area designated for an airport"
+      },
+      {
+        "id": "B",
+        "text": "Restricted area"
+      },
+      {
+        "id": "C",
+        "text": "Class A airspace"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from FAA sectional chart symbology / Knowledge Testing Supplement.",
+    "explanation_distractors": {},
+    "citation": "FAA sectional chart symbology / Knowledge Testing Supplement",
+    "difficulty_level": 2,
+    "source": "part107-question-bank",
+    "source_type": "resource_pack",
+    "tags": [
+      "part107-bank",
+      "airspace_charts_image_based"
+    ],
+    "concept_key": "merged:airspace_charts_image_based|faa_sectional_chart_symbology_knowledge_testing_supplement"
+  },
+  {
+    "id": "CAR-101",
+    "category": "Airspace",
+    "subcategory": "Airspace",
+    "question_text": "How can drone operators access NOTAMs which provide important safety information about potential hazards along a flight route?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "By requesting directly from any airport tower."
+      },
+      {
+        "id": "B",
+        "text": "Via FAA's DroneZone portal."
+      },
+      {
+        "id": "C",
+        "text": "Through the FAA's NOTAM Search tool or relevant aviation apps."
+      },
+      {
+        "id": "D",
+        "text": "By tuning into the local ATIS broadcast."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "airspace"
+    ],
+    "concept_key": "merged:airspace|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-102",
+    "category": "Airspace",
+    "subcategory": "Airspace",
+    "question_text": "What does a Temporary Flight Restriction (TFR) typically indicate for drone operations?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Permanent changes to airspace regulations."
+      },
+      {
+        "id": "B",
+        "text": "An area temporarily restricted for drone operations due to hazards or special events."
+      },
+      {
+        "id": "C",
+        "text": "An increase in the altitude ceiling for drone operations."
+      },
+      {
+        "id": "D",
+        "text": "A temporary allowance for drones to fly closer to airports."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "airspace"
+    ],
+    "concept_key": "merged:airspace|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-103",
+    "category": "Airspace",
+    "subcategory": "Airspace",
+    "question_text": "What is the primary hazard of flying a drone in an area with active Temporary Flight Restrictions (TFRs) without permission?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Risk of signal interference."
+      },
+      {
+        "id": "B",
+        "text": "Legal penalties and potential criminal charges."
+      },
+      {
+        "id": "C",
+        "text": "Increased air traffic."
+      },
+      {
+        "id": "D",
+        "text": "Drone malfunction due to environmental factors."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "airspace"
+    ],
+    "concept_key": "merged:airspace|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-104",
+    "category": "Weather",
+    "subcategory": "Weather",
+    "question_text": "When interpreting a METAR, what does the term \"BKN\" signify in the context of cloud cover?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Few clouds"
+      },
+      {
+        "id": "B",
+        "text": "Broken clouds"
+      },
+      {
+        "id": "C",
+        "text": "Clear skies"
+      },
+      {
+        "id": "D",
+        "text": "Overcast"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "weather"
+    ],
+    "concept_key": "merged:weather|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-105",
+    "category": "Weather",
+    "subcategory": "Weather",
+    "question_text": "If a TAF report indicates \"TSRA\", what should a drone operator anticipate?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Thunderstorms with rain"
+      },
+      {
+        "id": "B",
+        "text": "Turbulent solar radiation"
+      },
+      {
+        "id": "C",
+        "text": "Temporary sunspot activity"
+      },
+      {
+        "id": "D",
+        "text": "Tropical storm warnings"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "weather"
+    ],
+    "concept_key": "merged:weather|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-106",
+    "category": "Weather",
+    "subcategory": "Weather",
+    "question_text": "How does a drone operator interpret a METAR that includes \"27015G25KT\" regarding wind conditions?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Steady wind from 270 degrees at 15 knots with gusts up to 25 knots."
+      },
+      {
+        "id": "B",
+        "text": "Variable wind from 270 degrees shifting to 150 degrees at 25 knots."
+      },
+      {
+        "id": "C",
+        "text": "Continuous gusts at 270 degrees peaking at 25 knots."
+      },
+      {
+        "id": "D",
+        "text": "Wind chill factor causing temperature to feel like 15 to 25 degrees colder."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "weather"
+    ],
+    "concept_key": "merged:weather|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-107",
+    "category": "Weather",
+    "subcategory": "Weather",
+    "question_text": "What does a visibility notation of \"1/2SM\" in a METAR suggest for drone flying conditions?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Visibility is restricted to 1/2 statute mile, suggesting poor flying conditions."
+      },
+      {
+        "id": "B",
+        "text": "Visibility is half of the standard meteorological range, indicating moderate conditions."
+      },
+      {
+        "id": "C",
+        "text": "The report is incomplete, and visibility data is pending."
+      },
+      {
+        "id": "D",
+        "text": "Visibility extends to half the visible horizon, suitable for flying."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "weather"
+    ],
+    "concept_key": "merged:weather|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-108",
+    "category": "Weather",
+    "subcategory": "Weather",
+    "question_text": "In a TAF report, what does the term \"PROB40\" indicate?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "There is a 40% probability of the subsequent conditions occurring."
+      },
+      {
+        "id": "B",
+        "text": "Weather conditions are projected to improve by 40%."
+      },
+      {
+        "id": "C",
+        "text": "40% of the area covered by the forecast will experience the stated conditions."
+      },
+      {
+        "id": "D",
+        "text": "The forecast conditions are 40% less severe than predicted."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "weather"
+    ],
+    "concept_key": "merged:weather|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-109",
+    "category": "Weather",
+    "subcategory": "Weather",
+    "question_text": "A TAF includes \"TEMPO 1214 3SM BR\". What should a drone operator expect?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Temporary weather conditions between 1200 and 1400 UTC with 3 statute miles visibility and mist."
+      },
+      {
+        "id": "B",
+        "text": "Temperature reaching 14 degrees Celsius with moderate rain."
+      },
+      {
+        "id": "C",
+        "text": "Temporary brightness increasing visibility to 3 statute miles."
+      },
+      {
+        "id": "D",
+        "text": "Turbulent conditions expected to last from 1200 to 1400."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "weather"
+    ],
+    "concept_key": "merged:weather|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-110",
+    "category": "Weather",
+    "subcategory": "Weather",
+    "question_text": "What implications does \"P6SM\" have for drone operations in a TAF report?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Precipitation expected within 6 square miles."
+      },
+      {
+        "id": "B",
+        "text": "Visibility predicted to be greater than 6 statute miles, favorable for flying."
+      },
+      {
+        "id": "C",
+        "text": "Pressure within 6 millibars of standard atmospheric pressure."
+      },
+      {
+        "id": "D",
+        "text": "Period of 6 hours with severe meteorological conditions."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "weather"
+    ],
+    "concept_key": "merged:weather|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-111",
+    "category": "Weather",
+    "subcategory": "Weather",
+    "question_text": "What does the encoding \"SCT030\" in a TAF report imply about the cloud coverage?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Sky is scattered with clouds at 3000 feet."
+      },
+      {
+        "id": "B",
+        "text": "Sky is scattered with clouds at 30000 feet."
+      },
+      {
+        "id": "C",
+        "text": "Cloud coverage is less than 30%."
+      },
+      {
+        "id": "D",
+        "text": "Sky is clear with no significant cloud coverage."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "weather"
+    ],
+    "concept_key": "merged:weather|carrington_drone_exam_prep"
+  },
+  {
+    "id": "CAR-112",
+    "category": "Weather",
+    "subcategory": "Weather",
+    "question_text": "A METAR includes \"HZ\" in its weather phenomena section. What does this signify, and what is its relevance to drone flying?",
+    "figure_reference": null,
+    "image_ref": null,
+    "figure_text": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Haze is present, reducing visibility."
+      },
+      {
+        "id": "B",
+        "text": "Horizontal visibility is zero."
+      },
+      {
+        "id": "C",
+        "text": "High ozone levels detected."
+      },
+      {
+        "id": "D",
+        "text": "High humidity zones."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Answer sourced from Carrington Drone Exam Prep.",
+    "explanation_distractors": {},
+    "citation": "Carrington Drone Exam Prep",
+    "difficulty_level": 2,
+    "source": "carrington-question-bank-strict",
+    "source_type": "resource_pack",
+    "tags": [
+      "carrington-bank",
+      "weather"
+    ],
+    "concept_key": "merged:weather|carrington_drone_exam_prep"
+  }
+]

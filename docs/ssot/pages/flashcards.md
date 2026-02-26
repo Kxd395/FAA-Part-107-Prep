@@ -6,7 +6,7 @@
 - Owner (eng): @kevindialmb
 - Owner (product): @kevindialmb (acting)
 - Owner (design): @kevindialmb (acting)
-- Last updated: 2026-02-24
+- Last updated: 2026-02-26
 - Related tickets/PRs: N/A (no linked ticket in repo)
 
 ## Purpose
@@ -77,13 +77,17 @@ Mobile:
 
 ## Components inventory
 - `useQuestionBank`
+- `useQuestionBank` (includes external `Part107` and `Carrington` source-pack adapters)
 - `useAdaptiveQuestionStats` (filtering + spaced-repetition updates)
 - `useLearningEventLogger` (flashcard interaction lifecycle + card-level actions)
 - `recordLearningAttempt` pipeline utility for unified flashcard rating writes and telemetry
 - `ReferenceModal` for figure references
+- `QuestionIssueReporter` for one-line question/answer issue reports
+- `questionTypePreferenceStore` for per-user default question-pool hydration/persistence
 - Card reveal uses deterministic front/back surface swap (question panel replaced by answer panel) to avoid browser 3D/backface rendering artifacts
 - Answer panel displays correct answer text (without fixed source option letter) to avoid reinforcing static letter-position memory
-- Rating controls use one-click default confidence (`3/5`) plus split `☑` high-confidence (`5/5`) actions
+- Rating controls expose a triad confidence selector (`Not Sure=1`, `Neutral=3`, `Confident=5`) across both card faces (pre-reveal and revealed)
+- Setup includes scheduler settings with persisted user defaults (`dailyReviewTarget`, `maxNewCardsPerDay`, `lapseHandling`)
 
 ## Interactive elements inventory (every control)
 | Control ID | Label | Type | Visible when | Enabled when | On action | API calls | State changes | Errors | Analytics |
@@ -93,14 +97,18 @@ Mobile:
 | `flash.warning.clear_snapshot` | Clear Cached Snapshot | button | warning banner shown (cached snapshot fallback) | always | clear local cached question snapshot so next load must use live source | none | removes `part107_question_bank_snapshot_v1` | if live source remains unavailable, next load may show error instead of fallback warning | none |
 | `flash.setup.question_type[*]` | Question Pool option | button | setup | always | set type profile | none | `selectedQuestionType` | none | none |
 | `flash.setup.category[*]` | Category option | button | setup | always | set category | none | `selectedCategory` | none | none |
+| `flash.setup.daily_target[*]` | Daily Review Target | button | setup | always | set per-session deck cap for due/upcoming cards | none | `dailyReviewTarget` | none | none |
+| `flash.setup.max_new[*]` | Max New Cards / Day | button | setup | always | cap number of new cards surfaced for the current day | none | `maxNewCardsPerDay` | none | none |
+| `flash.setup.lapse_handling[*]` | Lapse Handling | button | setup | always | choose reinsertion aggressiveness for misses (`balanced/aggressive/gentle`) | none | `lapseHandling` | none | none |
 | `flash.setup.start` | Start Flashcards | button | setup | `deckPreview.cards.length > 0` | starts due-first queue (or upcoming fallback) and enter run | none | `sessionCards` initialized, `started=true` | disabled when zero cards | `session_started` |
 | `flash.card.flip` | Tap/Space/Enter toggle | button-like card surface | run | always | toggles question/answer surface in either direction | none | `flipped` toggled | none | none |
 | `flash.card.show_question` | Show Question | button | run and flipped | always | return to question panel without rating | none | `flipped=false` | none | none |
-| `flash.card.figure` | View `<figure>` | button | front card with `figure_reference` | always | open modal | none | `figureRef` | image fallback handled in modal/card | none |
-| `flash.card.still_learning` | Still Learning | button | run and flipped | always | commit `still_learning` with default confidence `3/5` and advance queue | none | adaptive stats update with quality-based dequeue/reinsert behavior | none surfaced | `answer_submitted` (`metadata.rating=still_learning`, `metadata.confidence=3`) |
-| `flash.card.still_learning_confident` | Still Learning `☑` | split button | run and flipped | always | commit `still_learning` with high confidence `5/5` and advance queue | none | adaptive stats update with stronger quality penalty/reinsertion | none surfaced | `answer_submitted` (`metadata.rating=still_learning`, `metadata.confidence=5`) |
-| `flash.card.know_it` | Know It | button | run and flipped | always | commit `know_it` with default confidence `3/5` and advance queue | none | adaptive stats update with quality-based dequeue/reinsert behavior | none surfaced | `answer_submitted` (`metadata.rating=know_it`, `metadata.confidence=3`) |
-| `flash.card.know_it_confident` | Know It `☑` | split button | run and flipped | always | commit `know_it` with high confidence `5/5` and advance queue | none | adaptive stats update with strongest dequeue behavior | none surfaced | `answer_submitted` (`metadata.rating=know_it`, `metadata.confidence=5`) |
+| `flash.card.figure` | View `<figure>` | button | front card with `figure_reference` or `image_ref` | always | resolve image URL (`image_ref` first, else `/figures/<figure_reference>.png`) and open modal | none | `figureRef` | modal shows load failure message when source is unavailable | none |
+| `flash.card.confidence[*]` | Confidence `NS/N/C` | button group | run | always | set confidence used by next main rating click (`1/3/5`) | none | `ratingConfidence` updates | none surfaced | none |
+| `flash.card.still_learning` | Still Learning | button | run and flipped | always | commit `still_learning` with selected confidence and advance queue | none | adaptive stats update with quality-based dequeue/reinsert behavior | none surfaced | `answer_submitted` (`metadata.rating=still_learning`, `metadata.confidence`) |
+| `flash.card.know_it` | Know It | button | run and flipped | always | commit `know_it` with selected confidence and advance queue | none | adaptive stats update with quality-based dequeue/reinsert behavior | none surfaced | `answer_submitted` (`metadata.rating=know_it`, `metadata.confidence`) |
+| `flash.card.issue.toggle` | Report issue | button | run | always | show/hide one-line issue input for current card | none | local reporter panel open/close state | none surfaced | none |
+| `flash.card.issue.submit` | Send | button | run and issue panel open | one-line note present | submit issue report for current card/question metadata | `POST /api/user/question-issues` | none | inline submit error text | none |
 | `flash.card.change_topic` | Change Topic | button | run | always | return to setup and reset counters | none | `started=false` + restart state | none | none |
 | `flash.card.skip` | Skip | button | run | always | move current card to queue tail without rating | none | queue reorder only | none | `question_skipped` |
 | `flash.complete.restart` | Restart Deck | button | completion | always | reset counters/index | none | restart state | none | none |
@@ -124,6 +132,7 @@ State transitions:
 - loading -> error (fetch failure)
 - error -> loading (Retry)
 - setup -> in_run_unflipped (Start Flashcards)
+- in_run_unflipped -> in_run_unflipped (confidence selection update)
 - in_run_unflipped -> in_run_flipped (reveal/toggle action)
 - in_run_flipped -> in_run_unflipped (tap/space/enter toggle or Show Question)
 - in_run_flipped -> in_run_unflipped (rating submit; quality score decides dequeue vs reinsert gap)
@@ -133,20 +142,28 @@ State transitions:
 
 ## Data dependencies
 - Required data: question bank
-- Optional data: adaptive stats for filtering
+- Optional data: adaptive stats for filtering; per-user preferred question type
 - Data sources:
   - API `/api/questions`
   - localStorage keys:
     - `part107_adaptive_stats_v2` (read)
     - `part107_attempt_events_v1` (write via adaptive hook)
     - `part107_learning_events_v1` (write via learning-event logger)
+    - `part107_default_question_type_v1[:<userId>]` (read/write preferred question pool)
+    - `part107_flashcard_scheduler_settings_v1[:<userId>]` (read/write scheduler defaults)
+    - `part107_flashcard_scheduler_daily_v1[:<userId>]` (read/write daily new-card seen quota state)
 - Session behavior:
   - Setup prefers due-now cards using adaptive `nextDueAt`; when none are due, queue falls back to the soonest 20 cards.
+  - Daily target limits the run deck size; max-new-per-day limits how many unseen cards can appear in a day.
   - During a run, each rating computes a quality score from outcome + confidence:
     - `q>=4`: remove from queue
     - `q=3`: reinsert 5-8 cards later
     - `q=2`: reinsert 2-4 cards later
     - `q<=1`: reinsert 1-2 cards later
+  - Lapse handling modifies miss reinsertion:
+    - `balanced`: keep default reinsertion gaps
+    - `aggressive`: force misses to reappear in 1-2 cards
+    - `gentle`: push misses +2 cards farther than default
 - Cache invalidation rules: adaptive stats overwrite per question canonical key on each rating.
 - Stale data tolerance: high; adaptive stats are local-only and device-specific.
 
@@ -162,10 +179,17 @@ State transitions:
 
 ## Validation and input rules
 - Question-type and category selections constrained to hardcoded options.
+- Question-pool options include `confirmed_test`, `all_random`, `part107_bank`, `carrington_bank`, `carrington_strict`, and `real_exam`.
+- Scheduler settings are constrained to setup presets:
+  - daily target: `10/20/30/50`
+  - max new/day: `0/5/10/20`
+  - lapse handling: `balanced/aggressive/gentle`
+- Card-side answer display now uses at most 3 presented choices (`1` correct + `2` distractors) when source data has 4 options, with deterministic per-session randomization.
 - Keyboard shortcuts:
   - Space/Enter flips card when unflipped.
-  - ArrowRight or `k` commits `Know It` with default confidence `3/5`.
-  - ArrowLeft or `l` commits `Still Learning` with default confidence `3/5`.
+  - ArrowRight or `k` commits `Know It` with currently selected confidence.
+  - ArrowLeft or `l` commits `Still Learning` with currently selected confidence.
+- Adaptive canonicalization uses `concept_key` when present so paraphrased equivalents from different sources share mastery history.
 
 ## Destructive actions
 - Confirmations required: none

@@ -1,0 +1,1856 @@
+[
+  {
+    "id": 1,
+    "question": "What is the maximum altitude at which a drone may legally operate under FAA Part 107 rules, unless a waiver is obtained?",
+    "options": [
+      "200 feet above ground level",
+      "400 feet above ground level",
+      "500 feet above ground level",
+      "600 feet above ground level"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 2,
+    "question": "Under FAA Part 107, what is the maximum speed at which a drone may legally operate?",
+    "options": [
+      "50 mph",
+      "87 mph",
+      "100 mph",
+      "120 mph"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 3,
+    "question": "Which FAA form must be completed to apply for a Remote Pilot Certificate?",
+    "options": [
+      "FAA Form 8710-13",
+      "FAA Form 8610-2",
+      "FAA Form 8400-3",
+      "FAA Form 8500-8"
+    ],
+    "correct_answer_index": 0,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 4,
+    "question": "What are drone operators required to maintain visual line-of-sight (VLOS) during operations under FAA Part 107?",
+    "options": [
+      "To monitor weather conditions continuously",
+      "To ensure the drone does not exceed altitude and speed limits",
+      "To maintain control and visual contact with the drone",
+      "To communicate with manned aircraft"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 5,
+    "question": "For what primary reason might a drone operator need to obtain a waiver from standard Part 107 regulations?",
+    "options": [
+      "To fly at higher speeds for racing purposes",
+      "To operate during nighttime or over people",
+      "To decrease liability insurance requirements",
+      "To increase the maximum allowable weight of the drone"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 6,
+    "question": "How often must a remote pilot recertify their knowledge exam under FAA Part 107?",
+    "options": [
+      "Every 12 months",
+      "Every 24 months",
+      "Every 36 months",
+      "Every 48 months"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 7,
+    "question": "What is the minimum age requirement for obtaining a Remote Pilot Certificate under FAA Part 107?",
+    "options": [
+      "14 years",
+      "16 years",
+      "18 years",
+      "21 years"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 8,
+    "question": "Under what condition can drones operate from a moving vehicle according to FAA Part 107?",
+    "options": [
+      "In densely populated areas",
+      "During daylight hours only",
+      "In sparsely populated areas",
+      "At any time without restriction"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 9,
+    "question": "What does the registration number displayed on a drone signify under FAA regulations?",
+    "options": [
+      "The drone's model and type",
+      "The operational category of the drone",
+      "The owner\\'s identity and contact information",
+      "The specific permissions and waivers granted to the drone"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 10,
+    "question": "Which of the following is not a direct objective of FAA Part 107?",
+    "options": [
+      "Enhancing public safety",
+      "Promoting economic growth through commercial drone use",
+      "Reducing airspace congestion",
+      "Allowing drones to operate autonomously without human intervention"
+    ],
+    "correct_answer_index": 3,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 11,
+    "question": "What is required for a drone to operate during civil twilight under FAA Part 107?",
+    "options": [
+      "A special waiver from the FAA",
+      "Anti-collision lights visible for at least 3 statute miles",
+      "A visual observer besides the pilot",
+      "Permission from local authorities"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 12,
+    "question": "Which FAA form is used for drone registration under Part 107?",
+    "options": [
+      "FAA Form 8710-13",
+      "FAA Form 8050-1",
+      "FAA Form 8050-2",
+      "FAA Form 8400-3"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 13,
+    "question": "What is the purpose of VLOS (Visual Line of Sight) requirements under Part 107?",
+    "options": [
+      "To enable long-range drone operations",
+      "To ensure the pilot can always see the drone without enhancement",
+      "To facilitate nighttime operations",
+      "To monitor real-time video feed from the drone"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 14,
+    "question": "What type of operations would typically require a waiver from the FAA under Part 107?",
+    "options": [
+      "Operations within 5 miles of an airport",
+      "Indoor operations",
+      "Operations over open water",
+      "Night operations"
+    ],
+    "correct_answer_index": 3,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 15,
+    "question": "Under what circumstances can a drone pilot operate over moving vehicles under Part 107?",
+    "options": [
+      "Only with a waiver",
+      "If the vehicles are part of a controlled access highway",
+      "In any urban area during daylight",
+      "If the vehicles are not occupied"
+    ],
+    "correct_answer_index": 0,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 16,
+    "question": "What are the age and language requirements for obtaining a Remote Pilot Certificate under FAA Part 107?",
+    "options": [
+      "Minimum 18 years old, must understand French",
+      "Minimum 16 years old, must read, speak, write, and understand English",
+      "Minimum 21 years old, no language requirements",
+      "Minimum 14 years old, must understand Spanish"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 17,
+    "question": "Which condition does not require a drone to be registered under Part 107?",
+    "options": [
+      "Weighing more than 0.55 pounds but less than 55 pounds",
+      "Used in a commercial operation",
+      "Weighing less than 0.55 pounds",
+      "Equipped with a camera or other sensors"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 18,
+    "question": "What is the primary reason for the prohibition of drone operations from a moving vehicle under Part 107, unless in a sparsely populated area?",
+    "options": [
+      "To reduce traffic accidents",
+      "To prevent loss of GPS signal",
+      "To minimize distractions to the operator",
+      "To enhance safety and reduce risk to the public"
+    ],
+    "correct_answer_index": 3,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 19,
+    "question": "Which scenario is explicitly allowed under FAA Part 107 without requiring special permission or a waiver?",
+    "options": [
+      "Flying at night",
+      "Flying directly over crowds of people",
+      "Flying a drone within Class G airspace",
+      "Flying from a moving vehicle in urban areas"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 20,
+    "question": "What is the primary benefit of the FAA\\'s requirement for drone operators to pass a recurrent knowledge test every 24 months?",
+    "options": [
+      "To increase the cost of operations",
+      "To reduce the number of drone pilots",
+      "To ensure pilots\\' knowledge is up-to-date with current regulations and safety practices",
+      "To comply with international aviation standards"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 21,
+    "question": "Which of the following activities under FAA Part 107 requires a drone to be registered with the FAA?",
+    "options": [
+      "Conducting an indoor flight demonstration",
+      "Flying a drone weighing 0.53 pounds for commercial photography",
+      "Operating a drone weighing 0.60 pounds for hobby photography in rural areas",
+      "Testing a drone's capabilities in a closed warehouse"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 22,
+    "question": "What defines the operational limits of a drone flying near a tall structure under FAA Part 107?",
+    "options": [
+      "The drone can fly no higher than 400 feet above the structure's highest point.",
+      "The drone can operate up to 400 feet above and laterally of the structure's highest point.",
+      "The drone must always remain within 100 feet of the structure.",
+      "The drone can exceed 400 feet above ground level as long as it remains within 400 feet of the structure."
+    ],
+    "correct_answer_index": 3,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 23,
+    "question": "Which statement about the registration number on a drone is true under FAA Part 107?",
+    "options": [
+      "It is optional and used only for drones flying internationally.",
+      "It must be hidden from plain view to protect the operator's privacy.",
+      "It must be legibly displayed on an external surface of the drone.",
+      "It can be placed anywhere on the drone, including internal compartments."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 24,
+    "question": "What is the main reason for requiring anti-collision lighting on drones flying during civil twilight under FAA Part 107?",
+    "options": [
+      "To signal the drone's operational status",
+      "To enhance the visual beauty of the flight",
+      "To enable night photography",
+      "To increase visibility to other airspace users"
+    ],
+    "correct_answer_index": 3,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 25,
+    "question": "Which of the following best describes the purpose of a waiver under FAA Part 107?",
+    "options": [
+      "To exempt the pilot from all FAA regulations",
+      "To permit operations that deviate from specific regulations under controlled conditions",
+      "To allow pilots to fly without a Remote Pilot Certificate",
+      "To increase the maximum allowable altitude without restriction"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 26,
+    "question": "Which is a requirement for all commercial drone operations under FAA Part 107 regarding the condition of the drone?",
+    "options": [
+      "It must be brightly colored.",
+      "It must carry liability insurance.",
+      "It must undergo an annual inspection by the FAA.",
+      "It must be in a condition for safe operation."
+    ],
+    "correct_answer_index": 3,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 27,
+    "question": "What is the FAA's requirement for communicating a drone's registration number during an operation under Part 107?",
+    "options": [
+      "The number must be communicated to local law enforcement upon request.",
+      "The number must be broadcasted electronically at all times.",
+      "The number must be verbally provided to any bystander who asks.",
+      "The number does not need to be communicated but must be visible on the drone."
+    ],
+    "correct_answer_index": 3,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 28,
+    "question": "Which action is required from the drone operator if a drone has an in-flight emergency under FAA Part 107?",
+    "options": [
+      "Report the incident to the FAA within 48 hours",
+      "Perform an emergency landing in the nearest open area",
+      "Notify the nearest airport or control tower",
+      "Prioritize the safety of people and property when deciding how to respond"
+    ],
+    "correct_answer_index": 3,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 29,
+    "question": "What is the primary purpose of Class A airspace and at what altitude range does it exist?",
+    "options": [
+      "To accommodate high volumes of commercial traffic from the surface to 10,000 feet MSL.",
+      "To separate long-distance flights from other traffic from 18,000 feet to 60,000 feet MSL.",
+      "For unmanned aircraft operations from 500 feet to 12,000 feet AGL.",
+      "To manage congested air traffic around major airports from the surface to 2,500 feet AGL."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 30,
+    "question": "Which type of airspace requires drone operators to obtain ATC authorization before operating to prevent conflicts with commercial aircraft?",
+    "options": [
+      "Class G",
+      "Class E",
+      "Class B",
+      "Class A"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 31,
+    "question": "How can drone operators access NOTAMs which provide important safety information about potential hazards along a flight route?",
+    "options": [
+      "By requesting directly from any airport tower.",
+      "Via FAA's DroneZone portal.",
+      "Through the FAA's NOTAM Search tool or relevant aviation apps.",
+      "By tuning into the local ATIS broadcast."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 32,
+    "question": "What does a Temporary Flight Restriction (TFR) typically indicate for drone operations?",
+    "options": [
+      "Permanent changes to airspace regulations.",
+      "An area temporarily restricted for drone operations due to hazards or special events.",
+      "An increase in the altitude ceiling for drone operations.",
+      "A temporary allowance for drones to fly closer to airports."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 33,
+    "question": "What is the maximum allowable altitude for drone operation in Class G airspace under FAA Part 107?",
+    "options": [
+      "500 feet above ground level.",
+      "400 feet above ground level.",
+      "700 feet above ground level.",
+      "There is no specific altitude limit."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 34,
+    "question": "Which FAA tool should drone operators use to obtain real-time airspace authorizations for Classes B, C, D, and portions of E airspace?",
+    "options": [
+      "DroneZone",
+      "LAANC (Low Altitude Authorization and Notification Capability)",
+      "NOTAM Search",
+      "AirMap"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 35,
+    "question": "In which scenario is flying a drone in Class D airspace without prior authorization permitted under FAA Part 107?",
+    "options": [
+      "When flying at an altitude below 250 feet AGL.",
+      "If the drone operation is conducted during night hours.",
+      "When the nearest airport is not operational.",
+      "It is not permitted to fly without prior authorization in Class D airspace."
+    ],
+    "correct_answer_index": 3,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 36,
+    "question": "What is the primary hazard of flying a drone in an area with active Temporary Flight Restrictions (TFRs) without permission?",
+    "options": [
+      "Risk of signal interference.",
+      "Legal penalties and potential criminal charges.",
+      "Increased air traffic.",
+      "Drone malfunction due to environmental factors."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 37,
+    "question": "Which FAA capability allows drone operators to receive instant authorization to operate in controlled airspaces like Class C and D?",
+    "options": [
+      "DroneZone",
+      "LAANC",
+      "B4UFLY",
+      "FAA Mobile"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 38,
+    "question": "In what scenario might a drone operator need to check NOTAMs before a flight?",
+    "options": [
+      "Planning a flight near a recently activated volcano",
+      "Checking for battery recalls",
+      "Updating drone firmware",
+      "Reviewing local drone club meeting notes"
+    ],
+    "correct_answer_index": 0,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 39,
+    "question": "Under FAA Part 107, which class of airspace does not require ATC permission for drone operations unless it starts at the surface?",
+    "options": [
+      "Class A",
+      "Class B",
+      "Class E",
+      "Class G"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 40,
+    "question": "What procedure should a drone operator follow if operating within 5 miles of an airport not covered by LAANC?",
+    "options": [
+      "No action is necessary if flying below 400 feet.",
+      "Notify the airport and air traffic control tower, if one is present.",
+      "Only fly during daylight hours.",
+      "Ensure the drone is visible to radar."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 41,
+    "question": "For which reason might a drone operator require immediate access to updated NOTAMs?",
+    "options": [
+      "To check for software updates for their drone.",
+      "To plan for photographing large public events.",
+      "To be aware of sudden airspace closures or hazards.",
+      "To verify battery health before a flight."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 42,
+    "question": "What is the significance of understanding the vertical boundaries of Class E airspace for drone operations?",
+    "options": [
+      "It determines the maximum altitude for night flying.",
+      "It is necessary for programming the drone\\'s GPS.",
+      "It dictates where a drone can fly safely without ATC clearance.",
+      "It helps in choosing the right communication channels."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 43,
+    "question": "What is the primary reason for a drone operator to understand the different segments of Class E airspace?",
+    "options": [
+      "To communicate effectively with manned aircraft.",
+      "To optimize battery usage during flights.",
+      "To navigate safely and comply with airspace regulations.",
+      "To enhance video and photo quality."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 44,
+    "question": "Under what condition can a drone fly over a crowd under FAA Part 107 rules?",
+    "options": [
+      "With a special waiver from the FAA.",
+      "If the drone is equipped with a parachute system.",
+      "During emergency situations only.",
+      "At any time, if above 500 feet."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 45,
+    "question": "What should a drone operator do to ensure compliance with FAA regulations when flying near a restricted area?",
+    "options": [
+      "Fly only during authorized hours.",
+      "Maintain continuous radio contact with nearby control towers.",
+      "Ensure the drone remains outside the restricted area boundaries.",
+      "Use an automated flight path control system."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 46,
+    "question": "When interpreting a METAR, what does the term \\\"BKN\\\" signify in the context of cloud cover?",
+    "options": [
+      "Few clouds",
+      "Broken clouds",
+      "Clear skies",
+      "Overcast"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 47,
+    "question": "If a TAF report indicates \\\"TSRA\\\", what should a drone operator anticipate?",
+    "options": [
+      "Thunderstorms with rain",
+      "Turbulent solar radiation",
+      "Temporary sunspot activity",
+      "Tropical storm warnings"
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 48,
+    "question": "How does a drone operator interpret a METAR that includes \\\"27015G25KT\\\" regarding wind conditions?",
+    "options": [
+      "Steady wind from 270 degrees at 15 knots with gusts up to 25 knots.",
+      "Variable wind from 270 degrees shifting to 150 degrees at 25 knots.",
+      "Continuous gusts at 270 degrees peaking at 25 knots.",
+      "Wind chill factor causing temperature to feel like 15 to 25 degrees colder."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 49,
+    "question": "What does a visibility notation of \\\"1/2SM\\\" in a METAR suggest for drone flying conditions?",
+    "options": [
+      "Visibility is restricted to 1/2 statute mile, suggesting poor flying conditions.",
+      "Visibility is half of the standard meteorological range, indicating moderate conditions.",
+      "The report is incomplete, and visibility data is pending.",
+      "Visibility extends to half the visible horizon, suitable for flying."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 50,
+    "question": "In a TAF report, what does the term \\\"PROB40\\\" indicate?",
+    "options": [
+      "There is a 40% probability of the subsequent conditions occurring.",
+      "Weather conditions are projected to improve by 40%.",
+      "40% of the area covered by the forecast will experience the stated conditions.",
+      "The forecast conditions are 40% less severe than predicted."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 51,
+    "question": "What operational considerations should be made if a METAR report includes the term \\\"SQ\\\" (squall)?",
+    "options": [
+      "Prepare for sudden intense winds and possible precipitation.",
+      "Ensure that solar panels on drones are secured.",
+      "Flight operations are optimal as \\\"SQ\\\" indicates stable conditions.",
+      "Increase altitude to avoid ground-level disturbances."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 52,
+    "question": "What does \\\"FM1500\\\" signify in a TAF report?",
+    "options": [
+      "From 1500 UTC, forecasted weather conditions will change.",
+      "Frequency modulation at 1500 kHz is affecting radar readings.",
+      "The forecast is most reliable at 1500 feet altitude.",
+      "Fog and mist will clear by 1500 local time."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 53,
+    "question": "A TAF includes \\\"TEMPO 1214 3SM BR\\\". What should a drone operator expect?",
+    "options": [
+      "Temporary weather conditions between 1200 and 1400 UTC with 3 statute miles visibility and mist.",
+      "Temperature reaching 14 degrees Celsius with moderate rain.",
+      "Temporary brightness increasing visibility to 3 statute miles.",
+      "Turbulent conditions expected to last from 1200 to 1400."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 54,
+    "question": "What implications does \\\"P6SM\\\" have for drone operations in a TAF report?",
+    "options": [
+      "Precipitation expected within 6 square miles.",
+      "Visibility predicted to be greater than 6 statute miles, favorable for flying.",
+      "Pressure within 6 millibars of standard atmospheric pressure.",
+      "Period of 6 hours with severe meteorological conditions."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 55,
+    "question": "In a METAR report, what does the indication \\\"RAB05\\\" signify for drone operations?",
+    "options": [
+      "Rain began at 0500 UTC.",
+      "Rain began 5 minutes past the hour.",
+      "Runway 05 is closed due to rain.",
+      "Relative humidity is at 5%."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 56,
+    "question": "What does the encoding \\\"SCT030\\\" in a TAF report imply about the cloud coverage?",
+    "options": [
+      "Sky is scattered with clouds at 3000 feet.",
+      "Sky is scattered with clouds at 30000 feet.",
+      "Cloud coverage is less than 30%.",
+      "Sky is clear with no significant cloud coverage."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 57,
+    "question": "How should a drone operator interpret a TAF that forecasts \\\"VCBLSN\\\"?",
+    "options": [
+      "Visibility is variable due to blowing snow.",
+      "Snow will occur in the vicinity.",
+      "Conditions will be clear with visibility beyond 6 statute miles.",
+      "Variable cloud base at the snow line."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 58,
+    "question": "A METAR includes \\\"HZ\\\" in its weather phenomena section. What does this signify, and what is its relevance to drone flying?",
+    "options": [
+      "Haze is present, reducing visibility.",
+      "Horizontal visibility is zero.",
+      "High ozone levels detected.",
+      "High humidity zones."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 59,
+    "question": "What does the term \\\"FM200000Z\\\" specify in a TAF report?",
+    "options": [
+      "Forecasted weather conditions change starting at 2000 UTC.",
+      "The forecast is valid from the 20th of the month.",
+      "Frequency modulation interference expected at 2000 kHz.",
+      "Forecast is made in the 2000 UTC time zone."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 60,
+    "question": "What operational adjustments might be necessary when a TAF predicts \\\"GS\\\"?",
+    "options": [
+      "Ground staff must be increased due to expected ground stops.",
+      "Expect small hail that could impact drone safety.",
+      "Gusts will increase speed significantly.",
+      "Glare from the sun will be particularly strong."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 61,
+    "question": "How is the notation \\\"CNL\\\" in a TAF important for drone flight planning?",
+    "options": [
+      "It indicates that the previously issued forecast has been canceled.",
+      "Cloud cover is now negligible.",
+      "Continued normal operations are expected.",
+      "Caution is advised due to low visibility."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Weather",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 62,
+    "question": "What is the most effective way to handle a sudden loss of visual line of sight (VLOS) due to fog?",
+    "options": [
+      "Increase altitude to escape the fog layer.",
+      "Utilize the drone's onboard cameras to navigate.",
+      "Activate the drone's return-to-home feature.",
+      "Continue flying at the same altitude and wait for the fog to clear."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 63,
+    "question": "When communicating with Air Traffic Control (ATC), what information should be provided during the initial contact?",
+    "options": [
+      "Drone's current speed and future waypoints",
+      "Operator's personal identification and qualifications",
+      "Drone's location, altitude, identification, and intentions",
+      "Detailed technical specifications of the drone"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 64,
+    "question": "How should a UAS operator handle instructions received from ATC that are not clearly understood?",
+    "options": [
+      "Proceed with the last clear instruction",
+      "Request immediate clarification or repeat the instruction",
+      "Assume alternative instructions",
+      "Terminate the flight operation"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 65,
+    "question": "In the context of UAS operations, what is the significance of the command \\\"Standby\\\" from ATC?",
+    "options": [
+      "The operator should stop all drone activities immediately.",
+      "The operator should prepare for emergency landing.",
+      "The operator should wait for further information or instructions.",
+      "The operator is cleared for takeoff or landing."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 66,
+    "question": "What should a drone operator do if they receive conflicting instructions from two different ATC sources?",
+    "options": [
+      "Follow the most recent instruction received.",
+      "Ask for clarification from the original source of instructions.",
+      "Decide based on what seems safest at the moment.",
+      "Report the situation to the higher authority immediately."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 67,
+    "question": "How should UAS operators handle the communication after completing a readback with ATC?",
+    "options": [
+      "Confirm the completion of the communication with \\\"Out.\\\"",
+      "Wait for further instructions without acknowledgement.",
+      "Repeat the readback until confirmation is received.",
+      "Immediately proceed with the next phase of the operation."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 68,
+    "question": "In UAS operations, what is the primary purpose of using the \\\"readback\\\" procedure in communications with ATC?",
+    "options": [
+      "To confirm that the message has been understood and will be complied with.",
+      "To request further clarification on instructions received.",
+      "To check the functionality of the communication equipment.",
+      "To record the conversation for training purposes."
+    ],
+    "correct_answer_index": 0,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 69,
+    "question": "What is the most effective way to ensure clarity when communicating with ATC in a noisy environment?",
+    "options": [
+      "Increase the volume of the radio.",
+      "Use abbreviated language to shorten the transmission.",
+      "Employ the NATO phonetic alphabet to spell out critical information.",
+      "Repeat the message multiple times to ensure it is heard."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 70,
+    "question": "What should a drone operator do if they receive conflicting instructions from different ATC units?",
+    "options": [
+      "Follow the most recent instruction received.",
+      "Choose the instruction that seems safest.",
+      "Request clarification from the original ATC unit contacted.",
+      "Report the conflict to the nearest airport."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 71,
+    "question": "What is the primary effect of alcohol on UAS operators that directly impacts operational safety?",
+    "options": [
+      "Increases reaction speed",
+      "Improves focus and attention",
+      "Slows down brain function and reaction time",
+      "Enhances vision clarity"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 72,
+    "question": "According to FAA regulations, what is the minimum time a UAS operator must wait after consuming alcohol before operating a drone?",
+    "options": [
+      "4 hours",
+      "8 hours",
+      "12 hours",
+      "24 hours"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 73,
+    "question": "Which FAA regulation directly addresses the prohibition of drug use that impairs faculties contrary to safety in UAS operations?",
+    "options": [
+      "Part 107",
+      "Part 91",
+      "Part 61",
+      "Part 135"
+    ],
+    "correct_answer_index": 0,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 74,
+    "question": "What are the potential legal consequences for a UAS operator found to be operating under the influence of drugs or alcohol?",
+    "options": [
+      "Warning and educational courses",
+      "Fines, suspension or revocation of licenses, and possible criminal charges",
+      "Mandatory community service",
+      "No penalties, only rehabilitation sessions"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 75,
+    "question": "What type of drug testing circumstances might a UAS operator be subjected to under FAA regulations?",
+    "options": [
+      "Only pre-employment",
+      "Random, reasonable suspicion, post-accident, and return-to-duty",
+      "Only post-accident",
+      "None, unless voluntarily submitted"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 76,
+    "question": "How do stimulants affect UAS operators differently from depressants like alcohol?",
+    "options": [
+      "Cause relaxation and slower response times",
+      "Induce sleep to prevent fatigue during flights",
+      "Can cause overconfidence leading to risky behaviors",
+      "Enhance visual acuity and calculation speed"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 77,
+    "question": "Which FAA initiative aims to prevent substance abuse among UAS operators by providing educational resources?",
+    "options": [
+      "FAA Regulation Workshops",
+      "UAS Compliance Program",
+      "FAA\\'s educational programs and resources",
+      "Drone Peer Support Network"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 78,
+    "question": "What should UAS operators do if they suspect a peer is under the influence of drugs or alcohol?",
+    "options": [
+      "Ignore unless it becomes a recurring issue",
+      "Report immediately through proper channels, such as FAA hotlines or internal reporting systems",
+      "Confront the individual directly and demand cessation",
+      "Handle the situation themselves without involving others"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 79,
+    "question": "How does alcohol specifically impact a UAS operator\\'s ability to perform safely?",
+    "options": [
+      "Improves multitasking abilities",
+      "Enhances focus on long-duration flights",
+      "Slows down reaction times and impairs judgment",
+      "Increases alertness to environmental changes"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 80,
+    "question": "What is the legal blood alcohol content (BAC) limit for UAS operators as set by the FAA?",
+    "options": [
+      "0.02%",
+      "0.04%",
+      "0.08%",
+      "0.10%"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 81,
+    "question": "Under FAA regulations, which type of drug testing is mandatory following any aviation accident involving a UAS?",
+    "options": [
+      "Pre-employment",
+      "Random",
+      "Reasonable suspicion",
+      "Post-accident"
+    ],
+    "correct_answer_index": 3,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 82,
+    "question": "What is the primary purpose of the FAA\\'s reasonable suspicion drug testing for UAS operators?",
+    "options": [
+      "To screen all new employees",
+      "To conduct routine checks",
+      "Based on observed behaviors indicating possible drug or alcohol use",
+      "All operators are tested annually"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 83,
+    "question": "How does the FAA recommend UAS operators prepare for compliance with substance abuse regulations?",
+    "options": [
+      "Attend only mandatory training sessions",
+      "Rely on personal judgment and experience",
+      "Follow written policies and undergo regular training",
+      "Ignore unless involved in an incident"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 84,
+    "question": "Which FAA-supported initiative provides resources and support specifically for aviation professionals dealing with substance dependency?",
+    "options": [
+      "Aviation Safety Action Program (ASAP)",
+      "Pilot's Alcohol Recovery Program",
+      "UAS Operational Safety Plan",
+      "Drone Safety Awareness Campaign"
+    ],
+    "correct_answer_index": 0,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 85,
+    "question": "What are the consequences for a UAS operator who fails a drug test under FAA regulations?",
+    "options": [
+      "Temporary suspension pending an investigation",
+      "Immediate promotion and salary increase",
+      "Certificate revocation and possible criminal charges",
+      "No consequences unless involved in an accident"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 86,
+    "question": "What FAA regulation prohibits UAS operators from performing duties within 8 hours of consuming alcohol?",
+    "options": [
+      "Part 101",
+      "Part 107",
+      "Part 91",
+      "Part 61"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 87,
+    "question": "Which symptom is a direct effect of alcohol on UAS operational capabilities?",
+    "options": [
+      "Enhanced visual acuity",
+      "Increased focus",
+      "Impaired judgment",
+      "Improved reaction time"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 88,
+    "question": "When can a UAS operator be subjected to random drug testing under FAA regulations?",
+    "options": [
+      "Only after an accident",
+      "Before employment",
+      "Annually, as part of a random selection process",
+      "Only upon visible signs of impairment"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 89,
+    "question": "What is the primary focus of FAA educational programs on substance abuse for UAS operators?",
+    "options": [
+      "Legal penalties for non-compliance",
+      "Techniques for avoiding detection",
+      "Health benefits of abstaining from substance use",
+      "Safety risks associated with impairment"
+    ],
+    "correct_answer_index": 3,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 90,
+    "question": "How does the FAA enforce compliance with drug and alcohol regulations among UAS operators?",
+    "options": [
+      "Periodic self-reporting only",
+      "Mandatory training programs",
+      "Implementation of fines and license suspensions",
+      "Random checks at annual reviews"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 91,
+    "question": "What is an example of a behavior that may trigger reasonable suspicion testing under FAA guidelines?",
+    "options": [
+      "Consistently performing well under pressure",
+      "Reporting late to work occasionally",
+      "Observable signs of drug or alcohol use",
+      "Requesting personal days"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Regulations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 92,
+    "question": "What is the consequence of a UAS operator violating FAA drug and alcohol regulations during an operation that results in an accident?",
+    "options": [
+      "Mandatory retraining only",
+      "A written warning",
+      "Potential criminal charges",
+      "Automatic license renewal"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 93,
+    "question": "Which airspace requires UAS operators to obtain prior authorization from ATC?",
+    "options": [
+      "Uncontrolled airspace",
+      "Controlled airspace",
+      "No-fly zones",
+      "Restricted operations areas"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 94,
+    "question": "What is the role of air traffic control (ATC) in UAS operations near airports?",
+    "options": [
+      "Providing weather updates only",
+      "Managing ground traffic only",
+      "Coordinating and managing airspace safety",
+      "Monitoring wildlife activities around the airport"
+    ],
+    "correct_answer_index": 2,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 95,
+    "question": "How should UAS operators use NOTAMs when planning flights near airports?",
+    "options": [
+      "To check for available discounts on airport fees",
+      "To identify temporary airspace restrictions and changes in airport operations",
+      "To determine the color code for drone visibility enhancements",
+      "To communicate directly with other UAS operators"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 96,
+    "question": "Which statement best describes the role of air traffic control (ATC) in relation to UAS operations near airports?",
+    "options": [
+      "ATC solely provides weather updates to UAS operators.",
+      "ATC\\'s main role is to coordinate traffic on the ground.",
+      "ATC oversees and coordinates airspace safety for all aircraft, including UAS.",
+      "ATC manages ticket sales for commercial flights."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 97,
+    "question": "What is a critical step UAS operators must take before flying near airports to ensure compliance with FAA regulations?",
+    "options": [
+      "Subscribe to aviation magazines",
+      "Obtain prior authorization through the LAANC system or directly from the FAA",
+      "Purchase additional insurance coverage",
+      "Fly the drone at maximum altitude to avoid manned aircraft"
+    ],
+    "correct_answer_index": 1,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 98,
+    "question": "Why must UAS operators establish communication with local ATC when planning to fly near airports?",
+    "options": [
+      "ATC provides updates on local entertainment events.",
+      "Communication with ATC is only a formality and has no practical use.",
+      "ATC coordinates all airspace users to prevent conflicts and ensure safety.",
+      "ATC is responsible for scheduling UAS operations only."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 99,
+    "question": "How should UAS operators interpret NOTAMs relevant to their operations near airports?",
+    "options": [
+      "As suggestions that can be ignored based on the operator's judgment.",
+      "As mandatory instructions that must be followed to ensure safety and compliance.",
+      "As optional guidelines for recreational flyers only.",
+      "As historical data with no current relevance."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 100,
+    "question": "What is the primary purpose of utilizing the LAANC system by UAS operators when planning flights near airports?",
+    "options": [
+      "To automatically pilot drones without operator input.",
+      "To provide a platform for logging flight hours for entertainment purposes.",
+      "To obtain real-time authorization for operating in controlled airspace.",
+      "To purchase new drones at a discounted rate."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 101,
+    "question": "Which type of NOTAM would be most relevant to a UAS operator needing information about a temporary flight restriction (TFR)?",
+    "options": [
+      "NOTAMs announcing new aviation software.",
+      "NOTAMs that provide updates on airport social events.",
+      "NOTAMs informing about temporary airspace restrictions due to events.",
+      "NOTAMs that are outdated and no longer in effect."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 102,
+    "question": "Why is it crucial for UAS operators to verify NOTAMs before flights near airports?",
+    "options": [
+      "NOTAMs may detail permanent changes in airport operations.",
+      "NOTAMs provide entertainment listings for airport areas.",
+      "NOTAMs contain temporary operational changes and safety information.",
+      "NOTAMs offer discounts on aviation fuel."
+    ],
+    "correct_answer_index": 2,
+    "topic": "Airspace",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  },
+  {
+    "id": 103,
+    "question": "How should UAS operators respond if they encounter communication failures with ATC during a flight near an airport?",
+    "options": [
+      "Ignore the failure and continue the operation.",
+      "Attempt to restore communication and follow pre-established emergency protocols.",
+      "Land immediately without notifying anyone.",
+      "Increase altitude to get ATC\\'s attention."
+    ],
+    "correct_answer_index": 1,
+    "topic": "Operations",
+    "reference": "Carrington Drone Exam Prep",
+    "faa_citation": null,
+    "confirmed_test_eligible": false,
+    "image_required": false,
+    "image_url": null,
+    "image_description": null
+  }
+]

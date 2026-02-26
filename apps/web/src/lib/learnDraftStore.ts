@@ -1,6 +1,8 @@
 import type { QuestionTypeProfile } from "@part107/core";
+import { LOCAL_USER_ID } from "./analyticsTaxonomy";
+import { LEARN_DRAFT_STORAGE_KEY, userScopedStorageKey } from "./progressStorage";
 
-const STORAGE_KEY = "part107_learn_draft_v1";
+const STORAGE_KEY = LEARN_DRAFT_STORAGE_KEY;
 
 export type LearnDraftPhase = "teach" | "quiz" | "result";
 
@@ -31,10 +33,10 @@ export interface LearnDraft {
   quizResults: LearnDraftQuizResult[];
 }
 
-export function loadLearnDraft(): LearnDraft | null {
+export function loadLearnDraft(userId: string = LOCAL_USER_ID): LearnDraft | null {
   if (typeof window === "undefined") return null;
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(userScopedStorageKey(STORAGE_KEY, userId));
     if (!raw) return null;
     const parsed = JSON.parse(raw) as LearnDraft;
     if (!parsed || parsed.version !== 1) return null;
@@ -46,12 +48,12 @@ export function loadLearnDraft(): LearnDraft | null {
   }
 }
 
-export function saveLearnDraft(draft: LearnDraft): void {
+export function saveLearnDraft(draft: LearnDraft, userId: string = LOCAL_USER_ID): void {
   if (typeof window === "undefined") return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+  localStorage.setItem(userScopedStorageKey(STORAGE_KEY, userId), JSON.stringify(draft));
 }
 
-export function clearLearnDraft(): void {
+export function clearLearnDraft(userId: string = LOCAL_USER_ID): void {
   if (typeof window === "undefined") return;
-  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(userScopedStorageKey(STORAGE_KEY, userId));
 }

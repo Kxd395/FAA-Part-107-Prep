@@ -8,6 +8,8 @@ import {
   type ProgressSessionRecord,
   type ProgressStats,
 } from "@part107/core";
+import { LOCAL_USER_ID } from "../lib/analyticsTaxonomy";
+import { progressStorageKey } from "../lib/progressStorage";
 
 // ─────────────────────────────────────────────
 // Types
@@ -21,7 +23,6 @@ export type { ProgressStats };
 // ─────────────────────────────────────────────
 // Constants
 // ─────────────────────────────────────────────
-const STORAGE_KEY = "part107_progress";
 const PASSING_PERCENT = 70;
 
 // ─────────────────────────────────────────────
@@ -32,34 +33,34 @@ function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
-function loadSessions(): SessionRecord[] {
+function loadSessions(userId: string): SessionRecord[] {
   if (typeof window === "undefined") return [];
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(progressStorageKey(userId));
     return raw ? JSON.parse(raw) : [];
   } catch {
     return [];
   }
 }
 
-function persistSessions(sessions: SessionRecord[]) {
+function persistSessions(userId: string, sessions: SessionRecord[]) {
   if (typeof window === "undefined") return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+  localStorage.setItem(progressStorageKey(userId), JSON.stringify(sessions));
 }
 
 // ─────────────────────────────────────────────
 // Hook
 // ─────────────────────────────────────────────
 
-export function useProgress() {
+export function useProgress(userId: string = LOCAL_USER_ID) {
   const [sessions, setSessions] = useState<SessionRecord[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   // Load from localStorage on mount
   useEffect(() => {
-    setSessions(loadSessions());
+    setSessions(loadSessions(userId));
     setLoaded(true);
-  }, []);
+  }, [userId]);
 
   // ------ Save a new session ------
   const saveSession = useCallback(
@@ -74,30 +75,30 @@ export function useProgress() {
       };
       setSessions((prev) => {
         const updated = [newRecord, ...prev];
-        persistSessions(updated);
+        persistSessions(userId, updated);
         return updated;
       });
       return newRecord;
     },
-    []
+    [userId]
   );
 
   // ------ Delete a session ------
   const deleteSession = useCallback((id: string) => {
     setSessions((prev) => {
       const updated = prev.filter((s) => s.id !== id);
-      persistSessions(updated);
+      persistSessions(userId, updated);
       return updated;
     });
-  }, []);
+  }, [userId]);
 
   // ------ Clear all data ------
   const clearAll = useCallback(() => {
     setSessions([]);
     if (typeof window !== "undefined") {
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(progressStorageKey(userId));
     }
-  }, []);
+  }, [userId]);
 
   // ------ Compute stats ------
   const getStats = useCallback(

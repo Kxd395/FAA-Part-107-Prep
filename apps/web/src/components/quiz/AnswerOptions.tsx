@@ -33,6 +33,16 @@ export default function AnswerOptions({
   confidentConfidence = 5,
   disabled = false,
 }: AnswerOptionsProps) {
+  const quickConfidenceActions: Array<{
+    value: 1 | 2 | 3 | 4 | 5;
+    label: string;
+    shortLabel: string;
+  }> = [
+    { value: 1, label: "Not Sure", shortLabel: "NS" },
+    { value: 3, label: "Neutral", shortLabel: "N" },
+    { value: 5, label: "Confident", shortLabel: "C" },
+  ];
+
   const handleSelect = (
     optionId: OptionId,
     confidence: 1 | 2 | 3 | 4 | 5 | undefined,
@@ -83,7 +93,7 @@ export default function AnswerOptions({
               onClick={() => handleSelect(option.id, undefined, "main")}
               disabled={disabled}
               aria-pressed={isSelected}
-              className={`${className} ${showConfidenceSplit ? "pr-12" : ""}`}
+              className={`${className} ${showConfidenceSplit ? (splitConfidenceMode === "full" ? "pr-44" : "pr-24") : ""}`}
             >
               <div className="flex items-start gap-3">
                 <span
@@ -106,19 +116,39 @@ export default function AnswerOptions({
                 <span className="pt-0.5">{option.text}</span>
               </div>
             </button>
-            {showConfidenceSplit && (
+            {showConfidenceSplit && splitConfidenceMode === "full" && (
+              <div className="absolute right-2 top-1/2 flex -translate-y-1/2 gap-1">
+                {quickConfidenceActions.map((quickAction) => (
+                  <button
+                    key={`${option.id}-${quickAction.value}`}
+                    type="button"
+                    disabled={disabled}
+                    aria-label={`Answer ${displayLabel} as ${quickAction.label}`}
+                    title={`Answer with ${quickAction.label.toLowerCase()} confidence (${quickAction.value}/5)`}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleSelect(option.id, quickAction.value, "split");
+                    }}
+                    className="rounded-md border border-brand-400/40 bg-brand-500/20 px-1.5 py-1 text-[10px] font-semibold text-brand-100 hover:bg-brand-500/30 disabled:opacity-50"
+                  >
+                    {quickAction.shortLabel}
+                  </button>
+                ))}
+              </div>
+            )}
+            {showConfidenceSplit && splitConfidenceMode === "high_only" && (
               <button
                 type="button"
                 disabled={disabled}
                 aria-label={`Answer ${displayLabel} with high confidence`}
-                title="Answer with high confidence"
+                title={`Answer with high confidence (${confidentConfidence}/5)`}
                 onClick={(event) => {
                   event.stopPropagation();
                   handleSelect(option.id, confidentConfidence, "split");
                 }}
-                className="absolute right-2 top-2 rounded-md border border-brand-400/40 bg-brand-500/20 px-2 py-1 text-xs font-semibold text-brand-200 hover:bg-brand-500/30 disabled:opacity-50"
+                className="absolute right-2 top-2 rounded-md border border-brand-400/40 bg-brand-500/20 px-2.5 py-1 text-[11px] font-semibold text-brand-100 hover:bg-brand-500/30 disabled:opacity-50"
               >
-                ☑
+                High {confidentConfidence}/5
               </button>
             )}
           </div>

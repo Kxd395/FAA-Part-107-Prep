@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { type ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
+import { type ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useProgress, SessionRecord } from "../../hooks/useProgress";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
@@ -23,11 +23,15 @@ import {
   type ImportMergeMode,
 } from "../../lib/progressImportMerge";
 import { buildTelemetrySupportBundle, downloadJsonFile } from "../../lib/telemetrySupportBundle";
+import { readPortableStateForUser, writePortableStateForUser } from "../../lib/portableStateStorage";
+import { FLASHCARD_SR_STORAGE_KEY, userScopedStorageKey } from "../../lib/progressStorage";
 import {
   clearAnalyticsDeadLetterQueue,
   getAnalyticsDeadLetterSummary,
   retryAnalyticsDeadLetterQueue,
 } from "../../lib/analyticsSink";
+import { computeResponseTimeTelemetry } from "../../lib/responseTimeTelemetry";
+import { addQuestionsToCollection } from "../../lib/questionCollectionStore";
 
 const PORTABLE_EXPORT_KEYS = [
   "part107_progress",
@@ -36,8 +40,9 @@ const PORTABLE_EXPORT_KEYS = [
   "part107_learning_events_v1",
   "part107_flashcard_sr",
   "part107_learn_draft_v1",
+  "part107_question_collections_v1",
 ] as const;
-const SYNC_DEFAULT_USER_ID = "local-user";
+const SYNC_DEFAULT_USER_ID = LOCAL_USER_ID;
 
 interface PortableProgressSnapshot {
   version: 1;
@@ -90,6 +95,61 @@ const HISTORY_PAGE_SIZE = 15;
 const HISTORY_VIRTUALIZE_THRESHOLD = 250;
 const HISTORY_VIRTUAL_WINDOW_SIZE = 80;
 const HISTORY_ROW_ESTIMATE_PX = 108;
+const DAILY_ACTIVITY_WINDOW_DAYS = 30;
+const WEEKLY_ACTIVITY_WINDOW_WEEKS = 8;
+
+interface SessionActivityDailyPoint {
+  dateKey: string;
+  label: string;
+  count: number;
+  passCount: number;
+}
+
+interface SessionActivityWeeklyPoint {
+  weekKey: string;
+  label: string;
+  count: number;
+  passRatePercent: number | null;
+}
+
+interface SessionActivityInsights {
+  dailyPoints: SessionActivityDailyPoint[];
+  weeklyPoints: SessionActivityWeeklyPoint[];
+  currentDailyStreak: number;
+  longestDailyStreak: number;
+  activeDays: number;
+}
+
+type QuestionIssueMode = "study" | "exam" | "learn" | "flashcards" | "missed" | "unknown";
+
+interface QuestionIssueTriageRow {
+  questionId: string;
+  questionText: string;
+  category: string;
+  subcategory: string;
+  reportCount: number;
+  latestReportAt: string;
+  latestNote: string;
+  byMode: Record<QuestionIssueMode, number>;
+}
+
+interface QuestionIssueTriageSummary {
+  totalReports: number;
+  uniqueQuestionCount: number;
+  latestReportAt: string | null;
+  byMode: Record<QuestionIssueMode, number>;
+  byCategory: Record<string, number>;
+  topQuestions: QuestionIssueTriageRow[];
+}
+
+const ISSUE_TRIAGE_MODE_ORDER: QuestionIssueMode[] = [
+  "study",
+  "exam",
+  "learn",
+  "flashcards",
+  "missed",
+  "unknown",
+];
 
 // ─────────────────────────────────────────────
 // Helpers
@@ -118,6 +178,12 @@ function timeAgo(iso: string): string {
     month: "short",
     day: "numeric",
   });
+}
+
+function formatIssueMode(mode: QuestionIssueMode): string {
+  if (mode === "flashcards") return "Flashcards";
+  if (mode === "unknown") return "Unknown";
+  return mode.charAt(0).toUpperCase() + mode.slice(1);
 }
 
 function computeLearningEventInsights(events: LearningEvent[]): LearningEventInsights {
@@ -198,13 +264,144 @@ function computeLearnCompletionTrend(events: LearningEvent[]): LearnCompletionPo
     .slice(Math.max(0, trend.length - 8));
 }
 
-function readCurrentLocalData(keys: readonly string[]): Record<string, string | null> {
-  if (typeof window === "undefined") return {};
-  const data: Record<string, string | null> = {};
-  for (const key of keys) {
-    data[key] = localStorage.getItem(key);
+function startOfLocalDay(value: Date): Date {
+  return new Date(value.getFullYear(), value.getMonth(), value.getDate());
+}
+
+function addLocalDays(value: Date, days: number): Date {
+  const next = new Date(value);
+  next.setDate(next.getDate() + days);
+  return next;
+}
+
+function toLocalDateKey(value: Date): string {
+  const year = value.getFullYear();
+  const month = String(value.getMonth() + 1).padStart(2, "0");
+  const day = String(value.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function parseLocalDateKey(value: string): Date | null {
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return null;
+  const year = Number(match[1]);
+  const month = Number(match[2]) - 1;
+  const day = Number(match[3]);
+  const next = new Date(year, month, day);
+  if (
+    next.getFullYear() !== year ||
+    next.getMonth() !== month ||
+    next.getDate() !== day
+  ) {
+    return null;
   }
-  return data;
+  return next;
+}
+
+function startOfLocalWeek(value: Date): Date {
+  const dayStart = startOfLocalDay(value);
+  return addLocalDays(dayStart, -dayStart.getDay());
+}
+
+function diffLocalDays(left: Date, right: Date): number {
+  const MS_PER_DAY = 24 * 60 * 60 * 1000;
+  return Math.round((startOfLocalDay(left).getTime() - startOfLocalDay(right).getTime()) / MS_PER_DAY);
+}
+
+function computeSessionActivityInsights(sessions: SessionRecord[]): SessionActivityInsights {
+  const dayMap = new Map<
+    string,
+    {
+      count: number;
+      passCount: number;
+    }
+  >();
+
+  const validSessions = sessions
+    .map((session) => {
+      const parsed = Date.parse(session.timestamp);
+      if (Number.isNaN(parsed)) return null;
+      return { session, date: new Date(parsed) };
+    })
+    .filter((entry): entry is { session: SessionRecord; date: Date } => !!entry);
+
+  for (const { session, date } of validSessions) {
+    const dateKey = toLocalDateKey(date);
+    const existing = dayMap.get(dateKey) ?? { count: 0, passCount: 0 };
+    existing.count += 1;
+    if (session.passed) existing.passCount += 1;
+    dayMap.set(dateKey, existing);
+  }
+
+  const today = startOfLocalDay(new Date());
+  const dailyPoints: SessionActivityDailyPoint[] = [];
+  for (let offset = DAILY_ACTIVITY_WINDOW_DAYS - 1; offset >= 0; offset -= 1) {
+    const date = addLocalDays(today, -offset);
+    const dateKey = toLocalDateKey(date);
+    const value = dayMap.get(dateKey);
+    dailyPoints.push({
+      dateKey,
+      label: date.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      count: value?.count ?? 0,
+      passCount: value?.passCount ?? 0,
+    });
+  }
+
+  let currentDailyStreak = 0;
+  let cursor = today;
+  while (dayMap.has(toLocalDateKey(cursor))) {
+    currentDailyStreak += 1;
+    cursor = addLocalDays(cursor, -1);
+  }
+
+  const sortedActiveDates = Array.from(dayMap.keys())
+    .map((key) => parseLocalDateKey(key))
+    .filter((date): date is Date => !!date)
+    .sort((a, b) => a.getTime() - b.getTime());
+
+  let longestDailyStreak = 0;
+  let runningStreak = 0;
+  let previousDate: Date | null = null;
+  for (const date of sortedActiveDates) {
+    if (previousDate && diffLocalDays(date, previousDate) === 1) {
+      runningStreak += 1;
+    } else {
+      runningStreak = 1;
+    }
+    if (runningStreak > longestDailyStreak) {
+      longestDailyStreak = runningStreak;
+    }
+    previousDate = date;
+  }
+
+  const weeklyPoints: SessionActivityWeeklyPoint[] = [];
+  const currentWeekStart = startOfLocalWeek(today);
+  for (let offset = WEEKLY_ACTIVITY_WINDOW_WEEKS - 1; offset >= 0; offset -= 1) {
+    const weekStart = addLocalDays(currentWeekStart, -7 * offset);
+    const weekEndExclusive = addLocalDays(weekStart, 7);
+    let count = 0;
+    let passCount = 0;
+    for (const { session, date } of validSessions) {
+      if (date >= weekStart && date < weekEndExclusive) {
+        count += 1;
+        if (session.passed) passCount += 1;
+      }
+    }
+    weeklyPoints.push({
+      weekKey: toLocalDateKey(weekStart),
+      label: weekStart.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      count,
+      passRatePercent: count > 0 ? Math.round((passCount / count) * 100) : null,
+    });
+  }
+
+  return {
+    dailyPoints,
+    weeklyPoints,
+    currentDailyStreak,
+    longestDailyStreak,
+    activeDays: dayMap.size,
+  };
 }
 
 function tryParseSessionCount(raw: string | null): number | null {
@@ -252,8 +449,11 @@ function buildPreviewKeyConflicts(
 // ─────────────────────────────────────────────
 
 export default function ProgressPage() {
-  const { logEvent } = useLearningEventLogger(LOCAL_USER_ID);
-  const { sessions, loaded, getStats, clearAll } = useProgress();
+  const { user } = useAuth();
+  const authenticatedUserId = user?.userId ?? null;
+  const activeUserId = authenticatedUserId ?? LOCAL_USER_ID;
+  const { logEvent } = useLearningEventLogger(activeUserId);
+  const { sessions, loaded, getStats, clearAll } = useProgress(activeUserId);
   const [showConfirmClear, setShowConfirmClear] = useState(false);
   const [resetScope, setResetScope] = useState<ResetScope>("all");
   const [activeTab, setActiveTab] = useState<"overview" | "history" | "categories">("overview");
@@ -261,33 +461,106 @@ export default function ProgressPage() {
   const [pendingImportSnapshot, setPendingImportSnapshot] = useState<PortableProgressSnapshot | null>(null);
   const [pendingImportFileName, setPendingImportFileName] = useState<string | null>(null);
   const [importMergeMode, setImportMergeMode] = useState<ImportMergeMode>("merge");
-  const [syncUserId, setSyncUserId] = useState(SYNC_DEFAULT_USER_ID);
+  const [syncUserId, setSyncUserId] = useState(activeUserId);
   const [syncToken, setSyncToken] = useState<string | null>(null);
   const [syncStatus, setSyncStatus] = useState<string | null>(null);
   const [syncUpdatedAt, setSyncUpdatedAt] = useState<string | null>(null);
   const [syncPending, setSyncPending] = useState(false);
-  const { user } = useAuth();
-  const authenticatedUserId = user?.userId ?? null;
   const [cloudPending, setCloudPending] = useState(false);
   const [cloudStatus, setCloudStatus] = useState<string | null>(null);
   const [cloudUpdatedAt, setCloudUpdatedAt] = useState<string | null>(null);
   const [deadLetterSummary, setDeadLetterSummary] = useState(() => getAnalyticsDeadLetterSummary());
+  const [issueTriageSummary, setIssueTriageSummary] = useState<QuestionIssueTriageSummary | null>(null);
+  const [issueTriagePending, setIssueTriagePending] = useState(false);
+  const [issueTriageError, setIssueTriageError] = useState<string | null>(null);
+  const [issueTriageQueueStatus, setIssueTriageQueueStatus] = useState<string | null>(null);
   const [conflictResolutionByKey, setConflictResolutionByKey] = useState<
     Record<string, KeyConflictResolution>
   >({});
   const importInputRef = useRef<HTMLInputElement | null>(null);
   const autoLoadedAccountStateForUserRef = useRef<string | null>(null);
+  const syncUserOverriddenRef = useRef(false);
+  const attemptEvents = useMemo(
+    () => (loaded ? defaultAttemptEventStore.load(activeUserId) : []),
+    [activeUserId, loaded]
+  );
   const adaptiveInsights = useMemo(() => {
     if (!loaded) {
       return computeAdaptiveInsights({ statsByKey: {}, attempts: [] });
     }
-    const statsByKey = defaultAdaptiveStatsStore.load(LOCAL_USER_ID);
-    const attempts = defaultAttemptEventStore.load(LOCAL_USER_ID);
-    return computeAdaptiveInsights({ statsByKey, attempts });
-  }, [loaded]);
+    const statsByKey = defaultAdaptiveStatsStore.load(activeUserId);
+    return computeAdaptiveInsights({ statsByKey, attempts: attemptEvents });
+  }, [activeUserId, attemptEvents, loaded]);
+  const responseTimeTelemetry = useMemo(
+    () => computeResponseTimeTelemetry(attemptEvents),
+    [attemptEvents]
+  );
   const learningEventInsights = loaded
-    ? computeLearningEventInsights(defaultLearningEventStore.load(LOCAL_USER_ID))
+    ? computeLearningEventInsights(defaultLearningEventStore.load(activeUserId))
     : computeLearningEventInsights([]);
+  const issueModeBreakdown = useMemo(() => {
+    if (!issueTriageSummary) return [];
+    return ISSUE_TRIAGE_MODE_ORDER.map((mode) => ({
+      mode,
+      count: issueTriageSummary.byMode[mode] ?? 0,
+    })).filter((entry) => entry.count > 0);
+  }, [issueTriageSummary]);
+  const issueCategoryBreakdown = useMemo(() => {
+    if (!issueTriageSummary) return [];
+    return Object.entries(issueTriageSummary.byCategory)
+      .sort((left, right) => right[1] - left[1])
+      .slice(0, 6);
+  }, [issueTriageSummary]);
+
+  const loadIssueTriageSummary = useCallback(async () => {
+    if (!authenticatedUserId) {
+      setIssueTriageSummary(null);
+      setIssueTriageError(null);
+      setIssueTriagePending(false);
+      return;
+    }
+    setIssueTriagePending(true);
+    setIssueTriageError(null);
+    try {
+      const response = await fetch("/api/user/question-issues/summary?limit=8");
+      const body = (await response.json()) as { summary?: QuestionIssueTriageSummary; error?: string };
+      if (!response.ok) {
+        throw new Error(body.error ?? "Failed to load issue triage");
+      }
+      if (!body.summary) {
+        throw new Error("Issue triage summary missing from response");
+      }
+      setIssueTriageSummary(body.summary);
+    } catch (error) {
+      setIssueTriageError(error instanceof Error ? error.message : "Failed to load issue triage");
+      setIssueTriageSummary(null);
+    } finally {
+      setIssueTriagePending(false);
+    }
+  }, [authenticatedUserId]);
+
+  const queueIssueQuestionForReview = useCallback(
+    (questionId: string) => {
+      const normalizedQuestionId = questionId.trim();
+      if (!normalizedQuestionId) return;
+      const added = addQuestionsToCollection(activeUserId, "bookmarks", [normalizedQuestionId]);
+      const message =
+        added > 0
+          ? `${normalizedQuestionId} queued in bookmarks.`
+          : `${normalizedQuestionId} already in bookmarks.`;
+      setIssueTriageQueueStatus(message);
+      logEvent({
+        type: "control_clicked",
+        mode: "progress",
+        metadata: {
+          action: "issue_triage_queue_bookmark",
+          questionId: normalizedQuestionId,
+          added,
+        },
+      });
+    },
+    [activeUserId, logEvent]
+  );
 
   useEffect(() => {
     logEvent({
@@ -304,6 +577,15 @@ export default function ProgressPage() {
   useEffect(() => {
     setSyncToken(null);
   }, [syncUserId]);
+
+  useEffect(() => {
+    if (syncUserOverriddenRef.current) return;
+    setSyncUserId(activeUserId);
+  }, [activeUserId]);
+
+  useEffect(() => {
+    void loadIssueTriageSummary();
+  }, [loadIssueTriageSummary]);
 
 
 
@@ -359,6 +641,12 @@ export default function ProgressPage() {
     };
   }, [authenticatedUserId, importMergeMode, logEvent]);
 
+  const stats = getStats();
+  const sessionActivityInsights = useMemo(
+    () => computeSessionActivityInsights(sessions),
+    [sessions]
+  );
+
   if (!loaded) {
     return (
       <div className="flex items-center justify-center py-32">
@@ -367,34 +655,29 @@ export default function ProgressPage() {
     );
   }
 
-  const stats = getStats();
-
   const applyResetScope = (scope: ResetScope) => {
     if (scope === "all" || scope === "progress") {
       clearAll();
     }
     if (scope === "all" || scope === "adaptive") {
-      defaultAdaptiveStatsStore.clear(LOCAL_USER_ID);
+      defaultAdaptiveStatsStore.clear(activeUserId);
       if (typeof window !== "undefined") {
-        localStorage.removeItem("part107_flashcard_sr");
+        localStorage.removeItem(userScopedStorageKey(FLASHCARD_SR_STORAGE_KEY, activeUserId));
       }
     }
     if (scope === "all" || scope === "telemetry") {
-      defaultAttemptEventStore.clear(LOCAL_USER_ID);
-      defaultLearningEventStore.clear(LOCAL_USER_ID);
+      defaultAttemptEventStore.clear(activeUserId);
+      defaultLearningEventStore.clear(activeUserId);
     }
     if (scope === "all") {
-      clearLearnDraft();
+      clearLearnDraft(activeUserId);
     }
   };
 
   const handleExportData = () => {
     if (typeof window === "undefined") return;
 
-    const data: Record<string, string | null> = {};
-    for (const key of PORTABLE_EXPORT_KEYS) {
-      data[key] = localStorage.getItem(key);
-    }
+    const data = readPortableStateForUser(PORTABLE_EXPORT_KEYS, activeUserId);
 
     const payload: PortableProgressSnapshot = {
       version: 1,
@@ -415,7 +698,7 @@ export default function ProgressPage() {
   };
 
   const handleExportTelemetryBundle = () => {
-    const payload = buildTelemetrySupportBundle(LOCAL_USER_ID);
+    const payload = buildTelemetrySupportBundle(activeUserId);
     downloadJsonFile(
       `part107-telemetry-support-${new Date().toISOString().slice(0, 10)}.json`,
       payload
@@ -464,7 +747,7 @@ export default function ProgressPage() {
 
   const applyPendingImport = () => {
     if (!pendingImportSnapshot || typeof window === "undefined") return;
-    const currentData = readCurrentLocalData(PORTABLE_EXPORT_KEYS);
+    const currentData = readPortableStateForUser(PORTABLE_EXPORT_KEYS, activeUserId);
     const effectiveSnapshotData = { ...pendingImportSnapshot.data };
     for (const key of PORTABLE_EXPORT_KEYS) {
       if (conflictResolutionByKey[key] === "local") {
@@ -478,14 +761,7 @@ export default function ProgressPage() {
       importMergeMode
     );
 
-    for (const key of PORTABLE_EXPORT_KEYS) {
-      const value = resolvedData[key] ?? null;
-      if (value === null || value === undefined) {
-        localStorage.removeItem(key);
-      } else {
-        localStorage.setItem(key, value);
-      }
-    }
+    writePortableStateForUser(PORTABLE_EXPORT_KEYS, activeUserId, resolvedData);
 
     logEvent({
       type: "import_applied",
@@ -546,7 +822,7 @@ export default function ProgressPage() {
     setSyncPending(true);
     setSyncStatus(null);
     try {
-      const data = readCurrentLocalData(PORTABLE_EXPORT_KEYS);
+      const data = readPortableStateForUser(PORTABLE_EXPORT_KEYS, syncUserId);
       const response = await withSyncAuthRetry(async (token) =>
         fetch("/api/sync/upload", {
           method: "POST",
@@ -595,7 +871,7 @@ export default function ProgressPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           mode: importMergeMode,
-          data: readCurrentLocalData(PORTABLE_EXPORT_KEYS),
+          data: readPortableStateForUser(PORTABLE_EXPORT_KEYS, activeUserId),
         }),
       });
       const body = await response.json();
@@ -913,7 +1189,10 @@ export default function ProgressPage() {
             <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Sync User</div>
             <input
               value={syncUserId}
-              onChange={(event) => setSyncUserId(event.target.value.trim() || SYNC_DEFAULT_USER_ID)}
+              onChange={(event) => {
+                syncUserOverriddenRef.current = true;
+                setSyncUserId(event.target.value.trim() || SYNC_DEFAULT_USER_ID);
+              }}
               className="mt-1 w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-white"
             />
           </div>
@@ -971,6 +1250,135 @@ export default function ProgressPage() {
         </div>
       </div>
 
+      {authenticatedUserId && (
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <div className="text-sm font-semibold text-white">Issue Triage</div>
+              <div className="mt-1 text-xs text-[var(--muted)]">
+                Prioritize question fixes based on submitted in-question issue reports.
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Link
+                href="/study?collection=bookmarks&type=confirmed_test"
+                onClick={() =>
+                  logEvent({
+                    type: "link_opened",
+                    mode: "progress",
+                    metadata: { target: "issue_triage_open_bookmark_queue", href: "/study?collection=bookmarks&type=confirmed_test" },
+                  })
+                }
+                className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white"
+              >
+                Open Bookmark Queue
+              </Link>
+              <button
+                type="button"
+                onClick={() => void loadIssueTriageSummary()}
+                disabled={issueTriagePending}
+                className="rounded-lg border border-[var(--card-border)] px-3 py-1.5 text-xs text-[var(--muted)] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Refresh Issues
+              </button>
+            </div>
+          </div>
+          {issueTriageQueueStatus && (
+            <div className="mt-2 rounded-lg border border-brand-500/30 bg-brand-500/10 px-3 py-2 text-xs text-brand-200">
+              {issueTriageQueueStatus}
+            </div>
+          )}
+          {issueTriagePending && (
+            <div className="mt-3 text-xs text-[var(--muted)]">Loading issue triage…</div>
+          )}
+          {!issueTriagePending && issueTriageError && (
+            <div className="mt-3 rounded-lg border border-incorrect/30 bg-incorrect/10 px-3 py-2 text-xs text-incorrect">
+              Issue triage unavailable: {issueTriageError}
+            </div>
+          )}
+          {!issueTriagePending && !issueTriageError && issueTriageSummary && (
+            <div className="mt-3 space-y-3">
+              <div className="grid gap-2 sm:grid-cols-3">
+                <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2">
+                  <div className="text-[10px] uppercase tracking-wider text-[var(--muted)]">Total Reports</div>
+                  <div className="text-lg font-semibold text-white">{issueTriageSummary.totalReports}</div>
+                </div>
+                <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2">
+                  <div className="text-[10px] uppercase tracking-wider text-[var(--muted)]">Questions Flagged</div>
+                  <div className="text-lg font-semibold text-white">{issueTriageSummary.uniqueQuestionCount}</div>
+                </div>
+                <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2">
+                  <div className="text-[10px] uppercase tracking-wider text-[var(--muted)]">Last Report</div>
+                  <div className="text-lg font-semibold text-white">
+                    {issueTriageSummary.latestReportAt ? timeAgo(issueTriageSummary.latestReportAt) : "none"}
+                  </div>
+                </div>
+              </div>
+              {issueModeBreakdown.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {issueModeBreakdown.map((entry) => (
+                    <span
+                      key={entry.mode}
+                      className="rounded-full border border-[var(--card-border)] px-2 py-0.5 text-[11px] text-[var(--muted)]"
+                    >
+                      {formatIssueMode(entry.mode)}: {entry.count}
+                    </span>
+                  ))}
+                </div>
+              )}
+              {issueCategoryBreakdown.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {issueCategoryBreakdown.map(([category, count]) => (
+                    <span
+                      key={category}
+                      className="rounded-full border border-brand-500/25 bg-brand-500/10 px-2 py-0.5 text-[11px] text-brand-200"
+                    >
+                      {category}: {count}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <div>
+                <div className="text-xs font-semibold text-white">Top Reported Questions</div>
+                {issueTriageSummary.topQuestions.length === 0 ? (
+                  <div className="mt-1 text-xs text-[var(--muted)]">No issue reports submitted yet.</div>
+                ) : (
+                  <ul className="mt-2 space-y-2">
+                    {issueTriageSummary.topQuestions.map((row) => (
+                      <li
+                        key={row.questionId}
+                        className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2"
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0 space-y-0.5">
+                            <div className="text-[11px] text-[var(--muted)]">
+                              {row.questionId} • {row.category}
+                            </div>
+                            <div className="text-sm text-white">{row.questionText}</div>
+                            <div className="truncate text-xs text-[var(--muted)]">Latest note: {row.latestNote}</div>
+                          </div>
+                          <div className="shrink-0 text-right text-xs">
+                            <div className="font-semibold text-white">{row.reportCount} reports</div>
+                            <div className="text-[var(--muted)]">{timeAgo(row.latestReportAt)}</div>
+                            <button
+                              type="button"
+                              onClick={() => queueIssueQuestionForReview(row.questionId)}
+                              className="mt-1 rounded border border-[var(--card-border)] px-2 py-1 text-[11px] text-[var(--muted)] hover:text-white"
+                            >
+                              Queue for Review
+                            </button>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {pendingImportSnapshot && (
         <div className="rounded-xl border border-brand-500/30 bg-brand-500/10 p-4 text-sm">
           <div className="font-semibold text-white">Import Preview</div>
@@ -1006,7 +1414,7 @@ export default function ProgressPage() {
             <div>
               <div className="mb-1 text-xs uppercase tracking-wider text-[var(--muted)]">Preview</div>
               {(() => {
-                const currentData = readCurrentLocalData(PORTABLE_EXPORT_KEYS);
+                const currentData = readPortableStateForUser(PORTABLE_EXPORT_KEYS, activeUserId);
                 const preview = computeImportPreview(
                   pendingImportSnapshot.data,
                   currentData,
@@ -1169,7 +1577,9 @@ export default function ProgressPage() {
       {activeTab === "overview" && (
         <OverviewTab
           stats={stats}
+          sessionActivityInsights={sessionActivityInsights}
           adaptiveInsights={adaptiveInsights}
+          responseTimeTelemetry={responseTimeTelemetry}
           learningEventInsights={learningEventInsights}
           onTelemetryFilterChange={(metadata) =>
             logEvent({
@@ -1222,12 +1632,16 @@ function StatCard({
 // ─────────────────────────────────────────────
 function OverviewTab({
   stats,
+  sessionActivityInsights,
   adaptiveInsights,
+  responseTimeTelemetry,
   learningEventInsights,
   onTelemetryFilterChange,
 }: {
   stats: ReturnType<ReturnType<typeof useProgress>["getStats"]>;
+  sessionActivityInsights: SessionActivityInsights;
   adaptiveInsights: ReturnType<typeof computeAdaptiveInsights>;
+  responseTimeTelemetry: ReturnType<typeof computeResponseTimeTelemetry>;
   learningEventInsights: LearningEventInsights;
   onTelemetryFilterChange: (metadata: Record<string, string | number | boolean | null>) => void;
 }) {
@@ -1276,6 +1690,87 @@ function OverviewTab({
 
   return (
     <div className="space-y-6">
+      {sessionActivityInsights.activeDays > 0 && (
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
+          <h3 className="mb-4 font-semibold text-white">🔥 Session Momentum</h3>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Current Daily Streak</div>
+              <div className="mt-1 text-2xl font-bold text-white">
+                {sessionActivityInsights.currentDailyStreak} day
+                {sessionActivityInsights.currentDailyStreak === 1 ? "" : "s"}
+              </div>
+              <div className="mt-1 text-xs text-[var(--muted)]">
+                Longest: {sessionActivityInsights.longestDailyStreak} day
+                {sessionActivityInsights.longestDailyStreak === 1 ? "" : "s"}
+              </div>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Active Days</div>
+              <div className="mt-1 text-2xl font-bold text-white">{sessionActivityInsights.activeDays}</div>
+              <div className="mt-1 text-xs text-[var(--muted)]">Days with at least one recorded session</div>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Sessions (30d)</div>
+              <div className="mt-1 text-2xl font-bold text-white">
+                {sessionActivityInsights.dailyPoints.reduce((sum, point) => sum + point.count, 0)}
+              </div>
+              <div className="mt-1 text-xs text-[var(--muted)]">Rolling 30-day completion volume</div>
+            </div>
+          </div>
+
+          <div className="mt-4 rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-3">
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
+              Daily Trend (30 days)
+            </div>
+            <div className="flex items-end gap-1" style={{ height: 88 }}>
+              {sessionActivityInsights.dailyPoints.map((point) => {
+                const heightPx = point.count > 0 ? Math.min(84, 10 + point.count * 8) : 4;
+                return (
+                  <div key={point.dateKey} className="group relative flex flex-1 flex-col items-center">
+                    <div
+                      className={`w-full max-w-[12px] rounded-t transition-all ${
+                        point.count > 0 ? "bg-brand-500/70 group-hover:bg-brand-400" : "bg-[var(--card-border)]"
+                      }`}
+                      style={{ height: `${heightPx}px` }}
+                    />
+                    {point.count > 0 && (
+                      <div className="absolute -top-7 hidden rounded bg-[var(--background)] px-1.5 py-0.5 text-[10px] text-white shadow group-hover:block">
+                        {point.count}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-2 flex justify-between text-[10px] text-[var(--muted)]">
+              <span>{sessionActivityInsights.dailyPoints[0]?.label}</span>
+              <span>{sessionActivityInsights.dailyPoints[sessionActivityInsights.dailyPoints.length - 1]?.label}</span>
+            </div>
+          </div>
+
+          <div className="mt-4 rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-3">
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
+              Weekly Trend (8 weeks)
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {sessionActivityInsights.weeklyPoints.map((point) => (
+                <div
+                  key={point.weekKey}
+                  className="flex items-center justify-between rounded border border-[var(--card-border)] px-2 py-1.5 text-xs"
+                >
+                  <span className="text-white">Week of {point.label}</span>
+                  <span className="text-[var(--muted)]">
+                    {point.count} session{point.count === 1 ? "" : "s"}
+                    {point.passRatePercent !== null ? ` • ${point.passRatePercent}% pass` : ""}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {adaptiveInsights.trackedQuestions > 0 && (
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
           <h3 className="mb-4 font-semibold text-white">🧠 Adaptive Insights</h3>
@@ -1374,6 +1869,84 @@ function OverviewTab({
             <div>
               Confidence samples:{" "}
               <span className="font-medium text-white">{adaptiveInsights.confidenceAttemptCount}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {responseTimeTelemetry.attempts > 0 && (
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
+          <h3 className="mb-4 font-semibold text-white">⏱️ Response-Time Telemetry QA</h3>
+          <div className="grid gap-3 sm:grid-cols-4">
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Samples</div>
+              <div className="mt-1 text-2xl font-bold text-white">
+                {responseTimeTelemetry.sampled}/{responseTimeTelemetry.attempts}
+              </div>
+              <div className="mt-1 text-xs text-[var(--muted)]">
+                with non-null response time
+              </div>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">P50 / P95</div>
+              <div className="mt-1 text-2xl font-bold text-white">
+                {responseTimeTelemetry.p50Ms !== null ? `${responseTimeTelemetry.p50Ms}ms` : "—"}
+              </div>
+              <div className="mt-1 text-xs text-[var(--muted)]">
+                {responseTimeTelemetry.p95Ms !== null
+                  ? `P95 ${responseTimeTelemetry.p95Ms}ms`
+                  : "No percentile baseline yet"}
+              </div>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Null Rate</div>
+              <div
+                className={`mt-1 text-2xl font-bold ${
+                  responseTimeTelemetry.hasNullAnomaly ? "text-incorrect" : "text-white"
+                }`}
+              >
+                {responseTimeTelemetry.nullRatePercent}%
+              </div>
+              <div className="mt-1 text-xs text-[var(--muted)]">
+                {responseTimeTelemetry.nullCount} null values
+              </div>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
+              <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Zero Rate</div>
+              <div
+                className={`mt-1 text-2xl font-bold ${
+                  responseTimeTelemetry.hasZeroAnomaly ? "text-incorrect" : "text-white"
+                }`}
+              >
+                {responseTimeTelemetry.zeroRatePercent}%
+              </div>
+              <div className="mt-1 text-xs text-[var(--muted)]">
+                {responseTimeTelemetry.zeroCount} zero/negative values
+              </div>
+            </div>
+          </div>
+          {(responseTimeTelemetry.hasNullAnomaly || responseTimeTelemetry.hasZeroAnomaly) && (
+            <div className="mt-4 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-200">
+              Telemetry anomaly detected. Review mode-level instrumentation for missing or zero
+              response times.
+            </div>
+          )}
+          <div className="mt-4 rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-3">
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
+              Mode Breakdown
+            </div>
+            <div className="space-y-1 text-xs text-[var(--muted)]">
+              {responseTimeTelemetry.modes.map((modeSummary) => (
+                <div key={modeSummary.mode} className="flex items-center justify-between gap-3">
+                  <span className="text-white">
+                    {modeSummary.mode} ({modeSummary.sampled}/{modeSummary.attempts})
+                  </span>
+                  <span>
+                    null {modeSummary.nullRatePercent}% / zero {modeSummary.zeroRatePercent}% / p95{" "}
+                    {modeSummary.p95Ms !== null ? `${modeSummary.p95Ms}ms` : "—"}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

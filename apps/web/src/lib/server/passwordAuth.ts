@@ -1,7 +1,10 @@
 import crypto from "node:crypto";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
+import { serverLogger } from "./logger";
+import { requireSecret } from "./requiredSecret";
 
 const MAGIC_LINK_TTL_SECONDS = 15 * 60; // 15 minutes
-const DEFAULT_DEV_MAGIC_SECRET = "part107-dev-magic-link-secret";
 
 interface MagicLinkPayload {
   email: string;
@@ -9,8 +12,20 @@ interface MagicLinkPayload {
   nonce: string;
 }
 
-function getMagicSecret(): string {
-  return process.env.MAGIC_LINK_SECRET?.trim() || DEFAULT_DEV_MAGIC_SECRET;
+interface PersistedMagicLinkConsumeStore {
+  version: 1;
+  consumedNonces: Record<string, number>;
+}
+
+const isVercel = process.env.VERCEL === "1";
+const MAGIC_LINK_STORE_DIR = isVercel ? "/tmp/.data" : path.join(process.cwd(), ".data");
+const MAGIC_LINK_STORE_FILE = path.join(
+  MAGIC_LINK_STORE_DIR,
+  "magic-link-consumed-v1.json"
+);
+
+declare global {
+  var __part107MagicLinkConsumeStore__: PersistedMagicLinkConsumeStore | undefined;
 }
 
 function base64UrlEncode(value: string): string {
@@ -23,6 +38,51 @@ function base64UrlDecode(value: string): string {
 
 function sign(data: string, secret: string): string {
   return crypto.createHmac("sha256", secret).update(data).digest("base64url");
+}
+
+async function loadConsumeStore(): Promise<PersistedMagicLinkConsumeStore> {
+  if (globalThis.__part107MagicLinkConsumeStore__) {
+    return globalThis.__part107MagicLinkConsumeStore__;
+  }
+
+  try {
+    const raw = await readFile(MAGIC_LINK_STORE_FILE, "utf8");
+    const parsed = JSON.parse(raw) as PersistedMagicLinkConsumeStore;
+    if (
+      parsed?.version === 1 &&
+      parsed.consumedNonces &&
+      typeof parsed.consumedNonces === "object"
+    ) {
+      globalThis.__part107MagicLinkConsumeStore__ = parsed;
+      return parsed;
+    }
+  } catch {
+    // fall through
+  }
+
+  const empty: PersistedMagicLinkConsumeStore = {
+    version: 1,
+    consumedNonces: {},
+  };
+  globalThis.__part107MagicLinkConsumeStore__ = empty;
+  return empty;
+}
+
+async function saveConsumeStore(store: PersistedMagicLinkConsumeStore): Promise<void> {
+  await mkdir(MAGIC_LINK_STORE_DIR, { recursive: true });
+  await writeFile(MAGIC_LINK_STORE_FILE, JSON.stringify(store), "utf8");
+  globalThis.__part107MagicLinkConsumeStore__ = store;
+}
+
+function pruneExpiredConsumedNonces(
+  consumedNonces: Record<string, number>,
+  nowEpochSeconds: number
+): void {
+  for (const [nonce, exp] of Object.entries(consumedNonces)) {
+    if (!Number.isFinite(exp) || exp < nowEpochSeconds) {
+      delete consumedNonces[nonce];
+    }
+  }
 }
 
 // ─── Email Validation ───
@@ -43,18 +103,24 @@ export function createMagicLinkToken(email: string): string {
     nonce: crypto.randomBytes(16).toString("hex"),
   };
   const encodedPayload = base64UrlEncode(JSON.stringify(payload));
-  const signature = sign(encodedPayload, getMagicSecret());
+  const signature = sign(
+    encodedPayload,
+    requireSecret("MAGIC_LINK_SECRET", "part107-test-magic-link-secret")
+  );
   return `magic.${encodedPayload}.${signature}`;
 }
 
-export function verifyMagicLinkToken(token: string): { email: string } | null {
+function parseMagicLinkTokenPayload(token: string): MagicLinkPayload | null {
   if (!token.startsWith("magic.")) return null;
   const parts = token.split(".");
   if (parts.length !== 3) return null;
 
   const encodedPayload = parts[1];
   const actualSignature = parts[2];
-  const expectedSignature = sign(encodedPayload, getMagicSecret());
+  const expectedSignature = sign(
+    encodedPayload,
+    requireSecret("MAGIC_LINK_SECRET", "part107-test-magic-link-secret")
+  );
 
   if (
     expectedSignature.length !== actualSignature.length ||
@@ -70,11 +136,45 @@ export function verifyMagicLinkToken(token: string): { email: string } | null {
     const payload = JSON.parse(base64UrlDecode(encodedPayload)) as MagicLinkPayload;
     if (!payload?.email || !isValidEmail(payload.email)) return null;
     if (!payload.exp || typeof payload.exp !== "number") return null;
-    if (payload.exp < Math.floor(Date.now() / 1000)) return null;
-    return { email: payload.email };
+    if (!payload.nonce || typeof payload.nonce !== "string") return null;
+    return payload;
   } catch {
     return null;
   }
+}
+
+export function verifyMagicLinkToken(token: string): { email: string } | null {
+  const payload = parseMagicLinkTokenPayload(token);
+  if (!payload) return null;
+  if (payload.exp < Math.floor(Date.now() / 1000)) return null;
+  return { email: payload.email };
+}
+
+export async function consumeMagicLinkToken(
+  token: string
+): Promise<{ email: string } | null> {
+  const payload = parseMagicLinkTokenPayload(token);
+  if (!payload) return null;
+
+  const nowEpochSeconds = Math.floor(Date.now() / 1000);
+  if (payload.exp < nowEpochSeconds) return null;
+
+  const store = await loadConsumeStore();
+  pruneExpiredConsumedNonces(store.consumedNonces, nowEpochSeconds);
+
+  if (store.consumedNonces[payload.nonce]) {
+    return null;
+  }
+
+  store.consumedNonces[payload.nonce] = payload.exp;
+  await saveConsumeStore(store);
+  return { email: payload.email };
+}
+
+export async function clearMagicLinkConsumeStoreForTests(): Promise<void> {
+  const store = await loadConsumeStore();
+  store.consumedNonces = {};
+  await saveConsumeStore(store);
 }
 
 // ─── Send Magic Link ───
@@ -125,11 +225,10 @@ export async function sendMagicLink(
     return { sent: true };
   }
 
-  // Dev mode: log to console
-  console.log("\n─── Magic Link (dev) ───");
-  console.log(`  Email: ${email}`);
-  console.log(`  URL:   ${verifyUrl}`);
-  console.log("────────────────────────\n");
+  serverLogger.info("Magic link generated in development mode", {
+    email,
+    verifyUrl,
+  });
 
   return { sent: true, devUrl: verifyUrl };
 }

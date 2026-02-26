@@ -33,7 +33,12 @@
       "banked-turn",
       "weight"
     ],
-    "acs_code": "UA.IV.A.K1a"
+    "acs_code": "UA.IV.A.K1a",
+    "source_pdf": "FAA-CT-8080-2H (Airman Knowledge Testing Supplement)",
+    "source_figure": "figure-2",
+    "source_page": null,
+    "source_locator": "Figure 2",
+    "concept_key": "acs:UA.IV.A.K1A|load_factors|lp_001"
   },
   {
     "id": "LP-002",
@@ -68,7 +73,8 @@
       "maneuvering",
       "structural-limits"
     ],
-    "acs_code": "UA.IV.A.K1a"
+    "acs_code": "UA.IV.A.K1a",
+    "concept_key": "acs:UA.IV.A.K1A|load_factors|lp_002"
   },
   {
     "id": "LP-003",
@@ -103,7 +109,8 @@
       "angle-of-attack",
       "aerodynamics"
     ],
-    "acs_code": "UA.IV.A.K1b"
+    "acs_code": "UA.IV.A.K1b",
+    "concept_key": "acs:UA.IV.A.K1B|aerodynamics|lp_003"
   },
   {
     "id": "LP-004",
@@ -138,372 +145,8 @@
       "weight-balance",
       "flight-manual"
     ],
-    "acs_code": "UA.IV.A.K1b"
-  },
-  {
-    "id": "LP-ACS-005",
-    "category": "Loading & Performance",
-    "subcategory": "Loading and Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.IV.A.K1?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "General loading and performance, including:"
-      },
-      {
-        "id": "B",
-        "text": "a. Effects of loading changes"
-      },
-      {
-        "id": "C",
-        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS."
-      },
-      {
-        "id": "D",
-        "text": "b. Balance, stability, and center of gravity"
-      }
-    ],
-    "correct_option_id": "A",
-    "explanation_correct": "UA.IV.A.K1 corresponds to: General loading and performance, including:",
-    "explanation_distractors": {
-      "B": "This is incorrect. UA.IV.A.K1 corresponds to: General loading and performance, including:",
-      "C": "This is incorrect. UA.IV.A.K1 corresponds to: General loading and performance, including:",
-      "D": "This is incorrect. UA.IV.A.K1 corresponds to: General loading and performance, including:"
-    },
-    "citation": "ACS UA.IV.A.K1",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "loading",
-      "performance",
-      "ua-iv-a-k1",
-      "weight-balance",
-      "part-107"
-    ],
-    "acs_code": "UA.IV.A.K1",
-    "source": "ACS Mastery (UA.IV.A.K1)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "LP-ACS-006",
-    "category": "Loading & Performance",
-    "subcategory": "Loading and Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"General loading and performance, including:\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.IV.A.K1a"
-      },
-      {
-        "id": "B",
-        "text": "UA.IV.A.K1"
-      },
-      {
-        "id": "C",
-        "text": "UA.IV.A.K2"
-      },
-      {
-        "id": "D",
-        "text": "UA.IV.A.K1b"
-      }
-    ],
-    "correct_option_id": "B",
-    "explanation_correct": "The matching knowledge code for this topic is UA.IV.A.K1.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K1.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K1.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K1."
-    },
-    "citation": "ACS UA.IV.A.K1",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "loading",
-      "performance",
-      "ua-iv-a-k1",
-      "weight-balance",
-      "part-107"
-    ],
-    "acs_code": "UA.IV.A.K1",
-    "source": "ACS Mastery (UA.IV.A.K1)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "LP-ACS-007",
-    "category": "Loading & Performance",
-    "subcategory": "Loading and Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.IV.A.K1a?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS."
-      },
-      {
-        "id": "B",
-        "text": "General loading and performance, including:"
-      },
-      {
-        "id": "C",
-        "text": "a. Effects of loading changes"
-      },
-      {
-        "id": "D",
-        "text": "b. Balance, stability, and center of gravity"
-      }
-    ],
-    "correct_option_id": "C",
-    "explanation_correct": "UA.IV.A.K1a corresponds to: a. Effects of loading changes",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.IV.A.K1a corresponds to: a. Effects of loading changes",
-      "B": "This is incorrect. UA.IV.A.K1a corresponds to: a. Effects of loading changes",
-      "D": "This is incorrect. UA.IV.A.K1a corresponds to: a. Effects of loading changes"
-    },
-    "citation": "ACS UA.IV.A.K1a",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "loading",
-      "performance",
-      "weight-balance",
-      "part-107",
-      "ua-iv-a-k1a"
-    ],
-    "acs_code": "UA.IV.A.K1a",
-    "source": "ACS Mastery (UA.IV.A.K1a)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "LP-ACS-008",
-    "category": "Loading & Performance",
-    "subcategory": "Loading and Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"a. Effects of loading changes\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.IV.A.K2"
-      },
-      {
-        "id": "B",
-        "text": "UA.IV.A.K1b"
-      },
-      {
-        "id": "C",
-        "text": "UA.IV.A.K1"
-      },
-      {
-        "id": "D",
-        "text": "UA.IV.A.K1a"
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "The matching knowledge code for this topic is UA.IV.A.K1a.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K1a.",
-      "B": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K1a.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K1a."
-    },
-    "citation": "ACS UA.IV.A.K1a",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "loading",
-      "performance",
-      "weight-balance",
-      "part-107",
-      "ua-iv-a-k1a"
-    ],
-    "acs_code": "UA.IV.A.K1a",
-    "source": "ACS Mastery (UA.IV.A.K1a)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "LP-ACS-009",
-    "category": "Loading & Performance",
-    "subcategory": "Loading and Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.IV.A.K1b?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "b. Balance, stability, and center of gravity"
-      },
-      {
-        "id": "B",
-        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS."
-      },
-      {
-        "id": "C",
-        "text": "General loading and performance, including:"
-      },
-      {
-        "id": "D",
-        "text": "a. Effects of loading changes"
-      }
-    ],
-    "correct_option_id": "A",
-    "explanation_correct": "UA.IV.A.K1b corresponds to: b. Balance, stability, and center of gravity",
-    "explanation_distractors": {
-      "B": "This is incorrect. UA.IV.A.K1b corresponds to: b. Balance, stability, and center of gravity",
-      "C": "This is incorrect. UA.IV.A.K1b corresponds to: b. Balance, stability, and center of gravity",
-      "D": "This is incorrect. UA.IV.A.K1b corresponds to: b. Balance, stability, and center of gravity"
-    },
-    "citation": "ACS UA.IV.A.K1b",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "loading",
-      "performance",
-      "ua-iv-a-k1b",
-      "weight-balance",
-      "part-107"
-    ],
     "acs_code": "UA.IV.A.K1b",
-    "source": "ACS Mastery (UA.IV.A.K1b)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "LP-ACS-010",
-    "category": "Loading & Performance",
-    "subcategory": "Loading and Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"b. Balance, stability, and center of gravity\"?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.IV.A.K2"
-      },
-      {
-        "id": "B",
-        "text": "UA.IV.A.K1a"
-      },
-      {
-        "id": "C",
-        "text": "UA.IV.A.K1b"
-      },
-      {
-        "id": "D",
-        "text": "UA.IV.A.K1"
-      }
-    ],
-    "correct_option_id": "C",
-    "explanation_correct": "The matching knowledge code for this topic is UA.IV.A.K1b.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K1b.",
-      "B": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K1b.",
-      "D": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K1b."
-    },
-    "citation": "ACS UA.IV.A.K1b",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "loading",
-      "performance",
-      "ua-iv-a-k1b",
-      "weight-balance",
-      "part-107"
-    ],
-    "acs_code": "UA.IV.A.K1b",
-    "source": "ACS Mastery (UA.IV.A.K1b)",
-    "source_type": "acs_generated"
-  },
-  {
-    "id": "LP-ACS-011",
-    "category": "Loading & Performance",
-    "subcategory": "Loading and Performance",
-    "question_text": "Under Part 107 ACS, which concept is covered by knowledge code UA.IV.A.K2?",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "General loading and performance, including:"
-      },
-      {
-        "id": "B",
-        "text": "a. Effects of loading changes"
-      },
-      {
-        "id": "C",
-        "text": "b. Balance, stability, and center of gravity"
-      },
-      {
-        "id": "D",
-        "text": "Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS."
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS.",
-    "explanation_distractors": {
-      "A": "This is incorrect. UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS.",
-      "B": "This is incorrect. UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS.",
-      "C": "This is incorrect. UA.IV.A.K2 corresponds to: Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS."
-    },
-    "citation": "ACS UA.IV.A.K2",
-    "difficulty_level": 2,
-    "tags": [
-      "acs-mastery",
-      "loading",
-      "ua-iv-a-k2",
-      "performance",
-      "weight-balance",
-      "part-107"
-    ],
-    "acs_code": "UA.IV.A.K2",
-    "source": "ACS Mastery (UA.IV.A.K2)",
-    "source_type": "acs_generated",
-    "image_ref": null
-  },
-  {
-    "id": "LP-ACS-012",
-    "category": "Loading & Performance",
-    "subcategory": "Loading and Performance",
-    "question_text": "Which ACS knowledge code matches this topic: \"Importance and use of performance data to calculate the effect on the aircraft’s performance of an sUAS.",
-    "figure_reference": null,
-    "options": [
-      {
-        "id": "A",
-        "text": "UA.IV.A.K1a"
-      },
-      {
-        "id": "B",
-        "text": "UA.IV.A.K1"
-      },
-      {
-        "id": "C",
-        "text": "UA.IV.A.K1b"
-      },
-      {
-        "id": "D",
-        "text": "UA.IV.A.K2"
-      }
-    ],
-    "correct_option_id": "D",
-    "explanation_correct": "The matching knowledge code for this topic is UA.IV.A.K2.",
-    "explanation_distractors": {
-      "A": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K2.",
-      "B": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K2.",
-      "C": "This is incorrect. The matching knowledge code for this topic is UA.IV.A.K2."
-    },
-    "citation": "ACS UA.IV.A.K2",
-    "difficulty_level": 3,
-    "tags": [
-      "acs-mastery",
-      "loading",
-      "ua-iv-a-k2",
-      "performance",
-      "weight-balance",
-      "part-107"
-    ],
-    "acs_code": "UA.IV.A.K2",
-    "source": "ACS Mastery (UA.IV.A.K2)",
-    "source_type": "acs_generated",
-    "image_ref": null
+    "concept_key": "acs:UA.IV.A.K1B|weight_balance|lp_004"
   },
   {
     "id": "LP-013",
@@ -545,7 +188,8 @@
       "loading"
     ],
     "acs_code": "UA.IV.A.K2",
-    "source": "Review.md"
+    "source": "Review.md",
+    "concept_key": "acs:UA.IV.A.K2|center_of_gravity|lp_013"
   },
   {
     "id": "LP-014",
@@ -587,7 +231,8 @@
       "loading"
     ],
     "acs_code": "UA.IV.A.K1",
-    "source": "Review.md"
+    "source": "Review.md",
+    "concept_key": "acs:UA.IV.A.K1|performance|lp_014"
   },
   {
     "id": "LP-015",
@@ -629,6 +274,7 @@
       "aerodynamics"
     ],
     "acs_code": "UA.IV.B.K1",
-    "source": "Review.md"
+    "source": "Review.md",
+    "concept_key": "acs:UA.IV.B.K1|aerodynamics|lp_015"
   }
 ]

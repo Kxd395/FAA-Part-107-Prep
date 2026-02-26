@@ -86,6 +86,46 @@ describe("POST /api/sync/upload", () => {
     expect(response.status).toBe(401);
   });
 
+  it("rejects snapshot payload with null data", async () => {
+    const response = await POST(
+      makeRequest(
+        {
+          userId: "u1",
+          mode: "merge",
+          snapshot: {
+            version: 1,
+            exportedAt: "2026-02-24T00:00:00.000Z",
+            data: null,
+          },
+        },
+        { "x-sync-user-id": "u1" }
+      )
+    );
+
+    expect(response.status).toBe(400);
+  });
+
+  it("rejects snapshot payload with non-string data values", async () => {
+    const response = await POST(
+      makeRequest(
+        {
+          userId: "u1",
+          mode: "merge",
+          snapshot: {
+            version: 1,
+            exportedAt: "2026-02-24T00:00:00.000Z",
+            data: {
+              part107_progress: 42,
+            },
+          },
+        },
+        { "x-sync-user-id": "u1" }
+      )
+    );
+
+    expect(response.status).toBe(400);
+  });
+
   it("rejects invalid snapshot signature when configured", async () => {
     process.env.SYNC_SIGNING_SECRET = "sync-secret";
     process.env.SYNC_SNAPSHOT_HMAC_SECRET = "snap-secret";

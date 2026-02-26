@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "../../hooks/useAuth";
+import { sanitizeReturnUrl } from "../../lib/returnUrl";
 
 interface GoogleCredentialResponse {
   credential?: string;
@@ -35,7 +36,7 @@ function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tokenFromUrl = searchParams.get("token");
-  const returnUrl = searchParams.get("returnUrl") || "/";
+  const returnUrl = sanitizeReturnUrl(searchParams.get("returnUrl"));
 
   const { user, refreshSession } = useAuth();
   const [email, setEmail] = useState("");

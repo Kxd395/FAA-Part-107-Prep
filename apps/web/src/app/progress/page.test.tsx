@@ -3,18 +3,17 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import ProgressPage from "./page";
 import { useProgress } from "../../hooks/useProgress";
+import { QUESTION_COLLECTION_STORAGE_KEY } from "../../lib/questionCollectionStore";
+import { userScopedStorageKey } from "../../lib/progressStorage";
+
+const useAuthMock = vi.fn();
 
 vi.mock("../../hooks/useProgress", () => ({
   useProgress: vi.fn(),
 }));
 
 vi.mock("../../hooks/useAuth", () => ({
-  useAuth: () => ({
-    user: null,
-    loading: false,
-    refreshSession: vi.fn(),
-    signOut: vi.fn(),
-  }),
+  useAuth: () => useAuthMock(),
 }));
 
 vi.mock("../../hooks/useLearningEventLogger", () => ({
@@ -32,6 +31,7 @@ const PORTABLE_KEYS = [
   "part107_learning_events_v1",
   "part107_flashcard_sr",
   "part107_learn_draft_v1",
+  "part107_question_collections_v1",
 ] as const;
 
 function makeSnapshot(
@@ -50,6 +50,13 @@ function makeSnapshot(
 beforeEach(() => {
   localStorage.clear();
   vi.restoreAllMocks();
+  useAuthMock.mockReset();
+  useAuthMock.mockReturnValue({
+    user: null,
+    loading: false,
+    refreshSession: vi.fn(),
+    signOut: vi.fn(),
+  });
   const mockedUseProgress = vi.mocked(useProgress);
   mockedUseProgress.mockReturnValue({
     loaded: true,
@@ -102,6 +109,15 @@ afterEach(() => {
 });
 
 describe("Progress import flows", () => {
+  it("renders session momentum analytics (daily streak and trend windows)", async () => {
+    render(<ProgressPage />);
+
+    expect(await screen.findByText(/Session Momentum/i)).toBeInTheDocument();
+    expect(screen.getByText(/Current Daily Streak/i)).toBeInTheDocument();
+    expect(screen.getByText(/Daily Trend \(30 days\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Weekly Trend \(8 weeks\)/i)).toBeInTheDocument();
+  });
+
   it("applies merge mode by default and keeps newest duplicate session", async () => {
     const user = userEvent.setup();
     localStorage.setItem(
@@ -421,5 +437,116 @@ describe("Progress import flows", () => {
     expect(await screen.findByText(/Conflict winners:/i)).toBeInTheDocument();
     expect(await screen.findByText(/Local 0/i)).toBeInTheDocument();
     expect(await screen.findByText(/Remote 1/i)).toBeInTheDocument();
+  });
+
+  it("shows response-time telemetry QA summary and anomaly alert", async () => {
+    localStorage.setItem(
+      "part107_attempt_events_v1",
+      JSON.stringify({
+        version: 1,
+        users: {
+          "local-user": Array.from({ length: 24 }, (_, index) => ({
+            attemptId: `a-${index}`,
+            userId: "local-user",
+            questionKey: `k-${index}`,
+            questionId: `Q-${index}`,
+            timestamp: "2026-02-24T00:00:00.000Z",
+            mode: index % 2 === 0 ? "practice" : "mock",
+            correct: index % 3 === 0,
+            responseTimeMs: index < 5 ? null : index < 8 ? 0 : 1500 + index * 20,
+            selectedOptionId: "A",
+            quizId: null,
+            topicTags: ["Regulations"],
+            difficulty: 2,
+            confidence: 3,
+          })),
+        },
+      })
+    );
+
+    render(<ProgressPage />);
+    expect(await screen.findByText(/Response-Time Telemetry QA/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Telemetry anomaly detected/i)).toBeInTheDocument();
+  });
+
+  it("renders authenticated issue triage summary cards and top question rows", async () => {
+    const user = userEvent.setup();
+    useAuthMock.mockReturnValue({
+      user: {
+        userId: "pilot-user",
+        email: "pilot@example.com",
+      },
+      loading: false,
+      refreshSession: vi.fn(),
+      signOut: vi.fn(),
+    });
+    vi.spyOn(global, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      if (url.includes("/api/user/question-issues/summary")) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            userId: "pilot-user",
+            limit: 8,
+            generatedAt: "2026-02-26T00:00:00.000Z",
+            summary: {
+              totalReports: 3,
+              uniqueQuestionCount: 2,
+              latestReportAt: "2026-02-26T00:00:00.000Z",
+              byMode: {
+                study: 2,
+                exam: 1,
+                learn: 0,
+                flashcards: 0,
+                missed: 0,
+                unknown: 0,
+              },
+              byCategory: {
+                Regulations: 2,
+                Airspace: 1,
+              },
+              topQuestions: [
+                {
+                  questionId: "RID-001",
+                  questionText: "When is Remote ID required?",
+                  category: "Regulations",
+                  subcategory: "Remote ID",
+                  reportCount: 2,
+                  latestReportAt: "2026-02-26T00:00:00.000Z",
+                  latestNote: "Remote ID wording is ambiguous.",
+                  byMode: {
+                    study: 1,
+                    exam: 1,
+                    learn: 0,
+                    flashcards: 0,
+                    missed: 0,
+                    unknown: 0,
+                  },
+                },
+              ],
+            },
+          }),
+        } as Response;
+      }
+      return {
+        ok: true,
+        status: 404,
+        json: async () => ({ error: "No account state found" }),
+      } as Response;
+    });
+
+    render(<ProgressPage />);
+    expect(await screen.findByText(/Issue Triage/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Total Reports/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Questions Flagged/i)).toBeInTheDocument();
+    expect(await screen.findByText(/RID-001/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Remote ID wording is ambiguous\./i)).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /Queue for Review/i }));
+    expect(await screen.findByText(/RID-001 queued in bookmarks\./i)).toBeInTheDocument();
+    const storedCollections = localStorage.getItem(
+      userScopedStorageKey(QUESTION_COLLECTION_STORAGE_KEY, "pilot-user")
+    );
+    expect(storedCollections).toContain("RID-001");
   });
 });
