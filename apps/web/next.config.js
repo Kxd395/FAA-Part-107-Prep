@@ -18,10 +18,19 @@ const nextConfig = {
 
   // Exclude large static assets from serverless function bundles (Vercel 250 MB limit).
   outputFileTracingExcludes: {
+    "/api/questions": [
+      "**/source-materials/**",
+      "**/PDFtoMD/**",
+      "**/out_to_ocr/**",
+      "**/public/**",
+      "**/.next/cache/**",
+    ],
     "*": [
-      "source-materials/**",
-      "apps/web/public/**",
-      ".next/cache/**",
+      "**/source-materials/**",
+      "**/PDFtoMD/**",
+      "**/out_to_ocr/**",
+      "**/public/charts/**",
+      "**/.next/cache/**",
     ],
   },
 

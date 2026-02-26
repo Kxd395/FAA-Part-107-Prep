@@ -1,0 +1,3 @@
+# Large directories that should not be included in serverless function bundles
+source-materials/
+apps/web/.next.bak.*
