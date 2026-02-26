@@ -176,9 +176,19 @@ struct RootTabView: View {
                     Label("Exam", systemImage: "target")
                 }
 
+            FlashcardsView()
+                .tabItem {
+                    Label("Flashcards", systemImage: "rectangle.stack")
+                }
+
             ProgressView()
                 .tabItem {
                     Label("Progress", systemImage: "chart.bar")
+                }
+
+            AuthView()
+                .tabItem {
+                    Label("Auth", systemImage: "person.circle")
                 }
         }
         .tint(BrandColor.primary)

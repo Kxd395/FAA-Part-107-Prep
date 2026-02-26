@@ -17,7 +17,9 @@
 		6962CD656C4CB81CCBDB50BE /* StudySessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF6A3F31C04435AD9316282 /* StudySessionViewModel.swift */; };
 		9FA9913FB92E3B1DD417F44A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05308F2AFA2E74736DA60259 /* HomeView.swift */; };
 		A987D3A46318D554D86E07DB /* QuestionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18B2B710BCF3F425DB3BD87 /* QuestionRepository.swift */; };
+		AC4F0F42D90BEE89DBC9BB9E /* FlashcardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8471AB19EFD6A1BB59AB1C8E /* FlashcardsView.swift */; };
 		B5AD06D6FBAC974D088D5983 /* BrandStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E727EE646890B5137448 /* BrandStyle.swift */; };
+		DBE17FC337D4CAD7FF617DD9 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0ACFEEAD7AFCAE52E7FD8 /* AuthView.swift */; };
 		E3255A049A886063B3F533CA /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66630E9C7CFD39B2861F3AA /* ProgressView.swift */; };
 		EF4504E84101E85CE98BACFA /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5AE739F82CB7444D39D66A /* AppConfig.swift */; };
 		F6E1603BD9E89856B59D52F6 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACA307138E3D3D5DAA74484 /* APIClient.swift */; };
@@ -46,8 +48,10 @@
 		4EA1E727EE646890B5137448 /* BrandStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandStyle.swift; sourceTree = "<group>"; };
 		53D0A8723F3FD5286C3E2200 /* Part107PrepTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = Part107PrepTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F16B3DA1CFBB37BF29C808A /* runtime_question_bank.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = runtime_question_bank.json; sourceTree = "<group>"; };
+		64F0ACFEEAD7AFCAE52E7FD8 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		75116E965E5B7387B3873F05 /* AppConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigTests.swift; sourceTree = "<group>"; };
 		7C5AE739F82CB7444D39D66A /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		8471AB19EFD6A1BB59AB1C8E /* FlashcardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardsView.swift; sourceTree = "<group>"; };
 		8BF6A3F31C04435AD9316282 /* StudySessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionViewModel.swift; sourceTree = "<group>"; };
 		9D298F0BEEEC38F34D5E175A /* UserSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSync.swift; sourceTree = "<group>"; };
 		C18B2B710BCF3F425DB3BD87 /* QuestionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRepository.swift; sourceTree = "<group>"; };
@@ -69,7 +73,9 @@
 		1D4B94FDEA1444DFF94B0B8A /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A88DF251251C8A9E45DC04DC /* Auth */,
 				70AC2DD4D3DB6CC733B09A80 /* Exam */,
+				FB58AB8B93CB8DA902BB74F7 /* Flashcards */,
 				747AE1B4DD53BA52DACED01F /* Home */,
 				B35CB0C679B1D1657751A897 /* Progress */,
 				F07E6B37B6E235C3496F1E92 /* Study */,
@@ -155,6 +161,14 @@
 			);
 			sourceTree = "<group>";
 		};
+		A88DF251251C8A9E45DC04DC /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				64F0ACFEEAD7AFCAE52E7FD8 /* AuthView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		B35CB0C679B1D1657751A897 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +229,14 @@
 				414E79976A19681857625985 /* StudyView.swift */,
 			);
 			path = Study;
+			sourceTree = "<group>";
+		};
+		FB58AB8B93CB8DA902BB74F7 /* Flashcards */ = {
+			isa = PBXGroup;
+			children = (
+				8471AB19EFD6A1BB59AB1C8E /* FlashcardsView.swift */,
+			);
+			path = Flashcards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,8 +331,10 @@
 				F6E1603BD9E89856B59D52F6 /* APIClient.swift in Sources */,
 				EF4504E84101E85CE98BACFA /* AppConfig.swift in Sources */,
 				229C6B5EF740A45C1059180E /* AppSessionStore.swift in Sources */,
+				DBE17FC337D4CAD7FF617DD9 /* AuthView.swift in Sources */,
 				B5AD06D6FBAC974D088D5983 /* BrandStyle.swift in Sources */,
 				1648FEC14E6A7198E1939A8F /* ExamView.swift in Sources */,
+				AC4F0F42D90BEE89DBC9BB9E /* FlashcardsView.swift in Sources */,
 				9FA9913FB92E3B1DD417F44A /* HomeView.swift in Sources */,
 				FFD7D8960329EABD13B1544A /* Part107PrepApp.swift in Sources */,
 				E3255A049A886063B3F533CA /* ProgressView.swift in Sources */,
