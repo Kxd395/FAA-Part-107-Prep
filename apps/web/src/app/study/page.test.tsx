@@ -11,6 +11,7 @@ import { writeLearningPreferences } from "../../lib/learningPreferencesStore";
 
 const mocks = vi.hoisted(() => ({
   searchParams: new URLSearchParams(),
+  logEvent: vi.fn(),
 }));
 
 function makeQuestion(id: string): Question {
@@ -77,13 +78,14 @@ vi.mock("../../hooks/useActiveUserId", () => ({
 
 vi.mock("../../hooks/useLearningEventLogger", () => ({
   useLearningEventLogger: () => ({
-    logEvent: vi.fn(),
+    logEvent: mocks.logEvent,
   }),
 }));
 
 describe("StudyPage", () => {
   beforeEach(() => {
     mocks.searchParams = new URLSearchParams();
+    mocks.logEvent.mockReset();
     localStorage.clear();
   });
 
@@ -233,5 +235,28 @@ describe("StudyPage", () => {
     });
     expect(preferredButton).toBeInTheDocument();
     expect(within(preferredButton).getByText(/Regulations \(2 questions\)/i)).toBeInTheDocument();
+  });
+
+  it("can save, exit, and resume an in-progress study session", async () => {
+    const user = userEvent.setup();
+    render(<StudyPage />);
+
+    await user.click(await screen.findByRole("button", { name: /All .*questions available/i }));
+    await user.click(screen.getByRole("button", { name: /^Exit$/i }));
+
+    expect(await screen.findByRole("button", { name: /Continue Session/i })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /Continue Session/i }));
+
+    expect(await screen.findByText(/Question 1 of 2/i)).toBeInTheDocument();
+    expect(
+      mocks.logEvent.mock.calls.some(
+        ([event]) => event?.type === "session_saved" && event?.mode === "study"
+      )
+    ).toBe(true);
+    expect(
+      mocks.logEvent.mock.calls.some(
+        ([event]) => event?.type === "session_resumed" && event?.mode === "study"
+      )
+    ).toBe(true);
   });
 });

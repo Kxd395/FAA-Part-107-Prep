@@ -36,6 +36,12 @@ import {
   buildOptionPresentation,
   getDisplayLabelForOption,
 } from "../../lib/optionPresentation";
+import {
+  clearStudyDraft,
+  loadStudyDraft,
+  saveStudyDraft,
+  type StudyDraft,
+} from "../../lib/studyDraftStore";
 import { STUDY_CATEGORIES, countQuestionsByCategory, type StudyCategory } from "../../lib/questionBank";
 import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
 import {
@@ -186,6 +192,7 @@ function StudyPageClient() {
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const autoStarted = useRef(false);
   const [sessionSaved, setSessionSaved] = useState(false);
+  const [draftSession, setDraftSession] = useState<StudyDraft | null>(null);
   const [lastRecordedConfidence, setLastRecordedConfidence] = useState<1 | 2 | 3 | 4 | 5 | null>(null);
   const [selectedLengthPresetId, setSelectedLengthPresetId] = useState<(typeof STUDY_LENGTH_PRESETS)[number]["id"]>("full");
   const [selectedTimerPresetId, setSelectedTimerPresetId] = useState<(typeof STUDY_TIMER_PRESETS)[number]["id"]>("off");
@@ -234,10 +241,117 @@ function StudyPageClient() {
     study.sessionStartTime,
   ]);
 
+  const startStudyQuiz = useCallback(
+    (category: StudyCategory) => {
+      clearStudyDraft(activeUserId);
+      setDraftSession(null);
+      study.startQuiz(category, {
+        questionLimit: selectedLengthPreset.questionLimit,
+        timeLimitMs: selectedTimerPreset.timeLimitMs,
+      });
+      events.logEvent({
+        type: "session_started",
+        mode: "study",
+        category,
+        questionTypeProfile: selectedQuestionType,
+        metadata: {
+          question_limit: selectedLengthPreset.questionLimit ?? "all",
+          timed_drill_ms: selectedTimerPreset.timeLimitMs ?? 0,
+          pool_size: filteredQuestions.length,
+        },
+      });
+    },
+    [
+      activeUserId,
+      events,
+      filteredQuestions.length,
+      selectedLengthPreset.questionLimit,
+      selectedQuestionType,
+      selectedTimerPreset.timeLimitMs,
+      study,
+    ]
+  );
+
+  const resumeDraftSession = useCallback(() => {
+    if (!draftSession) return;
+    const remainingMs = Math.max(0, draftSession.session.remainingMs ?? 0);
+    const timeLimitMs = Math.max(0, draftSession.session.timeLimitMs ?? 0);
+    const resumedStartTime =
+      timeLimitMs > 0 ? Date.now() - Math.max(0, timeLimitMs - remainingMs) : Date.now();
+
+    setSelectedQuestionType(draftSession.selectedQuestionType);
+    study.restoreQuiz({
+      ...draftSession.session,
+      sessionStartTime: resumedStartTime,
+    });
+    clearStudyDraft(activeUserId);
+    setDraftSession(null);
+    setSessionSaved(false);
+    events.logEvent({
+      type: "session_resumed",
+      mode: "study",
+      category: draftSession.session.selectedCategory,
+      questionTypeProfile: draftSession.selectedQuestionType,
+      metadata: {
+        current_index: draftSession.session.currentIndex,
+        queue_size: draftSession.session.questions.length,
+      },
+    });
+  }, [activeUserId, draftSession, events, study]);
+
+  const discardDraftSession = useCallback(() => {
+    clearStudyDraft(activeUserId);
+    setDraftSession(null);
+  }, [activeUserId]);
+
   const handleSaveAndExit = useCallback(() => {
+    const draft: StudyDraft = {
+      version: 1,
+      updatedAt: new Date().toISOString(),
+      selectedQuestionType,
+      session: {
+        selectedCategory: study.selectedCategory,
+        questions: study.questions,
+        currentIndex: study.currentIndex,
+        selectedOption: study.selectedOption,
+        answerState: study.answerState,
+        score: study.score,
+        sessionStartTime: study.sessionStartTime,
+        questionResults: study.questionResults,
+        timeLimitMs: study.timeLimitMs,
+        remainingMs: study.remainingMs,
+        timedOut: study.timedOut,
+        lastStartOptions: {
+          questionLimit: selectedLengthPreset.questionLimit,
+          timeLimitMs: selectedTimerPreset.timeLimitMs,
+        },
+      },
+    };
+    saveStudyDraft(draft, activeUserId);
+    setDraftSession(draft);
+    events.logEvent({
+      type: "session_saved",
+      mode: "study",
+      category: study.selectedCategory,
+      questionTypeProfile: selectedQuestionType,
+      metadata: {
+        answered_count: study.questionResults.length,
+        current_index: study.currentIndex,
+        queue_size: study.questions.length,
+        timed_drill_remaining_ms: study.remainingMs,
+      },
+    });
     persistSession();
     study.resetToSetup();
-  }, [persistSession, study]);
+  }, [
+    activeUserId,
+    events,
+    persistSession,
+    selectedLengthPreset.questionLimit,
+    selectedQuestionType,
+    selectedTimerPreset.timeLimitMs,
+    study,
+  ]);
 
   useEffect(() => {
     setSelectedCollectionFilter(normalizeQuestionCollectionFilter(collectionParam));
@@ -247,6 +361,7 @@ function StudyPageClient() {
     setBookmarkedQuestionIds(readBookmarkedQuestionIds(activeUserId));
     setAvailableCollections(listQuestionCollections(activeUserId));
     setCollectionsHydrated(true);
+    setDraftSession(loadStudyDraft(activeUserId));
   }, [activeUserId]);
 
   useEffect(() => {
@@ -331,18 +446,13 @@ function StudyPageClient() {
 
     autoStarted.current = true;
     const matched = normalizeCategory(categoryParam);
-    study.startQuiz(matched ?? "All", {
-      questionLimit: selectedLengthPreset.questionLimit,
-      timeLimitMs: selectedTimerPreset.timeLimitMs,
-    });
+    startStudyQuiz(matched ?? "All");
   }, [
     categoryParam,
     loaded,
     activeUserId,
     presetHydratedForUserId,
-    selectedLengthPreset.questionLimit,
-    selectedTimerPreset.timeLimitMs,
-    study,
+    startStudyQuiz,
     weakFocusRequested,
   ]);
 
@@ -372,7 +482,9 @@ function StudyPageClient() {
   useEffect(() => {
     if (!study.isComplete) return;
     persistSession();
-  }, [persistSession, study.isComplete]);
+    clearStudyDraft(activeUserId);
+    setDraftSession(null);
+  }, [activeUserId, persistSession, study.isComplete]);
 
   useEffect(() => {
     setConfirmDeleteTemplateId(null);
@@ -419,6 +531,30 @@ function StudyPageClient() {
         {invalidCollectionParam && (
           <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
             Collection &quot;{collectionParam}&quot; is not available. Using all questions.
+          </div>
+        )}
+        {draftSession && (
+          <div className="rounded-xl border border-brand-500/30 bg-brand-500/10 px-4 py-3">
+            <div className="text-sm font-medium text-brand-300">You have a saved Study session.</div>
+            <div className="mt-1 text-xs text-[var(--muted)]">
+              {draftSession.session.selectedCategory} • Question {Math.min(draftSession.session.currentIndex + 1, draftSession.session.questions.length)} of {draftSession.session.questions.length}
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={resumeDraftSession}
+                className="rounded-lg border border-brand-500/40 bg-brand-500/20 px-3 py-2 text-xs font-medium text-brand-200 hover:bg-brand-500/30"
+              >
+                Continue Session
+              </button>
+              <button
+                type="button"
+                onClick={discardDraftSession}
+                className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-xs text-[var(--muted)] hover:text-white"
+              >
+                Discard Saved Session
+              </button>
+            </div>
           </div>
         )}
         {activeCollectionSummary && (
@@ -725,12 +861,7 @@ function StudyPageClient() {
         {preferredSetupCategory !== "All" && (
           <button
             type="button"
-            onClick={() =>
-              study.startQuiz(preferredSetupCategory, {
-                questionLimit: selectedLengthPreset.questionLimit,
-                timeLimitMs: selectedTimerPreset.timeLimitMs,
-              })
-            }
+            onClick={() => startStudyQuiz(preferredSetupCategory)}
             className="w-full rounded-xl border border-brand-500/50 bg-brand-500/10 px-4 py-3 text-left transition-colors hover:bg-brand-500/20"
           >
             <div className="text-sm font-semibold text-white">Start Preferred Category</div>
@@ -746,10 +877,7 @@ function StudyPageClient() {
               key={category}
               onClick={() => {
                 setPreferredSetupCategory(category);
-                study.startQuiz(category, {
-                  questionLimit: selectedLengthPreset.questionLimit,
-                  timeLimitMs: selectedTimerPreset.timeLimitMs,
-                });
+                startStudyQuiz(category);
               }}
               className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 text-left transition-all hover:border-brand-500/50 hover:scale-[1.02]"
             >

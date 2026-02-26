@@ -114,6 +114,7 @@ Mobile:
 | `study.setup.collection_create` | Create Collection | input + button | setup phase | non-empty valid name | create a new named collection and make it active filter | none | `part107_question_collections_v1[:<userId>]`, `selectedCollectionFilter` | invalid/blank name shows notice | none |
 | `study.setup.length_preset[*]` | Session Length preset | button | setup phase | always | select per-run question cap preset (`all`, `60`, `40`, `20`, `10`, `5`) | none | `selectedLengthPresetId` | none | none |
 | `study.setup.timer_preset[*]` | Timed Drill preset | button | setup phase | always | select per-run timer override (untimed/5m/10m/15m) | none | `selectedTimerPresetId` | none | none |
+| `study.setup.resume_saved` | Continue Session | button | setup phase with saved study draft | always | restore in-progress queue/state and continue from last position | none | `quizStarted=true`, saved draft cleared | stale draft can be discarded via setup control | `session_resumed` |
 | `study.setup.category[*]` | Category card | button | setup phase | always | start quiz for category | none | `quizStarted`, `questions`, score reset | zero-question outcome leads to immediate completion UI | none |
 | `study.question.bookmark` | Bookmark / Bookmarked | button | quiz in-progress | always | toggle current question in bookmark collection | none | `part107_question_collections_v1[:<userId>]` + local bookmark state | none | none |
 | `study.answer.option[*]` | randomized A/B/C/D answer choice | button | quiz in-progress | `answerState == unanswered` | submit selected answer immediately with current selected confidence and reveal feedback | none | `selectedOption`, `answerState`, score, questionResults, `lastRecordedConfidence` | no server error path | `answer_submitted` (`metadata.confidence`) |
@@ -169,9 +170,10 @@ State transitions:
   - Per-user collections (bookmarks + named) for optional setup filtering and in-session bookmark toggles
 - Data sources:
   - API (`useQuestionBank`)
-  - localStorage (`part107_adaptive_stats_v2`, `part107_attempt_events_v1`, `part107_learning_events_v1`, `part107_progress`, `part107_study_setup_v1:<userId>`, `part107_default_question_type_v1:<userId>`, `part107_question_collections_v1[:<userId>]`)
+- localStorage (`part107_adaptive_stats_v2`, `part107_attempt_events_v1`, `part107_learning_events_v1`, `part107_progress`, `part107_study_draft_v1[:<userId>]`, `part107_study_setup_v1:<userId>`, `part107_default_question_type_v1:<userId>`, `part107_question_collections_v1[:<userId>]`)
 - Partial-save behavior:
   - In-progress `Save & Exit` writes answered subset to `part107_progress`.
+  - In-progress `Save & Exit` writes resumable state to `part107_study_draft_v1[:<userId>]` for setup resume.
   - If no answered questions exist, `Exit` returns to setup without persistence.
 - Cache invalidation rules:
   - Question fetch uses `cache: no-store`

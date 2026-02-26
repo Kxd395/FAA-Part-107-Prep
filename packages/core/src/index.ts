@@ -42,6 +42,7 @@ export type {
   UseStudySessionOptions,
   UseStudySessionResult,
   StudyScore,
+  StudySessionSnapshot,
 } from "./studySession";
 export type {
   ExamPhase,

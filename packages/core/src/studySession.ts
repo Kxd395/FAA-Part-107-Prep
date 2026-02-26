@@ -70,6 +70,25 @@ export interface UseStudySessionResult<Q extends Question = Question> {
   nextQuestion: () => void;
   restartQuiz: () => void;
   resetToSetup: () => void;
+  restoreQuiz: (snapshot: StudySessionSnapshot<Q>) => void;
+}
+
+export interface StudySessionSnapshot<Q extends Question = Question> {
+  selectedCategory: StudyCategory;
+  questions: Q[];
+  currentIndex: number;
+  selectedOption: OptionId | null;
+  answerState: StudyAnswerState;
+  score: StudyScore;
+  sessionStartTime: number;
+  questionResults: ProgressQuestionResult[];
+  timeLimitMs: number;
+  remainingMs: number;
+  timedOut: boolean;
+  lastStartOptions?: {
+    questionLimit?: number | null;
+    timeLimitMs?: number | null;
+  };
 }
 
 export function useStudySession<Q extends Question = Question>({
@@ -247,6 +266,33 @@ export function useStudySession<Q extends Question = Question>({
     startQuiz(selectedCategory, lastStartOptions);
   }, [lastStartOptions, selectedCategory, startQuiz]);
 
+  const restoreQuiz = useCallback((snapshot: StudySessionSnapshot<Q>) => {
+    const safeQuestions = Array.isArray(snapshot.questions) ? snapshot.questions : [];
+    const clampedIndex = Math.max(0, Math.min(snapshot.currentIndex, safeQuestions.length));
+    const parsedTimeLimitMs =
+      Number.isFinite(snapshot.timeLimitMs) && snapshot.timeLimitMs > 0
+        ? Math.floor(snapshot.timeLimitMs)
+        : 0;
+    const parsedRemainingMs =
+      parsedTimeLimitMs > 0 && Number.isFinite(snapshot.remainingMs)
+        ? Math.max(0, Math.min(parsedTimeLimitMs, Math.floor(snapshot.remainingMs)))
+        : 0;
+
+    setSelectedCategory(snapshot.selectedCategory);
+    setQuestions(safeQuestions);
+    setCurrentIndex(clampedIndex);
+    setSelectedOption(snapshot.selectedOption ?? null);
+    setAnswerState(snapshot.answerState);
+    setScore(snapshot.score);
+    setSessionStartTime(snapshot.sessionStartTime);
+    setQuestionResults(Array.isArray(snapshot.questionResults) ? snapshot.questionResults : []);
+    setQuizStarted(true);
+    setTimeLimitMs(parsedTimeLimitMs);
+    setRemainingMs(parsedRemainingMs);
+    setTimedOut(Boolean(snapshot.timedOut));
+    setLastStartOptions(snapshot.lastStartOptions ?? {});
+  }, []);
+
   const isTimedDrill = quizStarted && timeLimitMs > 0;
   const isComplete = quizStarted && questions.length > 0 && currentIndex >= questions.length;
   useEffect(() => {
@@ -296,5 +342,6 @@ export function useStudySession<Q extends Question = Question>({
     nextQuestion,
     restartQuiz,
     resetToSetup,
+    restoreQuiz,
   };
 }

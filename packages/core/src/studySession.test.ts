@@ -187,4 +187,50 @@ describe("useStudySession", () => {
     expect(result.current.isComplete).toBe(true);
     expect(result.current.remainingMs).toBe(0);
   });
+
+  it("restores an in-progress snapshot", () => {
+    const bank = [makeQuestion("q1"), makeQuestion("q2")];
+    const { result } = renderHook(() =>
+      useStudySession({
+        allQuestions: bank,
+      })
+    );
+
+    act(() => {
+      result.current.restoreQuiz({
+        selectedCategory: "Regulations",
+        questions: bank,
+        currentIndex: 1,
+        selectedOption: "B",
+        answerState: "incorrect",
+        score: { correct: 0, total: 1 },
+        sessionStartTime: Date.now() - 120000,
+        questionResults: [
+          {
+            questionId: "q1",
+            userAnswer: "B",
+            correctAnswer: "A",
+            isCorrect: false,
+            category: "Regulations",
+          },
+        ],
+        timeLimitMs: 600000,
+        remainingMs: 480000,
+        timedOut: false,
+        lastStartOptions: {
+          questionLimit: 20,
+          timeLimitMs: 600000,
+        },
+      });
+    });
+
+    expect(result.current.quizStarted).toBe(true);
+    expect(result.current.currentIndex).toBe(1);
+    expect(result.current.currentQuestion?.id).toBe("q2");
+    expect(result.current.answerState).toBe("incorrect");
+    expect(result.current.selectedOption).toBe("B");
+    expect(result.current.score).toEqual({ correct: 0, total: 1 });
+    expect(result.current.remainingMs).toBeLessThanOrEqual(480000);
+    expect(result.current.remainingMs).toBeGreaterThan(470000);
+  });
 });
