@@ -9,6 +9,8 @@ struct ExamView: View {
                 description: Text("Foundation scaffold is in place. Next slice: timed exam session + review pass + scoring summary parity with web.")
             )
             .navigationTitle("Exam")
+            .foregroundStyle(BrandColor.textPrimary)
+            .brandScreen()
         }
     }
 }

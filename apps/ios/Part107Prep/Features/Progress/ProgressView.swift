@@ -22,24 +22,24 @@ struct ProgressView: View {
                 Button("Refresh") {
                     Task { await appState.refreshScoringSummary() }
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(PrimaryBrandButton())
                 Spacer()
             }
             .padding()
             .navigationTitle("Progress")
+            .foregroundStyle(BrandColor.textPrimary)
+            .brandScreen()
         }
     }
 
     private func statRow(title: String, value: String) -> some View {
         HStack {
             Text(title)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(BrandColor.textMuted)
             Spacer()
             Text(value)
                 .font(.headline)
         }
-        .padding()
-        .background(.thinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .brandCard()
     }
 }

@@ -18,13 +18,13 @@ struct StudyView: View {
                             viewModel.nextQuestion()
                             Task { await appState.persistStudyDraft() }
                         }
-                        .buttonStyle(.borderedProminent)
+                        .buttonStyle(PrimaryBrandButton())
 
                         Button("Restart") {
                             viewModel.startOver()
                             Task { await appState.persistStudyDraft() }
                         }
-                        .buttonStyle(.bordered)
+                        .buttonStyle(SecondaryBrandButton())
                     }
                 } else {
                     ContentUnavailableView("No Questions", systemImage: "tray", description: Text("No matching questions loaded."))
@@ -34,6 +34,8 @@ struct StudyView: View {
             }
             .padding()
             .navigationTitle("Study")
+            .foregroundStyle(BrandColor.textPrimary)
+            .brandScreen()
             .onChange(of: viewModel.selectedCategory) { _ in
                 Task { await appState.persistStudyDraft() }
             }
@@ -41,7 +43,7 @@ struct StudyView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Text("\(viewModel.currentIndex + 1)/\(max(viewModel.filteredQuestions.count, 1))")
                         .font(.footnote)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(BrandColor.textMuted)
                 }
             }
         }
@@ -64,17 +66,15 @@ struct StudyView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(question.category.rawValue)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(BrandColor.textMuted)
             Text(question.questionText)
                 .font(.headline)
             Text("Score: \(viewModel.scorePercent())%")
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(BrandColor.textMuted)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(.thinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .brandCard()
     }
 
     private func options(_ question: Question) -> some View {
@@ -92,7 +92,7 @@ struct StudyView: View {
                         Text(option.id)
                             .font(.subheadline.weight(.semibold))
                             .frame(width: 28, height: 28)
-                            .background(Color(.secondarySystemFill))
+                            .background(BrandColor.backgroundAlt)
                             .clipShape(Circle())
                         Text(option.text)
                             .multilineTextAlignment(.leading)
@@ -101,6 +101,10 @@ struct StudyView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(backgroundColor(question: question, optionId: option.id))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(BrandColor.border, lineWidth: 1)
+                    )
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
                 .buttonStyle(.plain)
@@ -110,16 +114,16 @@ struct StudyView: View {
             if viewModel.isAnswerSubmitted {
                 Text(question.explanationCorrect)
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(BrandColor.textMuted)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
     }
 
     private func backgroundColor(question: Question, optionId: String) -> Color {
-        guard viewModel.isAnswerSubmitted else { return Color(.secondarySystemBackground) }
-        if optionId == question.correctOptionId { return Color.green.opacity(0.22) }
-        if optionId == viewModel.selectedOptionId { return Color.red.opacity(0.22) }
-        return Color(.secondarySystemBackground)
+        guard viewModel.isAnswerSubmitted else { return BrandColor.card.opacity(0.92) }
+        if optionId == question.correctOptionId { return BrandColor.success }
+        if optionId == viewModel.selectedOptionId { return BrandColor.danger }
+        return BrandColor.card.opacity(0.92)
     }
 }

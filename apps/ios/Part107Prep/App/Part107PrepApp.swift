@@ -181,5 +181,7 @@ struct RootTabView: View {
                     Label("Progress", systemImage: "chart.bar")
                 }
         }
+        .tint(BrandColor.primary)
+        .preferredColorScheme(.dark)
     }
 }

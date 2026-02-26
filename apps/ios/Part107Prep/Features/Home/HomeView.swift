@@ -12,7 +12,7 @@ struct HomeView: View {
                         Text("Part 107 Prep")
                             .font(.largeTitle.weight(.bold))
                         Text("Shared backend + local fallback ready")
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(BrandColor.textMuted)
                     }
                     .padding(.top, 24)
 
@@ -23,7 +23,7 @@ struct HomeView: View {
                             .font(.headline)
                         Text(appState.syncStatus)
                             .font(.footnote)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(BrandColor.textMuted)
                         TextField("Dev user id", text: $devUserId)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
@@ -32,22 +32,20 @@ struct HomeView: View {
                             Button("Sign In (Dev)") {
                                 Task { await appState.signInForDevelopment(userId: devUserId) }
                             }
-                            .buttonStyle(.borderedProminent)
+                            .buttonStyle(PrimaryBrandButton())
                             Button("Sign Out") {
                                 Task { await appState.signOut() }
                             }
-                            .buttonStyle(.bordered)
+                            .buttonStyle(SecondaryBrandButton())
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .background(.thinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .brandCard()
 
                     if let loadedAt = appState.loadedAt {
                         Text("Last sync: \(loadedAt.formatted(date: .omitted, time: .shortened))")
                             .font(.footnote)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(BrandColor.textMuted)
                     }
 
                     if let error = appState.lastError {
@@ -61,6 +59,8 @@ struct HomeView: View {
                 .padding()
             }
             .navigationTitle("Home")
+            .foregroundStyle(BrandColor.textPrimary)
+            .brandScreen()
         }
     }
 
@@ -78,11 +78,10 @@ struct HomeView: View {
                 .font(.title3.weight(.semibold))
             Text(title)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(BrandColor.textMuted)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
-        .background(.thinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .brandCard()
     }
 }
