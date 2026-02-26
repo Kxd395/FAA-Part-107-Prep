@@ -3,11 +3,26 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
+  EXAM_DEFAULTS,
+  FULL_EXAM_QUESTION_COUNT,
   QUESTION_TYPE_PROFILE_LABELS,
   type QuestionTypeProfile,
 } from "@part107/core";
+import { useActiveUserId } from "../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../hooks/useLearningEventLogger";
-import { LOCAL_USER_ID } from "../lib/analyticsTaxonomy";
+import { useQuestionBank } from "../hooks/useQuestionBank";
+import { STUDY_CATEGORIES, countQuestionsByCategory, type StudyCategory } from "../lib/questionBank";
+import {
+  readPreferredQuestionType,
+  writePreferredQuestionType,
+} from "../lib/questionTypePreferenceStore";
+import { SELECTABLE_QUESTION_TYPE_OPTIONS as QUESTION_TYPE_OPTIONS } from "../lib/questionTypeOptions";
+import { SOURCE_PACK_REGISTRY } from "../lib/sourcePackRegistry";
+import {
+  readLearningPreferences,
+  readWeeklyGoalProgress,
+  writeLearningPreferences,
+} from "../lib/learningPreferencesStore";
 
 const FEATURES = [
   {
@@ -68,50 +83,130 @@ const FEATURES = [
   },
 ];
 
-const STATS = [
-  { label: "Questions", value: "362", sub: "FAA ACS + official UAG sources" },
-  { label: "Pass Rate", value: "70%", sub: "42 of 60 to pass" },
-  { label: "Time Limit", value: "2 hrs", sub: "120 minutes on exam day" },
-  { label: "Updated", value: "2026", sub: "Remote ID & Ops Over People" },
-];
+const LATEST_SOURCE_PACK_AUDIT_YEAR = (() => {
+  const auditYears = SOURCE_PACK_REGISTRY.map((entry) => new Date(entry.lastAuditDate).getFullYear()).filter(
+    (year) => Number.isFinite(year)
+  );
+  if (auditYears.length === 0) return new Date().getFullYear();
+  return Math.max(...auditYears);
+})();
+const EXAM_MINUTES = Math.round(EXAM_DEFAULTS.TIME_LIMIT_MS / 60000);
+const EXAM_HOURS = Math.round((EXAM_MINUTES / 60) * 10) / 10;
 
-const QUESTION_TYPE_OPTIONS: Array<{
-  value: QuestionTypeProfile;
-  title: string;
-  description: string;
-}> = [
-  {
-    value: "confirmed_test",
-    title: "✅ Confirmed Test Questions",
-    description: "Only questions verified from the real FAA exam — Review.md, UAG, and SPA banks (70 questions).",
-  },
-  {
-    value: "all_random",
-    title: "🎲 All Questions (Random)",
-    description: "Full 362-question pool — confirmed test material plus ACS practice drills.",
-  },
-  {
-    value: "acs_practice",
-    title: "📚 ACS Practice Only",
-    description: "Only ACS-generated mastery drills. Excludes confirmed real-test questions.",
-  },
-  {
-    value: "real_exam",
-    title: "Real Exam MCQ (Legacy)",
-    description: "Standard FAA-style MCQs only. Excludes ACS code-mapping drill format questions.",
-  },
-  {
-    value: "weak_spots",
-    title: "🔥 Weak Spots Only",
-    description: "Targets realistic MCQs you miss most often.",
-  },
-];
+function normalizeStudyCategoryValue(value: string): StudyCategory {
+  return (STUDY_CATEGORIES as readonly string[]).includes(value) ? (value as StudyCategory) : "All";
+}
 
 export default function HomePage() {
-  const { logEvent } = useLearningEventLogger(LOCAL_USER_ID);
+  const activeUserId = useActiveUserId();
+  const { questions: allQuestions } = useQuestionBank();
+  const { logEvent } = useLearningEventLogger(activeUserId);
   const [practiceType, setPracticeType] = useState<QuestionTypeProfile>("confirmed_test");
-  const practiceExamHref = useMemo(() => `/exam?type=${encodeURIComponent(practiceType)}`, [practiceType]);
-  const studyHref = useMemo(() => `/study?type=${encodeURIComponent(practiceType)}`, [practiceType]);
+  const [defaultStudyCategory, setDefaultStudyCategory] = useState<StudyCategory>("All");
+  const [defaultExamCategory, setDefaultExamCategory] = useState<StudyCategory>("All");
+  const [defaultLearnBatchSize, setDefaultLearnBatchSize] = useState(5);
+  const [defaultFlashcardDailyReviewTarget, setDefaultFlashcardDailyReviewTarget] = useState(20);
+  const [weeklyStudyGoalSessions, setWeeklyStudyGoalSessions] = useState(5);
+  const [weeklyExamGoalSessions, setWeeklyExamGoalSessions] = useState(2);
+  const [learningPrefsHydratedForUserId, setLearningPrefsHydratedForUserId] = useState<string | null>(
+    null
+  );
+
+  // Initialize with null to avoid server/client hydration mismatch caused by Date.now()
+  const [weeklyProgress, setWeeklyProgress] = useState<{ studySessions: number, examSessions: number } | null>(null);
+  const topicCounts = useMemo(() => countQuestionsByCategory(allQuestions), [allQuestions]);
+  const totalQuestions = topicCounts.All ?? allQuestions.length;
+  const stats = useMemo(
+    () => [
+      { label: "Questions", value: String(totalQuestions), sub: "Live loaded question bank" },
+      {
+        label: "Pass Rate",
+        value: `${EXAM_DEFAULTS.PASSING_PERCENT}%`,
+        sub: `${EXAM_DEFAULTS.PASSING_COUNT} of ${FULL_EXAM_QUESTION_COUNT} to pass`,
+      },
+      { label: "Time Limit", value: `${EXAM_HOURS} hrs`, sub: `${EXAM_MINUTES} minutes on exam day` },
+      { label: "Updated", value: String(LATEST_SOURCE_PACK_AUDIT_YEAR), sub: "Source-pack audit year" },
+    ],
+    [totalQuestions]
+  );
+  const practiceExamHref = useMemo(() => {
+    const params = new URLSearchParams({ type: practiceType });
+    if (defaultExamCategory !== "All") {
+      params.set("category", defaultExamCategory);
+    }
+    return `/exam?${params.toString()}`;
+  }, [defaultExamCategory, practiceType]);
+  const studyHref = useMemo(() => {
+    const params = new URLSearchParams({ type: practiceType });
+    if (defaultStudyCategory !== "All") {
+      params.set("category", defaultStudyCategory);
+    }
+    return `/study?${params.toString()}`;
+  }, [defaultStudyCategory, practiceType]);
+  const studyBookmarksHref = useMemo(
+    () => {
+      const params = new URLSearchParams({ collection: "bookmarks", type: practiceType });
+      if (defaultStudyCategory !== "All") {
+        params.set("category", defaultStudyCategory);
+      }
+      return `/study?${params.toString()}`;
+    },
+    [defaultStudyCategory, practiceType]
+  );
+  const examBookmarksHref = useMemo(
+    () => {
+      const params = new URLSearchParams({ collection: "bookmarks", type: practiceType });
+      if (defaultExamCategory !== "All") {
+        params.set("category", defaultExamCategory);
+      }
+      return `/exam?${params.toString()}`;
+    },
+    [defaultExamCategory, practiceType]
+  );
+
+  useEffect(() => {
+    const preferred = readPreferredQuestionType(activeUserId);
+    if (preferred) {
+      setPracticeType(preferred);
+    }
+  }, [activeUserId]);
+
+  useEffect(() => {
+    const preferences = readLearningPreferences(activeUserId);
+    setDefaultStudyCategory(preferences.defaultStudyCategory);
+    setDefaultExamCategory(preferences.defaultExamCategory);
+    setDefaultLearnBatchSize(preferences.defaultLearnBatchSize);
+    setDefaultFlashcardDailyReviewTarget(preferences.defaultFlashcardDailyReviewTarget);
+    setWeeklyStudyGoalSessions(preferences.weeklyStudyGoalSessions);
+    setWeeklyExamGoalSessions(preferences.weeklyExamGoalSessions);
+    setWeeklyProgress(readWeeklyGoalProgress(activeUserId));
+    setLearningPrefsHydratedForUserId(activeUserId);
+  }, [activeUserId]);
+
+  useEffect(() => {
+    writePreferredQuestionType(activeUserId, practiceType);
+  }, [activeUserId, practiceType]);
+
+  useEffect(() => {
+    if (learningPrefsHydratedForUserId !== activeUserId) return;
+    writeLearningPreferences(activeUserId, {
+      defaultStudyCategory,
+      defaultExamCategory,
+      defaultLearnBatchSize,
+      defaultFlashcardDailyReviewTarget,
+      weeklyStudyGoalSessions,
+      weeklyExamGoalSessions,
+    });
+  }, [
+    activeUserId,
+    defaultFlashcardDailyReviewTarget,
+    defaultExamCategory,
+    defaultLearnBatchSize,
+    defaultStudyCategory,
+    learningPrefsHydratedForUserId,
+    weeklyExamGoalSessions,
+    weeklyStudyGoalSessions,
+  ]);
 
   useEffect(() => {
     logEvent({
@@ -207,12 +302,146 @@ export default function HomePage() {
           <p className="text-xs text-[var(--muted)]/80">
             UAG format is 60 questions, 2.0 hours, 70% passing. ACS codes appear on AKTR after testing to identify deficient areas.
           </p>
+          <div className="grid gap-2 pt-2 sm:grid-cols-2">
+            <label className="space-y-1 text-xs text-[var(--muted)]">
+              <span className="block uppercase tracking-wider">Default Study Category</span>
+              <select
+                value={defaultStudyCategory}
+                onChange={(event) =>
+                  setDefaultStudyCategory(normalizeStudyCategoryValue(event.target.value))
+                }
+                className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-2 py-1.5 text-xs text-white"
+              >
+                {STUDY_CATEGORIES.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="space-y-1 text-xs text-[var(--muted)]">
+              <span className="block uppercase tracking-wider">Default Exam Category</span>
+              <select
+                value={defaultExamCategory}
+                onChange={(event) =>
+                  setDefaultExamCategory(normalizeStudyCategoryValue(event.target.value))
+                }
+                className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-2 py-1.5 text-xs text-white"
+              >
+                {STUDY_CATEGORIES.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <div className="space-y-1">
+              <div className="text-[11px] uppercase tracking-wider text-[var(--muted)]">
+                Learn batch default
+              </div>
+              <div className="flex flex-wrap gap-1">
+                {[3, 5, 10, 15, 20].map((value) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setDefaultLearnBatchSize(value)}
+                    className={`rounded-md border px-2 py-1 text-[11px] ${defaultLearnBatchSize === value
+                      ? "border-brand-400 bg-brand-500/20 text-white"
+                      : "border-[var(--card-border)] text-[var(--muted)] hover:text-white"
+                      }`}
+                  >
+                    {value}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-[11px] uppercase tracking-wider text-[var(--muted)]">
+                Flashcards daily target
+              </div>
+              <div className="flex flex-wrap gap-1">
+                {[10, 20, 30, 50].map((value) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setDefaultFlashcardDailyReviewTarget(value)}
+                    className={`rounded-md border px-2 py-1 text-[11px] ${defaultFlashcardDailyReviewTarget === value
+                      ? "border-brand-400 bg-brand-500/20 text-white"
+                      : "border-[var(--card-border)] text-[var(--muted)] hover:text-white"
+                      }`}
+                  >
+                    {value}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-xs text-[var(--muted)]">
+            Weekly goals (last 7 days): Study {weeklyProgress?.studySessions ?? 0}/{weeklyStudyGoalSessions} / Exam{" "}
+            {weeklyProgress?.examSessions ?? 0}/{weeklyExamGoalSessions}
+          </div>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <div className="space-y-1">
+              <div className="text-[11px] uppercase tracking-wider text-[var(--muted)]">Study goal / week</div>
+              <div className="flex flex-wrap gap-1">
+                {[3, 5, 7, 10].map((value) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setWeeklyStudyGoalSessions(value)}
+                    className={`rounded-md border px-2 py-1 text-[11px] ${weeklyStudyGoalSessions === value
+                      ? "border-brand-400 bg-brand-500/20 text-white"
+                      : "border-[var(--card-border)] text-[var(--muted)] hover:text-white"
+                      }`}
+                  >
+                    {value}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-[11px] uppercase tracking-wider text-[var(--muted)]">Exam goal / week</div>
+              <div className="flex flex-wrap gap-1">
+                {[0, 1, 2, 3, 5].map((value) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setWeeklyExamGoalSessions(value)}
+                    className={`rounded-md border px-2 py-1 text-[11px] ${weeklyExamGoalSessions === value
+                      ? "border-brand-400 bg-brand-500/20 text-white"
+                      : "border-[var(--card-border)] text-[var(--muted)] hover:text-white"
+                      }`}
+                  >
+                    {value}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-3 pt-1 text-xs">
+            <Link
+              href={studyBookmarksHref}
+              onClick={() => logNavigation("hero_study_bookmarks", studyBookmarksHref)}
+              className="text-brand-400 hover:text-brand-300"
+            >
+              Study Bookmarks →
+            </Link>
+            <Link
+              href={examBookmarksHref}
+              onClick={() => logNavigation("hero_exam_bookmarks", examBookmarksHref)}
+              className="text-brand-400 hover:text-brand-300"
+            >
+              Exam from Bookmarks →
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Stats Bar */}
       <section className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        {STATS.map((stat) => (
+        {stats.map((stat) => (
           <div
             key={stat.label}
             className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-center"
@@ -262,11 +491,11 @@ export default function HomePage() {
         </p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { name: "Regulations", icon: "⚖️", count: 150, sub: "Operating Rules, Registration, Remote ID, Night Ops, Ops Over People, Waivers" },
-            { name: "Airspace", icon: "🗺️", count: 60, sub: "Classification, Special Use, TFRs, MOAs, NOTAMs, ATC Authorization" },
-            { name: "Weather", icon: "🌤️", count: 37, sub: "METARs, TAFs, Density Altitude, Stable/Unstable Air, Wind Shear, Fog" },
-            { name: "Operations", icon: "🛩️", count: 100, sub: "Airport Ops, ADM, Emergency, Radio Comms, Physiology, Maintenance, CRM" },
-            { name: "Loading & Performance", icon: "⚙️", count: 15, sub: "Load Factors, Stalls, Weight & Balance, CG Limits, Performance Charts" },
+            { name: "Regulations", icon: "⚖️", sub: "Operating Rules, Registration, Remote ID, Night Ops, Ops Over People, Waivers" },
+            { name: "Airspace", icon: "🗺️", sub: "Classification, Special Use, TFRs, MOAs, NOTAMs, ATC Authorization" },
+            { name: "Weather", icon: "🌤️", sub: "METARs, TAFs, Density Altitude, Stable/Unstable Air, Wind Shear, Fog" },
+            { name: "Operations", icon: "🛩️", sub: "Airport Ops, ADM, Emergency, Radio Comms, Physiology, Maintenance, CRM" },
+            { name: "Loading & Performance", icon: "⚙️", sub: "Load Factors, Stalls, Weight & Balance, CG Limits, Performance Charts" },
           ].map((topic) => (
             <div
               key={topic.name}
@@ -279,7 +508,7 @@ export default function HomePage() {
                     {topic.name}
                   </div>
                   <div className="text-xs text-[var(--muted)]">
-                    {topic.count} questions
+                    {topicCounts[topic.name as keyof typeof topicCounts] ?? 0} questions
                   </div>
                 </div>
               </div>
