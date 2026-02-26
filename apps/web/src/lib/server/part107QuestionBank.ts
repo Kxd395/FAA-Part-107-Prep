@@ -130,7 +130,7 @@ export function loadPart107QuestionBank(): Question[] {
         source_type: "resource_pack",
         tags: ["part107-bank", slug(topic)],
         concept_key: deriveConceptKey(reference, topic),
-      };
+      } as unknown as Question;
     })
     .filter((q): q is Question => Boolean(q));
 }

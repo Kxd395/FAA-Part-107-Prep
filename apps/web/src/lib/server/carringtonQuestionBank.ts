@@ -129,7 +129,7 @@ function loadCarringtonBankFile(relativePath: string, sourceName: string): Quest
         source_type: "resource_pack",
         tags,
         concept_key: deriveConceptKey(reference, topic),
-      };
+      } as unknown as Question;
     })
     .filter((q): q is Question => Boolean(q));
 }
