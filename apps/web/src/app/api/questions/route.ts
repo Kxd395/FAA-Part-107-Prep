@@ -91,8 +91,9 @@ function semanticTokenFingerprint(text: string): string {
 }
 
 function deriveConceptKey(question: Question): string | null {
-  if (typeof question.concept_key === "string" && question.concept_key.trim()) {
-    return question.concept_key.trim();
+  const existingConceptKey = (question as unknown as Record<string, unknown>).concept_key;
+  if (typeof existingConceptKey === "string" && existingConceptKey.trim()) {
+    return existingConceptKey.trim();
   }
 
   const topic = slug(question.subcategory || question.category || "general");
