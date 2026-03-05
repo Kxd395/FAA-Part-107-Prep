@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
-  formatClockTime,
   QUESTION_TYPE_PROFILE_LABELS,
   filterQuestionsByType,
   normalizeCategory,
+  normalizeQuestionTypeProfile,
+  type OptionId,
+  type AttemptConfidence,
   type QuestionTypeProfile,
   useStudySession,
 } from "@part107/core";
@@ -17,17 +19,12 @@ import {
   QuestionBankLoading,
   QuestionBankWarning,
 } from "../../components/QuestionBankState";
-import QuestionTypeOptionsGrid from "../../components/QuestionTypeOptionsGrid";
 import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
-import ActionBar from "../../components/quiz/ActionBar";
 import AnswerOptions from "../../components/quiz/AnswerOptions";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
-import QuestionIssueReporter from "../../components/quiz/QuestionIssueReporter";
-import SessionButton from "../../components/quiz/SessionButton";
 import SessionSummaryCard from "../../components/quiz/SessionSummaryCard";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
-import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useProgress } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
@@ -36,63 +33,52 @@ import {
   buildOptionPresentation,
   getDisplayLabelForOption,
 } from "../../lib/optionPresentation";
-import {
-  clearStudyDraft,
-  loadStudyDraft,
-  saveStudyDraft,
-  type StudyDraft,
-} from "../../lib/studyDraftStore";
-import { STUDY_CATEGORIES, countQuestionsByCategory, type StudyCategory } from "../../lib/questionBank";
+import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
 import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
-import {
-  QUESTION_TYPE_OPTION_LABELS,
-  SELECTABLE_QUESTION_TYPE_OPTIONS as QUESTION_TYPE_OPTIONS,
-  normalizeSelectableQuestionTypeProfile,
-} from "../../lib/questionTypeOptions";
-import {
-  readPreferredQuestionType,
-  writePreferredQuestionType,
-} from "../../lib/questionTypePreferenceStore";
-import {
-  normalizeQuestionCollectionFilter,
-  createQuestionCollection,
-  hasQuestionCollection,
-  listQuestionCollections,
-  readQuestionCollectionQuestionIds,
-  type QuestionCollectionFilter,
-  readBookmarkedQuestionIds,
-  toggleQuestionInCollection,
-} from "../../lib/questionCollectionStore";
-import {
-  readStudySetupPresetSelection,
-  readExamSetupPresetSelection,
-  createSessionPresetTemplate,
-  deleteSessionPresetTemplate,
-  duplicateSessionPresetTemplate,
-  renameSessionPresetTemplate,
-  readSessionPresetTemplates,
-  applySessionPresetTemplate,
-  readDefaultSessionPresetTemplateId,
-  writeDefaultSessionPresetTemplateId,
-  writeStudySetupPresetSelection,
-} from "../../lib/sessionPresetStore";
-import { readLearningPreferences, writeLearningPreferences } from "../../lib/learningPreferencesStore";
 
-const STUDY_LENGTH_PRESETS = [
-  { id: "full", label: "All Available", questionLimit: null as number | null },
-  { id: "intense_60", label: "60", questionLimit: 60 },
-  { id: "deep_40", label: "40", questionLimit: 40 },
-  { id: "focus_20", label: "Focus 20", questionLimit: 20 },
-  { id: "quick_10", label: "Quick 10", questionLimit: 10 },
-  { id: "sprint_5", label: "Sprint 5", questionLimit: 5 },
-] as const;
+const SUPPORTED_QUESTION_TYPES: readonly QuestionTypeProfile[] = [
+  "confirmed_test",
+  "all_random",
+  "real_exam",
+  "weak_spots",
+];
 
-const STUDY_TIMER_PRESETS = [
-  { id: "off", label: "Untimed", timeLimitMs: null as number | null },
-  { id: "5m", label: "5 min", timeLimitMs: 5 * 60 * 1000 },
-  { id: "10m", label: "10 min", timeLimitMs: 10 * 60 * 1000 },
-  { id: "15m", label: "15 min", timeLimitMs: 15 * 60 * 1000 },
-] as const;
+function normalizeSelectableQuestionTypeProfile(
+  input: string | null | undefined
+): QuestionTypeProfile | null {
+  const normalized = normalizeQuestionTypeProfile(input);
+  if (!normalized) return null;
+  return SUPPORTED_QUESTION_TYPES.includes(normalized) ? normalized : null;
+}
+
+const QUESTION_TYPE_OPTIONS: Array<{
+  value: QuestionTypeProfile;
+  title: string;
+  description: string;
+}> = [
+  {
+    value: "confirmed_test",
+    title: "✅ Confirmed Test Questions",
+    description:
+      "Only questions verified from the real FAA exam — Review.md, UAG, and SPA banks (74 questions).",
+  },
+  {
+    value: "all_random",
+    title: "🎲 All Questions (Random)",
+    description:
+      "Study from all 85 direct exam-style questions.",
+  },
+  {
+    value: "real_exam",
+    title: "Real Exam MCQ (Legacy)",
+    description: "Shows FAA-style MCQs and excludes ACS code-mapping drill format questions.",
+  },
+  {
+    value: "weak_spots",
+    title: "🔥 Weak Spots Only",
+    description: "Prioritizes realistic MCQs you still struggle with.",
+  },
+];
 
 export default function StudyPage() {
   return (
@@ -112,7 +98,6 @@ function StudyPageClient() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const questionTypeParam = searchParams.get("type");
-  const collectionParam = searchParams.get("collection");
   const focusParam = searchParams.get("focus");
   const invalidQuestionTypeParam =
     !!questionTypeParam && !normalizeSelectableQuestionTypeProfile(questionTypeParam);
@@ -123,36 +108,11 @@ function StudyPageClient() {
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
   );
-  const activeUserId = useActiveUserId();
-  const [bookmarkedQuestionIds, setBookmarkedQuestionIds] = useState<Set<string>>(new Set());
-  const [availableCollections, setAvailableCollections] = useState<
-    Array<{ id: string; name: string; questionCount: number; system: boolean }>
-  >([]);
-  const [selectedCollectionFilter, setSelectedCollectionFilter] =
-    useState<QuestionCollectionFilter>(() => normalizeQuestionCollectionFilter(collectionParam));
-  const [collectionsHydrated, setCollectionsHydrated] = useState(false);
-  const [newCollectionName, setNewCollectionName] = useState("");
-  const [collectionNotice, setCollectionNotice] = useState<string | null>(null);
-  const { saveSession } = useProgress(activeUserId);
+  const { saveSession } = useProgress();
   const { questions: allQuestions, loaded, loading, error, warning, snapshotInfo, reload, clearSnapshot } = useQuestionBank();
-  const adaptive = useAdaptiveQuestionStats(activeUserId);
+  const adaptive = useAdaptiveQuestionStats();
   const events = useLearningEventLogger(adaptive.userId);
-  const collectionFilterExists =
-    selectedCollectionFilter === "all" ||
-    hasQuestionCollection(activeUserId, selectedCollectionFilter);
-  const effectiveCollectionFilter = collectionFilterExists ? selectedCollectionFilter : "all";
-  const invalidCollectionParam =
-    collectionsHydrated && !!collectionParam && !collectionFilterExists;
-  const activeCollectionSummary =
-    effectiveCollectionFilter === "all"
-      ? null
-      : availableCollections.find((collection) => collection.id === effectiveCollectionFilter) ??
-      null;
-  const selectedCollectionQuestionIds = useMemo(() => {
-    if (effectiveCollectionFilter === "all") return null;
-    return readQuestionCollectionQuestionIds(activeUserId, effectiveCollectionFilter);
-  }, [activeUserId, effectiveCollectionFilter]);
-  const questionTypeFilteredQuestions = useMemo(
+  const filteredQuestions = useMemo(
     () =>
       filterQuestionsByType(allQuestions, selectedQuestionType, {
         userStatsByKey: adaptive.statsByKey,
@@ -160,10 +120,6 @@ function StudyPageClient() {
       }),
     [adaptive.config, adaptive.statsByKey, allQuestions, selectedQuestionType]
   );
-  const filteredQuestions = useMemo(() => {
-    if (!selectedCollectionQuestionIds) return questionTypeFilteredQuestions;
-    return questionTypeFilteredQuestions.filter((question) => selectedCollectionQuestionIds.has(question.id));
-  }, [questionTypeFilteredQuestions, selectedCollectionQuestionIds]);
   const visibleCounts = useMemo(() => countQuestionsByCategory(filteredQuestions), [filteredQuestions]);
   const questionShownAtRef = useRef(Date.now());
 
@@ -192,30 +148,8 @@ function StudyPageClient() {
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const autoStarted = useRef(false);
   const [sessionSaved, setSessionSaved] = useState(false);
-  const [draftSession, setDraftSession] = useState<StudyDraft | null>(null);
-  const [lastRecordedConfidence, setLastRecordedConfidence] = useState<1 | 2 | 3 | 4 | 5 | null>(null);
-  const [selectedLengthPresetId, setSelectedLengthPresetId] = useState<(typeof STUDY_LENGTH_PRESETS)[number]["id"]>("full");
-  const [selectedTimerPresetId, setSelectedTimerPresetId] = useState<(typeof STUDY_TIMER_PRESETS)[number]["id"]>("off");
-  const [presetHydratedForUserId, setPresetHydratedForUserId] = useState<string | null>(null);
-  const [sessionTemplates, setSessionTemplates] = useState<
-    Array<{ id: string; name: string; study: { lengthPresetId: string; timerPresetId: string } }>
-  >([]);
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string>("");
-  const [confirmDeleteTemplateId, setConfirmDeleteTemplateId] = useState<string | null>(null);
-  const [defaultTemplateId, setDefaultTemplateId] = useState<string | null>(null);
-  const [newTemplateName, setNewTemplateName] = useState("");
-  const [templateNotice, setTemplateNotice] = useState<string | null>(null);
-  const [preferredSetupCategory, setPreferredSetupCategory] = useState<StudyCategory>("All");
-  const selectedLengthPreset =
-    STUDY_LENGTH_PRESETS.find((preset) => preset.id === selectedLengthPresetId) ??
-    STUDY_LENGTH_PRESETS[0];
-  const selectedTimerPreset =
-    STUDY_TIMER_PRESETS.find((preset) => preset.id === selectedTimerPresetId) ??
-    STUDY_TIMER_PRESETS[0];
-  const defaultTemplateName =
-    (defaultTemplateId
-      ? sessionTemplates.find((template) => template.id === defaultTemplateId)?.name
-      : null) ?? null;
+  const [pendingStudyAnswer, setPendingStudyAnswer] = useState<OptionId | null>(null);
+  const [lastRecordedConfidence, setLastRecordedConfidence] = useState<AttemptConfidence | null>(null);
 
   const persistSession = useCallback(() => {
     if (sessionSaved || study.questionResults.length === 0) return;
@@ -241,128 +175,10 @@ function StudyPageClient() {
     study.sessionStartTime,
   ]);
 
-  const startStudyQuiz = useCallback(
-    (category: StudyCategory) => {
-      clearStudyDraft(activeUserId);
-      setDraftSession(null);
-      study.startQuiz(category, {
-        questionLimit: selectedLengthPreset.questionLimit,
-        timeLimitMs: selectedTimerPreset.timeLimitMs,
-      });
-      events.logEvent({
-        type: "session_started",
-        mode: "study",
-        category,
-        questionTypeProfile: selectedQuestionType,
-        metadata: {
-          question_limit: selectedLengthPreset.questionLimit ?? "all",
-          timed_drill_ms: selectedTimerPreset.timeLimitMs ?? 0,
-          pool_size: filteredQuestions.length,
-        },
-      });
-    },
-    [
-      activeUserId,
-      events,
-      filteredQuestions.length,
-      selectedLengthPreset.questionLimit,
-      selectedQuestionType,
-      selectedTimerPreset.timeLimitMs,
-      study,
-    ]
-  );
-
-  const resumeDraftSession = useCallback(() => {
-    if (!draftSession) return;
-    const remainingMs = Math.max(0, draftSession.session.remainingMs ?? 0);
-    const timeLimitMs = Math.max(0, draftSession.session.timeLimitMs ?? 0);
-    const resumedStartTime =
-      timeLimitMs > 0 ? Date.now() - Math.max(0, timeLimitMs - remainingMs) : Date.now();
-
-    setSelectedQuestionType(draftSession.selectedQuestionType);
-    study.restoreQuiz({
-      ...draftSession.session,
-      sessionStartTime: resumedStartTime,
-    });
-    clearStudyDraft(activeUserId);
-    setDraftSession(null);
-    setSessionSaved(false);
-    events.logEvent({
-      type: "session_resumed",
-      mode: "study",
-      category: draftSession.session.selectedCategory,
-      questionTypeProfile: draftSession.selectedQuestionType,
-      metadata: {
-        current_index: draftSession.session.currentIndex,
-        queue_size: draftSession.session.questions.length,
-      },
-    });
-  }, [activeUserId, draftSession, events, study]);
-
-  const discardDraftSession = useCallback(() => {
-    clearStudyDraft(activeUserId);
-    setDraftSession(null);
-  }, [activeUserId]);
-
   const handleSaveAndExit = useCallback(() => {
-    const draft: StudyDraft = {
-      version: 1,
-      updatedAt: new Date().toISOString(),
-      selectedQuestionType,
-      session: {
-        selectedCategory: study.selectedCategory,
-        questions: study.questions,
-        currentIndex: study.currentIndex,
-        selectedOption: study.selectedOption,
-        answerState: study.answerState,
-        score: study.score,
-        sessionStartTime: study.sessionStartTime,
-        questionResults: study.questionResults,
-        timeLimitMs: study.timeLimitMs,
-        remainingMs: study.remainingMs,
-        timedOut: study.timedOut,
-        lastStartOptions: {
-          questionLimit: selectedLengthPreset.questionLimit,
-          timeLimitMs: selectedTimerPreset.timeLimitMs,
-        },
-      },
-    };
-    saveStudyDraft(draft, activeUserId);
-    setDraftSession(draft);
-    events.logEvent({
-      type: "session_saved",
-      mode: "study",
-      category: study.selectedCategory,
-      questionTypeProfile: selectedQuestionType,
-      metadata: {
-        answered_count: study.questionResults.length,
-        current_index: study.currentIndex,
-        queue_size: study.questions.length,
-        timed_drill_remaining_ms: study.remainingMs,
-      },
-    });
     persistSession();
     study.resetToSetup();
-  }, [
-    activeUserId,
-    events,
-    persistSession,
-    selectedLengthPreset.questionLimit,
-    selectedQuestionType,
-    selectedTimerPreset.timeLimitMs,
-    study,
-  ]);
-
-  useEffect(() => {
-    setSelectedCollectionFilter(normalizeQuestionCollectionFilter(collectionParam));
-  }, [collectionParam]);
-
-  useEffect(() => {
-    setBookmarkedQuestionIds(readBookmarkedQuestionIds(activeUserId));
-    setAvailableCollections(listQuestionCollections(activeUserId));
-    setCollectionsHydrated(true);
-    setDraftSession(loadStudyDraft(activeUserId));
-  }, [activeUserId]);
+  }, [persistSession, study]);
 
   useEffect(() => {
     const nextType = normalizeSelectableQuestionTypeProfile(questionTypeParam);
@@ -376,85 +192,14 @@ function StudyPageClient() {
   }, [questionTypeParam, weakFocusRequested]);
 
   useEffect(() => {
-    if (questionTypeParam || weakFocusRequested) return;
-    const preferred = readPreferredQuestionType(activeUserId);
-    if (preferred) {
-      setSelectedQuestionType(preferred);
-    }
-  }, [activeUserId, questionTypeParam, weakFocusRequested]);
-
-  useEffect(() => {
-    writePreferredQuestionType(activeUserId, selectedQuestionType);
-  }, [activeUserId, selectedQuestionType]);
-
-  useEffect(() => {
-    let stored = readStudySetupPresetSelection(activeUserId);
-    if (!stored) {
-      const defaultTemplate = readDefaultSessionPresetTemplateId(activeUserId);
-      if (defaultTemplate) {
-        applySessionPresetTemplate(activeUserId, defaultTemplate);
-        stored = readStudySetupPresetSelection(activeUserId);
-      }
-    }
-    if (stored) {
-      if (STUDY_LENGTH_PRESETS.some((preset) => preset.id === stored.lengthPresetId)) {
-        setSelectedLengthPresetId(
-          stored.lengthPresetId as (typeof STUDY_LENGTH_PRESETS)[number]["id"]
-        );
-      }
-      if (STUDY_TIMER_PRESETS.some((preset) => preset.id === stored.timerPresetId)) {
-        setSelectedTimerPresetId(
-          stored.timerPresetId as (typeof STUDY_TIMER_PRESETS)[number]["id"]
-        );
-      }
-    }
-    const templates = readSessionPresetTemplates(activeUserId);
-    setSessionTemplates(templates);
-    const storedDefaultTemplate = readDefaultSessionPresetTemplateId(activeUserId);
-    setDefaultTemplateId(storedDefaultTemplate);
-    if (storedDefaultTemplate) {
-      setSelectedTemplateId(storedDefaultTemplate);
-    }
-    const preferences = readLearningPreferences(activeUserId);
-    setPreferredSetupCategory(normalizeCategory(preferences.defaultStudyCategory) ?? "All");
-    setPresetHydratedForUserId(activeUserId);
-  }, [activeUserId]);
-
-  useEffect(() => {
-    if (presetHydratedForUserId !== activeUserId) return;
-    writeStudySetupPresetSelection(activeUserId, {
-      lengthPresetId: selectedLengthPresetId,
-      timerPresetId: selectedTimerPresetId,
-    });
-  }, [activeUserId, presetHydratedForUserId, selectedLengthPresetId, selectedTimerPresetId]);
-
-  useEffect(() => {
-    if (presetHydratedForUserId !== activeUserId) return;
-    const current = readLearningPreferences(activeUserId);
-    if (current.defaultStudyCategory === preferredSetupCategory) return;
-    writeLearningPreferences(activeUserId, {
-      ...current,
-      defaultStudyCategory: preferredSetupCategory,
-    });
-  }, [activeUserId, preferredSetupCategory, presetHydratedForUserId]);
-
-  useEffect(() => {
-    if (presetHydratedForUserId !== activeUserId) return;
     if (!loaded || autoStarted.current) return;
 
     if (!categoryParam && !weakFocusRequested) return;
 
     autoStarted.current = true;
     const matched = normalizeCategory(categoryParam);
-    startStudyQuiz(matched ?? "All");
-  }, [
-    categoryParam,
-    loaded,
-    activeUserId,
-    presetHydratedForUserId,
-    startStudyQuiz,
-    weakFocusRequested,
-  ]);
+    study.startQuiz(matched ?? "All");
+  }, [categoryParam, loaded, study, weakFocusRequested]);
 
   useEffect(() => {
     if (!study.quizStarted || study.isComplete || !study.currentQuestion) return;
@@ -476,19 +221,14 @@ function StudyPageClient() {
   }, [study.quizStarted, study.isComplete, study.sessionStartTime]);
 
   useEffect(() => {
+    setPendingStudyAnswer(null);
     setLastRecordedConfidence(null);
   }, [study.currentQuestion?.id]);
 
   useEffect(() => {
     if (!study.isComplete) return;
     persistSession();
-    clearStudyDraft(activeUserId);
-    setDraftSession(null);
-  }, [activeUserId, persistSession, study.isComplete]);
-
-  useEffect(() => {
-    setConfirmDeleteTemplateId(null);
-  }, [selectedTemplateId]);
+  }, [persistSession, study.isComplete]);
 
   useEffect(() => {
     if (study.answerState === "unanswered" || !study.currentQuestion) return;
@@ -513,11 +253,10 @@ function StudyPageClient() {
 
   if (!study.quizStarted) {
     return (
-      <div className="mx-auto max-w-5xl space-y-8 pt-8">
-        <div className="text-center">
-          <div className="text-5xl">📖</div>
-          <h1 className="mt-4 text-3xl font-bold">Study Mode</h1>
-          <p className="mx-auto mt-2 max-w-2xl text-[var(--muted)]">
+      <div className="space-y-8">
+        <div>
+          <h1 className="text-3xl font-bold">📖 Study Mode</h1>
+          <p className="mt-2 text-[var(--muted)]">
             Choose a topic to drill down on, or study all categories. You&apos;ll get instant feedback after each answer.
           </p>
         </div>
@@ -525,360 +264,47 @@ function StudyPageClient() {
         {invalidQuestionTypeParam && (
           <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
             Question type &quot;{questionTypeParam}&quot; is not available in realistic mode. Falling
-            back to {QUESTION_TYPE_OPTION_LABELS.confirmed_test}.
-          </div>
-        )}
-        {invalidCollectionParam && (
-          <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
-            Collection &quot;{collectionParam}&quot; is not available. Using all questions.
-          </div>
-        )}
-        {draftSession && (
-          <div className="rounded-xl border border-brand-500/30 bg-brand-500/10 px-4 py-3">
-            <div className="text-sm font-medium text-brand-300">You have a saved Study session.</div>
-            <div className="mt-1 text-xs text-[var(--muted)]">
-              {draftSession.session.selectedCategory} • Question {Math.min(draftSession.session.currentIndex + 1, draftSession.session.questions.length)} of {draftSession.session.questions.length}
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={resumeDraftSession}
-                className="rounded-lg border border-brand-500/40 bg-brand-500/20 px-3 py-2 text-xs font-medium text-brand-200 hover:bg-brand-500/30"
-              >
-                Continue Session
-              </button>
-              <button
-                type="button"
-                onClick={discardDraftSession}
-                className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-xs text-[var(--muted)] hover:text-white"
-              >
-                Discard Saved Session
-              </button>
-            </div>
-          </div>
-        )}
-        {activeCollectionSummary && (
-          <div className="rounded-xl border border-brand-500/30 bg-brand-500/10 px-4 py-3 text-sm text-brand-300">
-            Collection filter active: {activeCollectionSummary.name} ({activeCollectionSummary.questionCount} saved).
+            back to Real Exam MCQ.
           </div>
         )}
         {filteredQuestions.length === 0 && <QuestionSelectionEmptyState context="study" />}
 
-        <QuestionTypeOptionsGrid
-          options={QUESTION_TYPE_OPTIONS}
-          selectedQuestionType={selectedQuestionType}
-          onSelectQuestionType={setSelectedQuestionType}
-          variant="compact"
-          note={
-            <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
-              Selected:{" "}
-              <span className="font-medium text-brand-400">
-                {QUESTION_TYPE_PROFILE_LABELS[selectedQuestionType]}
-              </span>
-              <div className="mt-2">
-                Real UAG questions are standard MCQs. ACS/learning codes are primarily post-test AKTR
-                remediation signals.
-              </div>
-            </div>
-          }
-        />
-
-        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 space-y-3">
-          <div className="text-sm font-semibold text-white">Collections</div>
-          <label className="space-y-1 text-xs text-[var(--muted)]">
-            <span className="block uppercase tracking-wider">Active Filter</span>
-            <select
-              value={effectiveCollectionFilter}
-              onChange={(event) =>
-                setSelectedCollectionFilter(normalizeQuestionCollectionFilter(event.target.value))
-              }
-              className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-white"
-            >
-              <option value="all">All questions</option>
-              {availableCollections.map((collection) => (
-                <option key={collection.id} value={collection.id}>
-                  {collection.name} ({collection.questionCount})
-                </option>
-              ))}
-            </select>
-          </label>
-          <div className="flex flex-wrap items-center gap-2">
-            <input
-              value={newCollectionName}
-              onChange={(event) => setNewCollectionName(event.target.value)}
-              placeholder="Create collection name"
-              className="min-w-[220px] flex-1 rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-white placeholder:text-[var(--muted)]"
-            />
-            <button
-              type="button"
-              onClick={() => {
-                const created = createQuestionCollection(activeUserId, newCollectionName);
-                if (!created) {
-                  setCollectionNotice(
-                    "Collection name is required. Names are trimmed to 40 characters."
-                  );
-                  return;
-                }
-                setNewCollectionName("");
-                setBookmarkedQuestionIds(readBookmarkedQuestionIds(activeUserId));
-                setAvailableCollections(listQuestionCollections(activeUserId));
-                setSelectedCollectionFilter(created.id);
-                setCollectionNotice(`Created collection "${created.name}".`);
-              }}
-              className="rounded-lg border border-brand-500/40 bg-brand-500/10 px-3 py-2 text-sm font-medium text-brand-300 hover:bg-brand-500/20"
-            >
-              Create Collection
-            </button>
-          </div>
-          {collectionNotice && (
-            <div className="text-xs text-[var(--muted)]">{collectionNotice}</div>
-          )}
-        </div>
-
-        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 space-y-3">
-          <div className="text-sm font-semibold text-white">Session Templates</div>
-          <label className="space-y-1 text-xs text-[var(--muted)]">
-            <span className="block uppercase tracking-wider">Template</span>
-            <select
-              value={selectedTemplateId}
-              onChange={(event) => setSelectedTemplateId(event.target.value)}
-              className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-white"
-            >
-              <option value="">None</option>
-              {sessionTemplates.map((template) => (
-                <option key={template.id} value={template.id}>
-                  {template.name}
-                  {defaultTemplateId === template.id ? " (default)" : ""}
-                </option>
-              ))}
-            </select>
-          </label>
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              disabled={!selectedTemplateId}
-              onClick={() => {
-                if (!selectedTemplateId) return;
-                const applied = applySessionPresetTemplate(activeUserId, selectedTemplateId);
-                if (!applied) return;
-                const refreshed = readStudySetupPresetSelection(activeUserId);
-                if (refreshed) {
-                  setSelectedLengthPresetId(
-                    refreshed.lengthPresetId as (typeof STUDY_LENGTH_PRESETS)[number]["id"]
-                  );
-                  setSelectedTimerPresetId(
-                    refreshed.timerPresetId as (typeof STUDY_TIMER_PRESETS)[number]["id"]
-                  );
-                }
-                setConfirmDeleteTemplateId(null);
-                setTemplateNotice(`Applied template "${applied.name}".`);
-              }}
-              className="rounded-lg border border-brand-500/40 bg-brand-500/10 px-3 py-2 text-xs font-medium text-brand-300 hover:bg-brand-500/20 disabled:opacity-50"
-            >
-              Apply Template
-            </button>
-            <button
-              type="button"
-              disabled={!selectedTemplateId}
-              onClick={() => {
-                if (!selectedTemplateId) return;
-                const duplicated = duplicateSessionPresetTemplate(activeUserId, selectedTemplateId);
-                if (!duplicated) return;
-                const templates = readSessionPresetTemplates(activeUserId);
-                setSessionTemplates(templates);
-                setSelectedTemplateId(duplicated.id);
-                setConfirmDeleteTemplateId(null);
-                setTemplateNotice(`Duplicated template "${duplicated.name}".`);
-              }}
-              className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-xs text-[var(--muted)] hover:text-white disabled:opacity-50"
-            >
-              Duplicate
-            </button>
-            <button
-              type="button"
-              disabled={!selectedTemplateId}
-              onClick={() => {
-                if (!selectedTemplateId) return;
-                writeDefaultSessionPresetTemplateId(activeUserId, selectedTemplateId);
-                setDefaultTemplateId(selectedTemplateId);
-                setConfirmDeleteTemplateId(null);
-                setTemplateNotice("Default template updated.");
-              }}
-              className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-xs text-[var(--muted)] hover:text-white disabled:opacity-50"
-            >
-              Set as Default
-            </button>
-            <button
-              type="button"
-              disabled={!selectedTemplateId}
-              onClick={() => {
-                if (!selectedTemplateId) return;
-                if (confirmDeleteTemplateId !== selectedTemplateId) {
-                  setConfirmDeleteTemplateId(selectedTemplateId);
-                  setTemplateNotice('Click "Confirm Delete" to remove this template.');
-                  return;
-                }
-                const deleted = deleteSessionPresetTemplate(activeUserId, selectedTemplateId);
-                if (!deleted) return;
-                const templates = readSessionPresetTemplates(activeUserId);
-                setSessionTemplates(templates);
-                setSelectedTemplateId("");
-                setConfirmDeleteTemplateId(null);
-                const nextDefault = readDefaultSessionPresetTemplateId(activeUserId);
-                setDefaultTemplateId(nextDefault);
-                setTemplateNotice("Template deleted.");
-              }}
-              className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-200 hover:bg-red-500/20 disabled:opacity-50"
-            >
-              {confirmDeleteTemplateId === selectedTemplateId && selectedTemplateId
-                ? "Confirm Delete"
-                : "Delete"}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                writeDefaultSessionPresetTemplateId(activeUserId, null);
-                setDefaultTemplateId(null);
-                setConfirmDeleteTemplateId(null);
-                setTemplateNotice("Default template cleared.");
-              }}
-              className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-xs text-[var(--muted)] hover:text-white"
-            >
-              Clear Default
-            </button>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <input
-              value={newTemplateName}
-              onChange={(event) => setNewTemplateName(event.target.value)}
-              placeholder="Save current setup as template"
-              className="min-w-[220px] flex-1 rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-white placeholder:text-[var(--muted)]"
-            />
-            <button
-              type="button"
-              disabled={!selectedTemplateId || newTemplateName.trim().length === 0}
-              onClick={() => {
-                if (!selectedTemplateId) return;
-                const renamed = renameSessionPresetTemplate(
-                  activeUserId,
-                  selectedTemplateId,
-                  newTemplateName
-                );
-                if (!renamed) {
-                  setTemplateNotice("Template name is required.");
-                  return;
-                }
-                setNewTemplateName("");
-                setSessionTemplates(readSessionPresetTemplates(activeUserId));
-                setConfirmDeleteTemplateId(null);
-                setTemplateNotice(`Renamed template to "${renamed.name}".`);
-              }}
-              className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-[var(--muted)] hover:text-white disabled:opacity-50"
-            >
-              Rename
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                const created = createSessionPresetTemplate(activeUserId, newTemplateName, {
-                  study: {
-                    lengthPresetId: selectedLengthPresetId,
-                    timerPresetId: selectedTimerPresetId,
-                  },
-                  exam:
-                    readExamSetupPresetSelection(activeUserId) ?? {
-                      lengthPresetId: "full",
-                      timerPresetId: "auto",
-                    },
-                });
-                if (!created) {
-                  setTemplateNotice("Template name is required.");
-                  return;
-                }
-                setNewTemplateName("");
-                const templates = readSessionPresetTemplates(activeUserId);
-                setSessionTemplates(templates);
-                setSelectedTemplateId(created.id);
-                setConfirmDeleteTemplateId(null);
-                setTemplateNotice(`Saved template "${created.name}".`);
-              }}
-              className="rounded-lg border border-brand-500/40 bg-brand-500/10 px-3 py-2 text-sm font-medium text-brand-300 hover:bg-brand-500/20"
-            >
-              Save Template
-            </button>
-          </div>
-          {(templateNotice || defaultTemplateId) && (
-            <div className="text-xs text-[var(--muted)]">
-              {templateNotice}
-              {defaultTemplateName ? ` Default: ${defaultTemplateName}.` : ""}
-            </div>
-          )}
-        </div>
-
         <div className="space-y-3">
-          <div className="text-sm font-semibold text-white">Session Length</div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {STUDY_LENGTH_PRESETS.map((preset) => (
+          <div className="text-sm font-semibold text-white">Question Type</div>
+          <div className="grid gap-2">
+            {QUESTION_TYPE_OPTIONS.map((option) => (
               <button
-                key={preset.id}
+                key={option.value}
                 type="button"
-                onClick={() => setSelectedLengthPresetId(preset.id)}
-                className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
-                  selectedLengthPresetId === preset.id
-                    ? "border-brand-400 bg-brand-500/20 text-white"
-                    : "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)] hover:text-white"
+                onClick={() => setSelectedQuestionType(option.value)}
+                className={`rounded-xl border px-4 py-3 text-left transition-colors ${
+                  selectedQuestionType === option.value
+                    ? "border-brand-500/60 bg-brand-500/10"
+                    : "border-[var(--card-border)] bg-[var(--card)] hover:border-brand-500/30"
                 }`}
               >
-                {preset.label}
+                <div className="text-sm font-semibold text-white">{option.title}</div>
+                <div className="mt-1 text-xs text-[var(--muted)]">{option.description}</div>
               </button>
             ))}
           </div>
-          <div className="text-xs text-[var(--muted)]">
-            Choose <strong className="text-white">All Available</strong> to run the full pool for the selected topic.
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <div className="text-sm font-semibold text-white">Timed Drill</div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {STUDY_TIMER_PRESETS.map((preset) => (
-              <button
-                key={preset.id}
-                type="button"
-                onClick={() => setSelectedTimerPresetId(preset.id)}
-                className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
-                  selectedTimerPresetId === preset.id
-                    ? "border-brand-400 bg-brand-500/20 text-white"
-                    : "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)] hover:text-white"
-                }`}
-              >
-                {preset.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {preferredSetupCategory !== "All" && (
-          <button
-            type="button"
-            onClick={() => startStudyQuiz(preferredSetupCategory)}
-            className="w-full rounded-xl border border-brand-500/50 bg-brand-500/10 px-4 py-3 text-left transition-colors hover:bg-brand-500/20"
-          >
-            <div className="text-sm font-semibold text-white">Start Preferred Category</div>
-            <div className="mt-1 text-xs text-[var(--muted)]">
-              {preferredSetupCategory} ({visibleCounts[preferredSetupCategory]} questions)
+          <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 px-4 py-3 text-xs text-[var(--muted)]">
+            Selected:{" "}
+            <span className="font-medium text-brand-400">
+              {QUESTION_TYPE_PROFILE_LABELS[selectedQuestionType]}
+            </span>
+            <div className="mt-2">
+              Real UAG questions are standard MCQs. ACS/learning codes are primarily post-test AKTR
+              remediation signals.
             </div>
-          </button>
-        )}
+          </div>
+        </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
           {STUDY_CATEGORIES.map((category) => (
             <button
               key={category}
-              onClick={() => {
-                setPreferredSetupCategory(category);
-                startStudyQuiz(category);
-              }}
+              onClick={() => study.startQuiz(category)}
               className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 text-left transition-all hover:border-brand-500/50 hover:scale-[1.02]"
             >
               <div className="text-lg font-semibold text-white">{category}</div>
@@ -901,9 +327,6 @@ function StudyPageClient() {
       <div className="mx-auto max-w-lg space-y-6 text-center">
         <div className="text-6xl">{passed ? "🎉" : "📚"}</div>
         <h1 className="text-3xl font-bold">{passed ? "Great Job!" : "Keep Studying!"}</h1>
-        {study.timedOut && (
-          <p className="text-sm text-amber-300">Timed drill ended. Review and try again.</p>
-        )}
 
         <SessionSummaryCard
           passed={passed}
@@ -914,20 +337,18 @@ function StudyPageClient() {
         />
 
         <div className="flex gap-3">
-          <SessionButton
-            variant="brand-solid"
+          <button
             onClick={study.restartQuiz}
-            className="flex-1 py-3"
+            className="flex-1 rounded-xl bg-brand-600 py-3 font-semibold text-white hover:bg-brand-700"
           >
             Try Again
-          </SessionButton>
-          <SessionButton
-            variant="muted-outline"
+          </button>
+          <button
             onClick={study.resetToSetup}
-            className="flex-1 py-3 font-semibold"
+            className="flex-1 rounded-xl border border-[var(--card-border)] py-3 font-semibold text-[var(--muted)] hover:text-white"
           >
             Change Topic
-          </SessionButton>
+          </button>
         </div>
 
         <Link
@@ -944,9 +365,6 @@ function StudyPageClient() {
     study.score.total > 0
       ? `Score: ${study.score.correct}/${study.score.total} (${Math.round((study.score.correct / study.score.total) * 100)}%)`
       : `Score: ${study.score.correct}/${study.score.total}`;
-  const rightLabelWithTimer = study.isTimedDrill
-    ? `${rightLabel} • ⏱ ${formatClockTime(study.remainingMs)}`
-    : rightLabel;
   const selectedDistractorExplanation =
     study.selectedOption && study.answerState === "incorrect"
       ? study.currentQuestion.explanation_distractors[study.selectedOption] ??
@@ -964,8 +382,6 @@ function StudyPageClient() {
     study.currentQuestion.citation,
     extractCitationText(selectedDistractorExplanation)
   );
-  const currentQuestionId = study.currentQuestion.id;
-  const isCurrentBookmarked = bookmarkedQuestionIds.has(currentQuestionId);
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -979,15 +395,10 @@ function StudyPageClient() {
       )}
       <ProgressHeader
         left={`Question ${study.currentIndex + 1} of ${study.questions.length}`}
-        right={rightLabelWithTimer}
+        right={rightLabel}
         progress={study.progressPercent}
         progressClassName="progress-fill bg-brand-500"
       />
-      {study.isTimedDrill && study.remainingMs <= 60_000 && (
-        <p className="text-sm text-incorrect" role="alert" aria-live="assertive">
-          Time is low. Less than 1 minute remains.
-        </p>
-      )}
 
       <div className="flex items-center gap-2">
         <span className="rounded-full bg-brand-500/10 px-3 py-1 text-xs font-medium text-brand-500">
@@ -1002,77 +413,73 @@ function StudyPageClient() {
         <span className="rounded-full bg-[var(--card)] px-3 py-1 text-xs text-[var(--muted)]">
           {"⭐".repeat(study.currentQuestion.difficulty_level)}
         </span>
-        <button
-          type="button"
-          onClick={() => {
-            toggleQuestionInCollection(activeUserId, "bookmarks", currentQuestionId);
-            setBookmarkedQuestionIds(readBookmarkedQuestionIds(activeUserId));
-            setAvailableCollections(listQuestionCollections(activeUserId));
-          }}
-          className={`rounded-full border px-3 py-1 text-xs transition-colors ${
-            isCurrentBookmarked
-              ? "border-amber-400 bg-amber-500/15 text-amber-300"
-              : "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)] hover:text-white"
-          }`}
-        >
-          {isCurrentBookmarked ? "★ Bookmarked" : "☆ Bookmark"}
-        </button>
       </div>
 
       <QuestionCard question={study.currentQuestion} onOpenFigure={setFigureRef} />
-      <QuestionIssueReporter
-        mode="study"
-        question={study.currentQuestion}
-        selectedOptionId={study.selectedOption}
-        questionTypeProfile={selectedQuestionType}
-        confidence={lastRecordedConfidence ?? 3}
-      />
 
       <AnswerOptions
         options={optionPresentation.options}
         mode="study"
-        selectedOption={study.selectedOption}
+        selectedOption={study.selectedOption ?? pendingStudyAnswer}
         correctOptionId={study.currentQuestion.correct_option_id}
         displayLabelByOptionId={optionPresentation.displayLabelByOptionId}
         answerState={study.answerState}
         onSelect={(optionId) => {
           if (study.answerState !== "unanswered") return;
-          study.answerQuestion(optionId, { confidence: 3 });
-          setLastRecordedConfidence(3);
+          setPendingStudyAnswer(optionId);
         }}
         onSelectWithConfidence={(optionId, confidence) => {
           if (study.answerState !== "unanswered") return;
           study.answerQuestion(optionId, { confidence });
           setLastRecordedConfidence(confidence);
+          setPendingStudyAnswer(null);
         }}
         showConfidenceSplit
-        splitConfidenceMode="full"
-        defaultConfidence={3}
+        splitConfidenceMode="high_only"
         confidentConfidence={5}
         disabled={study.answerState !== "unanswered"}
       />
 
-      {optionPresentation.options.length < study.currentQuestion.options.length && (
-        <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-3 py-2 text-xs text-[var(--muted)]">
-          Practice mode is showing 3 options for this question to reduce memorization.
+      {study.answerState === "unanswered" && pendingStudyAnswer && (
+        <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 p-4">
+          <div className="text-sm font-semibold text-white">How confident are you? (before reveal)</div>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {[1, 2, 3, 4, 5].map((value) => (
+              <button
+                key={value}
+                onClick={() => {
+                  const confidence = value as AttemptConfidence;
+                  study.answerQuestion(pendingStudyAnswer, { confidence });
+                  setLastRecordedConfidence(confidence);
+                  setPendingStudyAnswer(null);
+                }}
+                className="rounded-lg border border-brand-400/40 bg-brand-500/10 px-3 py-1.5 text-sm text-brand-200 hover:bg-brand-500/20"
+              >
+                {value}
+              </button>
+            ))}
+          </div>
+          <div className="mt-2 text-xs text-[var(--muted)]">
+            Tip: click the <code>☑</code> on any answer for a one-click high-confidence submit.
+          </div>
         </div>
       )}
 
-      <ActionBar>
-        <SessionButton
-          variant="muted-outline"
+      <div className="flex items-center justify-between gap-3">
+        <button
           onClick={study.skipQuestion}
-          disabled={study.answerState !== "unanswered"}
+          disabled={study.answerState !== "unanswered" || !!pendingStudyAnswer}
+          className="rounded-xl border border-[var(--card-border)] px-4 py-2.5 text-sm text-[var(--muted)] transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
         >
           Skip for now →
-        </SessionButton>
-        <SessionButton
-          variant="brand-outline"
+        </button>
+        <button
           onClick={handleSaveAndExit}
+          className="rounded-xl border border-brand-500/30 bg-brand-500/10 px-4 py-2.5 text-sm font-medium text-brand-300 transition-colors hover:bg-brand-500/20"
         >
           {study.questionResults.length > 0 ? "Save & Exit" : "Exit"}
-        </SessionButton>
-      </ActionBar>
+        </button>
+      </div>
 
       {study.answerState !== "unanswered" && (
         <div

@@ -517,5 +517,307 @@
     "acs_code": "UA.III.B.K2",
     "source": "Review.md",
     "concept_key": "acs:UA.III.B.K2|wind_shear|wx_037"
+  },
+  {
+    "id": "WX-038",
+    "category": "Weather",
+    "subcategory": "Wind Shear",
+    "question_text": "At what altitude(s) can wind shear be expected?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Only at altitudes above 3,000 feet AGL."
+      },
+      {
+        "id": "B",
+        "text": "Only at altitudes below 2,000 feet AGL."
+      },
+      {
+        "id": "C",
+        "text": "At any altitude."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Wind shear can occur at any altitude. While it is most commonly associated with low-level phenomena like temperature inversions and frontal boundaries, wind shear also occurs at higher altitudes near the jet stream, around thunderstorms, and in mountain wave turbulence.",
+    "explanation_distractors": {
+      "A": "Wind shear is not restricted to altitudes above 3,000 feet — some of the most hazardous wind shear occurs at low altitudes near the surface.",
+      "B": "While low-level wind shear is well-known, wind shear can and does occur at all altitudes, including near the jet stream and around convective weather."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 2,
+    "tags": [
+      "wind-shear",
+      "altitude",
+      "hazardous-weather"
+    ],
+    "acs_code": "UA.III.B.K2",
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.B.K2|wind_shear_altitude|wx_038"
+  },
+  {
+    "id": "WX-039",
+    "category": "Weather",
+    "subcategory": "Weather Theory",
+    "question_text": "What type of cloud is associated with stable air and poor visibility?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Cumulus."
+      },
+      {
+        "id": "B",
+        "text": "Cumulonimbus."
+      },
+      {
+        "id": "C",
+        "text": "Stratus."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Stratus clouds form in stable air when a layer of moist air is cooled uniformly. They are flat, layered clouds associated with poor visibility, smooth air, and steady (continuous) precipitation such as drizzle. Stable conditions trap moisture and pollutants near the surface.",
+    "explanation_distractors": {
+      "A": "Cumulus clouds are associated with unstable air and convective activity, not stable air.",
+      "B": "Cumulonimbus clouds are thunderstorm clouds associated with very unstable air, turbulence, and heavy precipitation."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 1,
+    "tags": [
+      "stable-air",
+      "stratus",
+      "clouds",
+      "visibility"
+    ],
+    "acs_code": "UA.III.B.K1c",
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.B.K1C|stable_air_clouds|wx_039"
+  },
+  {
+    "id": "WX-040",
+    "category": "Weather",
+    "subcategory": "Thunderstorms",
+    "question_text": "What are the three stages of a thunderstorm?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Towering, dissipating, and forming."
+      },
+      {
+        "id": "B",
+        "text": "Cumulus, mature, and dissipating."
+      },
+      {
+        "id": "C",
+        "text": "Initial, building, and final."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The three stages of a thunderstorm are: (1) Cumulus stage — characterized by strong updrafts that build the cloud vertically; (2) Mature stage — the most dangerous, with both updrafts and downdrafts, heavy precipitation, lightning, hail, and turbulence; (3) Dissipating stage — dominated by downdrafts as the storm weakens and precipitation diminishes.",
+    "explanation_distractors": {
+      "A": "'Towering, dissipating, and forming' is not the correct terminology. The standard FAA stages are cumulus, mature, and dissipating.",
+      "C": "'Initial, building, and final' is not recognized terminology for thunderstorm stages."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 2,
+    "tags": [
+      "thunderstorm",
+      "cumulus-stage",
+      "mature-stage",
+      "dissipating-stage"
+    ],
+    "acs_code": "UA.III.B.K3",
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.B.K3|thunderstorm_stages|wx_040"
+  },
+  {
+    "id": "WX-041",
+    "category": "Weather",
+    "subcategory": "Weather Theory",
+    "question_text": "What condition is most likely to cause turbulence?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "A continuous high-pressure system."
+      },
+      {
+        "id": "B",
+        "text": "Overcast skies with steady precipitation."
+      },
+      {
+        "id": "C",
+        "text": "Uneven heating of the earth's surface."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Uneven heating of the earth's surface creates convective currents — rising columns of warm air and sinking columns of cooler air. These vertical air movements produce turbulence. Different surface types (water, pavement, vegetation, sand) absorb and radiate heat at different rates, creating localized temperature differences that drive convective turbulence.",
+    "explanation_distractors": {
+      "A": "A continuous high-pressure system typically produces stable conditions with smooth air, not turbulence.",
+      "B": "Overcast skies with steady precipitation are associated with stable air and smooth conditions, not turbulence."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 2,
+    "tags": [
+      "turbulence",
+      "convection",
+      "uneven-heating"
+    ],
+    "acs_code": "UA.III.B.K1d",
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.B.K1D|turbulence_cause|wx_041"
+  },
+  {
+    "id": "WX-042",
+    "category": "Weather",
+    "subcategory": "Density Altitude",
+    "question_text": "How does high density altitude affect a small unmanned aircraft?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Increases lift and improves battery efficiency."
+      },
+      {
+        "id": "B",
+        "text": "Has no significant effect on performance."
+      },
+      {
+        "id": "C",
+        "text": "Reduces lift, decreases propeller efficiency, and increases battery consumption."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "High density altitude means the air is less dense (caused by high temperature, high humidity, or high elevation). Less dense air reduces lift because the wings/rotors move less air mass, decreases propeller efficiency for the same reason, and increases battery consumption because motors must work harder to maintain flight.",
+    "explanation_distractors": {
+      "A": "Thinner air at high density altitude reduces lift and propeller efficiency — it does not increase them.",
+      "B": "Density altitude has a significant negative effect on all aspects of sUAS performance."
+    },
+    "citation": "FAA-H-8083-25, Ch 11",
+    "difficulty_level": 2,
+    "tags": [
+      "density-altitude",
+      "performance",
+      "lift",
+      "propeller",
+      "battery"
+    ],
+    "acs_code": "UA.III.B.K1a",
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.B.K1A|density_altitude_sUAS|wx_042"
+  },
+  {
+    "id": "WX-043",
+    "category": "Weather",
+    "subcategory": "Weather Theory",
+    "question_text": "What is the primary cause of all weather changes?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Variation of solar energy received by the earth."
+      },
+      {
+        "id": "B",
+        "text": "Changes in barometric pressure."
+      },
+      {
+        "id": "C",
+        "text": "Movement of the jet stream."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The sun is the primary source of energy that drives all weather. Unequal heating of the earth's surface (due to latitude, terrain, water vs land, cloud cover, and seasons) creates temperature differences that produce pressure differences, wind, and moisture changes — the fundamental building blocks of all weather phenomena.",
+    "explanation_distractors": {
+      "B": "Barometric pressure changes are a result of unequal solar heating, not the primary cause of weather changes.",
+      "C": "The jet stream influences weather patterns but is itself a product of unequal solar heating of the earth."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 1,
+    "tags": [
+      "solar-energy",
+      "weather-cause",
+      "weather-theory"
+    ],
+    "acs_code": "UA.III.B.K1a",
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.B.K1A|weather_primary_cause|wx_043"
+  },
+  {
+    "id": "WX-044",
+    "category": "Weather",
+    "subcategory": "Weather Theory",
+    "question_text": "What are the characteristics of unstable air?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Poor visibility, steady precipitation, and stratus clouds."
+      },
+      {
+        "id": "B",
+        "text": "Turbulence, good visibility, and showery precipitation."
+      },
+      {
+        "id": "C",
+        "text": "Smooth air, steady precipitation, and fog."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Unstable air is characterized by turbulence (convective currents), good visibility (vertical mixing disperses pollutants), showery (intermittent) precipitation, and cumuliform clouds. The rising air currents in unstable conditions create bumpy conditions but also clear the air of haze and smog.",
+    "explanation_distractors": {
+      "A": "Poor visibility, steady precipitation, and stratus clouds are characteristics of stable air, not unstable air.",
+      "C": "Smooth air, steady precipitation, and fog are all associated with stable atmospheric conditions."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 2,
+    "tags": [
+      "unstable-air",
+      "turbulence",
+      "visibility",
+      "precipitation"
+    ],
+    "acs_code": "UA.III.B.K1d",
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.B.K1D|unstable_air_characteristics|wx_044"
+  },
+  {
+    "id": "WX-045",
+    "category": "Weather",
+    "subcategory": "Weather Theory",
+    "question_text": "What produces the global circulation of winds?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The rotation of the earth and differences in air pressure."
+      },
+      {
+        "id": "B",
+        "text": "Tidal forces from the moon."
+      },
+      {
+        "id": "C",
+        "text": "Mountain ranges deflecting airflow."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Global wind circulation is produced by two main factors: (1) unequal heating of the earth's surface creates pressure differences that cause air to flow from high to low pressure, and (2) the rotation of the earth (Coriolis effect) deflects this airflow, creating the prevailing wind patterns (trade winds, westerlies, polar easterlies).",
+    "explanation_distractors": {
+      "B": "Tidal forces from the moon affect ocean tides but do not produce global wind circulation patterns.",
+      "C": "Mountain ranges can deflect local airflow and create turbulence, but they do not produce the global circulation of winds."
+    },
+    "citation": "FAA-H-8083-25, Ch 12",
+    "difficulty_level": 2,
+    "tags": [
+      "global-winds",
+      "coriolis-effect",
+      "pressure-difference",
+      "earth-rotation"
+    ],
+    "acs_code": "UA.III.B.K1b",
+    "source": "Review.md",
+    "concept_key": "acs:UA.III.B.K1B|global_wind_circulation|wx_045"
   }
 ]

@@ -39,10 +39,10 @@ export type {
 } from "./adaptive";
 export type {
   StudyAnswerState,
+  StudySessionSnapshot,
   UseStudySessionOptions,
   UseStudySessionResult,
   StudyScore,
-  StudySessionSnapshot,
 } from "./studySession";
 export type {
   ExamPhase,

@@ -10,6 +10,7 @@ import {
   type AttemptConfidence,
   type Question,
   type QuestionTypeProfile,
+  type UserQuestionStats,
 } from "@part107/core";
 import { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
 import {
@@ -17,68 +18,115 @@ import {
   QuestionBankLoading,
   QuestionBankWarning,
 } from "../../components/QuestionBankState";
-import QuestionTypeOptionsGrid from "../../components/QuestionTypeOptionsGrid";
 import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
-import ActionBar from "../../components/quiz/ActionBar";
-import ConfidencePanel from "../../components/quiz/ConfidencePanel";
-import QuestionIssueReporter from "../../components/quiz/QuestionIssueReporter";
-import SessionButton from "../../components/quiz/SessionButton";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
-import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { resolveFigureImageUrl } from "../../lib/figureImage";
-import {
-  applyLapseHandlingToQueueDecision,
-  buildFlashcardPlanRecommendation,
-  buildFlashcardDeckPreview,
-  DEFAULT_FLASHCARD_SCHEDULER_SETTINGS,
-  type FlashcardLapseHandling,
-} from "../../lib/flashcardScheduler";
-import {
-  getFlashcardRemainingNewQuota,
-  hasFlashcardSchedulerSettings,
-  markFlashcardReviewCompleted,
-  markFlashcardNewSeenToday,
-  readFlashcardSchedulerProgress,
-  readFlashcardSchedulerSettings,
-  writeFlashcardSchedulerSettings,
-} from "../../lib/flashcardSchedulerStore";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 import { reinsertQueueHeadWithGap } from "../../lib/queueReinsertion";
 import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
 import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
-import { SELECTABLE_QUESTION_TYPE_OPTIONS as QUESTION_TYPE_OPTIONS } from "../../lib/questionTypeOptions";
-import {
-  readPreferredQuestionType,
-  writePreferredQuestionType,
-} from "../../lib/questionTypePreferenceStore";
-import { readLearningPreferences, writeLearningPreferences } from "../../lib/learningPreferencesStore";
 
-const DAILY_REVIEW_TARGET_OPTIONS = [10, 20, 30, 50] as const;
-const MAX_NEW_PER_DAY_OPTIONS = [0, 5, 10, 20] as const;
-const MAX_PER_CATEGORY_OPTIONS = [0, 2, 3, 5] as const;
-const WEEKLY_REVIEW_GOAL_OPTIONS = [20, 40, 60, 80] as const;
-const LAPSE_HANDLING_OPTIONS: Array<{
-  value: FlashcardLapseHandling;
-  label: string;
+// ─── Supported question‑type profiles ───
+const QUESTION_TYPE_OPTIONS: Array<{
+  value: QuestionTypeProfile;
+  title: string;
   description: string;
 }> = [
   {
-    value: "balanced",
-    label: "Balanced",
-    description: "Default spacing on misses.",
+    value: "confirmed_test",
+    title: "✅ Confirmed Test Questions",
+    description: "Only real-exam questions (66).",
   },
   {
-    value: "aggressive",
-    label: "Aggressive",
-    description: "Bring missed cards back ASAP.",
+    value: "all_random",
+    title: "🎲 All Questions",
+    description: "Full 85-question direct exam-style pool.",
   },
   {
-    value: "gentle",
-    label: "Gentle",
-    description: "Push missed cards slightly farther.",
+    value: "real_exam",
+    title: "Real Exam MCQ",
+    description: "Excludes ACS drill format.",
+  },
+  {
+    value: "weak_spots",
+    title: "🔥 Weak Spots",
+    description: "Questions you still struggle with.",
   },
 ];
+
+const UPCOMING_FALLBACK_COUNT = 20;
+
+interface DeckPreview {
+  cards: Question[];
+  totalPool: number;
+  dueNowCount: number;
+  usingUpcomingFallback: boolean;
+}
+
+function getQuestionSchedule(
+  question: Question,
+  statsByKey: Record<string, UserQuestionStats>,
+  includeChoicesInCanonicalKey: boolean
+): { dueAtMs: number; masteryScore: number } {
+  const key = canonicalQuestionKey(question, { includeChoices: includeChoicesInCanonicalKey });
+  const stats = statsByKey[key];
+  const parsedDue = Date.parse(stats?.nextDueAt ?? "");
+  return {
+    dueAtMs: Number.isFinite(parsedDue) ? parsedDue : 0,
+    masteryScore: typeof stats?.masteryScore === "number" ? stats.masteryScore : 0,
+  };
+}
+
+function buildDeckPreview(
+  questions: Question[],
+  statsByKey: Record<string, UserQuestionStats>,
+  includeChoicesInCanonicalKey: boolean
+): DeckPreview {
+  if (questions.length === 0) {
+    return {
+      cards: [],
+      totalPool: 0,
+      dueNowCount: 0,
+      usingUpcomingFallback: false,
+    };
+  }
+
+  const nowMs = Date.now();
+  const ranked = [...questions].sort((a, b) => {
+    const aSchedule = getQuestionSchedule(a, statsByKey, includeChoicesInCanonicalKey);
+    const bSchedule = getQuestionSchedule(b, statsByKey, includeChoicesInCanonicalKey);
+
+    if (aSchedule.dueAtMs !== bSchedule.dueAtMs) {
+      return aSchedule.dueAtMs - bSchedule.dueAtMs;
+    }
+    if (aSchedule.masteryScore !== bSchedule.masteryScore) {
+      return aSchedule.masteryScore - bSchedule.masteryScore;
+    }
+    return a.id.localeCompare(b.id);
+  });
+
+  const dueNow = ranked.filter(
+    (question) =>
+      getQuestionSchedule(question, statsByKey, includeChoicesInCanonicalKey).dueAtMs <= nowMs
+  );
+
+  if (dueNow.length > 0) {
+    return {
+      cards: dueNow,
+      totalPool: questions.length,
+      dueNowCount: dueNow.length,
+      usingUpcomingFallback: false,
+    };
+  }
+
+  return {
+    cards: ranked.slice(0, Math.min(UPCOMING_FALLBACK_COUNT, ranked.length)),
+    totalPool: questions.length,
+    dueNowCount: 0,
+    usingUpcomingFallback: true,
+  };
+}
 
 // ─── Component ───
 export default function FlashcardsPage() {
@@ -92,8 +140,7 @@ export default function FlashcardsPage() {
     reload,
     clearSnapshot,
   } = useQuestionBank();
-  const activeUserId = useActiveUserId();
-  const adaptive = useAdaptiveQuestionStats(activeUserId);
+  const adaptive = useAdaptiveQuestionStats();
   const events = useLearningEventLogger(adaptive.userId);
 
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("confirmed_test");
@@ -105,36 +152,6 @@ export default function FlashcardsPage() {
   const [known, setKnown] = useState(0);
   const [learning, setLearning] = useState(0);
   const [reviews, setReviews] = useState(0);
-  const [ratingConfidence, setRatingConfidence] = useState<AttemptConfidence>(3);
-  const [dailyReviewTarget, setDailyReviewTarget] = useState<number>(
-    DEFAULT_FLASHCARD_SCHEDULER_SETTINGS.dailyReviewTarget
-  );
-  const [maxNewCardsPerDay, setMaxNewCardsPerDay] = useState<number>(
-    DEFAULT_FLASHCARD_SCHEDULER_SETTINGS.maxNewCardsPerDay
-  );
-  const [lapseHandling, setLapseHandling] = useState<FlashcardLapseHandling>(
-    DEFAULT_FLASHCARD_SCHEDULER_SETTINGS.lapseHandling
-  );
-  const [maxPerCategory, setMaxPerCategory] = useState<number>(
-    DEFAULT_FLASHCARD_SCHEDULER_SETTINGS.maxPerCategory
-  );
-  const [weeklyReviewGoal, setWeeklyReviewGoal] = useState<number>(
-    DEFAULT_FLASHCARD_SCHEDULER_SETTINGS.weeklyReviewGoal
-  );
-  const [schedulerHydratedForUserId, setSchedulerHydratedForUserId] = useState<string | null>(
-    null
-  );
-  const [prefsHydratedForUserId, setPrefsHydratedForUserId] = useState<string | null>(null);
-  const [dailySeenVersion, setDailySeenVersion] = useState(0);
-  const [remainingNewQuota, setRemainingNewQuota] = useState(() =>
-    getFlashcardRemainingNewQuota(
-      activeUserId,
-      DEFAULT_FLASHCARD_SCHEDULER_SETTINGS.maxNewCardsPerDay
-    )
-  );
-  const [weeklyProgress, setWeeklyProgress] = useState(() =>
-    readFlashcardSchedulerProgress(activeUserId)
-  );
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const questionShownAtRef = useRef(Date.now());
   const completionLoggedRef = useRef(false);
@@ -148,108 +165,22 @@ export default function FlashcardsPage() {
     [adaptive.config, adaptive.statsByKey, allQuestions, selectedQuestionType]
   );
 
-  useEffect(() => {
-    const stored = readFlashcardSchedulerSettings(activeUserId);
-    const preferences = readLearningPreferences(activeUserId);
-    const hasStoredSettings = hasFlashcardSchedulerSettings(activeUserId);
-    setDailyReviewTarget(
-      hasStoredSettings ? stored.dailyReviewTarget : preferences.defaultFlashcardDailyReviewTarget
-    );
-    setMaxNewCardsPerDay(stored.maxNewCardsPerDay);
-    setLapseHandling(stored.lapseHandling);
-    setMaxPerCategory(stored.maxPerCategory);
-    setWeeklyReviewGoal(stored.weeklyReviewGoal);
-    setWeeklyProgress(readFlashcardSchedulerProgress(activeUserId));
-    setSchedulerHydratedForUserId(activeUserId);
-    setPrefsHydratedForUserId(activeUserId);
-    setDailySeenVersion((value) => value + 1);
-  }, [activeUserId]);
-
-  useEffect(() => {
-    const preferred = readPreferredQuestionType(activeUserId);
-    if (preferred) {
-      setSelectedQuestionType(preferred);
-    }
-  }, [activeUserId]);
-
-  useEffect(() => {
-    writePreferredQuestionType(activeUserId, selectedQuestionType);
-  }, [activeUserId, selectedQuestionType]);
-
-  useEffect(() => {
-    if (schedulerHydratedForUserId !== activeUserId) return;
-    writeFlashcardSchedulerSettings(activeUserId, {
-      dailyReviewTarget,
-      maxNewCardsPerDay,
-      lapseHandling,
-      maxPerCategory,
-      weeklyReviewGoal,
-    });
-  }, [
-    activeUserId,
-    dailyReviewTarget,
-    lapseHandling,
-    maxPerCategory,
-    maxNewCardsPerDay,
-    schedulerHydratedForUserId,
-    weeklyReviewGoal,
-  ]);
-
-  useEffect(() => {
-    if (prefsHydratedForUserId !== activeUserId) return;
-    if (started) return;
-    const current = readLearningPreferences(activeUserId);
-    if (current.defaultFlashcardDailyReviewTarget === dailyReviewTarget) return;
-    writeLearningPreferences(activeUserId, {
-      ...current,
-      defaultFlashcardDailyReviewTarget: dailyReviewTarget,
-    });
-  }, [activeUserId, dailyReviewTarget, prefsHydratedForUserId, started]);
-
-  useEffect(() => {
-    setRemainingNewQuota(getFlashcardRemainingNewQuota(activeUserId, maxNewCardsPerDay));
-  }, [activeUserId, maxNewCardsPerDay, dailySeenVersion]);
-
   const deckPreview = useMemo(() => {
     const pool =
       selectedCategory === "All"
         ? filteredQuestions
         : filteredQuestions.filter((q) => q.category === selectedCategory);
-    return buildFlashcardDeckPreview({
-      questions: pool,
-      statsByKey: adaptive.statsByKey,
-      includeChoicesInCanonicalKey: adaptive.config.includeChoicesInCanonicalKey,
-      settings: {
-        dailyReviewTarget,
-        maxNewCardsPerDay,
-        lapseHandling,
-        maxPerCategory,
-        weeklyReviewGoal,
-      },
-      remainingNewQuota,
-    });
+    return buildDeckPreview(
+      pool,
+      adaptive.statsByKey,
+      adaptive.config.includeChoicesInCanonicalKey
+    );
   }, [
     adaptive.config.includeChoicesInCanonicalKey,
     adaptive.statsByKey,
-    dailyReviewTarget,
     filteredQuestions,
-    lapseHandling,
-    maxNewCardsPerDay,
-    maxPerCategory,
-    remainingNewQuota,
     selectedCategory,
-    weeklyReviewGoal,
   ]);
-
-  const weeklyPlanRecommendation = useMemo(() => {
-    const dayOfWeek = (new Date().getDay() + 6) % 7;
-    return buildFlashcardPlanRecommendation({
-      weeklyReviewGoal,
-      weeklyCompleted: weeklyProgress.completedThisWeek,
-      daysRemainingInWeek: Math.max(1, 7 - dayOfWeek),
-      streakDays: weeklyProgress.streakDays,
-    });
-  }, [weeklyProgress.completedThisWeek, weeklyProgress.streakDays, weeklyReviewGoal]);
 
   const visibleCounts = useMemo(() => countQuestionsByCategory(filteredQuestions), [filteredQuestions]);
 
@@ -262,7 +193,6 @@ export default function FlashcardsPage() {
     setKnown(0);
     setLearning(0);
     setReviews(0);
-    setRatingConfidence(3);
     setFlipped(false);
     setFigureRef(null);
     setSessionCards([]);
@@ -276,7 +206,6 @@ export default function FlashcardsPage() {
     setKnown(0);
     setLearning(0);
     setReviews(0);
-    setRatingConfidence(3);
     setFlipped(false);
     setFigureRef(null);
     setStarted(true);
@@ -291,30 +220,9 @@ export default function FlashcardsPage() {
         totalPool: deckPreview.totalPool,
         dueNowCount: deckPreview.dueNowCount,
         usingUpcomingFallback: deckPreview.usingUpcomingFallback,
-        dueNowReviewCount: deckPreview.dueNowReviewCount,
-        dueNowNewCount: deckPreview.dueNowNewCount,
-        dailyReviewTarget,
-        maxNewCardsPerDay,
-        remainingNewQuota,
-        lapseHandling,
-        maxPerCategory,
-        weeklyReviewGoal,
-        weeklyCompleted: weeklyProgress.completedThisWeek,
       },
     });
-  }, [
-    dailyReviewTarget,
-    deckPreview,
-    events,
-    lapseHandling,
-    maxPerCategory,
-    maxNewCardsPerDay,
-    remainingNewQuota,
-    selectedCategory,
-    selectedQuestionType,
-    weeklyProgress.completedThisWeek,
-    weeklyReviewGoal,
-  ]);
+  }, [deckPreview, events, selectedCategory, selectedQuestionType]);
 
   const handleToggleCard = useCallback(() => setFlipped((prev) => !prev), []);
   const handleShowQuestion = useCallback(() => setFlipped(false), []);
@@ -323,19 +231,11 @@ export default function FlashcardsPage() {
     (rating: "know_it" | "still_learning", confidence: AttemptConfidence) => {
       if (!currentCard) return;
       const isCorrect = rating === "know_it";
-      const canonicalKey = canonicalQuestionKey(currentCard, {
-        includeChoices: adaptive.config.includeChoicesInCanonicalKey,
-      });
-      const isNewCard = !adaptive.statsByKey[canonicalKey];
       const qualityScore = qualityFromOutcomeConfidence(
         isCorrect ? "correct" : "incorrect",
         confidence
       );
-      const queueDecision = applyLapseHandlingToQueueDecision(
-        sessionQueueDecisionFromQuality(qualityScore),
-        isCorrect,
-        lapseHandling
-      );
+      const queueDecision = sessionQueueDecisionFromQuality(qualityScore);
       const responseTimeMs = Math.max(0, Date.now() - questionShownAtRef.current);
       recordLearningAttempt({
         adaptive,
@@ -356,10 +256,6 @@ export default function FlashcardsPage() {
             : `reinsert_${queueDecision.gapMin}-${queueDecision.gapMax}`,
         },
       });
-      if (isNewCard && markFlashcardNewSeenToday(activeUserId, canonicalKey)) {
-        setDailySeenVersion((value) => value + 1);
-      }
-      setWeeklyProgress(markFlashcardReviewCompleted(activeUserId, 1));
 
       if (!isCorrect) {
         setLearning((n) => n + 1);
@@ -379,16 +275,24 @@ export default function FlashcardsPage() {
         );
       });
     },
-    [activeUserId, adaptive, currentCard, events, lapseHandling, selectedQuestionType]
+    [adaptive, currentCard, events, selectedQuestionType]
   );
 
   const handleKnowIt = useCallback(() => {
-    handleRateCard("know_it", ratingConfidence);
-  }, [handleRateCard, ratingConfidence]);
+    handleRateCard("know_it", 3);
+  }, [handleRateCard]);
+
+  const handleKnowItConfident = useCallback(() => {
+    handleRateCard("know_it", 5);
+  }, [handleRateCard]);
 
   const handleStillLearning = useCallback(() => {
-    handleRateCard("still_learning", ratingConfidence);
-  }, [handleRateCard, ratingConfidence]);
+    handleRateCard("still_learning", 3);
+  }, [handleRateCard]);
+
+  const handleStillLearningConfident = useCallback(() => {
+    handleRateCard("still_learning", 5);
+  }, [handleRateCard]);
 
   const handleSkip = useCallback(() => {
     if (!currentCard) return;
@@ -414,7 +318,6 @@ export default function FlashcardsPage() {
     setKnown(0);
     setLearning(0);
     setReviews(0);
-    setRatingConfidence(3);
     setFlipped(false);
     setFigureRef(null);
     completionLoggedRef.current = false;
@@ -524,37 +427,28 @@ export default function FlashcardsPage() {
             practicing.
           </div>
         )}
-        {deckPreview.limitedByDailyTarget && totalSetupCards > 0 && (
-          <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-4 py-3 text-xs text-cyan-300">
-            Daily target applied: showing first {totalSetupCards} cards for this session.
-          </div>
-        )}
-        {deckPreview.limitedByNewCap && (
-          <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-xs text-amber-300">
-            New-card cap applied: {deckPreview.remainingNewQuota} new-card slots left today.
-          </div>
-        )}
-        {deckPreview.limitedByCategoryCap && (
-          <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-4 py-3 text-xs text-cyan-300">
-            Category cap applied: max {maxPerCategory} card{maxPerCategory === 1 ? "" : "s"} per
-            category in this deck.
-          </div>
-        )}
-        {totalSetupCards === 0 && deckPreview.dueNowNewCount > 0 && deckPreview.remainingNewQuota === 0 && (
-          <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-xs text-amber-300">
-            New-card cap reached for today. Increase max new cards/day or return tomorrow.
-          </div>
-        )}
 
         {/* Question type selector */}
         {totalSetupCards === 0 && <QuestionSelectionEmptyState context="flashcards" />}
-        <QuestionTypeOptionsGrid
-          title="Question Pool"
-          options={QUESTION_TYPE_OPTIONS}
-          selectedQuestionType={selectedQuestionType}
-          onSelectQuestionType={setSelectedQuestionType}
-          variant="compact"
-        />
+        <div className="space-y-3">
+          <div className="text-sm font-semibold text-white">Question Pool</div>
+          <div className="grid gap-2">
+            {QUESTION_TYPE_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => setSelectedQuestionType(opt.value)}
+                className={`rounded-xl border px-4 py-3 text-left transition-colors ${
+                  selectedQuestionType === opt.value
+                    ? "border-brand-500/60 bg-brand-500/10"
+                    : "border-[var(--card-border)] bg-[var(--card)] hover:border-brand-500/30"
+                }`}
+              >
+                <div className="text-sm font-semibold text-white">{opt.title}</div>
+                <div className="mt-1 text-xs text-[var(--muted)]">{opt.description}</div>
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Category selector */}
         <div className="space-y-3">
@@ -587,135 +481,6 @@ export default function FlashcardsPage() {
                 <div className="mt-1 text-xs text-[var(--muted)]">
                   {visibleCounts[cat] ?? 0} cards
                 </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 text-xs">
-          <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-3 py-2 text-center text-[var(--muted)]">
-            Due now
-            <div className="mt-1 font-semibold text-white">{deckPreview.dueNowCount}</div>
-          </div>
-          <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-3 py-2 text-center text-[var(--muted)]">
-            Reviews due
-            <div className="mt-1 font-semibold text-white">{deckPreview.dueNowReviewCount}</div>
-          </div>
-          <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-3 py-2 text-center text-[var(--muted)]">
-            New slots left
-            <div className="mt-1 font-semibold text-white">{deckPreview.remainingNewQuota}</div>
-          </div>
-        </div>
-
-        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4">
-          <div className="text-sm font-semibold text-white">Weekly Plan</div>
-          <div className="mt-2 text-xs text-[var(--muted)]">
-            Week progress: {weeklyProgress.completedThisWeek}/{weeklyReviewGoal} reviews
-          </div>
-          <div className="mt-1 text-xs text-[var(--muted)]">
-            Streak: {weeklyProgress.streakDays} day{weeklyProgress.streakDays === 1 ? "" : "s"}
-          </div>
-          <div className="mt-2 rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-xs text-white">
-            {weeklyPlanRecommendation.message}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <div className="text-sm font-semibold text-white">Daily Review Target</div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {DAILY_REVIEW_TARGET_OPTIONS.map((option) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => setDailyReviewTarget(option)}
-                className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
-                  dailyReviewTarget === option
-                    ? "border-brand-400 bg-brand-500/20 text-white"
-                    : "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)] hover:text-white"
-                }`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <div className="text-sm font-semibold text-white">Max New Cards / Day</div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {MAX_NEW_PER_DAY_OPTIONS.map((option) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => setMaxNewCardsPerDay(option)}
-                className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
-                  maxNewCardsPerDay === option
-                    ? "border-brand-400 bg-brand-500/20 text-white"
-                    : "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)] hover:text-white"
-                }`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <div className="text-sm font-semibold text-white">Lapse Handling</div>
-          <div className="grid gap-2 sm:grid-cols-3">
-            {LAPSE_HANDLING_OPTIONS.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() => setLapseHandling(option.value)}
-                className={`rounded-lg border px-3 py-2 text-left text-sm transition-colors ${
-                  lapseHandling === option.value
-                    ? "border-brand-400 bg-brand-500/20 text-white"
-                    : "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)] hover:text-white"
-                }`}
-              >
-                <div className="font-medium">{option.label}</div>
-                <div className="mt-1 text-xs text-[var(--muted)]">{option.description}</div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <div className="text-sm font-semibold text-white">Max Cards Per Category</div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {MAX_PER_CATEGORY_OPTIONS.map((option) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => setMaxPerCategory(option)}
-                className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
-                  maxPerCategory === option
-                    ? "border-brand-400 bg-brand-500/20 text-white"
-                    : "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)] hover:text-white"
-                }`}
-              >
-                {option === 0 ? "Unlimited" : option}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <div className="text-sm font-semibold text-white">Weekly Review Goal</div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {WEEKLY_REVIEW_GOAL_OPTIONS.map((option) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => setWeeklyReviewGoal(option)}
-                className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
-                  weeklyReviewGoal === option
-                    ? "border-brand-400 bg-brand-500/20 text-white"
-                    : "border-[var(--card-border)] bg-[var(--card)] text-[var(--muted)] hover:text-white"
-                }`}
-              >
-                {option}
               </button>
             ))}
           </div>
@@ -760,23 +525,21 @@ export default function FlashcardsPage() {
           </div>
         </div>
         <div className="flex gap-3">
-          <SessionButton
-            variant="brand-solid"
+          <button
             onClick={restart}
-            className="flex-1 py-3"
+            className="flex-1 rounded-xl bg-brand-600 py-3 font-semibold text-white hover:bg-brand-700"
           >
             Restart Deck
-          </SessionButton>
-          <SessionButton
-            variant="muted-outline"
+          </button>
+          <button
             onClick={() => {
               setStarted(false);
               resetSession();
             }}
-            className="flex-1 py-3 font-semibold"
+            className="flex-1 rounded-xl border border-[var(--card-border)] py-3 font-semibold text-[var(--muted)] hover:text-white"
           >
             Change Topic
-          </SessionButton>
+          </button>
         </div>
         <Link
           href="/study"
@@ -922,75 +685,72 @@ export default function FlashcardsPage() {
         )}
       </div>
 
-      <ConfidencePanel
-        title={
-          <>
-            Confidence for next rating: <code>{ratingConfidence}/5</code>
-          </>
-        }
-        value={ratingConfidence}
-        onChange={setRatingConfidence}
-        selectorMode="triad"
-        selectorSize="md"
-        selectorClassName="mt-2 flex flex-wrap justify-center gap-2"
-        hint={
-          flipped
-            ? "Use NS/N/C for your next Know It/Still Learning click."
-            : "Set NS/N/C now, then flip the card and rate."
-        }
-      />
-
-      <QuestionIssueReporter
-        mode="flashcards"
-        question={q}
-        selectedOptionId={null}
-        questionTypeProfile={selectedQuestionType}
-        confidence={ratingConfidence}
-      />
-
       {/* Action buttons — only visible when flipped */}
       {flipped && (
         <div className="space-y-2">
           <div className="grid grid-cols-2 gap-4">
-            <button
-              onClick={handleStillLearning}
-              className="w-full rounded-xl border border-amber-500/40 bg-amber-500/10 py-4 text-center font-semibold text-amber-400 transition-all hover:scale-[1.02] hover:bg-amber-500/20"
-            >
-              📖 Still Learning
-              <span className="mt-1 block text-xs text-[var(--muted)]">← or L key</span>
-            </button>
-            <button
-              onClick={handleKnowIt}
-              className="w-full rounded-xl border border-green-500/40 bg-green-500/10 py-4 text-center font-semibold text-green-400 transition-all hover:scale-[1.02] hover:bg-green-500/20"
-            >
-              ✅ Know It
-              <span className="mt-1 block text-xs text-[var(--muted)]">→ or K key</span>
-            </button>
+            <div className="relative">
+              <button
+                onClick={handleStillLearning}
+                className="w-full rounded-xl border border-amber-500/40 bg-amber-500/10 py-4 pr-12 text-center font-semibold text-amber-400 transition-all hover:scale-[1.02] hover:bg-amber-500/20"
+              >
+                📖 Still Learning
+                <span className="mt-1 block text-xs text-[var(--muted)]">← or L key</span>
+              </button>
+              <button
+                type="button"
+                aria-label="Still Learning with high confidence"
+                title="Still Learning with high confidence"
+                onClick={handleStillLearningConfident}
+                className="absolute right-2 top-2 rounded-md border border-amber-400/40 bg-amber-500/20 px-2 py-1 text-xs font-semibold text-amber-200 hover:bg-amber-500/30"
+              >
+                ☑
+              </button>
+            </div>
+            <div className="relative">
+              <button
+                onClick={handleKnowIt}
+                className="w-full rounded-xl border border-green-500/40 bg-green-500/10 py-4 pr-12 text-center font-semibold text-green-400 transition-all hover:scale-[1.02] hover:bg-green-500/20"
+              >
+                ✅ Know It
+                <span className="mt-1 block text-xs text-[var(--muted)]">→ or K key</span>
+              </button>
+              <button
+                type="button"
+                aria-label="Know It with high confidence"
+                title="Know It with high confidence"
+                onClick={handleKnowItConfident}
+                className="absolute right-2 top-2 rounded-md border border-green-400/40 bg-green-500/20 px-2 py-1 text-xs font-semibold text-green-200 hover:bg-green-500/30"
+              >
+                ☑
+              </button>
+            </div>
           </div>
           <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 p-3 text-center text-xs text-[var(--muted)]">
-            One click records your selected confidence with each rating.
+            One click records confidence <code>3/5</code>. Tap <code>☑</code> for high confidence{" "}
+            <code>5/5</code>.
           </div>
         </div>
       )}
 
       {/* Back to setup */}
-      <ActionBar layout="text">
-        <SessionButton
-          variant="text-muted"
+      <div className="flex justify-between text-sm">
+        <button
           onClick={() => {
             setStarted(false);
             resetSession();
           }}
+          className="text-[var(--muted)] hover:text-white transition-colors"
         >
           ← Change Topic
-        </SessionButton>
-        <SessionButton
-          variant="text-muted"
+        </button>
+        <button
           onClick={handleSkip}
+          className="text-[var(--muted)] hover:text-white transition-colors"
         >
           Skip →
-        </SessionButton>
-      </ActionBar>
+        </button>
+      </div>
 
       {figureRef && (
         <ReferenceModal ref_={figureRef} onClose={() => setFigureRef(null)} />
