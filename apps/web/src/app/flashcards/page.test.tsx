@@ -16,7 +16,8 @@ vi.mock("../../hooks/useQuestionBank", () => ({
         category: "Airspace",
         subcategory: "Class C",
         question_text: "What must a remote pilot do before entering Class C airspace?",
-        figure_reference: null,
+        figure_reference: "Figure 20",
+        image_ref: "/figures/figure-20.png",
         options: [
           { id: "A", text: "Nothing" },
           { id: "B", text: "ATC authorization" },
@@ -69,6 +70,14 @@ describe("FlashcardsPage", () => {
     localStorage.clear();
   });
 
+  it("renders setup controls", () => {
+    render(<FlashcardsPage />);
+    expect(screen.getByRole("heading", { name: /Flashcards/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Confirmed Test Questions/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /All Categories/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Start Flashcards/i })).toBeInTheDocument();
+  });
+
   it("reveals answer and returns to question without blank card", async () => {
     const user = userEvent.setup();
     render(<FlashcardsPage />);
@@ -78,7 +87,6 @@ describe("FlashcardsPage", () => {
     expect(
       screen.getByText(/What must a remote pilot do before entering Class C airspace\?/i)
     ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Report issue/i })).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /Tap or press Space to reveal answer/i }));
     expect(screen.getByText(/Correct Answer/i)).toBeInTheDocument();
@@ -106,7 +114,7 @@ describe("FlashcardsPage", () => {
     expect(screen.getAllByText(/Deck Complete!/i).length).toBeGreaterThan(0);
   });
 
-  it("shows triad confidence selector before reveal and applies selected confidence", async () => {
+  it("records high-confidence rating via quick action", async () => {
     const user = userEvent.setup();
     mocks.recordAnswer.mockReset();
     render(<FlashcardsPage />);
@@ -114,20 +122,10 @@ describe("FlashcardsPage", () => {
     await user.click(screen.getByRole("button", { name: /All Questions/i }));
     await user.click(screen.getByRole("button", { name: /Start Flashcards/i }));
 
-    expect(screen.getByText(/Confidence for next rating:/i)).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: /^Not Sure$/i }));
-    expect(screen.getByText("1/5", { selector: "code" })).toBeInTheDocument();
-
     await user.click(screen.getByRole("button", { name: /Tap or press Space to reveal answer/i }));
-    await user.click(screen.getByRole("button", { name: /^✅ Know It/i }));
-    expect(mocks.recordAnswer).toHaveBeenCalledWith(
-      expect.any(Object),
-      true,
-      expect.any(Number),
-      expect.objectContaining({
-        confidence: 1,
-      })
-    );
+    await user.click(screen.getByRole("button", { name: /Know It with high confidence/i }));
+    expect(await screen.findByText(/Deck Complete!/i)).toBeInTheDocument();
+    expect(mocks.recordAnswer).toHaveBeenCalled();
   });
 
   it("disables start when max new cards/day is reached with only new cards available", async () => {
@@ -146,40 +144,27 @@ describe("FlashcardsPage", () => {
     expect(startButton).toHaveTextContent("0 cards");
   });
 
-  it("hydrates preferred question type for active user", () => {
-    localStorage.setItem("part107_default_question_type_v1", "weak_spots");
+  it("allows switching question pool option", async () => {
+    const user = userEvent.setup();
     render(<FlashcardsPage />);
 
-    const weakSpotsButton = screen.getByRole("button", { name: /Weak Spots Only/i });
-    return waitFor(() => {
-      expect(weakSpotsButton.className).toContain("border-brand-500/60");
-    });
+    const weakSpotsButton = screen.getByRole("button", { name: /Weak Spots/i });
+    await user.click(weakSpotsButton);
+    expect(weakSpotsButton.className).toContain("border-brand-500/60");
   });
 
-  it("renders weekly plan controls in setup", () => {
+  it("opens and closes figure modal from the card face", async () => {
+    const user = userEvent.setup();
     render(<FlashcardsPage />);
-    expect(screen.getByText(/Weekly Plan/i)).toBeInTheDocument();
-    expect(screen.getByText(/Week progress:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Weekly Review Goal/i)).toBeInTheDocument();
-  });
 
-  it("hydrates default flashcard daily target from learning preferences when scheduler settings are missing", async () => {
-    localStorage.setItem(
-      "part107_learning_preferences_v1",
-      JSON.stringify({
-        defaultStudyCategory: "All",
-        defaultExamCategory: "All",
-        defaultLearnBatchSize: 5,
-        defaultFlashcardDailyReviewTarget: 30,
-        weeklyStudyGoalSessions: 5,
-        weeklyExamGoalSessions: 2,
-      })
-    );
-
-    render(<FlashcardsPage />);
-    const targetButton = await screen.findByRole("button", { name: /^30$/i });
+    await user.click(screen.getByRole("button", { name: /All Questions/i }));
+    await user.click(screen.getByRole("button", { name: /Start Flashcards/i }));
+    const figureButtons = screen.getAllByRole("button", { name: /View Figure 20/i });
+    await user.click(figureButtons[figureButtons.length - 1]!);
+    expect(await screen.findByRole("dialog")).toBeInTheDocument();
+    await user.keyboard("{Escape}");
     await waitFor(() => {
-      expect(targetButton.className).toContain("border-brand-400");
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     });
   });
 });

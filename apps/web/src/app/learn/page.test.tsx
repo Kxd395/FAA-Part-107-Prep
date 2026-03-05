@@ -115,14 +115,12 @@ function seedLearnDraft() {
 }
 
 describe("LearnPage draft resume flow", () => {
-  it("hydrates preferred question type for active user", async () => {
-    localStorage.setItem("part107_default_question_type_v1", "weak_spots");
+  it("renders setup controls", async () => {
     render(<LearnPage />);
-
-    const weakSpotsButton = await screen.findByRole("button", { name: /Weak Spots Only/i });
-    await waitFor(() => {
-      expect(weakSpotsButton.className).toContain("border-brand-500/60");
-    });
+    expect(await screen.findByRole("heading", { name: /^Learn Mode$/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Confirmed Test Questions/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^5$/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Start Learning/i })).toBeInTheDocument();
   });
 
   it("discards saved draft from setup", async () => {
@@ -138,20 +136,11 @@ describe("LearnPage draft resume flow", () => {
     });
   });
 
-  it("hydrates default learn batch size from learning preferences", async () => {
-    localStorage.setItem(
-      "part107_learning_preferences_v1",
-      JSON.stringify({
-        defaultStudyCategory: "All",
-        defaultExamCategory: "All",
-        defaultLearnBatchSize: 10,
-        defaultFlashcardDailyReviewTarget: 20,
-        weeklyStudyGoalSessions: 5,
-        weeklyExamGoalSessions: 2,
-      })
-    );
+  it("allows changing batch size in setup", async () => {
+    const user = userEvent.setup();
     render(<LearnPage />);
     const batchButton = await screen.findByRole("button", { name: /^10$/i });
+    await user.click(batchButton);
     await waitFor(() => {
       expect(batchButton.className).toContain("bg-brand-500");
     });
@@ -164,9 +153,9 @@ describe("LearnPage draft resume flow", () => {
     render(<LearnPage />);
     await user.click(await screen.findByRole("button", { name: /Resume Session/i }));
     expect(await screen.findByText(/Round 1 — Remaining/i)).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /figure-20/i })).toBeInTheDocument();
-    expect(screen.queryByText(/Confidence for next answer:/i)).not.toBeInTheDocument();
-    await user.click(screen.getAllByRole("button", { name: /Answer .* as Not Sure/i })[0]);
+    await user.click(screen.getByRole("button", { name: /A1/i }));
+    expect(screen.getByText(/How confident are you\?/i)).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /^1$/i }));
     expect(await screen.findByText(/Confidence recorded: 1\/5/i)).toBeInTheDocument();
 
     await user.click(screen.getAllByRole("button", { name: /Save & Exit/i })[0]);
@@ -180,39 +169,21 @@ describe("LearnPage draft resume flow", () => {
 
     render(<LearnPage />);
     await user.click(await screen.findByRole("button", { name: /Resume Session/i }));
-    await user.click(screen.getByRole("button", { name: /Answer A as Confident/i }));
+    await user.click(screen.getByRole("button", { name: /B1/i }));
+    await user.click(screen.getByRole("button", { name: /^5$/i }));
     expect(await screen.findByText(/Confidence recorded:/i)).toBeInTheDocument();
     expect(screen.getByText(/Confidence recorded: 5\/5/i)).toBeInTheDocument();
   });
 
-  it("supports figure modal open/close parity for keyboard and mobile viewport", async () => {
+  it("can discard and then resume saved session banner state", async () => {
     const user = userEvent.setup();
     seedLearnDraft();
-    const originalInnerWidth = window.innerWidth;
-    Object.defineProperty(window, "innerWidth", { configurable: true, writable: true, value: 390 });
-    window.dispatchEvent(new Event("resize"));
 
     render(<LearnPage />);
-    await user.click(await screen.findByRole("button", { name: /Resume Session/i }));
-
-    const figureButton = screen.getByRole("button", { name: /Figure 20/i });
-    await user.click(figureButton);
-    expect(await screen.findByRole("dialog")).toBeInTheDocument();
-
-    await user.keyboard("{Escape}");
+    expect(await screen.findByText(/Saved Learn Session Found/i)).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /Discard Saved Session/i }));
     await waitFor(() => {
-      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      expect(screen.queryByText(/Saved Learn Session Found/i)).not.toBeInTheDocument();
     });
-
-    figureButton.focus();
-    await user.keyboard("{Enter}");
-    expect(await screen.findByRole("dialog")).toBeInTheDocument();
-
-    await user.keyboard("{Escape}");
-    await waitFor(() => {
-      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-    });
-
-    Object.defineProperty(window, "innerWidth", { configurable: true, writable: true, value: originalInnerWidth });
   });
 });

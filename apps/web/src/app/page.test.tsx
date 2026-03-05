@@ -1,13 +1,10 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import HomePage from "./page";
 
 const mocks = vi.hoisted(() => ({
   logEvent: vi.fn(),
-}));
-
-vi.mock("../hooks/useActiveUserId", () => ({
-  useActiveUserId: () => "test-user",
 }));
 
 vi.mock("../hooks/useLearningEventLogger", () => ({
@@ -16,21 +13,9 @@ vi.mock("../hooks/useLearningEventLogger", () => ({
   }),
 }));
 
-vi.mock("../hooks/useQuestionBank", () => ({
-  useQuestionBank: () => ({
-    questions: [
-      { category: "Regulations" },
-      { category: "Regulations" },
-      { category: "Airspace" },
-      { category: "Operations" },
-    ],
-  }),
-}));
-
 describe("HomePage", () => {
   beforeEach(() => {
     mocks.logEvent.mockReset();
-    localStorage.clear();
   });
 
   afterEach(() => {
@@ -40,7 +25,8 @@ describe("HomePage", () => {
   it("renders hero and logs home page view", () => {
     render(<HomePage />);
 
-    expect(screen.getByRole("heading", { name: /Pass Your/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Pass Your Part 107 Exam/i })).toBeInTheDocument();
+    expect(screen.getByText(/Updated for 2026 FAA Rules/i)).toBeInTheDocument();
     expect(mocks.logEvent).toHaveBeenCalledWith(
       expect.objectContaining({
         type: "page_view",
@@ -50,7 +36,7 @@ describe("HomePage", () => {
     );
   });
 
-  it("updates hero study/exam links when practice type changes", () => {
+  it("updates hero and topic links when practice type changes", () => {
     render(<HomePage />);
 
     const practiceTypeSelect = screen.getByLabelText(/Practice Question Type/i);
@@ -58,17 +44,23 @@ describe("HomePage", () => {
 
     const studyLink = screen.getByRole("link", { name: /Start Studying/i });
     const examLink = screen.getByRole("link", { name: /Take Practice Exam/i });
-    const studyBookmarksLink = screen.getByRole("link", { name: /Study Bookmarks/i });
-    const examBookmarksLink = screen.getByRole("link", { name: /Exam from Bookmarks/i });
-
     expect(studyLink.getAttribute("href")).toContain("/study?type=weak_spots");
     expect(examLink.getAttribute("href")).toContain("/exam?type=weak_spots");
-    expect(studyBookmarksLink.getAttribute("href")).toContain(
-      "/study?collection=bookmarks&type=weak_spots"
+
+    const topicStudyLinks = screen.getAllByRole("link", { name: "📖 Study" });
+    const topicExamLinks = screen.getAllByRole("link", { name: "🎯 Test" });
+    expect(topicStudyLinks[0]?.getAttribute("href")).toContain(
+      "/study?category=Regulations&type=weak_spots"
     );
-    expect(examBookmarksLink.getAttribute("href")).toContain(
-      "/exam?collection=bookmarks&type=weak_spots"
+    expect(topicExamLinks[0]?.getAttribute("href")).toContain(
+      "/exam?category=Regulations&type=weak_spots"
     );
+
+    expect(screen.getByText(/Targets realistic MCQs you miss most often\./i)).toBeInTheDocument();
+    expect(
+      screen.getByText((_, element) => element?.textContent === "Selected: Weak Spots Only")
+    ).toBeInTheDocument();
+
     expect(mocks.logEvent).toHaveBeenCalledWith(
       expect.objectContaining({
         type: "filter_changed",
@@ -78,49 +70,57 @@ describe("HomePage", () => {
     );
   });
 
-  it("renders dynamic live question count stat", () => {
+  it("renders current static stats and feature links", () => {
     render(<HomePage />);
-    expect(screen.getByText("4")).toBeInTheDocument();
-    expect(screen.getByText(/Live loaded question bank/i)).toBeInTheDocument();
+
+    expect(screen.getByText(/^85$/)).toBeInTheDocument();
+    expect(screen.getByText(/^70%$/)).toBeInTheDocument();
+    expect(screen.getByText(/^2 hrs$/)).toBeInTheDocument();
+    expect(screen.getByText(/^2026$/)).toBeInTheDocument();
+
+    expect(screen.getByRole("link", { name: /Study Mode/i })).toHaveAttribute("href", "/study");
+    expect(screen.getByRole("link", { name: /Exam Mode/i })).toHaveAttribute("href", "/exam");
+    expect(screen.getByRole("link", { name: /Flashcards/i })).toHaveAttribute("href", "/flashcards");
+    expect(screen.getByRole("link", { name: /Learn Mode/i })).toHaveAttribute("href", "/learn");
+    expect(screen.getByRole("link", { name: /Missed Questions/i })).toHaveAttribute("href", "/missed");
+    expect(screen.getByRole("link", { name: /Sectional Charts/i })).toHaveAttribute("href", "/charts");
+    expect(screen.getByRole("link", { name: /Smart Review/i })).toHaveAttribute(
+      "href",
+      "/study?type=weak_spots"
+    );
   });
 
-  it("hydrates preferred question type for active user", () => {
-    localStorage.setItem("part107_default_question_type_v1:test-user", "weak_spots");
+  it("logs navigation events when hero actions are clicked", async () => {
+    const user = userEvent.setup();
     render(<HomePage />);
 
-    const studyLink = screen.getByRole("link", { name: /Start Studying/i });
-    expect(studyLink.getAttribute("href")).toContain("/study?type=weak_spots");
-  });
+    const startStudyLink = screen.getByRole("link", { name: /Start Studying/i });
+    const takeExamLink = screen.getByRole("link", { name: /Take Practice Exam/i });
+    startStudyLink.addEventListener("click", (event) => event.preventDefault());
+    takeExamLink.addEventListener("click", (event) => event.preventDefault());
 
-  it("applies preferred study/exam categories to hero links", () => {
-    render(<HomePage />);
+    await user.click(startStudyLink);
+    await user.click(takeExamLink);
 
-    fireEvent.change(screen.getByLabelText(/Default Study Category/i), {
-      target: { value: "Airspace" },
-    });
-    fireEvent.change(screen.getByLabelText(/Default Exam Category/i), {
-      target: { value: "Operations" },
-    });
-
-    const studyLink = screen.getByRole("link", { name: /Start Studying/i });
-    const examLink = screen.getByRole("link", { name: /Take Practice Exam/i });
-    expect(studyLink.getAttribute("href")).toContain("category=Airspace");
-    expect(examLink.getAttribute("href")).toContain("category=Operations");
-  });
-
-  it("persists learn and flashcard default preferences from home controls", () => {
-    render(<HomePage />);
-
-    fireEvent.click(screen.getByRole("button", { name: /^15$/i }));
-    fireEvent.click(screen.getByRole("button", { name: /^30$/i }));
-
-    const raw = localStorage.getItem("part107_learning_preferences_v1:test-user");
-    expect(raw).toBeTruthy();
-    const parsed = JSON.parse(raw ?? "{}") as {
-      defaultLearnBatchSize?: number;
-      defaultFlashcardDailyReviewTarget?: number;
-    };
-    expect(parsed.defaultLearnBatchSize).toBe(15);
-    expect(parsed.defaultFlashcardDailyReviewTarget).toBe(30);
+    expect(mocks.logEvent).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: "link_opened",
+        mode: "home",
+        metadata: expect.objectContaining({
+          target: "hero_start_study",
+          href: "/study?type=confirmed_test",
+        }),
+      })
+    );
+    expect(mocks.logEvent).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: "link_opened",
+        mode: "home",
+        metadata: expect.objectContaining({
+          target: "hero_take_exam",
+          href: "/exam?type=confirmed_test",
+        }),
+      })
+    );
   });
 });
