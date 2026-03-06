@@ -7,6 +7,7 @@ Generated: 2026-02-26
   - `user state` (`/api/user/state`)
   - `learning events` (`/api/user/learning-events`)
 - `question issues` (`/api/user/question-issues`)
+- `magic-link nonce replay guard` (`/api/auth/verify`)
 - Runtime fallback remains local `.data/*.json` if Supabase is unavailable or misconfigured.
 
 ## Required `.env.local` setup (exact)
@@ -37,11 +38,12 @@ Optional table overrides:
 - `SUPABASE_TABLE_USER_STATE` (default: `part107_user_state`)
 - `SUPABASE_TABLE_LEARNING_EVENTS` (default: `part107_learning_events`)
 - `SUPABASE_TABLE_QUESTION_ISSUES` (default: `part107_question_issues`)
+- `SUPABASE_TABLE_MAGIC_LINK_NONCES` (default: `part107_magic_link_nonces`)
 
 ## Provisioning
 1. Open Supabase SQL editor.
 2. Run [`docs/engineering/supabase_persistence_schema.sql`](/Volumes/Developer/projects/experiments/FAA_107_Study_Guide/docs/engineering/supabase_persistence_schema.sql).
-3. Confirm the three tables are created in `public`.
+3. Confirm the four tables are created in `public`.
 
 ## Behavior
 - Stores attempt Supabase first.
@@ -64,7 +66,7 @@ Run:
 
 This verifies:
 - required env keys are present
-- service-role auth can query all three persistence tables
+- service-role auth can query all four persistence tables
 
 ## Common failure and fix
 If you see:

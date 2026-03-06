@@ -15,6 +15,7 @@ function clearSupabaseEnv(): void {
   delete process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
   delete process.env.SUPABASE_PERSISTENCE_ENABLED;
   delete process.env.SUPABASE_ALLOW_PUBLISHABLE_FALLBACK;
+  delete process.env.SUPABASE_TABLE_MAGIC_LINK_NONCES;
 }
 
 describe("supabasePersistence", () => {
@@ -50,6 +51,7 @@ describe("supabasePersistence", () => {
     expect(context).not.toBeNull();
     expect(context?.config.keyKind).toBe("service_role");
     expect(context?.config.tables.userState).toBe("part107_user_state");
+    expect(context?.config.tables.magicLinkNonces).toBe("part107_magic_link_nonces");
   });
 
   it("respects the explicit disable flag", () => {

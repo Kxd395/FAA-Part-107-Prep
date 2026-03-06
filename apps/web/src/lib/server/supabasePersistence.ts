@@ -5,6 +5,7 @@ export interface SupabaseTablesConfig {
   userState: string;
   learningEvents: string;
   questionIssues: string;
+  magicLinkNonces: string;
 }
 
 export interface SupabasePersistenceConfig {
@@ -92,6 +93,8 @@ function resolveConfig(): SupabasePersistenceConfig | null {
         readEnv("SUPABASE_TABLE_LEARNING_EVENTS") ?? "part107_learning_events",
       questionIssues:
         readEnv("SUPABASE_TABLE_QUESTION_ISSUES") ?? "part107_question_issues",
+      magicLinkNonces:
+        readEnv("SUPABASE_TABLE_MAGIC_LINK_NONCES") ?? "part107_magic_link_nonces",
     },
   };
 }

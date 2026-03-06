@@ -74,6 +74,7 @@ export default function MissedPage() {
     useState<QuestionCollectionFilter>("bookmarks");
   const [newCollectionName, setNewCollectionName] = useState("");
   const [collectionNotice, setCollectionNotice] = useState<string | null>(null);
+  const [reviewShuffleSeed] = useState(() => Date.now());
 
   useEffect(() => {
     logEvent({
@@ -282,7 +283,7 @@ export default function MissedPage() {
         <div className="flex flex-wrap items-center gap-2">
           <select
             value={selectedCollectionId}
-            onChange={(event) => setSelectedCollectionId(event.target.value)}
+            onChange={(event) => setSelectedCollectionId(event.target.value as QuestionCollectionFilter)}
             className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-3 py-1.5 text-xs text-white"
           >
             {availableCollections.map((collection) => (
@@ -456,7 +457,10 @@ export default function MissedPage() {
           const entryIndex = shouldVirtualize ? virtualStartIndex + renderIndex : renderIndex;
           const isExpanded = expandedId === q.id;
           const detailsId = `missed-details-${q.id}`;
-          const optionPresentation = buildOptionPresentation(q, "missed:review");
+          const optionPresentation = buildOptionPresentation(
+            q,
+            `missed:review:${reviewShuffleSeed}`
+          );
           const correctOpt = q.options.find((o) => o.id === q.correct_option_id);
           const yourOpt = entry.yourAnswer
             ? q.options.find((o) => o.id === entry.yourAnswer)

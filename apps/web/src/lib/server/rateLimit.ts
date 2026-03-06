@@ -4,6 +4,7 @@ import { serverLogger } from "./logger";
 interface Bucket {
   tokens: number;
   refillAt: number;
+  touchedAt: number;
 }
 
 interface RateMetric {
@@ -26,7 +27,11 @@ interface RateLimitResult {
 declare global {
   var __part107RateLimitStore__: Map<string, Bucket> | undefined;
   var __part107RateLimitMetrics__: Map<string, RateMetric> | undefined;
+  var __part107RateLimitLastPruneAt__: number | undefined;
 }
+
+const MAX_RATE_LIMIT_BUCKETS = 5_000;
+const PRUNE_INTERVAL_MS = 60_000;
 
 function getStore(): Map<string, Bucket> {
   if (!globalThis.__part107RateLimitStore__) {
@@ -45,6 +50,7 @@ function getMetricStore(): Map<string, RateMetric> {
 export function clearRateLimitStoreForTests(): void {
   getStore().clear();
   getMetricStore().clear();
+  globalThis.__part107RateLimitLastPruneAt__ = undefined;
 }
 
 function getClientIp(request: NextRequest): string {
@@ -56,11 +62,47 @@ function getClientIp(request: NextRequest): string {
   return request.headers.get("x-real-ip")?.trim() || "unknown";
 }
 
+function pruneStore(now: number): void {
+  const store = getStore();
+
+  for (const [key, bucket] of store.entries()) {
+    if (now >= bucket.refillAt) {
+      store.delete(key);
+    }
+  }
+
+  if (store.size <= MAX_RATE_LIMIT_BUCKETS) return;
+
+  const overflow = store.size - MAX_RATE_LIMIT_BUCKETS;
+  const oldestFirst = Array.from(store.entries())
+    .sort((left, right) => {
+      if (left[1].touchedAt !== right[1].touchedAt) {
+        return left[1].touchedAt - right[1].touchedAt;
+      }
+      return left[1].refillAt - right[1].refillAt;
+    })
+    .slice(0, overflow);
+
+  for (const [key] of oldestFirst) {
+    store.delete(key);
+  }
+}
+
+function maybePruneStore(now: number): void {
+  const lastPruneAt = globalThis.__part107RateLimitLastPruneAt__ ?? 0;
+  const shouldPrune =
+    now - lastPruneAt >= PRUNE_INTERVAL_MS || getStore().size > MAX_RATE_LIMIT_BUCKETS;
+  if (!shouldPrune) return;
+  pruneStore(now);
+  globalThis.__part107RateLimitLastPruneAt__ = now;
+}
+
 export function consumeRateLimit(
   request: NextRequest,
   config: RateLimitConfig
 ): RateLimitResult {
   const now = Date.now();
+  maybePruneStore(now);
   const store = getStore();
   const identity = `${config.key}:${getClientIp(request)}`;
   const bucket = store.get(identity);
@@ -70,7 +112,11 @@ export function consumeRateLimit(
     store.set(identity, {
       tokens: config.capacity - 1,
       refillAt: now + config.windowMs,
+      touchedAt: now,
     });
+    if (store.size > MAX_RATE_LIMIT_BUCKETS) {
+      pruneStore(now);
+    }
     metric.allowed += 1;
     getMetricStore().set(config.key, metric);
     return {
@@ -81,6 +127,11 @@ export function consumeRateLimit(
   }
 
   if (bucket.tokens <= 0) {
+    bucket.touchedAt = now;
+    store.set(identity, bucket);
+    if (store.size > MAX_RATE_LIMIT_BUCKETS) {
+      pruneStore(now);
+    }
     metric.blocked += 1;
     getMetricStore().set(config.key, metric);
     if (metric.blocked % 25 === 0) {
@@ -97,7 +148,11 @@ export function consumeRateLimit(
   }
 
   bucket.tokens -= 1;
+  bucket.touchedAt = now;
   store.set(identity, bucket);
+  if (store.size > MAX_RATE_LIMIT_BUCKETS) {
+    pruneStore(now);
+  }
   metric.allowed += 1;
   getMetricStore().set(config.key, metric);
   return {
@@ -105,6 +160,10 @@ export function consumeRateLimit(
     retryAfterSeconds: Math.max(1, Math.ceil((bucket.refillAt - now) / 1000)),
     remaining: bucket.tokens,
   };
+}
+
+export function getRateLimitStoreSizeForTests(): number {
+  return getStore().size;
 }
 
 export function getRateLimitMetrics(): Record<string, RateMetric> {

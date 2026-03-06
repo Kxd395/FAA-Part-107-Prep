@@ -40,6 +40,8 @@ const tableLearningEvents =
   process.env.SUPABASE_TABLE_LEARNING_EVENTS ?? "part107_learning_events";
 const tableQuestionIssues =
   process.env.SUPABASE_TABLE_QUESTION_ISSUES ?? "part107_question_issues";
+const tableMagicLinkNonces =
+  process.env.SUPABASE_TABLE_MAGIC_LINK_NONCES ?? "part107_magic_link_nonces";
 
 if (!url) {
   console.error("FAIL: missing SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL).");
@@ -69,10 +71,12 @@ async function run() {
   console.log(`- Table(user_state): ${tableUserState}`);
   console.log(`- Table(learning_events): ${tableLearningEvents}`);
   console.log(`- Table(question_issues): ${tableQuestionIssues}`);
+  console.log(`- Table(magic_link_nonces): ${tableMagicLinkNonces}`);
 
   await checkTable(tableUserState);
   await checkTable(tableLearningEvents);
   await checkTable(tableQuestionIssues);
+  await checkTable(tableMagicLinkNonces);
 
   console.log("PASS: Supabase persistence is reachable and tables are queryable.");
 }

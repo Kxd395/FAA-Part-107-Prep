@@ -51,6 +51,16 @@ create table if not exists public.part107_question_issues (
 create index if not exists idx_part107_question_issues_user_created
   on public.part107_question_issues (user_id, created_at asc);
 
+create table if not exists public.part107_magic_link_nonces (
+  nonce_hash text primary key,
+  expires_at timestamptz not null,
+  consumed_at timestamptz not null default now(),
+  inserted_at timestamptz not null default now()
+);
+
+create index if not exists idx_part107_magic_link_nonces_expires
+  on public.part107_magic_link_nonces (expires_at asc);
+
 -- This app currently authenticates users with its own signed session cookie,
 -- not Supabase Auth JWT. Recommended deployment:
 -- - Keep service-role key server-side only.

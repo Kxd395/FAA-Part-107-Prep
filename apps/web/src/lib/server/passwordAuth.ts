@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { serverLogger } from "./logger";
 import { requireSecret } from "./requiredSecret";
+import { getSupabasePersistenceContext } from "./supabasePersistence";
 
 const MAGIC_LINK_TTL_SECONDS = 15 * 60; // 15 minutes
 
@@ -17,15 +18,23 @@ interface PersistedMagicLinkConsumeStore {
   consumedNonces: Record<string, number>;
 }
 
+interface SupabaseMagicLinkNonceRow {
+  nonce_hash: string;
+  expires_at: string;
+  consumed_at: string;
+}
+
 const isVercel = process.env.VERCEL === "1";
 const MAGIC_LINK_STORE_DIR = isVercel ? "/tmp/.data" : path.join(process.cwd(), ".data");
 const MAGIC_LINK_STORE_FILE = path.join(
   MAGIC_LINK_STORE_DIR,
   "magic-link-consumed-v1.json"
 );
+const REMOTE_NONCE_PRUNE_INTERVAL_MS = 5 * 60 * 1000;
 
 declare global {
   var __part107MagicLinkConsumeStore__: PersistedMagicLinkConsumeStore | undefined;
+  var __part107MagicLinkRemoteNoncePrunedAt__: number | undefined;
 }
 
 function base64UrlEncode(value: string): string {
@@ -38,6 +47,61 @@ function base64UrlDecode(value: string): string {
 
 function sign(data: string, secret: string): string {
   return crypto.createHmac("sha256", secret).update(data).digest("base64url");
+}
+
+function hashNonce(nonce: string): string {
+  return crypto.createHash("sha256").update(nonce, "utf8").digest("hex");
+}
+
+function isUniqueConstraintError(error: unknown): boolean {
+  if (!error || typeof error !== "object") return false;
+  const code = (error as { code?: unknown }).code;
+  if (typeof code === "string" && code === "23505") return true;
+  const message = (error as { message?: unknown }).message;
+  return typeof message === "string" && /duplicate key value/i.test(message);
+}
+
+async function maybePruneRemoteConsumedNonces(nowIso: string): Promise<void> {
+  const context = getSupabasePersistenceContext();
+  if (!context) return;
+
+  const nowMs = Date.now();
+  const lastPrunedAt = globalThis.__part107MagicLinkRemoteNoncePrunedAt__ ?? 0;
+  if (nowMs - lastPrunedAt < REMOTE_NONCE_PRUNE_INTERVAL_MS) return;
+  globalThis.__part107MagicLinkRemoteNoncePrunedAt__ = nowMs;
+
+  const { client, config } = context;
+  const { error } = await client
+    .from(config.tables.magicLinkNonces)
+    .delete()
+    .lte("expires_at", nowIso);
+  if (error) {
+    throw error;
+  }
+}
+
+async function consumeRemoteMagicLinkNonce(
+  nonce: string,
+  expEpochSeconds: number
+): Promise<boolean | null> {
+  const context = getSupabasePersistenceContext();
+  if (!context) return null;
+
+  const nowIso = new Date().toISOString();
+  const expiresAtIso = new Date(expEpochSeconds * 1000).toISOString();
+  const nonceHash = hashNonce(nonce);
+  await maybePruneRemoteConsumedNonces(nowIso);
+
+  const { client, config } = context;
+  const row: SupabaseMagicLinkNonceRow = {
+    nonce_hash: nonceHash,
+    expires_at: expiresAtIso,
+    consumed_at: nowIso,
+  };
+  const { error } = await client.from(config.tables.magicLinkNonces).insert(row);
+  if (!error) return true;
+  if (isUniqueConstraintError(error)) return false;
+  throw error;
 }
 
 async function loadConsumeStore(): Promise<PersistedMagicLinkConsumeStore> {
@@ -159,6 +223,18 @@ export async function consumeMagicLinkToken(
   const nowEpochSeconds = Math.floor(Date.now() / 1000);
   if (payload.exp < nowEpochSeconds) return null;
 
+  try {
+    const remoteConsumed = await consumeRemoteMagicLinkNonce(payload.nonce, payload.exp);
+    if (remoteConsumed !== null) {
+      return remoteConsumed ? { email: payload.email } : null;
+    }
+  } catch (error) {
+    serverLogger.warn(
+      "Magic link nonce remote persistence unavailable; falling back to local nonce store",
+      { error }
+    );
+  }
+
   const store = await loadConsumeStore();
   pruneExpiredConsumedNonces(store.consumedNonces, nowEpochSeconds);
 
@@ -175,6 +251,7 @@ export async function clearMagicLinkConsumeStoreForTests(): Promise<void> {
   const store = await loadConsumeStore();
   store.consumedNonces = {};
   await saveConsumeStore(store);
+  globalThis.__part107MagicLinkRemoteNoncePrunedAt__ = undefined;
 }
 
 // ─── Send Magic Link ───

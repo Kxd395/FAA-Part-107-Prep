@@ -207,8 +207,14 @@ export async function mergeAndSaveSnapshot(payload: SyncUploadPayload): Promise<
   mergedSummary: { changedKeys: string[]; conflicts: number };
   record: SyncRecord;
 }> {
-  const state = await loadState();
-  const existing = state.records[payload.userId];
+  const remoteEnabled = isRemoteStoreEnabled();
+  const state = remoteEnabled ? null : await loadState();
+  const existing =
+    payload.mode === "merge"
+      ? remoteEnabled
+        ? await getSyncedSnapshot(payload.userId)
+        : state?.records[payload.userId] ?? null
+      : null;
   const currentData: Record<string, string | null> = {};
   for (const key of SYNC_KEYS) {
     currentData[key] = existing?.snapshot.data[key] ?? null;
@@ -251,7 +257,7 @@ export async function mergeAndSaveSnapshot(payload: SyncUploadPayload): Promise<
     if (!response.ok) {
       throw new Error("Failed to write remote sync store");
     }
-  } else {
+  } else if (state) {
     state.records[payload.userId] = record;
     await saveState(state);
   }
