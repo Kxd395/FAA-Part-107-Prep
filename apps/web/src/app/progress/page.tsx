@@ -26,7 +26,12 @@ import {
   type ImportMergeMode,
 } from "../../lib/progressImportMerge";
 import { buildTelemetrySupportBundle, downloadJsonFile } from "../../lib/telemetrySupportBundle";
-import { readPortableStateForUser, writePortableStateForUser } from "../../lib/portableStateStorage";
+import {
+  PORTABLE_STATE_CHANGED_EVENT,
+  readPortableStateForUser,
+  writePortableStateForUser,
+  type PortableStateChangedDetail,
+} from "../../lib/portableStateStorage";
 import { FLASHCARD_SR_STORAGE_KEY, userScopedStorageKey } from "../../lib/progressStorage";
 import {
   clearAnalyticsDeadLetterQueue,
@@ -44,6 +49,11 @@ const PORTABLE_EXPORT_KEYS = [
   "part107_flashcard_sr",
   "part107_learn_draft_v1",
   "part107_question_collections_v1",
+] as const;
+const TRACKING_PORTABLE_KEYS = [
+  "part107_adaptive_stats_v2",
+  "part107_attempt_events_v1",
+  "part107_learning_events_v1",
 ] as const;
 const SYNC_DEFAULT_USER_ID = LOCAL_USER_ID;
 
@@ -168,6 +178,36 @@ function computeLearningEventInsights(events: LearningEvent[]): LearningEventIns
     byType,
     recent: [...events].slice(-12).reverse(),
   };
+}
+
+function jsonValueHasContent(value: unknown): boolean {
+  if (value === null || value === undefined) return false;
+  if (Array.isArray(value)) return value.some((entry) => jsonValueHasContent(entry));
+  if (typeof value === "string") return value.trim().length > 0;
+  if (typeof value === "number" || typeof value === "boolean") return true;
+  if (typeof value !== "object") return false;
+
+  const entries = Object.entries(value as Record<string, unknown>);
+  if (entries.length === 0) return false;
+  return entries.some(([, entryValue]) => jsonValueHasContent(entryValue));
+}
+
+function portableValueHasContent(raw: string | null | undefined): boolean {
+  if (typeof raw !== "string") return false;
+  const trimmed = raw.trim();
+  if (!trimmed) return false;
+  try {
+    return jsonValueHasContent(JSON.parse(trimmed));
+  } catch {
+    return trimmed.length > 0;
+  }
+}
+
+function hasPortableStateContent(
+  data: Record<string, string | null>,
+  keys: readonly string[]
+): boolean {
+  return keys.some((key) => portableValueHasContent(data[key]));
 }
 
 function isLearningEventMode(value: string): value is LearningEventMode {
@@ -440,6 +480,7 @@ export default function ProgressPage() {
   const [issueTriagePending, setIssueTriagePending] = useState(false);
   const [issueTriageError, setIssueTriageError] = useState<string | null>(null);
   const [issueTriageQueueStatus, setIssueTriageQueueStatus] = useState<string | null>(null);
+  const [portableStateRevision, setPortableStateRevision] = useState(0);
   const [conflictResolutionByKey, setConflictResolutionByKey] = useState<
     Record<string, KeyConflictResolution>
   >({});
@@ -448,7 +489,7 @@ export default function ProgressPage() {
   const syncUserOverriddenRef = useRef(false);
   const attemptEvents = useMemo(
     () => (loaded ? defaultAttemptEventStore.load(activeUserId) : []),
-    [activeUserId, loaded]
+    [activeUserId, loaded, portableStateRevision]
   );
   const adaptiveInsights = useMemo(() => {
     if (!loaded) {
@@ -456,14 +497,18 @@ export default function ProgressPage() {
     }
     const statsByKey = defaultAdaptiveStatsStore.load(activeUserId);
     return computeAdaptiveInsights({ statsByKey, attempts: attemptEvents });
-  }, [activeUserId, attemptEvents, loaded]);
+  }, [activeUserId, attemptEvents, loaded, portableStateRevision]);
   const responseTimeTelemetry = useMemo(
     () => computeResponseTimeTelemetry(attemptEvents),
     [attemptEvents]
   );
-  const learningEventInsights = loaded
-    ? computeLearningEventInsights(defaultLearningEventStore.load(activeUserId))
-    : computeLearningEventInsights([]);
+  const learningEventInsights = useMemo(
+    () =>
+      loaded
+        ? computeLearningEventInsights(defaultLearningEventStore.load(activeUserId))
+        : computeLearningEventInsights([]),
+    [activeUserId, loaded, portableStateRevision]
+  );
 
   const loadIssueTriageSummary = useCallback(async () => {
     if (!authenticatedUserId) {
@@ -550,6 +595,24 @@ export default function ProgressPage() {
     void loadIssueTriageSummary();
   }, [loadIssueTriageSummary]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handlePortableStateChanged = (event: Event) => {
+      const detail = (event as CustomEvent<PortableStateChangedDetail>).detail;
+      if (!detail || detail.userId !== activeUserId) return;
+      setPortableStateRevision((current) => current + 1);
+    };
+
+    window.addEventListener(PORTABLE_STATE_CHANGED_EVENT, handlePortableStateChanged as EventListener);
+    return () => {
+      window.removeEventListener(
+        PORTABLE_STATE_CHANGED_EVENT,
+        handlePortableStateChanged as EventListener
+      );
+    };
+  }, [activeUserId]);
+
 
 
   useEffect(() => {
@@ -577,6 +640,34 @@ export default function ProgressPage() {
           exportedAt: body.updatedAt ?? new Date().toISOString(),
           data: body.data ?? {},
         };
+        const localData = readPortableStateForUser(PORTABLE_EXPORT_KEYS, authenticatedUserId);
+        const shouldAutoHydrate =
+          (!hasPortableStateContent(localData, PORTABLE_EXPORT_KEYS) &&
+            hasPortableStateContent(snapshot.data, PORTABLE_EXPORT_KEYS)) ||
+          (!hasPortableStateContent(localData, TRACKING_PORTABLE_KEYS) &&
+            hasPortableStateContent(snapshot.data, TRACKING_PORTABLE_KEYS));
+
+        if (shouldAutoHydrate) {
+          const { resolvedData, changedKeys } = resolveImportedData(
+            snapshot.data,
+            localData,
+            PORTABLE_EXPORT_KEYS,
+            "merge"
+          );
+          writePortableStateForUser(PORTABLE_EXPORT_KEYS, authenticatedUserId, resolvedData);
+          setPortableStateRevision((current) => current + 1);
+          setPendingImportSnapshot(null);
+          setPendingImportFileName(null);
+          setConflictResolutionByKey({});
+          setCloudUpdatedAt(body.updatedAt ?? null);
+          setCloudStatus(`Merged account state into this browser (${changedKeys.length} changed keys).`);
+          logEvent({
+            type: "control_clicked",
+            mode: "progress",
+            metadata: { action: "user_state_auto_hydrate", changedKeys: changedKeys.length },
+          });
+          return;
+        }
         setPendingImportSnapshot(snapshot);
         setPendingImportFileName(`account:${body.userId ?? authenticatedUserId ?? "user"}`);
         setConflictResolutionByKey({});
@@ -725,6 +816,7 @@ export default function ProgressPage() {
     );
 
     writePortableStateForUser(PORTABLE_EXPORT_KEYS, activeUserId, resolvedData);
+    setPortableStateRevision((current) => current + 1);
 
     logEvent({
       type: "import_applied",
@@ -738,9 +830,6 @@ export default function ProgressPage() {
     setPendingImportFileName(null);
     setConflictResolutionByKey({});
     setTransferError(null);
-    if (process.env.NODE_ENV !== "test") {
-      window.location.reload();
-    }
   };
 
   const cancelPendingImport = () => {
@@ -945,9 +1034,13 @@ export default function ProgressPage() {
   const deadLetterRetryBlocked =
     deadLetterSummary.count === 0 ||
     (typeof nextRetryAtMs === "number" && Number.isFinite(nextRetryAtMs) && nextRetryAtMs > Date.now());
+  const hasTrackingHistory =
+    adaptiveInsights.trackedQuestions > 0 ||
+    responseTimeTelemetry.attempts > 0 ||
+    learningEventInsights.total > 0;
 
   // ─── Empty State ───
-  if (sessions.length === 0) {
+  if (sessions.length === 0 && !hasTrackingHistory) {
     return (
       <div className="mx-auto max-w-lg space-y-6 pt-12 text-center">
         <div className="text-6xl">📊</div>
@@ -998,6 +1091,11 @@ export default function ProgressPage() {
           <p className="mt-1 text-sm text-[var(--muted)]">
             {stats.totalSessions} sessions • {stats.totalQuestions} questions answered
           </p>
+          {sessions.length === 0 && hasTrackingHistory ? (
+            <p className="mt-1 text-xs text-[var(--muted)]">
+              Tracking data is available even though no full sessions have been saved yet.
+            </p>
+          ) : null}
         </div>
         <div>
           {showConfirmClear ? (

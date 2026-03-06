@@ -469,6 +469,63 @@ describe("Progress import flows", () => {
     expect(await screen.findByText(/Telemetry anomaly detected/i)).toBeInTheDocument();
   });
 
+  it("renders tracking insights even when no saved sessions exist", async () => {
+    const mockedUseProgress = vi.mocked(useProgress);
+    mockedUseProgress.mockReturnValue({
+      loaded: true,
+      sessions: [],
+      saveSession: vi.fn(),
+      deleteSession: vi.fn(),
+      clearAll: vi.fn(),
+      getStats: () => ({
+        totalSessions: 0,
+        totalQuestions: 0,
+        totalCorrect: 0,
+        overallAccuracy: 0,
+        studySessions: 0,
+        examSessions: 0,
+        examPassRate: 0,
+        bestExamScore: 0,
+        currentStreak: 0,
+        longestStreak: 0,
+        recentTrend: [],
+        weakSpots: [],
+        categoryBreakdown: [],
+      }),
+    });
+    localStorage.setItem(
+      "part107_attempt_events_v1",
+      JSON.stringify({
+        version: 1,
+        users: {
+          "local-user": [
+            {
+              attemptId: "a-1",
+              userId: "local-user",
+              questionKey: "k-1",
+              questionId: "Q-1",
+              timestamp: "2026-02-24T00:00:00.000Z",
+              mode: "practice",
+              correct: true,
+              responseTimeMs: 1800,
+              selectedOptionId: "A",
+              quizId: null,
+              topicTags: ["Regulations"],
+              difficulty: 2,
+              confidence: 3,
+            },
+          ],
+        },
+      })
+    );
+
+    render(<ProgressPage />);
+
+    expect(screen.queryByText(/No Progress Yet/i)).not.toBeInTheDocument();
+    expect(await screen.findByText(/Response-Time Telemetry QA/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Tracking data is available even though no full sessions have been saved yet./i)).toBeInTheDocument();
+  });
+
   it("renders authenticated issue triage summary cards and top question rows", async () => {
     const user = userEvent.setup();
     useAuthMock.mockReturnValue({

@@ -9,7 +9,11 @@ import {
   type ProgressStats,
 } from "@part107/core";
 import { LOCAL_USER_ID } from "../lib/analyticsTaxonomy";
-import { progressStorageKey } from "../lib/progressStorage";
+import { PROGRESS_STORAGE_KEY, progressStorageKey } from "../lib/progressStorage";
+import {
+  PORTABLE_STATE_CHANGED_EVENT,
+  type PortableStateChangedDetail,
+} from "../lib/portableStateStorage";
 
 // ─────────────────────────────────────────────
 // Types
@@ -56,11 +60,34 @@ export function useProgress(userId: string = LOCAL_USER_ID) {
   const [sessions, setSessions] = useState<SessionRecord[]>([]);
   const [loaded, setLoaded] = useState(false);
 
-  // Load from localStorage on mount
-  useEffect(() => {
+  const reloadSessions = useCallback(() => {
     setSessions(loadSessions(userId));
     setLoaded(true);
   }, [userId]);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    reloadSessions();
+  }, [reloadSessions]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handlePortableStateChanged = (event: Event) => {
+      const detail = (event as CustomEvent<PortableStateChangedDetail>).detail;
+      if (!detail || detail.userId !== userId) return;
+      if (!detail.keys.includes(PROGRESS_STORAGE_KEY)) return;
+      reloadSessions();
+    };
+
+    window.addEventListener(PORTABLE_STATE_CHANGED_EVENT, handlePortableStateChanged as EventListener);
+    return () => {
+      window.removeEventListener(
+        PORTABLE_STATE_CHANGED_EVENT,
+        handlePortableStateChanged as EventListener
+      );
+    };
+  }, [reloadSessions, userId]);
 
   // ------ Save a new session ------
   const saveSession = useCallback(

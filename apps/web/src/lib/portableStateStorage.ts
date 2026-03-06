@@ -6,6 +6,13 @@ import {
 } from "./progressStorage";
 import { QUESTION_COLLECTION_STORAGE_KEY } from "./questionCollectionStore";
 
+export const PORTABLE_STATE_CHANGED_EVENT = "part107:portable-state-changed";
+
+export interface PortableStateChangedDetail {
+  userId: string;
+  keys: string[];
+}
+
 const USER_SCOPED_PAYLOAD_CONFIG = {
   part107_adaptive_stats_v2: 2,
   part107_attempt_events_v1: 1,
@@ -118,6 +125,15 @@ function resolveLocalStorageKey(portableKey: string, userId: string): string {
   return portableKey;
 }
 
+function dispatchPortableStateChanged(userId: string, keys: readonly string[]): void {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(
+    new CustomEvent<PortableStateChangedDetail>(PORTABLE_STATE_CHANGED_EVENT, {
+      detail: { userId, keys: [...keys] },
+    })
+  );
+}
+
 export function readPortableStateForUser(
   keys: readonly string[],
   userId: string
@@ -157,4 +173,6 @@ export function writePortableStateForUser(
       localStorage.setItem(storageKey, value);
     }
   }
+
+  dispatchPortableStateChanged(userId, keys);
 }
