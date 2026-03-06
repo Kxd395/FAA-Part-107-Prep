@@ -35,6 +35,13 @@ export const SELECTABLE_QUESTION_TYPE_PROFILES: readonly QuestionTypeProfile[] =
   "weak_spots",
 ];
 
+export const STANDARD_PRACTICE_QUESTION_TYPE_PROFILES: readonly QuestionTypeProfile[] = [
+  "confirmed_test",
+  "all_random",
+  "real_exam",
+  "weak_spots",
+];
+
 export function normalizeSelectableQuestionTypeProfile(
   input: string | null | undefined
 ): QuestionTypeProfile | null {
@@ -48,6 +55,14 @@ export function normalizeSelectableQuestionTypeProfile(
   const normalized = normalizeQuestionTypeProfile(input);
   if (!normalized) return null;
   return SELECTABLE_QUESTION_TYPE_PROFILES.includes(normalized) ? normalized : null;
+}
+
+export function normalizeStandardPracticeQuestionTypeProfile(
+  input: string | null | undefined
+): QuestionTypeProfile | null {
+  const normalized = normalizeSelectableQuestionTypeProfile(input);
+  if (!normalized) return null;
+  return STANDARD_PRACTICE_QUESTION_TYPE_PROFILES.includes(normalized) ? normalized : null;
 }
 
 export const SELECTABLE_QUESTION_TYPE_OPTIONS: ReadonlyArray<QuestionTypeOption> = [
@@ -77,3 +92,8 @@ export const SELECTABLE_QUESTION_TYPE_OPTIONS: ReadonlyArray<QuestionTypeOption>
     description: "Prioritizes realistic MCQs you still struggle with.",
   },
 ];
+
+export const STANDARD_PRACTICE_QUESTION_TYPE_OPTIONS: ReadonlyArray<QuestionTypeOption> =
+  SELECTABLE_QUESTION_TYPE_OPTIONS.filter((option) =>
+    STANDARD_PRACTICE_QUESTION_TYPE_PROFILES.includes(option.value)
+  );
