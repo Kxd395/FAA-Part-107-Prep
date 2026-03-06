@@ -9,7 +9,6 @@ import {
   REAL_EXAM_BLUEPRINT_TARGETS,
   QUESTION_TYPE_PROFILE_LABELS,
   formatClockTime,
-  normalizeQuestionTypeProfile,
   type QuestionTypeProfile,
   useExamSession,
 } from "@part107/core";
@@ -24,6 +23,7 @@ import AnswerOptions from "../../components/quiz/AnswerOptions";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
 import SessionSummaryCard from "../../components/quiz/SessionSummaryCard";
+import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useProgress, type QuestionResult } from "../../hooks/useProgress";
@@ -34,54 +34,15 @@ import {
   getDisplayLabelForOption,
   getOptionTextById,
 } from "../../lib/optionPresentation";
+import {
+  normalizeStandardPracticeQuestionTypeProfile,
+  STANDARD_PRACTICE_QUESTION_TYPE_OPTIONS,
+} from "../../lib/questionTypeOptions";
 import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
 
 const PASSING_PERCENT = 70;
 const EXAM_DEFAULT_CONFIDENCE: AttemptConfidence = 3;
 const EXAM_CONFIDENT_CONFIDENCE: AttemptConfidence = 5;
-const SUPPORTED_QUESTION_TYPES: readonly QuestionTypeProfile[] = [
-  "confirmed_test",
-  "all_random",
-  "real_exam",
-  "weak_spots",
-];
-
-function normalizeSelectableQuestionTypeProfile(
-  input: string | null | undefined
-): QuestionTypeProfile | null {
-  const normalized = normalizeQuestionTypeProfile(input);
-  if (!normalized) return null;
-  return SUPPORTED_QUESTION_TYPES.includes(normalized) ? normalized : null;
-}
-
-const QUESTION_TYPE_OPTIONS: Array<{
-  value: QuestionTypeProfile;
-  title: string;
-  description: string;
-}> = [
-  {
-    value: "confirmed_test",
-    title: "✅ Confirmed Test Questions",
-    description:
-      "Only questions verified from the real FAA exam — Review.md, UAG, and SPA banks (74 questions). Best for final exam prep.",
-  },
-  {
-    value: "all_random",
-    title: "🎲 All Questions (Random)",
-    description:
-      "Random mix of all 85 direct exam-style questions.",
-  },
-  {
-    value: "real_exam",
-    title: "Real Exam MCQ (Legacy)",
-    description: "Standard FAA-style MCQs only. Excludes ACS code-mapping drill format questions.",
-  },
-  {
-    value: "weak_spots",
-    title: "🔥 Weak Spots Only",
-    description: "Prioritizes realistic MCQs you have not mastered yet.",
-  },
-];
 
 export default function ExamPage() {
   return (
@@ -102,14 +63,16 @@ function ExamPageClient() {
   const categoryParam = searchParams.get("category");
   const questionTypeParam = searchParams.get("type");
   const invalidQuestionTypeParam =
-    !!questionTypeParam && !normalizeSelectableQuestionTypeProfile(questionTypeParam);
-  const parsedQuestionType = normalizeSelectableQuestionTypeProfile(questionTypeParam) ?? "confirmed_test";
+    !!questionTypeParam && !normalizeStandardPracticeQuestionTypeProfile(questionTypeParam);
+  const parsedQuestionType =
+    normalizeStandardPracticeQuestionTypeProfile(questionTypeParam) ?? "confirmed_test";
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
   );
 
-  const { saveSession } = useProgress();
-  const adaptive = useAdaptiveQuestionStats();
+  const activeUserId = useActiveUserId();
+  const { saveSession } = useProgress(activeUserId);
+  const adaptive = useAdaptiveQuestionStats(activeUserId);
   const events = useLearningEventLogger(adaptive.userId);
   const {
     questions: allQuestions,
@@ -141,7 +104,7 @@ function ExamPageClient() {
   const lastReviewLoggedStartRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const nextType = normalizeSelectableQuestionTypeProfile(questionTypeParam);
+    const nextType = normalizeStandardPracticeQuestionTypeProfile(questionTypeParam);
     if (!nextType) return;
     setSelectedQuestionType(nextType);
   }, [questionTypeParam]);
@@ -309,7 +272,7 @@ function ExamPageClient() {
         <div className="space-y-3">
           <div className="text-sm font-semibold text-white">Question Type</div>
           <div className="grid gap-2">
-            {QUESTION_TYPE_OPTIONS.map((option) => (
+            {STANDARD_PRACTICE_QUESTION_TYPE_OPTIONS.map((option) => (
               <button
                 key={option.value}
                 type="button"

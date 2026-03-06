@@ -17,6 +17,7 @@ import {
   QuestionBankWarning,
 } from "../../components/QuestionBankState";
 import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
+import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useProgress } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
 import {
@@ -33,20 +34,9 @@ import {
   getOptionTextById,
 } from "../../lib/optionPresentation";
 import { reinsertQueueHeadWithGap } from "../../lib/queueReinsertion";
+import { STANDARD_PRACTICE_QUESTION_TYPE_OPTIONS } from "../../lib/questionTypeOptions";
 import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
 import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
-
-// ─── Question type options (shared pattern) ───
-const QUESTION_TYPE_OPTIONS: Array<{
-  value: QuestionTypeProfile;
-  title: string;
-  description: string;
-}> = [
-  { value: "confirmed_test", title: "✅ Confirmed Test Questions", description: "Only real-exam questions (66)." },
-  { value: "all_random", title: "🎲 All Questions", description: "Full 85-question direct exam-style pool." },
-  { value: "real_exam", title: "Real Exam MCQ", description: "Excludes ACS drill format." },
-  { value: "weak_spots", title: "🔥 Weak Spots", description: "Questions you still struggle with." },
-];
 
 type LearnPhase = "setup" | "teach" | "quiz" | "result";
 const QUIZ_REINSERT_MIN_GAP = 2;
@@ -109,9 +99,10 @@ export default function LearnPage() {
     reload,
     clearSnapshot,
   } = useQuestionBank();
-  const adaptive = useAdaptiveQuestionStats();
+  const activeUserId = useActiveUserId();
+  const adaptive = useAdaptiveQuestionStats(activeUserId);
   const events = useLearningEventLogger(adaptive.userId);
-  const { saveSession } = useProgress();
+  const { saveSession } = useProgress(activeUserId);
 
   // Setup state
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("confirmed_test");
@@ -756,7 +747,7 @@ export default function LearnPage() {
         <div className="space-y-3">
           <div className="text-sm font-semibold text-white">Question Pool</div>
           <div className="grid gap-2">
-            {QUESTION_TYPE_OPTIONS.map((opt) => (
+            {STANDARD_PRACTICE_QUESTION_TYPE_OPTIONS.map((opt) => (
               <button
                 key={opt.value}
                 onClick={() => setSelectedQuestionType(opt.value)}

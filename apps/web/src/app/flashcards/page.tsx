@@ -19,6 +19,7 @@ import {
   QuestionBankWarning,
 } from "../../components/QuestionBankState";
 import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionEmptyState";
+import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { resolveFigureImageUrl } from "../../lib/figureImage";
@@ -140,7 +141,8 @@ export default function FlashcardsPage() {
     reload,
     clearSnapshot,
   } = useQuestionBank();
-  const adaptive = useAdaptiveQuestionStats();
+  const activeUserId = useActiveUserId();
+  const adaptive = useAdaptiveQuestionStats(activeUserId);
   const events = useLearningEventLogger(adaptive.userId);
 
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("confirmed_test");
