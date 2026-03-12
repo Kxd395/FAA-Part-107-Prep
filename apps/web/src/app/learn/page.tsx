@@ -105,7 +105,7 @@ export default function LearnPage() {
   const { saveSession } = useProgress(activeUserId);
 
   // Setup state
-  const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("confirmed_test");
+  const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("all_random");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [batchSize, setBatchSize] = useState(5);
 

@@ -64,7 +64,7 @@ function StudyPageClient() {
   const weakFocusRequested = focusParam?.trim().toLowerCase() === "weak";
   const parsedQuestionType =
     normalizeStandardPracticeQuestionTypeProfile(questionTypeParam) ??
-    (weakFocusRequested ? "weak_spots" : "confirmed_test");
+    (weakFocusRequested ? "weak_spots" : "all_random");
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
   );

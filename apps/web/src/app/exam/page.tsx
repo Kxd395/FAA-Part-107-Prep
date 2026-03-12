@@ -65,7 +65,7 @@ function ExamPageClient() {
   const invalidQuestionTypeParam =
     !!questionTypeParam && !normalizeStandardPracticeQuestionTypeProfile(questionTypeParam);
   const parsedQuestionType =
-    normalizeStandardPracticeQuestionTypeProfile(questionTypeParam) ?? "confirmed_test";
+    normalizeStandardPracticeQuestionTypeProfile(questionTypeParam) ?? "all_random";
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>(
     parsedQuestionType
   );

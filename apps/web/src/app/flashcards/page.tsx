@@ -35,14 +35,14 @@ const QUESTION_TYPE_OPTIONS: Array<{
   description: string;
 }> = [
   {
-    value: "confirmed_test",
-    title: "✅ Confirmed Test Questions",
-    description: "Only real-exam questions (66).",
-  },
-  {
     value: "all_random",
     title: "🎲 All Questions",
-    description: "Full 85-question direct exam-style pool.",
+    description: "Full question pool across all study materials.",
+  },
+  {
+    value: "confirmed_test",
+    title: "✅ Confirmed Test Questions",
+    description: "Questions verified from real FAA exam sources only.",
   },
   {
     value: "real_exam",
@@ -145,7 +145,7 @@ export default function FlashcardsPage() {
   const adaptive = useAdaptiveQuestionStats(activeUserId);
   const events = useLearningEventLogger(adaptive.userId);
 
-  const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("confirmed_test");
+  const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("all_random");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [started, setStarted] = useState(false);
   const [sessionCards, setSessionCards] = useState<Question[]>([]);
