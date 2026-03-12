@@ -43,13 +43,30 @@ function loadLocalCategorySupplement() {
     path.join(REPO_ROOT, "packages/content/questions/weather.json"),
     path.join(REPO_ROOT, "packages/content/questions/operations.json"),
     path.join(REPO_ROOT, "packages/content/questions/loading_performance.json"),
+    path.join(REPO_ROOT, "packages/content/questions/airport_operations.json"),
+    path.join(REPO_ROOT, "packages/content/questions/acronyms.json"),
+    path.join(REPO_ROOT, "packages/content/questions/regulations_verified.json"),
+    path.join(REPO_ROOT, "packages/content/questions/extended_terms.json"),
+    path.join(REPO_ROOT, "packages/content/questions/practice_questions.json"),
+    path.join(REPO_ROOT, "packages/content/questions/phonetic_alphabet.json"),
   ];
+
+  const allowedRegulationsSubcategories = new Set([
+    "Acronyms & Abbreviations",
+    "Verified Rules",
+    "Practice Questions",
+    "Extended Terms",
+  ]);
 
   return localCategoryFiles
     .map((filePath) => loadQuestionArray(filePath))
     .filter((rows) => Array.isArray(rows))
     .flat()
-    .filter((question) => question.category !== "Regulations");
+    .filter(
+      (question) =>
+        question.category !== "Regulations" ||
+        allowedRegulationsSubcategories.has(question.subcategory)
+    );
 }
 
 function normalizeText(value) {

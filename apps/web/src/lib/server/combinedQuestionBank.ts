@@ -24,13 +24,29 @@ function loadLocalCategorySupplement(repoRoot: string): Question[] {
     path.join(repoRoot, "packages/content/questions/weather.json"),
     path.join(repoRoot, "packages/content/questions/operations.json"),
     path.join(repoRoot, "packages/content/questions/loading_performance.json"),
+    path.join(repoRoot, "packages/content/questions/airport_operations.json"),
+    path.join(repoRoot, "packages/content/questions/acronyms.json"),
+    path.join(repoRoot, "packages/content/questions/regulations_verified.json"),
+    path.join(repoRoot, "packages/content/questions/extended_terms.json"),
+    path.join(repoRoot, "packages/content/questions/practice_questions.json"),
+    path.join(repoRoot, "packages/content/questions/phonetic_alphabet.json"),
   ];
+
+  const allowedRegulationsSubcategories = new Set([
+    "Acronyms & Abbreviations",
+    "Verified Rules",
+    "Practice Questions",
+  ]);
 
   return localCategoryFiles
     .map((filePath) => loadQuestionArray(filePath))
     .filter((rows): rows is Question[] => Array.isArray(rows))
     .flat()
-    .filter((question) => question.category !== "Regulations");
+    .filter(
+      (question) =>
+        question.category !== "Regulations" ||
+        allowedRegulationsSubcategories.has(question.subcategory)
+    );
 }
 
 function isQuestionLike(value: unknown): value is Question {
