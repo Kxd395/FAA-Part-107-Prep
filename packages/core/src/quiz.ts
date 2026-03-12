@@ -8,6 +8,12 @@ export const STUDY_CATEGORIES = [
   "Weather",
   "Operations",
   "Loading & Performance",
+  "Airport Operations",
+  "Radio Communications",
+  "Crew Resource Management",
+  "Emergency Procedures",
+  "Physiology",
+  "Remote ID",
 ] as const;
 
 export type StudyCategory = (typeof STUDY_CATEGORIES)[number];
