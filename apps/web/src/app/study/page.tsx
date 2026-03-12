@@ -108,12 +108,12 @@ function StudyPageClient() {
   });
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const autoStarted = useRef(false);
-  const [sessionSaved, setSessionSaved] = useState(false);
+  const sessionSavedRef = useRef(false);
   const [pendingStudyAnswer, setPendingStudyAnswer] = useState<OptionId | null>(null);
   const [lastRecordedConfidence, setLastRecordedConfidence] = useState<AttemptConfidence | null>(null);
 
   const persistSession = useCallback(() => {
-    if (sessionSaved || study.questionResults.length === 0) return;
+    if (sessionSavedRef.current || study.questionResults.length === 0) return;
 
     saveSession({
       mode: "study",
@@ -124,11 +124,10 @@ function StudyPageClient() {
       timeSpentMs: Date.now() - study.sessionStartTime,
       questions: study.questionResults,
     });
-    setSessionSaved(true);
+    sessionSavedRef.current = true;
   }, [
     saveSession,
     selectedQuestionType,
-    sessionSaved,
     study.questionResults,
     study.score.correct,
     study.score.total,
@@ -177,7 +176,7 @@ function StudyPageClient() {
 
   useEffect(() => {
     if (study.quizStarted && !study.isComplete) {
-      setSessionSaved(false);
+      sessionSavedRef.current = false;
     }
   }, [study.quizStarted, study.isComplete, study.sessionStartTime]);
 
@@ -190,6 +189,20 @@ function StudyPageClient() {
     if (!study.isComplete) return;
     persistSession();
   }, [persistSession, study.isComplete]);
+
+  // Persist partial session when user navigates away without completing
+  useEffect(() => {
+    return () => {
+      persistSession();
+    };
+  }, [persistSession]);
+
+  // Persist on browser close / tab reload
+  useEffect(() => {
+    const handleBeforeUnload = () => persistSession();
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [persistSession]);
 
   useEffect(() => {
     if (study.answerState === "unanswered" || !study.currentQuestion) return;
@@ -274,6 +287,29 @@ function StudyPageClient() {
               </div>
             </button>
           ))}
+        </div>
+
+        {/* Standalone Drills — not part of the exam question bank */}
+        <div className="space-y-3">
+          <div className="text-sm font-semibold text-white">Standalone Drills</div>
+          <p className="text-xs text-[var(--muted)]">
+            Reference tools and flash-card drills — not part of the exam question bank.
+          </p>
+          <Link
+            href="/phonetic"
+            className="group flex items-center gap-4 rounded-xl border border-violet-500/30 bg-violet-500/10 p-5 transition-all hover:border-violet-500/60 hover:scale-[1.01]"
+          >
+            <span className="text-3xl">🔤</span>
+            <div>
+              <div className="text-lg font-semibold text-white">NATO Phonetic Alphabet</div>
+              <div className="mt-0.5 text-sm text-[var(--muted)]">
+                Flip cards · Quick quiz · Reference table — 26 letters + 10 digits
+              </div>
+              <div className="mt-1 text-xs text-violet-400">
+                Not on the MCQ exam — essential for radio communications →
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     );

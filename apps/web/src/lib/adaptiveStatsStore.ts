@@ -65,7 +65,11 @@ export function createLocalStorageAdaptiveStatsStore(): AdaptiveStatsStore {
       if (!payloadV1) return {};
 
       if (payloadV1.userId === userId) {
-        return payloadV1.statsByKey ?? {};
+        const stats = payloadV1.statsByKey ?? {};
+        // Permanently migrate v1 → v2 so future loads use v2 and don't risk data loss
+        // when a second user's save() creates v2 before this user's data is migrated.
+        persistPayloadV2({ version: 2, users: { [userId]: stats } });
+        return stats;
       }
 
       return {};
