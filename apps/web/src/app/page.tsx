@@ -66,6 +66,14 @@ const FEATURES = [
     href: "/study?type=weak_spots",
     color: "from-amber-500/20 to-amber-600/5",
   },
+  {
+    icon: "🔤",
+    title: "NATO Phonetic Alphabet",
+    description:
+      "Flip-card drill for all 26 letters + digits. Word, pronunciation, and Morse code. Not on the exam — essential on the radio.",
+    href: "/phonetic",
+    color: "from-violet-500/20 to-violet-600/5",
+  },
 ];
 
 const STATS = [
@@ -262,8 +270,7 @@ export default function HomePage() {
             { name: "Weather", icon: "🌤️", count: 37, sub: "METARs, TAFs, Density Altitude, Stable/Unstable Air, Wind Shear, Fog" },
             { name: "Operations", icon: "🛩️", count: 100, sub: "Airport Ops, ADM, Emergency, Radio Comms, Physiology, Maintenance, CRM" },
             { name: "Loading & Performance", icon: "⚙️", count: 15, sub: "Load Factors, Stalls, Weight & Balance, CG Limits, Performance Charts" },
-          ].map((topic) => (
-            <div
+          ].map((topic) => (            <div
               key={topic.name}
               className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 transition-all hover:border-brand-500/40 hover:bg-brand-500/5"
             >
@@ -309,6 +316,32 @@ export default function HomePage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Quick Drills — standalone tools not tied to the exam question bank */}
+      <section>
+        <h2 className="mb-2 text-2xl font-bold">Quick Drills</h2>
+        <p className="mb-6 text-sm text-[var(--muted)]">
+          Reference tools and flash-card drills that aren&apos;t part of the exam question bank.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Link
+            href="/phonetic"
+            onClick={() => logNavigation("quick_drill_phonetic", "/phonetic")}
+            className="group rounded-2xl border border-[var(--card-border)] bg-gradient-to-br from-violet-500/20 to-violet-600/5 p-6 transition-all hover:border-white/20 hover:scale-[1.02]"
+          >
+            <div className="text-3xl">🔤</div>
+            <h3 className="mt-3 text-lg font-semibold text-white">NATO Phonetic Alphabet</h3>
+            <p className="mt-2 text-sm text-[var(--muted)]">
+              26 letters · 10 digits · pronunciation guide · Morse code.
+              Flip-card, quick quiz, and reference table.
+            </p>
+            <p className="mt-2 text-xs text-violet-400/80">Not on the MCQ exam — essential on the radio.</p>
+            <div className="mt-4 text-sm font-medium text-brand-500 opacity-0 transition-opacity group-hover:opacity-100">
+              Start Drilling →
+            </div>
+          </Link>
         </div>
       </section>
     </div>

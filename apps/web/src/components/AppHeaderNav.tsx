@@ -16,6 +16,7 @@ const NAV_ITEMS = [
   { href: "/missed", label: "Missed" },
   { href: "/progress", label: "Progress" },
   { href: "/charts", label: "Charts" },
+  { href: "/phonetic", label: "Phonetic" },
 ] as const;
 
 function modeFromPathname(pathname: string | null): LearningEventMode {
@@ -27,6 +28,7 @@ function modeFromPathname(pathname: string | null): LearningEventMode {
   if (pathname.startsWith("/missed")) return "missed";
   if (pathname.startsWith("/progress")) return "progress";
   if (pathname.startsWith("/charts")) return "charts";
+  if (pathname.startsWith("/phonetic")) return "phonetic";
   return "home";
 }
 
