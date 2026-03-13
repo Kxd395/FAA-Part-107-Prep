@@ -59,6 +59,9 @@ const ALPHABET_RAW: PhoneticEntry[] = [
 // ─── Modes ─────────────────────────────────────────────────────────────────────
 
 type StudyMode = "flip" | "grid" | "quiz";
+type PhoneticSubset = "all" | "letters" | "digits";
+
+const PHONETIC_PREFERENCES_KEY = "part107_phonetic_preferences_v1";
 
 // ─── Flip-card component ───────────────────────────────────────────────────────
 
@@ -396,7 +399,36 @@ export default function PhoneticPage() {
   const activeUserId = useActiveUserId();
   const { logEvent } = useLearningEventLogger(activeUserId);
   const [mode, setMode] = useState<StudyMode>("flip");
-  const [subset, setSubset] = useState<"all" | "letters" | "digits">("all");
+  const [subset, setSubset] = useState<PhoneticSubset>("all");
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(PHONETIC_PREFERENCES_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as {
+        mode?: StudyMode;
+        subset?: PhoneticSubset;
+      };
+      if (parsed.mode === "flip" || parsed.mode === "grid" || parsed.mode === "quiz") {
+        setMode(parsed.mode);
+      }
+      if (parsed.subset === "all" || parsed.subset === "letters" || parsed.subset === "digits") {
+        setSubset(parsed.subset);
+      }
+    } catch {
+      // Ignore malformed local preferences and fall back to defaults.
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      PHONETIC_PREFERENCES_KEY,
+      JSON.stringify({
+        mode,
+        subset,
+      })
+    );
+  }, [mode, subset]);
 
   const entries = ALPHABET_RAW.filter((e) => {
     if (subset === "letters") return /^[A-Z]$/i.test(e.character);
@@ -414,7 +446,7 @@ export default function PhoneticPage() {
     { value: "grid", label: "Reference Table", emoji: "📋" },
   ];
 
-  const SUBSETS: Array<{ value: typeof subset; label: string }> = [
+  const SUBSETS: Array<{ value: PhoneticSubset; label: string }> = [
     { value: "all", label: "All (A–Z + 0–9 + extras)" },
     { value: "letters", label: "Letters only (A–Z)" },
     { value: "digits", label: "Digits only (0–9)" },

@@ -38,6 +38,8 @@ const ACRONYM_RAW: AcronymEntry[] = [
 type StudyMode = "flip" | "quiz" | "grid";
 type SubsetMode = "all" | AcronymEntry["group"];
 
+const ACRONYM_PREFERENCES_KEY = "part107_acronym_preferences_v1";
+
 function shuffle<T>(arr: T[]): T[] {
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -267,6 +269,40 @@ export default function AcronymsPage() {
   const { logEvent } = useLearningEventLogger(activeUserId);
   const [mode, setMode] = useState<StudyMode>("flip");
   const [subset, setSubset] = useState<SubsetMode>("all");
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(ACRONYM_PREFERENCES_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as {
+        mode?: StudyMode;
+        subset?: SubsetMode;
+      };
+      if (parsed.mode === "flip" || parsed.mode === "grid" || parsed.mode === "quiz") {
+        setMode(parsed.mode);
+      }
+      if (
+        parsed.subset === "all" ||
+        parsed.subset === "operations" ||
+        parsed.subset === "radio" ||
+        parsed.subset === "weather"
+      ) {
+        setSubset(parsed.subset);
+      }
+    } catch {
+      // Ignore malformed local preferences and fall back to defaults.
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      ACRONYM_PREFERENCES_KEY,
+      JSON.stringify({
+        mode,
+        subset,
+      })
+    );
+  }, [mode, subset]);
 
   const entries = useMemo(
     () =>
