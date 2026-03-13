@@ -29,6 +29,7 @@ export const ANALYTICS_MODES = [
   "charts",
   "progress",
   "phonetic",
+  "acronyms",
 ] as const;
 
 export type LearningEventMode = (typeof ANALYTICS_MODES)[number];

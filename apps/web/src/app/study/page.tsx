@@ -302,21 +302,38 @@ function StudyPageClient() {
           <p className="text-xs text-[var(--muted)]">
             Reference tools and flash-card drills — not part of the exam question bank.
           </p>
-          <Link
-            href="/phonetic"
-            className="group flex items-center gap-4 rounded-xl border border-violet-500/30 bg-violet-500/10 p-5 transition-all hover:border-violet-500/60 hover:scale-[1.01]"
-          >
-            <span className="text-3xl">🔤</span>
-            <div>
-              <div className="text-lg font-semibold text-white">NATO Phonetic Alphabet</div>
-              <div className="mt-0.5 text-sm text-[var(--muted)]">
-                Flip cards · Quick quiz · Reference table — 26 letters + 10 digits
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Link
+              href="/acronyms"
+              className="group flex items-center gap-4 rounded-xl border border-sky-500/30 bg-sky-500/10 p-5 transition-all hover:border-sky-500/60 hover:scale-[1.01]"
+            >
+              <span className="text-3xl">🧾</span>
+              <div>
+                <div className="text-lg font-semibold text-white">FAA Acronyms</div>
+                <div className="mt-0.5 text-sm text-[var(--muted)]">
+                  Flip cards · Quick quiz · Reference table — RPIC, LAANC, NOTAM, TFR, VLOS, FRIA
+                </div>
+                <div className="mt-1 text-xs text-sky-400">
+                  Memorize the shorthand that shows up across Part 107 questions →
+                </div>
               </div>
-              <div className="mt-1 text-xs text-violet-400">
-                Not on the MCQ exam — essential for radio communications →
+            </Link>
+            <Link
+              href="/phonetic"
+              className="group flex items-center gap-4 rounded-xl border border-violet-500/30 bg-violet-500/10 p-5 transition-all hover:border-violet-500/60 hover:scale-[1.01]"
+            >
+              <span className="text-3xl">🔤</span>
+              <div>
+                <div className="text-lg font-semibold text-white">NATO Phonetic Alphabet</div>
+                <div className="mt-0.5 text-sm text-[var(--muted)]">
+                  Flip cards · Quick quiz · Reference table — 26 letters + 10 digits
+                </div>
+                <div className="mt-1 text-xs text-violet-400">
+                  Not on the MCQ exam — essential for radio communications →
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         </div>
       </div>
     );

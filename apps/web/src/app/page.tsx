@@ -67,6 +67,14 @@ const FEATURES = [
     color: "from-amber-500/20 to-amber-600/5",
   },
   {
+    icon: "🧾",
+    title: "FAA Acronyms",
+    description:
+      "Flash drill for RPIC, LAANC, NOTAM, TFR, VLOS, FRIA, METAR, TAF, and other Part 107 shorthand.",
+    href: "/acronyms",
+    color: "from-sky-500/20 to-sky-600/5",
+  },
+  {
     icon: "🔤",
     title: "NATO Phonetic Alphabet",
     description:
@@ -326,6 +334,21 @@ export default function HomePage() {
           Reference tools and flash-card drills that aren&apos;t part of the exam question bank.
         </p>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Link
+            href="/acronyms"
+            onClick={() => logNavigation("quick_drill_acronyms", "/acronyms")}
+            className="group rounded-2xl border border-[var(--card-border)] bg-gradient-to-br from-sky-500/20 to-sky-600/5 p-6 transition-all hover:border-white/20 hover:scale-[1.02]"
+          >
+            <div className="text-3xl">🧾</div>
+            <h3 className="mt-3 text-lg font-semibold text-white">FAA Acronyms</h3>
+            <p className="mt-2 text-sm text-[var(--muted)]">
+              RPIC, UAS, VO, VLOS, LAANC, NOTAM, TFR, FRIA, METAR, TAF, and more.
+              Flip cards, quick quiz, and a reference table.
+            </p>
+            <div className="mt-4 text-sm font-medium text-brand-500 opacity-0 transition-opacity group-hover:opacity-100">
+              Start Drilling →
+            </div>
+          </Link>
           <Link
             href="/phonetic"
             onClick={() => logNavigation("quick_drill_phonetic", "/phonetic")}
