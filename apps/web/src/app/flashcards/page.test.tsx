@@ -101,6 +101,7 @@ describe("FlashcardsPage", () => {
     expect(screen.getByRole("button", { name: /3-Choice Drill/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Confirmed Test Questions/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /All Categories/i })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Crew Resource Management/i })).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Start Flashcards/i })).toBeInTheDocument();
   });
 

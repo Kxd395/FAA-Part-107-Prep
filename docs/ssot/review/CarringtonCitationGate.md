@@ -1,7 +1,7 @@
 # Carrington Citation Gate
 
 - Source: `/Volumes/Developer/projects/experiments/FAA_107_Study_Guide/docs/ssot/review/carrington_question_bank.json`
-- Generated: 2026-03-13T21:32:55.645Z
+- Generated: 2026-03-13T22:17:08.796Z
 - Total rows: **342**
 - Marked confirmed-test eligible: **0**
 - Eligible rows with explicit FAA citation mapping: **0**

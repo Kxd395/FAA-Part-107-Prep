@@ -5,15 +5,21 @@ import {
   buildTimeLimitMs,
   computeRemainingTime,
   normalizeCategory,
+  questionMatchesStudyCategory,
   REAL_EXAM_BLUEPRINT_TARGETS,
+  filterQuestionsByCategory,
 } from "./quiz";
 import type { Question } from "./types";
 
-function makeQuestion(id: number, category: Question["category"] = "Regulations"): Question {
+function makeQuestion(
+  id: number,
+  category: Question["category"] = "Regulations",
+  subcategory = "General"
+): Question {
   return {
     id: `Q-${id}`,
     category,
-    subcategory: "General",
+    subcategory,
     question_text: `Question ${id}`,
     figure_reference: null,
     options: [
@@ -36,6 +42,47 @@ describe("quiz helpers", () => {
     expect(normalizeCategory("airspace")).toBe("Airspace");
     expect(normalizeCategory("ALL")).toBe("All");
     expect(normalizeCategory("unknown")).toBeNull();
+  });
+
+  it("matches supplemental study categories by direct category or nested subcategory", () => {
+    expect(
+      questionMatchesStudyCategory(
+        makeQuestion(1, "Operations", "Airport Operations"),
+        "Airport Operations"
+      )
+    ).toBe(true);
+    expect(
+      questionMatchesStudyCategory(
+        makeQuestion(2, "Regulations", "Remote ID"),
+        "Remote ID"
+      )
+    ).toBe(true);
+    expect(
+      questionMatchesStudyCategory(
+        makeQuestion(3, "Radio Communications", "Phonetic Alphabet"),
+        "Radio Communications"
+      )
+    ).toBe(true);
+    expect(
+      questionMatchesStudyCategory(
+        makeQuestion(4, "Operations", "Aeronautical Decision Making"),
+        "Crew Resource Management"
+      )
+    ).toBe(false);
+  });
+
+  it("filters nested subcategories into their study slices", () => {
+    const bank = [
+      makeQuestion(1, "Operations", "Airport Operations"),
+      makeQuestion(2, "Operations", "Emergency Procedures"),
+      makeQuestion(3, "Regulations", "Remote ID"),
+      makeQuestion(4, "Radio Communications", "Phonetic Alphabet"),
+    ];
+
+    expect(filterQuestionsByCategory(bank, "Airport Operations")).toHaveLength(1);
+    expect(filterQuestionsByCategory(bank, "Emergency Procedures")).toHaveLength(1);
+    expect(filterQuestionsByCategory(bank, "Remote ID")).toHaveLength(1);
+    expect(filterQuestionsByCategory(bank, "Radio Communications")).toHaveLength(1);
   });
 
   it("uses full exam limits for all-category exams", () => {

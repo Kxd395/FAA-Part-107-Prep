@@ -2,7 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+  filterQuestionsByCategory,
   filterQuestionsByType,
+  normalizeCategory,
   qualityFromOutcomeConfidence,
   sessionQueueDecisionFromQuality,
   type AttemptConfidence,
@@ -35,7 +37,11 @@ import {
 } from "../../lib/optionPresentation";
 import { reinsertQueueHeadWithGap } from "../../lib/queueReinsertion";
 import { STANDARD_PRACTICE_QUESTION_TYPE_OPTIONS } from "../../lib/questionTypeOptions";
-import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
+import {
+  STUDY_CATEGORIES,
+  countQuestionsByCategory,
+  type StudyCategory,
+} from "../../lib/questionBank";
 import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
 
 type LearnPhase = "setup" | "teach" | "quiz" | "result";
@@ -106,7 +112,7 @@ export default function LearnPage() {
 
   // Setup state
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("all_random");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedCategory, setSelectedCategory] = useState<StudyCategory>("All");
   const [batchSize, setBatchSize] = useState(5);
 
   // Session state
@@ -140,10 +146,17 @@ export default function LearnPage() {
   const categoryQuestions = useMemo(() => {
     return selectedCategory === "All"
       ? filteredQuestions
-      : filteredQuestions.filter((q) => q.category === selectedCategory);
+      : filterQuestionsByCategory(filteredQuestions, selectedCategory);
   }, [filteredQuestions, selectedCategory]);
 
   const visibleCounts = useMemo(() => countQuestionsByCategory(filteredQuestions), [filteredQuestions]);
+  const selectableCategories = useMemo(
+    () =>
+      STUDY_CATEGORIES.filter(
+        (category) => category !== "All" && (visibleCounts[category] ?? 0) > 0
+      ),
+    [visibleCounts]
+  );
   const questionById = useMemo(
     () => new Map(allQuestions.map((question) => [question.id, question])),
     [allQuestions]
@@ -162,6 +175,12 @@ export default function LearnPage() {
       quizQuestion ? buildOptionPresentation(quizQuestion, `learn:${roundStartedAt}`) : null,
     [quizQuestion, roundStartedAt]
   );
+
+  useEffect(() => {
+    if (selectedCategory !== "All" && (visibleCounts[selectedCategory] ?? 0) === 0) {
+      setSelectedCategory("All");
+    }
+  }, [selectedCategory, visibleCounts]);
 
   const buildProgressSignature = useCallback(
     (results: LearnDraftQuizResult[]) => {
@@ -290,7 +309,7 @@ export default function LearnPage() {
     }
 
     setSelectedQuestionType(resumeDraft.selectedQuestionType);
-    setSelectedCategory(resumeDraft.selectedCategory);
+    setSelectedCategory(normalizeCategory(resumeDraft.selectedCategory) ?? "All");
     setBatchSize(resumeDraft.batchSize);
     setRound(resumeDraft.round);
     setRoundStartedAt(resumeDraft.roundStartedAt);
@@ -779,7 +798,7 @@ export default function LearnPage() {
               <div className="text-sm font-semibold text-white">All Categories</div>
               <div className="mt-1 text-xs text-[var(--muted)]">{filteredQuestions.length} questions</div>
             </button>
-            {STUDY_CATEGORIES.filter((c) => c !== "All").map((cat) => (
+            {selectableCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}

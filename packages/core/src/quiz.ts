@@ -37,6 +37,17 @@ const REAL_EXAM_BLUEPRINT_CATEGORIES = [
   "Operations",
 ] as const;
 
+const STUDY_CATEGORY_SUBCATEGORY_MATCHERS: Partial<
+  Record<StudyCategory, readonly string[]>
+> = {
+  "Airport Operations": ["Airport Operations"],
+  "Radio Communications": ["Radio Communications"],
+  "Crew Resource Management": ["Crew Resource Management"],
+  "Emergency Procedures": ["Emergency Procedures"],
+  Physiology: ["Physiology"],
+  "Remote ID": ["Remote ID"],
+};
+
 export function shuffleQuestions<T>(questions: readonly T[]): T[] {
   const copy = [...questions];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -56,7 +67,22 @@ export function filterQuestionsByCategory(
   category: StudyCategory
 ): Question[] {
   if (category === "All") return [...allQuestions];
-  return allQuestions.filter((q) => q.category === category);
+  return allQuestions.filter((question) => questionMatchesStudyCategory(question, category));
+}
+
+export function questionMatchesStudyCategory(
+  question: Question,
+  category: StudyCategory
+): boolean {
+  if (category === "All") return true;
+  if (question.category === category) return true;
+
+  const subcategoryMatchers = STUDY_CATEGORY_SUBCATEGORY_MATCHERS[category];
+  if (!subcategoryMatchers || subcategoryMatchers.length === 0) {
+    return false;
+  }
+
+  return subcategoryMatchers.includes(question.subcategory);
 }
 
 export function buildTimeLimitMs(questionCount: number, category: StudyCategory): number {

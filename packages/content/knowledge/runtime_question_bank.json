@@ -6266,6 +6266,2134 @@
     "concept_key": "acs:UA.IV.B.K1|aerodynamics|lp_015"
   },
   {
+    "id": "PA-001",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"A\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Alfa"
+      },
+      {
+        "id": "B",
+        "text": "Alpha"
+      },
+      {
+        "id": "C",
+        "text": "Actual"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Alfa\" (pronounced AL FAH) is the ICAO phonetic word for the letter \"A\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Alpha\" is not the ICAO standard phonetic word for \"A\". The correct word is \"Alfa\".",
+      "C": "\"Actual\" is not the ICAO standard phonetic word for \"A\". The correct word is \"Alfa\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "a"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|a"
+  },
+  {
+    "id": "PA-002",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"B\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Bravo"
+      },
+      {
+        "id": "B",
+        "text": "Beta"
+      },
+      {
+        "id": "C",
+        "text": "Baker"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Bravo\" (pronounced BRAH VOH) is the ICAO phonetic word for the letter \"B\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Beta\" is not the ICAO standard phonetic word for \"B\". The correct word is \"Bravo\".",
+      "C": "\"Baker\" is not the ICAO standard phonetic word for \"B\". The correct word is \"Bravo\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "b"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|b"
+  },
+  {
+    "id": "PA-003",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"C\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Charlie"
+      },
+      {
+        "id": "B",
+        "text": "Cobra"
+      },
+      {
+        "id": "C",
+        "text": "Charley"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Charlie\" (pronounced CHAR LEE / SHAR LEE) is the ICAO phonetic word for the letter \"C\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Cobra\" is not the ICAO standard phonetic word for \"C\". The correct word is \"Charlie\".",
+      "C": "\"Charley\" is not the ICAO standard phonetic word for \"C\". The correct word is \"Charlie\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "c"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|c"
+  },
+  {
+    "id": "PA-004",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"D\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Delta"
+      },
+      {
+        "id": "B",
+        "text": "Dog"
+      },
+      {
+        "id": "C",
+        "text": "Denver"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Delta\" (pronounced DELL TAH) is the ICAO phonetic word for the letter \"D\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Dog\" is not the ICAO standard phonetic word for \"D\". The correct word is \"Delta\".",
+      "C": "\"Denver\" is not the ICAO standard phonetic word for \"D\". The correct word is \"Delta\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "d"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|d"
+  },
+  {
+    "id": "PA-005",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"E\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Echo"
+      },
+      {
+        "id": "B",
+        "text": "Easy"
+      },
+      {
+        "id": "C",
+        "text": "Eagle"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Echo\" (pronounced ECK OH) is the ICAO phonetic word for the letter \"E\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Easy\" is not the ICAO standard phonetic word for \"E\". The correct word is \"Echo\".",
+      "C": "\"Eagle\" is not the ICAO standard phonetic word for \"E\". The correct word is \"Echo\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "e"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|e"
+  },
+  {
+    "id": "PA-006",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"F\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Foxtrot"
+      },
+      {
+        "id": "B",
+        "text": "Fox"
+      },
+      {
+        "id": "C",
+        "text": "Frank"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Foxtrot\" (pronounced FOKS TROT) is the ICAO phonetic word for the letter \"F\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Fox\" is not the ICAO standard phonetic word for \"F\". The correct word is \"Foxtrot\".",
+      "C": "\"Frank\" is not the ICAO standard phonetic word for \"F\". The correct word is \"Foxtrot\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "f"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|f"
+  },
+  {
+    "id": "PA-007",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"G\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Golf"
+      },
+      {
+        "id": "B",
+        "text": "George"
+      },
+      {
+        "id": "C",
+        "text": "Gamma"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Golf\" (pronounced GOLF) is the ICAO phonetic word for the letter \"G\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"George\" is not the ICAO standard phonetic word for \"G\". The correct word is \"Golf\".",
+      "C": "\"Gamma\" is not the ICAO standard phonetic word for \"G\". The correct word is \"Golf\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "g"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|g"
+  },
+  {
+    "id": "PA-008",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"H\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Hotel"
+      },
+      {
+        "id": "B",
+        "text": "Harry"
+      },
+      {
+        "id": "C",
+        "text": "Hippo"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Hotel\" (pronounced HOH TEL) is the ICAO phonetic word for the letter \"H\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Harry\" is not the ICAO standard phonetic word for \"H\". The correct word is \"Hotel\".",
+      "C": "\"Hippo\" is not the ICAO standard phonetic word for \"H\". The correct word is \"Hotel\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "h"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|h"
+  },
+  {
+    "id": "PA-009",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"I\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "India"
+      },
+      {
+        "id": "B",
+        "text": "Item"
+      },
+      {
+        "id": "C",
+        "text": "Ivan"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"India\" (pronounced IN DEE AH) is the ICAO phonetic word for the letter \"I\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Item\" is not the ICAO standard phonetic word for \"I\". The correct word is \"India\".",
+      "C": "\"Ivan\" is not the ICAO standard phonetic word for \"I\". The correct word is \"India\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "i"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|i"
+  },
+  {
+    "id": "PA-010",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"J\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Juliett"
+      },
+      {
+        "id": "B",
+        "text": "Jig"
+      },
+      {
+        "id": "C",
+        "text": "Junior"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Juliett\" (pronounced JEW LEE ETT) is the ICAO phonetic word for the letter \"J\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Jig\" is not the ICAO standard phonetic word for \"J\". The correct word is \"Juliett\".",
+      "C": "\"Junior\" is not the ICAO standard phonetic word for \"J\". The correct word is \"Juliett\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "j"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|j"
+  },
+  {
+    "id": "PA-011",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"K\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Kilo"
+      },
+      {
+        "id": "B",
+        "text": "King"
+      },
+      {
+        "id": "C",
+        "text": "Kappa"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Kilo\" (pronounced KEY LOH) is the ICAO phonetic word for the letter \"K\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"King\" is not the ICAO standard phonetic word for \"K\". The correct word is \"Kilo\".",
+      "C": "\"Kappa\" is not the ICAO standard phonetic word for \"K\". The correct word is \"Kilo\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "k"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|k"
+  },
+  {
+    "id": "PA-012",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"L\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Lima"
+      },
+      {
+        "id": "B",
+        "text": "Love"
+      },
+      {
+        "id": "C",
+        "text": "Lambda"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Lima\" (pronounced LEE MAH) is the ICAO phonetic word for the letter \"L\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Love\" is not the ICAO standard phonetic word for \"L\". The correct word is \"Lima\".",
+      "C": "\"Lambda\" is not the ICAO standard phonetic word for \"L\". The correct word is \"Lima\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "l"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|l"
+  },
+  {
+    "id": "PA-013",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"M\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Mike"
+      },
+      {
+        "id": "B",
+        "text": "Mother"
+      },
+      {
+        "id": "C",
+        "text": "Metro"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Mike\" (pronounced MIKE) is the ICAO phonetic word for the letter \"M\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Mother\" is not the ICAO standard phonetic word for \"M\". The correct word is \"Mike\".",
+      "C": "\"Metro\" is not the ICAO standard phonetic word for \"M\". The correct word is \"Mike\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "m"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|m"
+  },
+  {
+    "id": "PA-014",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"N\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "November"
+      },
+      {
+        "id": "B",
+        "text": "Niner"
+      },
+      {
+        "id": "C",
+        "text": "Nancy"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"November\" (pronounced NO VEM BER) is the ICAO phonetic word for the letter \"N\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Niner\" is not the ICAO standard phonetic word for \"N\". The correct word is \"November\".",
+      "C": "\"Nancy\" is not the ICAO standard phonetic word for \"N\". The correct word is \"November\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "n"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|n"
+  },
+  {
+    "id": "PA-015",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"O\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Oscar"
+      },
+      {
+        "id": "B",
+        "text": "Oliver"
+      },
+      {
+        "id": "C",
+        "text": "Otto"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Oscar\" (pronounced OSS CAH) is the ICAO phonetic word for the letter \"O\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Oliver\" is not the ICAO standard phonetic word for \"O\". The correct word is \"Oscar\".",
+      "C": "\"Otto\" is not the ICAO standard phonetic word for \"O\". The correct word is \"Oscar\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "o"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|o"
+  },
+  {
+    "id": "PA-016",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"P\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Papa"
+      },
+      {
+        "id": "B",
+        "text": "Peter"
+      },
+      {
+        "id": "C",
+        "text": "Polo"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Papa\" (pronounced PAH PAH) is the ICAO phonetic word for the letter \"P\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Peter\" is not the ICAO standard phonetic word for \"P\". The correct word is \"Papa\".",
+      "C": "\"Polo\" is not the ICAO standard phonetic word for \"P\". The correct word is \"Papa\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "p"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|p"
+  },
+  {
+    "id": "PA-017",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"Q\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Quebec"
+      },
+      {
+        "id": "B",
+        "text": "Queen"
+      },
+      {
+        "id": "C",
+        "text": "Quota"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Quebec\" (pronounced KEH BECK) is the ICAO phonetic word for the letter \"Q\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Queen\" is not the ICAO standard phonetic word for \"Q\". The correct word is \"Quebec\".",
+      "C": "\"Quota\" is not the ICAO standard phonetic word for \"Q\". The correct word is \"Quebec\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "q"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|q"
+  },
+  {
+    "id": "PA-018",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"R\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Romeo"
+      },
+      {
+        "id": "B",
+        "text": "Roger"
+      },
+      {
+        "id": "C",
+        "text": "Radar"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Romeo\" (pronounced ROW ME OH) is the ICAO phonetic word for the letter \"R\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Roger\" is not the ICAO standard phonetic word for \"R\". The correct word is \"Romeo\".",
+      "C": "\"Radar\" is not the ICAO standard phonetic word for \"R\". The correct word is \"Romeo\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "r"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|r"
+  },
+  {
+    "id": "PA-019",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"S\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Sierra"
+      },
+      {
+        "id": "B",
+        "text": "Sugar"
+      },
+      {
+        "id": "C",
+        "text": "Sam"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Sierra\" (pronounced SEE AIR RAH) is the ICAO phonetic word for the letter \"S\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Sugar\" is not the ICAO standard phonetic word for \"S\". The correct word is \"Sierra\".",
+      "C": "\"Sam\" is not the ICAO standard phonetic word for \"S\". The correct word is \"Sierra\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "s"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|s"
+  },
+  {
+    "id": "PA-020",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"T\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Tango"
+      },
+      {
+        "id": "B",
+        "text": "Thomas"
+      },
+      {
+        "id": "C",
+        "text": "Tiger"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Tango\" (pronounced TANG GO) is the ICAO phonetic word for the letter \"T\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Thomas\" is not the ICAO standard phonetic word for \"T\". The correct word is \"Tango\".",
+      "C": "\"Tiger\" is not the ICAO standard phonetic word for \"T\". The correct word is \"Tango\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "t"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|t"
+  },
+  {
+    "id": "PA-021",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"U\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Uniform"
+      },
+      {
+        "id": "B",
+        "text": "Uncle"
+      },
+      {
+        "id": "C",
+        "text": "Ultra"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Uniform\" (pronounced YOU NEE FORM) is the ICAO phonetic word for the letter \"U\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Uncle\" is not the ICAO standard phonetic word for \"U\". The correct word is \"Uniform\".",
+      "C": "\"Ultra\" is not the ICAO standard phonetic word for \"U\". The correct word is \"Uniform\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "u"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|u"
+  },
+  {
+    "id": "PA-022",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"V\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Victor"
+      },
+      {
+        "id": "B",
+        "text": "Victor-Alpha"
+      },
+      {
+        "id": "C",
+        "text": "Violin"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Victor\" (pronounced VIK TAH) is the ICAO phonetic word for the letter \"V\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Victor-Alpha\" is not the ICAO standard phonetic word for \"V\". The correct word is \"Victor\".",
+      "C": "\"Violin\" is not the ICAO standard phonetic word for \"V\". The correct word is \"Victor\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "v"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|v"
+  },
+  {
+    "id": "PA-023",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"W\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Whiskey"
+      },
+      {
+        "id": "B",
+        "text": "William"
+      },
+      {
+        "id": "C",
+        "text": "Wango"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Whiskey\" (pronounced WISS KEY) is the ICAO phonetic word for the letter \"W\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"William\" is not the ICAO standard phonetic word for \"W\". The correct word is \"Whiskey\".",
+      "C": "\"Wango\" is not the ICAO standard phonetic word for \"W\". The correct word is \"Whiskey\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "w"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|w"
+  },
+  {
+    "id": "PA-024",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"X\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "X-Ray"
+      },
+      {
+        "id": "B",
+        "text": "Xray"
+      },
+      {
+        "id": "C",
+        "text": "X-Alpha"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"X-Ray\" (pronounced ECKS RAY) is the ICAO phonetic word for the letter \"X\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Xray\" is not the ICAO standard phonetic word for \"X\". The correct word is \"X-Ray\".",
+      "C": "\"X-Alpha\" is not the ICAO standard phonetic word for \"X\". The correct word is \"X-Ray\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "x"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|x"
+  },
+  {
+    "id": "PA-025",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"Y\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Yankee"
+      },
+      {
+        "id": "B",
+        "text": "Yoke"
+      },
+      {
+        "id": "C",
+        "text": "Yellow"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Yankee\" (pronounced YANG KEY) is the ICAO phonetic word for the letter \"Y\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Yoke\" is not the ICAO standard phonetic word for \"Y\". The correct word is \"Yankee\".",
+      "C": "\"Yellow\" is not the ICAO standard phonetic word for \"Y\". The correct word is \"Yankee\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "y"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|y"
+  },
+  {
+    "id": "PA-026",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO/NATO phonetic alphabet used in aviation radio communications, what is the phonetic word for the letter \"Z\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Zulu"
+      },
+      {
+        "id": "B",
+        "text": "Zebra"
+      },
+      {
+        "id": "C",
+        "text": "Zero"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Zulu\" (pronounced ZOO LOO) is the ICAO phonetic word for the letter \"Z\". It is used worldwide in aviation radio communications to eliminate confusion between similar-sounding letters.",
+    "explanation_distractors": {
+      "B": "\"Zebra\" is not the ICAO standard phonetic word for \"Z\". The correct word is \"Zulu\".",
+      "C": "\"Zero\" is not the ICAO standard phonetic word for \"Z\". The correct word is \"Zulu\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "z"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|letter|z"
+  },
+  {
+    "id": "PA-027",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the ICAO/NATO phonetic word used to represent the digit \"0\" in aviation radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Zero (pronounced ZE RO)"
+      },
+      {
+        "id": "B",
+        "text": "Niner"
+      },
+      {
+        "id": "C",
+        "text": "Zero-Alpha"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Zero\" (pronounced ZE RO) is the ICAO standard phonetic for the digit \"0\". This standardized pronunciation prevents confusion over radio communications.",
+    "explanation_distractors": {
+      "B": "\"Niner\" is not the correct ICAO phonetic for digit \"0\". The correct term is \"Zero\", pronounced ZE RO.",
+      "C": "\"Zero-Alpha\" is not the correct ICAO phonetic for digit \"0\". The correct term is \"Zero\", pronounced ZE RO."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "numbers"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|digit|0"
+  },
+  {
+    "id": "PA-028",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the ICAO/NATO phonetic word used to represent the digit \"1\" in aviation radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "One (pronounced WUN)"
+      },
+      {
+        "id": "B",
+        "text": "One-Alpha"
+      },
+      {
+        "id": "C",
+        "text": "Wun-Niner"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"One\" (pronounced WUN) is the ICAO standard phonetic for the digit \"1\". This standardized pronunciation prevents confusion over radio communications.",
+    "explanation_distractors": {
+      "B": "\"One-Alpha\" is not the correct ICAO phonetic for digit \"1\". The correct term is \"One\", pronounced WUN.",
+      "C": "\"Wun-Niner\" is not the correct ICAO phonetic for digit \"1\". The correct term is \"One\", pronounced WUN."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "numbers"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|digit|1"
+  },
+  {
+    "id": "PA-029",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the ICAO/NATO phonetic word used to represent the digit \"2\" in aviation radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Two (pronounced TOO)"
+      },
+      {
+        "id": "B",
+        "text": "Tango"
+      },
+      {
+        "id": "C",
+        "text": "Two-Alpha"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Two\" (pronounced TOO) is the ICAO standard phonetic for the digit \"2\". This standardized pronunciation prevents confusion over radio communications.",
+    "explanation_distractors": {
+      "B": "\"Tango\" is not the correct ICAO phonetic for digit \"2\". The correct term is \"Two\", pronounced TOO.",
+      "C": "\"Two-Alpha\" is not the correct ICAO phonetic for digit \"2\". The correct term is \"Two\", pronounced TOO."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "numbers"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|digit|2"
+  },
+  {
+    "id": "PA-030",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the ICAO/NATO phonetic word used to represent the digit \"3\" in aviation radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Three (pronounced TREE)"
+      },
+      {
+        "id": "B",
+        "text": "Tree-Alpha"
+      },
+      {
+        "id": "C",
+        "text": "Foxtrot"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Three\" (pronounced TREE) is the ICAO standard phonetic for the digit \"3\". This standardized pronunciation prevents confusion over radio communications.",
+    "explanation_distractors": {
+      "B": "\"Tree-Alpha\" is not the correct ICAO phonetic for digit \"3\". The correct term is \"Three\", pronounced TREE.",
+      "C": "\"Foxtrot\" is not the correct ICAO phonetic for digit \"3\". The correct term is \"Three\", pronounced TREE."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "numbers"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|digit|3"
+  },
+  {
+    "id": "PA-031",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the ICAO/NATO phonetic word used to represent the digit \"4\" in aviation radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Four (pronounced FOW ER)"
+      },
+      {
+        "id": "B",
+        "text": "Fore"
+      },
+      {
+        "id": "C",
+        "text": "Four-Alpha"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Four\" (pronounced FOW ER) is the ICAO standard phonetic for the digit \"4\". This standardized pronunciation prevents confusion over radio communications.",
+    "explanation_distractors": {
+      "B": "\"Fore\" is not the correct ICAO phonetic for digit \"4\". The correct term is \"Four\", pronounced FOW ER.",
+      "C": "\"Four-Alpha\" is not the correct ICAO phonetic for digit \"4\". The correct term is \"Four\", pronounced FOW ER."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "numbers"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|digit|4"
+  },
+  {
+    "id": "PA-032",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the ICAO/NATO phonetic word used to represent the digit \"5\" in aviation radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Five (pronounced FIFE)"
+      },
+      {
+        "id": "B",
+        "text": "Five-Alpha"
+      },
+      {
+        "id": "C",
+        "text": "Fifer"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Five\" (pronounced FIFE) is the ICAO standard phonetic for the digit \"5\". This standardized pronunciation prevents confusion over radio communications.",
+    "explanation_distractors": {
+      "B": "\"Five-Alpha\" is not the correct ICAO phonetic for digit \"5\". The correct term is \"Five\", pronounced FIFE.",
+      "C": "\"Fifer\" is not the correct ICAO phonetic for digit \"5\". The correct term is \"Five\", pronounced FIFE."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "numbers"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|digit|5"
+  },
+  {
+    "id": "PA-033",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the ICAO/NATO phonetic word used to represent the digit \"6\" in aviation radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Six (pronounced SIX)"
+      },
+      {
+        "id": "B",
+        "text": "Sierra"
+      },
+      {
+        "id": "C",
+        "text": "Six-Alpha"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Six\" (pronounced SIX) is the ICAO standard phonetic for the digit \"6\". This standardized pronunciation prevents confusion over radio communications.",
+    "explanation_distractors": {
+      "B": "\"Sierra\" is not the correct ICAO phonetic for digit \"6\". The correct term is \"Six\", pronounced SIX.",
+      "C": "\"Six-Alpha\" is not the correct ICAO phonetic for digit \"6\". The correct term is \"Six\", pronounced SIX."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "numbers"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|digit|6"
+  },
+  {
+    "id": "PA-034",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the ICAO/NATO phonetic word used to represent the digit \"7\" in aviation radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Seven (pronounced SEV EN)"
+      },
+      {
+        "id": "B",
+        "text": "Seven-Alpha"
+      },
+      {
+        "id": "C",
+        "text": "Tango"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Seven\" (pronounced SEV EN) is the ICAO standard phonetic for the digit \"7\". This standardized pronunciation prevents confusion over radio communications.",
+    "explanation_distractors": {
+      "B": "\"Seven-Alpha\" is not the correct ICAO phonetic for digit \"7\". The correct term is \"Seven\", pronounced SEV EN.",
+      "C": "\"Tango\" is not the correct ICAO phonetic for digit \"7\". The correct term is \"Seven\", pronounced SEV EN."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "numbers"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|digit|7"
+  },
+  {
+    "id": "PA-035",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the ICAO/NATO phonetic word used to represent the digit \"8\" in aviation radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Eight (pronounced AIT)"
+      },
+      {
+        "id": "B",
+        "text": "Eight-Alpha"
+      },
+      {
+        "id": "C",
+        "text": "Ait-Niner"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Eight\" (pronounced AIT) is the ICAO standard phonetic for the digit \"8\". This standardized pronunciation prevents confusion over radio communications.",
+    "explanation_distractors": {
+      "B": "\"Eight-Alpha\" is not the correct ICAO phonetic for digit \"8\". The correct term is \"Eight\", pronounced AIT.",
+      "C": "\"Ait-Niner\" is not the correct ICAO phonetic for digit \"8\". The correct term is \"Eight\", pronounced AIT."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "numbers"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|digit|8"
+  },
+  {
+    "id": "PA-036",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the ICAO/NATO phonetic word used to represent the digit \"9\" in aviation radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Nine (pronounced NIN ER)"
+      },
+      {
+        "id": "B",
+        "text": "Niner-Alpha"
+      },
+      {
+        "id": "C",
+        "text": "November"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Nine\" (pronounced NIN ER) is the ICAO standard phonetic for the digit \"9\". This standardized pronunciation prevents confusion over radio communications.",
+    "explanation_distractors": {
+      "B": "\"Niner-Alpha\" is not the correct ICAO phonetic for digit \"9\". The correct term is \"Nine\", pronounced NIN ER.",
+      "C": "\"November\" is not the correct ICAO phonetic for digit \"9\". The correct term is \"Nine\", pronounced NIN ER."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 1,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "numbers"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|digit|9"
+  },
+  {
+    "id": "PA-037",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Foxtrot\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "F"
+      },
+      {
+        "id": "B",
+        "text": "G"
+      },
+      {
+        "id": "C",
+        "text": "E"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Foxtrot\" is the ICAO phonetic word for the letter \"F\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"G\" is not represented by \"Foxtrot\". \"G\" is represented by a different phonetic word.",
+      "C": "The letter \"E\" is not represented by \"Foxtrot\". \"E\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|foxtrot"
+  },
+  {
+    "id": "PA-038",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Kilo\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "K"
+      },
+      {
+        "id": "B",
+        "text": "C"
+      },
+      {
+        "id": "C",
+        "text": "Q"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Kilo\" is the ICAO phonetic word for the letter \"K\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"C\" is not represented by \"Kilo\". \"C\" is represented by a different phonetic word.",
+      "C": "The letter \"Q\" is not represented by \"Kilo\". \"Q\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|kilo"
+  },
+  {
+    "id": "PA-039",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Lima\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "L"
+      },
+      {
+        "id": "B",
+        "text": "M"
+      },
+      {
+        "id": "C",
+        "text": "N"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Lima\" is the ICAO phonetic word for the letter \"L\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"M\" is not represented by \"Lima\". \"M\" is represented by a different phonetic word.",
+      "C": "The letter \"N\" is not represented by \"Lima\". \"N\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|lima"
+  },
+  {
+    "id": "PA-040",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"November\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "N"
+      },
+      {
+        "id": "B",
+        "text": "M"
+      },
+      {
+        "id": "C",
+        "text": "W"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"November\" is the ICAO phonetic word for the letter \"N\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"M\" is not represented by \"November\". \"M\" is represented by a different phonetic word.",
+      "C": "The letter \"W\" is not represented by \"November\". \"W\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|november"
+  },
+  {
+    "id": "PA-041",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Quebec\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Q"
+      },
+      {
+        "id": "B",
+        "text": "K"
+      },
+      {
+        "id": "C",
+        "text": "X"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Quebec\" is the ICAO phonetic word for the letter \"Q\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"K\" is not represented by \"Quebec\". \"K\" is represented by a different phonetic word.",
+      "C": "The letter \"X\" is not represented by \"Quebec\". \"X\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|quebec"
+  },
+  {
+    "id": "PA-042",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Sierra\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "S"
+      },
+      {
+        "id": "B",
+        "text": "C"
+      },
+      {
+        "id": "C",
+        "text": "Z"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Sierra\" is the ICAO phonetic word for the letter \"S\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"C\" is not represented by \"Sierra\". \"C\" is represented by a different phonetic word.",
+      "C": "The letter \"Z\" is not represented by \"Sierra\". \"Z\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|sierra"
+  },
+  {
+    "id": "PA-043",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Uniform\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "U"
+      },
+      {
+        "id": "B",
+        "text": "V"
+      },
+      {
+        "id": "C",
+        "text": "W"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Uniform\" is the ICAO phonetic word for the letter \"U\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"V\" is not represented by \"Uniform\". \"V\" is represented by a different phonetic word.",
+      "C": "The letter \"W\" is not represented by \"Uniform\". \"W\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|uniform"
+  },
+  {
+    "id": "PA-044",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Whiskey\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "W"
+      },
+      {
+        "id": "B",
+        "text": "V"
+      },
+      {
+        "id": "C",
+        "text": "X"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Whiskey\" is the ICAO phonetic word for the letter \"W\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"V\" is not represented by \"Whiskey\". \"V\" is represented by a different phonetic word.",
+      "C": "The letter \"X\" is not represented by \"Whiskey\". \"X\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|whiskey"
+  },
+  {
+    "id": "PA-045",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Yankee\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Y"
+      },
+      {
+        "id": "B",
+        "text": "J"
+      },
+      {
+        "id": "C",
+        "text": "X"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Yankee\" is the ICAO phonetic word for the letter \"Y\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"J\" is not represented by \"Yankee\". \"J\" is represented by a different phonetic word.",
+      "C": "The letter \"X\" is not represented by \"Yankee\". \"X\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|yankee"
+  },
+  {
+    "id": "PA-046",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Juliett\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "J"
+      },
+      {
+        "id": "B",
+        "text": "G"
+      },
+      {
+        "id": "C",
+        "text": "I"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Juliett\" is the ICAO phonetic word for the letter \"J\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"G\" is not represented by \"Juliett\". \"G\" is represented by a different phonetic word.",
+      "C": "The letter \"I\" is not represented by \"Juliett\". \"I\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|juliett"
+  },
+  {
+    "id": "PA-047",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Zulu\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Z"
+      },
+      {
+        "id": "B",
+        "text": "Y"
+      },
+      {
+        "id": "C",
+        "text": "S"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Zulu\" is the ICAO phonetic word for the letter \"Z\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"Y\" is not represented by \"Zulu\". \"Y\" is represented by a different phonetic word.",
+      "C": "The letter \"S\" is not represented by \"Zulu\". \"S\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|zulu"
+  },
+  {
+    "id": "PA-048",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "In the ICAO phonetic alphabet, the word \"Victor\" represents which letter?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "V"
+      },
+      {
+        "id": "B",
+        "text": "U"
+      },
+      {
+        "id": "C",
+        "text": "W"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Victor\" is the ICAO phonetic word for the letter \"V\". Phonetic alphabet words are used in radio communications so each letter is clearly understood despite noise or interference.",
+    "explanation_distractors": {
+      "B": "The letter \"U\" is not represented by \"Victor\". \"U\" is represented by a different phonetic word.",
+      "C": "The letter \"W\" is not represented by \"Victor\". \"W\" is represented by a different phonetic word."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "reverse"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|reverse|victor"
+  },
+  {
+    "id": "PA-049",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "An ATC controller clears you to operate in the vicinity of airport \"KBOS.\" When reading back \"B\" over the radio, what phonetic word do you use?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Bravo"
+      },
+      {
+        "id": "B",
+        "text": "Baker"
+      },
+      {
+        "id": "C",
+        "text": "Beta"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Bravo\" (pronounced BRAH VOH) is the ICAO phonetic word for \"B\". Using standard phonetics eliminates radio communication errors, especially in noisy environments.",
+    "explanation_distractors": {
+      "B": "\"Baker\" was used in the older US military phonetic alphabet but is NOT the current ICAO standard. The correct word is \"Bravo.\"",
+      "C": "\"Beta\" is not an ICAO phonetic word. The correct word for \"B\" is \"Bravo.\""
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "applied"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|applied|bravo"
+  },
+  {
+    "id": "PA-050",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "A controller assigns squawk code 4271. You read back \"4271\" as: \"Four Two Seven One.\" What is the ICAO-correct way to say the digit \"9\" if it appeared in this code?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Niner (NIN ER)"
+      },
+      {
+        "id": "B",
+        "text": "Nine (standard pronunciation)"
+      },
+      {
+        "id": "C",
+        "text": "November"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Niner\" (NIN ER) is the ICAO standard phonetic for the digit \"9\". The altered pronunciation prevents confusion with the German word \"nein\" (meaning \"no\") during international communications.",
+    "explanation_distractors": {
+      "B": "\"Nine\" using standard English pronunciation is NOT the ICAO standard. ICAO specifies \"Niner\" (NIN ER) to prevent international misunderstanding.",
+      "C": "\"November\" is the phonetic for the letter \"N\", not the digit \"9\". The digit \"9\" is \"Niner\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "applied"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|applied|niner"
+  },
+  {
+    "id": "PA-051",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "Why does the ICAO phonetic alphabet say \"Alfa\" instead of \"Alpha\" and \"Juliett\" instead of \"Juliet\"?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "To ensure correct pronunciation by non-English speakers worldwide"
+      },
+      {
+        "id": "B",
+        "text": "Because the FAA prefers older English spellings"
+      },
+      {
+        "id": "C",
+        "text": "To distinguish them from common first names"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ICAO phonetic spellings like \"Alfa\" and \"Juliett\" are designed so the words are pronounced consistently by speakers of all languages. \"Alpha\" in French is read differently, so \"Alfa\" standardizes the pronunciation globally.",
+    "explanation_distractors": {
+      "B": "The FAA follows ICAO international standards. The altered spellings are for global linguistic consistency, not stylistic preference.",
+      "C": "While incidental, the actual reason is international pronunciation standardization. \"Alfa\" ensures non-English speakers pronounce it correctly."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "applied"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|applied|icao-design"
+  },
+  {
+    "id": "PA-052",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the phonetic way to say the number \"500\" over the radio?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Fife Hundred"
+      },
+      {
+        "id": "B",
+        "text": "Five Zero Zero"
+      },
+      {
+        "id": "C",
+        "text": "Five Hundred"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Fife Hundred\" — digits are spoken individually using their phonetic pronunciations (\"Fife\" for 5), and \"Hundred\" is pronounced \"HUN DRED\". So 500 = \"Fife Hundred\".",
+    "explanation_distractors": {
+      "B": "\"Five Zero Zero\" uses standard English rather than ICAO phonetic pronunciation. ICAO uses \"Fife\" for 5, not \"Five\".",
+      "C": "\"Five Hundred\" uses standard English. ICAO requires \"Fife Hundred\" with the specialized digit pronunciation."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "applied"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|applied|hundreds"
+  },
+  {
+    "id": "PA-053",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "A NOTAM states an airspace restriction in \"Class Bravo.\" Which letter does \"Bravo\" represent?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "B"
+      },
+      {
+        "id": "B",
+        "text": "D"
+      },
+      {
+        "id": "C",
+        "text": "P"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Bravo\" is the ICAO phonetic word for the letter \"B\". Class B (Bravo) airspace surrounds the busiest airports and requires ATC authorization before entering.",
+    "explanation_distractors": {
+      "B": "\"Delta\" is the phonetic for \"D\". Class D airspace surrounds smaller airports with control towers.",
+      "C": "\"Papa\" is the phonetic for \"P\". Class P is Prohibited airspace."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "applied"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|applied|class-bravo"
+  },
+  {
+    "id": "PA-054",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What does \"Mayday Mayday Mayday\" indicate in radio communications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "A life-threatening emergency requiring immediate assistance"
+      },
+      {
+        "id": "B",
+        "text": "An urgency condition requiring priority handling"
+      },
+      {
+        "id": "C",
+        "text": "A request to change radio frequency"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Mayday\" (from French m'aidez, \"help me\") repeated three times is the international distress call for a life-threatening emergency. For a less critical urgency, the phrase \"Pan-Pan\" is used instead.",
+    "explanation_distractors": {
+      "B": "\"Pan-Pan\" (repeated three times) indicates an urgency condition. \"Mayday\" is reserved for life-threatening emergencies only.",
+      "C": "Changing frequencies uses phrases like \"switching to [frequency]\" — not a distress call."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "applied"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|applied|mayday"
+  },
+  {
+    "id": "PA-055",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "When a controller says \"N12345, taxi to runway two-seven,\" what does \"two-seven\" mean?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Runway 27 — oriented approximately 270° magnetic"
+      },
+      {
+        "id": "B",
+        "text": "Runway 27 — the 27th runway on the airport"
+      },
+      {
+        "id": "C",
+        "text": "Taxi to a parking spot numbered 27"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Runway numbers represent the magnetic heading divided by 10. \"Two-seven\" = Runway 27 = approximately 270° magnetic (due West). Controllers use spoken numbers for each digit to avoid misunderstanding.",
+    "explanation_distractors": {
+      "B": "Runway numbers are NOT sequential IDs. They represent the approximate magnetic heading for takeoff/landing. Runway 27 ≈ 270°.",
+      "C": "Runway numbers indicate the direction of flight, not a parking spot number. \"Taxi to runway two-seven\" means runway 27."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "applied"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|applied|runway-numbers"
+  },
+  {
+    "id": "PA-056",
+    "category": "Radio Communications",
+    "subcategory": "Phonetic Alphabet",
+    "question_text": "What is the correct phonetic pronunciation of the letter \"C\" per ICAO standards?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Charlie (CHAR LEE)"
+      },
+      {
+        "id": "B",
+        "text": "Cuba (KOO BAH)"
+      },
+      {
+        "id": "C",
+        "text": "Cobra (KOH BRAH)"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "\"Charlie\" (pronounced CHAR LEE or SHAR LEE) is the ICAO phonetic word for \"C\". It is universally recognized in aviation worldwide.",
+    "explanation_distractors": {
+      "B": "\"Cuba\" is not an ICAO phonetic word. The correct word for \"C\" is \"Charlie\".",
+      "C": "\"Cobra\" is not an ICAO phonetic word. The correct word for \"C\" is \"Charlie\"."
+    },
+    "citation": "ICAO Annex 10 / FAA AIM Chapter 4",
+    "difficulty_level": 2,
+    "tags": [
+      "phonetic-alphabet",
+      "radio",
+      "icao",
+      "applied"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "ICAO Phonetic Alphabet (Skybrary)",
+    "concept_key": "phonetic|applied|charlie"
+  },
+  {
     "id": "KUP-010",
     "category": "Operations",
     "subcategory": "During A Part",

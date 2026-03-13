@@ -57,6 +57,12 @@ const PART107_CATEGORIES = new Set([
   "Weather",
   "Operations",
   "Loading & Performance",
+  "Airport Operations",
+  "Radio Communications",
+  "Crew Resource Management",
+  "Emergency Procedures",
+  "Physiology",
+  "Remote ID",
 ]);
 
 function loadJsonFile(filePath) {

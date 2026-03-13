@@ -82,6 +82,13 @@ function StudyPageClient() {
     [adaptive.config, adaptive.statsByKey, allQuestions, selectedQuestionType]
   );
   const visibleCounts = useMemo(() => countQuestionsByCategory(filteredQuestions), [filteredQuestions]);
+  const selectableCategories = useMemo(
+    () =>
+      STUDY_CATEGORIES.filter(
+        (category) => category === "All" || (visibleCounts[category] ?? 0) > 0
+      ),
+    [visibleCounts]
+  );
   const questionShownAtRef = useRef(Date.now());
 
   const study = useStudySession({
@@ -275,7 +282,7 @@ function StudyPageClient() {
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          {STUDY_CATEGORIES.map((category) => (
+          {selectableCategories.map((category) => (
             <button
               key={category}
               onClick={() => study.startQuiz(category)}

@@ -1,4 +1,9 @@
-import { STUDY_CATEGORIES, type Question, type StudyCategory } from "@part107/core";
+import {
+  filterQuestionsByCategory,
+  STUDY_CATEGORIES,
+  type Question,
+  type StudyCategory,
+} from "@part107/core";
 import {
   parseQuestionApiResponse,
   type QuestionApiResponse,
@@ -48,7 +53,7 @@ export function countQuestionsByCategory(allQuestions: readonly AppQuestion[]) {
       return acc;
     }
 
-    acc[category] = allQuestions.filter((q) => q.category === category).length;
+    acc[category] = filterQuestionsByCategory(allQuestions, category).length;
     return acc;
   }, {} as Record<StudyCategory, number>);
 }

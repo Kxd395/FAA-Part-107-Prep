@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   canonicalQuestionKey,
+  filterQuestionsByCategory,
   filterQuestionsByType,
   qualityFromOutcomeConfidence,
   sessionQueueDecisionFromQuality,
@@ -37,7 +38,11 @@ import {
   getOptionTextById,
 } from "../../lib/optionPresentation";
 import { reinsertQueueHeadWithGap } from "../../lib/queueReinsertion";
-import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
+import {
+  STUDY_CATEGORIES,
+  countQuestionsByCategory,
+  type StudyCategory,
+} from "../../lib/questionBank";
 import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
 
 // ─── Supported question‑type profiles ───
@@ -104,7 +109,7 @@ export default function FlashcardsPage() {
   const events = useLearningEventLogger(adaptive.userId);
 
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("all_random");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedCategory, setSelectedCategory] = useState<StudyCategory>("All");
   const [selectedRunMode, setSelectedRunMode] = useState<FlashcardRunMode>("flip");
   const [sessionRunMode, setSessionRunMode] = useState<FlashcardRunMode>("flip");
   const [started, setStarted] = useState(false);
@@ -143,7 +148,7 @@ export default function FlashcardsPage() {
     const pool =
       selectedCategory === "All"
         ? filteredQuestions
-        : filteredQuestions.filter((q) => q.category === selectedCategory);
+        : filterQuestionsByCategory(filteredQuestions, selectedCategory);
     return buildFlashcardDeckPreview({
       questions: pool,
       statsByKey: adaptive.statsByKey,
@@ -161,6 +166,13 @@ export default function FlashcardsPage() {
   ]);
 
   const visibleCounts = useMemo(() => countQuestionsByCategory(filteredQuestions), [filteredQuestions]);
+  const selectableCategories = useMemo(
+    () =>
+      STUDY_CATEGORIES.filter(
+        (category) => category !== "All" && (visibleCounts[category] ?? 0) > 0
+      ),
+    [visibleCounts]
+  );
 
   const totalSetupCards = deckPreview.cards.length;
   const currentCard = sessionCards[0] ?? null;
@@ -191,6 +203,12 @@ export default function FlashcardsPage() {
     resetMcqState();
     completionLoggedRef.current = false;
   }, [resetMcqState]);
+
+  useEffect(() => {
+    if (selectedCategory !== "All" && (visibleCounts[selectedCategory] ?? 0) === 0) {
+      setSelectedCategory("All");
+    }
+  }, [selectedCategory, visibleCounts]);
 
   const beginSession = useCallback(() => {
     if (deckPreview.cards.length === 0) return;
@@ -633,7 +651,7 @@ export default function FlashcardsPage() {
                 {filteredQuestions.length} cards
               </div>
             </button>
-            {STUDY_CATEGORIES.filter((c) => c !== "All").map((cat) => (
+            {selectableCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
