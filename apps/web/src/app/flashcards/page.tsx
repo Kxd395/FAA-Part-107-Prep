@@ -677,6 +677,45 @@ export default function FlashcardsPage() {
         >
           Start Flashcards ({totalSetupCards} cards) →
         </button>
+
+        <div className="space-y-3">
+          <div className="text-sm font-semibold text-white">Standalone Stacks</div>
+          <p className="text-xs text-[var(--muted)]">
+            Flashcard drills that live alongside the main deck setup, but use their own memorization flow.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Link
+              href="/acronyms"
+              className="group flex items-center gap-4 rounded-xl border border-sky-500/30 bg-sky-500/10 p-5 transition-all hover:border-sky-500/60 hover:scale-[1.01]"
+            >
+              <span className="text-3xl">🧾</span>
+              <div>
+                <div className="text-lg font-semibold text-white">FAA Acronyms</div>
+                <div className="mt-0.5 text-sm text-[var(--muted)]">
+                  RPIC, LAANC, NOTAM, TFR, VLOS, FRIA, METAR, TAF
+                </div>
+                <div className="mt-1 text-xs text-sky-400">
+                  Drill the shorthand used across Part 107 questions →
+                </div>
+              </div>
+            </Link>
+            <Link
+              href="/phonetic"
+              className="group flex items-center gap-4 rounded-xl border border-violet-500/30 bg-violet-500/10 p-5 transition-all hover:border-violet-500/60 hover:scale-[1.01]"
+            >
+              <span className="text-3xl">🔤</span>
+              <div>
+                <div className="text-lg font-semibold text-white">NATO Phonetic Alphabet</div>
+                <div className="mt-0.5 text-sm text-[var(--muted)]">
+                  26 letters + 10 digits · pronunciation · reference table
+                </div>
+                <div className="mt-1 text-xs text-violet-400">
+                  Radio communication flash drill →
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

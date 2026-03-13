@@ -103,6 +103,8 @@ describe("FlashcardsPage", () => {
     expect(screen.getByRole("button", { name: /All Categories/i })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /Crew Resource Management/i })).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Start Flashcards/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /FAA Acronyms/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /NATO Phonetic Alphabet/i })).toBeInTheDocument();
   });
 
   it("reveals answer and returns to question without blank card", async () => {
