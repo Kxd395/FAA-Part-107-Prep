@@ -132,9 +132,10 @@ describe("ExamPage", () => {
     await user.click(await screen.findByRole("button", { name: /Begin Exam/i }));
     expect(screen.getByText(/⏱ 2:00:00/i)).toBeInTheDocument();
     expect(screen.queryByText(/Confidence for next answer:/i)).not.toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /Answer .* as Not Sure/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("button", { name: /Answer .* as Neutral/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("button", { name: /Answer .* as Confident/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("button", { name: /Answer .* as Not Sure/i })).toHaveLength(3);
+    expect(screen.getAllByRole("button", { name: /Answer .* as Neutral/i })).toHaveLength(3);
+    expect(screen.getAllByRole("button", { name: /Answer .* as Confident/i })).toHaveLength(3);
+    expect(screen.queryByRole("button", { name: /Answer D as Not Sure/i })).not.toBeInTheDocument();
   });
 
   it("supports category-targeted exam setup via query params", async () => {

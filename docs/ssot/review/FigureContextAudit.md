@@ -1,7 +1,7 @@
 # Figure Context Audit
 
-- Generated: 2026-02-26T22:25:02.233Z
-- Total questions audited: **77**
+- Generated: 2026-03-13T21:32:55.567Z
+- Total questions audited: **141**
 - Questions with `figure_reference`: **16**
 - Questions with `(Refer to ... Figure N)` prompt: **16**
 - Questions with usable visual context: **16**

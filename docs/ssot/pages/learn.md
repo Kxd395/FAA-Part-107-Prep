@@ -180,8 +180,8 @@ State transitions:
   - includes `part107_bank`, `carrington_bank`, and `carrington_strict` for source-pack-only learn rounds
 - Batch size constrained to fixed set `[3,5,10,15,20]`.
 - Category constrained to `All` + `STUDY_CATEGORIES` values.
-- Teach and quiz options are rendered in deterministic shuffled order per round with local display labels (`A-D`) while correctness logic uses source option IDs.
-- Teach and quiz now render exactly 3 answer choices per question (`1` correct + `2` distractors) when source data contains 4 options; selection is deterministic within a round and randomized between rounds/sessions.
+- Teach and quiz options are rendered in deterministic shuffled order per round with local display labels (`A-C`) while correctness logic uses source option IDs.
+- Teach and quiz render exactly 3 visible answer choices per question (`1` correct + `2` distractors) when source data contains 4 options; selection is deterministic within a round and randomized between rounds/sessions.
 - Quiz confidence selector is always visible during unanswered quiz state; selected value (`1..5`) is applied on answer click and persisted with the attempt.
 - Adaptive canonicalization uses `concept_key` when present so paraphrased equivalents from different sources share mastery history.
 

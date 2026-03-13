@@ -201,8 +201,8 @@ State transitions:
   - Session length presets cap per-run question count (`all`, `60`, `40`, `20`, `10`, `5`).
   - Timed drill presets apply optional countdown override (`untimed`, `5m`, `10m`, `15m`).
   - Preset selections are hydrated and persisted per active user id.
-- Option order is shuffled per session and rendered with remapped display labels (`A-D`) while grading still uses underlying source option IDs.
-- Study now renders exactly 3 answer choices per question (`1` correct + `2` distractors) when source data contains 4 options; selection is deterministic within a session and randomized between sessions.
+- Option order is shuffled per session and rendered with remapped display labels (`A-C`) while grading still uses underlying source option IDs.
+- Study renders exactly 3 visible answer choices per question (`1` correct + `2` distractors) when source data contains 4 options; selection is deterministic within a session and randomized between sessions.
 - Confidence is captured before reveal via the persistent in-session selector (`1..5`) or split `☑` high-confidence submit (`5/5`), then persisted to adaptive attempt events.
 - Input sanitization for question content is done server-side in API route.
 - Adaptive canonicalization uses `concept_key` when present so paraphrased equivalents from different sources share mastery history.

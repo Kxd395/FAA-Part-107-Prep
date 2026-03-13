@@ -193,8 +193,8 @@ State transitions:
 - Weak-domain mock generator shortcut presets setup to `weak_spots` profile with `20` questions and `30m` timer; weakest-domain chips apply the same preset while targeting a specific category.
 - Invalid `type` warnings now explicitly reference fallback to `confirmed_test` (Confirmed Test Questions).
 - Submit flow now enforces a flagged-review pass before final submission when one or more questions are flagged.
-- Each question's option order is shuffled once per exam session and rendered as local A-D labels to reduce answer-key memorization by letter.
-- Exam now renders exactly 3 answer choices per question (`1` correct + `2` distractors) when source data contains 4 options; selection is deterministic within a session and randomized between sessions.
+- Each question's option order is shuffled once per exam session and rendered as local `A-C` labels to reduce answer-key memorization by letter.
+- Exam renders exactly 3 visible answer choices per question (`1` correct + `2` distractors) when source data contains 4 options; selection is deterministic within a session and randomized between sessions, while grading still uses source option IDs.
 - Confidence is captured per selected answer in-session (selector-driven main click or split high-confidence click) and forwarded into `recordExamReview` when phase transitions to review.
 - Adaptive canonicalization uses `concept_key` when present so paraphrased equivalents from different sources share mastery history.
 

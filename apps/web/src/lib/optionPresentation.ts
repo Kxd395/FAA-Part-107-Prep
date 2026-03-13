@@ -1,7 +1,7 @@
 import type { OptionId, Question, QuestionOption } from "@part107/core";
 
-const DISPLAY_LABELS: readonly OptionId[] = ["A", "B", "C", "D"];
-const DEFAULT_PRESENTED_OPTION_COUNT = 3;
+const DISPLAY_LABELS: readonly OptionId[] = ["A", "B", "C"];
+const DEFAULT_PRESENTED_OPTION_COUNT = DISPLAY_LABELS.length;
 
 export interface PresentedOption extends QuestionOption {
   displayLabel: OptionId;
@@ -75,7 +75,7 @@ export function buildOptionPresentation(
   const selected = selectPresentedOptions(
     question,
     contextKey,
-    Math.max(2, Math.min(4, maxOptions))
+    Math.max(2, Math.min(DEFAULT_PRESENTED_OPTION_COUNT, maxOptions))
   );
   const shuffled = shuffleDeterministic(
     selected,

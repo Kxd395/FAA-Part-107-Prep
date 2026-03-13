@@ -153,7 +153,11 @@ describe("LearnPage draft resume flow", () => {
     render(<LearnPage />);
     await user.click(await screen.findByRole("button", { name: /Resume Session/i }));
     expect(await screen.findByText(/Round 1 — Remaining/i)).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: /A1/i }));
+    const answerButtons = screen.getAllByRole("button").filter((button) =>
+      /(A1|B1|C1|D1)/.test(button.textContent ?? "")
+    );
+    expect(answerButtons).toHaveLength(3);
+    await user.click(answerButtons[0]!);
     expect(screen.getByText(/How confident are you\?/i)).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: /^1$/i }));
     expect(await screen.findByText(/Confidence recorded: 1\/5/i)).toBeInTheDocument();

@@ -8,10 +8,11 @@ import {
   qualityFromOutcomeConfidence,
   sessionQueueDecisionFromQuality,
   type AttemptConfidence,
+  type OptionId,
   type Question,
   type QuestionTypeProfile,
-  type UserQuestionStats,
 } from "@part107/core";
+import AnswerOptions from "../../components/quiz/AnswerOptions";
 import { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
 import {
   QuestionBankError,
@@ -24,6 +25,17 @@ import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { resolveFigureImageUrl } from "../../lib/figureImage";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
+import { buildFlashcardDeckPreview } from "../../lib/flashcardScheduler";
+import {
+  getFlashcardRemainingNewQuota,
+  markFlashcardNewSeenToday,
+  readFlashcardSchedulerSettings,
+} from "../../lib/flashcardSchedulerStore";
+import {
+  buildOptionPresentation,
+  getDisplayLabelForOption,
+  getOptionTextById,
+} from "../../lib/optionPresentation";
 import { reinsertQueueHeadWithGap } from "../../lib/queueReinsertion";
 import { STUDY_CATEGORIES, countQuestionsByCategory } from "../../lib/questionBank";
 import { recordLearningAttempt } from "../../lib/learningAttemptPipeline";
@@ -56,78 +68,24 @@ const QUESTION_TYPE_OPTIONS: Array<{
   },
 ];
 
-const UPCOMING_FALLBACK_COUNT = 20;
+type FlashcardRunMode = "flip" | "mcq";
 
-interface DeckPreview {
-  cards: Question[];
-  totalPool: number;
-  dueNowCount: number;
-  usingUpcomingFallback: boolean;
-}
-
-function getQuestionSchedule(
-  question: Question,
-  statsByKey: Record<string, UserQuestionStats>,
-  includeChoicesInCanonicalKey: boolean
-): { dueAtMs: number; masteryScore: number } {
-  const key = canonicalQuestionKey(question, { includeChoices: includeChoicesInCanonicalKey });
-  const stats = statsByKey[key];
-  const parsedDue = Date.parse(stats?.nextDueAt ?? "");
-  return {
-    dueAtMs: Number.isFinite(parsedDue) ? parsedDue : 0,
-    masteryScore: typeof stats?.masteryScore === "number" ? stats.masteryScore : 0,
-  };
-}
-
-function buildDeckPreview(
-  questions: Question[],
-  statsByKey: Record<string, UserQuestionStats>,
-  includeChoicesInCanonicalKey: boolean
-): DeckPreview {
-  if (questions.length === 0) {
-    return {
-      cards: [],
-      totalPool: 0,
-      dueNowCount: 0,
-      usingUpcomingFallback: false,
-    };
-  }
-
-  const nowMs = Date.now();
-  const ranked = [...questions].sort((a, b) => {
-    const aSchedule = getQuestionSchedule(a, statsByKey, includeChoicesInCanonicalKey);
-    const bSchedule = getQuestionSchedule(b, statsByKey, includeChoicesInCanonicalKey);
-
-    if (aSchedule.dueAtMs !== bSchedule.dueAtMs) {
-      return aSchedule.dueAtMs - bSchedule.dueAtMs;
-    }
-    if (aSchedule.masteryScore !== bSchedule.masteryScore) {
-      return aSchedule.masteryScore - bSchedule.masteryScore;
-    }
-    return a.id.localeCompare(b.id);
-  });
-
-  const dueNow = ranked.filter(
-    (question) =>
-      getQuestionSchedule(question, statsByKey, includeChoicesInCanonicalKey).dueAtMs <= nowMs
-  );
-
-  if (dueNow.length > 0) {
-    return {
-      cards: dueNow,
-      totalPool: questions.length,
-      dueNowCount: dueNow.length,
-      usingUpcomingFallback: false,
-    };
-  }
-
-  return {
-    cards: ranked.slice(0, Math.min(UPCOMING_FALLBACK_COUNT, ranked.length)),
-    totalPool: questions.length,
-    dueNowCount: 0,
-    usingUpcomingFallback: true,
-  };
-}
+const FLASHCARD_RUN_MODE_OPTIONS: Array<{
+  value: FlashcardRunMode;
+  title: string;
+  description: string;
+}> = [
+  {
+    value: "flip",
+    title: "↔ Flip & Rate",
+    description: "Reveal the answer, then rate whether you know it.",
+  },
+  {
+    value: "mcq",
+    title: "🧠 3-Choice Drill",
+    description: "Answer a 3-choice question before seeing the explanation.",
+  },
+];
 
 // ─── Component ───
 export default function FlashcardsPage() {
@@ -147,13 +105,22 @@ export default function FlashcardsPage() {
 
   const [selectedQuestionType, setSelectedQuestionType] = useState<QuestionTypeProfile>("all_random");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedRunMode, setSelectedRunMode] = useState<FlashcardRunMode>("flip");
+  const [sessionRunMode, setSessionRunMode] = useState<FlashcardRunMode>("flip");
   const [started, setStarted] = useState(false);
   const [sessionCards, setSessionCards] = useState<Question[]>([]);
+  const [sessionStartedAt, setSessionStartedAt] = useState(0);
   const [initialDeckSize, setInitialDeckSize] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const [revealedCardId, setRevealedCardId] = useState<string | null>(null);
   const [known, setKnown] = useState(0);
   const [learning, setLearning] = useState(0);
   const [reviews, setReviews] = useState(0);
+  const [mcqSelectedOption, setMcqSelectedOption] = useState<OptionId | null>(null);
+  const [mcqConfidence, setMcqConfidence] = useState<AttemptConfidence | null>(null);
+  const [mcqAnswerState, setMcqAnswerState] = useState<"unanswered" | "correct" | "incorrect">(
+    "unanswered"
+  );
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const questionShownAtRef = useRef(Date.now());
   const completionLoggedRef = useRef(false);
@@ -166,21 +133,30 @@ export default function FlashcardsPage() {
       }),
     [adaptive.config, adaptive.statsByKey, allQuestions, selectedQuestionType]
   );
+  const schedulerSettings = readFlashcardSchedulerSettings(activeUserId);
+  const remainingNewQuota = getFlashcardRemainingNewQuota(
+    activeUserId,
+    schedulerSettings.maxNewCardsPerDay
+  );
 
   const deckPreview = useMemo(() => {
     const pool =
       selectedCategory === "All"
         ? filteredQuestions
         : filteredQuestions.filter((q) => q.category === selectedCategory);
-    return buildDeckPreview(
-      pool,
-      adaptive.statsByKey,
-      adaptive.config.includeChoicesInCanonicalKey
-    );
+    return buildFlashcardDeckPreview({
+      questions: pool,
+      statsByKey: adaptive.statsByKey,
+      includeChoicesInCanonicalKey: adaptive.config.includeChoicesInCanonicalKey,
+      settings: schedulerSettings,
+      remainingNewQuota,
+    });
   }, [
     adaptive.config.includeChoicesInCanonicalKey,
     adaptive.statsByKey,
     filteredQuestions,
+    remainingNewQuota,
+    schedulerSettings,
     selectedCategory,
   ]);
 
@@ -189,6 +165,18 @@ export default function FlashcardsPage() {
   const totalSetupCards = deckPreview.cards.length;
   const currentCard = sessionCards[0] ?? null;
   const total = sessionCards.length;
+  const isCurrentCardRevealed =
+    !!currentCard && flipped && revealedCardId === currentCard.id;
+  const currentOptionPresentation =
+    currentCard && sessionRunMode === "mcq"
+      ? buildOptionPresentation(currentCard, `flashcards:${sessionStartedAt}`)
+      : null;
+
+  const resetMcqState = useCallback(() => {
+    setMcqSelectedOption(null);
+    setMcqConfidence(null);
+    setMcqAnswerState("unanswered");
+  }, []);
 
   const resetSession = useCallback(() => {
     setInitialDeckSize(0);
@@ -196,20 +184,36 @@ export default function FlashcardsPage() {
     setLearning(0);
     setReviews(0);
     setFlipped(false);
+    setRevealedCardId(null);
+    setSessionStartedAt(0);
     setFigureRef(null);
     setSessionCards([]);
+    resetMcqState();
     completionLoggedRef.current = false;
-  }, []);
+  }, [resetMcqState]);
 
   const beginSession = useCallback(() => {
     if (deckPreview.cards.length === 0) return;
+    const startedAt = Date.now();
+    for (const question of deckPreview.cards) {
+      const canonicalKey = canonicalQuestionKey(question, {
+        includeChoices: adaptive.config.includeChoicesInCanonicalKey,
+      });
+      if (!adaptive.statsByKey[canonicalKey]) {
+        markFlashcardNewSeenToday(activeUserId, canonicalKey);
+      }
+    }
     setSessionCards(deckPreview.cards);
+    setSessionStartedAt(startedAt);
+    setSessionRunMode(selectedRunMode);
     setInitialDeckSize(deckPreview.cards.length);
     setKnown(0);
     setLearning(0);
     setReviews(0);
     setFlipped(false);
+    setRevealedCardId(null);
     setFigureRef(null);
+    resetMcqState();
     setStarted(true);
     completionLoggedRef.current = false;
     events.logEvent({
@@ -222,12 +226,33 @@ export default function FlashcardsPage() {
         totalPool: deckPreview.totalPool,
         dueNowCount: deckPreview.dueNowCount,
         usingUpcomingFallback: deckPreview.usingUpcomingFallback,
+        runMode: selectedRunMode,
       },
     });
-  }, [deckPreview, events, selectedCategory, selectedQuestionType]);
+  }, [
+    activeUserId,
+    adaptive.config.includeChoicesInCanonicalKey,
+    adaptive.statsByKey,
+    deckPreview,
+    events,
+    resetMcqState,
+    selectedCategory,
+    selectedQuestionType,
+    selectedRunMode,
+  ]);
 
-  const handleToggleCard = useCallback(() => setFlipped((prev) => !prev), []);
-  const handleShowQuestion = useCallback(() => setFlipped(false), []);
+  const handleToggleCard = useCallback(() => {
+    if (!currentCard) return;
+    setFlipped((prev) => {
+      const next = !prev;
+      setRevealedCardId(next ? currentCard.id : null);
+      return next;
+    });
+  }, [currentCard]);
+  const handleShowQuestion = useCallback(() => {
+    setFlipped(false);
+    setRevealedCardId(null);
+  }, []);
 
   const handleRateCard = useCallback(
     (rating: "know_it" | "still_learning", confidence: AttemptConfidence) => {
@@ -266,6 +291,8 @@ export default function FlashcardsPage() {
       }
       setReviews((n) => n + 1);
       setFlipped(false);
+      setRevealedCardId(null);
+      resetMcqState();
       setSessionCards((prev) => {
         if (queueDecision.removeFromQueue) {
           return prev.slice(1);
@@ -277,7 +304,7 @@ export default function FlashcardsPage() {
         );
       });
     },
-    [adaptive, currentCard, events, selectedQuestionType]
+    [adaptive, currentCard, events, resetMcqState, selectedQuestionType]
   );
 
   const handleKnowIt = useCallback(() => {
@@ -307,23 +334,102 @@ export default function FlashcardsPage() {
       questionTypeProfile: selectedQuestionType,
     });
     setFlipped(false);
+    setRevealedCardId(null);
+    resetMcqState();
     setSessionCards((prev) => {
       if (prev.length <= 1) return prev;
       const [head, ...rest] = prev;
       return [...rest, head];
     });
-  }, [currentCard, events, selectedQuestionType]);
+  }, [currentCard, events, resetMcqState, selectedQuestionType]);
 
   const restart = useCallback(() => {
+    const startedAt = Date.now();
     setSessionCards(deckPreview.cards);
+    setSessionStartedAt(startedAt);
     setInitialDeckSize(deckPreview.cards.length);
     setKnown(0);
     setLearning(0);
     setReviews(0);
     setFlipped(false);
+    setRevealedCardId(null);
     setFigureRef(null);
+    resetMcqState();
     completionLoggedRef.current = false;
-  }, [deckPreview.cards]);
+  }, [deckPreview.cards, resetMcqState]);
+
+  const commitMcqAnswer = useCallback(() => {
+    if (!currentCard || !mcqSelectedOption || !mcqConfidence) return;
+
+    const isCorrect = mcqSelectedOption === currentCard.correct_option_id;
+    const qualityScore = qualityFromOutcomeConfidence(
+      isCorrect ? "correct" : "incorrect",
+      mcqConfidence
+    );
+    const queueDecision = sessionQueueDecisionFromQuality(qualityScore);
+    const responseTimeMs = Math.max(0, Date.now() - questionShownAtRef.current);
+
+    recordLearningAttempt({
+      adaptive,
+      events,
+      question: currentCard,
+      learningMode: "flashcards",
+      attemptMode: "flashcard",
+      isCorrect,
+      selectedOptionId: mcqSelectedOption,
+      responseTimeMs,
+      confidence: mcqConfidence,
+      questionTypeProfile: selectedQuestionType,
+      metadata: {
+        rating: isCorrect ? "know_it" : "still_learning",
+        qualityScore,
+        queueAction: queueDecision.removeFromQueue
+          ? "remove"
+          : `reinsert_${queueDecision.gapMin}-${queueDecision.gapMax}`,
+        runMode: "mcq",
+      },
+    });
+
+    if (queueDecision.removeFromQueue) {
+      setKnown((n) => n + 1);
+    } else {
+      setLearning((n) => n + 1);
+    }
+    setReviews((n) => n + 1);
+    setFlipped(false);
+    setRevealedCardId(null);
+    resetMcqState();
+    setSessionCards((prev) => {
+      if (queueDecision.removeFromQueue) {
+        return prev.slice(1);
+      }
+      return reinsertQueueHeadWithGap(
+        prev,
+        queueDecision.gapMin ?? 2,
+        queueDecision.gapMax ?? 4
+      );
+    });
+  }, [
+    adaptive,
+    currentCard,
+    events,
+    mcqConfidence,
+    mcqSelectedOption,
+    resetMcqState,
+    selectedQuestionType,
+  ]);
+
+  const handleMcqAnswer = useCallback(
+    (optionId: OptionId, confidence: AttemptConfidence) => {
+      if (!currentCard) return;
+      setMcqSelectedOption(optionId);
+      setMcqConfidence(confidence);
+      setMcqAnswerState(optionId === currentCard.correct_option_id ? "correct" : "incorrect");
+      setFlipped(true);
+      setRevealedCardId(currentCard.id);
+    },
+    [currentCard]
+  );
 
   // Keyboard navigation
   useEffect(() => {
@@ -336,22 +442,61 @@ export default function FlashcardsPage() {
           ["INPUT", "TEXTAREA", "SELECT", "BUTTON", "A"].includes(target.tagName));
       if (isInteractiveTarget) return;
 
-      if (e.key === " " || e.key === "Enter") {
+      if (sessionRunMode === "flip" && (e.key === " " || e.key === "Enter")) {
         e.preventDefault();
         handleToggleCard();
         return;
       }
-      if (flipped && (e.key === "ArrowRight" || e.key === "k")) {
-        handleKnowIt();
+      if (sessionRunMode === "mcq" && !isCurrentCardRevealed && currentOptionPresentation) {
+        const normalizedKey = e.key.toLowerCase();
+        const optionIndex =
+          normalizedKey === "a" || normalizedKey === "1"
+            ? 0
+            : normalizedKey === "b" || normalizedKey === "2"
+            ? 1
+            : normalizedKey === "c" || normalizedKey === "3"
+            ? 2
+            : -1;
+        if (optionIndex >= 0) {
+          const targetOption = currentOptionPresentation.options[optionIndex];
+          if (targetOption) {
+            e.preventDefault();
+            handleMcqAnswer(targetOption.id, 3);
+            return;
+          }
+        }
+      }
+      if (isCurrentCardRevealed && (e.key === "ArrowRight" || e.key === "k")) {
+        if (sessionRunMode === "mcq") {
+          commitMcqAnswer();
+        } else {
+          handleKnowIt();
+        }
         return;
       }
-      if (flipped && (e.key === "ArrowLeft" || e.key === "l")) {
-        handleStillLearning();
+      if (isCurrentCardRevealed && (e.key === "ArrowLeft" || e.key === "l")) {
+        if (sessionRunMode === "flip") {
+          handleStillLearning();
+        }
+      }
+      if (sessionRunMode === "mcq" && isCurrentCardRevealed && (e.key === "Enter" || e.key === " ")) {
+        e.preventDefault();
+        commitMcqAnswer();
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [flipped, handleKnowIt, handleStillLearning, handleToggleCard, started]);
+  }, [
+    commitMcqAnswer,
+    currentOptionPresentation,
+    handleKnowIt,
+    handleMcqAnswer,
+    handleStillLearning,
+    handleToggleCard,
+    isCurrentCardRevealed,
+    sessionRunMode,
+    started,
+  ]);
 
   useEffect(() => {
     if (!started || !currentCard) return;
@@ -432,6 +577,25 @@ export default function FlashcardsPage() {
 
         {/* Question type selector */}
         {totalSetupCards === 0 && <QuestionSelectionEmptyState context="flashcards" />}
+        <div className="space-y-3">
+          <div className="text-sm font-semibold text-white">Study Style</div>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {FLASHCARD_RUN_MODE_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => setSelectedRunMode(opt.value)}
+                className={`rounded-xl border px-4 py-3 text-left transition-colors ${
+                  selectedRunMode === opt.value
+                    ? "border-brand-500/60 bg-brand-500/10"
+                    : "border-[var(--card-border)] bg-[var(--card)] hover:border-brand-500/30"
+                }`}
+              >
+                <div className="text-sm font-semibold text-white">{opt.title}</div>
+                <div className="mt-1 text-xs text-[var(--muted)]">{opt.description}</div>
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="space-y-3">
           <div className="text-sm font-semibold text-white">Question Pool</div>
           <div className="grid gap-2">
@@ -556,8 +720,17 @@ export default function FlashcardsPage() {
   // ─── Card View ───
   const progressPct = initialDeckSize > 0 ? Math.round((known / initialDeckSize) * 100) : 0;
   const q = currentCard!;
-
   const correctOption = q.options.find((o) => o.id === q.correct_option_id);
+  const selectedOptionDisplayLabel =
+    currentOptionPresentation && mcqSelectedOption
+      ? getDisplayLabelForOption(currentOptionPresentation.displayLabelByOptionId, mcqSelectedOption)
+      : null;
+  const correctOptionDisplayLabel = currentOptionPresentation?.correctDisplayLabel ?? null;
+  const selectedOptionText = getOptionTextById(q.options, mcqSelectedOption);
+  const selectedDistractorExplanation =
+    mcqSelectedOption && mcqAnswerState === "incorrect"
+      ? q.explanation_distractors[mcqSelectedOption] ?? "That answer does not match the correct rule."
+      : null;
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -602,7 +775,7 @@ export default function FlashcardsPage() {
 
       {/* Card surface */}
       <div className="min-h-[340px]">
-        {!flipped ? (
+        {!isCurrentCardRevealed && sessionRunMode === "flip" ? (
           <div
             role="button"
             tabIndex={0}
@@ -644,51 +817,153 @@ export default function FlashcardsPage() {
               Tap or press Space to reveal answer
             </div>
           </div>
-        ) : (
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={handleToggleCard}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                handleToggleCard();
-              }
-            }}
-            className="min-h-[340px] cursor-pointer rounded-2xl border border-green-500/30 bg-[var(--card)] p-8 animate-slide-up"
-          >
-            <div className="mb-4 flex items-center justify-between gap-3">
-              <div className="text-xs font-semibold uppercase tracking-wider text-green-400">
-                Correct Answer
-              </div>
+        ) : !isCurrentCardRevealed && sessionRunMode === "mcq" ? (
+          <div className="min-h-[340px] rounded-2xl border border-[var(--card-border)] bg-[var(--card)] p-8 text-left">
+            <div className="mb-4 text-xs font-semibold uppercase tracking-wider text-brand-500">
+              3-Choice Drill
+            </div>
+            <div className="text-lg leading-relaxed text-white">{q.question_text}</div>
+
+            {(q.figure_reference || q.image_ref) && (
               <button
                 type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleShowQuestion();
+                onClick={() => {
+                  const imageUrl = resolveFigureImageUrl(q);
+                  if (!imageUrl) return;
+                  setFigureRef({
+                    url: imageUrl,
+                    label: q.figure_reference ?? "Figure",
+                    type: "image",
+                    description: q.figure_reference ?? "Question figure",
+                  });
                 }}
-                className="rounded-lg border border-[var(--card-border)] px-2.5 py-1 text-xs text-[var(--muted)] transition-colors hover:text-white"
+                className="mt-4 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs text-cyan-400 hover:bg-cyan-500/20"
               >
-                Show Question
+                📊 View {q.figure_reference ?? "Figure"}
               </button>
-            </div>
-            <div className="text-lg font-semibold text-green-400">
-              {correctOption?.text ?? "Correct answer unavailable."}
-            </div>
-            <div className="mt-4 text-sm leading-relaxed text-[var(--foreground)]/90">
-              {q.explanation_correct}
-            </div>
-            {q.citation && (
-              <div className="mt-4 rounded-lg border border-brand-500/20 bg-brand-500/5 px-3 py-2 text-xs text-[var(--muted)]">
-                📖 {q.citation}
+            )}
+
+            {currentOptionPresentation && (
+              <div className="mt-6 space-y-3">
+                <AnswerOptions
+                  options={currentOptionPresentation.options}
+                  mode="study"
+                  selectedOption={mcqSelectedOption}
+                  correctOptionId={q.correct_option_id}
+                  displayLabelByOptionId={currentOptionPresentation.displayLabelByOptionId}
+                  answerState="unanswered"
+                  onSelect={(optionId) => handleMcqAnswer(optionId, 3)}
+                  onSelectWithConfidence={handleMcqAnswer}
+                  showConfidenceSplit
+                  defaultConfidence={3}
+                  confidentConfidence={5}
+                />
+                <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 p-3 text-center text-xs text-[var(--muted)]">
+                  Click an answer or use <code>A-C</code> / <code>1-3</code>. Quick confidence buttons
+                  submit `Not Sure`, `Neutral`, or `Confident`.
+                </div>
               </div>
             )}
           </div>
+        ) : (
+          <>
+            {sessionRunMode === "flip" ? (
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={handleToggleCard}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleToggleCard();
+                  }
+                }}
+                className="min-h-[340px] cursor-pointer rounded-2xl border border-green-500/30 bg-[var(--card)] p-8 animate-slide-up"
+              >
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-green-400">
+                    Correct Answer
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleShowQuestion();
+                    }}
+                    className="rounded-lg border border-[var(--card-border)] px-2.5 py-1 text-xs text-[var(--muted)] transition-colors hover:text-white"
+                  >
+                    Show Question
+                  </button>
+                </div>
+                <div className="text-lg font-semibold text-green-400">
+                  {correctOption?.text ?? "Correct answer unavailable."}
+                </div>
+                <div className="mt-4 text-sm leading-relaxed text-[var(--foreground)]/90">
+                  {q.explanation_correct}
+                </div>
+                {q.citation && (
+                  <div className="mt-4 rounded-lg border border-brand-500/20 bg-brand-500/5 px-3 py-2 text-xs text-[var(--muted)]">
+                    📖 {q.citation}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="min-h-[340px] rounded-2xl border border-brand-500/30 bg-[var(--card)] p-8 animate-slide-up">
+                <div className="mb-4 text-xs font-semibold uppercase tracking-wider text-brand-400">
+                  {mcqAnswerState === "correct" ? "Correct" : "Review"}
+                </div>
+                <div
+                  className={`rounded-xl border p-4 text-sm ${
+                    mcqAnswerState === "correct"
+                      ? "border-green-500/30 bg-green-500/10 text-green-300"
+                      : "border-red-500/30 bg-red-500/10 text-red-300"
+                  }`}
+                >
+                  {mcqAnswerState === "correct" ? (
+                    <div>
+                      <strong>Correct.</strong> You picked{" "}
+                      <strong>{selectedOptionDisplayLabel}</strong>
+                      {selectedOptionText ? ` (${selectedOptionText})` : ""}.
+                    </div>
+                  ) : (
+                    <div>
+                      <strong>Incorrect.</strong> You picked{" "}
+                      <strong>{selectedOptionDisplayLabel}</strong>
+                      {selectedOptionText ? ` (${selectedOptionText})` : ""}. The correct answer is{" "}
+                      <strong>{correctOptionDisplayLabel}</strong>
+                      {correctOption?.text ? ` (${correctOption.text})` : ""}.
+                    </div>
+                  )}
+                </div>
+                {selectedDistractorExplanation && (
+                  <div className="mt-4 rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-sm text-[var(--foreground)]/85">
+                    {selectedDistractorExplanation}
+                  </div>
+                )}
+                <div className="mt-4 text-sm leading-relaxed text-[var(--foreground)]/90">
+                  {q.explanation_correct}
+                </div>
+                {q.citation && (
+                  <div className="mt-4 rounded-lg border border-brand-500/20 bg-brand-500/5 px-3 py-2 text-xs text-[var(--muted)]">
+                    📖 {q.citation}
+                  </div>
+                )}
+                <div className="mt-6 flex gap-3">
+                  <button
+                    onClick={commitMcqAnswer}
+                    className="flex-1 rounded-xl bg-brand-600 py-3 font-semibold text-white hover:bg-brand-700"
+                  >
+                    Continue →
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
 
       {/* Action buttons — only visible when flipped */}
-      {flipped && (
+      {isCurrentCardRevealed && sessionRunMode === "flip" && (
         <div className="space-y-2">
           <div className="grid grid-cols-2 gap-4">
             <div className="relative">

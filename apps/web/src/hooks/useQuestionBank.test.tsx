@@ -42,11 +42,12 @@ describe("useQuestionBank", () => {
   });
 
   it("retries and then falls back to cached snapshot", async () => {
+    const freshSnapshotDate = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString();
     localStorage.setItem(
       "part107_question_bank_snapshot_v1",
       JSON.stringify({
         version: 1,
-        updatedAt: "2026-02-24T00:00:00.000Z",
+        updatedAt: freshSnapshotDate,
         source: "local",
         questions: [sampleQuestion],
       })

@@ -66,10 +66,27 @@ describe("optionPresentation", () => {
     );
   });
 
+  it("changes the answer position across different session keys", () => {
+    const positions = new Set(
+      Array.from({ length: 12 }, (_, index) =>
+        buildOptionPresentation(question, `study:${index + 1}`).correctDisplayLabel
+      )
+    );
+
+    expect(positions.size).toBeGreaterThan(1);
+  });
+
   it("always includes the correct option when reducing to 3 choices", () => {
-    const presentation = buildOptionPresentation(question, "study:reduced");
+    const presentation = buildOptionPresentation(question, "study:reduced", 3);
     const optionIds = presentation.options.map((option) => option.id);
     expect(optionIds).toContain(question.correct_option_id);
     expect(optionIds).toHaveLength(3);
+  });
+
+  it("caps visible choices at 3 even when a larger value is requested", () => {
+    const presentation = buildOptionPresentation(question, "study:capped", 4);
+
+    expect(presentation.options).toHaveLength(3);
+    expect(presentation.options.map((option) => option.displayLabel)).toEqual(["A", "B", "C"]);
   });
 });

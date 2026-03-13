@@ -1,7 +1,7 @@
 # Deck Overlap Audit
 
-- Generated: 2026-02-26T22:25:02.503Z
-- Local category questions: **77**
+- Generated: 2026-03-13T21:32:55.818Z
+- Local category questions: **141**
 - Merged canonical questions: **112**
 - Exact duplicate pairs: **0**
 - High-overlap semantic pairs (>= 0.58): **0**
@@ -36,7 +36,7 @@
 - score=0.222 | REG-152 -> P107-034 | Under Part 107, when must a remote pilot report an sUAS accident to the FAA?
 - score=0.214 | REG-154 -> P107-058 | Which statement best describes a Declaration of Compliance (DoC) for operations over people?
 - score=0.194 | REG-156 -> P107-005 | Upon request by the FAA, what must the remote pilot in command make available?
+- score=0.192 | WX-038 -> P107-027 | At what altitude(s) can wind shear be expected?
 - score=0.179 | AIR-056 -> CAR-102 | What type of special use airspace designates areas where flight is prohibited due to national security or welfare reason
 - score=0.179 | OPS-016 -> P107-018 | According to 14 CFR part 107, the responsibility to inspect the small UAS to ensure it is in a safe operating condition 
 - score=0.179 | REG-001 -> P107-028 | According to 14 CFR part 107, how may a remote pilot operate an unmanned aircraft in Class C airspace?
-- score=0.156 | REG-003 -> P107-028 | According to 14 CFR part 107, what is required to operate a small UA within 30 minutes after official sunset?

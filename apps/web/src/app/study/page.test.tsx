@@ -107,7 +107,7 @@ describe("StudyPage", () => {
     render(<StudyPage />);
 
     expect(await screen.findByText(/Question 1 of 2/i)).toBeInTheDocument();
-    expect(screen.getByText(/Confirmed Test Questions/i)).toBeInTheDocument();
+    expect(screen.getByText(/All Questions \(Random\)/i)).toBeInTheDocument();
   });
 
   it("auto-starts weak-focus mode from query params", async () => {
@@ -123,6 +123,8 @@ describe("StudyPage", () => {
     render(<StudyPage />);
 
     await user.click(await screen.findByRole("button", { name: /All .*questions available/i }));
+    expect(screen.getAllByRole("button", { name: /Answer .* with high confidence/i })).toHaveLength(3);
+    expect(screen.queryByRole("button", { name: /Answer D with high confidence/i })).not.toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: /Answer A with high confidence/i }));
     expect(await screen.findByText(/Confidence recorded: 5\/5/i)).toBeInTheDocument();
   });

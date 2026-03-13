@@ -11,6 +11,7 @@ Canonical runtime files:
 - `combined_question_bank.canonical.json` (normalized merged runtime bank)
 - `knokegeupdate_question_bank.curated.json` (curated non-regulation supplement imported from `knokegeUpdate/more questions.docx`)
 - `runtime_question_bank.json` (single runtime artifact consumed by `/api/questions` local mode)
+- `archive/runtime_question_bank.review_archive.json` (questions excluded from the live runtime bank, with archival reasons for later review)
 
 Canonical local category packs:
 
@@ -26,6 +27,7 @@ Notes:
 - Loaders keep a fallback to `docs/ssot/review/*` for backward compatibility.
 - Review reports and extraction scripts may still write to `docs/ssot/review`.
 - `/api/questions` local mode serves `runtime_question_bank.json` first.
+- Runtime-bank generation now enforces a Part 107 relevance gate and archives filtered-out questions instead of silently dropping them.
 - Regenerate canonical merged bank with:
   - `npm run build:combined-canonical --workspace=@part107/content`
 - Regenerate knokegeUpdate supplement with:
