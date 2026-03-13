@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { resolveCanonicalAppOrigin, resolveRequestOrigin } from "./lib/server/appOrigin";
 import { REQUEST_ID_HEADER, getOrCreateRequestId } from "./lib/server/requestId";
 
 // The routes that require authentication
@@ -25,6 +26,22 @@ export function proxy(request: NextRequest) {
     const requestId = getOrCreateRequestId(request.headers);
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set(REQUEST_ID_HEADER, requestId);
+
+    const canonicalOrigin = resolveCanonicalAppOrigin();
+    const requestOrigin = resolveRequestOrigin(request);
+    const shouldCanonicalize =
+        process.env.NODE_ENV === "production" &&
+        canonicalOrigin &&
+        requestOrigin &&
+        canonicalOrigin !== requestOrigin &&
+        (request.method === "GET" || request.method === "HEAD");
+
+    if (shouldCanonicalize) {
+        const redirectUrl = new URL(`${pathname}${search}`, canonicalOrigin);
+        const response = NextResponse.redirect(redirectUrl, 307);
+        response.headers.set(REQUEST_ID_HEADER, requestId);
+        return response;
+    }
 
     const isProtectedRoute = PROTECTED_ROUTES.some((route) => pathname === route || pathname.startsWith(`${route}/`));
     const isProtectedApiRoute = PROTECTED_API_ROUTES.some((route) => pathname.startsWith(route));

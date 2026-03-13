@@ -33,11 +33,23 @@ function configuredAppOrigins(): string[] {
   return origins;
 }
 
-function resolveLocalDevOrigin(request: NextRequest): string | null {
-  const protocol = request.headers.get("x-forwarded-proto") || "http";
+export function resolveCanonicalAppOrigin(): string | null {
+  const configured = configuredAppOrigins();
+  return configured[0] ?? null;
+}
+
+export function resolveRequestOrigin(request: NextRequest): string | null {
+  const protocol = request.headers.get("x-forwarded-proto") || request.nextUrl.protocol.replace(":", "") || "https";
   const forwardedHost = request.headers.get("x-forwarded-host");
-  const host = forwardedHost || request.headers.get("host") || "localhost:3000";
-  const origin = normalizeOrigin(`${protocol}://${host}`);
+  const host = forwardedHost || request.headers.get("host");
+  if (!host) return null;
+  return normalizeOrigin(`${protocol}://${host}`);
+}
+
+function resolveLocalDevOrigin(request: NextRequest): string | null {
+  const origin =
+    resolveRequestOrigin(request) ||
+    normalizeOrigin("http://localhost:3000");
   if (!origin) return null;
 
   const hostname = new URL(origin).hostname;
@@ -46,10 +58,8 @@ function resolveLocalDevOrigin(request: NextRequest): string | null {
 }
 
 export function resolveMagicLinkBaseUrl(request: NextRequest): string | null {
-  const configured = configuredAppOrigins();
-  if (configured.length > 0) {
-    return configured[0];
-  }
+  const configured = resolveCanonicalAppOrigin();
+  if (configured) return configured;
 
   if (process.env.NODE_ENV === "production") {
     return null;
