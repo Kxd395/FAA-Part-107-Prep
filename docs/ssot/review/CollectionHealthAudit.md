@@ -1,13 +1,13 @@
 # Collection Health Audit
 
-- Generated: 2026-03-13T22:17:08.896Z
-- Question files audited: **6**
-- Total questions audited: **141**
+- Generated: 2026-03-15T02:55:28.529Z
+- Question files audited: **7**
+- Total questions audited: **160**
 - Concept-key coverage: **100%**
 - Duplicate concept-key groups: **0**
 - Missing/placeholder citations: **0**
 - Potentially stale citations: **0**
-- Category imbalance ratio (max/min): **8**
+- Category imbalance ratio (max/min): **7**
 - Errors: **0**
 - Warnings: **1**
 
@@ -19,15 +19,15 @@
 - Concept-key coverage warning target: 60%+.
 
 ## Category counts
-- Airspace: 16
-- Loading & Performance: 7
-- Operations: 20
+- Airspace: 18
+- Loading & Performance: 8
+- Operations: 27
 - Radio Communications: 56
-- Regulations: 21
+- Regulations: 30
 - Weather: 21
 
 ## Errors
 - None.
 
 ## Warnings
-- category imbalance ratio is 8 (max=56, min=7), above 4.
+- category imbalance ratio is 7 (max=56, min=8), above 4.

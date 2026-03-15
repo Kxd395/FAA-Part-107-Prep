@@ -114,6 +114,13 @@ function loadLocalCategorySupplement() {
     "Verified Rules",
     "Practice Questions",
     "Extended Terms",
+    "Airspace Authorization",
+    "Night Operations",
+    "Operating Limitations",
+    "Registration",
+    "Responsibilities",
+    "Safety and Compliance",
+    "See and Avoid",
   ]);
 
   return localCategoryFiles

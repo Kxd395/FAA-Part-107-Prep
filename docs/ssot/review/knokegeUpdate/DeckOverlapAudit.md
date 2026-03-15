@@ -1,7 +1,7 @@
 # Deck Overlap Audit
 
-- Generated: 2026-03-13T22:17:09.023Z
-- Local category questions: **141**
+- Generated: 2026-03-15T02:55:28.609Z
+- Local category questions: **160**
 - Merged canonical questions: **112**
 - Exact duplicate pairs: **0**
 - High-overlap semantic pairs (>= 0.58): **0**
@@ -32,11 +32,11 @@
 - score=0.250 | REG-153 -> P107-038 | Provided no property is carried for compensation or hire, when may a remote pilot operate a small UAS from a moving vehi
 - score=0.231 | REG-151 -> P107-009 | What is the minimum age to take the Part 107 aeronautical knowledge test?
 - score=0.229 | AIR-001 -> P107-028 | According to 14 CFR part 107 the remote pilot in command (PIC) of a small unmanned aircraft planning to operate within C
+- score=0.222 | PRAC-018 -> P107-033 | During a Part 107 operation, the remote PIC deviates from a regulation to avoid an unexpected manned helicopter that ent
 - score=0.222 | REG-004 -> P107-005 | According to 14 CFR part 107, who is responsible for determining the performance of a small unmanned aircraft?
 - score=0.222 | REG-152 -> P107-034 | Under Part 107, when must a remote pilot report an sUAS accident to the FAA?
 - score=0.214 | REG-154 -> P107-058 | Which statement best describes a Declaration of Compliance (DoC) for operations over people?
 - score=0.194 | REG-156 -> P107-005 | Upon request by the FAA, what must the remote pilot in command make available?
 - score=0.192 | WX-038 -> P107-027 | At what altitude(s) can wind shear be expected?
+- score=0.186 | PRAC-011 -> P107-008 | A remote pilot obtained a remote pilot certificate after previously registering a small unmanned aircraft for recreation
 - score=0.179 | AIR-056 -> CAR-102 | What type of special use airspace designates areas where flight is prohibited due to national security or welfare reason
-- score=0.179 | OPS-016 -> P107-018 | According to 14 CFR part 107, the responsibility to inspect the small UAS to ensure it is in a safe operating condition 
-- score=0.179 | REG-001 -> P107-028 | According to 14 CFR part 107, how may a remote pilot operate an unmanned aircraft in Class C airspace?

@@ -6266,6 +6266,728 @@
     "concept_key": "acs:UA.IV.B.K1|aerodynamics|lp_015"
   },
   {
+    "id": "PRAC-001",
+    "category": "Regulations",
+    "subcategory": "Night Operations",
+    "question_text": "You are flying a small unmanned aircraft at night and observe an airplane flying at low altitude in your area. How can you determine if the aircraft is getting closer or moving farther away?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The aircraft will appear to be descending as it moves closer."
+      },
+      {
+        "id": "B",
+        "text": "The lights on the aircraft will increase or decrease in intensity."
+      },
+      {
+        "id": "C",
+        "text": "The aircraft's lights will appear to change colors."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "At night, an aircraft that is getting closer will generally appear brighter because its lights increase in intensity. Dimming lights usually indicate the aircraft is moving farther away.",
+    "explanation_distractors": {
+      "A": "Relative descent alone is not a reliable nighttime cue for whether another aircraft is closing on your position.",
+      "C": "Navigation light colors indicate aircraft orientation, not whether it is getting closer or farther away."
+    },
+    "citation": "FAA-H-8083-25, Ch 17; AIM 8-1-6",
+    "difficulty_level": 2,
+    "tags": [
+      "remote pilot",
+      "night operations",
+      "aircraft lights",
+      "collision avoidance"
+    ],
+    "acs_code": "UA.I.B.K14b",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.B.K14B|night_operations|prac_001"
+  },
+  {
+    "id": "PRAC-002",
+    "category": "Regulations",
+    "subcategory": "See and Avoid",
+    "question_text": "Why would it be unsafe to operate a small unmanned aircraft in the vicinity of hot air balloons?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Because of the unpredictability caused by wind."
+      },
+      {
+        "id": "B",
+        "text": "Because of the Coriolis effect caused by the Earth's rotation."
+      },
+      {
+        "id": "C",
+        "text": "Because hot air balloons may be tethered during launch, landing, or ground handling, and the tethered lines can be extremely difficult to see."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Hot air balloons can be tethered during launch, landing, or ground handling. Those lines can be extremely difficult to detect from a remote pilot station, creating a severe collision hazard for a small UAS.",
+    "explanation_distractors": {
+      "A": "Wind affects balloons, but the specific hazard described here is the presence of nearly invisible tether lines.",
+      "B": "The Coriolis effect does not create the immediate operational hazard that tether lines do in the launch and recovery area."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 2,
+    "tags": [
+      "remote pilot",
+      "see and avoid",
+      "hot air balloon",
+      "tether lines"
+    ],
+    "acs_code": "UA.I.B.K14",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.B.K14|see_and_avoid|prac_002"
+  },
+  {
+    "id": "PRAC-003",
+    "category": "Regulations",
+    "subcategory": "Responsibilities",
+    "question_text": "Two certified remote pilots want to transfer control of a small UA during active flight. How may this be accomplished?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "There can only be one remote pilot who maintains control and authority at a time during the transfer."
+      },
+      {
+        "id": "B",
+        "text": "By sharing the control responsibility at the same time."
+      },
+      {
+        "id": "C",
+        "text": "Only by landing the aircraft before transferring control."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Only one person may act as remote PIC at a time. Control may be transferred during flight, but a single remote pilot must maintain operational authority and responsibility throughout the handoff.",
+    "explanation_distractors": {
+      "B": "Part 107 does not allow shared simultaneous command authority over the same aircraft.",
+      "C": "Landing is not required if the transfer is managed so that one remote pilot clearly holds authority at all times."
+    },
+    "citation": "14 CFR §§107.12, 107.19",
+    "difficulty_level": 2,
+    "tags": [
+      "remote pilot",
+      "transfer of control",
+      "responsibility",
+      "small ua"
+    ],
+    "acs_code": "UA.I.B.K20",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.B.K20|responsibilities|prac_003"
+  },
+  {
+    "id": "PRAC-004",
+    "category": "Regulations",
+    "subcategory": "Safety and Compliance",
+    "question_text": "If a remote PIC intentionally falsifies a required report, what action may the FAA take?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Issue only a warning letter unless property damage occurred."
+      },
+      {
+        "id": "B",
+        "text": "Suspend or revoke any certificate, waiver, or declaration of compliance."
+      },
+      {
+        "id": "C",
+        "text": "Require the remote PIC to retake the knowledge test within 30 days."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Under Part 107, falsification, reproduction, or alteration of applications, certificates, logbooks, reports, or records can lead the FAA to suspend or revoke a certificate, waiver, or declaration of compliance.",
+    "explanation_distractors": {
+      "A": "Intentional falsification is not limited to a warning letter and is not conditioned on property damage.",
+      "C": "The regulation authorizes certificate, waiver, or declaration action, not a simple retest requirement."
+    },
+    "citation": "14 CFR §107.5",
+    "difficulty_level": 2,
+    "tags": [
+      "remote pic",
+      "falsification",
+      "reports",
+      "compliance"
+    ],
+    "acs_code": "UA.I.A.K4",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.A.K4|safety_and_compliance|prac_004"
+  },
+  {
+    "id": "PRAC-005",
+    "category": "Operations",
+    "subcategory": "Visual Perception",
+    "question_text": "While flying a small unmanned aircraft forward, nearby trees appear to move quickly while distant mountains appear to move slowly. This is an example of",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "motion parallax."
+      },
+      {
+        "id": "B",
+        "text": "autokinesis."
+      },
+      {
+        "id": "C",
+        "text": "the Coriolis illusion."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Motion parallax is the apparent difference in rate of movement of objects at different distances. Nearby objects seem to move faster than distant objects as the aircraft moves forward.",
+    "explanation_distractors": {
+      "B": "Autokinesis is the illusion that a stationary light is moving when stared at in darkness.",
+      "C": "The Coriolis illusion is a vestibular illusion caused by head movement during acceleration, not by relative motion of near and far objects."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 1,
+    "tags": [
+      "unmanned aircraft",
+      "visual perception",
+      "motion parallax",
+      "human factors"
+    ],
+    "acs_code": "UA.V.E.K6",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.V.E.K6|visual_perception|prac_005"
+  },
+  {
+    "id": "PRAC-006",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision Making",
+    "question_text": "A remote PIC correctly identifies all hazards in the operating environment and understands how these hazards could affect the flight outcome. This best describes",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "risk management."
+      },
+      {
+        "id": "B",
+        "text": "aeronautical decision-making."
+      },
+      {
+        "id": "C",
+        "text": "situational awareness."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Situational awareness is the accurate perception and understanding of all factors affecting the operation, including hazards and how they may change the flight outcome.",
+    "explanation_distractors": {
+      "A": "Risk management is the process of identifying and mitigating hazards, but the question describes the pilot's accurate understanding of the current operating picture.",
+      "B": "ADM is the broader decision-making process. Situational awareness is a key input to ADM."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 1,
+    "tags": [
+      "remote pic",
+      "situational awareness",
+      "hazards",
+      "adm"
+    ],
+    "acs_code": "UA.V.D.K3",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.V.D.K3|aeronautical_decision_making|prac_006"
+  },
+  {
+    "id": "PRAC-007",
+    "category": "Airspace",
+    "subcategory": "Airspace Authorization",
+    "question_text": "A remote pilot plans to operate a small unmanned aircraft system within Class B airspace. Which of the following is required for the operation?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The aircraft must be equipped with ADS-B Out."
+      },
+      {
+        "id": "B",
+        "text": "The remote PIC must obtain ATC authorization before operating in Class B airspace."
+      },
+      {
+        "id": "C",
+        "text": "The aircraft must be equipped with a Mode C transponder."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Part 107 operations in Class B airspace require prior ATC authorization. Small UAS are not required to carry ADS-B Out or a Mode C transponder for this purpose.",
+    "explanation_distractors": {
+      "A": "ADS-B Out is not a standard requirement for Part 107 operations in Class B airspace.",
+      "C": "A Mode C transponder is not required for a small UAS under Part 107 to obtain authorization."
+    },
+    "citation": "14 CFR §107.41",
+    "difficulty_level": 2,
+    "tags": [
+      "remote pic",
+      "class b",
+      "atc authorization",
+      "controlled airspace"
+    ],
+    "acs_code": "UA.I.B.K16",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.B.K16|airspace_authorization|prac_007"
+  },
+  {
+    "id": "PRAC-008",
+    "category": "Operations",
+    "subcategory": "Maintenance",
+    "question_text": "What precautions should a remote PIC take to reduce the risk of flight emergencies when using lithium-based batteries?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Store the batteries fully discharged."
+      },
+      {
+        "id": "B",
+        "text": "Use batteries that show signs of swelling."
+      },
+      {
+        "id": "C",
+        "text": "Follow the manufacturer's charging and temperature guidelines."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Lithium-based batteries should be charged, stored, and used according to the manufacturer's temperature and charging guidance. That reduces the risk of battery failure, fire, or in-flight power loss.",
+    "explanation_distractors": {
+      "A": "Fully discharging lithium batteries can damage them and may increase failure risk depending on the battery type.",
+      "B": "Swelling is a warning sign of battery damage and should be treated as an unsafe condition."
+    },
+    "citation": "AC 107-2A, Section 7.5; FAA-H-8083-25, Ch 7",
+    "difficulty_level": 1,
+    "tags": [
+      "remote pic",
+      "battery",
+      "preflight",
+      "maintenance"
+    ],
+    "acs_code": "UA.V.F.K1",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.V.F.K1|maintenance|prac_008"
+  },
+  {
+    "id": "PRAC-009",
+    "category": "Regulations",
+    "subcategory": "Operating Limitations",
+    "question_text": "A recreational drone pilot is flying in Class G airspace near a 600-foot radio tower. Under which condition, if any, may the pilot legally fly above 400 feet AGL?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Never; a recreational flyer is not allowed to exceed 400 feet AGL."
+      },
+      {
+        "id": "B",
+        "text": "If the pilot remains within 400 feet laterally of the tower."
+      },
+      {
+        "id": "C",
+        "text": "If the tower owner grants permission and visual line of sight is maintained."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Under the recreational exception, the pilot must operate within the fixed altitude limit and does not receive the Part 107 structure-based allowance above 400 feet AGL. The scenario does not create an exception.",
+    "explanation_distractors": {
+      "B": "The structure-based altitude exception is not part of the recreational rule set described in this question.",
+      "C": "Property-owner permission does not create a recreational altitude exception."
+    },
+    "citation": "49 U.S.C. §44809",
+    "difficulty_level": 2,
+    "tags": [
+      "drone",
+      "class g",
+      "recreational rules",
+      "altitude limits"
+    ],
+    "acs_code": "UA.I.B.K3",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.B.K3|operating_limitations|prac_009"
+  },
+  {
+    "id": "PRAC-010",
+    "category": "Operations",
+    "subcategory": "Aeronautical Decision Making",
+    "question_text": "Which situation best represents an external pressure affecting decision-making during a remote pilot operation?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Poor weather conditions."
+      },
+      {
+        "id": "B",
+        "text": "The desire to complete a paid flight on time."
+      },
+      {
+        "id": "C",
+        "text": "Equipment malfunction."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "External pressures include schedule demands, client expectations, financial incentives, and self-imposed pressure to complete a mission even when conditions suggest delaying or canceling it.",
+    "explanation_distractors": {
+      "A": "Poor weather is an operational hazard, not an external pressure.",
+      "C": "Equipment malfunction is a mechanical issue, not a pressure on the pilot's decision-making."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 1,
+    "tags": [
+      "remote pilot",
+      "external pressures",
+      "adm",
+      "risk management"
+    ],
+    "acs_code": "UA.V.D.K3",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.V.D.K3|aeronautical_decision_making|prac_010"
+  },
+  {
+    "id": "PRAC-011",
+    "category": "Regulations",
+    "subcategory": "Registration",
+    "question_text": "A remote pilot obtained a remote pilot certificate after previously registering a small unmanned aircraft for recreational use. The pilot now plans to conduct a paid aerial photography flight with the same aircraft. What action is required before conducting the flight?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "No action is required because the aircraft may be used commercially under the same recreational registration."
+      },
+      {
+        "id": "B",
+        "text": "The aircraft must be re-registered under Part 107 before it can be used for commercial operations."
+      },
+      {
+        "id": "C",
+        "text": "Only the pilot certificate must be updated; the aircraft registration does not change."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Commercial use requires the aircraft to be registered for Part 107 operations. A recreational registration does not cover the aircraft once it is used for compensation or hire.",
+    "explanation_distractors": {
+      "A": "Recreational registration does not automatically authorize commercial use of the aircraft.",
+      "C": "The aircraft registration itself must reflect the new operational context."
+    },
+    "citation": "14 CFR Part 48; FAA DroneZone Registration Guidance",
+    "difficulty_level": 2,
+    "tags": [
+      "remote pilot",
+      "registration",
+      "commercial use",
+      "part 107"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.B.K1|registration|prac_011"
+  },
+  {
+    "id": "PRAC-012",
+    "category": "Regulations",
+    "subcategory": "Registration",
+    "question_text": "A non-U.S. citizen is visiting the United States and plans to conduct a commercial drone operation using a drone that is registered with the FAA. Which statement is correct?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The operation is permitted if the drone is FAA registered and the operator holds an FAA remote pilot certificate."
+      },
+      {
+        "id": "B",
+        "text": "The operation is prohibited because only U.S. citizens may operate FAA-registered drones."
+      },
+      {
+        "id": "C",
+        "text": "The operation is permitted only if the drone was manufactured in the United States."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Part 107 operations are not limited to U.S. citizens. If the operator holds the required FAA remote pilot certification and the aircraft is properly registered, the commercial operation may be conducted lawfully.",
+    "explanation_distractors": {
+      "B": "Citizenship alone does not bar a properly certificated remote pilot from conducting a lawful operation.",
+      "C": "The country of manufacture does not determine whether a Part 107 operation is permitted."
+    },
+    "citation": "14 CFR §§107.12, 48.15",
+    "difficulty_level": 2,
+    "tags": [
+      "remote pilot",
+      "registration",
+      "commercial operation",
+      "part 107"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.B.K1|registration|prac_012"
+  },
+  {
+    "id": "PRAC-013",
+    "category": "Loading & Performance",
+    "subcategory": "Altimetry",
+    "question_text": "When an altimeter setting is adjusted to 29.92 inches of mercury, what altitude is being displayed?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "True altitude."
+      },
+      {
+        "id": "B",
+        "text": "Density altitude."
+      },
+      {
+        "id": "C",
+        "text": "Pressure altitude."
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Setting 29.92 inches of mercury in the altimeter window causes the instrument to indicate pressure altitude, which is the altitude above the standard datum plane.",
+    "explanation_distractors": {
+      "A": "True altitude is the aircraft's actual height above mean sea level after correcting for nonstandard conditions.",
+      "B": "Density altitude is pressure altitude corrected for nonstandard temperature."
+    },
+    "citation": "FAA-H-8083-25, Ch 11",
+    "difficulty_level": 1,
+    "tags": [
+      "unmanned aircraft",
+      "altimeter",
+      "pressure altitude",
+      "performance"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.IV.A.K1|altimetry|prac_013"
+  },
+  {
+    "id": "PRAC-014",
+    "category": "Operations",
+    "subcategory": "Crew Resource Management",
+    "question_text": "During a complex drone operation, a visual observer notices another aircraft approaching the operation area but hesitates to inform the remote pilot because they assume the PIC already sees it. This situation best illustrates a breakdown in",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "situational awareness."
+      },
+      {
+        "id": "B",
+        "text": "crew resource management."
+      },
+      {
+        "id": "C",
+        "text": "aeronautical decision-making."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Crew resource management depends on timely, assertive communication among all participants. Hesitating to speak up about an approaching aircraft is a CRM breakdown.",
+    "explanation_distractors": {
+      "A": "Situational awareness may degrade as a result, but the root failure described is the crew's poor coordination and communication.",
+      "C": "ADM is the broader decision process; the scenario specifically describes a crew communication problem."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 1,
+    "tags": [
+      "drone",
+      "crew resource management",
+      "visual observer",
+      "communication"
+    ],
+    "acs_code": "UA.V.D.K2",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.V.D.K2|crew_resource_management|prac_014"
+  },
+  {
+    "id": "PRAC-015",
+    "category": "Regulations",
+    "subcategory": "See and Avoid",
+    "question_text": "What visual scanning method should a remote pilot use to effectively detect other aircraft and avoid collisions?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Stare at one point in the distance and wait for movement."
+      },
+      {
+        "id": "B",
+        "text": "Use a series of short, regularly spaced eye movements to scan small sections of the sky."
+      },
+      {
+        "id": "C",
+        "text": "Rely primarily on peripheral vision."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Effective visual scanning uses short, deliberate eye movements that divide the sky into small sections. That allows the eyes time to focus and improves the chance of detecting conflicting traffic.",
+    "explanation_distractors": {
+      "A": "Fixating on one point reduces overall traffic detection and can cause conflicting aircraft to be missed.",
+      "C": "Peripheral vision alone is not reliable for see-and-avoid duties."
+    },
+    "citation": "FAA-H-8083-25, Ch 17; AIM 8-1-6",
+    "difficulty_level": 1,
+    "tags": [
+      "remote pilot",
+      "see and avoid",
+      "visual scanning",
+      "collision avoidance"
+    ],
+    "acs_code": "UA.I.B.K14a",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.B.K14A|see_and_avoid|prac_015"
+  },
+  {
+    "id": "PRAC-016",
+    "category": "Operations",
+    "subcategory": "Physiology",
+    "question_text": "As a remote pilot, long extended flights during hot summer temperatures increase the susceptibility to dehydration because",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "hot days increase the rate of water loss in the body."
+      },
+      {
+        "id": "B",
+        "text": "body water loss slows as long as the pilot remains seated at the controls."
+      },
+      {
+        "id": "C",
+        "text": "the body's need for water decreases in hot weather."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "High temperatures increase perspiration and fluid loss. Without active hydration, a remote pilot is more susceptible to dehydration, fatigue, and degraded judgment.",
+    "explanation_distractors": {
+      "B": "Remaining seated does not prevent heat-related fluid loss.",
+      "C": "Hot weather increases, not decreases, the body's need for water."
+    },
+    "citation": "FAA-H-8083-25, Ch 17",
+    "difficulty_level": 1,
+    "tags": [
+      "remote pilot",
+      "physiology",
+      "dehydration",
+      "summer operations"
+    ],
+    "acs_code": "UA.V.E.K5",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.V.E.K5|physiology|prac_016"
+  },
+  {
+    "id": "PRAC-017",
+    "category": "Airspace",
+    "subcategory": "Airspace Authorization",
+    "question_text": "A remote pilot receives LAANC authorization for controlled airspace but launches 15 minutes earlier than the approved start time due to favorable weather. Which statement is correct?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The authorization remains valid as long as the altitude limits are followed."
+      },
+      {
+        "id": "B",
+        "text": "The operation is unauthorized during the unapproved time window."
+      },
+      {
+        "id": "C",
+        "text": "Early operations are allowed if ATC is not actively monitoring."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "ATC authorization through LAANC is limited to the approved date, time window, and altitude. Launching before the authorized start time is outside the authorization and is therefore not permitted.",
+    "explanation_distractors": {
+      "A": "Altitude limits are only one part of the authorization; the approved time window also governs the operation.",
+      "C": "Authorization requirements do not depend on whether ATC is actively monitoring the flight."
+    },
+    "citation": "14 CFR §107.41; FAA LAANC Guidance",
+    "difficulty_level": 2,
+    "tags": [
+      "remote pilot",
+      "laanc",
+      "atc authorization",
+      "controlled airspace"
+    ],
+    "acs_code": "UA.I.B.K16",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.B.K16|airspace_authorization|prac_017"
+  },
+  {
+    "id": "PRAC-018",
+    "category": "Operations",
+    "subcategory": "Emergency Procedures",
+    "question_text": "During a Part 107 operation, the remote PIC deviates from a regulation to avoid an unexpected manned helicopter that enters the operating area. What must the remote PIC do after the flight?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Nothing, because emergency authority permanently resolves the situation."
+      },
+      {
+        "id": "B",
+        "text": "Submit a written report to the FAA only if requested."
+      },
+      {
+        "id": "C",
+        "text": "Immediately notify air traffic control after landing."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "In an in-flight emergency, the remote PIC may deviate from Part 107 rules to the extent needed to respond safely. The FAA may then require a written report of that deviation on request.",
+    "explanation_distractors": {
+      "A": "Emergency authority does not eliminate possible follow-up reporting if the FAA asks for it.",
+      "C": "Immediate ATC notification after landing is not the rule-based reporting requirement described in Part 107."
+    },
+    "citation": "14 CFR §107.21",
+    "difficulty_level": 2,
+    "tags": [
+      "part 107",
+      "emergency procedures",
+      "remote pic",
+      "deviation"
+    ],
+    "acs_code": "UA.V.C.K1",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.V.C.K1|emergency_procedures|prac_018"
+  },
+  {
+    "id": "PRAC-019",
+    "category": "Regulations",
+    "subcategory": "Responsibilities",
+    "question_text": "A remote pilot launches a Part 107 operation using a manufacturer-provided automated flight mode. The aircraft independently adjusts altitude to maintain tracking accuracy and briefly exceeds the authorized altitude without pilot input or warning. Who is responsible for the deviation?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "The aircraft manufacturer."
+      },
+      {
+        "id": "B",
+        "text": "The remote pilot in command."
+      },
+      {
+        "id": "C",
+        "text": "No one, because the altitude change was automatic."
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The remote PIC remains directly responsible for the operation of the small UAS at all times, including when manufacturer-provided automation or autonomous features are being used.",
+    "explanation_distractors": {
+      "A": "Manufacturers provide features, but operational compliance remains the responsibility of the remote PIC.",
+      "C": "Automation does not remove pilot responsibility under Part 107."
+    },
+    "citation": "14 CFR §§107.19, 107.49",
+    "difficulty_level": 2,
+    "tags": [
+      "part 107",
+      "remote pic",
+      "automation",
+      "responsibility"
+    ],
+    "acs_code": "UA.I.B.K20",
+    "source": "User Question Intake 2026-03-14",
+    "concept_key": "acs:UA.I.B.K20|responsibilities|prac_019"
+  },
+  {
     "id": "PA-001",
     "category": "Radio Communications",
     "subcategory": "Phonetic Alphabet",
