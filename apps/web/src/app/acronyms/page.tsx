@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
+import { StandaloneFlipCard } from "../../components/flashcards/StandaloneFlipCard";
 
 interface AcronymEntry {
   term: string;
@@ -61,28 +62,20 @@ function AcronymCard({
   onNext: () => void;
 }) {
   return (
-    <button
-      onClick={revealed ? onNext : onReveal}
-      className="flex h-72 w-full flex-col items-center justify-center rounded-2xl border border-[var(--card-border)] bg-[var(--card)] px-6 text-center transition-all hover:border-white/20"
-      aria-label={`Study ${entry.term}`}
-    >
-      {!revealed ? (
-        <>
-          <div className="text-6xl font-bold text-sky-300">{entry.term}</div>
-          <div className="mt-4 text-xs uppercase tracking-widest text-[var(--muted)]">
-            Tap to reveal
-          </div>
-        </>
-      ) : (
+    <StandaloneFlipCard
+      front={<div className="text-6xl font-bold text-sky-300">{entry.term}</div>}
+      back={
         <>
           <div className="text-3xl font-bold text-white">{entry.expansion}</div>
           <div className="mt-3 text-sm text-[var(--muted)]">{entry.note}</div>
-          <div className="mt-4 text-xs uppercase tracking-widest text-sky-300">
-            Tap for next
-          </div>
         </>
-      )}
-    </button>
+      }
+      revealed={revealed}
+      onReveal={onReveal}
+      onNext={onNext}
+      ariaLabel={`Study ${entry.term}`}
+      accentClassName="text-sky-300"
+    />
   );
 }
 

@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useActiveUserId } from "../../hooks/useActiveUserId";
+import { StandaloneFlipCard } from "../../components/flashcards/StandaloneFlipCard";
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
 
@@ -67,60 +68,42 @@ const PHONETIC_PREFERENCES_KEY = "part107_phonetic_preferences_v1";
 
 function FlipCard({
   entry,
-  side,
-  onClick,
+  revealed,
+  onReveal,
+  onNext,
 }: {
   entry: PhoneticEntry;
-  side: "front" | "back";
-  onClick: () => void;
+  revealed: boolean;
+  onReveal: () => void;
+  onNext: () => void;
 }) {
   return (
-    <button
-      onClick={onClick}
-      className="relative w-full h-64 sm:h-72 cursor-pointer"
-      aria-label={`Flip card for ${entry.character}`}
-      style={{ perspective: "1200px" }}
-    >
-      <div
-        className="relative w-full h-full transition-transform duration-500"
-        style={{
-          transformStyle: "preserve-3d",
-          transform: side === "back" ? "rotateY(180deg)" : "rotateY(0deg)",
-        }}
-      >
-        {/* Front — just the character */}
-        <div
-          className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-[var(--card-border)] bg-[var(--card)] backface-hidden"
-          style={{ backfaceVisibility: "hidden" }}
-        >
-          <div className="text-7xl sm:text-8xl font-bold text-brand-400 leading-none">
-            {entry.character}
-          </div>
-          <div className="mt-4 text-xs text-[var(--muted)] uppercase tracking-widest">
-            Tap to reveal
-          </div>
+    <StandaloneFlipCard
+      front={
+        <div className="text-7xl font-bold leading-none text-brand-400 sm:text-8xl">
+          {entry.character}
         </div>
-
-        {/* Back — word + pronunciation + morse */}
-        <div
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-2xl border border-brand-500/40 bg-brand-500/10 backface-hidden"
-          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-        >
-          <div className="text-4xl sm:text-5xl font-bold text-white">{entry.word}</div>
-          <div className="text-lg text-brand-300 font-mono tracking-wider">
+      }
+      back={
+        <>
+          <div className="text-4xl font-bold text-white sm:text-5xl">{entry.word}</div>
+          <div className="mt-3 text-lg font-mono tracking-wider text-brand-300">
             {entry.pronunciation}
           </div>
           {entry.morse && (
-            <div className="mt-1 text-2xl text-[var(--muted)] tracking-widest font-mono">
+            <div className="mt-1 text-2xl font-mono tracking-widest text-[var(--muted)]">
               {entry.morse}
             </div>
           )}
-          <div className="mt-3 text-xs text-[var(--muted)] uppercase tracking-widest">
-            Tap for next
-          </div>
-        </div>
-      </div>
-    </button>
+        </>
+      }
+      revealed={revealed}
+      onReveal={onReveal}
+      onNext={onNext}
+      ariaLabel={`Study ${entry.character}`}
+      accentClassName="text-brand-300"
+      className="h-64 sm:h-72"
+    />
   );
 }
 
@@ -289,7 +272,7 @@ function GridMode({ entries }: { entries: PhoneticEntry[] }) {
 
 function FlipMode({ entries }: { entries: PhoneticEntry[] }) {
   const [index, setIndex] = useState(0);
-  const [side, setSide] = useState<"front" | "back">("front");
+  const [revealed, setRevealed] = useState(false);
   const [randomOrder, setRandomOrder] = useState(false);
   const [deck, setDeck] = useState(entries);
 
@@ -301,33 +284,32 @@ function FlipMode({ entries }: { entries: PhoneticEntry[] }) {
       const next = !r;
       setDeck(next ? shuffle(entries) : entries);
       setIndex(0);
-      setSide("front");
+      setRevealed(false);
       return next;
     });
   }, [entries]);
 
-  const handleFlip = () => {
-    if (side === "front") {
-      setSide("back");
+  const handleFlip = useCallback(() => {
+    if (!current) return;
+    if (!revealed) {
+      setRevealed(true);
     } else {
-      // Advance to next card on back-tap
-      setSide("front");
+      setRevealed(false);
       setIndex((i) => (i + 1) % total);
     }
-  };
+  }, [current, revealed, total]);
 
-  const handlePrev = () => {
-    setSide("front");
+  const handlePrev = useCallback(() => {
+    setRevealed(false);
     setIndex((i) => (i - 1 + total) % total);
-  };
+  }, [total]);
 
-  const handleNext = () => {
-    setSide("front");
+  const handleNext = useCallback(() => {
+    setRevealed(false);
     setIndex((i) => (i + 1) % total);
-  };
+  }, [total]);
 
   // Keyboard support
-  const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight" || e.key === " ") handleNext();
@@ -336,12 +318,12 @@ function FlipMode({ entries }: { entries: PhoneticEntry[] }) {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  });
+  }, [handleFlip, handleNext, handlePrev]);
 
   if (!current) return null;
 
   return (
-    <div ref={containerRef} className="space-y-6">
+    <div className="space-y-6">
       {/* Progress + controls */}
       <div className="flex items-center justify-between text-sm text-[var(--muted)]">
         <span>
@@ -368,7 +350,13 @@ function FlipMode({ entries }: { entries: PhoneticEntry[] }) {
       </div>
 
       {/* Card */}
-      <FlipCard entry={current} side={side} onClick={handleFlip} />
+      <FlipCard
+        key={`${current.character}-${current.word}`}
+        entry={current}
+        revealed={revealed}
+        onReveal={() => setRevealed(true)}
+        onNext={handleNext}
+      />
 
       {/* Navigation */}
       <div className="flex items-center gap-3">
