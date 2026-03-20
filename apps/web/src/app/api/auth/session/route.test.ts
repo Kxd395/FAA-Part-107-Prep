@@ -50,6 +50,20 @@ describe("auth session route", () => {
     expect(body.userId).toBe("pilot_user_2");
   });
 
+  it("marks session responses as no-store", async () => {
+    const token = issueAppSessionToken("pilot_user_2");
+    const response = await GET(
+      new NextRequest("http://localhost/api/auth/session", {
+        headers: {
+          cookie: `part107_auth=${token}`,
+        },
+      })
+    );
+
+    expect(response.headers.get("cache-control")).toContain("no-store");
+    expect(response.headers.get("pragma")).toBe("no-cache");
+  });
+
   it("clears session cookie on delete", async () => {
     const response = await DELETE();
     expect(response.status).toBe(200);

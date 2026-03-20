@@ -25,7 +25,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const fetchSession = useCallback(async () => {
         try {
             setLoading(true);
-            const res = await fetch("/api/auth/session");
+            const res = await fetch("/api/auth/session", {
+                cache: "no-store",
+                credentials: "same-origin",
+                headers: {
+                    "cache-control": "no-store",
+                },
+            });
             if (res.ok) {
                 const data = await res.json();
                 if (data.authenticated && data.userId) {
@@ -42,12 +48,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 } else {
                     setUser(null);
                 }
-            } else {
+            } else if (res.status === 401 || res.status === 403) {
                 setUser(null);
             }
         } catch (err) {
             console.error("Failed to fetch session", err);
-            setUser(null);
         } finally {
             setLoading(false);
         }
@@ -59,7 +64,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const signOut = useCallback(async () => {
         try {
-            await fetch("/api/auth/session", { method: "DELETE" });
+            await fetch("/api/auth/session", {
+                method: "DELETE",
+                cache: "no-store",
+                credentials: "same-origin",
+            });
             setUser(null);
         } catch (err) {
             console.error("Failed to sign out", err);

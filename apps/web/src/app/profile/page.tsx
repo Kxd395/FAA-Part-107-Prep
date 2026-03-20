@@ -6,12 +6,20 @@ import { useAuth } from "../../hooks/useAuth";
 import Link from "next/link";
 
 export default function ProfilePage() {
-    const { user, refreshSession, signOut } = useAuth();
+    const { user, loading, refreshSession, signOut } = useAuth();
     const router = useRouter();
 
     const [displayName, setDisplayName] = useState(user?.displayName || "");
     const [isSaving, setIsSaving] = useState(false);
     const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+    if (loading) {
+        return (
+            <div className="mx-auto max-w-xl text-center mt-12">
+                <p className="text-[var(--muted)]">Loading profile...</p>
+            </div>
+        );
+    }
 
     if (!user) {
         return (

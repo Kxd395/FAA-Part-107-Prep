@@ -7,6 +7,7 @@ const mocks = vi.hoisted(() => ({
   refreshSession: vi.fn<() => Promise<void>>(),
   signOut: vi.fn<() => Promise<void>>(),
   user: null as { userId: string; email: string | null; displayName: string | null } | null,
+  loading: false,
 }));
 
 vi.mock("next/navigation", () => ({
@@ -18,7 +19,7 @@ vi.mock("next/navigation", () => ({
 vi.mock("../../hooks/useAuth", () => ({
   useAuth: () => ({
     user: mocks.user,
-    loading: false,
+    loading: mocks.loading,
     refreshSession: mocks.refreshSession,
     signOut: mocks.signOut,
   }),
@@ -30,6 +31,7 @@ describe("ProfilePage", () => {
     mocks.refreshSession.mockReset();
     mocks.signOut.mockReset();
     mocks.user = null;
+    mocks.loading = false;
     vi.restoreAllMocks();
   });
 
@@ -40,6 +42,12 @@ describe("ProfilePage", () => {
   it("shows login redirect state when user is missing", () => {
     render(<ProfilePage />);
     expect(screen.getByText(/Redirecting to login/i)).toBeInTheDocument();
+  });
+
+  it("shows loading state while auth is hydrating", () => {
+    mocks.loading = true;
+    render(<ProfilePage />);
+    expect(screen.getByText(/Loading profile/i)).toBeInTheDocument();
   });
 
   it("updates display name and refreshes session", async () => {

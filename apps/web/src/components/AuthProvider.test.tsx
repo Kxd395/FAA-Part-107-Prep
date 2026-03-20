@@ -57,6 +57,16 @@ describe("AuthProvider", () => {
     await waitFor(() => {
       expect(screen.getByTestId("user-id")).toHaveTextContent("pilot-user");
     });
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/auth/session",
+      expect.objectContaining({
+        cache: "no-store",
+        credentials: "same-origin",
+        headers: expect.objectContaining({
+          "cache-control": "no-store",
+        }),
+      })
+    );
     expect(migrateMock).toHaveBeenCalledWith("pilot-user");
     expect(screen.getByTestId("loading")).toHaveTextContent("false");
   });
@@ -92,5 +102,37 @@ describe("AuthProvider", () => {
     await waitFor(() => {
       expect(screen.getByTestId("user-id")).toHaveTextContent("none");
     });
+  });
+
+  it("keeps the current user when refresh fails unexpectedly", async () => {
+    fetchMock
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          authenticated: true,
+          userId: "pilot-user",
+          email: "pilot@example.com",
+          displayName: "Pilot",
+        }),
+      } as Response)
+      .mockRejectedValueOnce(new Error("network failure"));
+
+    const user = userEvent.setup();
+    render(
+      <AuthProvider>
+        <Harness />
+      </AuthProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId("user-id")).toHaveTextContent("pilot-user");
+    });
+
+    await user.click(screen.getByRole("button", { name: /refresh/i }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("loading")).toHaveTextContent("false");
+    });
+    expect(screen.getByTestId("user-id")).toHaveTextContent("pilot-user");
   });
 });

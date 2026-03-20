@@ -16,12 +16,20 @@ export const runtime = "nodejs";
 export async function GET(request: NextRequest) {
   const tracker = startApiRequest(request, "/api/auth/session");
   const session = getAuthenticatedSession(request);
-  return tracker.json({
-    authenticated: !!session,
-    userId: session?.uid ?? null,
-    email: session?.email ?? null,
-    displayName: session?.displayName ?? null,
-  });
+  return tracker.json(
+    {
+      authenticated: !!session,
+      userId: session?.uid ?? null,
+      email: session?.email ?? null,
+      displayName: session?.displayName ?? null,
+    },
+    {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        Pragma: "no-cache",
+      },
+    }
+  );
 }
 
 export async function POST(request: NextRequest) {
