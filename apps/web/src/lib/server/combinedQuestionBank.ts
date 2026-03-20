@@ -25,6 +25,7 @@ function loadLocalCategorySupplement(repoRoot: string): Question[] {
     path.join(repoRoot, "packages/content/questions/operations.json"),
     path.join(repoRoot, "packages/content/questions/loading_performance.json"),
     path.join(repoRoot, "packages/content/questions/airport_operations.json"),
+    path.join(repoRoot, "packages/content/questions/high_yield_2026.json"),
     path.join(repoRoot, "packages/content/questions/acronyms.json"),
     path.join(repoRoot, "packages/content/questions/regulations_verified.json"),
     path.join(repoRoot, "packages/content/questions/extended_terms.json"),
@@ -34,8 +35,29 @@ function loadLocalCategorySupplement(repoRoot: string): Question[] {
 
   const allowedRegulationsSubcategories = new Set([
     "Acronyms & Abbreviations",
+    "Operations over people",
     "Verified Rules",
     "Practice Questions",
+  ]);
+
+  const curatedReviewExcludedIds = new Set([
+    "ACR-007",
+    "ACR-008",
+    "ACR-013",
+    "ACR-021",
+    "ACR-022",
+    "ACR-026",
+    "ACR-032",
+    "ACR-041",
+    "ACR-042",
+    "ACR-046",
+    "ACR-047",
+    "ACR-055",
+    "P107-065",
+    "P107-066",
+    "PRAC-009",
+    "PRAC-011",
+    "PRAC-012",
   ]);
 
   return localCategoryFiles
@@ -44,8 +66,10 @@ function loadLocalCategorySupplement(repoRoot: string): Question[] {
     .flat()
     .filter(
       (question) =>
-        question.category !== "Regulations" ||
-        allowedRegulationsSubcategories.has(question.subcategory)
+        question.subcategory !== "Phonetic Alphabet" &&
+        !curatedReviewExcludedIds.has(question.id) &&
+        (question.category !== "Regulations" ||
+          allowedRegulationsSubcategories.has(question.subcategory))
     );
 }
 

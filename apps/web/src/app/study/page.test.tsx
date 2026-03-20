@@ -108,6 +108,8 @@ describe("StudyPage", () => {
 
     expect(await screen.findByText(/Question 1 of 2/i)).toBeInTheDocument();
     expect(screen.getByText(/All Questions \(Random\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Source Tier: FAA-anchored/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Report issue/i })).toBeInTheDocument();
   });
 
   it("auto-starts weak-focus mode from query params", async () => {

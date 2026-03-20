@@ -4,6 +4,7 @@ const airspace = require("./questions/airspace.json");
 const weather = require("./questions/weather.json");
 const operations = require("./questions/operations.json");
 const loadingPerformance = require("./questions/loading_performance.json");
+const highYield2026 = require("./questions/high_yield_2026.json");
 
 const questionsByCategory = {
   regulations,
@@ -11,6 +12,7 @@ const questionsByCategory = {
   weather,
   operations,
   loadingPerformance,
+  highYield2026,
 };
 
 module.exports = {
@@ -22,5 +24,6 @@ module.exports = {
     ...weather,
     ...operations,
     ...loadingPerformance,
+    ...highYield2026,
   ],
 };

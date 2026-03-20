@@ -1,4 +1,4 @@
-import { cleanup, render } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach } from "vitest";
 import { describe, expect, it, vi } from "vitest";
@@ -24,6 +24,10 @@ const baseQuestion: Question = {
   citation: "14 CFR §107.31",
   difficulty_level: 2,
   tags: [],
+  acs_code: "UA.I.B.K1",
+  source: "review.md",
+  source_type: "confirmed_test",
+  year_updated: 2026,
 };
 
 describe("QuestionCard", () => {
@@ -152,5 +156,16 @@ describe("QuestionCard", () => {
         url: "/figures/rpsg-2016/rpsg2016-figure-2-4.jpeg",
       })
     );
+  });
+
+  it("renders provenance metadata for trust and debugging", () => {
+    render(<QuestionCard question={baseQuestion} onOpenFigure={vi.fn()} />);
+
+    expect(screen.getByText(/Source Tier: FAA-anchored/i)).toBeInTheDocument();
+    expect(screen.getByText(/ACS: UA.I.B.K1/i)).toBeInTheDocument();
+    expect(screen.getByText(/Reviewed: 2026/i)).toBeInTheDocument();
+    expect(screen.getByText(/Reference:/i)).toBeInTheDocument();
+    expect(screen.getByText("review.md")).toBeInTheDocument();
+    expect(screen.getByText("Confirmed Test")).toBeInTheDocument();
   });
 });

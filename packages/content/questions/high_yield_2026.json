@@ -1,0 +1,327 @@
+[
+  {
+    "id": "HY-001",
+    "category": "Airspace",
+    "subcategory": "Class E Airspace Floors",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 20, area 2.) What is the floor of the Class E airspace indicated by the dashed magenta line southeast of Elizabeth City?",
+    "figure_reference": "figure-20",
+    "image_ref": "/figures/figure-20.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "The surface"
+      },
+      {
+        "id": "B",
+        "text": "700 feet AGL"
+      },
+      {
+        "id": "C",
+        "text": "1,200 feet AGL"
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "A dashed magenta line indicates Class E airspace designated as a surface area for an airport. For Part 107 operations, that means ATC authorization is required because the controlled airspace starts at the surface.",
+    "explanation_distractors": {
+      "B": "700 feet AGL is shown by a shaded magenta vignette, not a dashed magenta surface-area boundary.",
+      "C": "1,200 feet AGL is the usual Class E transition floor in many areas, but it is not what the dashed magenta boundary depicts."
+    },
+    "citation": "FAA Aeronautical Chart User's Guide; FAA-CT-8080-2H Figure 20",
+    "difficulty_level": 3,
+    "acs_code": "UA.II.A.K1",
+    "tags": [
+      "2026-high-yield",
+      "class-e",
+      "surface-area",
+      "dashed-magenta",
+      "sectional-chart"
+    ],
+    "source": "2026 review curation pass",
+    "source_pdf": "FAA-CT-8080-2H (Airman Knowledge Testing Supplement)",
+    "source_figure": "figure-20",
+    "source_page": null,
+    "source_locator": "Figure 20, area 2",
+    "concept_key": "acs:UA.II.A.K1|class_e_airspace_floors|hy_001",
+    "year_updated": 2026
+  },
+  {
+    "id": "HY-002",
+    "category": "Airspace",
+    "subcategory": "Class E Airspace Floors",
+    "question_text": "(Refer to FAA-CT-8080-2H, Figure 26, area 4 near Jamestown Regional.) The shaded magenta vignette around the airport indicates Class E airspace beginning at",
+    "figure_reference": "figure-26",
+    "image_ref": "/figures/figure-26.png",
+    "options": [
+      {
+        "id": "A",
+        "text": "the surface"
+      },
+      {
+        "id": "B",
+        "text": "700 feet AGL"
+      },
+      {
+        "id": "C",
+        "text": "1,200 feet AGL"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "A shaded or fading magenta vignette indicates Class E airspace that begins at 700 feet AGL on the shaded side of the boundary. Below that floor, the airspace is Class G unless another surface-area designation applies.",
+    "explanation_distractors": {
+      "A": "A surface Class E area is shown with a dashed magenta boundary, not a shaded vignette.",
+      "C": "1,200 feet AGL is common elsewhere, but the shaded magenta transition area specifically marks a 700-foot AGL Class E floor."
+    },
+    "citation": "FAA Aeronautical Chart User's Guide; FAA-CT-8080-2H Figure 26",
+    "difficulty_level": 3,
+    "acs_code": "UA.II.A.K1",
+    "tags": [
+      "2026-high-yield",
+      "class-e",
+      "700-agl",
+      "magenta-vignette",
+      "sectional-chart"
+    ],
+    "source": "2026 review curation pass",
+    "source_pdf": "FAA-CT-8080-2H (Airman Knowledge Testing Supplement)",
+    "source_figure": "figure-26",
+    "source_page": null,
+    "source_locator": "Figure 26, area 4",
+    "concept_key": "acs:UA.II.A.K1|class_e_airspace_floors|hy_002",
+    "year_updated": 2026
+  },
+  {
+    "id": "HY-003",
+    "category": "Weather",
+    "subcategory": "METAR Decoding",
+    "question_text": "METAR: KECG 201253Z 04008KT 10SM FEW035 BKN250 12/08 A3012. What are the visibility and ceiling?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "10 statute miles visibility and no ceiling"
+      },
+      {
+        "id": "B",
+        "text": "10 statute miles visibility and a ceiling at 25,000 feet"
+      },
+      {
+        "id": "C",
+        "text": "10 statute miles visibility and a ceiling at 3,500 feet"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "The METAR reports 10SM visibility. A ceiling is the lowest layer reported as broken (BKN) or overcast (OVC), so BKN250 means the ceiling is 25,000 feet AGL. FEW035 does not create a ceiling because a few layer is not considered a ceiling.",
+    "explanation_distractors": {
+      "A": "There is a ceiling because a broken layer is present. BKN250 is still a ceiling even though it is high.",
+      "C": "FEW035 is not a ceiling. The lowest broken or overcast layer is BKN250, which is 25,000 feet."
+    },
+    "citation": "Aviation Weather Handbook, METAR/SPECI chapter",
+    "difficulty_level": 2,
+    "acs_code": "UA.III.A.K2",
+    "tags": [
+      "2026-high-yield",
+      "metar",
+      "ceiling",
+      "visibility"
+    ],
+    "source": "2026 review curation pass",
+    "concept_key": "acs:UA.III.A.K2|metar_decoding|hy_003",
+    "year_updated": 2026
+  },
+  {
+    "id": "HY-004",
+    "category": "Loading & Performance",
+    "subcategory": "Density Altitude",
+    "question_text": "Pressure altitude is 1,000 feet and the temperature is 35 C. What effect does this high density altitude have on your drone's performance?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Better climb performance and longer battery life"
+      },
+      {
+        "id": "B",
+        "text": "Reduced propeller efficiency and faster battery drain"
+      },
+      {
+        "id": "C",
+        "text": "No meaningful effect below 400 feet AGL"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "High density altitude means thinner air. That reduces propeller efficiency and lift, so the motors work harder to maintain performance. For a small UAS, that usually shows up as weaker climb performance and faster battery consumption.",
+    "explanation_distractors": {
+      "A": "High density altitude degrades performance. It does not improve climb or battery endurance.",
+      "C": "Density altitude affects aircraft performance regardless of a Part 107 altitude limit. The air is still less dense at low operating altitudes on a hot day."
+    },
+    "citation": "Pilot's Handbook of Aeronautical Knowledge, Density Altitude",
+    "difficulty_level": 2,
+    "acs_code": "UA.III.B.K1a",
+    "tags": [
+      "2026-high-yield",
+      "density-altitude",
+      "performance",
+      "battery"
+    ],
+    "source": "2026 review curation pass",
+    "concept_key": "acs:UA.III.B.K1A|density_altitude|hy_004",
+    "year_updated": 2026
+  },
+  {
+    "id": "HY-005",
+    "category": "Regulations",
+    "subcategory": "Operations over people",
+    "question_text": "You are conducting a Category 3 operation over people. May you fly directly over an open-air concert crowd as part of that operation?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Yes, if you remain below 100 feet AGL"
+      },
+      {
+        "id": "B",
+        "text": "Yes, if you maintain visual line of sight the entire time"
+      },
+      {
+        "id": "C",
+        "text": "No, sustained flight over open-air assemblies is prohibited for Category 3"
+      }
+    ],
+    "correct_option_id": "C",
+    "explanation_correct": "Category 3 operations may not involve sustained flight over open-air assemblies of human beings. A concert crowd is an open-air assembly, so that operation is not allowed under Category 3.",
+    "explanation_distractors": {
+      "A": "There is no low-altitude exception that allows Category 3 sustained flight over an open-air assembly.",
+      "B": "Visual line of sight is still required, but it does not remove the open-air assembly restriction."
+    },
+    "citation": "14 CFR 107.125(b)",
+    "difficulty_level": 2,
+    "acs_code": "UA.I.B.K3",
+    "tags": [
+      "2026-high-yield",
+      "operations-over-people",
+      "category-3",
+      "open-air-assembly"
+    ],
+    "source": "2026 review curation pass",
+    "concept_key": "acs:UA.I.B.K3|operations_over_people|hy_005",
+    "year_updated": 2026
+  },
+  {
+    "id": "HY-006",
+    "category": "Crew Resource Management",
+    "subcategory": "Risk Management",
+    "question_text": "A remote pilot is tired after a 12-hour drive and the client is pressuring an immediate small UAS launch so the job can finish before sunset. Which risk-management factors are most clearly present?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Aircraft only"
+      },
+      {
+        "id": "B",
+        "text": "Pilot fatigue and external pressure"
+      },
+      {
+        "id": "C",
+        "text": "Environment only"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "This is a classic risk-management trap. Fatigue falls under the Pilot element of PAVE and the Fatigue item in IMSAFE. Client pressure is External Pressure in PAVE. Both are present and should trigger a no-go or delay decision.",
+    "explanation_distractors": {
+      "A": "The described hazard is not primarily an aircraft issue.",
+      "C": "The environment may matter, but the clear immediate risks in the scenario are pilot fatigue and external pressure."
+    },
+    "citation": "Pilot's Handbook of Aeronautical Knowledge, Aeronautical Decision-Making and Risk Management",
+    "difficulty_level": 2,
+    "acs_code": "UA.V.B.K1",
+    "tags": [
+      "2026-high-yield",
+      "pave",
+      "imsafe",
+      "fatigue",
+      "external-pressure"
+    ],
+    "source": "2026 review curation pass",
+    "concept_key": "acs:UA.V.B.K1|risk_management|hy_006",
+    "year_updated": 2026
+  },
+  {
+    "id": "HY-007",
+    "category": "Physiology",
+    "subcategory": "Night Vision",
+    "question_text": "When scanning for aircraft during a civil-twilight or night small UAS operation, which part of the eye is most effective for the remote pilot?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Cones using direct central vision"
+      },
+      {
+        "id": "B",
+        "text": "Rods using off-center peripheral vision"
+      },
+      {
+        "id": "C",
+        "text": "The cornea only"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "Rods are concentrated more toward the periphery of the retina and are much more sensitive in low-light conditions. That is why pilots use off-center viewing at night instead of staring directly at a dim target.",
+    "explanation_distractors": {
+      "A": "Cones are best for sharp color vision in brighter light, not for detecting dim objects at night.",
+      "C": "The cornea helps focus incoming light but is not the night-sensitive structure used for scanning."
+    },
+    "citation": "Pilot's Handbook of Aeronautical Knowledge, Aeromedical Factors",
+    "difficulty_level": 2,
+    "acs_code": "UA.V.E.K8",
+    "tags": [
+      "2026-high-yield",
+      "night-vision",
+      "rods",
+      "peripheral-vision"
+    ],
+    "source": "2026 review curation pass",
+    "concept_key": "acs:UA.V.E.K8|night_vision|hy_007",
+    "year_updated": 2026
+  },
+  {
+    "id": "HY-008",
+    "category": "Emergency Procedures",
+    "subcategory": "Lost Link",
+    "question_text": "During flight, the control link between your controller and the drone is lost. What is the appropriate response?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Continue the mission using GPS only and recover the aircraft later"
+      },
+      {
+        "id": "B",
+        "text": "Follow the preprogrammed lost-link procedure and land as soon as practicable"
+      },
+      {
+        "id": "C",
+        "text": "Immediately descend vertically wherever the aircraft is located"
+      }
+    ],
+    "correct_option_id": "B",
+    "explanation_correct": "A lost control link is an emergency procedure item. The aircraft should execute its preplanned lost-link response, such as return-to-home or hover-and-land, so the flight terminates as safely as practicable.",
+    "explanation_distractors": {
+      "A": "Continuing the mission after a lost control link can create unnecessary risk and is not the standard emergency response.",
+      "C": "An immediate vertical descent may create a greater hazard depending on where the aircraft is. The correct response is the established lost-link procedure."
+    },
+    "citation": "14 CFR 107.19; FAA UAS lost-link guidance",
+    "difficulty_level": 2,
+    "acs_code": "UA.V.A.K3",
+    "tags": [
+      "2026-high-yield",
+      "lost-link",
+      "emergency-procedures",
+      "return-to-home"
+    ],
+    "source": "2026 review curation pass",
+    "concept_key": "acs:UA.V.A.K3|lost_link|hy_008",
+    "year_updated": 2026
+  }
+]

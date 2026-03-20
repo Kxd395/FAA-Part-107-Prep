@@ -65,6 +65,26 @@ const PART107_CATEGORIES = new Set([
   "Remote ID",
 ]);
 
+const CURATED_REVIEW_EXCLUDED_IDS = new Set([
+  "ACR-007",
+  "ACR-008",
+  "ACR-013",
+  "ACR-021",
+  "ACR-022",
+  "ACR-026",
+  "ACR-032",
+  "ACR-041",
+  "ACR-042",
+  "ACR-046",
+  "ACR-047",
+  "ACR-055",
+  "P107-065",
+  "P107-066",
+  "PRAC-009",
+  "PRAC-011",
+  "PRAC-012",
+]);
+
 function loadJsonFile(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
@@ -102,6 +122,7 @@ function loadLocalCategorySupplement() {
     path.join(REPO_ROOT, "packages/content/questions/operations.json"),
     path.join(REPO_ROOT, "packages/content/questions/loading_performance.json"),
     path.join(REPO_ROOT, "packages/content/questions/airport_operations.json"),
+    path.join(REPO_ROOT, "packages/content/questions/high_yield_2026.json"),
     path.join(REPO_ROOT, "packages/content/questions/acronyms.json"),
     path.join(REPO_ROOT, "packages/content/questions/regulations_verified.json"),
     path.join(REPO_ROOT, "packages/content/questions/extended_terms.json"),
@@ -117,6 +138,7 @@ function loadLocalCategorySupplement() {
     "Airspace Authorization",
     "Night Operations",
     "Operating Limitations",
+    "Operations over people",
     "Registration",
     "Responsibilities",
     "Safety and Compliance",
@@ -132,6 +154,18 @@ function loadLocalCategorySupplement() {
         question.category !== "Regulations" ||
         allowedRegulationsSubcategories.has(question.subcategory)
     );
+}
+
+function getCuratedReviewExclusionReason(question) {
+  if (question.subcategory === "Phonetic Alphabet") {
+    return "curated_out_phonetic_alphabet_drill";
+  }
+
+  if (CURATED_REVIEW_EXCLUDED_IDS.has(question.id)) {
+    return "curated_out_low_roi_review_2026";
+  }
+
+  return null;
 }
 
 function normalizeText(value) {
@@ -169,6 +203,11 @@ function hasPart107Signal(question) {
 
 function classifyQuestionForRuntime(question) {
   const reasons = [];
+
+  const curatedReviewExclusionReason = getCuratedReviewExclusionReason(question);
+  if (curatedReviewExclusionReason) {
+    reasons.push(curatedReviewExclusionReason);
+  }
 
   if (GENERIC_BLOCKLIST.some((pattern) => pattern.test(question.question_text))) {
     reasons.push("generic_topic_blocked");

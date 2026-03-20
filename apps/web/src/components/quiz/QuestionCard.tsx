@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { ResolvedReference } from "../ReferenceModal";
 import { resolveFigureImageUrl } from "../../lib/figureImage";
 import { isUnresolvedFigurePlaceholderText } from "../../lib/figurePlaceholder";
+import QuestionProvenanceBar from "./QuestionProvenanceBar";
 
 function formatFigureLabel(figureRef: string | null): string {
   if (!figureRef) return "Figure";
@@ -73,6 +74,8 @@ export default function QuestionCard({ question, onOpenFigure }: QuestionCardPro
           📊 Figure unavailable for this question in the current build.
         </div>
       )}
+
+      <QuestionProvenanceBar question={question} />
     </div>
   );
 }

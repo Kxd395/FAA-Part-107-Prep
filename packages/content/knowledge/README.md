@@ -20,6 +20,7 @@ Canonical local category packs:
 - `packages/content/questions/weather.json`
 - `packages/content/questions/operations.json`
 - `packages/content/questions/loading_performance.json`
+- `packages/content/questions/high_yield_2026.json`
 
 Notes:
 

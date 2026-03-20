@@ -22,7 +22,7 @@ const REQUIRED_FIELDS = [
 
 const VALID_OPTION_IDS = new Set(["A", "B", "C", "D"]);
 const VALID_CORRECT_IDS = new Set(["A", "B", "C", "D"]);
-const QUESTION_ID_PATTERN = /^[A-Z]{2,6}(?:-ACS)?-\d{3}$/;
+const QUESTION_ID_PATTERN = /^[A-Z]{2,6}(?:-[A-Z]{1,4})*-\d{3}$/;
 
 function loadQuestionFiles() {
   return fs
@@ -59,7 +59,9 @@ function validateQuestion(q, file, idx, errors) {
   }
 
   if (typeof q.id !== "string" || !QUESTION_ID_PATTERN.test(q.id)) {
-    errors.push(`${where}: id '${q.id}' does not match expected format PREFIX-NNN or PREFIX-ACS-NNN`);
+    errors.push(
+      `${where}: id '${q.id}' does not match expected format PREFIX-NNN or compound-prefix variants such as REG-ACS-NNN or REG-V-NNN`
+    );
   }
 
   if (!VALID_CORRECT_IDS.has(q.correct_option_id)) {

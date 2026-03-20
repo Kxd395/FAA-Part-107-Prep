@@ -1,11 +1,11 @@
 # Figure Context Audit
 
-- Generated: 2026-03-15T02:55:28.347Z
-- Total questions audited: **160**
-- Questions with `figure_reference`: **16**
-- Questions with `(Refer to ... Figure N)` prompt: **16**
-- Questions with usable visual context: **16**
-- Issues found: **0**
+- Generated: 2026-03-20T16:59:42.081Z
+- Total questions audited: **331**
+- Questions with `figure_reference`: **30**
+- Questions with `(Refer to ... Figure N)` prompt: **17**
+- Questions with usable visual context: **26**
+- Issues found: **52**
 
 ## Rules enforced
 - If prompt includes `Refer to ... Figure N`, `figure_reference` must exist and match.
@@ -22,4 +22,55 @@
   - `source_locator` (non-empty string, e.g., `Figure 20, area 3`).
 
 ## Issues
-- None.
+- airport_operations.json#17 (APT-017): missing required provenance field source_pdf.
+- airport_operations.json#17 (APT-017): missing required provenance field source_figure.
+- airport_operations.json#17 (APT-017): source_page must be a positive number or null.
+- airport_operations.json#17 (APT-017): missing required provenance field source_locator.
+- airport_operations.json#18 (APT-018): missing required provenance field source_pdf.
+- airport_operations.json#18 (APT-018): missing required provenance field source_figure.
+- airport_operations.json#18 (APT-018): source_page must be a positive number or null.
+- airport_operations.json#18 (APT-018): missing required provenance field source_locator.
+- airport_operations.json#19 (APT-019): missing required provenance field source_pdf.
+- airport_operations.json#19 (APT-019): missing required provenance field source_figure.
+- airport_operations.json#19 (APT-019): source_page must be a positive number or null.
+- airport_operations.json#19 (APT-019): missing required provenance field source_locator.
+- airport_operations.json#20 (APT-020): missing required provenance field source_pdf.
+- airport_operations.json#20 (APT-020): missing required provenance field source_figure.
+- airport_operations.json#20 (APT-020): source_page must be a positive number or null.
+- airport_operations.json#20 (APT-020): missing required provenance field source_locator.
+- airport_operations.json#21 (APT-021): missing visual context (no valid image_ref asset, no local figure image, and no figure_text).
+- airport_operations.json#21 (APT-021): missing required provenance field source_pdf.
+- airport_operations.json#21 (APT-021): missing required provenance field source_figure.
+- airport_operations.json#21 (APT-021): source_page must be a positive number or null.
+- airport_operations.json#21 (APT-021): missing required provenance field source_locator.
+- airport_operations.json#22 (APT-022): missing visual context (no valid image_ref asset, no local figure image, and no figure_text).
+- airport_operations.json#22 (APT-022): missing required provenance field source_pdf.
+- airport_operations.json#22 (APT-022): missing required provenance field source_figure.
+- airport_operations.json#22 (APT-022): source_page must be a positive number or null.
+- airport_operations.json#22 (APT-022): missing required provenance field source_locator.
+- airport_operations.json#23 (APT-023): missing required provenance field source_pdf.
+- airport_operations.json#23 (APT-023): missing required provenance field source_figure.
+- airport_operations.json#23 (APT-023): source_page must be a positive number or null.
+- airport_operations.json#23 (APT-023): missing required provenance field source_locator.
+- airport_operations.json#24 (APT-024): missing required provenance field source_pdf.
+- airport_operations.json#24 (APT-024): missing required provenance field source_figure.
+- airport_operations.json#24 (APT-024): source_page must be a positive number or null.
+- airport_operations.json#24 (APT-024): missing required provenance field source_locator.
+- airport_operations.json#25 (APT-025): missing required provenance field source_pdf.
+- airport_operations.json#25 (APT-025): missing required provenance field source_figure.
+- airport_operations.json#25 (APT-025): source_page must be a positive number or null.
+- airport_operations.json#25 (APT-025): missing required provenance field source_locator.
+- airport_operations.json#26 (APT-026): missing required provenance field source_pdf.
+- airport_operations.json#26 (APT-026): missing required provenance field source_figure.
+- airport_operations.json#26 (APT-026): source_page must be a positive number or null.
+- airport_operations.json#26 (APT-026): missing required provenance field source_locator.
+- airport_operations.json#27 (APT-027): missing visual context (no valid image_ref asset, no local figure image, and no figure_text).
+- airport_operations.json#27 (APT-027): missing required provenance field source_pdf.
+- airport_operations.json#27 (APT-027): missing required provenance field source_figure.
+- airport_operations.json#27 (APT-027): source_page must be a positive number or null.
+- airport_operations.json#27 (APT-027): missing required provenance field source_locator.
+- airport_operations.json#28 (APT-028): missing visual context (no valid image_ref asset, no local figure image, and no figure_text).
+- airport_operations.json#28 (APT-028): missing required provenance field source_pdf.
+- airport_operations.json#28 (APT-028): missing required provenance field source_figure.
+- airport_operations.json#28 (APT-028): source_page must be a positive number or null.
+- airport_operations.json#28 (APT-028): missing required provenance field source_locator.

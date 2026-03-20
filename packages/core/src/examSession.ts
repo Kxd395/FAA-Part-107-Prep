@@ -1,25 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
-  dedupeQuestions,
-  selectAdaptiveQuestions,
-  type AdaptiveQuizConfig,
-  type UserQuestionStats,
-} from "./adaptive";
-import {
-  filterQuestionsByType,
-  normalizeQuestionTypeProfile,
-  type QuestionTypeProfile,
-} from "./questionType";
-import {
-  FULL_EXAM_QUESTION_COUNT,
-  buildRealExamBlueprintQuestionSet,
-  buildTimeLimitMs,
   computeRemainingTime,
-  filterQuestionsByCategory,
   normalizeCategory,
-  shuffleQuestions,
   type StudyCategory,
 } from "./quiz";
+import { normalizeQuestionTypeProfile, type QuestionTypeProfile } from "./questionType";
+import {
+  buildExamRun,
+  type ExamRunSettings,
+} from "./examBuilder";
 import type { OptionId, Question } from "./types";
 
 export type ExamPhase = "setup" | "in-progress" | "review";
@@ -47,20 +36,11 @@ export interface ExamSetupPreview {
   invalidQuestionType: boolean;
 }
 
-export interface ExamRunSettings {
-  questionLimit?: number | null;
-  timeLimitMs?: number | null;
-}
-
 export interface UseExamSessionOptions<Q extends Question = Question> {
   allQuestions: readonly Q[];
   passPercent?: number;
   initialQuestionTypeProfile?: QuestionTypeProfile;
-  adaptive?: {
-    userId: string;
-    userStatsByKey?: Record<string, UserQuestionStats>;
-    config?: Partial<AdaptiveQuizConfig>;
-  };
+  adaptive?: Parameters<typeof buildExamRun<Q>>[0]["adaptive"];
 }
 
 export interface UseExamSessionResult<Q extends Question = Question> {
@@ -116,24 +96,6 @@ export function useExamSession<Q extends Question = Question>({
   const [timeLimitMs, setTimeLimitMs] = useState(0);
   const [remainingMs, setRemainingMs] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const parseRunSettings = useCallback((runSettings?: ExamRunSettings) => {
-    const parsedQuestionLimit =
-      typeof runSettings?.questionLimit === "number" &&
-      Number.isFinite(runSettings.questionLimit) &&
-      runSettings.questionLimit > 0
-        ? Math.floor(runSettings.questionLimit)
-        : null;
-    const parsedTimeLimitMs =
-      typeof runSettings?.timeLimitMs === "number" &&
-      Number.isFinite(runSettings.timeLimitMs) &&
-      runSettings.timeLimitMs > 0
-        ? Math.floor(runSettings.timeLimitMs)
-        : null;
-    return {
-      questionLimit: parsedQuestionLimit,
-      timeLimitMs: parsedTimeLimitMs,
-    };
-  }, []);
 
   const startExam = useCallback(
     (
@@ -144,45 +106,15 @@ export function useExamSession<Q extends Question = Question>({
       const normalizedCategory = normalizeCategory(categoryInput ?? examCategory) ?? "All";
       const normalizedType =
         normalizeQuestionTypeProfile(questionTypeInput ?? questionTypeProfile) ?? "real_exam";
-      const parsedRunSettings = parseRunSettings(runSettings);
+      const examRun = buildExamRun<Q>({
+        allQuestions,
+        categoryInput: normalizedCategory,
+        questionTypeInput: normalizedType,
+        runSettings,
+        adaptive,
+      });
 
-      const filteredByCategory = filterQuestionsByCategory(allQuestions, normalizedCategory) as Q[];
-      const filteredByType = filterQuestionsByType(filteredByCategory, normalizedType, {
-        userStatsByKey: adaptive?.userStatsByKey,
-        adaptiveConfig: adaptive?.config,
-      }) as Q[];
-
-      const deduped = dedupeQuestions(filteredByType);
-      const useRealExamBlueprint = normalizedCategory === "All" && normalizedType === "real_exam";
-      const baseTargetCount =
-        useRealExamBlueprint
-          ? Math.min(FULL_EXAM_QUESTION_COUNT, deduped.questions.length)
-          : normalizedCategory === "All"
-          ? Math.min(FULL_EXAM_QUESTION_COUNT, deduped.questions.length)
-          : deduped.questions.length;
-      const targetCount = parsedRunSettings.questionLimit
-        ? Math.min(baseTargetCount, parsedRunSettings.questionLimit)
-        : baseTargetCount;
-
-      let selectedQuestions: Q[];
-      if (useRealExamBlueprint) {
-        selectedQuestions = buildRealExamBlueprintQuestionSet(
-          deduped.questions as Q[],
-          FULL_EXAM_QUESTION_COUNT
-        ).questions.slice(0, targetCount);
-      } else if (adaptive?.userId) {
-        selectedQuestions = selectAdaptiveQuestions({
-          userId: adaptive.userId,
-          desiredQuizSize: targetCount,
-          fullQuestionBank: filteredByType,
-          userStatsByKey: adaptive.userStatsByKey,
-          config: adaptive.config,
-        }).questions as Q[];
-      } else {
-        selectedQuestions = shuffleQuestions(deduped.questions as Q[]).slice(0, targetCount);
-      }
-
-      if (selectedQuestions.length === 0) {
+      if (examRun.questions.length === 0) {
         setQuestions([]);
         setExamCategory(normalizedCategory);
         setQuestionTypeProfile(normalizedType);
@@ -191,22 +123,20 @@ export function useExamSession<Q extends Question = Question>({
       }
 
       const now = Date.now();
-      const autoTimeLimitMs = buildTimeLimitMs(selectedQuestions.length, normalizedCategory);
-      const nextTimeLimitMs = parsedRunSettings.timeLimitMs ?? autoTimeLimitMs;
 
       setExamCategory(normalizedCategory);
       setQuestionTypeProfile(normalizedType);
-      setQuestions(selectedQuestions);
+      setQuestions(examRun.questions);
       setCurrentIndex(0);
       setAnswers(new Map());
       setFlagged(new Set());
       setStartTime(now);
-      setTimeLimitMs(nextTimeLimitMs);
-      setRemainingMs(nextTimeLimitMs);
+      setTimeLimitMs(examRun.timeLimitMs);
+      setRemainingMs(examRun.timeLimitMs);
       setPhase("in-progress");
       return true;
     },
-    [adaptive, allQuestions, examCategory, parseRunSettings, questionTypeProfile]
+    [adaptive, allQuestions, examCategory, questionTypeProfile]
   );
 
   useEffect(() => {
@@ -302,59 +232,24 @@ export function useExamSession<Q extends Question = Question>({
       questionTypeInput?: string | QuestionTypeProfile | null,
       runSettings?: ExamRunSettings
     ): ExamSetupPreview => {
-      const parsedCategory = normalizeCategory(categoryInput ?? examCategory);
-      const category = parsedCategory ?? "All";
-      const invalidCategory = !!categoryInput && !parsedCategory;
-
-      const parsedType = normalizeQuestionTypeProfile(questionTypeInput ?? questionTypeProfile);
-      const questionType = parsedType ?? "real_exam";
-      const invalidQuestionType = !!questionTypeInput && !parsedType;
-
-      const pool = filterQuestionsByCategory(allQuestions, category);
-      const filteredByType = filterQuestionsByType(pool, questionType, {
-        userStatsByKey: adaptive?.userStatsByKey,
-        adaptiveConfig: adaptive?.config,
+      const preview = buildExamRun<Q>({
+        allQuestions,
+        categoryInput: categoryInput ?? examCategory,
+        questionTypeInput: questionTypeInput ?? questionTypeProfile,
+        runSettings,
+        adaptive,
       });
-      const deduped = dedupeQuestions(filteredByType);
-      const useRealExamBlueprint = category === "All" && questionType === "real_exam";
-      const parsedRunSettings = parseRunSettings(runSettings);
-      const baseTargetCount =
-        useRealExamBlueprint
-          ? Math.min(FULL_EXAM_QUESTION_COUNT, deduped.questions.length)
-          : category === "All"
-          ? Math.min(FULL_EXAM_QUESTION_COUNT, deduped.questions.length)
-          : deduped.questions.length;
-      const targetCount = parsedRunSettings.questionLimit
-        ? Math.min(baseTargetCount, parsedRunSettings.questionLimit)
-        : baseTargetCount;
-
-      const questionCount = useRealExamBlueprint
-        ? buildRealExamBlueprintQuestionSet(
-            deduped.questions,
-            FULL_EXAM_QUESTION_COUNT
-          ).questions.slice(0, targetCount).length
-        : adaptive?.userId
-          ? selectAdaptiveQuestions({
-              userId: adaptive.userId,
-              desiredQuizSize: targetCount,
-              fullQuestionBank: filteredByType,
-              userStatsByKey: adaptive.userStatsByKey,
-              config: adaptive.config,
-            }).questions.length
-          : targetCount;
-
-      const timeLimitMs = parsedRunSettings.timeLimitMs ?? buildTimeLimitMs(questionCount, category);
 
       return {
-        category,
-        questionTypeProfile: questionType,
-        questionCount,
-        timeLimitMs,
-        invalidCategory,
-        invalidQuestionType,
+        category: preview.category,
+        questionTypeProfile: preview.questionTypeProfile,
+        questionCount: preview.questions.length,
+        timeLimitMs: preview.timeLimitMs,
+        invalidCategory: preview.invalidCategory,
+        invalidQuestionType: preview.invalidQuestionType,
       };
     },
-    [adaptive, allQuestions, examCategory, parseRunSettings, questionTypeProfile]
+    [adaptive, allQuestions, examCategory, questionTypeProfile]
   );
 
   const answeredCount = answers.size;

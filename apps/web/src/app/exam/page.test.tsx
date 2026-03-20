@@ -131,6 +131,8 @@ describe("ExamPage", () => {
 
     await user.click(await screen.findByRole("button", { name: /Begin Exam/i }));
     expect(screen.getByText(/⏱ 2:00:00/i)).toBeInTheDocument();
+    expect(screen.getByText(/Source Tier: FAA-anchored/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Report issue/i })).toBeInTheDocument();
     expect(screen.queryByText(/Confidence for next answer:/i)).not.toBeInTheDocument();
     expect(screen.getAllByRole("button", { name: /Answer .* as Not Sure/i })).toHaveLength(3);
     expect(screen.getAllByRole("button", { name: /Answer .* as Neutral/i })).toHaveLength(3);

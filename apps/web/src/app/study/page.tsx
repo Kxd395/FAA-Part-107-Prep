@@ -22,6 +22,7 @@ import { QuestionSelectionEmptyState } from "../../components/QuestionSelectionE
 import AnswerOptions from "../../components/quiz/AnswerOptions";
 import ProgressHeader from "../../components/quiz/ProgressHeader";
 import QuestionCard from "../../components/quiz/QuestionCard";
+import QuestionIssueReporter from "../../components/quiz/QuestionIssueReporter";
 import SessionSummaryCard from "../../components/quiz/SessionSummaryCard";
 import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useAdaptiveQuestionStats } from "../../hooks/useAdaptiveQuestionStats";
@@ -437,6 +438,14 @@ function StudyPageClient() {
       </div>
 
       <QuestionCard question={study.currentQuestion} onOpenFigure={setFigureRef} />
+
+      <QuestionIssueReporter
+        mode="study"
+        question={study.currentQuestion}
+        selectedOptionId={study.selectedOption}
+        questionTypeProfile={selectedQuestionType}
+        confidence={lastRecordedConfidence}
+      />
 
       <AnswerOptions
         options={optionPresentation.options}

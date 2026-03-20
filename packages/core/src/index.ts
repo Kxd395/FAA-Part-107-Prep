@@ -53,6 +53,12 @@ export type {
   UseExamSessionResult,
 } from "./examSession";
 export type {
+  ExamRunSettings,
+  ParsedExamRunSettings,
+  BuildExamRunOptions,
+  BuildExamRunResult,
+} from "./examBuilder";
+export type {
   AttemptOutcome,
   AttemptConfidence,
   QualityScore,
@@ -119,3 +125,4 @@ export {
 } from "./grading";
 export { useStudySession } from "./studySession";
 export { useExamSession } from "./examSession";
+export { buildExamRun, parseExamRunSettings } from "./examBuilder";
