@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-03-15T02:55:12.928Z",
-  "runtimeQuestionCount": 256,
-  "archivedQuestionCount": 7,
+  "generatedAt": "2026-03-20T16:32:05.267Z",
+  "runtimeQuestionCount": 415,
+  "archivedQuestionCount": 11,
   "archivedQuestions": [
     {
       "question": {
@@ -278,6 +278,178 @@
           "airspace_charts_image_based"
         ],
         "concept_key": "merged:airspace_charts_image_based|faa_sectional_chart_symbology_knowledge_testing_supplement"
+      },
+      "reasons": [
+        "broken_figure_dependency"
+      ]
+    },
+    {
+      "question": {
+        "id": "APT-021",
+        "category": "Airport Operations",
+        "subcategory": "Figure-Specific Runways",
+        "question_text": "Referring to the Dallas Executive (RBD) sectional excerpt, what is the magnetic heading for Runway 13?",
+        "figure_reference": "figure-25",
+        "options": [
+          {
+            "id": "A",
+            "text": "130 degrees. The opposite end (Runway 31) is 310 degrees."
+          },
+          {
+            "id": "B",
+            "text": "170 degrees. The opposite end (Runway 35) is 350 degrees."
+          },
+          {
+            "id": "C",
+            "text": "310 degrees. The opposite end (Runway 13) is 130 degrees."
+          }
+        ],
+        "correct_option_id": "A",
+        "explanation_correct": "Runway 13 times 10 equals 130 degrees. The opposite end is 13 plus 18 equals 31 at 310 degrees.",
+        "explanation_distractors": {
+          "B": "170/350 degrees is the heading for Runway 17/35, a different runway.",
+          "C": "310 degrees is the heading for Runway 31 (the opposite end)."
+        },
+        "citation": "AIM 2-3-3; FAA Testing Supplement Figure 25",
+        "difficulty_level": 2,
+        "tags": [
+          "runway",
+          "figure-25",
+          "rbd",
+          "dallas-executive"
+        ],
+        "acs_code": "UA.II.B.K1",
+        "source": "Part 107 Study Pack Runway Cards",
+        "concept_key": "figure|f25_rbd_rwy13|apt_021"
+      },
+      "reasons": [
+        "broken_figure_dependency"
+      ]
+    },
+    {
+      "question": {
+        "id": "APT-022",
+        "category": "Airport Operations",
+        "subcategory": "Figure-Specific Runways",
+        "question_text": "Referring to the Dallas Executive (RBD) sectional excerpt, what is the magnetic heading for Runway 17?",
+        "figure_reference": "figure-25",
+        "options": [
+          {
+            "id": "A",
+            "text": "170 degrees. The opposite end (Runway 35) is 350 degrees."
+          },
+          {
+            "id": "B",
+            "text": "130 degrees. The opposite end (Runway 31) is 310 degrees."
+          },
+          {
+            "id": "C",
+            "text": "350 degrees. The opposite end (Runway 17) is 170 degrees."
+          }
+        ],
+        "correct_option_id": "A",
+        "explanation_correct": "Runway 17 times 10 equals 170 degrees. The opposite end is 17 plus 18 equals 35 at 350 degrees.",
+        "explanation_distractors": {
+          "B": "130/310 degrees is the heading for Runway 13/31.",
+          "C": "350 degrees is the heading for Runway 35 (the opposite end)."
+        },
+        "citation": "AIM 2-3-3; FAA Testing Supplement Figure 25",
+        "difficulty_level": 2,
+        "tags": [
+          "runway",
+          "figure-25",
+          "rbd",
+          "dallas-executive"
+        ],
+        "acs_code": "UA.II.B.K1",
+        "source": "Part 107 Study Pack Runway Cards",
+        "concept_key": "figure|f25_rbd_rwy17|apt_022"
+      },
+      "reasons": [
+        "broken_figure_dependency"
+      ]
+    },
+    {
+      "question": {
+        "id": "APT-027",
+        "category": "Airport Operations",
+        "subcategory": "Figure-Specific Runways",
+        "question_text": "Referring to the Sioux Gateway (SUX) sectional excerpt, what is the magnetic heading for Runway 13?",
+        "figure_reference": "figure-78",
+        "options": [
+          {
+            "id": "A",
+            "text": "130 degrees. The opposite end (Runway 31) is 310 degrees."
+          },
+          {
+            "id": "B",
+            "text": "180 degrees. The opposite end (Runway 36) is 360 degrees."
+          },
+          {
+            "id": "C",
+            "text": "310 degrees. The opposite end (Runway 13) is 130 degrees."
+          }
+        ],
+        "correct_option_id": "A",
+        "explanation_correct": "Runway 13 times 10 equals 130 degrees. The opposite end is 13 plus 18 equals 31 at 310 degrees.",
+        "explanation_distractors": {
+          "B": "180/360 degrees is the heading for Runway 18/36, a different runway.",
+          "C": "310 degrees is the opposite end heading."
+        },
+        "citation": "AIM 2-3-3; FAA Testing Supplement Figure 78",
+        "difficulty_level": 2,
+        "tags": [
+          "runway",
+          "figure-78",
+          "sux",
+          "sioux-gateway"
+        ],
+        "acs_code": "UA.II.B.K1",
+        "source": "Part 107 Study Pack Runway Cards",
+        "concept_key": "figure|f78_sux_rwy13|apt_027"
+      },
+      "reasons": [
+        "broken_figure_dependency"
+      ]
+    },
+    {
+      "question": {
+        "id": "APT-028",
+        "category": "Airport Operations",
+        "subcategory": "Figure-Specific Runways",
+        "question_text": "Referring to the Sioux Gateway (SUX) sectional excerpt, what is the magnetic heading for Runway 18?",
+        "figure_reference": "figure-78",
+        "options": [
+          {
+            "id": "A",
+            "text": "180 degrees. The opposite end (Runway 36) is 360 degrees."
+          },
+          {
+            "id": "B",
+            "text": "130 degrees. The opposite end (Runway 31) is 310 degrees."
+          },
+          {
+            "id": "C",
+            "text": "360 degrees. The opposite end (Runway 18) is 180 degrees."
+          }
+        ],
+        "correct_option_id": "A",
+        "explanation_correct": "Runway 18 times 10 equals 180 degrees (due South). The opposite end is 18 plus 18 equals 36 at 360 degrees (due North).",
+        "explanation_distractors": {
+          "B": "130/310 degrees is the heading for Runway 13/31.",
+          "C": "360 degrees is the opposite end heading for Runway 36."
+        },
+        "citation": "AIM 2-3-3; FAA Testing Supplement Figure 78",
+        "difficulty_level": 2,
+        "tags": [
+          "runway",
+          "figure-78",
+          "sux",
+          "sioux-gateway"
+        ],
+        "acs_code": "UA.II.B.K1",
+        "source": "Part 107 Study Pack Runway Cards",
+        "concept_key": "figure|f78_sux_rwy18|apt_028"
       },
       "reasons": [
         "broken_figure_dependency"
