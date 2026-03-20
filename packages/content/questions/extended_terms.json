@@ -1,0 +1,877 @@
+[
+  {
+    "id": "EXT-001",
+    "category": "Airspace",
+    "subcategory": "Extended Terms",
+    "question_text": "What does AGL mean in aviation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Above Ground Level — height measured from the surface directly below the aircraft."
+      },
+      {
+        "id": "B",
+        "text": "Altitude Guidance Limit — the ceiling set by ATC."
+      },
+      {
+        "id": "C",
+        "text": "Aeronautical Ground Level — MSL corrected for terrain."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "AGL stands for Above Ground Level. It is height measured from the surface directly below the aircraft — not from sea level.",
+    "explanation_distractors": {
+      "B": "AGL is a measurement reference, not a limit set by ATC.",
+      "C": "AGL measures from the surface below; MSL measures from sea level."
+    },
+    "citation": "FAA Pilot/Controller Glossary",
+    "difficulty_level": 1,
+    "tags": [
+      "airspace",
+      "altitude",
+      "agl"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-002",
+    "category": "Airspace",
+    "subcategory": "Extended Terms",
+    "question_text": "What does MSL mean in aviation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mean Sea Level — many charted altitudes and airspace floors/ceilings are expressed in MSL."
+      },
+      {
+        "id": "B",
+        "text": "Minimum Safe Level — the lowest permitted flight altitude."
+      },
+      {
+        "id": "C",
+        "text": "Maximum Speed Limit — maximum airspeed near airports."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MSL stands for Mean Sea Level. Many charted altitudes and airspace floors and ceilings are expressed as MSL values.",
+    "explanation_distractors": {
+      "B": "MSL is a reference datum, not a regulatory floor.",
+      "C": "MSL has nothing to do with airspeed limits."
+    },
+    "citation": "FAA Pilot/Controller Glossary",
+    "difficulty_level": 1,
+    "tags": [
+      "airspace",
+      "altitude",
+      "msl"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-003",
+    "category": "Weather",
+    "subcategory": "Extended Terms",
+    "question_text": "What is a METAR?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Meteorological Aerodrome Report — current airport weather observation, usually issued hourly."
+      },
+      {
+        "id": "B",
+        "text": "Military Emergency Terminal Airspace Report."
+      },
+      {
+        "id": "C",
+        "text": "A 24-hour weather forecast for terminal areas."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "METAR is a Meteorological Aerodrome Report. It is the current airport weather observation, usually issued every hour.",
+    "explanation_distractors": {
+      "B": "METAR is a civilian weather reporting format, not a military one.",
+      "C": "A 24-hour forecast is a TAF, not a METAR."
+    },
+    "citation": "FAA-H-8083-25B; AIM 7-1-27",
+    "difficulty_level": 1,
+    "tags": [
+      "weather",
+      "metar",
+      "observation"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-004",
+    "category": "Weather",
+    "subcategory": "Extended Terms",
+    "question_text": "What is a TAF?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Terminal Aerodrome Forecast — forecast of expected weather within 5 SM of the airport terminal area, usually for 24 or 30 hours."
+      },
+      {
+        "id": "B",
+        "text": "Turbulence Alert Forecast — warnings for severe turbulence."
+      },
+      {
+        "id": "C",
+        "text": "Temperature and Frontal chart issued daily by the NWS."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "TAF stands for Terminal Aerodrome Forecast. It is a forecast of expected weather within 5 statute miles of the airport, usually covering 24 hours (sometimes 30 hours).",
+    "explanation_distractors": {
+      "B": "Turbulence warnings are issued as AIRMETs or SIGMETs, not TAFs.",
+      "C": "TAF is a forecast product, not a chart product."
+    },
+    "citation": "AIM 7-1-28",
+    "difficulty_level": 1,
+    "tags": [
+      "weather",
+      "taf",
+      "forecast"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-005",
+    "category": "Weather",
+    "subcategory": "Extended Terms",
+    "question_text": "What is an AIRMET?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Advisory for significant weather affecting aircraft operations at intensities lower than a SIGMET — examples include IFR conditions, mountain obscuration, turbulence, icing."
+      },
+      {
+        "id": "B",
+        "text": "An emergency weather alert for all aircraft regardless of type."
+      },
+      {
+        "id": "C",
+        "text": "A routine hourly weather broadcast at airports with ATIS."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "An AIRMET (Airmen's Meteorological Information) advises of significant weather at intensities lower than those requiring a SIGMET. Examples include IFR conditions, mountain obscuration, turbulence, strong surface winds, icing, and freezing levels.",
+    "explanation_distractors": {
+      "B": "SIGMETs cover more severe weather hazards significant to all aircraft.",
+      "C": "ATIS broadcasts are local; AIRMETs are area-wide weather advisories."
+    },
+    "citation": "AIM 7-1-6",
+    "difficulty_level": 2,
+    "tags": [
+      "weather",
+      "airmet",
+      "advisories"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-006",
+    "category": "Weather",
+    "subcategory": "Extended Terms",
+    "question_text": "What is a SIGMET?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Weather advisory significant to the safety of all aircraft, covering hazards such as severe turbulence, severe icing, and widespread dust or sandstorms reducing visibility below 3 miles."
+      },
+      {
+        "id": "B",
+        "text": "A signal-based meteorological alert sent via radio."
+      },
+      {
+        "id": "C",
+        "text": "A low-level weather advisory for small drones only."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "A SIGMET (Significant Meteorological Information) is a weather advisory significant to the safety of all aircraft. It covers hazards such as severe turbulence, severe icing, and widespread dust/sandstorms reducing visibility below 3 miles.",
+    "explanation_distractors": {
+      "B": "SIGMETs are textual weather products, not radio signals.",
+      "C": "SIGMETs affect all aircraft, not just drones."
+    },
+    "citation": "AIM 7-1-6",
+    "difficulty_level": 2,
+    "tags": [
+      "weather",
+      "sigmet",
+      "advisories"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-007",
+    "category": "Weather",
+    "subcategory": "Extended Terms",
+    "question_text": "What are AWOS and ASOS?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Automated weather systems at airports that collect and disseminate airport weather information."
+      },
+      {
+        "id": "B",
+        "text": "Air traffic control communication frequencies for weather broadcasts."
+      },
+      {
+        "id": "C",
+        "text": "Military weather satellites."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "AWOS (Automated Weather Observing System) and ASOS (Automated Surface Observing System) are automated weather systems at airports that collect and disseminate airport weather information.",
+    "explanation_distractors": {
+      "B": "AWOS/ASOS are weather observation systems, not communication frequencies.",
+      "C": "Both are ground-based airport systems, not satellites."
+    },
+    "citation": "AIM 7-1-12",
+    "difficulty_level": 1,
+    "tags": [
+      "weather",
+      "awos",
+      "asos"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-008",
+    "category": "Radio Communications",
+    "subcategory": "Extended Terms",
+    "question_text": "What is a CTAF?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Common Traffic Advisory Frequency — used for airport advisory practices at airports without an operating control tower."
+      },
+      {
+        "id": "B",
+        "text": "Control Tower Approach Frequency — assigned by ATC for instrument approaches."
+      },
+      {
+        "id": "C",
+        "text": "Commercial Traffic Announcement Frequency for airline operations."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CTAF (Common Traffic Advisory Frequency) is used at airports without an operating control tower. The CTAF may be a UNICOM, MULTICOM, FSS, or tower frequency.",
+    "explanation_distractors": {
+      "B": "Instrument approach frequencies are assigned by ATC, not called CTAF.",
+      "C": "CTAF is not commercial-specific; it is for any aircraft at non-towered airports."
+    },
+    "citation": "AIM 4-1-9",
+    "difficulty_level": 1,
+    "tags": [
+      "radio",
+      "ctaf",
+      "communications"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-009",
+    "category": "Radio Communications",
+    "subcategory": "Extended Terms",
+    "question_text": "What is UNICOM?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A nongovernment communication facility that may provide airport information at certain airports. Locations and frequencies are shown on aeronautical charts."
+      },
+      {
+        "id": "B",
+        "text": "A universal emergency communication system for all aircraft."
+      },
+      {
+        "id": "C",
+        "text": "The ATC tower frequency at Class D airports."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UNICOM is a nongovernment communication facility that may provide airport information at certain airports. Its locations and frequencies are shown on aeronautical charts and publications.",
+    "explanation_distractors": {
+      "B": "Emergency communications use Guard frequency (121.5 MHz), not UNICOM.",
+      "C": "Class D airports have an ATC tower with an assigned frequency, not UNICOM."
+    },
+    "citation": "AIM 4-1-11",
+    "difficulty_level": 1,
+    "tags": [
+      "radio",
+      "unicom",
+      "communications"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-010",
+    "category": "Radio Communications",
+    "subcategory": "Extended Terms",
+    "question_text": "What is MULTICOM?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A mobile service for communications essential to private aircraft activities — commonly used for self-announce where no tower or UNICOM is available."
+      },
+      {
+        "id": "B",
+        "text": "A multi-channel ATC communication system."
+      },
+      {
+        "id": "C",
+        "text": "A frequency used only for drone operators near uncontrolled airports."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MULTICOM is a mobile service used for communications essential to private aircraft activities. In pilot training, it is the self-announce option where no tower or UNICOM is available.",
+    "explanation_distractors": {
+      "B": "MULTICOM is a designated frequency, not an ATC system.",
+      "C": "MULTICOM is used by all general aviation, not exclusively by drone operators."
+    },
+    "citation": "AIM 4-1-11",
+    "difficulty_level": 2,
+    "tags": [
+      "radio",
+      "multicom",
+      "communications"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-011",
+    "category": "Radio Communications",
+    "subcategory": "Extended Terms",
+    "question_text": "What is ATIS?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Automatic Terminal Information Service — continuous broadcast of recorded noncontrol information in selected high-activity terminal areas."
+      },
+      {
+        "id": "B",
+        "text": "Air Traffic Information System — the computer system tracking radar targets."
+      },
+      {
+        "id": "C",
+        "text": "Advanced Tower Instruction Sequence used at busy Class B airports."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ATIS is the Automatic Terminal Information Service, providing a continuous broadcast of recorded noncontrol information such as weather, NOTAMs, and active runways at high-activity terminal areas.",
+    "explanation_distractors": {
+      "B": "Radar tracking systems have different names; ATIS is an audio broadcast.",
+      "C": "ATIS is a passive information broadcast, not a sequencing system."
+    },
+    "citation": "AIM 4-1-13",
+    "difficulty_level": 1,
+    "tags": [
+      "radio",
+      "atis",
+      "communications"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-012",
+    "category": "Radio Communications",
+    "subcategory": "Extended Terms",
+    "question_text": "What is an FSS?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Flight Service Station — provides pilot briefings, flight plan processing, search and rescue help, weather, NOTAM processing, and aeronautical information."
+      },
+      {
+        "id": "B",
+        "text": "Federal Surveillance System — radar monitoring network."
+      },
+      {
+        "id": "C",
+        "text": "Flight Safety System — the black box recorder on manned aircraft."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FSS (Flight Service Station) is an air traffic facility that provides pilot briefings, flight plan processing, search and rescue assistance, weather, NOTAM processing, and aeronautical information.",
+    "explanation_distractors": {
+      "B": "FSS is a human-staffed information service, not a radar system.",
+      "C": "Black box recorders are flight data recorders (FDR), not FSS."
+    },
+    "citation": "AIM 4-1-3",
+    "difficulty_level": 1,
+    "tags": [
+      "radio",
+      "fss",
+      "communications"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-013",
+    "category": "Airspace",
+    "subcategory": "Extended Terms",
+    "question_text": "What is a MOA?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Military Operations Area — airspace outside Class A to separate certain nonhazardous military activities from IFR traffic and identify the area for VFR pilots."
+      },
+      {
+        "id": "B",
+        "text": "Mandatory Operations Airspace requiring ATC clearance."
+      },
+      {
+        "id": "C",
+        "text": "A restricted area where all civilian flight is prohibited."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MOA (Military Operations Area) is airspace established outside Class A to separate certain nonhazardous military activities from IFR traffic and to identify the area for VFR pilots.",
+    "explanation_distractors": {
+      "B": "MOAs do not require ATC clearance for VFR pilots, though caution is advised.",
+      "C": "MOAs are advisory for VFR traffic; they are not prohibited areas."
+    },
+    "citation": "14 CFR 73; AIM 3-4-5",
+    "difficulty_level": 2,
+    "tags": [
+      "airspace",
+      "moa",
+      "military"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-014",
+    "category": "Airspace",
+    "subcategory": "Extended Terms",
+    "question_text": "What is an MTR?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Military Training Route — airspace of defined vertical and lateral dimensions used for military training at airspeeds greater than 250 knots."
+      },
+      {
+        "id": "B",
+        "text": "Mandatory Traffic Route near Class B airports."
+      },
+      {
+        "id": "C",
+        "text": "Metropolitan Terminal Region — a wide-area airspace designation."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MTR (Military Training Route) is airspace of defined vertical and lateral dimensions established for military training at airspeeds greater than 250 knots indicated airspeed.",
+    "explanation_distractors": {
+      "B": "MTRs are military training routes, not mandatory civilian traffic routes.",
+      "C": "MTR is a specific airspace type, not a metropolitan designation."
+    },
+    "citation": "AIM 3-5-2",
+    "difficulty_level": 2,
+    "tags": [
+      "airspace",
+      "mtr",
+      "military"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-015",
+    "category": "Airport Operations",
+    "subcategory": "Extended Terms",
+    "question_text": "What is TPA and what is the standard value?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Traffic Pattern Altitude — standard is usually 1,000 ft AGL for most propeller aircraft unless otherwise published."
+      },
+      {
+        "id": "B",
+        "text": "Terminal Procedures Altitude — the minimum approach altitude."
+      },
+      {
+        "id": "C",
+        "text": "Tower Pattern Approach — the altitude at which the tower clears aircraft to land."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "TPA stands for Traffic Pattern Altitude. Standard TPA for most propeller aircraft is 1,000 ft AGL unless otherwise published. Drone pilots should stay alert for aircraft using the airport pattern.",
+    "explanation_distractors": {
+      "B": "Minimum approach altitudes are called MDA or DA, not TPA.",
+      "C": "TPA is a published pattern altitude, not a clearance altitude."
+    },
+    "citation": "AIM 4-3-3",
+    "difficulty_level": 1,
+    "tags": [
+      "airport-ops",
+      "tpa",
+      "traffic-pattern"
+    ],
+    "acs_code": "UA.II.B.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-016",
+    "category": "Weather",
+    "subcategory": "Extended Terms",
+    "question_text": "When using aviation weather reports and charts, what unit is used for visibility versus distances?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Statute miles (SM) for weather visibility; nautical miles (NM) for aviation distance and speed references such as knots."
+      },
+      {
+        "id": "B",
+        "text": "Nautical miles for everything in aviation."
+      },
+      {
+        "id": "C",
+        "text": "Kilometers for weather visibility; miles for navigation."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Statute miles (SM) are used for weather visibility reporting. Nautical miles (NM) are used for aviation distance and speed references (knots).",
+    "explanation_distractors": {
+      "B": "Visibility is reported in statute miles, not nautical miles.",
+      "C": "U.S. aviation uses miles and nautical miles, not kilometers."
+    },
+    "citation": "AIM 7-1-27",
+    "difficulty_level": 1,
+    "tags": [
+      "weather",
+      "units",
+      "sm-vs-nm"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-017",
+    "category": "Loading & Performance",
+    "subcategory": "Extended Terms",
+    "question_text": "What is density altitude and how does it affect performance?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Pressure altitude corrected for nonstandard temperature. High density altitude reduces lift, climb performance, and battery margin."
+      },
+      {
+        "id": "B",
+        "text": "The altitude at which an aircraft must fly for maximum fuel efficiency."
+      },
+      {
+        "id": "C",
+        "text": "The altitude measured from sea level based on air density alone."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Density altitude is pressure altitude corrected for nonstandard temperature. High density altitude (hot, high, humid conditions) reduces lift, climb performance, and often battery margin for electric drones.",
+    "explanation_distractors": {
+      "B": "Density altitude is a performance indicator, not an efficiency altitude.",
+      "C": "Density altitude combines pressure and temperature effects — it is not simply an MSL reading."
+    },
+    "citation": "FAA-H-8083-25B Ch. 11",
+    "difficulty_level": 2,
+    "tags": [
+      "performance",
+      "density-altitude",
+      "weather"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-018",
+    "category": "Crew Resource Management",
+    "subcategory": "Extended Terms",
+    "question_text": "What is ADM in aviation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Aeronautical Decision Making — systematic process for identifying hazards, assessing risk, and choosing safe actions."
+      },
+      {
+        "id": "B",
+        "text": "Aircraft Diagnostics and Maintenance — the preflight checklist system."
+      },
+      {
+        "id": "C",
+        "text": "Altitude Deviation Monitoring — an autopilot function."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ADM (Aeronautical Decision Making) is the systematic process for identifying hazards, assessing risk, and choosing safe actions during a flight operation.",
+    "explanation_distractors": {
+      "B": "Preflight checklists are separate from ADM; ADM is about decision-making processes.",
+      "C": "Altitude deviation monitoring is an autopilot feature, not ADM."
+    },
+    "citation": "FAA-H-8083-2 Ch. 1",
+    "difficulty_level": 1,
+    "tags": [
+      "crm",
+      "adm",
+      "decision-making"
+    ],
+    "acs_code": "UA.VI.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-019",
+    "category": "Crew Resource Management",
+    "subcategory": "Extended Terms",
+    "question_text": "What does PAVE stand for?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A risk checklist: Pilot, Aircraft, enVironment, External pressures."
+      },
+      {
+        "id": "B",
+        "text": "Pre-flight Avoidance and Vigilance Exercise."
+      },
+      {
+        "id": "C",
+        "text": "Pilot Awareness and Visual Evaluation."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "PAVE is a risk identification checklist: Pilot (fitness), Aircraft (airworthiness), enVironment (weather and airspace), External pressures (get-there-itis and schedule pressure).",
+    "explanation_distractors": {
+      "B": "That is not a real FAA acronym.",
+      "C": "That is not the PAVE definition."
+    },
+    "citation": "FAA-H-8083-2 Ch. 2",
+    "difficulty_level": 1,
+    "tags": [
+      "crm",
+      "pave",
+      "risk"
+    ],
+    "acs_code": "UA.VI.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-020",
+    "category": "Physiology",
+    "subcategory": "Extended Terms",
+    "question_text": "What does IMSAFE stand for?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Personal readiness checklist: Illness, Medication, Stress, Alcohol, Fatigue, Emotion."
+      },
+      {
+        "id": "B",
+        "text": "Instrument Meteorological Safety and Flight Evaluation."
+      },
+      {
+        "id": "C",
+        "text": "In-Mission Safety and Flight Emergency checklist."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "IMSAFE is a personal readiness checklist: Illness, Medication, Stress, Alcohol, Fatigue, Emotion. Pilots use it to self-assess fitness before each flight.",
+    "explanation_distractors": {
+      "B": "IMSAFE is a personal readiness checklist, not an instrument weather evaluation.",
+      "C": "IMSAFE is a preflight personal assessment, not an in-flight emergency checklist."
+    },
+    "citation": "FAA-H-8083-2 Ch. 2",
+    "difficulty_level": 1,
+    "tags": [
+      "physiology",
+      "imsafe",
+      "risk"
+    ],
+    "acs_code": "UA.VI.A.K2",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-021",
+    "category": "Crew Resource Management",
+    "subcategory": "Extended Terms",
+    "question_text": "What is SRM?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Single-Pilot Resource Management — using all available resources when one pilot is responsible for the operation."
+      },
+      {
+        "id": "B",
+        "text": "Standard Route Management — the FAA flight planning protocol."
+      },
+      {
+        "id": "C",
+        "text": "Safety Risk Management — the formal SMS process."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "SRM (Single-Pilot Resource Management) is the effective use of all available resources — information, automation, crew — when one pilot bears sole responsibility for the operation.",
+    "explanation_distractors": {
+      "B": "SRM is about in-flight resource use, not a route planning protocol.",
+      "C": "Safety Risk Management is part of a Safety Management System (SMS), not SRM."
+    },
+    "citation": "FAA-H-8083-2 Ch. 2",
+    "difficulty_level": 1,
+    "tags": [
+      "crm",
+      "srm",
+      "decision-making"
+    ],
+    "acs_code": "UA.VI.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-022",
+    "category": "Crew Resource Management",
+    "subcategory": "Extended Terms",
+    "question_text": "What is CRM?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Crew Resource Management — effective use of people, equipment, and information to improve safety and decision making."
+      },
+      {
+        "id": "B",
+        "text": "Communication and Radio Management system."
+      },
+      {
+        "id": "C",
+        "text": "Critical Response Methodology for emergency procedures."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CRM (Crew Resource Management) is the effective use of all available resources — people, equipment, and information — to improve safety and decision making in flight operations.",
+    "explanation_distractors": {
+      "B": "Radio management is one element of CRM, not its definition.",
+      "C": "CRM is a broad operational philosophy, not only for emergencies."
+    },
+    "citation": "FAA-H-8083-2 Ch. 2",
+    "difficulty_level": 1,
+    "tags": [
+      "crm",
+      "crew-resource-management"
+    ],
+    "acs_code": "UA.VI.A.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-023",
+    "category": "Loading & Performance",
+    "subcategory": "Extended Terms",
+    "question_text": "What is the Center of Gravity (CG) in aviation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The balance point of the aircraft system. An improper CG can degrade stability and performance."
+      },
+      {
+        "id": "B",
+        "text": "The maximum takeoff weight limit."
+      },
+      {
+        "id": "C",
+        "text": "The geometric center of the aircraft's fuselage."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CG (Center of Gravity) is the balance point of the aircraft system. If the CG is outside allowable limits it can degrade stability, handling, and performance.",
+    "explanation_distractors": {
+      "B": "Maximum takeoff weight is a separate specification from CG.",
+      "C": "CG is the balance point based on weight distribution, not the geometric center."
+    },
+    "citation": "FAA-H-8083-25B Ch. 10",
+    "difficulty_level": 1,
+    "tags": [
+      "performance",
+      "cg",
+      "loading"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-024",
+    "category": "Loading & Performance",
+    "subcategory": "Extended Terms",
+    "question_text": "What is Load Factor?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The ratio of aerodynamic load supported by the aircraft to the aircraft's weight. Higher load factor increases aerodynamic demand during maneuvering."
+      },
+      {
+        "id": "B",
+        "text": "The maximum payload the aircraft can carry."
+      },
+      {
+        "id": "C",
+        "text": "The ratio of battery capacity to flight time."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Load factor is the ratio of aerodynamic load supported by the wings or rotors to the aircraft's weight. Higher load factors occur during turns and maneuvering and increase aerodynamic demand.",
+    "explanation_distractors": {
+      "B": "Payload capacity is a separate specification. Load factor is a ratio, not a weight.",
+      "C": "Load factor is an aerodynamic concept, not a battery metric."
+    },
+    "citation": "FAA-H-8083-25B Ch. 5",
+    "difficulty_level": 2,
+    "tags": [
+      "performance",
+      "load-factor",
+      "aerodynamics"
+    ],
+    "acs_code": "UA.IV.B.K1",
+    "source": "Part 107 Extended Terms"
+  },
+  {
+    "id": "EXT-025",
+    "category": "Airspace",
+    "subcategory": "Extended Terms",
+    "question_text": "When would you use the Sectional Chart Legend on the FAA exam?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The legend is the chart symbol cheat sheet. It is worth knowing how to flip to it quickly when a figure has an unfamiliar symbol."
+      },
+      {
+        "id": "B",
+        "text": "The legend is never needed on the exam because all symbols are explained in the question text."
+      },
+      {
+        "id": "C",
+        "text": "The legend is only used for IFR charts, not sectional charts."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The sectional chart legend is the symbol cheat sheet used during the exam. Knowing how to quickly reference it for unfamiliar chart symbols can save time on figure-heavy questions.",
+    "explanation_distractors": {
+      "B": "The exam does include figure questions with symbols that require the legend.",
+      "C": "Sectional charts are VFR charts; the legend is for those charts specifically."
+    },
+    "citation": "FAA-CT-8080-2H Testing Supplement",
+    "difficulty_level": 1,
+    "tags": [
+      "airspace",
+      "sectional-chart",
+      "legend",
+      "exam-tip"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "Part 107 Extended Terms"
+  }
+]

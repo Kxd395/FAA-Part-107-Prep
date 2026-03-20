@@ -1,0 +1,880 @@
+[
+  {
+    "id": "REG-V-001",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What is the Part 107 default rule for drone operations under 55 lb?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Part 107 is the default regulation for most non-recreational operations."
+      },
+      {
+        "id": "B",
+        "text": "Part 101 applies to all drone operations under 55 lb."
+      },
+      {
+        "id": "C",
+        "text": "No FAA regulation applies to drones under 55 lb."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "For drones under 55 lb, Part 107 is the default regulation for most non-recreational operations.",
+    "explanation_distractors": {
+      "B": "Part 101 covers recreational operations (the exception), not the default rule.",
+      "C": "FAA regulations do apply to all drone operations in the National Airspace System."
+    },
+    "citation": "14 CFR Part 107",
+    "difficulty_level": 1,
+    "tags": [
+      "regulations",
+      "part107",
+      "basic"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-002",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What does sUAS stand for and what does it mean under Part 107?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Small Unmanned Aircraft System — generally a drone operation under 55 lb at takeoff."
+      },
+      {
+        "id": "B",
+        "text": "Standard Unmanned Aerial System — any drone over 25 lb."
+      },
+      {
+        "id": "C",
+        "text": "Supervised Unmanned Aircraft System — requires a co-pilot."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "sUAS stands for Small Unmanned Aircraft System. Under Part 107 it generally means a drone operation under 55 lb at takeoff.",
+    "explanation_distractors": {
+      "B": "The 'S' stands for 'small' and the weight limit is 55 lb, not 25 lb.",
+      "C": "sUAS does not require a co-pilot — it refers only to the weight category."
+    },
+    "citation": "14 CFR 107.3",
+    "difficulty_level": 1,
+    "tags": [
+      "regulations",
+      "definitions",
+      "suas"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-003",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What is a Remote PIC (RPIC) under Part 107?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Remote Pilot in Command. Must be designated before or during the flight and has final authority and responsibility for the operation."
+      },
+      {
+        "id": "B",
+        "text": "A person who monitors airspace from the ground during the flight."
+      },
+      {
+        "id": "C",
+        "text": "An FAA inspector who oversees drone operations."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The RPIC is the Remote Pilot in Command, must be designated before or during the flight, and has final authority and responsibility for the operation.",
+    "explanation_distractors": {
+      "B": "That describes a Visual Observer (VO), not the RPIC.",
+      "C": "The RPIC is the operator, not an FAA inspector."
+    },
+    "citation": "14 CFR 107.12",
+    "difficulty_level": 1,
+    "tags": [
+      "regulations",
+      "rpic",
+      "roles"
+    ],
+    "acs_code": "UA.I.B.K2",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-004",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What is the role of a Visual Observer (VO) under Part 107?",
+    "options": [
+      {
+        "id": "A",
+        "text": "An optional crewmember who helps maintain awareness; must be able to see the aircraft and maintain effective communication with the RPIC."
+      },
+      {
+        "id": "B",
+        "text": "A mandatory crewmember who must be present on every Part 107 flight."
+      },
+      {
+        "id": "C",
+        "text": "The person primarily responsible for controlling the drone."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The VO is optional, helps maintain situational awareness, must maintain VLOS of the aircraft, and must communicate effectively with the RPIC and person manipulating the controls.",
+    "explanation_distractors": {
+      "B": "The VO is optional under Part 107, not mandatory.",
+      "C": "The person manipulating the controls operates the drone; the VO is an observer role."
+    },
+    "citation": "14 CFR 107.33",
+    "difficulty_level": 1,
+    "tags": [
+      "regulations",
+      "vo",
+      "roles"
+    ],
+    "acs_code": "UA.I.B.K2",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-005",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What does VLOS mean and who must maintain it?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Visual Line of Sight. The RPIC, person manipulating the controls, or a VO must see the aircraft throughout the flight with unaided vision (corrective lenses allowed)."
+      },
+      {
+        "id": "B",
+        "text": "Video Line of Sight. The RPIC may use FPV goggles as the sole means of maintaining sight."
+      },
+      {
+        "id": "C",
+        "text": "Visual Line of Sight. Only the RPIC must maintain it at all times."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "VLOS (Visual Line of Sight) requires the RPIC, person manipulating the controls, or a VO to maintain unaided visual sight of the aircraft. Corrective lenses are allowed; FPV-only is not.",
+    "explanation_distractors": {
+      "B": "FPV goggles alone do not satisfy the VLOS requirement.",
+      "C": "A VO may fulfill the VLOS requirement, so the RPIC alone is not the only option."
+    },
+    "citation": "14 CFR 107.31",
+    "difficulty_level": 2,
+    "tags": [
+      "regulations",
+      "vlos",
+      "operations"
+    ],
+    "acs_code": "UA.I.B.K3",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-006",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What is BVLOS and is it routine under current Part 107?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Beyond Visual Line of Sight. Not routine — generally requires an FAA waiver or specific authorization."
+      },
+      {
+        "id": "B",
+        "text": "Beyond Visual Line of Sight. Allowed any time as long as the RPIC holds a Part 107 certificate."
+      },
+      {
+        "id": "C",
+        "text": "Beyond Visual Line of Sight. Allowed routinely at night."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "BVLOS is Beyond Visual Line of Sight. It is not a routine Part 107 operation and generally requires an FAA waiver or specific authorization.",
+    "explanation_distractors": {
+      "B": "A Part 107 certificate alone does not authorize BVLOS operations.",
+      "C": "Night authorization does not extend to BVLOS operations."
+    },
+    "citation": "14 CFR 107.31; 107.200",
+    "difficulty_level": 2,
+    "tags": [
+      "regulations",
+      "bvlos",
+      "waiver"
+    ],
+    "acs_code": "UA.I.B.K3",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-007",
+    "category": "Remote ID",
+    "subcategory": "Verified Rules",
+    "question_text": "Who must comply with Remote ID requirements?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Drones that are required to be registered or are registered must comply."
+      },
+      {
+        "id": "B",
+        "text": "Only commercial operators flying in Class B airspace."
+      },
+      {
+        "id": "C",
+        "text": "Remote ID is optional for drones under 25 lb."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Drones that are required to be registered or are registered must comply with Remote ID. Compliance paths include a Standard Remote ID drone, a broadcast module, or operating in a FRIA.",
+    "explanation_distractors": {
+      "B": "Remote ID applies based on registration requirements, not airspace class alone.",
+      "C": "Remote ID is not optional for registered drones regardless of weight."
+    },
+    "citation": "14 CFR 89.110",
+    "difficulty_level": 2,
+    "tags": [
+      "remote-id",
+      "registration",
+      "compliance"
+    ],
+    "acs_code": "UA.I.B.K4",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-008",
+    "category": "Remote ID",
+    "subcategory": "Verified Rules",
+    "question_text": "What is a FRIA and what does it allow?",
+    "options": [
+      {
+        "id": "A",
+        "text": "FAA-Recognized Identification Area. A defined area where a drone without Remote ID equipment may operate, as long as it stays within the FRIA and within VLOS."
+      },
+      {
+        "id": "B",
+        "text": "Federal Remote Identification Authority. An agency that approves Remote ID hardware."
+      },
+      {
+        "id": "C",
+        "text": "A temporary exemption that waives all Part 107 rules within a defined airspace."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FRIA stands for FAA-Recognized Identification Area. Drones without Remote ID equipment may operate there as long as they stay within the FRIA and within VLOS.",
+    "explanation_distractors": {
+      "B": "FRIA is an area designation, not a government authority.",
+      "C": "The FRIA only addresses Remote ID, not all Part 107 rules."
+    },
+    "citation": "14 CFR 89.215",
+    "difficulty_level": 2,
+    "tags": [
+      "remote-id",
+      "fria",
+      "compliance"
+    ],
+    "acs_code": "UA.I.B.K4",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-009",
+    "category": "Airspace",
+    "subcategory": "Verified Rules",
+    "question_text": "What is LAANC and how does it work?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Low Altitude Authorization and Notification Capability. An FAA/UAS Data Exchange capability that automates many controlled-airspace authorization requests near airports via FAA-approved UAS Service Suppliers."
+      },
+      {
+        "id": "B",
+        "text": "A physical license issued by the FAA that authorizes permanent drone operations near airports."
+      },
+      {
+        "id": "C",
+        "text": "A weather alert system for low-altitude drone pilots."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "LAANC automates many controlled-airspace authorization requests near airports through FAA-approved UAS Service Suppliers, enabling near real-time approvals.",
+    "explanation_distractors": {
+      "B": "LAANC is an automated digital process, not a physical license.",
+      "C": "LAANC is an airspace authorization tool, not a weather service."
+    },
+    "citation": "14 CFR 107.41; FAA LAANC Program",
+    "difficulty_level": 2,
+    "tags": [
+      "airspace",
+      "laanc",
+      "authorization"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-010",
+    "category": "Airspace",
+    "subcategory": "Verified Rules",
+    "question_text": "Under Part 107, which airspace classes require prior ATC authorization?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Class B, C, D airspace, and within the lateral boundaries of surface Class E designated for an airport."
+      },
+      {
+        "id": "B",
+        "text": "Only Class B airspace requires prior authorization."
+      },
+      {
+        "id": "C",
+        "text": "Class G airspace — all others are unrestricted for drones."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Prior ATC authorization is required for Class B, C, D, and within the lateral boundaries of surface Class E designated for an airport.",
+    "explanation_distractors": {
+      "B": "Class C, D, and surface-designated Class E also require authorization, not only Class B.",
+      "C": "Class G is uncontrolled and does not require authorization; the other classes do."
+    },
+    "citation": "14 CFR 107.41",
+    "difficulty_level": 2,
+    "tags": [
+      "airspace",
+      "authorization",
+      "controlled"
+    ],
+    "acs_code": "UA.II.A.K1",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-011",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What is the difference between a waiver and a COA under Part 107?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A waiver permits deviating from specific Part 107 rules. A COA (Certificate of Waiver or Authorization) is typically used for public aircraft or certain Part 91/public safety operations, not the normal Part 107 pathway."
+      },
+      {
+        "id": "B",
+        "text": "A COA is the same as a waiver — the terms are interchangeable."
+      },
+      {
+        "id": "C",
+        "text": "A waiver is only for military drones; a COA is for commercial operators."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "A Part 107 waiver permits deviating from specific Part 107 rules. A COA is an authorization typically used for public aircraft or certain Part 91/public safety operations, not the normal Part 107 pathway.",
+    "explanation_distractors": {
+      "B": "They are not interchangeable — they serve different regulatory purposes.",
+      "C": "Waivers are for civilian Part 107 operators who need rule deviation; neither is exclusively military."
+    },
+    "citation": "14 CFR 107.200",
+    "difficulty_level": 2,
+    "tags": [
+      "regulations",
+      "waiver",
+      "coa",
+      "authorization"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-012",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "Under current Part 107, when can you fly at night without a waiver?",
+    "options": [
+      {
+        "id": "A",
+        "text": "If the RPIC completed the required knowledge test or training after April 6, 2021, and the drone has anti-collision lighting visible for at least 3 statute miles."
+      },
+      {
+        "id": "B",
+        "text": "Night flight is always prohibited without a waiver."
+      },
+      {
+        "id": "C",
+        "text": "Anytime — nighttime restrictions were fully removed in 2021."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Night operations are allowed under current Part 107 if the RPIC completed the required initial knowledge test or training after April 6, 2021, and the drone is equipped with anti-collision lighting visible for at least 3 statute miles.",
+    "explanation_distractors": {
+      "B": "Night waivers are no longer required if the pilot meets the current training requirement.",
+      "C": "Lighting and training requirements still apply — night flight is not completely unrestricted."
+    },
+    "citation": "14 CFR 107.29",
+    "difficulty_level": 2,
+    "tags": [
+      "regulations",
+      "night",
+      "operations"
+    ],
+    "acs_code": "UA.I.B.K3",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-013",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "Under Part 107, when are operations over people allowed without a waiver?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Only if the person is directly participating, under a covered structure, inside a stationary vehicle, or the operation meets Category 1, 2, 3, or 4 requirements."
+      },
+      {
+        "id": "B",
+        "text": "Operations over people are always allowed below 400 ft AGL."
+      },
+      {
+        "id": "C",
+        "text": "Operations over people require a waiver in all cases."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Part 107 allows operations over people only for direct participants, those under covered structures, those in stationary vehicles, or when the operation fits Category 1, 2, 3, or 4. Category 3 cannot be used for open-air assemblies.",
+    "explanation_distractors": {
+      "B": "Altitude alone does not authorize operations over non-participating people.",
+      "C": "Categories 1–4 provide waiver-free pathways for operations over people."
+    },
+    "citation": "14 CFR 107.110–107.145",
+    "difficulty_level": 2,
+    "tags": [
+      "regulations",
+      "operations-over-people",
+      "categories"
+    ],
+    "acs_code": "UA.I.B.K3",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-014",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What is the maximum altitude under Part 107, and when does the 400 ft limit not apply?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Maximum is 400 ft AGL, unless within 400 ft of a structure — then you may fly up to 400 ft above that structure's uppermost limit."
+      },
+      {
+        "id": "B",
+        "text": "Maximum is 400 ft AGL with no exceptions."
+      },
+      {
+        "id": "C",
+        "text": "Maximum is 500 ft AGL unless in controlled airspace."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The default max altitude is 400 ft AGL. When operating within 400 ft of a structure, the drone may fly up to 400 ft above the structure's immediate uppermost limit.",
+    "explanation_distractors": {
+      "B": "The structure exception is a real and important exception to the 400 ft AGL rule.",
+      "C": "The limit is 400 ft AGL, not 500 ft."
+    },
+    "citation": "14 CFR 107.51",
+    "difficulty_level": 2,
+    "tags": [
+      "regulations",
+      "altitude",
+      "400-ft-rule"
+    ],
+    "acs_code": "UA.I.B.K3",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-015",
+    "category": "Weather",
+    "subcategory": "Verified Rules",
+    "question_text": "What is the minimum flight visibility requirement under Part 107?",
+    "options": [
+      {
+        "id": "A",
+        "text": "3 statute miles as observed from the control station."
+      },
+      {
+        "id": "B",
+        "text": "1 statute mile at any altitude below 400 ft AGL."
+      },
+      {
+        "id": "C",
+        "text": "5 statute miles for operations in Class G airspace."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The minimum flight visibility under Part 107 is 3 statute miles as observed from the control station.",
+    "explanation_distractors": {
+      "B": "1 SM is below the required minimum — Part 107 requires at least 3 SM.",
+      "C": "The standard is 3 SM regardless of airspace class (in uncontrolled Class G)."
+    },
+    "citation": "14 CFR 107.51(c)",
+    "difficulty_level": 1,
+    "tags": [
+      "weather",
+      "visibility",
+      "minimums"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-016",
+    "category": "Weather",
+    "subcategory": "Verified Rules",
+    "question_text": "What are the minimum cloud clearance requirements under Part 107?",
+    "options": [
+      {
+        "id": "A",
+        "text": "500 ft below clouds and 2,000 ft horizontally from clouds."
+      },
+      {
+        "id": "B",
+        "text": "Clear of clouds at all times."
+      },
+      {
+        "id": "C",
+        "text": "1,000 ft below and 1,000 ft horizontally from clouds."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Part 107 requires minimum cloud clearance of 500 ft below clouds and 2,000 ft horizontally from clouds.",
+    "explanation_distractors": {
+      "B": "'Clear of clouds' is the VFR rule for Class B airspace, not the Part 107 standard.",
+      "C": "1,000 ft below and 1,000 ft horizontal are not the Part 107 minimums."
+    },
+    "citation": "14 CFR 107.51(b)",
+    "difficulty_level": 1,
+    "tags": [
+      "weather",
+      "cloud-clearance",
+      "minimums"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-017",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "Under Part 107, what right-of-way rule applies to small unmanned aircraft?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Small unmanned aircraft must yield right of way to all aircraft, airborne vehicles, and launch and reentry vehicles."
+      },
+      {
+        "id": "B",
+        "text": "Manned aircraft must yield to drones in controlled airspace."
+      },
+      {
+        "id": "C",
+        "text": "Right of way is determined by who is operating at lower altitude."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Under Part 107, small unmanned aircraft must yield right of way to all aircraft, airborne vehicles, and launch and reentry vehicles.",
+    "explanation_distractors": {
+      "B": "Drones always yield to manned aircraft, not the other way around.",
+      "C": "Altitude does not determine right of way — drones always yield."
+    },
+    "citation": "14 CFR 107.37",
+    "difficulty_level": 1,
+    "tags": [
+      "regulations",
+      "right-of-way",
+      "safety"
+    ],
+    "acs_code": "UA.I.B.K3",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-018",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What preflight familiarization and inspection is required before a Part 107 flight?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Assess local weather, airspace and flight restrictions, nearby people and property, other ground hazards, and verify the aircraft is in a condition for safe operation."
+      },
+      {
+        "id": "B",
+        "text": "Only verify the aircraft battery is charged."
+      },
+      {
+        "id": "C",
+        "text": "No preflight is required for flights under 10 minutes."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Before flight, the RPIC must assess local weather, airspace and flight restrictions, nearby people and property, other ground hazards, and verify the aircraft is in a condition for safe operation.",
+    "explanation_distractors": {
+      "B": "Preflight includes airspace, weather, and safety assessment — not just battery check.",
+      "C": "Preflight requirements apply to every flight regardless of duration."
+    },
+    "citation": "14 CFR 107.49",
+    "difficulty_level": 1,
+    "tags": [
+      "regulations",
+      "preflight",
+      "inspection"
+    ],
+    "acs_code": "UA.V.A.K1",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-019",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "When must a drone accident be reported to the FAA under Part 107?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Within 10 calendar days if the operation causes serious injury, loss of consciousness, or more than $500 damage to property other than the drone."
+      },
+      {
+        "id": "B",
+        "text": "Within 24 hours for any crash landing."
+      },
+      {
+        "id": "C",
+        "text": "Only if an manned aircraft is involved."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Report to the FAA within 10 calendar days if the operation causes serious injury, loss of consciousness, or more than $500 damage to property other than the drone.",
+    "explanation_distractors": {
+      "B": "The threshold is serious injury or over $500 property damage — not every crash landing.",
+      "C": "The reporting requirement is not limited to incidents involving manned aircraft."
+    },
+    "citation": "14 CFR 107.9",
+    "difficulty_level": 2,
+    "tags": [
+      "regulations",
+      "accident-reporting",
+      "safety"
+    ],
+    "acs_code": "UA.I.B.K5",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-020",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What alcohol rule applies to Part 107 pilots and Visual Observers?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Must comply with 14 CFR 91.17 and 91.19: 8-hour bottle-to-throttle rule and no alcohol concentration of 0.04 or greater."
+      },
+      {
+        "id": "B",
+        "text": "No numeric alcohol limit — just no visible impairment."
+      },
+      {
+        "id": "C",
+        "text": "The 8-hour rule applies to the RPIC only, not the VO."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "Part 107 cross-references 14 CFR 91.17 and 91.19, requiring the 8-hour bottle-to-throttle rule and no blood alcohol concentration of 0.04 or greater. This applies to the RPIC, person manipulating controls, and VO.",
+    "explanation_distractors": {
+      "B": "There is a numeric limit of 0.04 blood alcohol concentration.",
+      "C": "The alcohol rule applies to all crew, including VOs."
+    },
+    "citation": "14 CFR 107.57; 91.17; 91.19",
+    "difficulty_level": 1,
+    "tags": [
+      "regulations",
+      "alcohol",
+      "safety"
+    ],
+    "acs_code": "UA.I.B.K5",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-021",
+    "category": "Airspace",
+    "subcategory": "Verified Rules",
+    "question_text": "What is a NOTAM and what does it stand for?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Notice to Airmen. Time-critical notices about abnormal changes or hazards in the National Airspace System."
+      },
+      {
+        "id": "B",
+        "text": "Notice to Air Missions. Permanent announcements about airports."
+      },
+      {
+        "id": "C",
+        "text": "National Observation and Tracking Alert Message."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "NOTAM stands for Notice to Airmen. These are time-critical notices about abnormal changes or hazards in the National Airspace System. (FAA Order JO 7930.2U changed the current usage back to Notice to Airmen in 2025.)",
+    "explanation_distractors": {
+      "B": "'Notice to Air Missions' was a previous term. The current FAA order reverted to 'Notice to Airmen' in 2025.",
+      "C": "That is not a real FAA term."
+    },
+    "citation": "FAA Order JO 7930.2U",
+    "difficulty_level": 1,
+    "tags": [
+      "airspace",
+      "notam",
+      "definitions"
+    ],
+    "acs_code": "UA.II.A.K2",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-022",
+    "category": "Airspace",
+    "subcategory": "Verified Rules",
+    "question_text": "What is an FDC NOTAM?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A Flight Data Center NOTAM — a regulatory NOTAM type. Temporary Flight Restrictions are issued as FDC NOTAMs."
+      },
+      {
+        "id": "B",
+        "text": "A Federal Defense Command NOTAM issued for military airspace."
+      },
+      {
+        "id": "C",
+        "text": "A local NOTAM issued by the airport tower."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FDC stands for Flight Data Center. FDC NOTAMs are regulatory in nature. Temporary Flight Restrictions (TFRs) are issued as FDC NOTAMs.",
+    "explanation_distractors": {
+      "B": "FDC stands for Flight Data Center, not Federal Defense Command.",
+      "C": "FDC NOTAMs are issued nationally, not by local towers."
+    },
+    "citation": "FAA Order JO 7930.2U",
+    "difficulty_level": 2,
+    "tags": [
+      "airspace",
+      "notam",
+      "fdc",
+      "tfr"
+    ],
+    "acs_code": "UA.II.A.K2",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-023",
+    "category": "Airspace",
+    "subcategory": "Verified Rules",
+    "question_text": "What is a TFR?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Temporary Flight Restriction. A temporary airspace restriction commonly issued by FDC NOTAM for security, VIP movement, disasters, major events, or safety."
+      },
+      {
+        "id": "B",
+        "text": "Terminal Flight Route. A published route near an airport."
+      },
+      {
+        "id": "C",
+        "text": "Traffic Flow Restriction issued by the tower controller."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "TFR stands for Temporary Flight Restriction, a temporary airspace restriction issued by FDC NOTAM. Common reasons include security, VIP movements, disasters, major events, and safety.",
+    "explanation_distractors": {
+      "B": "There is no FAA term 'Terminal Flight Route'.",
+      "C": "TFRs are issued nationally via FDC NOTAM, not by individual tower controllers."
+    },
+    "citation": "14 CFR 91.137–91.145; FAA Order JO 7930.2U",
+    "difficulty_level": 1,
+    "tags": [
+      "airspace",
+      "tfr",
+      "notam"
+    ],
+    "acs_code": "UA.II.A.K2",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-024",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "What is the format of the UAG Remote Pilot knowledge test?",
+    "options": [
+      {
+        "id": "A",
+        "text": "60 questions, 2.0 hours allowed, 70 percent passing score."
+      },
+      {
+        "id": "B",
+        "text": "80 questions, 3.0 hours allowed, 75 percent passing score."
+      },
+      {
+        "id": "C",
+        "text": "40 questions, 1.0 hour allowed, 70 percent passing score."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The UAG Remote Pilot knowledge test has 60 questions, a 2.0-hour time limit, and a 70 percent passing score, as listed in the current FAA testing matrix.",
+    "explanation_distractors": {
+      "B": "The test has 60 questions, not 80, and 2.0 hours, not 3.0.",
+      "C": "The test has 60 questions and 2.0 hours, not 40 questions and 1.0 hour."
+    },
+    "citation": "FAA UAG Knowledge Test Matrix",
+    "difficulty_level": 1,
+    "tags": [
+      "regulations",
+      "exam",
+      "test-format"
+    ],
+    "acs_code": "UA.I.A.K1",
+    "source": "Part 107 Verified Rules"
+  },
+  {
+    "id": "REG-V-025",
+    "category": "Regulations",
+    "subcategory": "Verified Rules",
+    "question_text": "Which FAA testing supplement is currently listed for the UAG Remote Pilot exam?",
+    "options": [
+      {
+        "id": "A",
+        "text": "FAA-CT-8080-2H (2018), used for the figures and charts on the UAG exam."
+      },
+      {
+        "id": "B",
+        "text": "FAA-CT-8080-3F."
+      },
+      {
+        "id": "C",
+        "text": "FAA-CT-8080-9A."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "The current FAA testing matrix still points Remote Pilot applicants to FAA-CT-8080-2H (2018) for the figures and charts used on the UAG exam.",
+    "explanation_distractors": {
+      "B": "FAA-CT-8080-3F is not the supplement for the UAG test.",
+      "C": "FAA-CT-8080-9A is not the supplement for the UAG test."
+    },
+    "citation": "FAA UAG Knowledge Test Matrix",
+    "difficulty_level": 1,
+    "tags": [
+      "regulations",
+      "exam",
+      "supplement",
+      "figures"
+    ],
+    "acs_code": "UA.I.A.K1",
+    "source": "Part 107 Verified Rules"
+  }
+]

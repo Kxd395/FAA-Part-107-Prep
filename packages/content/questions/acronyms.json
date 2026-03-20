@@ -1,0 +1,2972 @@
+[
+  {
+    "id": "ACR-001",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does the abbreviation \"14 CFR\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Title 14 of the Code of Federal Regulations."
+      },
+      {
+        "id": "B",
+        "text": "14th Circuit Federal Register."
+      },
+      {
+        "id": "C",
+        "text": "Title 14 Civil Flight Rules."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "14 CFR stands for Title 14 of the Code of Federal Regulations — the title containing all federal aviation regulations including Part 107.",
+    "explanation_distractors": {
+      "B": "There is no '14th Circuit Federal Register.' CFR stands for Code of Federal Regulations.",
+      "C": "CFR does not stand for Civil Flight Rules. It is the Code of Federal Regulations."
+    },
+    "citation": "14 CFR",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "cfr",
+      "regulations"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|14cfr|acr_001"
+  },
+  {
+    "id": "ACR-002",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "In FAA publications, what does \"AC\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Advisory Circular."
+      },
+      {
+        "id": "B",
+        "text": "Air Carrier."
+      },
+      {
+        "id": "C",
+        "text": "Aircraft Certificate."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "AC stands for Advisory Circular — FAA informational documents that provide guidance and best practices on aviation topics.",
+    "explanation_distractors": {
+      "B": "Air Carrier is not abbreviated AC in FAA terminology. AC refers to Advisory Circular.",
+      "C": "Aircraft Certificate is not the meaning of AC. Advisory Circulars are FAA guidance documents."
+    },
+    "citation": "FAA Advisory Circular system",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "ac",
+      "advisory-circular"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|ac|acr_002"
+  },
+  {
+    "id": "ACR-003",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"ACS\" stand for in the context of FAA pilot testing?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Airman Certification Standards."
+      },
+      {
+        "id": "B",
+        "text": "Aircraft Control System."
+      },
+      {
+        "id": "C",
+        "text": "Air Communication Service."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ACS stands for Airman Certification Standards — the document that defines the knowledge, risk management, and skills required for FAA pilot certificates and ratings.",
+    "explanation_distractors": {
+      "B": "Aircraft Control System is not what ACS stands for in the testing context.",
+      "C": "ACS does not refer to a communication service. It defines certification testing standards."
+    },
+    "citation": "FAA-S-ACS-10",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "acs",
+      "testing"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|acs|acr_003"
+  },
+  {
+    "id": "ACR-004",
+    "category": "Weather",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"ADDS\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Aviation Digital Data Services."
+      },
+      {
+        "id": "B",
+        "text": "Automated Drone Detection System."
+      },
+      {
+        "id": "C",
+        "text": "Airport Departure Data Sheet."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ADDS stands for Aviation Digital Data Services — a web-based weather resource for pilots that includes METARs, TAFs, PIREPs, and other aviation weather products.",
+    "explanation_distractors": {
+      "B": "ADDS is not related to drone detection. It is a weather data service.",
+      "C": "ADDS is not a departure data sheet. It provides digital weather products for aviation."
+    },
+    "citation": "aviationweather.gov",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "adds",
+      "weather"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|adds|acr_004"
+  },
+  {
+    "id": "ACR-005",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"ADIZ\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Air Defense Identification Zone."
+      },
+      {
+        "id": "B",
+        "text": "Airport Departure Instrument Zone."
+      },
+      {
+        "id": "C",
+        "text": "Automated Drone Identification Zone."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ADIZ stands for Air Defense Identification Zone — airspace over land or water where the identification, location, and control of aircraft is required in the interest of national security.",
+    "explanation_distractors": {
+      "B": "ADIZ has nothing to do with instrument departures. It is a national security airspace zone.",
+      "C": "ADIZ predates drone regulations. It is an Air Defense Identification Zone."
+    },
+    "citation": "14 CFR §99",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "adiz",
+      "airspace"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|adiz|acr_005"
+  },
+  {
+    "id": "ACR-006",
+    "category": "Crew Resource Management",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"ADM\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Aeronautical Decision-Making."
+      },
+      {
+        "id": "B",
+        "text": "Aircraft Departure Management."
+      },
+      {
+        "id": "C",
+        "text": "Automated Data Monitoring."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ADM stands for Aeronautical Decision-Making — a systematic process for identifying hazards, assessing risk, and choosing safe courses of action.",
+    "explanation_distractors": {
+      "B": "ADM does not refer to departure management. It is a decision-making framework.",
+      "C": "ADM is not about data monitoring. It is a structured approach to aviation risk management."
+    },
+    "citation": "FAA-H-8083-2",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "adm",
+      "risk-management"
+    ],
+    "acs_code": "UA.V.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|adm|acr_006"
+  },
+  {
+    "id": "ACR-007",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"AFM\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Airplane Flight Manual."
+      },
+      {
+        "id": "B",
+        "text": "Aviation Frequency Management."
+      },
+      {
+        "id": "C",
+        "text": "Air Force Manual."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "AFM stands for Airplane Flight Manual — the FAA-approved document containing operating limitations, procedures, and performance data for a specific aircraft.",
+    "explanation_distractors": {
+      "B": "AFM does not refer to frequency management. It is the official flight manual for an aircraft.",
+      "C": "In aviation context, AFM means Airplane Flight Manual, not Air Force Manual."
+    },
+    "citation": "14 CFR §91.9",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "afm",
+      "documentation"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|afm|acr_007"
+  },
+  {
+    "id": "ACR-008",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"AFS\" stand for in FAA organizational structure?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Flight Standards Service."
+      },
+      {
+        "id": "B",
+        "text": "Airport Facility Survey."
+      },
+      {
+        "id": "C",
+        "text": "Airfield Fire Service."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "AFS stands for Flight Standards Service — the FAA office responsible for certification and oversight of airmen, air operators, and air agencies.",
+    "explanation_distractors": {
+      "B": "AFS is not an airport survey. It refers to the FAA's Flight Standards Service.",
+      "C": "AFS is not a fire service. It is the Flight Standards Service within the FAA."
+    },
+    "citation": "FAA Organization",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "afs",
+      "faa-organization"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|afs|acr_008"
+  },
+  {
+    "id": "ACR-009",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"AGL\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Above Ground Level."
+      },
+      {
+        "id": "B",
+        "text": "Approved Guidance Limit."
+      },
+      {
+        "id": "C",
+        "text": "Average Geographic Latitude."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "AGL stands for Above Ground Level — height measured from the surface directly below the aircraft. Part 107's 400 ft altitude limit is measured in AGL.",
+    "explanation_distractors": {
+      "B": "AGL does not refer to guidance limits. It is a measurement of height above the ground.",
+      "C": "AGL has nothing to do with latitude. It means Above Ground Level."
+    },
+    "citation": "14 CFR §107.51(b)",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "agl",
+      "altitude"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|agl|acr_009"
+  },
+  {
+    "id": "ACR-010",
+    "category": "Weather",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"AIRMET\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Airman's Meteorological Information."
+      },
+      {
+        "id": "B",
+        "text": "Airport Meteorological Terminal."
+      },
+      {
+        "id": "C",
+        "text": "Airspace Instrument Rating Evaluation Tool."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "AIRMET stands for Airman's Meteorological Information — advisories for significant weather conditions at intensities lower than those requiring a SIGMET, including IFR conditions, mountain obscuration, turbulence, strong surface winds, and icing.",
+    "explanation_distractors": {
+      "B": "AIRMET is not an airport terminal. It is a weather advisory product.",
+      "C": "AIRMET has nothing to do with instrument ratings. It is a weather advisory."
+    },
+    "citation": "AIM §7-1-5",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "airmet",
+      "weather-advisory"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|airmet|acr_010"
+  },
+  {
+    "id": "ACR-011",
+    "category": "Loading & Performance",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"AOA\" stand for in aerodynamics?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Angle of Attack."
+      },
+      {
+        "id": "B",
+        "text": "Area of Approach."
+      },
+      {
+        "id": "C",
+        "text": "Altitude Over Airport."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "AOA stands for Angle of Attack — the angle between the wing's chord line and the relative wind. Exceeding the critical AOA causes a stall.",
+    "explanation_distractors": {
+      "B": "Area of Approach is not what AOA stands for. It describes the angle of the wing relative to airflow.",
+      "C": "AOA is not an altitude measurement. It is a fundamental aerodynamic concept."
+    },
+    "citation": "FAA-H-8083-25B Ch. 5",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "aoa",
+      "aerodynamics"
+    ],
+    "acs_code": "UA.V.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|aoa|acr_011"
+  },
+  {
+    "id": "ACR-012",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"ATC\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Air Traffic Control."
+      },
+      {
+        "id": "B",
+        "text": "Aircraft Technical Certificate."
+      },
+      {
+        "id": "C",
+        "text": "Aviation Training Center."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ATC stands for Air Traffic Control — the service operated by the FAA to promote the safe and efficient flow of air traffic. Part 107 requires ATC authorization for controlled airspace operations.",
+    "explanation_distractors": {
+      "B": "ATC does not refer to a certificate. It is the Air Traffic Control service.",
+      "C": "ATC is not a training center. It is the Air Traffic Control system."
+    },
+    "citation": "14 CFR §107.41",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "atc",
+      "airspace"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|atc|acr_012"
+  },
+  {
+    "id": "ACR-013",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"ATD\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Aviation Training Device."
+      },
+      {
+        "id": "B",
+        "text": "Air Transport Document."
+      },
+      {
+        "id": "C",
+        "text": "Airport Terminal District."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ATD stands for Aviation Training Device — a training tool that replicates aircraft instruments and controls for ground-based practice.",
+    "explanation_distractors": {
+      "B": "ATD is not a transport document. It is a device used for pilot training.",
+      "C": "ATD does not refer to an airport district. It is an Aviation Training Device."
+    },
+    "citation": "14 CFR §61.4(c)",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "atd",
+      "training"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|atd|acr_013"
+  },
+  {
+    "id": "ACR-014",
+    "category": "Weather",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "In weather reports, what does \"CB\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Cumulonimbus."
+      },
+      {
+        "id": "B",
+        "text": "Cloud Base."
+      },
+      {
+        "id": "C",
+        "text": "Controlled Boundary."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CB stands for Cumulonimbus — towering thunderstorm clouds associated with severe turbulence, icing, hail, lightning, and wind shear. These are hazardous to all aircraft.",
+    "explanation_distractors": {
+      "B": "Cloud Base is not abbreviated CB. CB specifically means Cumulonimbus thunderstorm clouds.",
+      "C": "CB has nothing to do with boundaries. It identifies dangerous thunderstorm clouds."
+    },
+    "citation": "AIM §7-1-29",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "cb",
+      "thunderstorm",
+      "weather"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|cb|acr_014"
+  },
+  {
+    "id": "ACR-015",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"CFA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Controlled Firing Areas."
+      },
+      {
+        "id": "B",
+        "text": "Center Frequency Assignment."
+      },
+      {
+        "id": "C",
+        "text": "Commercial Flight Authorization."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CFA stands for Controlled Firing Areas — airspace where activities such as weapons testing are conducted under conditions that ensure the safety of non-participating aircraft. CFAs are not charted because activities are suspended when aircraft are detected.",
+    "explanation_distractors": {
+      "B": "CFA is not related to frequency assignments. It designates areas with controlled weapons firing.",
+      "C": "CFA does not refer to flight authorization. It is a type of special use airspace."
+    },
+    "citation": "AIM §3-4-4",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "cfa",
+      "special-use-airspace"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|cfa|acr_015"
+  },
+  {
+    "id": "ACR-016",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"CFR\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Code of Federal Regulations."
+      },
+      {
+        "id": "B",
+        "text": "Certified Flight Requirements."
+      },
+      {
+        "id": "C",
+        "text": "Central Flight Record."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CFR stands for Code of Federal Regulations — the codification of the general and permanent rules published in the Federal Register by U.S. executive departments and agencies.",
+    "explanation_distractors": {
+      "B": "CFR does not stand for Certified Flight Requirements. It is the Code of Federal Regulations.",
+      "C": "CFR is not a flight record. It is the complete collection of federal regulations."
+    },
+    "citation": "ecfr.gov",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "cfr",
+      "regulations"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|cfr|acr_016"
+  },
+  {
+    "id": "ACR-017",
+    "category": "Loading & Performance",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"CG\" stand for in aircraft operations?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Center of Gravity."
+      },
+      {
+        "id": "B",
+        "text": "Control Group."
+      },
+      {
+        "id": "C",
+        "text": "Course Guidance."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CG stands for Center of Gravity — the balance point of the aircraft system. An improper CG can degrade stability and control.",
+    "explanation_distractors": {
+      "B": "Control Group is not what CG means in aviation. CG refers to the balance point of the aircraft.",
+      "C": "CG is not navigation guidance. It is the Center of Gravity."
+    },
+    "citation": "FAA-H-8083-25B Ch. 10",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "cg",
+      "weight-balance"
+    ],
+    "acs_code": "UA.V.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|cg|acr_017"
+  },
+  {
+    "id": "ACR-018",
+    "category": "Loading & Performance",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"CP\" stand for in aerodynamics?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Center of Pressure."
+      },
+      {
+        "id": "B",
+        "text": "Critical Point."
+      },
+      {
+        "id": "C",
+        "text": "Constant Power."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CP stands for Center of Pressure — the point along the wing chord where the total aerodynamic force is considered to act. Its position changes with angle of attack.",
+    "explanation_distractors": {
+      "B": "Critical Point is not the aviation meaning of CP. CP describes where aerodynamic forces concentrate.",
+      "C": "Constant Power is not what CP means. It refers to the Center of Pressure on an airfoil."
+    },
+    "citation": "FAA-H-8083-25B Ch. 5",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "cp",
+      "aerodynamics"
+    ],
+    "acs_code": "UA.V.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|cp|acr_018"
+  },
+  {
+    "id": "ACR-019",
+    "category": "Crew Resource Management",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"CRM\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Crew Resource Management."
+      },
+      {
+        "id": "B",
+        "text": "Crash Recovery Mission."
+      },
+      {
+        "id": "C",
+        "text": "Controlled Route Mapping."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CRM stands for Crew Resource Management — the effective use of all available resources (people, equipment, information) to improve safety and decision making during flight operations.",
+    "explanation_distractors": {
+      "B": "CRM is not about crash recovery. It focuses on proactive safety through resource management.",
+      "C": "CRM has nothing to do with route mapping. It is a team-based safety management approach."
+    },
+    "citation": "FAA-H-8083-2",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "crm",
+      "safety"
+    ],
+    "acs_code": "UA.V.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|crm|acr_019"
+  },
+  {
+    "id": "ACR-020",
+    "category": "Radio Communications",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"CTAF\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Common Traffic Advisory Frequency."
+      },
+      {
+        "id": "B",
+        "text": "Controlled Tower Approach Frequency."
+      },
+      {
+        "id": "C",
+        "text": "Central Terminal Area Frequency."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CTAF stands for Common Traffic Advisory Frequency — used for airport advisory practices at non-towered airports. The CTAF may be a UNICOM, MULTICOM, FSS, or tower frequency.",
+    "explanation_distractors": {
+      "B": "CTAF is not a controlled tower frequency. It is the Common Traffic Advisory Frequency.",
+      "C": "CTAF does not refer to a terminal area. It is used for traffic advisories at non-towered airports."
+    },
+    "citation": "AIM §4-1-9",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "ctaf",
+      "communications"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|ctaf|acr_020"
+  },
+  {
+    "id": "ACR-021",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"CTP\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Certification Training Program."
+      },
+      {
+        "id": "B",
+        "text": "Commercial Transport Pilot."
+      },
+      {
+        "id": "C",
+        "text": "Controlled Traffic Pattern."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "CTP stands for Certification Training Program — an FAA-required training program for certain pilot certificates.",
+    "explanation_distractors": {
+      "B": "CTP is not a pilot certificate. It is a training program requirement.",
+      "C": "CTP has nothing to do with traffic patterns. It is a Certification Training Program."
+    },
+    "citation": "FAA Training Programs",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "ctp",
+      "training"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|ctp|acr_021"
+  },
+  {
+    "id": "ACR-022",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"DPE\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Designated Pilot Examiner."
+      },
+      {
+        "id": "B",
+        "text": "Drone Performance Evaluation."
+      },
+      {
+        "id": "C",
+        "text": "Departure Procedure Establishment."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "DPE stands for Designated Pilot Examiner — an individual authorized by the FAA to conduct practical tests for pilot certificates and ratings.",
+    "explanation_distractors": {
+      "B": "DPE is not about drone evaluation. A DPE conducts pilot checkrides on behalf of the FAA.",
+      "C": "DPE has nothing to do with departure procedures. It is a Designated Pilot Examiner."
+    },
+    "citation": "14 CFR §183.23",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "dpe",
+      "certification"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|dpe|acr_022"
+  },
+  {
+    "id": "ACR-023",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"DVFR\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Defense VFR."
+      },
+      {
+        "id": "B",
+        "text": "Direct Visual Flight Route."
+      },
+      {
+        "id": "C",
+        "text": "Designated VFR."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "DVFR stands for Defense VFR — a VFR flight plan that must be filed for flights operating within an Air Defense Identification Zone (ADIZ).",
+    "explanation_distractors": {
+      "B": "DVFR is not a flight route. It is a Defense VFR flight plan required in an ADIZ.",
+      "C": "DVFR does not mean Designated VFR. The D stands for Defense."
+    },
+    "citation": "14 CFR §99.11",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "dvfr",
+      "defense"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|dvfr|acr_023"
+  },
+  {
+    "id": "ACR-024",
+    "category": "Emergency Procedures",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"EMS\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Emergency Services."
+      },
+      {
+        "id": "B",
+        "text": "Electronic Monitoring System."
+      },
+      {
+        "id": "C",
+        "text": "Equipment Maintenance Schedule."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "EMS stands for Emergency Services — medical and rescue services. Drone pilots must avoid interfering with EMS operations.",
+    "explanation_distractors": {
+      "B": "EMS is not an electronic system. It refers to Emergency Services such as medical helicopters and first responders.",
+      "C": "EMS does not refer to maintenance. It stands for Emergency Services."
+    },
+    "citation": "14 CFR §107.45",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "ems",
+      "emergency"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|ems|acr_024"
+  },
+  {
+    "id": "ACR-025",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"FAA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Federal Aviation Administration."
+      },
+      {
+        "id": "B",
+        "text": "Federal Airspace Authority."
+      },
+      {
+        "id": "C",
+        "text": "Flight Authorization Agency."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FAA stands for Federal Aviation Administration — the U.S. government agency responsible for regulating civil aviation.",
+    "explanation_distractors": {
+      "B": "The FAA is not called the Federal Airspace Authority. It is the Federal Aviation Administration.",
+      "C": "FAA does not stand for Flight Authorization Agency."
+    },
+    "citation": "49 USC §106",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "faa"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|faa|acr_025"
+  },
+  {
+    "id": "ACR-026",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"FADEC\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Full Authority Digital Engine Control."
+      },
+      {
+        "id": "B",
+        "text": "Federal Air Defense Emergency Command."
+      },
+      {
+        "id": "C",
+        "text": "Flight and Data Electronic Console."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FADEC stands for Full Authority Digital Engine Control — a system that manages all aspects of engine performance digitally.",
+    "explanation_distractors": {
+      "B": "FADEC is not a defense command. It is an engine management computer system.",
+      "C": "FADEC is not a console. It is a Full Authority Digital Engine Control system."
+    },
+    "citation": "FAA-H-8083-25B",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "fadec",
+      "systems"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|fadec|acr_026"
+  },
+  {
+    "id": "ACR-027",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "In the context of the alcohol and drug testing rules, what does \"FDA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Federal Drug Administration."
+      },
+      {
+        "id": "B",
+        "text": "Flight Duty Assignment."
+      },
+      {
+        "id": "C",
+        "text": "Federal Drone Authorization."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FDA stands for Federal Drug Administration — the agency relevant to medication and substance regulations that affect pilot fitness for duty.",
+    "explanation_distractors": {
+      "B": "FDA does not refer to duty assignments. It is the Federal Drug Administration.",
+      "C": "FDA has nothing to do with drone authorization."
+    },
+    "citation": "14 CFR §91.17",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "fda",
+      "medications"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|fda|acr_027"
+  },
+  {
+    "id": "ACR-028",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"FDC\" stand for in the context of NOTAMs?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Flight Data Center."
+      },
+      {
+        "id": "B",
+        "text": "Federal Drone Command."
+      },
+      {
+        "id": "C",
+        "text": "Flight Dispatch Control."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FDC stands for Flight Data Center — a regulatory NOTAM type. Temporary Flight Restrictions (TFRs) are issued as FDC NOTAMs.",
+    "explanation_distractors": {
+      "B": "FDC is not a drone command. FDC NOTAMs are regulatory notices from the Flight Data Center.",
+      "C": "FDC does not mean Flight Dispatch Control. It is the source of regulatory NOTAMs."
+    },
+    "citation": "AIM §5-1-3",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "fdc",
+      "notam"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|fdc|acr_028"
+  },
+  {
+    "id": "ACR-029",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"FL\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Flight Level."
+      },
+      {
+        "id": "B",
+        "text": "Final Leg."
+      },
+      {
+        "id": "C",
+        "text": "Fuel Limit."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FL stands for Flight Level — a standard nominal altitude expressed in hundreds of feet (e.g., FL180 = 18,000 feet MSL). Flight levels begin at 18,000 feet MSL.",
+    "explanation_distractors": {
+      "B": "FL does not mean Final Leg. It designates altitude levels above 18,000 feet.",
+      "C": "FL is not related to fuel. It is a pressure altitude reference."
+    },
+    "citation": "AIM §3-1-1",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "fl",
+      "altitude"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|fl|acr_029"
+  },
+  {
+    "id": "ACR-030",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"FRZ\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Flight Restriction Zone."
+      },
+      {
+        "id": "B",
+        "text": "Federal Radar Zone."
+      },
+      {
+        "id": "C",
+        "text": "Fuel Reserve Zone."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FRZ stands for Flight Restriction Zone — a defined area of airspace (most notably around Washington, D.C.) where flight is restricted or prohibited.",
+    "explanation_distractors": {
+      "B": "FRZ does not refer to radar. It is a Flight Restriction Zone.",
+      "C": "FRZ has nothing to do with fuel. It restricts flight in certain airspace."
+    },
+    "citation": "14 CFR §93 Subpart V",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "frz",
+      "restricted-airspace"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|frz|acr_030"
+  },
+  {
+    "id": "ACR-031",
+    "category": "Radio Communications",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"FS\" stand for in FAA services?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Flight Service."
+      },
+      {
+        "id": "B",
+        "text": "Federal Security."
+      },
+      {
+        "id": "C",
+        "text": "Fuel Station."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FS stands for Flight Service — providing pilot briefings, weather, NOTAM processing, flight plan services, and aeronautical information.",
+    "explanation_distractors": {
+      "B": "FS does not mean Federal Security. It is Flight Service.",
+      "C": "FS is not related to fuel. It refers to the Flight Service system."
+    },
+    "citation": "AIM §7-1-2",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "fs",
+      "flight-service"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|fs|acr_031"
+  },
+  {
+    "id": "ACR-032",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"FSDO\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Flight Standards District Office."
+      },
+      {
+        "id": "B",
+        "text": "Federal Safety and Drone Operations."
+      },
+      {
+        "id": "C",
+        "text": "Flight Service Dispatch Office."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FSDO stands for Flight Standards District Office — local FAA offices responsible for certification and surveillance of airmen, flight schools, and air operators.",
+    "explanation_distractors": {
+      "B": "FSDO is not about drones specifically. It is a general FAA field office.",
+      "C": "FSDO is not a dispatch office. It oversees flight standards in a geographic district."
+    },
+    "citation": "FAA Organization",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "fsdo",
+      "faa-organization"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|fsdo|acr_032"
+  },
+  {
+    "id": "ACR-033",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"IAP\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Instrument Approach Procedures."
+      },
+      {
+        "id": "B",
+        "text": "Initial Approach Point."
+      },
+      {
+        "id": "C",
+        "text": "International Airport Protocol."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "IAP stands for Instrument Approach Procedures — series of predetermined maneuvers for the orderly transfer of an aircraft under instrument flight conditions.",
+    "explanation_distractors": {
+      "B": "While 'Initial Approach Point' is a concept, IAP officially stands for Instrument Approach Procedures.",
+      "C": "IAP is not an international protocol. It refers to instrument landing procedures."
+    },
+    "citation": "AIM §5-4-1",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "iap",
+      "instrument"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|iap|acr_033"
+  },
+  {
+    "id": "ACR-034",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"ICAO\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "International Civil Aviation Organization."
+      },
+      {
+        "id": "B",
+        "text": "International Commercial Airline Operations."
+      },
+      {
+        "id": "C",
+        "text": "Interstate Civil Aircraft Oversight."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ICAO stands for International Civil Aviation Organization — the United Nations agency that sets international aviation standards and practices.",
+    "explanation_distractors": {
+      "B": "ICAO is not about commercial airlines. It is the UN agency for international civil aviation standards.",
+      "C": "ICAO is an international body, not an interstate oversight agency."
+    },
+    "citation": "ICAO Convention",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "icao",
+      "international"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|icao|acr_034"
+  },
+  {
+    "id": "ACR-035",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"IFR\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Instrument Flight Rules."
+      },
+      {
+        "id": "B",
+        "text": "Initial Flight Restriction."
+      },
+      {
+        "id": "C",
+        "text": "International Flight Regulations."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "IFR stands for Instrument Flight Rules — the rules governing flight when visual reference to the ground is not possible. Part 107 operations are conducted under VFR, not IFR.",
+    "explanation_distractors": {
+      "B": "IFR is not about restrictions. It is a set of flight rules for low-visibility conditions.",
+      "C": "IFR is not international. It is the Instrument Flight Rules system."
+    },
+    "citation": "14 CFR §91 Subpart C",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "ifr",
+      "flight-rules"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|ifr|acr_035"
+  },
+  {
+    "id": "ACR-036",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "On sectional charts, what does \"IR\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Instrument Routes."
+      },
+      {
+        "id": "B",
+        "text": "Inactive Runway."
+      },
+      {
+        "id": "C",
+        "text": "Instrument Restriction."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "IR stands for Instrument Routes — military training routes flown under IFR. On sectional charts, IR routes with four-digit numbers are flown at or below 1,500 ft AGL.",
+    "explanation_distractors": {
+      "B": "IR does not mean Inactive Runway. It labels Instrument Routes for military training.",
+      "C": "IR is not an instrument restriction. It identifies specific military training routes."
+    },
+    "citation": "AIM §3-5-2",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "ir",
+      "military-routes",
+      "sectional"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|ir|acr_036"
+  },
+  {
+    "id": "ACR-037",
+    "category": "Weather",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"ISA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "International Standard Atmosphere."
+      },
+      {
+        "id": "B",
+        "text": "Instrument Safety Advisory."
+      },
+      {
+        "id": "C",
+        "text": "Interstate Security Area."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "ISA stands for International Standard Atmosphere — a model atmosphere used as a reference (15°C at sea level, standard pressure 29.92 inHg). Deviations from ISA affect density altitude.",
+    "explanation_distractors": {
+      "B": "ISA is not a safety advisory. It is the standard model atmosphere used in aviation calculations.",
+      "C": "ISA has nothing to do with security. It is the International Standard Atmosphere."
+    },
+    "citation": "ICAO Doc 7488",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "isa",
+      "atmosphere",
+      "performance"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|isa|acr_037"
+  },
+  {
+    "id": "ACR-038",
+    "category": "Radio Communications",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"LAA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Local Airport Advisory."
+      },
+      {
+        "id": "B",
+        "text": "Low Altitude Approach."
+      },
+      {
+        "id": "C",
+        "text": "Landing Area Authorization."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "LAA stands for Local Airport Advisory — a service provided by facilities at airports not served by a control tower, giving pilots information about wind, runway, and traffic.",
+    "explanation_distractors": {
+      "B": "LAA is not a type of approach. It is a local advisory service.",
+      "C": "LAA does not refer to authorization. It is a Local Airport Advisory service."
+    },
+    "citation": "AIM §3-5-1",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "laa",
+      "advisory"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|laa|acr_038"
+  },
+  {
+    "id": "ACR-039",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"MAP\" stand for in instrument procedures?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Missed Approach Point."
+      },
+      {
+        "id": "B",
+        "text": "Maximum Altitude Point."
+      },
+      {
+        "id": "C",
+        "text": "Military Approach Pattern."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MAP stands for Missed Approach Point — the point in an instrument approach at which the pilot must execute a missed approach if the runway is not in sight.",
+    "explanation_distractors": {
+      "B": "MAP does not refer to a maximum altitude. It is the decision point on an instrument approach.",
+      "C": "MAP is not a military pattern. It is the Missed Approach Point."
+    },
+    "citation": "AIM §5-4-5",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "map",
+      "instrument"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|map|acr_039"
+  },
+  {
+    "id": "ACR-040",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"MDA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Minimum Descent Altitude."
+      },
+      {
+        "id": "B",
+        "text": "Maximum Drone Altitude."
+      },
+      {
+        "id": "C",
+        "text": "Military Defense Area."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MDA stands for Minimum Descent Altitude — the lowest altitude to which descent is authorized on a non-precision instrument approach until the pilot sees the required visual references.",
+    "explanation_distractors": {
+      "B": "MDA is not related to drones. It is a non-precision instrument approach altitude.",
+      "C": "MDA does not mean Military Defense Area. It is the Minimum Descent Altitude."
+    },
+    "citation": "AIM §5-4-5",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "mda",
+      "instrument"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|mda|acr_040"
+  },
+  {
+    "id": "ACR-041",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"MEL\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Minimum Equipment List."
+      },
+      {
+        "id": "B",
+        "text": "Maximum Elevation Level."
+      },
+      {
+        "id": "C",
+        "text": "Military Equipment Listing."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MEL stands for Minimum Equipment List — a document that allows an aircraft to be operated with certain items of equipment inoperative under specific conditions.",
+    "explanation_distractors": {
+      "B": "MEL is not an elevation reference. It lists equipment that may be inoperative for dispatch.",
+      "C": "MEL has nothing to do with military equipment. It is a Minimum Equipment List."
+    },
+    "citation": "14 CFR §91.213",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "mel",
+      "equipment"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|mel|acr_041"
+  },
+  {
+    "id": "ACR-042",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"MFD\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Multi-functional Displays."
+      },
+      {
+        "id": "B",
+        "text": "Minimum Flight Distance."
+      },
+      {
+        "id": "C",
+        "text": "Military Flight Directive."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MFD stands for Multi-functional Displays — cockpit screens that can show multiple types of information including navigation, weather, and traffic.",
+    "explanation_distractors": {
+      "B": "MFD is not a distance measurement. It refers to electronic display screens.",
+      "C": "MFD has nothing to do with military directives. It is a cockpit display system."
+    },
+    "citation": "FAA-H-8083-25B",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "mfd",
+      "cockpit"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|mfd|acr_042"
+  },
+  {
+    "id": "ACR-043",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"MOA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Military Operations Area."
+      },
+      {
+        "id": "B",
+        "text": "Mandatory Operating Altitude."
+      },
+      {
+        "id": "C",
+        "text": "Maximum Operating Area."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MOA stands for Military Operations Area — airspace established outside Class A to separate certain nonhazardous military activities from IFR traffic and identify the area for VFR pilots.",
+    "explanation_distractors": {
+      "B": "MOA is not an altitude requirement. It is a type of special use airspace.",
+      "C": "MOA does not mean Maximum Operating Area. It designates military training airspace."
+    },
+    "citation": "AIM §3-4-5",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "moa",
+      "special-use-airspace"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|moa|acr_043"
+  },
+  {
+    "id": "ACR-044",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"MSL\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Mean Sea Level."
+      },
+      {
+        "id": "B",
+        "text": "Maximum Safety Limit."
+      },
+      {
+        "id": "C",
+        "text": "Minimum Separation Lateral."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MSL stands for Mean Sea Level — many charted altitudes, airspace floors, and ceilings are expressed as feet above MSL.",
+    "explanation_distractors": {
+      "B": "MSL is not a safety limit. It is the reference datum for altitude measurement.",
+      "C": "MSL has nothing to do with lateral separation. It means Mean Sea Level."
+    },
+    "citation": "AIM §3-1-1",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "msl",
+      "altitude"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|msl|acr_044"
+  },
+  {
+    "id": "ACR-045",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"MTR\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Military Training Route."
+      },
+      {
+        "id": "B",
+        "text": "Maximum Transition Rate."
+      },
+      {
+        "id": "C",
+        "text": "Minimum Terrain Restriction."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "MTR stands for Military Training Route — routes used for military training at airspeeds greater than 250 knots. Routes with 4-digit numbers are flown at or below 1,500 ft AGL.",
+    "explanation_distractors": {
+      "B": "MTR is not a transition rate. It identifies routes for high-speed military training flights.",
+      "C": "MTR has nothing to do with terrain restrictions. It designates Military Training Routes."
+    },
+    "citation": "AIM §3-5-2",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "mtr",
+      "military-routes"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|mtr|acr_045"
+  },
+  {
+    "id": "ACR-046",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"NACG\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "National Aeronautical Charting Group."
+      },
+      {
+        "id": "B",
+        "text": "National Aviation Control Grid."
+      },
+      {
+        "id": "C",
+        "text": "Non-standard Approach Control Group."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "NACG stands for National Aeronautical Charting Group — the organization responsible for producing aeronautical charts including sectional and terminal area charts.",
+    "explanation_distractors": {
+      "B": "NACG is not a control grid. It produces the charts pilots use for navigation.",
+      "C": "NACG has nothing to do with approach control. It is the charting organization."
+    },
+    "citation": "FAA Charting Program",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "nacg",
+      "charts"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|nacg|acr_046"
+  },
+  {
+    "id": "ACR-047",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"NASA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "National Aeronautics and Space Administration."
+      },
+      {
+        "id": "B",
+        "text": "National Airspace Safety Authority."
+      },
+      {
+        "id": "C",
+        "text": "North American Surveillance Agency."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "NASA stands for National Aeronautics and Space Administration. Pilots may file confidential safety reports through NASA's ASRS (Aviation Safety Reporting System).",
+    "explanation_distractors": {
+      "B": "NASA is not a safety authority. It is the space and aeronautics research agency.",
+      "C": "NASA is not a surveillance agency. It conducts aeronautics and space research."
+    },
+    "citation": "NASA ASRS Program",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "nasa",
+      "asrs"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|nasa|acr_047"
+  },
+  {
+    "id": "ACR-048",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"NAS\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "National Airspace System."
+      },
+      {
+        "id": "B",
+        "text": "Non-Authorized Space."
+      },
+      {
+        "id": "C",
+        "text": "North American Sector."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "NAS stands for National Airspace System — the common network of U.S. airspace including air navigation facilities, equipment, services, airports, and rules.",
+    "explanation_distractors": {
+      "B": "NAS does not mean non-authorized space. It encompasses all U.S. airspace and supporting infrastructure.",
+      "C": "NAS is not a geographic sector. It is the National Airspace System."
+    },
+    "citation": "AIM Glossary",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "nas",
+      "airspace"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|nas|acr_048"
+  },
+  {
+    "id": "ACR-049",
+    "category": "Operations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"NM\" stand for in aviation?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Nautical Miles."
+      },
+      {
+        "id": "B",
+        "text": "Normal Mode."
+      },
+      {
+        "id": "C",
+        "text": "Navigation Marker."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "NM stands for Nautical Miles — used for aviation distances and speed references (knots). One nautical mile equals approximately 1.15 statute miles.",
+    "explanation_distractors": {
+      "B": "NM does not refer to an operating mode. It is a unit of distance.",
+      "C": "NM is not a navigation marker. It stands for Nautical Miles."
+    },
+    "citation": "AIM Glossary",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "nm",
+      "navigation"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|nm|acr_049"
+  },
+  {
+    "id": "ACR-050",
+    "category": "Weather",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"NOAA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "National Oceanic and Atmospheric Administration."
+      },
+      {
+        "id": "B",
+        "text": "National Operations and Aviation Authority."
+      },
+      {
+        "id": "C",
+        "text": "North American Observation Agency."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "NOAA stands for National Oceanic and Atmospheric Administration — the agency that provides weather data including aviation weather products.",
+    "explanation_distractors": {
+      "B": "NOAA is not an aviation authority. It focuses on oceanic and atmospheric science.",
+      "C": "NOAA is not an observation agency. It is the National Oceanic and Atmospheric Administration."
+    },
+    "citation": "noaa.gov",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "noaa",
+      "weather"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|noaa|acr_050"
+  },
+  {
+    "id": "ACR-051",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"NOTAM\" stand for according to current FAA terminology (2025)?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Notice to Airmen."
+      },
+      {
+        "id": "B",
+        "text": "Notice to Air Missions."
+      },
+      {
+        "id": "C",
+        "text": "National Operations and Traffic Advisory Message."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "NOTAM stands for Notice to Airmen. FAA Order JO 7930.2U changed the term back to 'Notice to Airmen' effective 2025.",
+    "explanation_distractors": {
+      "B": "'Notice to Air Missions' was briefly used but the current FAA order reverted to Notice to Airmen.",
+      "C": "NOTAM does not stand for any version with 'Traffic Advisory Message.'"
+    },
+    "citation": "FAA Order JO 7930.2U",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "notam",
+      "current-terminology"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|notam|acr_051"
+  },
+  {
+    "id": "ACR-052",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"NSA\" stand for in aviation charting?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "National Security Area."
+      },
+      {
+        "id": "B",
+        "text": "No-fly Safety Area."
+      },
+      {
+        "id": "C",
+        "text": "Non-Standard Airspace."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "NSA stands for National Security Area — airspace where there is a requirement for increased security of ground facilities. Flight in NSAs is voluntarily avoided.",
+    "explanation_distractors": {
+      "B": "NSA is not labeled a 'no-fly' area. Pilots are requested but not required to avoid them.",
+      "C": "NSA does not mean non-standard airspace. It is a National Security Area."
+    },
+    "citation": "AIM §3-4-8",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "nsa",
+      "security"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|nsa|acr_052"
+  },
+  {
+    "id": "ACR-053",
+    "category": "Physiology",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"OTC\" stand for in the context of pilot medications?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Over-the-Counter."
+      },
+      {
+        "id": "B",
+        "text": "Operational Test Certificate."
+      },
+      {
+        "id": "C",
+        "text": "Outside Traffic Control."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "OTC stands for Over-the-Counter — referring to medications available without a prescription. Some OTC medications can impair pilot performance.",
+    "explanation_distractors": {
+      "B": "OTC in the medication context is not a certificate. It describes non-prescription drugs.",
+      "C": "OTC does not refer to traffic control when discussing pilot fitness."
+    },
+    "citation": "14 CFR §91.17",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "otc",
+      "medications",
+      "fitness"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|otc|acr_053"
+  },
+  {
+    "id": "ACR-054",
+    "category": "Crew Resource Management",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"PAVE\" stand for as a risk assessment checklist?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "PIC (or Pilot) – Aircraft – enVironment – External pressures."
+      },
+      {
+        "id": "B",
+        "text": "Procedure – Altitude – Visibility – Equipment."
+      },
+      {
+        "id": "C",
+        "text": "Plan – Assess – Verify – Execute."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "PAVE stands for Pilot, Aircraft, enVironment, External pressures — a structured checklist for assessing risk before and during flight.",
+    "explanation_distractors": {
+      "B": "PAVE does not include altitude or visibility. It evaluates four risk categories.",
+      "C": "PAVE is not a process flow. It categorizes risk into Pilot, Aircraft, enVironment, and External pressures."
+    },
+    "citation": "FAA-H-8083-2",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "pave",
+      "risk-management"
+    ],
+    "acs_code": "UA.V.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|pave|acr_054"
+  },
+  {
+    "id": "ACR-055",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"POH\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Pilot's Operating Handbook."
+      },
+      {
+        "id": "B",
+        "text": "Primary Operations Hub."
+      },
+      {
+        "id": "C",
+        "text": "Post-Operation Hazard."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "POH stands for Pilot's Operating Handbook — the document containing operating procedures and performance data for a specific aircraft model.",
+    "explanation_distractors": {
+      "B": "POH is not a facility. It is the operating manual for the aircraft.",
+      "C": "POH has nothing to do with hazards. It is the Pilot's Operating Handbook."
+    },
+    "citation": "14 CFR §91.9",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "poh",
+      "documentation"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|poh|acr_055"
+  },
+  {
+    "id": "ACR-056",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"SAO\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Special Area of Operation."
+      },
+      {
+        "id": "B",
+        "text": "Standard Approach Overlay."
+      },
+      {
+        "id": "C",
+        "text": "Surveillance and Observation."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "SAO stands for Special Area of Operation — a designated area where certain operations or activities are conducted under specific conditions.",
+    "explanation_distractors": {
+      "B": "SAO is not an approach overlay. It designates special operational areas.",
+      "C": "SAO does not refer to surveillance. It is a Special Area of Operation."
+    },
+    "citation": "AIM Glossary",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "sao",
+      "operations"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|sao|acr_056"
+  },
+  {
+    "id": "ACR-057",
+    "category": "Weather",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"SIGMET\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Significant Meteorological Information."
+      },
+      {
+        "id": "B",
+        "text": "Signal Meteorological Emergency Transmission."
+      },
+      {
+        "id": "C",
+        "text": "Standard Instrument Ground Meteorological Terminal."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "SIGMET stands for Significant Meteorological Information — an advisory for weather significant to the safety of all aircraft, covering severe turbulence, severe icing, and widespread dust or sandstorms.",
+    "explanation_distractors": {
+      "B": "SIGMET is not an emergency transmission. It is a weather advisory product.",
+      "C": "SIGMET has nothing to do with ground terminals. It is Significant Meteorological Information."
+    },
+    "citation": "AIM §7-1-5",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "sigmet",
+      "weather-advisory"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|sigmet|acr_057"
+  },
+  {
+    "id": "ACR-058",
+    "category": "Operations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"SOP\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Standard Operating Procedures."
+      },
+      {
+        "id": "B",
+        "text": "Safety Operations Protocol."
+      },
+      {
+        "id": "C",
+        "text": "Scheduled Operating Plan."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "SOP stands for Standard Operating Procedures — documented procedures to ensure consistency and safety in operations.",
+    "explanation_distractors": {
+      "B": "SOP does not specifically stand for Safety Operations Protocol, although SOPs improve safety.",
+      "C": "SOP is not a scheduling plan. It is Standard Operating Procedures."
+    },
+    "citation": "FAA-H-8083-2",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "sop",
+      "procedures"
+    ],
+    "acs_code": "UA.V.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|sop|acr_058"
+  },
+  {
+    "id": "ACR-059",
+    "category": "Weather",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"TCU\" stand for in weather reports?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Towering Cumulus."
+      },
+      {
+        "id": "B",
+        "text": "Terminal Control Unit."
+      },
+      {
+        "id": "C",
+        "text": "Turbulence Caution Update."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "TCU stands for Towering Cumulus — rapidly growing cumulus clouds that may develop into cumulonimbus (thunderstorm) clouds. An indicator of atmospheric instability.",
+    "explanation_distractors": {
+      "B": "TCU in weather context is not a control unit. It identifies developing storm clouds.",
+      "C": "TCU is not a turbulence update. It describes a specific cloud type."
+    },
+    "citation": "AIM §7-1-29",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "tcu",
+      "clouds",
+      "weather"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|tcu|acr_059"
+  },
+  {
+    "id": "ACR-060",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"TFR\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Temporary Flight Restriction."
+      },
+      {
+        "id": "B",
+        "text": "Terminal Frequency Range."
+      },
+      {
+        "id": "C",
+        "text": "Traffic Flow Regulation."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "TFR stands for Temporary Flight Restriction — a temporary airspace restriction commonly issued for security, VIP movement, disasters, major events, or safety. TFRs are issued as FDC NOTAMs.",
+    "explanation_distractors": {
+      "B": "TFR is not related to frequencies. It restricts flight in a defined area temporarily.",
+      "C": "TFR does not regulate traffic flow. It temporarily restricts flight in specific airspace."
+    },
+    "citation": "14 CFR §91.137-139",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "tfr",
+      "notam",
+      "restrictions"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|tfr|acr_060"
+  },
+  {
+    "id": "ACR-061",
+    "category": "Operations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"TN\" stand for in navigation?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "True North."
+      },
+      {
+        "id": "B",
+        "text": "Terminal Navigation."
+      },
+      {
+        "id": "C",
+        "text": "Transition Notice."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "TN stands for True North — the direction toward the geographic North Pole. It differs from magnetic north by the amount of magnetic variation.",
+    "explanation_distractors": {
+      "B": "TN is not about terminal navigation. It refers to the geographic North Pole direction.",
+      "C": "TN does not mean Transition Notice. It stands for True North."
+    },
+    "citation": "AIM Glossary",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "tn",
+      "navigation",
+      "compass"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|tn|acr_061"
+  },
+  {
+    "id": "ACR-062",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"TRSA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Terminal Radar Service Area."
+      },
+      {
+        "id": "B",
+        "text": "Temporary Restricted Safety Area."
+      },
+      {
+        "id": "C",
+        "text": "Traffic Routing and Separation Area."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "TRSA stands for Terminal Radar Service Area — airspace surrounding certain airports where ATC provides radar services on a voluntary basis. Participation is not mandatory.",
+    "explanation_distractors": {
+      "B": "TRSA is not a restricted area. Participation in TRSA services is voluntary.",
+      "C": "TRSA does not regulate routing. It is a voluntary radar service area."
+    },
+    "citation": "AIM §3-5-5",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "trsa",
+      "radar"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|trsa|acr_062"
+  },
+  {
+    "id": "ACR-063",
+    "category": "Physiology",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"TUC\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Time of Useful Consciousness."
+      },
+      {
+        "id": "B",
+        "text": "Terminal Usage Certificate."
+      },
+      {
+        "id": "C",
+        "text": "Traffic Update Channel."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "TUC stands for Time of Useful Consciousness — the time between losing pressurization (or oxygen supply) and the point where a person can no longer take effective action.",
+    "explanation_distractors": {
+      "B": "TUC is not a certificate. It measures the time available before incapacitation from hypoxia.",
+      "C": "TUC has nothing to do with traffic. It is a physiological concept."
+    },
+    "citation": "FAA-H-8083-25B Ch. 17",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "tuc",
+      "physiology",
+      "hypoxia"
+    ],
+    "acs_code": "UA.V.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|tuc|acr_063"
+  },
+  {
+    "id": "ACR-064",
+    "category": "Radio Communications",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"UNICOM\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Aeronautical Advisory Communications Stations."
+      },
+      {
+        "id": "B",
+        "text": "Universal Communications Module."
+      },
+      {
+        "id": "C",
+        "text": "Unified Navigation and Information Command."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UNICOM stands for Aeronautical Advisory Communications Stations — nongovernment facilities that may provide airport information at certain airports. Frequencies are shown on charts.",
+    "explanation_distractors": {
+      "B": "UNICOM is not a communications module. It is a nongovernment advisory facility.",
+      "C": "UNICOM is not a navigation command. It provides airport advisory information."
+    },
+    "citation": "AIM §4-1-11",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "unicom",
+      "communications"
+    ],
+    "acs_code": "UA.III.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|unicom|acr_064"
+  },
+  {
+    "id": "ACR-065",
+    "category": "Operations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"UTC\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Coordinated Universal Time."
+      },
+      {
+        "id": "B",
+        "text": "Unmanned Traffic Control."
+      },
+      {
+        "id": "C",
+        "text": "Universal Terminal Communications."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "UTC stands for Coordinated Universal Time — the global time standard used in aviation. METARs, TAFs, and NOTAMs use UTC (also called Zulu time).",
+    "explanation_distractors": {
+      "B": "UTC is not about unmanned traffic. It is the universal time standard.",
+      "C": "UTC has nothing to do with terminal communications. It is Coordinated Universal Time."
+    },
+    "citation": "AIM Glossary",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "utc",
+      "zulu-time"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|utc|acr_065"
+  },
+  {
+    "id": "ACR-066",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"VFR\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Visual Flight Rules."
+      },
+      {
+        "id": "B",
+        "text": "Variable Frequency Range."
+      },
+      {
+        "id": "C",
+        "text": "Verified Flight Route."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "VFR stands for Visual Flight Rules — the rules governing flight when there is sufficient visibility to navigate by visual reference. All Part 107 operations are conducted under VFR weather minimums.",
+    "explanation_distractors": {
+      "B": "VFR is not a frequency range. It is a set of flight rules for visual conditions.",
+      "C": "VFR does not mean a verified route. It is Visual Flight Rules."
+    },
+    "citation": "14 CFR §91 Subpart B",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "vfr",
+      "flight-rules"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|vfr|acr_066"
+  },
+  {
+    "id": "ACR-067",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "On sectional charts, what does \"VR\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Visual Routes (military training routes flown under VFR)."
+      },
+      {
+        "id": "B",
+        "text": "Variable Range."
+      },
+      {
+        "id": "C",
+        "text": "VFR Restriction."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "VR stands for Visual Routes — military training routes flown under VFR. Like IR routes, routes with 4-digit numbers have segments at or below 1,500 ft AGL.",
+    "explanation_distractors": {
+      "B": "VR does not mean Variable Range. It identifies VFR military training routes.",
+      "C": "VR is not a VFR restriction. It labels specific military training routes."
+    },
+    "citation": "AIM §3-5-2",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "vr",
+      "military-routes",
+      "sectional"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|vr|acr_067"
+  },
+  {
+    "id": "ACR-068",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"VO\" stand for under Part 107?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Visual Observer."
+      },
+      {
+        "id": "B",
+        "text": "Verification Officer."
+      },
+      {
+        "id": "C",
+        "text": "Variable Output."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "VO stands for Visual Observer — an optional crewmember who helps maintain situational awareness by watching the aircraft and scanning for hazards.",
+    "explanation_distractors": {
+      "B": "VO is not a verification officer. It is a crew role in sUAS operations.",
+      "C": "VO does not refer to equipment output. It is the Visual Observer role."
+    },
+    "citation": "14 CFR §107.33",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "vo",
+      "crew-roles"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|vo|acr_068"
+  },
+  {
+    "id": "ACR-069",
+    "category": "Loading & Performance",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"W&B\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Weight and Balance."
+      },
+      {
+        "id": "B",
+        "text": "Wind and Barometer."
+      },
+      {
+        "id": "C",
+        "text": "Waypoint and Bearing."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "W&B stands for Weight and Balance — the process of verifying that an aircraft's weight is within limits and its center of gravity is within the allowable range.",
+    "explanation_distractors": {
+      "B": "W&B does not refer to weather instruments. It is about aircraft weight and its balance point.",
+      "C": "W&B is not about navigation waypoints. It concerns Weight and Balance."
+    },
+    "citation": "FAA-H-8083-25B Ch. 10",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "w-b",
+      "weight-balance"
+    ],
+    "acs_code": "UA.V.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|wb|acr_069"
+  },
+  {
+    "id": "ACR-070",
+    "category": "Weather",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"WST\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Convective Significant Meteorological Information (Convective SIGMET)."
+      },
+      {
+        "id": "B",
+        "text": "Weather Station Terminal."
+      },
+      {
+        "id": "C",
+        "text": "Wind Shear Test."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "WST stands for Convective Significant Meteorological Information — commonly called a Convective SIGMET, issued for severe thunderstorms, tornadoes, and significant convective activity.",
+    "explanation_distractors": {
+      "B": "WST is not a weather station. It is a convective weather advisory product.",
+      "C": "WST does not refer to wind shear testing. It is a Convective SIGMET."
+    },
+    "citation": "AIM §7-1-5",
+    "difficulty_level": 2,
+    "tags": [
+      "acronym",
+      "wst",
+      "convective-sigmet",
+      "weather"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|wst|acr_070"
+  },
+  {
+    "id": "ACR-071",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does the abbreviation \"RPIC\" stand for in Part 107 operations?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Remote Pilot in Command."
+      },
+      {
+        "id": "B",
+        "text": "Registered Pilot Identification Code."
+      },
+      {
+        "id": "C",
+        "text": "Remote Pilot Instruction Certificate."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "RPIC stands for Remote Pilot in Command — the person who has final authority and responsibility for the operation and safety of a sUAS flight under Part 107.",
+    "explanation_distractors": {
+      "B": "There is no FAA term 'Registered Pilot Identification Code.' RPIC refers to Remote Pilot in Command.",
+      "C": "RPIC does not stand for Instruction Certificate. It is the designated person in command of the flight."
+    },
+    "citation": "14 CFR §107.12",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "rpic",
+      "remote-pilot"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|rpic|acr_071"
+  },
+  {
+    "id": "ACR-072",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "In FAA terminology, what does \"sUAS\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Small Unmanned Aircraft System."
+      },
+      {
+        "id": "B",
+        "text": "Standard Unmanned Aerial Surveillance."
+      },
+      {
+        "id": "C",
+        "text": "Small Utility Aircraft Service."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "sUAS stands for Small Unmanned Aircraft System. Under Part 107, this generally means a drone weighing less than 55 pounds at takeoff, including everything on board or attached.",
+    "explanation_distractors": {
+      "B": "sUAS does not refer to surveillance. It describes the category of small unmanned aircraft systems under Part 107.",
+      "C": "sUAS is not related to utility services. It is the regulatory term for small drones."
+    },
+    "citation": "14 CFR §107.3",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "suas",
+      "definitions"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|suas|acr_072"
+  },
+  {
+    "id": "ACR-073",
+    "category": "Weather",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"METAR\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Meteorological Aerodrome Report."
+      },
+      {
+        "id": "B",
+        "text": "Main Environmental Terminal Analysis Report."
+      },
+      {
+        "id": "C",
+        "text": "Magnetic Elevation Tracking and Recording."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "METAR stands for Meteorological Aerodrome Report — a standardized current weather observation for an airport, usually issued hourly.",
+    "explanation_distractors": {
+      "B": "METAR is not an environmental analysis. It is a standardized airport weather observation.",
+      "C": "METAR has nothing to do with elevation tracking. It reports current weather conditions."
+    },
+    "citation": "AIM §7-1-30",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "metar",
+      "weather-reports"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|metar|acr_073"
+  },
+  {
+    "id": "ACR-074",
+    "category": "Weather",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"TAF\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Terminal Aerodrome Forecast."
+      },
+      {
+        "id": "B",
+        "text": "Traffic Advisory Frequency."
+      },
+      {
+        "id": "C",
+        "text": "Terrain Analysis File."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "TAF stands for Terminal Aerodrome Forecast — a forecast of expected weather within 5 statute miles of the airport terminal area, usually covering 24 to 30 hours.",
+    "explanation_distractors": {
+      "B": "TAF is not a frequency. It is a weather forecast for the airport area.",
+      "C": "TAF has nothing to do with terrain files. It forecasts airport weather conditions."
+    },
+    "citation": "AIM §7-1-31",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "taf",
+      "weather-forecast"
+    ],
+    "acs_code": "UA.IV.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|taf|acr_074"
+  },
+  {
+    "id": "ACR-075",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"VLOS\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Visual Line of Sight."
+      },
+      {
+        "id": "B",
+        "text": "Variable Level Operating Standard."
+      },
+      {
+        "id": "C",
+        "text": "Vertical Launch and Operations System."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "VLOS stands for Visual Line of Sight — the requirement that the RPIC, the person manipulating the controls, or a VO must see the unmanned aircraft throughout the flight with unaided vision (except corrective lenses).",
+    "explanation_distractors": {
+      "B": "VLOS is not an operating standard level. It is a visual tracking requirement.",
+      "C": "VLOS has nothing to do with launch systems. It requires visual contact with the drone."
+    },
+    "citation": "14 CFR §107.31",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "vlos",
+      "visual-line-of-sight"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|vlos|acr_075"
+  },
+  {
+    "id": "ACR-076",
+    "category": "Regulations",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"BVLOS\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Beyond Visual Line of Sight."
+      },
+      {
+        "id": "B",
+        "text": "Basic Visual Location Operating Standard."
+      },
+      {
+        "id": "C",
+        "text": "Broad Visual Landing Operations System."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "BVLOS stands for Beyond Visual Line of Sight — operating a drone when the crew cannot directly see it. This is not routine under Part 107 and generally requires a waiver.",
+    "explanation_distractors": {
+      "B": "BVLOS is not a location standard. It describes operating beyond the pilot's visual range.",
+      "C": "BVLOS has nothing to do with landing. It means the drone is beyond unaided visual range."
+    },
+    "citation": "14 CFR §107.31",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "bvlos",
+      "advanced-operations"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|bvlos|acr_076"
+  },
+  {
+    "id": "ACR-077",
+    "category": "Remote ID",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"FRIA\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "FAA-Recognized Identification Area."
+      },
+      {
+        "id": "B",
+        "text": "Federal Restricted Instrument Approach."
+      },
+      {
+        "id": "C",
+        "text": "Flight Restriction and Information Area."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "FRIA stands for FAA-Recognized Identification Area — a defined area where a drone without Remote ID equipment may operate if it stays within the FRIA and within VLOS.",
+    "explanation_distractors": {
+      "B": "FRIA has nothing to do with instrument approaches. It is a Remote ID exception area.",
+      "C": "FRIA is not a flight restriction zone. It allows non-Remote-ID drones to fly in a defined area."
+    },
+    "citation": "14 CFR §89",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "fria",
+      "remote-id"
+    ],
+    "acs_code": "UA.I.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|fria|acr_077"
+  },
+  {
+    "id": "ACR-078",
+    "category": "Airspace",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"LAANC\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Low Altitude Authorization and Notification Capability."
+      },
+      {
+        "id": "B",
+        "text": "Local Airspace Advisory and Navigation Control."
+      },
+      {
+        "id": "C",
+        "text": "Limited Altitude Access for Non-Commercial."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "LAANC stands for Low Altitude Authorization and Notification Capability — the FAA system that automates many controlled-airspace authorization requests near airports through approved UAS Service Suppliers.",
+    "explanation_distractors": {
+      "B": "LAANC is not an advisory service. It automates airspace authorization for drone pilots.",
+      "C": "LAANC is available for all Part 107 pilots, not just non-commercial operations."
+    },
+    "citation": "FAA UAS Data Exchange",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "laanc",
+      "authorization"
+    ],
+    "acs_code": "UA.III.A.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|laanc|acr_078"
+  },
+  {
+    "id": "ACR-079",
+    "category": "Crew Resource Management",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does the \"IMSAFE\" checklist stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Illness, Medication, Stress, Alcohol, Fatigue, Emotion."
+      },
+      {
+        "id": "B",
+        "text": "Instrument, Maintenance, Safety, Aircraft, Fuel, Equipment."
+      },
+      {
+        "id": "C",
+        "text": "Inspection, Mechanical, System, Alert, Frequency, Emergency."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "IMSAFE stands for Illness, Medication, Stress, Alcohol, Fatigue, Emotion — a personal readiness checklist pilots use to self-assess fitness for duty before flying.",
+    "explanation_distractors": {
+      "B": "IMSAFE is a personal fitness checklist, not an equipment inspection list.",
+      "C": "IMSAFE has nothing to do with mechanical systems. It assesses pilot personal readiness."
+    },
+    "citation": "FAA-H-8083-2",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "imsafe",
+      "fitness",
+      "risk-management"
+    ],
+    "acs_code": "UA.V.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|imsafe|acr_079"
+  },
+  {
+    "id": "ACR-080",
+    "category": "Crew Resource Management",
+    "subcategory": "Acronyms & Abbreviations",
+    "question_text": "What does \"SRM\" stand for?",
+    "figure_reference": null,
+    "options": [
+      {
+        "id": "A",
+        "text": "Single-Pilot Resource Management."
+      },
+      {
+        "id": "B",
+        "text": "Standard Route Mapping."
+      },
+      {
+        "id": "C",
+        "text": "Safety Review Manual."
+      }
+    ],
+    "correct_option_id": "A",
+    "explanation_correct": "SRM stands for Single-Pilot Resource Management — using all available resources (automation, checklists, other people) when one pilot is solely responsible for the operation.",
+    "explanation_distractors": {
+      "B": "SRM is not about route mapping. It is about managing all available resources as a single pilot.",
+      "C": "SRM is not a review manual. It is a pilot resource management concept."
+    },
+    "citation": "FAA-H-8083-2",
+    "difficulty_level": 1,
+    "tags": [
+      "acronym",
+      "srm",
+      "resource-management"
+    ],
+    "acs_code": "UA.V.B.K1",
+    "source": "FAA Remote Pilot Study Guide Appendix 3",
+    "concept_key": "acronym|srm|acr_080"
+  }
+]
