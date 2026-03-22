@@ -8,7 +8,7 @@ import { StandaloneFlipCard } from "../../components/flashcards/StandaloneFlipCa
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
 
-interface PhoneticEntry {
+export interface PhoneticEntry {
   character: string;
   word: string;
   pronunciation: string;
@@ -118,13 +118,33 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-function buildQuizQuestion(
+export function buildQuizQuestion(
   target: PhoneticEntry,
   pool: PhoneticEntry[]
 ): { prompt: string; answer: string; options: string[] } {
-  const distractors = shuffle(pool.filter((e) => e.word !== target.word))
-    .slice(0, 3)
-    .map((e) => e.word);
+  const targetIndex = pool.findIndex((entry) => entry.word === target.word);
+  const distractorIndexes: number[] = [];
+  let offset = 1;
+
+  while (
+    distractorIndexes.length < 2 &&
+    (targetIndex - offset >= 0 || targetIndex + offset < pool.length)
+  ) {
+    if (targetIndex - offset >= 0) {
+      distractorIndexes.push(targetIndex - offset);
+    }
+    if (distractorIndexes.length >= 2) break;
+    if (targetIndex + offset < pool.length) {
+      distractorIndexes.push(targetIndex + offset);
+    }
+    offset += 1;
+  }
+
+  const distractors = distractorIndexes
+    .slice(0, 2)
+    .map((index) => pool[index]?.word)
+    .filter((word): word is string => !!word && word !== target.word);
+
   const options = shuffle([target.word, ...distractors]);
   return {
     prompt: `What is the NATO phonetic word for "${target.character}"?`,
@@ -183,7 +203,7 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
       </div>
 
       {/* Options */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {question.options.map((opt) => {
           const isCorrect = opt === question.answer;
           const isChosen = opt === selected;

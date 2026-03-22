@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Suspense, useMemo } from "react";
-import { STUDY_CATEGORIES } from "@part107/core";
+import { STUDY_CATEGORIES, REAL_EXAM_BLUEPRINT_TARGETS, FULL_EXAM_QUESTION_COUNT } from "@part107/core";
 import {
   QuestionBankError,
   QuestionBankLoading,
@@ -30,7 +30,40 @@ import {
   IconLayers,
   IconGradCap,
   IconProgress,
+  IconRegulations,
+  IconAirspace,
+  IconWeather,
+  IconOperations,
+  IconLoadPerf,
+  IconAirportOps,
+  IconRadio,
+  IconCRM,
+  IconEmergency,
+  IconPhysiology,
+  IconRemoteID,
 } from "./icons";
+
+/* ── Category theming ─────────────────────────────────────────── */
+
+const CATEGORY_THEME: Record<string, {
+  icon: React.ReactNode;
+  color: string;      // text & icon color
+  bg: string;         // icon badge background
+  border: string;     // card left-border accent
+  bar: string;        // progress bar fill
+}> = {
+  Regulations:            { icon: <IconRegulations className="h-5 w-5" />, color: "text-blue-400",    bg: "bg-blue-500/15",    border: "border-l-blue-500/60",    bar: "bg-blue-500/60" },
+  Airspace:               { icon: <IconAirspace className="h-5 w-5" />,    color: "text-cyan-400",    bg: "bg-cyan-500/15",    border: "border-l-cyan-500/60",    bar: "bg-cyan-500/60" },
+  Weather:                { icon: <IconWeather className="h-5 w-5" />,     color: "text-sky-400",     bg: "bg-sky-500/15",     border: "border-l-sky-500/60",     bar: "bg-sky-500/60" },
+  Operations:             { icon: <IconOperations className="h-5 w-5" />,  color: "text-orange-400",  bg: "bg-orange-500/15",  border: "border-l-orange-500/60",  bar: "bg-orange-500/60" },
+  "Loading & Performance":{ icon: <IconLoadPerf className="h-5 w-5" />,   color: "text-purple-400",  bg: "bg-purple-500/15",  border: "border-l-purple-500/60",  bar: "bg-purple-500/60" },
+  "Airport Operations":   { icon: <IconAirportOps className="h-5 w-5" />, color: "text-amber-400",   bg: "bg-amber-500/15",   border: "border-l-amber-500/40",   bar: "bg-amber-500/40" },
+  "Radio Communications": { icon: <IconRadio className="h-5 w-5" />,      color: "text-yellow-400",  bg: "bg-yellow-500/15",  border: "border-l-yellow-500/40",  bar: "bg-yellow-500/40" },
+  "Crew Resource Management":{ icon: <IconCRM className="h-5 w-5" />,     color: "text-rose-400",    bg: "bg-rose-500/15",    border: "border-l-rose-500/40",    bar: "bg-rose-500/40" },
+  "Emergency Procedures": { icon: <IconEmergency className="h-5 w-5" />,  color: "text-red-400",     bg: "bg-red-500/15",     border: "border-l-red-500/40",     bar: "bg-red-500/40" },
+  Physiology:             { icon: <IconPhysiology className="h-5 w-5" />, color: "text-pink-400",    bg: "bg-pink-500/15",    border: "border-l-pink-500/40",    bar: "bg-pink-500/40" },
+  "Remote ID":            { icon: <IconRemoteID className="h-5 w-5" />,   color: "text-indigo-400",  bg: "bg-indigo-500/15",  border: "border-l-indigo-500/40",  bar: "bg-indigo-500/40" },
+};
 
 /* ================================================================== */
 /*  V2 Dashboard — real data from useProgress & useQuestionBank       */
@@ -286,6 +319,97 @@ function DashboardContent() {
         </div>
       </section>
 
+      {/* ---- About the Real Exam ---- */}
+      <section className="overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)]">
+        {/* header */}
+        <div className="border-b border-[var(--card-border)] bg-gradient-to-r from-brand-600/10 to-transparent px-6 py-4">
+          <h2 className="flex items-center gap-2 text-lg font-bold text-[var(--foreground)]">
+            <IconExam className="h-5 w-5 text-brand-400" />
+            About the FAA Part 107 Exam
+          </h2>
+          <p className="mt-0.5 text-sm text-[var(--muted)]">
+            What to expect on test day — know the format before you sit down.
+          </p>
+        </div>
+
+        <div className="grid gap-6 p-6 lg:grid-cols-2">
+          {/* left — key facts */}
+          <div className="space-y-5">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Key Facts</h3>
+            <div className="space-y-3">
+              {([
+                ["Official Name", "Unmanned Aircraft General – Small (UAG)"],
+                ["Questions", `${FULL_EXAM_QUESTION_COUNT} multiple-choice`],
+                ["Time Limit", "2 hours (120 minutes)"],
+                ["Passing Score", `70% — ${Math.ceil(FULL_EXAM_QUESTION_COUNT * 0.7)} of ${FULL_EXAM_QUESTION_COUNT} correct`],
+                ["Test Provider", "PSI Exams — schedule at psiexams.com"],
+                ["Testing Fee", "$175 (pay at time of scheduling)"],
+                ["Certificate Valid", "24 months — recurrent test (UGR) to renew"],
+                ["Prerequisite", "Must be 16+, able to read/write English, pass TSA vetting"],
+              ] as const).map(([label, detail]) => (
+                <div key={label} className="flex gap-3">
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
+                  <div>
+                    <span className="text-sm font-medium text-[var(--foreground)]">{label}:</span>{" "}
+                    <span className="text-sm text-[var(--muted)]">{detail}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* right — blueprint breakdown */}
+          <div className="space-y-5">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
+              Exam Blueprint — Question Distribution
+            </h3>
+            <div className="space-y-2.5">
+              {(Object.entries(REAL_EXAM_BLUEPRINT_TARGETS) as [string, number][]).map(
+                ([area, target]) => {
+                  const pct = Math.round((target / FULL_EXAM_QUESTION_COUNT) * 100);
+                  return (
+                    <div key={area}>
+                      <div className="mb-1 flex items-center justify-between text-sm">
+                        <span className="font-medium text-[var(--foreground)]">{area}</span>
+                        <span className="tabular-nums text-[var(--muted)]">
+                          {target} Qs · {pct}%
+                        </span>
+                      </div>
+                      <div className="h-2 overflow-hidden rounded-full bg-white/[0.06]">
+                        <div
+                          className="h-full rounded-full bg-brand-500/70 transition-all duration-700"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                },
+              )}
+            </div>
+            <p className="rounded-lg border border-brand-500/20 bg-brand-500/5 px-3 py-2 text-xs text-[var(--muted)]">
+              <strong className="text-[var(--foreground)]">Tip:</strong> Operations is the
+              heaviest section at{" "}
+              {REAL_EXAM_BLUEPRINT_TARGETS.Operations} questions — it covers crew duties,
+              preflight, in-flight procedures, and post-flight. Focus here for the
+              biggest score impact.
+            </p>
+          </div>
+        </div>
+
+        {/* footer cta */}
+        <div className="border-t border-[var(--card-border)] bg-white/[0.02] px-6 py-3.5 flex items-center justify-between">
+          <p className="text-xs text-[var(--muted)]">
+            Our Exam Sim mirrors the real test — {FULL_EXAM_QUESTION_COUNT} questions, 2-hour timer, same category weights.
+          </p>
+          <Link
+            href="/v2/exam"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700 shadow-sm"
+          >
+            Start Exam Sim <IconArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </section>
+
       {/* ---- Weak areas ---- */}
       {weakSpots.length > 0 && (
         <section>
@@ -332,37 +456,78 @@ function DashboardContent() {
         <h2 className="mb-4 text-lg font-bold text-[var(--foreground)]">
           Questions by Category
         </h2>
+        <p className="mb-5 text-sm text-[var(--muted)]">
+          The real FAA exam pulls {FULL_EXAM_QUESTION_COUNT} questions weighted across 5 knowledge areas. Supplemental topics fall under <strong className="text-orange-400">Operations</strong> on the actual test. Click any card to study.
+        </p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {STUDY_CATEGORIES.filter((c) => c !== "All").map((cat) => {
             const count = counts[cat] ?? 0;
             const catStat = stats.categoryBreakdown.find((b) => b.category === cat);
+            const examTarget = REAL_EXAM_BLUEPRINT_TARGETS[cat as keyof typeof REAL_EXAM_BLUEPRINT_TARGETS] as number | undefined;
+            const examPct = examTarget ? Math.round((examTarget / FULL_EXAM_QUESTION_COUNT) * 100) : null;
+            const theme = CATEGORY_THEME[cat];
             return (
-              <div
+              <Link
                 key={cat}
-                className="flex items-center justify-between rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3"
+                href={`/v2/study?category=${encodeURIComponent(cat)}`}
+                className={`group relative flex flex-col gap-2.5 rounded-xl border border-[var(--card-border)] border-l-[3px] ${theme?.border ?? ""} bg-[var(--card)] px-4 py-4 transition-all hover:bg-white/[0.03] hover:shadow-md hover:shadow-black/20`}
               >
-                <div>
-                  <p className="text-sm font-medium text-[var(--foreground)]">{cat}</p>
-                  <p className="text-xs text-[var(--muted)]">{count} questions</p>
+                {/* top row — icon + name + badge */}
+                <div className="flex items-center gap-3">
+                  {/* icon badge */}
+                  <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${theme?.bg ?? "bg-white/5"} ${theme?.color ?? "text-zinc-400"}`}>
+                    {theme?.icon ?? <IconLayers className="h-5 w-5" />}
+                  </div>
+                  {/* title + accuracy */}
+                  <div className="flex flex-1 items-center justify-between min-w-0">
+                    <p className={`text-sm font-semibold text-[var(--foreground)] transition-colors group-hover:${theme?.color ?? "text-brand-400"}`}>{cat}</p>
+                    <div className="flex items-center gap-2 shrink-0">
+                      {catStat && catStat.total > 0 ? (
+                        <span
+                          className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${
+                            catStat.percentage >= 70
+                              ? "bg-correct/15 text-correct"
+                              : catStat.percentage >= 50
+                                ? "bg-amber-400/15 text-amber-400"
+                                : "bg-incorrect/15 text-incorrect"
+                          }`}
+                        >
+                          {catStat.percentage}%
+                        </span>
+                      ) : (
+                        <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-xs text-[var(--muted)]">
+                          Not started
+                        </span>
+                      )}
+                      <IconArrowRight className="h-3.5 w-3.5 text-[var(--muted)] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                    </div>
+                  </div>
                 </div>
-                {catStat && catStat.total > 0 ? (
-                  <span
-                    className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${
-                      catStat.percentage >= 70
-                        ? "bg-correct/15 text-correct"
-                        : catStat.percentage >= 50
-                          ? "bg-amber-400/15 text-amber-400"
-                          : "bg-incorrect/15 text-incorrect"
-                    }`}
-                  >
-                    {catStat.percentage}%
-                  </span>
-                ) : (
-                  <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-xs text-[var(--muted)]">
-                    Not started
-                  </span>
+
+                {/* detail row — practice count + exam info */}
+                <div className="flex items-center justify-between text-xs text-[var(--muted)] pl-12">
+                  <span>{count} practice Qs</span>
+                  {examTarget ? (
+                    <span className={`tabular-nums font-medium ${theme?.color ?? "text-brand-400"}`}>
+                      {examTarget} on exam · {examPct}%
+                    </span>
+                  ) : (
+                    <span className="italic text-[var(--muted)]">
+                      part of <span className="text-orange-400/80">Operations</span> on exam
+                    </span>
+                  )}
+                </div>
+
+                {/* exam weight bar */}
+                {examPct != null && (
+                  <div className="ml-12 h-1 overflow-hidden rounded-full bg-white/[0.06]">
+                    <div
+                      className={`h-full rounded-full transition-all duration-700 ${theme?.bar ?? "bg-brand-500/50"}`}
+                      style={{ width: `${examPct}%` }}
+                    />
+                  </div>
                 )}
-              </div>
+              </Link>
             );
           })}
         </div>

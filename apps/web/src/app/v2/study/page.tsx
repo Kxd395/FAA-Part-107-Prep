@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   STUDY_CATEGORIES,
@@ -66,6 +67,8 @@ export default function V2StudyPage() {
 }
 
 function V2StudyClient() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
   const activeUserId = useActiveUserId();
   const { saveSession } = useProgress(activeUserId);
   const adaptive = useAdaptiveQuestionStats(activeUserId);
@@ -113,6 +116,18 @@ function V2StudyClient() {
 
   const [figureRef, setFigureRef] = useState<ResolvedReference | null>(null);
   const questionShownAtRef = useRef(Date.now());
+
+  // Auto-start quiz if ?category=... param is present
+  const autoStartedRef = useRef(false);
+  useEffect(() => {
+    if (autoStartedRef.current || study.quizStarted || !loaded) return;
+    if (!categoryParam) return;
+    const normalized = normalizeCategory(categoryParam);
+    if (normalized && selectableCategories.includes(normalized)) {
+      autoStartedRef.current = true;
+      study.startQuiz(normalized);
+    }
+  }, [categoryParam, loaded, study, selectableCategories]);
 
   // Reset timer when question changes
   useEffect(() => {
