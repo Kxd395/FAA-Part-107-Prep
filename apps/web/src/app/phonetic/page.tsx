@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
 import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { StandaloneFlipCard } from "../../components/flashcards/StandaloneFlipCard";
@@ -193,25 +193,42 @@ export function buildQuizQuestion(
 }
 
 function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
-  const pool = entries.filter((e) => /^[A-Z]$/i.test(e.character) || /^\d$/.test(e.character));
+  const pool = useMemo(
+    () => entries.filter((e) => /^[A-Z]$/i.test(e.character) || /^\d$/.test(e.character)),
+    [entries]
+  );
   const [queue, setQueue] = useState(() => shuffle(pool));
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [score, setScore] = useState({ correct: 0, total: 0 });
+  const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const current = queue[index];
-  const question = current ? buildQuizQuestion(current, pool) : null;
+  const question = useMemo(
+    () => (current ? buildQuizQuestion(current, pool) : null),
+    [current, pool]
+  );
 
   const handleSelect = (opt: string) => {
     if (selected !== null || !current) return;
     setSelected(opt);
+    const isCorrect = opt === current.word;
     setScore((s) => ({
-      correct: s.correct + (opt === current.word ? 1 : 0),
+      correct: s.correct + (isCorrect ? 1 : 0),
       total: s.total + 1,
     }));
+    if (isCorrect) {
+      advanceTimeoutRef.current = setTimeout(() => {
+        handleNext();
+      }, 650);
+    }
   };
 
   const handleNext = () => {
+    if (advanceTimeoutRef.current) {
+      clearTimeout(advanceTimeoutRef.current);
+      advanceTimeoutRef.current = null;
+    }
     if (index + 1 >= queue.length) {
       setQueue(shuffle(pool));
       setIndex(0);
@@ -221,7 +238,17 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
     setSelected(null);
   };
 
+  useEffect(() => {
+    return () => {
+      if (advanceTimeoutRef.current) {
+        clearTimeout(advanceTimeoutRef.current);
+      }
+    };
+  }, []);
+
   if (!question) return null;
+
+  const selectedIsCorrect = selected !== null && selected === question.answer;
 
   return (
     <div className="space-y-6">
@@ -268,23 +295,36 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
 
       {selected !== null && (
         <div className="space-y-2">
-          {/* Pronunciation hint */}
-          <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 text-sm text-center">
-            <span className="text-[var(--muted)]">Pronunciation: </span>
-            <span className="font-mono text-brand-300">{current.pronunciation}</span>
-            {current.morse && (
-              <>
-                <span className="mx-2 text-[var(--muted)]">·</span>
-                <span className="font-mono text-[var(--muted)]">{current.morse}</span>
-              </>
-            )}
-          </div>
-          <button
-            onClick={handleNext}
-            className="w-full rounded-xl bg-brand-600 py-3 font-semibold text-white transition-all hover:bg-brand-700"
-          >
-            Next →
-          </button>
+          {selectedIsCorrect ? (
+            <div className="rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-center text-green-200">
+              Correct. <span className="font-semibold text-green-300">{question.answer}</span> is the NATO word for{" "}
+              <span className="font-semibold text-white">{current.character}</span>. Loading the next question…
+            </div>
+          ) : (
+            <>
+              <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-center text-red-100">
+                You picked <span className="font-semibold text-white">{selected}</span>. The correct answer for{" "}
+                <span className="font-semibold text-white">{current.character}</span> is{" "}
+                <span className="font-semibold text-green-300">{question.answer}</span>.
+              </div>
+              <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 text-sm text-center">
+                <span className="text-[var(--muted)]">Pronunciation: </span>
+                <span className="font-mono text-brand-300">{current.pronunciation}</span>
+                {current.morse && (
+                  <>
+                    <span className="mx-2 text-[var(--muted)]">·</span>
+                    <span className="font-mono text-[var(--muted)]">{current.morse}</span>
+                  </>
+                )}
+              </div>
+              <button
+                onClick={handleNext}
+                className="w-full rounded-xl bg-brand-600 py-3 font-semibold text-white transition-all hover:bg-brand-700"
+              >
+                Next →
+              </button>
+            </>
+          )}
         </div>
       )}
     </div>
