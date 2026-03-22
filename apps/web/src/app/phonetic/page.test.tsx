@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -105,13 +105,17 @@ describe("PhoneticPage", () => {
     const currentCharacter = screen.getByText(/^[0-9]$/).textContent ?? "";
     const correctAnswer = DIGIT_WORDS[currentCharacter];
     expect(correctAnswer).toBeDefined();
+    expect(screen.getByText(/0 correct in a row/i)).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: correctAnswer }));
     expect(screen.getByText(/Loading the next question/i)).toBeInTheDocument();
 
-    vi.advanceTimersByTime(700);
+    act(() => {
+      vi.advanceTimersByTime(700);
+    });
 
-    expect(screen.getByText(/Question 2/i)).toBeInTheDocument();
+    expect(screen.getByText(/1 correct in a row/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Loading the next question/i)).not.toBeInTheDocument();
   });
 
   it("shows correction feedback after a wrong quiz answer", async () => {
@@ -146,6 +150,7 @@ describe("PhoneticPage", () => {
         element?.textContent === `You picked ${wrongAnswer}. The correct answer for ${currentCharacter} is ${correctAnswer}.`
       )
     ).toBeInTheDocument();
+    expect(screen.getByText(/0 correct in a row/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Next/i })).toBeInTheDocument();
   });
 });

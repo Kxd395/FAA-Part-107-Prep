@@ -147,6 +147,15 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+function pickRandomEntry<T>(items: T[], exclude?: T): T | null {
+  if (items.length === 0) return null;
+  if (items.length === 1) return items[0] ?? null;
+
+  const candidates = exclude === undefined ? items : items.filter((item) => item !== exclude);
+  const pool = candidates.length > 0 ? candidates : items;
+  return pool[Math.floor(Math.random() * pool.length)] ?? null;
+}
+
 export function buildQuizQuestion(
   target: PhoneticEntry,
   pool: PhoneticEntry[]
@@ -197,26 +206,32 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
     () => entries.filter((e) => /^[A-Z]$/i.test(e.character) || /^\d$/.test(e.character)),
     [entries]
   );
-  const [queue, setQueue] = useState(() => shuffle(pool));
-  const [index, setIndex] = useState(0);
+  const [current, setCurrent] = useState<PhoneticEntry | null>(() => pickRandomEntry(pool));
   const [selected, setSelected] = useState<string | null>(null);
-  const [score, setScore] = useState({ correct: 0, total: 0 });
+  const [streak, setStreak] = useState(0);
   const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const current = queue[index];
   const question = useMemo(
     () => (current ? buildQuizQuestion(current, pool) : null),
     [current, pool]
   );
 
+  useEffect(() => {
+    setCurrent((existing) => {
+      if (existing && pool.includes(existing)) {
+        return existing;
+      }
+      return pickRandomEntry(pool);
+    });
+    setSelected(null);
+    setStreak(0);
+  }, [pool]);
+
   const handleSelect = (opt: string) => {
     if (selected !== null || !current) return;
     setSelected(opt);
     const isCorrect = opt === current.word;
-    setScore((s) => ({
-      correct: s.correct + (isCorrect ? 1 : 0),
-      total: s.total + 1,
-    }));
+    setStreak((value) => (isCorrect ? value + 1 : 0));
     if (isCorrect) {
       advanceTimeoutRef.current = setTimeout(() => {
         handleNext();
@@ -229,12 +244,7 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
       clearTimeout(advanceTimeoutRef.current);
       advanceTimeoutRef.current = null;
     }
-    if (index + 1 >= queue.length) {
-      setQueue(shuffle(pool));
-      setIndex(0);
-    } else {
-      setIndex((i) => i + 1);
-    }
+    setCurrent((existing) => pickRandomEntry(pool, existing ?? undefined));
     setSelected(null);
   };
 
@@ -246,19 +256,15 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
     };
   }, []);
 
-  if (!question) return null;
+  if (!question || !current) return null;
 
   const selectedIsCorrect = selected !== null && selected === question.answer;
 
   return (
     <div className="space-y-6">
-      {/* Score */}
-      <div className="flex items-center justify-between text-sm text-[var(--muted)]">
-        <span>
-          Question {score.total + 1} · {queue.length} card deck
-        </span>
-        <span className="text-brand-400 font-semibold">
-          {score.total > 0 ? `${score.correct}/${score.total} correct` : ""}
+      <div className="flex items-center justify-end text-sm text-[var(--muted)]">
+        <span className="rounded-full border border-brand-500/20 bg-brand-500/10 px-3 py-1 font-semibold text-brand-300">
+          {streak} correct in a row
         </span>
       </div>
 
