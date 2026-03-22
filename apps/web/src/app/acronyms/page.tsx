@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
@@ -48,6 +48,15 @@ function shuffle<T>(arr: T[]): T[] {
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
+}
+
+function pickRandomEntry<T>(items: T[], exclude?: T): T | null {
+  if (items.length === 0) return null;
+  if (items.length === 1) return items[0] ?? null;
+
+  const candidates = exclude === undefined ? items : items.filter((item) => item !== exclude);
+  const pool = candidates.length > 0 ? candidates : items;
+  return pool[Math.floor(Math.random() * pool.length)] ?? null;
 }
 
 function AcronymCard({
@@ -161,45 +170,76 @@ function GridMode({ entries }: { entries: AcronymEntry[] }) {
 }
 
 function QuizMode({ entries }: { entries: AcronymEntry[] }) {
-  const [queue, setQueue] = useState(() => shuffle(entries));
-  const [index, setIndex] = useState(0);
+  const [current, setCurrent] = useState<AcronymEntry | null>(() => pickRandomEntry(entries));
   const [selected, setSelected] = useState<string | null>(null);
-  const [score, setScore] = useState({ correct: 0, total: 0 });
+  const [streak, setStreak] = useState(0);
+  const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    setQueue(shuffle(entries));
-    setIndex(0);
+    setCurrent((existing) => {
+      if (existing && entries.includes(existing)) {
+        return existing;
+      }
+      return pickRandomEntry(entries);
+    });
     setSelected(null);
-    setScore({ correct: 0, total: 0 });
+    setStreak(0);
   }, [entries]);
 
-  const current = queue[index];
-  const options = current
-    ? shuffle([
-        current.expansion,
-        ...shuffle(entries.filter((entry) => entry.term !== current.term))
-          .slice(0, 3)
-          .map((entry) => entry.expansion),
-      ])
-    : [];
+  const options = useMemo(() => {
+    if (!current) return [];
+
+    const sameGroupDistractors = shuffle(
+      entries.filter((entry) => entry.term !== current.term && entry.group === current.group)
+    )
+      .slice(0, 2)
+      .map((entry) => entry.expansion);
+
+    const fallbackDistractors = shuffle(
+      entries.filter(
+        (entry) =>
+          entry.term !== current.term && !sameGroupDistractors.includes(entry.expansion)
+      )
+    )
+      .slice(0, Math.max(0, 2 - sameGroupDistractors.length))
+      .map((entry) => entry.expansion);
+
+    return shuffle([current.expansion, ...sameGroupDistractors, ...fallbackDistractors]);
+  }, [current, entries]);
 
   if (!current) return null;
 
+  const selectedIsCorrect = selected !== null && selected === current.expansion;
+
+  const handleNext = () => {
+    if (advanceTimeoutRef.current) {
+      clearTimeout(advanceTimeoutRef.current);
+      advanceTimeoutRef.current = null;
+    }
+    setCurrent((existing) => pickRandomEntry(entries, existing ?? undefined));
+    setSelected(null);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (advanceTimeoutRef.current) {
+        clearTimeout(advanceTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between text-sm text-[var(--muted)]">
-        <span>
-          Question {score.total + 1} · {queue.length} card deck
-        </span>
-        <span className="font-semibold text-sky-300">
-          {score.total > 0 ? `${score.correct}/${score.total} correct` : ""}
+      <div className="flex items-center justify-end text-sm text-[var(--muted)]">
+        <span className="rounded-full border border-sky-500/20 bg-sky-500/10 px-3 py-1 font-semibold text-sky-300">
+          {streak} correct in a row
         </span>
       </div>
       <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] p-8 text-center">
         <p className="text-base text-[var(--muted)]">What does {current.term} stand for?</p>
         <div className="mt-4 text-6xl font-bold text-sky-300">{current.term}</div>
       </div>
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {options.map((option) => {
           const isCorrect = option === current.expansion;
           const isChosen = option === selected;
@@ -219,10 +259,13 @@ function QuizMode({ entries }: { entries: AcronymEntry[] }) {
               onClick={() => {
                 if (selected !== null) return;
                 setSelected(option);
-                setScore((value) => ({
-                  correct: value.correct + (option === current.expansion ? 1 : 0),
-                  total: value.total + 1,
-                }));
+                const isCorrect = option === current.expansion;
+                setStreak((value) => (isCorrect ? value + 1 : 0));
+                if (isCorrect) {
+                  advanceTimeoutRef.current = setTimeout(() => {
+                    handleNext();
+                  }, 650);
+                }
               }}
               className={cls}
             >
@@ -233,24 +276,30 @@ function QuizMode({ entries }: { entries: AcronymEntry[] }) {
       </div>
       {selected !== null && (
         <div className="space-y-3">
-          <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 text-sm">
-            <div className="font-semibold text-white">{current.expansion}</div>
-            <div className="mt-1 text-[var(--muted)]">{current.note}</div>
-          </div>
-          <button
-            onClick={() => {
-              if (index + 1 >= queue.length) {
-                setQueue(shuffle(entries));
-                setIndex(0);
-              } else {
-                setIndex((value) => value + 1);
-              }
-              setSelected(null);
-            }}
-            className="w-full rounded-xl bg-brand-600 py-3 font-semibold text-white transition-all hover:bg-brand-700"
-          >
-            Next →
-          </button>
+          {selectedIsCorrect ? (
+            <div className="rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-center text-green-200">
+              Correct. <span className="font-semibold text-green-300">{current.expansion}</span> is what{" "}
+              <span className="font-semibold text-white">{current.term}</span> stands for. Loading the next question…
+            </div>
+          ) : (
+            <>
+              <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-center text-red-100">
+                You picked <span className="font-semibold text-white">{selected}</span>. The correct answer for{" "}
+                <span className="font-semibold text-white">{current.term}</span> is{" "}
+                <span className="font-semibold text-green-300">{current.expansion}</span>.
+              </div>
+              <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 text-sm">
+                <div className="font-semibold text-white">{current.expansion}</div>
+                <div className="mt-1 text-[var(--muted)]">{current.note}</div>
+              </div>
+              <button
+                onClick={handleNext}
+                className="w-full rounded-xl bg-brand-600 py-3 font-semibold text-white transition-all hover:bg-brand-700"
+              >
+                Next →
+              </button>
+            </>
+          )}
         </div>
       )}
     </div>
