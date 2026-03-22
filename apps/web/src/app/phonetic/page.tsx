@@ -57,6 +57,35 @@ const ALPHABET_RAW: PhoneticEntry[] = [
   { character: "—",  word: "Thousand",pronunciation: "TOU SAND",                 morse: null    },
 ];
 
+const LETTER_DISTRACTORS: Record<string, [string, string]> = {
+  A: ["Atlas", "Arrow"],
+  B: ["Beacon", "Boston"],
+  C: ["Cobra", "Canyon"],
+  D: ["Denver", "Dragon"],
+  E: ["Eagle", "Engine"],
+  F: ["Falcon", "Frontier"],
+  G: ["Goal", "George"],
+  H: ["Harbor", "Hunter"],
+  I: ["Ivory", "Island"],
+  J: ["Jupiter", "Jetstream"],
+  K: ["King", "Kodiak"],
+  L: ["Legend", "Liberty"],
+  M: ["Matrix", "Mercury"],
+  N: ["Neptune", "Nexus"],
+  O: ["Orbit", "Oxford"],
+  P: ["Pilot", "Phoenix"],
+  Q: ["Quantum", "Quest"],
+  R: ["Radar", "Rocket"],
+  S: ["Signal", "Summit"],
+  T: ["Thunder", "Titan"],
+  U: ["Ultra", "Union"],
+  V: ["Vector", "Voyager"],
+  W: ["West", "Warden"],
+  X: ["Xenon", "Xylophone"],
+  Y: ["Yellow", "Yonder"],
+  Z: ["Zebra", "Zenith"],
+};
+
 // ─── Modes ─────────────────────────────────────────────────────────────────────
 
 type StudyMode = "flip" | "grid" | "quiz";
@@ -122,6 +151,16 @@ export function buildQuizQuestion(
   target: PhoneticEntry,
   pool: PhoneticEntry[]
 ): { prompt: string; answer: string; options: string[] } {
+  const letterDistractors = LETTER_DISTRACTORS[target.character.toUpperCase()];
+  if (letterDistractors) {
+    const options = shuffle([target.word, ...letterDistractors]);
+    return {
+      prompt: `What is the NATO phonetic word for "${target.character}"?`,
+      answer: target.word,
+      options,
+    };
+  }
+
   const targetIndex = pool.findIndex((entry) => entry.word === target.word);
   const distractorIndexes: number[] = [];
   let offset = 1;
