@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, CheckCircle2, XCircle } from "lucide-react";
+import { BookOpen, Brain, CheckCircle2, FlaskConical, Trophy, XCircle } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   filterQuestionsByCategory,
@@ -710,7 +710,9 @@ export default function LearnPage() {
           />
         )}
         <div className="text-center">
-          <div className="text-5xl">🧠</div>
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-brand-500/30 bg-brand-500/10 text-brand-300">
+            <Brain className="h-9 w-9" aria-hidden="true" />
+          </div>
           <h1 className="mt-4 text-3xl font-bold">Learn Mode</h1>
           <p className="mt-2 text-[var(--muted)]">
             <strong>Read first, then test.</strong> You&apos;ll see each question with its correct answer
@@ -959,7 +961,8 @@ export default function LearnPage() {
                 onClick={startQuizPhase}
                 className="flex-1 rounded-xl bg-purple-600 py-3 font-semibold text-white hover:bg-purple-700"
               >
-                🧪 Now Quiz Me on These →
+                <FlaskConical className="mr-1.5 inline h-4 w-4 align-[-2px]" aria-hidden="true" />
+                Now Quiz Me on These →
               </button>
             )}
           </div>
@@ -1017,8 +1020,9 @@ export default function LearnPage() {
           />
         )}
         <div className="flex items-center justify-between text-sm text-[var(--muted)]">
-          <span>
-            🧪 Mastered {masteredCount} of {batch.length}
+          <span className="inline-flex items-center gap-1.5">
+            <FlaskConical className="h-4 w-4 text-purple-400" aria-hidden="true" />
+            Mastered {masteredCount} of {batch.length}
           </span>
           <span className="rounded-full bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-400">
             Round {round} — Remaining {quizOrder.length}
@@ -1203,7 +1207,21 @@ export default function LearnPage() {
           onClearSnapshot={clearSnapshot}
         />
       )}
-      <div className="text-6xl">{perfectFirstPass ? "🎉" : allMastered ? "💪" : firstPassPct >= 70 ? "👍" : "📚"}</div>
+      <div
+        className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border ${
+          perfectFirstPass || allMastered || firstPassPct >= 70
+            ? "border-green-500/30 bg-green-500/10 text-green-300"
+            : "border-brand-500/30 bg-brand-500/10 text-brand-300"
+        }`}
+      >
+        {perfectFirstPass ? (
+          <Trophy className="h-9 w-9" aria-hidden="true" />
+        ) : allMastered || firstPassPct >= 70 ? (
+          <CheckCircle2 className="h-9 w-9" aria-hidden="true" />
+        ) : (
+          <BookOpen className="h-9 w-9" aria-hidden="true" />
+        )}
+      </div>
       <h1 className="text-3xl font-bold">
         {perfectFirstPass ? "Perfect First Pass!" : allMastered ? "Mastered After Review!" : firstPassPct >= 70 ? "Good Progress!" : "Keep Practicing!"}
       </h1>
