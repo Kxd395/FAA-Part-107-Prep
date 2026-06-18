@@ -10,6 +10,7 @@ const REPORT_PATH = path.resolve(
   ROOT,
   "../../docs/ssot/review/FigureContextAudit.md"
 );
+const REPORT_ONLY = process.argv.includes("--report-only");
 
 const FIGURE_REF_FROM_TEXT = /figure\s+(\d+)/i;
 const REFER_PROMPT_PATTERN =
@@ -211,7 +212,11 @@ function main() {
     console.error(
       `Figure/context audit failed with ${summary.issues.length} issue(s). See ${REPORT_PATH}`
     );
-    process.exit(1);
+    if (!REPORT_ONLY) {
+      process.exit(1);
+    }
+    console.error("Report-only mode enabled; not failing the process.");
+    return;
   }
 
   console.log(

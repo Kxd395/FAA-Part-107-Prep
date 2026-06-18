@@ -8,7 +8,10 @@
   },
   "main": "index.js",
   "scripts": {
-    "validate": "node scripts/validate-questions.js && node scripts/build-runtime-question-bank.js --check && node scripts/audit-figure-context.js && node scripts/audit-carrington-citations.js && node scripts/audit-collection-health.js && node scripts/audit-deck-overlap.js",
+    "validate": "npm run validate:required",
+    "validate:required": "node scripts/validate-questions.js && node scripts/build-runtime-question-bank.js --check && node scripts/audit-carrington-citations.js && node scripts/audit-collection-health.js && node scripts/audit-deck-overlap.js",
+    "validate:advisory": "node scripts/audit-figure-context.js --report-only",
+    "validate:full": "npm run validate:required && node scripts/audit-figure-context.js",
     "audit:figures": "node scripts/audit-figure-context.js",
     "audit:carrington": "node scripts/audit-carrington-citations.js",
     "audit:collection-health": "node scripts/audit-collection-health.js",

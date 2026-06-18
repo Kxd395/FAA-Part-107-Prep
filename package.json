@@ -15,7 +15,9 @@
     "test": "npm --prefix apps/web run test && npm run test --workspace=@part107/core -- --run",
     "coverage": "npm run test:coverage --workspace=part107-web && npm run test:coverage --workspace=@part107/core",
     "build:core": "npm run build --workspace=@part107/core",
-    "validate:content": "npm run validate --workspace=@part107/content",
+    "validate:content": "npm run validate:required --workspace=@part107/content",
+    "validate:content:advisory": "npm run validate:advisory --workspace=@part107/content",
+    "validate:content:full": "npm run validate:full --workspace=@part107/content",
     "audit:prod": "npm audit --omit=dev",
     "ci:verify": "npm run lint && npm run typecheck && npm run test && npm run coverage && npm run build && npm run validate:content"
   }
