@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CheckCircle2, FileQuestion, XCircle } from "lucide-react";
+import { CheckCircle2, FileQuestion, ImageIcon, Target, XCircle } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { type OptionId, type Question } from "@part107/core";
 import { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
@@ -189,7 +189,9 @@ export default function MissedPage() {
   if (missedEntries.length === 0) {
     return (
       <div className="mx-auto max-w-lg space-y-6 pt-12 text-center">
-        <div className="text-6xl">🎯</div>
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-brand-500/30 bg-brand-500/10 text-brand-300">
+          <Target className="h-9 w-9" aria-hidden="true" />
+        </div>
         <h1 className="text-3xl font-bold">No Missed Questions Yet!</h1>
         <p className="text-[var(--muted)]">
           Take a practice exam or study quiz first. Any questions you get wrong will appear here for review.
@@ -617,7 +619,8 @@ export default function MissedPage() {
                       }}
                       className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs text-cyan-400 hover:bg-cyan-500/20"
                     >
-                      📊 View {q.figure_reference ?? "Figure"}
+                      <ImageIcon className="mr-1.5 inline h-3.5 w-3.5 align-[-2px]" aria-hidden="true" />
+                      View {q.figure_reference ?? "Figure"}
                     </button>
                   )}
 
