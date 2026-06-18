@@ -488,11 +488,14 @@ export default function ProgressPage() {
   const importInputRef = useRef<HTMLInputElement | null>(null);
   const autoLoadedAccountStateForUserRef = useRef<string | null>(null);
   const syncUserOverriddenRef = useRef(false);
-  const attemptEvents = useMemo(
-    () => (loaded ? defaultAttemptEventStore.load(activeUserId) : []),
-    [activeUserId, loaded, portableStateRevision]
-  );
+  const attemptEvents = useMemo(() => {
+    // The revision is an explicit invalidation signal for localStorage-backed stores.
+    void portableStateRevision;
+    return loaded ? defaultAttemptEventStore.load(activeUserId) : [];
+  }, [activeUserId, loaded, portableStateRevision]);
   const adaptiveInsights = useMemo(() => {
+    // The revision is an explicit invalidation signal for localStorage-backed stores.
+    void portableStateRevision;
     if (!loaded) {
       return computeAdaptiveInsights({ statsByKey: {}, attempts: [] });
     }
@@ -504,10 +507,13 @@ export default function ProgressPage() {
     [attemptEvents]
   );
   const learningEventInsights = useMemo(
-    () =>
-      loaded
+    () => {
+      // The revision is an explicit invalidation signal for localStorage-backed stores.
+      void portableStateRevision;
+      return loaded
         ? computeLearningEventInsights(defaultLearningEventStore.load(activeUserId))
-        : computeLearningEventInsights([]),
+        : computeLearningEventInsights([]);
+    },
     [activeUserId, loaded, portableStateRevision]
   );
 
