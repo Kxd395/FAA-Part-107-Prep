@@ -40,7 +40,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitest/coverage-v8": "^2.1.9",
     "autoprefixer": "^10.4.0",
-    "eslint": "^9.39.0",
+    "eslint": "^10.0.2",
     "eslint-config-next": "^16.1.6",
     "jsdom": "^25.0.1",
     "postcss": "^8.4.0",
