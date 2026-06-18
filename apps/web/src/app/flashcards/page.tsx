@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, CheckCircle2, FileText, Layers, Languages } from "lucide-react";
+import { BookOpen, CheckCircle2, FileText, ImageIcon, Layers, Languages } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   canonicalQuestionKey,
@@ -69,7 +69,7 @@ const QUESTION_TYPE_OPTIONS: Array<{
   },
   {
     value: "weak_spots",
-    title: "🔥 Weak Spots",
+    title: "Weak Spots",
     description: "Questions you still struggle with.",
   },
 ];
@@ -83,12 +83,12 @@ const FLASHCARD_RUN_MODE_OPTIONS: Array<{
 }> = [
   {
     value: "flip",
-    title: "↔ Flip & Rate",
+    title: "Flip & Rate",
     description: "Reveal the answer, then rate whether you know it.",
   },
   {
     value: "mcq",
-    title: "🧠 3-Choice Drill",
+    title: "3-Choice Drill",
     description: "Answer a 3-choice question before seeing the explanation.",
   },
 ];
@@ -735,7 +735,9 @@ export default function FlashcardsPage() {
             onClearSnapshot={clearSnapshot}
           />
         )}
-        <div className="text-6xl">🎉</div>
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-green-500/30 bg-green-500/10 text-green-300">
+          <CheckCircle2 className="h-9 w-9" aria-hidden="true" />
+        </div>
         <h1 className="text-3xl font-bold">Deck Complete!</h1>
         <p className="text-sm text-[var(--muted)]">
           {reviews} review actions across {initialDeckSize} due cards.
@@ -874,7 +876,8 @@ export default function FlashcardsPage() {
                 }}
                 className="mt-4 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs text-cyan-400 hover:bg-cyan-500/20"
               >
-                📊 View {q.figure_reference ?? "Figure"}
+                <ImageIcon className="mr-1.5 inline h-3.5 w-3.5 align-[-2px]" aria-hidden="true" />
+                View {q.figure_reference ?? "Figure"}
               </button>
             )}
 
@@ -909,7 +912,8 @@ export default function FlashcardsPage() {
                 }}
                 className="mt-4 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 text-xs text-cyan-400 hover:bg-cyan-500/20"
               >
-                📊 View {q.figure_reference ?? "Figure"}
+                <ImageIcon className="mr-1.5 inline h-3.5 w-3.5 align-[-2px]" aria-hidden="true" />
+                View {q.figure_reference ?? "Figure"}
               </button>
             )}
 

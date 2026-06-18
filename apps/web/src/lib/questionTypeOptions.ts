@@ -68,17 +68,17 @@ export function normalizeStandardPracticeQuestionTypeProfile(
 export const SELECTABLE_QUESTION_TYPE_OPTIONS: ReadonlyArray<QuestionTypeOption> = [
   {
     value: "confirmed_test",
-    title: "✅ Confirmed Test Questions",
+    title: "Confirmed Test Questions",
     description: "Questions verified from real FAA-style sources (Review/UAG/SPA).",
   },
   {
     value: "all_random",
-    title: "🎲 All Questions (Random)",
+    title: "All Questions (Random)",
     description: "Combined direct exam-style pool across all loaded materials.",
   },
   ...SOURCE_PACK_REGISTRY.map((entry) => ({
     value: entry.profile as QuestionTypeProfile,
-    title: String(entry.profile) === "part107_bank" ? "📘 Part107 Question Bank" : "📙 Carrington Bank (Strict)",
+    title: String(entry.profile) === "part107_bank" ? "Part107 Question Bank" : "Carrington Bank (Strict)",
     description: entry.description,
   })),
   {
@@ -88,7 +88,7 @@ export const SELECTABLE_QUESTION_TYPE_OPTIONS: ReadonlyArray<QuestionTypeOption>
   },
   {
     value: "weak_spots",
-    title: "🔥 Weak Spots Only",
+    title: "Weak Spots Only",
     description: "Prioritizes realistic MCQs you still struggle with.",
   },
 ];

@@ -1,4 +1,5 @@
 import type { Question } from "@part107/core";
+import { FileText, ImageIcon, ImageOff } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { ResolvedReference } from "../ReferenceModal";
 import { resolveFigureImageUrl } from "../../lib/figureImage";
@@ -43,8 +44,9 @@ export default function QuestionCard({ question, onOpenFigure }: QuestionCardPro
             })
           }
         >
-          <p className="mb-2 text-xs font-medium text-[var(--muted)] text-center uppercase tracking-wide">
-            📊 {figureLabel} <span className="text-brand-400 ml-1">(tap to enlarge)</span>
+          <p className="mb-2 inline-flex w-full items-center justify-center gap-1.5 text-xs font-medium text-[var(--muted)] uppercase tracking-wide">
+            <ImageIcon className="h-3.5 w-3.5 text-brand-400" aria-hidden="true" />
+            {figureLabel} <span className="text-brand-400 ml-1">(tap to enlarge)</span>
           </p>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -58,8 +60,9 @@ export default function QuestionCard({ question, onOpenFigure }: QuestionCardPro
 
       {(imageFailed || !imageRef) && figureTextToRender && (
         <div className="mt-4 rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
-          <p className="mb-2 text-xs font-medium text-[var(--muted)] uppercase tracking-wide">
-            📊 {figureLabel}
+          <p className="mb-2 inline-flex items-center gap-1.5 text-xs font-medium text-[var(--muted)] uppercase tracking-wide">
+            <FileText className="h-3.5 w-3.5 text-brand-400" aria-hidden="true" />
+            {figureLabel}
           </p>
           <pre className="text-sm leading-relaxed text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto">
             {figureTextToRender}
@@ -71,7 +74,8 @@ export default function QuestionCard({ question, onOpenFigure }: QuestionCardPro
         (imageFailed || !imageRef) &&
         !figureTextToRender && (
         <div className="mt-4 rounded-lg border border-dashed border-[var(--card-border)] bg-[var(--background)] p-4 text-center text-sm text-[var(--muted)]">
-          📊 Figure unavailable for this question in the current build.
+          <ImageOff className="mx-auto mb-2 h-5 w-5 text-[var(--muted)]" aria-hidden="true" />
+          Figure unavailable for this question in the current build.
         </div>
       )}
 
