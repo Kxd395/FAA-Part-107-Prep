@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Part 107 Exam Prep — Shared Question Bank, Categories, and Figure References",
   "engines": {
-    "node": ">=20 <23",
+    "node": ">=20 <25",
     "npm": ">=10"
   },
   "main": "index.js",

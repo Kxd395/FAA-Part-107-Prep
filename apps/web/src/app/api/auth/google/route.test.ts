@@ -7,9 +7,11 @@ import { POST } from "./route";
 const verifyIdTokenMock = vi.fn();
 
 vi.mock("google-auth-library", () => ({
-  OAuth2Client: vi.fn().mockImplementation(() => ({
-    verifyIdToken: verifyIdTokenMock,
-  })),
+  OAuth2Client: vi.fn(function OAuth2Client() {
+    return {
+      verifyIdToken: verifyIdTokenMock,
+    };
+  }),
 }));
 
 describe("POST /api/auth/google", () => {

@@ -2,7 +2,7 @@
   "name": "faa-107-study-guide",
   "private": true,
   "engines": {
-    "node": ">=20 <23",
+    "node": ">=20 <25",
     "npm": ">=10"
   },
   "workspaces": ["apps/web", "packages/core", "packages/content"],

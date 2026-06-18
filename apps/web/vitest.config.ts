@@ -9,10 +9,6 @@ export default defineConfig({
       { find: "@part107/core", replacement: path.resolve(__dirname, "../../packages/core/src/index.ts") },
     ],
   },
-  esbuild: {
-    jsx: "automatic",
-    jsxImportSource: "react",
-  },
   test: {
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
