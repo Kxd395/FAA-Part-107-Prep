@@ -20,7 +20,7 @@ import {
 } from "./icons";
 
 /* ------------------------------------------------------------------ */
-/*  V2 Layout — completely self-contained, does NOT touch v1 routes   */
+/*  Production study shell for the current Part 107 experience         */
 /* ------------------------------------------------------------------ */
 
 const PRIMARY_NAV = [
@@ -137,7 +137,7 @@ export default function V2Layout({ children }: { children: React.ReactNode }) {
                 DarkWater<span className="text-blue-400"> Drones</span>
               </span>
               <span className="ml-2 rounded-full bg-blue-500/10 px-2 py-0.5 text-[10px] font-semibold text-blue-400 border border-blue-500/20">
-                v2 Preview
+                Part 107 Prep
               </span>
             </div>
           </Link>
@@ -252,7 +252,7 @@ export default function V2Layout({ children }: { children: React.ReactNode }) {
             <span className="text-zinc-800">·</span>
             <span>Not affiliated with the FAA</span>
           </div>
-          <span className="text-xs text-zinc-500">v2 is now the default experience</span>
+          <span className="text-xs text-zinc-500">Production study workspace</span>
         </div>
       </footer>
     </div>
