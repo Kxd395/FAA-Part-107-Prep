@@ -154,7 +154,14 @@ function QuizMode({ entries }: { entries: AcronymEntry[] }) {
       </div>
       <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-8 text-center">
         <p className="text-base text-[var(--muted)]">{question.prompt}</p>
-        <div className="mt-4 text-6xl font-bold text-sky-300">{current.term}</div>
+        <div
+          role="heading"
+          aria-level={2}
+          aria-label={`Current acronym: ${current.term}`}
+          className="mt-4 text-6xl font-bold text-sky-300"
+        >
+          {current.term}
+        </div>
       </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {question.options.map((option) => {

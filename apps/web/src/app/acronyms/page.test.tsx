@@ -25,17 +25,8 @@ const EXPANSIONS: Record<string, string> = {
   METAR: "Meteorological Aerodrome Report",
   TAF: "Terminal Aerodrome Forecast",
 };
-const TERMS = Object.keys(EXPANSIONS);
-
 function getCurrentQuizTerm() {
-  const termElement = screen.getByText((content, element) => {
-    const text = content.trim();
-    const className =
-      typeof element?.getAttribute("class") === "string" ? element.getAttribute("class") ?? "" : "";
-
-    return TERMS.includes(text) && className.includes("text-6xl");
-  });
-
+  const termElement = screen.getByRole("heading", { name: /^Current acronym:/i });
   return termElement.textContent?.trim() ?? "";
 }
 
