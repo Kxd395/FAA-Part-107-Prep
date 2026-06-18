@@ -98,7 +98,14 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
 
       <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-8 text-center">
         <p className="mb-2 text-base text-[var(--muted)]">{question.prompt}</p>
-        <div className="mt-4 text-6xl font-bold text-brand-400">{current.character}</div>
+        <div
+          role="heading"
+          aria-level={2}
+          aria-label={`Current phonetic character: ${current.character}`}
+          className="mt-4 text-6xl font-bold text-brand-400"
+        >
+          {current.character}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">

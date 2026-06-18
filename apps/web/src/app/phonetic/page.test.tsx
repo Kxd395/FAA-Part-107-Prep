@@ -17,6 +17,14 @@ const DIGIT_WORDS: Record<string, string> = {
   "9": "Nine",
 };
 
+function getCurrentPhoneticCharacter() {
+  const characterElement = screen.getByRole("heading", {
+    name: /^Current phonetic character:/i,
+  });
+
+  return characterElement.textContent?.trim() ?? "";
+}
+
 vi.mock("../../hooks/useActiveUserId", () => ({
   useActiveUserId: () => "local-user",
 }));
@@ -102,7 +110,7 @@ describe("PhoneticPage", () => {
     fireEvent.change(screen.getByRole("combobox"), { target: { value: "digits" } });
     fireEvent.click(screen.getByRole("button", { name: /Quick Quiz/i }));
 
-    const currentCharacter = screen.getByText(/^[0-9]$/).textContent ?? "";
+    const currentCharacter = getCurrentPhoneticCharacter();
     const correctAnswer = DIGIT_WORDS[currentCharacter];
     expect(correctAnswer).toBeDefined();
     expect(screen.getByText(/0 correct in a row/i)).toBeInTheDocument();
@@ -126,7 +134,7 @@ describe("PhoneticPage", () => {
     await user.selectOptions(screen.getByRole("combobox"), "digits");
     await user.click(screen.getByRole("button", { name: /Quick Quiz/i }));
 
-    const currentCharacter = screen.getByText(/^[0-9]$/).textContent ?? "";
+    const currentCharacter = getCurrentPhoneticCharacter();
     const correctAnswer = DIGIT_WORDS[currentCharacter];
     expect(correctAnswer).toBeDefined();
 

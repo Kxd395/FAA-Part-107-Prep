@@ -114,6 +114,11 @@ describe("FlashcardsPage", () => {
     await user.click(screen.getByRole("button", { name: /All Questions/i }));
     await user.click(screen.getByRole("button", { name: /Start Flashcards/i }));
     expect(
+      screen.getByRole("heading", {
+        name: /Current flashcard question: What must a remote pilot do before entering Class C airspace\?/i,
+      })
+    ).toBeInTheDocument();
+    expect(
       screen.getByText(/What must a remote pilot do before entering Class C airspace\?/i)
     ).toBeInTheDocument();
 
@@ -165,6 +170,11 @@ describe("FlashcardsPage", () => {
     await user.click(screen.getByRole("button", { name: /3-Choice Drill/i }));
     await user.click(screen.getByRole("button", { name: /All Questions/i }));
     await user.click(screen.getByRole("button", { name: /Start Flashcards/i }));
+    expect(
+      screen.getByRole("heading", {
+        name: /Current flashcard question: What must a remote pilot do before entering Class C airspace\?/i,
+      })
+    ).toBeInTheDocument();
 
     const optionButtons = screen.getAllByRole("button").filter((button) =>
       /(Nothing|ATC authorization|Call tower after|Only fly at night)/.test(button.textContent ?? "")

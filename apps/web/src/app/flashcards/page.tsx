@@ -851,7 +851,12 @@ export default function FlashcardsPage() {
             <div className="mb-4 text-xs font-semibold uppercase tracking-wider text-brand-500">
               Question
             </div>
-            <div className="text-lg leading-relaxed text-white">{q.question_text}</div>
+            <h2
+              aria-label={`Current flashcard question: ${q.question_text}`}
+              className="text-lg leading-relaxed text-white"
+            >
+              {q.question_text}
+            </h2>
 
             {(q.figure_reference || q.image_ref) && (
               <button
@@ -882,7 +887,12 @@ export default function FlashcardsPage() {
             <div className="mb-4 text-xs font-semibold uppercase tracking-wider text-brand-500">
               3-Choice Drill
             </div>
-            <div className="text-lg leading-relaxed text-white">{q.question_text}</div>
+            <h2
+              aria-label={`Current flashcard question: ${q.question_text}`}
+              className="text-lg leading-relaxed text-white"
+            >
+              {q.question_text}
+            </h2>
 
             {(q.figure_reference || q.image_ref) && (
               <button
