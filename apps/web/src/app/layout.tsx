@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import AppHeaderNav from "../components/AppHeaderNav";
+import AppChrome from "../components/AppChrome";
 import "./globals.css";
 
 import { AuthProvider } from "../components/AuthProvider";
@@ -42,22 +42,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased">
         <AuthProvider>
-          {/* Navigation Header */}
-          <header className="sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--background)]/80 backdrop-blur-xl">
-            <AppHeaderNav />
-          </header>
-
-          {/* Main Content */}
-          <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
-
-          {/* Footer */}
-          <footer className="border-t border-[var(--card-border)] py-6 text-center text-xs text-[var(--muted)]">
-            <p>
-              Based on official FAA sources (FAA-G-8082-22, FAA-CT-8080-2H).
-              Updated for 2026 rules.
-            </p>
-            <p className="mt-1">Not affiliated with the FAA.</p>
-          </footer>
+          <AppChrome>{children}</AppChrome>
         </AuthProvider>
       </body>
     </html>
