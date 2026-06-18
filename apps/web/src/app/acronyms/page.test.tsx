@@ -25,6 +25,19 @@ const EXPANSIONS: Record<string, string> = {
   METAR: "Meteorological Aerodrome Report",
   TAF: "Terminal Aerodrome Forecast",
 };
+const TERMS = Object.keys(EXPANSIONS);
+
+function getCurrentQuizTerm() {
+  const termElement = screen.getByText((content, element) => {
+    const text = content.trim();
+    const className =
+      typeof element?.getAttribute("class") === "string" ? element.getAttribute("class") ?? "" : "";
+
+    return TERMS.includes(text) && className.includes("text-6xl");
+  });
+
+  return termElement.textContent?.trim() ?? "";
+}
 
 vi.mock("../../hooks/useActiveUserId", () => ({
   useActiveUserId: () => "local-user",
@@ -73,7 +86,7 @@ describe("AcronymsPage", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /Quick Quiz/i }));
 
-    const currentTerm = screen.getByText(/^[A-Z][A-Z0-9]*$/).textContent ?? "";
+    const currentTerm = getCurrentQuizTerm();
     const answerText = EXPANSIONS[currentTerm];
 
     expect(answerText).toBeDefined();
@@ -88,7 +101,7 @@ describe("AcronymsPage", () => {
 
     expect(screen.getByText(/1 correct in a row/i)).toBeInTheDocument();
     expect(screen.queryByText(/Loading the next question/i)).not.toBeInTheDocument();
-    expect(screen.getByText(/^[A-Z][A-Z0-9]*$/).textContent).not.toBe(currentTerm);
+    expect(getCurrentQuizTerm()).not.toBe(currentTerm);
   });
 
   it("shows correction feedback after a wrong answer", async () => {
@@ -98,7 +111,7 @@ describe("AcronymsPage", () => {
 
     await user.click(screen.getByRole("button", { name: /Quick Quiz/i }));
 
-    const currentTerm = screen.getByText(/^[A-Z][A-Z0-9]*$/).textContent ?? "";
+    const currentTerm = getCurrentQuizTerm();
     const correctAnswer = EXPANSIONS[currentTerm];
     const optionButtons = screen
       .getAllByRole("button")
