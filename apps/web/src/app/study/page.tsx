@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, CheckCircle2, FileText, Languages, XCircle } from "lucide-react";
+import { BarChart3, BookOpen, CheckCircle2, FileText, Languages, XCircle } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -351,7 +351,19 @@ function StudyPageClient() {
 
     return (
       <div className="mx-auto max-w-lg space-y-6 text-center">
-        <div className="text-6xl">{passed ? "🎉" : "📚"}</div>
+        <div
+          className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border ${
+            passed
+              ? "border-green-500/30 bg-green-500/10 text-green-300"
+              : "border-brand-500/30 bg-brand-500/10 text-brand-300"
+          }`}
+        >
+          {passed ? (
+            <CheckCircle2 className="h-9 w-9" aria-hidden="true" />
+          ) : (
+            <BookOpen className="h-9 w-9" aria-hidden="true" />
+          )}
+        </div>
         <h1 className="text-3xl font-bold">{passed ? "Great Job!" : "Keep Studying!"}</h1>
 
         <SessionSummaryCard
@@ -379,9 +391,10 @@ function StudyPageClient() {
 
         <Link
           href="/progress"
-          className="block text-center text-sm text-brand-400 hover:text-brand-300 transition-colors"
+          className="inline-flex items-center justify-center gap-1.5 text-sm text-brand-400 hover:text-brand-300 transition-colors"
         >
-          📊 View Progress Dashboard →
+          <BarChart3 className="h-4 w-4" aria-hidden="true" />
+          View Progress Dashboard →
         </Link>
       </div>
     );

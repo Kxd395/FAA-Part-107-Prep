@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CheckCircle2, Flag, Folder, ListChecks, XCircle } from "lucide-react";
+import { BarChart3, BookOpen, CheckCircle2, Flag, Folder, ListChecks, Target, XCircle } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -239,7 +239,9 @@ function ExamPageClient() {
     return (
       <div className="mx-auto max-w-lg space-y-8 pt-8">
         <div className="text-center">
-          <div className="text-5xl">🎯</div>
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-brand-500/30 bg-brand-500/10 text-brand-300">
+            <Target className="h-9 w-9" aria-hidden="true" />
+          </div>
           <h1 className="mt-4 text-3xl font-bold">
             {preview.category === "All" ? "Practice Exam" : `${preview.category} Test`}
           </h1>
@@ -371,7 +373,19 @@ function ExamPageClient() {
     return (
       <div className="space-y-8">
         <div className="mx-auto max-w-lg text-center space-y-4">
-          <div className="text-6xl">{exam.review.passed ? "🎉" : "📚"}</div>
+          <div
+            className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border ${
+              exam.review.passed
+                ? "border-green-500/30 bg-green-500/10 text-green-300"
+                : "border-brand-500/30 bg-brand-500/10 text-brand-300"
+            }`}
+          >
+            {exam.review.passed ? (
+              <CheckCircle2 className="h-9 w-9" aria-hidden="true" />
+            ) : (
+              <BookOpen className="h-9 w-9" aria-hidden="true" />
+            )}
+          </div>
           <h1 className="text-3xl font-bold">
             {exam.review.passed ? "You Passed!" : "Not Quite — Keep Going!"}
           </h1>
@@ -401,9 +415,10 @@ function ExamPageClient() {
 
           <Link
             href="/progress"
-            className="block text-center text-sm text-brand-400 hover:text-brand-300 transition-colors"
+            className="inline-flex items-center justify-center gap-1.5 text-sm text-brand-400 hover:text-brand-300 transition-colors"
           >
-            📊 View Progress Dashboard →
+            <BarChart3 className="h-4 w-4" aria-hidden="true" />
+            View Progress Dashboard →
           </Link>
         </div>
 
