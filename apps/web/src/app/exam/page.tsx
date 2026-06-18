@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CheckCircle2, Flag, Folder, ListChecks, XCircle } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -265,7 +266,8 @@ function ExamPageClient() {
         {preview.category !== "All" && (
           <div className="flex justify-center">
             <span className="rounded-full bg-brand-500/10 px-4 py-1.5 text-sm font-medium text-brand-500">
-              📂 Topic: {preview.category}
+              <Folder className="mr-1.5 inline h-4 w-4 align-[-2px]" />
+              Topic: {preview.category}
             </span>
           </div>
         )}
@@ -433,7 +435,11 @@ function ExamPageClient() {
                     }`}
                   >
                     <div className="flex items-center gap-2 text-sm">
-                      <span>{result.isCorrect ? "✅" : "❌"}</span>
+                      {result.isCorrect ? (
+                        <CheckCircle2 className="h-4 w-4 text-correct" />
+                      ) : (
+                        <XCircle className="h-4 w-4 text-incorrect" />
+                      )}
                       <span className="font-medium">Q{i + 1}</span>
                       <span className="text-[var(--muted)]">
                         {result.question.category} → {result.question.subcategory}
@@ -455,7 +461,7 @@ function ExamPageClient() {
                         <p className="text-gray-400">{result.question.explanation_correct}</p>
                         <CitationLinks
                           citation={result.question.citation}
-                          label="📖 Correct answer reference:"
+                          label="Correct answer reference:"
                           onReferenceClick={(ref) => {
                             events.logEvent({
                               type: "citation_clicked",
@@ -478,7 +484,7 @@ function ExamPageClient() {
                                 : undefined
                             )
                           )}
-                          label={`📖 Why "${userAnswerDisplayLabel}" reference:`}
+                          label={`Why "${userAnswerDisplayLabel}" reference:`}
                           onReferenceClick={(ref) => {
                             events.logEvent({
                               type: "citation_clicked",
@@ -537,7 +543,7 @@ function ExamPageClient() {
       )}
       <ProgressHeader
         left={`Q ${exam.currentIndex + 1} / ${exam.questions.length} (${exam.answeredCount} answered)`}
-        right={`⏱ ${formatClockTime(exam.remainingMs)}`}
+        right={`Time ${formatClockTime(exam.remainingMs)}`}
         progress={exam.progressPercent}
         progressClassName={isTimeLow ? "bg-incorrect animate-pulse" : "bg-brand-500"}
       />
@@ -591,13 +597,15 @@ function ExamPageClient() {
               : "border-[var(--card-border)] text-[var(--muted)] hover:text-white"
           }`}
         >
-          🚩 {exam.flagged.has(exam.currentQuestion.id) ? "Flagged" : "Flag for Review"}
+          <Flag className="mr-1.5 inline h-4 w-4 align-[-2px]" />
+          {exam.flagged.has(exam.currentQuestion.id) ? "Flagged" : "Flag for Review"}
         </button>
         <button
           onClick={() => setShowNavigator((prev) => !prev)}
           className="rounded-xl border border-[var(--card-border)] px-4 py-2.5 text-sm text-[var(--muted)] hover:text-white"
         >
-          📋 Navigator
+          <ListChecks className="mr-1.5 inline h-4 w-4 align-[-2px]" />
+          Navigator
         </button>
         <div className="flex-1" />
         {exam.currentIndex < exam.questions.length - 1 ? (

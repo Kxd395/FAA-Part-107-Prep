@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { BookOpen, CheckCircle2, FileText, Layers, Languages } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   canonicalQuestionKey,
@@ -53,12 +54,12 @@ const QUESTION_TYPE_OPTIONS: Array<{
 }> = [
   {
     value: "all_random",
-    title: "🎲 All Questions",
+    title: "All Questions",
     description: "Full question pool across all study materials.",
   },
   {
     value: "confirmed_test",
-    title: "✅ Confirmed Test Questions",
+    title: "Confirmed Test Questions",
     description: "Questions verified from real FAA exam sources only.",
   },
   {
@@ -578,7 +579,9 @@ export default function FlashcardsPage() {
           />
         )}
         <div className="text-center">
-          <div className="text-5xl">🃏</div>
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-lg border border-brand-400/20 bg-brand-400/10 text-brand-300">
+            <Layers className="h-7 w-7" />
+          </div>
           <h1 className="mt-4 text-3xl font-bold">Flashcards</h1>
           <p className="mt-2 text-[var(--muted)]">
             Flip to reveal the answer. Rate yourself <strong>Know It</strong> or{" "}
@@ -688,7 +691,7 @@ export default function FlashcardsPage() {
               href="/acronyms"
               className="group flex items-center gap-4 rounded-xl border border-sky-500/30 bg-sky-500/10 p-5 transition-all hover:border-sky-500/60 hover:scale-[1.01]"
             >
-              <span className="text-3xl">🧾</span>
+              <FileText className="h-8 w-8 shrink-0 text-sky-300" />
               <div>
                 <div className="text-lg font-semibold text-white">FAA Acronyms</div>
                 <div className="mt-0.5 text-sm text-[var(--muted)]">
@@ -703,7 +706,7 @@ export default function FlashcardsPage() {
               href="/phonetic"
               className="group flex items-center gap-4 rounded-xl border border-violet-500/30 bg-violet-500/10 p-5 transition-all hover:border-violet-500/60 hover:scale-[1.01]"
             >
-              <span className="text-3xl">🔤</span>
+              <Languages className="h-8 w-8 shrink-0 text-violet-300" />
               <div>
                 <div className="text-lg font-semibold text-white">NATO Phonetic Alphabet</div>
                 <div className="mt-0.5 text-sm text-[var(--muted)]">
@@ -805,7 +808,7 @@ export default function FlashcardsPage() {
           Mastered {known} of {initialDeckSize}
         </span>
         <span>
-          Remaining {total} &nbsp; • &nbsp; 📖 {learning}
+          Remaining {total} &nbsp; | &nbsp; Learning {learning}
         </span>
       </div>
       <div className="h-2 rounded-full bg-[var(--card-border)]">
@@ -960,7 +963,7 @@ export default function FlashcardsPage() {
                 </div>
                 {q.citation && (
                   <div className="mt-4 rounded-lg border border-brand-500/20 bg-brand-500/5 px-3 py-2 text-xs text-[var(--muted)]">
-                    📖 {q.citation}
+                    {q.citation}
                   </div>
                 )}
               </div>
@@ -1002,7 +1005,7 @@ export default function FlashcardsPage() {
                 </div>
                 {q.citation && (
                   <div className="mt-4 rounded-lg border border-brand-500/20 bg-brand-500/5 px-3 py-2 text-xs text-[var(--muted)]">
-                    📖 {q.citation}
+                    {q.citation}
                   </div>
                 )}
                 <div className="mt-6 flex gap-3">
@@ -1028,7 +1031,10 @@ export default function FlashcardsPage() {
                 onClick={handleStillLearning}
                 className="w-full rounded-xl border border-amber-500/40 bg-amber-500/10 py-4 pr-12 text-center font-semibold text-amber-400 transition-all hover:scale-[1.02] hover:bg-amber-500/20"
               >
-                📖 Still Learning
+                <span className="inline-flex items-center justify-center gap-2">
+                  <BookOpen className="h-4 w-4" />
+                  Still Learning
+                </span>
                 <span className="mt-1 block text-xs text-[var(--muted)]">← or L key</span>
               </button>
               <button
@@ -1038,7 +1044,7 @@ export default function FlashcardsPage() {
                 onClick={handleStillLearningConfident}
                 className="absolute right-2 top-2 rounded-md border border-amber-400/40 bg-amber-500/20 px-2 py-1 text-xs font-semibold text-amber-200 hover:bg-amber-500/30"
               >
-                ☑
+                <CheckCircle2 className="h-4 w-4" />
               </button>
             </div>
             <div className="relative">
@@ -1046,7 +1052,10 @@ export default function FlashcardsPage() {
                 onClick={handleKnowIt}
                 className="w-full rounded-xl border border-green-500/40 bg-green-500/10 py-4 pr-12 text-center font-semibold text-green-400 transition-all hover:scale-[1.02] hover:bg-green-500/20"
               >
-                ✅ Know It
+                <span className="inline-flex items-center justify-center gap-2">
+                  <CheckCircle2 className="h-4 w-4" />
+                  Know It
+                </span>
                 <span className="mt-1 block text-xs text-[var(--muted)]">→ or K key</span>
               </button>
               <button
@@ -1056,12 +1065,13 @@ export default function FlashcardsPage() {
                 onClick={handleKnowItConfident}
                 className="absolute right-2 top-2 rounded-md border border-green-400/40 bg-green-500/20 px-2 py-1 text-xs font-semibold text-green-200 hover:bg-green-500/30"
               >
-                ☑
+                <CheckCircle2 className="h-4 w-4" />
               </button>
             </div>
           </div>
           <div className="rounded-xl border border-brand-500/20 bg-brand-500/5 p-3 text-center text-xs text-[var(--muted)]">
-            One click records confidence <code>3/5</code>. Tap <code>☑</code> for high confidence{" "}
+            One click records confidence <code>3/5</code>. Use the high-confidence control for
+            confidence{" "}
             <code>5/5</code>.
           </div>
         </div>

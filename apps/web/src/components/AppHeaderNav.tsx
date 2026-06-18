@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Plane } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useActiveUserId } from "../hooks/useActiveUserId";
@@ -77,7 +78,7 @@ export default function AppHeaderNav() {
   return (
     <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
       <Link href="/" onClick={() => logHeaderNavigation("/")} className="flex items-center gap-2">
-        <span className="text-2xl">🛩️</span>
+        <Plane className="h-6 w-6 text-brand-400" />
         <span className="text-lg font-bold tracking-tight">
           Part 107 <span className="text-brand-500">Prep</span>
         </span>

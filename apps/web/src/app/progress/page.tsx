@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { AlertTriangle, BarChart3, Clock3, FolderOpen, History, Satellite } from "lucide-react";
 import { type ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useProgress, SessionRecord } from "../../hooks/useProgress";
@@ -1512,7 +1513,12 @@ export default function ProgressPage() {
               : "text-[var(--muted)] hover:text-white"
               }`}
           >
-            {tab === "overview" ? "📈 Overview" : tab === "history" ? "📋 History" : "📂 Categories"}
+            <span className="inline-flex items-center justify-center gap-2">
+              {tab === "overview" && <BarChart3 className="h-4 w-4" />}
+              {tab === "history" && <History className="h-4 w-4" />}
+              {tab === "categories" && <FolderOpen className="h-4 w-4" />}
+              {tab === "overview" ? "Overview" : tab === "history" ? "History" : "Categories"}
+            </span>
           </button>
         ))}
       </div>
@@ -1820,7 +1826,10 @@ function OverviewTab({
 
       {responseTimeTelemetry.attempts > 0 && (
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
-          <h3 className="mb-4 font-semibold text-white">⏱️ Response-Time Telemetry QA</h3>
+          <h3 className="mb-4 inline-flex items-center gap-2 font-semibold text-white">
+            <Clock3 className="h-4 w-4 text-brand-400" />
+            Response-Time Telemetry QA
+          </h3>
           <div className="grid gap-3 sm:grid-cols-4">
             <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4">
               <div className="text-xs uppercase tracking-wider text-[var(--muted)]">Samples</div>
@@ -1898,7 +1907,10 @@ function OverviewTab({
 
       {learningEventInsights.total > 0 && (
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
-          <h3 className="mb-4 font-semibold text-white">🛰️ Learning Event Activity</h3>
+          <h3 className="mb-4 inline-flex items-center gap-2 font-semibold text-white">
+            <Satellite className="h-4 w-4 text-brand-400" />
+            Learning Event Activity
+          </h3>
           <div className="mb-4 grid gap-2 md:grid-cols-4">
             <label className="space-y-1 text-xs text-[var(--muted)]">
               <span className="block uppercase tracking-wider">Mode</span>
@@ -2102,7 +2114,10 @@ function OverviewTab({
       {/* Accuracy Trend (Text-based chart) */}
       {stats.recentTrend.length > 1 && (
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
-          <h3 className="mb-4 font-semibold text-white">📈 Accuracy Trend</h3>
+          <h3 className="mb-4 inline-flex items-center gap-2 font-semibold text-white">
+            <BarChart3 className="h-4 w-4 text-brand-400" />
+            Accuracy Trend
+          </h3>
           <div className="flex items-end gap-1" style={{ height: 120 }}>
             {stats.recentTrend.map((point, i) => (
               <div key={i} className="group relative flex flex-1 flex-col items-center">
@@ -2134,8 +2149,9 @@ function OverviewTab({
       {/* Weak Spots */}
       {stats.weakSpots.length > 0 && (
         <div className="rounded-xl border border-incorrect/20 bg-incorrect/5 p-6">
-          <h3 className="mb-3 font-semibold text-incorrect">
-            ⚠️ Weak Spots — Focus Here
+          <h3 className="mb-3 inline-flex items-center gap-2 font-semibold text-incorrect">
+            <AlertTriangle className="h-4 w-4" />
+            Weak Spots - Focus Here
           </h3>
           <p className="mb-4 text-sm text-[var(--muted)]">
             These categories are below the 70% passing threshold. Study these
@@ -2293,7 +2309,7 @@ function HistoryTab({ sessions }: { sessions: SessionRecord[] }) {
 
                   {/* Pass/Fail */}
                   <span className="text-sm">
-                    {session.passed ? "✅" : "❌"}
+                    {session.passed ? "Pass" : "Fail"}
                   </span>
 
                   {/* Time */}
@@ -2310,7 +2326,7 @@ function HistoryTab({ sessions }: { sessions: SessionRecord[] }) {
                   <span>
                     {session.score}/{session.total} correct
                   </span>
-                  <span>⏱ {formatDuration(session.timeSpentMs)}</span>
+                  <span>Time {formatDuration(session.timeSpentMs)}</span>
                   <span>
                     {new Date(session.timestamp).toLocaleDateString("en-US", {
                       weekday: "short",
@@ -2459,7 +2475,7 @@ function CategoriesTab({
             <span>
               {cat.correct} of {cat.total} correct
             </span>
-            <span>{cat.percentage >= 70 ? "✅ Passing" : "⚠️ Needs work"}</span>
+            <span>{cat.percentage >= 70 ? "Passing" : "Needs work"}</span>
           </div>
         </div>
       ))}

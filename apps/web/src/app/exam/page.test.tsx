@@ -130,7 +130,7 @@ describe("ExamPage", () => {
     render(<ExamPage />);
 
     await user.click(await screen.findByRole("button", { name: /Begin Exam/i }));
-    expect(screen.getByText(/⏱ 2:00:00/i)).toBeInTheDocument();
+    expect(screen.getByText(/Time 2:00:00/i)).toBeInTheDocument();
     expect(screen.getByText(/Source Tier: FAA-anchored/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Report issue/i })).toBeInTheDocument();
     expect(screen.queryByText(/Confidence for next answer:/i)).not.toBeInTheDocument();

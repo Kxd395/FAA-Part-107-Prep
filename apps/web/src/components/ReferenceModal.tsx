@@ -9,6 +9,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type WheelEvent as ReactWheelEvent,
 } from "react";
+import { ExternalLink, FileText, ImageIcon } from "lucide-react";
 import { parseCitation, type CitationReference } from "@part107/core";
 
 export type ResolvedReference = CitationReference;
@@ -375,7 +376,7 @@ interface CitationLinksProps {
 
 export default function CitationLinks({
   citation,
-  label = "📖 Reference:",
+  label = "Reference:",
   onReferenceClick,
 }: CitationLinksProps) {
   const [activeRef, setActiveRef] = useState<ResolvedReference | null>(null);
@@ -420,9 +421,9 @@ export default function CitationLinks({
             className="inline-flex items-center gap-1 rounded-lg border border-brand-500/30 bg-brand-500/10 px-2.5 py-1 text-brand-400 hover:bg-brand-500/20 hover:text-brand-300 transition-colors cursor-pointer"
             title={ref.description}
           >
-            {ref.type === "external" && <span>↗</span>}
-            {ref.type === "pdf" && <span>📄</span>}
-            {ref.type === "image" && <span>🗺️</span>}
+            {ref.type === "external" && <ExternalLink className="h-3.5 w-3.5" />}
+            {ref.type === "pdf" && <FileText className="h-3.5 w-3.5" />}
+            {ref.type === "image" && <ImageIcon className="h-3.5 w-3.5" />}
             {ref.label}
           </button>
         ))}

@@ -1,62 +1,31 @@
 "use client";
 
+import { BookOpen, ChevronLeft, FileText, List, RefreshCw, Rows3, Zap } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import type { ComponentType, ReactNode } from "react";
+import { useEffect, useMemo, useState } from "react";
 
+import { StandaloneFlipCard } from "../../components/flashcards/StandaloneFlipCard";
 import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
-import { StandaloneFlipCard } from "../../components/flashcards/StandaloneFlipCard";
-
-interface AcronymEntry {
-  term: string;
-  expansion: string;
-  note: string;
-  group: "operations" | "radio" | "weather";
-}
-
-const ACRONYM_RAW: AcronymEntry[] = [
-  { term: "RPIC", expansion: "Remote Pilot in Command", note: "The certificated remote pilot responsible for the operation.", group: "operations" },
-  { term: "UAS", expansion: "Unmanned Aircraft System", note: "The aircraft, control station, link, and support equipment as a complete system.", group: "operations" },
-  { term: "sUAS", expansion: "small Unmanned Aircraft System", note: "A UAS under 55 pounds within standard Part 107 scope.", group: "operations" },
-  { term: "UA", expansion: "Unmanned Aircraft", note: "The aircraft itself, not the whole system.", group: "operations" },
-  { term: "VO", expansion: "Visual Observer", note: "Crewmember assisting the RPIC with visual scanning and situational awareness.", group: "operations" },
-  { term: "VLOS", expansion: "Visual Line of Sight", note: "The aircraft must remain visible without aids other than corrective lenses.", group: "operations" },
-  { term: "BVLOS", expansion: "Beyond Visual Line of Sight", note: "Operations beyond normal visual-line-of-sight limits.", group: "operations" },
-  { term: "FRIA", expansion: "FAA-Recognized Identification Area", note: "Area where certain aircraft may operate without standard Remote ID broadcast.", group: "operations" },
-  { term: "RID", expansion: "Remote Identification", note: "Broadcast identity/location rules under the Remote ID framework.", group: "operations" },
-  { term: "CRM", expansion: "Crew Resource Management", note: "Use of people, equipment, and information to improve safety and decision-making.", group: "operations" },
-  { term: "ATC", expansion: "Air Traffic Control", note: "Controllers responsible for traffic management and controlled-airspace authorization.", group: "radio" },
-  { term: "CTAF", expansion: "Common Traffic Advisory Frequency", note: "Self-announce frequency used at non-towered airports.", group: "radio" },
-  { term: "LAANC", expansion: "Low Altitude Authorization and Notification Capability", note: "System for near-real-time authorization in controlled airspace.", group: "radio" },
-  { term: "NOTAM", expansion: "Notice to Air Missions", note: "Time-sensitive aeronautical notice that may affect a flight.", group: "radio" },
-  { term: "TFR", expansion: "Temporary Flight Restriction", note: "Temporary airspace restriction that can prohibit or limit drone operations.", group: "radio" },
-  { term: "AGL", expansion: "Above Ground Level", note: "Altitude measured from the terrain directly below the aircraft.", group: "operations" },
-  { term: "MSL", expansion: "Mean Sea Level", note: "Altitude referenced to average sea level.", group: "operations" },
-  { term: "METAR", expansion: "Meteorological Aerodrome Report", note: "Current observed weather report for an airport.", group: "weather" },
-  { term: "TAF", expansion: "Terminal Aerodrome Forecast", note: "Forecast weather report for an airport and surrounding area.", group: "weather" },
-];
+import {
+  ACRONYM_ENTRIES,
+  buildAcronymQuestion,
+  type AcronymEntry,
+} from "../../lib/drills/acronyms";
+import { shuffle, useThreeChoiceDrill } from "../../lib/drills/threeChoice";
 
 type StudyMode = "flip" | "quiz" | "grid";
 type SubsetMode = "all" | AcronymEntry["group"];
 
 const ACRONYM_PREFERENCES_KEY = "part107_acronym_preferences_v1";
 
-function shuffle<T>(arr: T[]): T[] {
-  const copy = [...arr];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
-
-function pickRandomEntry<T>(items: T[], exclude?: T): T | null {
-  if (items.length === 0) return null;
-  if (items.length === 1) return items[0] ?? null;
-
-  const candidates = exclude === undefined ? items : items.filter((item) => item !== exclude);
-  const pool = candidates.length > 0 ? candidates : items;
-  return pool[Math.floor(Math.random() * pool.length)] ?? null;
+function IconTile({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-sky-400/20 bg-sky-400/10 text-sky-300">
+      {children}
+    </span>
+  );
 }
 
 function AcronymCard({
@@ -111,13 +80,14 @@ function FlipMode({ entries }: { entries: AcronymEntry[] }) {
         </span>
         <button
           onClick={() => setRandomOrder((value) => !value)}
-          className={`rounded-lg border px-3 py-1 text-xs transition-all ${
+          className={`inline-flex items-center gap-2 rounded-lg border px-3 py-1 text-xs transition-all ${
             randomOrder
               ? "border-sky-500 bg-sky-500/20 text-sky-300"
               : "border-[var(--card-border)] hover:border-white/30"
           }`}
         >
-          🔀 Random
+          <RefreshCw className="h-3.5 w-3.5" />
+          Random
         </button>
       </div>
       <div className="h-1 w-full rounded-full bg-[var(--card-border)]">
@@ -141,7 +111,7 @@ function FlipMode({ entries }: { entries: AcronymEntry[] }) {
 
 function GridMode({ entries }: { entries: AcronymEntry[] }) {
   return (
-    <div className="overflow-x-auto rounded-2xl border border-[var(--card-border)]">
+    <div className="overflow-x-auto rounded-lg border border-[var(--card-border)]">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-[var(--card-border)] text-left text-xs uppercase tracking-wide text-[var(--muted)]">
@@ -170,63 +140,10 @@ function GridMode({ entries }: { entries: AcronymEntry[] }) {
 }
 
 function QuizMode({ entries }: { entries: AcronymEntry[] }) {
-  const [current, setCurrent] = useState<AcronymEntry | null>(() => pickRandomEntry(entries));
-  const [selected, setSelected] = useState<string | null>(null);
-  const [streak, setStreak] = useState(0);
-  const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { current, next, question, select, selected, selectedIsCorrect, streak } =
+    useThreeChoiceDrill(entries, buildAcronymQuestion);
 
-  useEffect(() => {
-    setCurrent((existing) => {
-      if (existing && entries.includes(existing)) {
-        return existing;
-      }
-      return pickRandomEntry(entries);
-    });
-    setSelected(null);
-    setStreak(0);
-  }, [entries]);
-
-  const options = useMemo(() => {
-    if (!current) return [];
-
-    const sameGroupDistractors = shuffle(
-      entries.filter((entry) => entry.term !== current.term && entry.group === current.group)
-    )
-      .slice(0, 2)
-      .map((entry) => entry.expansion);
-
-    const fallbackDistractors = shuffle(
-      entries.filter(
-        (entry) =>
-          entry.term !== current.term && !sameGroupDistractors.includes(entry.expansion)
-      )
-    )
-      .slice(0, Math.max(0, 2 - sameGroupDistractors.length))
-      .map((entry) => entry.expansion);
-
-    return shuffle([current.expansion, ...sameGroupDistractors, ...fallbackDistractors]);
-  }, [current, entries]);
-
-  if (!current) return null;
-
-  const selectedIsCorrect = selected !== null && selected === current.expansion;
-
-  const handleNext = () => {
-    if (advanceTimeoutRef.current) {
-      clearTimeout(advanceTimeoutRef.current);
-      advanceTimeoutRef.current = null;
-    }
-    setCurrent((existing) => pickRandomEntry(entries, existing ?? undefined));
-    setSelected(null);
-  };
-
-  useEffect(() => {
-    return () => {
-      if (advanceTimeoutRef.current) {
-        clearTimeout(advanceTimeoutRef.current);
-      }
-    };
-  }, []);
+  if (!current || !question) return null;
 
   return (
     <div className="space-y-6">
@@ -235,17 +152,18 @@ function QuizMode({ entries }: { entries: AcronymEntry[] }) {
           {streak} correct in a row
         </span>
       </div>
-      <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] p-8 text-center">
-        <p className="text-base text-[var(--muted)]">What does {current.term} stand for?</p>
+      <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-8 text-center">
+        <p className="text-base text-[var(--muted)]">{question.prompt}</p>
         <div className="mt-4 text-6xl font-bold text-sky-300">{current.term}</div>
       </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        {options.map((option) => {
-          const isCorrect = option === current.expansion;
+        {question.options.map((option) => {
+          const isCorrect = option === question.answer;
           const isChosen = option === selected;
-          let cls = "rounded-xl border px-4 py-4 text-left text-sm font-semibold transition-all ";
+          let cls = "rounded-lg border px-4 py-4 text-left text-sm font-semibold transition-all ";
           if (selected === null) {
-            cls += "border-[var(--card-border)] bg-[var(--card)] hover:border-sky-500/60 hover:bg-sky-500/10";
+            cls +=
+              "border-[var(--card-border)] bg-[var(--card)] hover:border-sky-500/60 hover:bg-sky-500/10";
           } else if (isCorrect) {
             cls += "border-green-500 bg-green-500/20 text-green-300";
           } else if (isChosen) {
@@ -254,21 +172,7 @@ function QuizMode({ entries }: { entries: AcronymEntry[] }) {
             cls += "border-[var(--card-border)] bg-[var(--card)] opacity-40";
           }
           return (
-            <button
-              key={option}
-              onClick={() => {
-                if (selected !== null) return;
-                setSelected(option);
-                const isCorrect = option === current.expansion;
-                setStreak((value) => (isCorrect ? value + 1 : 0));
-                if (isCorrect) {
-                  advanceTimeoutRef.current = setTimeout(() => {
-                    handleNext();
-                  }, 650);
-                }
-              }}
-              className={cls}
-            >
+            <button key={option} onClick={() => select(option)} className={cls}>
               {option}
             </button>
           );
@@ -277,26 +181,27 @@ function QuizMode({ entries }: { entries: AcronymEntry[] }) {
       {selected !== null && (
         <div className="space-y-3">
           {selectedIsCorrect ? (
-            <div className="rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-center text-green-200">
-              Correct. <span className="font-semibold text-green-300">{current.expansion}</span> is what{" "}
-              <span className="font-semibold text-white">{current.term}</span> stands for. Loading the next question…
+            <div className="rounded-lg border border-green-500/30 bg-green-500/10 px-4 py-3 text-center text-sm text-green-200">
+              Correct. <span className="font-semibold text-green-300">{question.answer}</span>{" "}
+              is what <span className="font-semibold text-white">{current.term}</span> stands for.
+              Loading the next question...
             </div>
           ) : (
             <>
-              <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-center text-red-100">
-                You picked <span className="font-semibold text-white">{selected}</span>. The correct answer for{" "}
-                <span className="font-semibold text-white">{current.term}</span> is{" "}
-                <span className="font-semibold text-green-300">{current.expansion}</span>.
+              <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-center text-sm text-red-100">
+                You picked <span className="font-semibold text-white">{selected}</span>. The
+                correct answer for <span className="font-semibold text-white">{current.term}</span>{" "}
+                is <span className="font-semibold text-green-300">{question.answer}</span>.
               </div>
-              <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 text-sm">
+              <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 text-sm">
                 <div className="font-semibold text-white">{current.expansion}</div>
                 <div className="mt-1 text-[var(--muted)]">{current.note}</div>
               </div>
               <button
-                onClick={handleNext}
-                className="w-full rounded-xl bg-brand-600 py-3 font-semibold text-white transition-all hover:bg-brand-700"
+                onClick={next}
+                className="w-full rounded-lg bg-brand-600 py-3 font-semibold text-white transition-all hover:bg-brand-700"
               >
-                Next →
+                Next
               </button>
             </>
           )}
@@ -337,18 +242,12 @@ export default function AcronymsPage() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(
-      ACRONYM_PREFERENCES_KEY,
-      JSON.stringify({
-        mode,
-        subset,
-      })
-    );
+    localStorage.setItem(ACRONYM_PREFERENCES_KEY, JSON.stringify({ mode, subset }));
   }, [mode, subset]);
 
   const entries = useMemo(
     () =>
-      ACRONYM_RAW.filter((entry) => {
+      ACRONYM_ENTRIES.filter((entry) => {
         if (subset === "all") return true;
         return entry.group === subset;
       }),
@@ -359,19 +258,28 @@ export default function AcronymsPage() {
     logEvent({ type: "page_view", mode: "acronyms", metadata: { route: "/acronyms" } });
   }, [logEvent]);
 
-  const modes: Array<{ value: StudyMode; label: string; emoji: string }> = [
-    { value: "flip", label: "Flip Cards", emoji: "🃏" },
-    { value: "quiz", label: "Quick Quiz", emoji: "⚡" },
-    { value: "grid", label: "Reference Table", emoji: "📋" },
+  const modes: Array<{ value: StudyMode; label: string; icon: ComponentType<{ className?: string }> }> = [
+    { value: "flip", label: "Flip Cards", icon: BookOpen },
+    { value: "quiz", label: "Quick Quiz", icon: Zap },
+    { value: "grid", label: "Reference Table", icon: Rows3 },
   ];
 
   return (
     <div className="space-y-8">
       <div>
-        <Link href="/" className="text-sm text-[var(--muted)] transition-colors hover:text-white">
-          ← Home
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-sm text-[var(--muted)] transition-colors hover:text-white"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Home
         </Link>
-        <h1 className="mt-3 text-3xl font-bold">🧾 FAA Acronyms</h1>
+        <div className="mt-3 flex items-center gap-3">
+          <IconTile>
+            <FileText className="h-5 w-5" />
+          </IconTile>
+          <h1 className="text-3xl font-bold">FAA Acronyms</h1>
+        </div>
         <p className="mt-2 text-sm text-[var(--muted)]">
           Drill the shorthand that shows up constantly in Part 107 study: RPIC, UAS, VO, VLOS,
           LAANC, NOTAM, TFR, FRIA, METAR, TAF, and the rest.
@@ -379,27 +287,31 @@ export default function AcronymsPage() {
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex gap-2">
-          {modes.map((item) => (
-            <button
-              key={item.value}
-              onClick={() => {
-                setMode(item.value);
-                logEvent({
-                  type: "tab_changed",
-                  mode: "acronyms",
-                  metadata: { tab: item.value },
-                });
-              }}
-              className={`rounded-xl border px-4 py-2 text-sm font-semibold transition-all ${
-                mode === item.value
-                  ? "border-sky-500 bg-sky-500/20 text-sky-300"
-                  : "border-[var(--card-border)] text-[var(--muted)] hover:border-white/30 hover:text-white"
-              }`}
-            >
-              {item.emoji} {item.label}
-            </button>
-          ))}
+        <div className="flex flex-wrap gap-2">
+          {modes.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.value}
+                onClick={() => {
+                  setMode(item.value);
+                  logEvent({
+                    type: "tab_changed",
+                    mode: "acronyms",
+                    metadata: { tab: item.value },
+                  });
+                }}
+                className={`inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all ${
+                  mode === item.value
+                    ? "border-sky-500 bg-sky-500/20 text-sky-300"
+                    : "border-[var(--card-border)] text-[var(--muted)] hover:border-white/30 hover:text-white"
+                }`}
+              >
+                <Icon className="h-4 w-4" />
+                {item.label}
+              </button>
+            );
+          })}
         </div>
 
         <select
@@ -420,13 +332,18 @@ export default function AcronymsPage() {
         {mode === "grid" && <GridMode entries={entries} />}
       </div>
 
-      <div className="rounded-xl border border-sky-500/20 bg-sky-500/5 px-5 py-4 text-sm">
-        <p className="font-semibold text-sky-300">Study Use</p>
-        <p className="mt-1 text-[var(--muted)]">
-          This stack is separate because the acronym source file is missing from the live question
-          bank. You can still drill the terms directly here instead of waiting for them to appear
-          incidentally inside multiple-choice explanations.
-        </p>
+      <div className="rounded-lg border border-sky-500/20 bg-sky-500/5 px-5 py-4 text-sm">
+        <div className="flex items-start gap-3">
+          <List className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" />
+          <div>
+            <p className="font-semibold text-sky-300">Study Use</p>
+            <p className="mt-1 text-[var(--muted)]">
+              This stack is separate because the acronym source file is missing from the live
+              question bank. You can still drill the terms directly here instead of waiting for
+              them to appear incidentally inside multiple-choice explanations.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

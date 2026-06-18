@@ -1,5 +1,6 @@
 "use client";
 
+import { BookOpen, CheckCircle2, XCircle } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   filterQuestionsByCategory,
@@ -847,7 +848,8 @@ export default function LearnPage() {
         {/* Header */}
         <div className="flex items-center justify-between text-sm text-[var(--muted)]">
           <span>
-            📖 Learning {teachIndex + 1} of {batch.length}
+            <BookOpen className="mr-1.5 inline h-4 w-4 align-[-2px]" />
+            Learning {teachIndex + 1} of {batch.length}
           </span>
           <span className="rounded-full bg-brand-500/10 px-3 py-1 text-xs font-medium text-brand-500">
             Round {round}
@@ -888,7 +890,7 @@ export default function LearnPage() {
                   }`}
                 >
                   <span className="font-semibold">{displayLabel}.</span> {opt.text}
-                  {isCorrect && <span className="ml-2">✅</span>}
+                  {isCorrect && <CheckCircle2 className="ml-2 inline h-4 w-4 text-green-300" />}
                 </div>
               );
             })}
@@ -929,7 +931,7 @@ export default function LearnPage() {
           {/* Citation */}
           {q.citation && (
             <div className="rounded-lg border border-brand-500/20 bg-brand-500/5 px-3 py-2 text-xs text-[var(--muted)]">
-              📖 {q.citation}
+              {q.citation}
             </div>
           )}
         </div>
@@ -1068,8 +1070,12 @@ export default function LearnPage() {
                     disabled={showResult}
                   >
                     <span className="font-semibold">{displayLabel}.</span> {opt.text}
-                    {showResult && isCorrect && <span className="ml-2">✅</span>}
-                    {showResult && isSelected && !isCorrect && <span className="ml-2">❌</span>}
+                    {showResult && isCorrect && (
+                      <CheckCircle2 className="ml-2 inline h-4 w-4 text-green-300" />
+                    )}
+                    {showResult && isSelected && !isCorrect && (
+                      <XCircle className="ml-2 inline h-4 w-4 text-red-300" />
+                    )}
                   </button>
                 </div>
               );
@@ -1241,7 +1247,8 @@ export default function LearnPage() {
             }}
             className="flex-1 rounded-xl bg-amber-600 py-3 font-semibold text-white hover:bg-amber-700"
           >
-            📖 Re-learn Missed ({masteredTotal - masteredCount})
+            <BookOpen className="mr-2 inline h-4 w-4 align-[-2px]" />
+            Re-learn Missed ({masteredTotal - masteredCount})
           </button>
         )}
         <button

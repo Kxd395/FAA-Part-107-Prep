@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { BookOpen, CheckCircle2, FileText, Languages, XCircle } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -237,7 +238,10 @@ function StudyPageClient() {
     return (
       <div className="space-y-8">
         <div>
-          <h1 className="text-3xl font-bold">📖 Study Mode</h1>
+          <div className="flex items-center gap-3">
+            <BookOpen className="h-7 w-7 text-brand-400" />
+            <h1 className="text-3xl font-bold">Study Mode</h1>
+          </div>
           <p className="mt-2 text-[var(--muted)]">
             Choose a topic to drill down on, or study all categories. You&apos;ll get instant feedback after each answer.
           </p>
@@ -308,7 +312,7 @@ function StudyPageClient() {
               href="/acronyms"
               className="group flex items-center gap-4 rounded-xl border border-sky-500/30 bg-sky-500/10 p-5 transition-all hover:border-sky-500/60 hover:scale-[1.01]"
             >
-              <span className="text-3xl">🧾</span>
+              <FileText className="h-8 w-8 shrink-0 text-sky-300" />
               <div>
                 <div className="text-lg font-semibold text-white">FAA Acronyms</div>
                 <div className="mt-0.5 text-sm text-[var(--muted)]">
@@ -323,7 +327,7 @@ function StudyPageClient() {
               href="/phonetic"
               className="group flex items-center gap-4 rounded-xl border border-violet-500/30 bg-violet-500/10 p-5 transition-all hover:border-violet-500/60 hover:scale-[1.01]"
             >
-              <span className="text-3xl">🔤</span>
+              <Languages className="h-8 w-8 shrink-0 text-violet-300" />
               <div>
                 <div className="text-lg font-semibold text-white">NATO Phonetic Alphabet</div>
                 <div className="mt-0.5 text-sm text-[var(--muted)]">
@@ -490,7 +494,7 @@ function StudyPageClient() {
             ))}
           </div>
           <div className="mt-2 text-xs text-[var(--muted)]">
-            Tip: click the <code>☑</code> on any answer for a one-click high-confidence submit.
+            Tip: use the high-confidence control on any answer for a one-click confident submit.
           </div>
         </div>
       )}
@@ -522,7 +526,11 @@ function StudyPageClient() {
           }`}
         >
           <div className="mb-3 flex items-center gap-2">
-            <span className="text-xl">{study.answerState === "correct" ? "✅" : "❌"}</span>
+            {study.answerState === "correct" ? (
+              <CheckCircle2 className="h-5 w-5 text-correct" />
+            ) : (
+              <XCircle className="h-5 w-5 text-incorrect" />
+            )}
             <span className="font-semibold text-white">
               {study.answerState === "correct" ? "Correct!" : "Incorrect"}
             </span>
@@ -541,7 +549,7 @@ function StudyPageClient() {
 
           <CitationLinks
             citation={study.currentQuestion.citation}
-            label="📖 Correct answer reference:"
+            label="Correct answer reference:"
             onReferenceClick={(ref) => {
               events.logEvent({
                 type: "citation_clicked",
@@ -558,7 +566,7 @@ function StudyPageClient() {
           {study.answerState === "incorrect" && study.selectedOption && (
             <CitationLinks
               citation={selectedAnswerCitation}
-              label={`📖 Why "${selectedOptionDisplayLabel}" reference:`}
+              label={`Why "${selectedOptionDisplayLabel}" reference:`}
               onReferenceClick={(ref) => {
                 events.logEvent({
                   type: "citation_clicked",

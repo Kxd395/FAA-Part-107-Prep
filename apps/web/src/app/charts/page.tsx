@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Map } from "lucide-react";
 import { useEffect } from "react";
 import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
@@ -29,7 +30,10 @@ export default function ChartsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">🗺️ Sectional Charts</h1>
+        <div className="flex items-center gap-3">
+          <Map className="h-7 w-7 text-brand-400" />
+          <h1 className="text-3xl font-bold">Sectional Charts</h1>
+        </div>
         <p className="mt-2 text-sm text-[var(--muted)]">
           Open FAA testing supplement figures used in study and exam questions.
         </p>

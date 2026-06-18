@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildQuizQuestion, type PhoneticEntry } from "./page";
+import { buildPhoneticQuestion, type PhoneticEntry } from "../../lib/drills/phonetic";
 
 function makeEntry(character: string, word: string): PhoneticEntry {
   return {
@@ -10,7 +10,7 @@ function makeEntry(character: string, word: string): PhoneticEntry {
   };
 }
 
-describe("buildQuizQuestion", () => {
+describe("buildPhoneticQuestion", () => {
   it("returns exactly three answer choices", () => {
     const pool = [
       makeEntry("A", "Alfa"),
@@ -19,7 +19,7 @@ describe("buildQuizQuestion", () => {
       makeEntry("D", "Delta"),
     ];
 
-    const question = buildQuizQuestion(pool[1]!, pool);
+    const question = buildPhoneticQuestion(pool[1]!, pool);
 
     expect(question.options).toHaveLength(3);
     expect(question.options).toContain("Bravo");
@@ -33,7 +33,7 @@ describe("buildQuizQuestion", () => {
       makeEntry("Z", "Zulu"),
     ];
 
-    const question = buildQuizQuestion(pool[3]!, pool);
+    const question = buildPhoneticQuestion(pool[3]!, pool);
 
     expect(question.options).toHaveLength(3);
     expect(question.options).toEqual(expect.arrayContaining(["Zulu", "Zebra", "Zenith"]));
@@ -48,7 +48,7 @@ describe("buildQuizQuestion", () => {
       makeEntry("8", "Eight"),
     ];
 
-    const question = buildQuizQuestion(pool[2]!, pool);
+    const question = buildPhoneticQuestion(pool[2]!, pool);
 
     expect(question.options).toHaveLength(3);
     expect(question.options).toEqual(expect.arrayContaining(["Seven", "Six", "Eight"]));

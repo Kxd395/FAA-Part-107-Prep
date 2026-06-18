@@ -20,7 +20,7 @@ describe("ConfidencePanel", () => {
         onChange={vi.fn()}
         hint={
           <>
-            Tip: use <code>☑</code> for high confidence.
+            Tip: use <code>5</code> for high confidence.
           </>
         }
       />

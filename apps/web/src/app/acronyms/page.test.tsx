@@ -18,7 +18,7 @@ const EXPANSIONS: Record<string, string> = {
   ATC: "Air Traffic Control",
   CTAF: "Common Traffic Advisory Frequency",
   LAANC: "Low Altitude Authorization and Notification Capability",
-  NOTAM: "Notice to Air Missions",
+  NOTAM: "Notice to Airmen",
   TFR: "Temporary Flight Restriction",
   AGL: "Above Ground Level",
   MSL: "Mean Sea Level",
@@ -57,10 +57,10 @@ describe("AcronymsPage", () => {
       .filter(
         (label) =>
           !!label &&
-          label !== "🃏 Flip Cards" &&
-          label !== "⚡ Quick Quiz" &&
-          label !== "📋 Reference Table" &&
-          label !== "Next →"
+          label !== "Flip Cards" &&
+          label !== "Quick Quiz" &&
+          label !== "Reference Table" &&
+          label !== "Next"
       );
 
     expect(quizOptions).toHaveLength(3);
@@ -106,9 +106,9 @@ describe("AcronymsPage", () => {
         const label = button.textContent?.trim() ?? "";
         return (
           !!label &&
-          label !== "🃏 Flip Cards" &&
-          label !== "⚡ Quick Quiz" &&
-          label !== "📋 Reference Table"
+          label !== "Flip Cards" &&
+          label !== "Quick Quiz" &&
+          label !== "Reference Table"
         );
       });
 

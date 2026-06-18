@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CheckCircle2, FileQuestion, XCircle } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { type OptionId, type Question } from "@part107/core";
 import { ReferenceModal, type ResolvedReference } from "../../components/ReferenceModal";
@@ -237,7 +238,10 @@ export default function MissedPage() {
       )}
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold">❌ Missed Questions Review</h1>
+        <div className="flex items-center gap-3">
+          <FileQuestion className="h-7 w-7 text-incorrect" />
+          <h1 className="text-3xl font-bold">Missed Questions Review</h1>
+        </div>
         <p className="mt-2 text-[var(--muted)]">
           {missedEntries.length} unique questions you&apos;ve gotten wrong. Browse them with full explanations — no pressure, just learning.
         </p>
@@ -561,8 +565,12 @@ export default function MissedPage() {
                           }`}
                         >
                           <span className="font-semibold">{displayLabel}.</span> {opt.text}
-                          {isCorrect && " ✅"}
-                          {wasYours && !isCorrect && " ❌"}
+                          {isCorrect && (
+                            <CheckCircle2 className="ml-2 inline h-4 w-4 text-green-300" />
+                          )}
+                          {wasYours && !isCorrect && (
+                            <XCircle className="ml-2 inline h-4 w-4 text-red-300" />
+                          )}
                         </div>
                       );
                     })}
@@ -581,7 +589,7 @@ export default function MissedPage() {
                   {/* Citation */}
                   {q.citation && (
                     <div className="rounded-lg border border-brand-500/20 bg-brand-500/5 px-3 py-2 text-xs text-[var(--muted)]">
-                      📖 {q.citation}
+                      {q.citation}
                     </div>
                   )}
 

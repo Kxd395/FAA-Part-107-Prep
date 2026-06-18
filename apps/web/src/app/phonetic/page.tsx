@@ -1,99 +1,41 @@
 "use client";
 
+import {
+  BookOpen,
+  ChevronLeft,
+  ChevronRight,
+  Languages,
+  Lightbulb,
+  RefreshCw,
+  Rows3,
+  Zap,
+} from "lucide-react";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
-import { useActiveUserId } from "../../hooks/useActiveUserId";
+import type { ComponentType, ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+
 import { StandaloneFlipCard } from "../../components/flashcards/StandaloneFlipCard";
-
-// ─── Data ──────────────────────────────────────────────────────────────────────
-
-export interface PhoneticEntry {
-  character: string;
-  word: string;
-  pronunciation: string;
-  morse: string | null;
-}
-
-const ALPHABET_RAW: PhoneticEntry[] = [
-  { character: "A", word: "Alfa",     pronunciation: "AL FAH",                   morse: ".-"    },
-  { character: "B", word: "Bravo",    pronunciation: "BRAH VOH",                 morse: "-..."  },
-  { character: "C", word: "Charlie",  pronunciation: "CHAR LEE / SHAR LEE",      morse: "-.-."  },
-  { character: "D", word: "Delta",    pronunciation: "DELL TAH",                 morse: "-.."   },
-  { character: "E", word: "Echo",     pronunciation: "ECK OH",                   morse: "."     },
-  { character: "F", word: "Foxtrot",  pronunciation: "FOKS TROT",                morse: "..-."  },
-  { character: "G", word: "Golf",     pronunciation: "GOLF",                     morse: "--."   },
-  { character: "H", word: "Hotel",    pronunciation: "HOH TEL",                  morse: "...."  },
-  { character: "I", word: "India",    pronunciation: "IN DEE AH",                morse: ".."    },
-  { character: "J", word: "Juliett",  pronunciation: "JEW LEE ETT",              morse: ".---"  },
-  { character: "K", word: "Kilo",     pronunciation: "KEY LOH",                  morse: "-.-"   },
-  { character: "L", word: "Lima",     pronunciation: "LEE MAH",                  morse: ".-.."  },
-  { character: "M", word: "Mike",     pronunciation: "MIKE",                     morse: "--"    },
-  { character: "N", word: "November", pronunciation: "NO VEM BER",               morse: "-."    },
-  { character: "O", word: "Oscar",    pronunciation: "OSS CAH",                  morse: "---"   },
-  { character: "P", word: "Papa",     pronunciation: "PAH PAH",                  morse: ".--."  },
-  { character: "Q", word: "Quebec",   pronunciation: "KEH BECK",                 morse: "--.-"  },
-  { character: "R", word: "Romeo",    pronunciation: "ROW ME OH",                morse: ".-."   },
-  { character: "S", word: "Sierra",   pronunciation: "SEE AIR RAH",              morse: "..."   },
-  { character: "T", word: "Tango",    pronunciation: "TANG GO",                  morse: "-"     },
-  { character: "U", word: "Uniform",  pronunciation: "YOU NEE FORM / OO NEE FORM", morse: "..-" },
-  { character: "V", word: "Victor",   pronunciation: "VIK TAH",                  morse: "...-"  },
-  { character: "W", word: "Whiskey",  pronunciation: "WISS KEY",                 morse: ".--"   },
-  { character: "X", word: "X-Ray",    pronunciation: "ECKS RAY",                 morse: "-..-"  },
-  { character: "Y", word: "Yankee",   pronunciation: "YANG KEY",                 morse: "-.--"  },
-  { character: "Z", word: "Zulu",     pronunciation: "ZOO LOO",                  morse: "--.."  },
-  { character: "1", word: "One",      pronunciation: "WUN",                      morse: ".----" },
-  { character: "2", word: "Two",      pronunciation: "TOO",                      morse: "..---" },
-  { character: "3", word: "Three",    pronunciation: "TREE",                     morse: "...--" },
-  { character: "4", word: "Four",     pronunciation: "FOW ER",                   morse: "....-" },
-  { character: "5", word: "Five",     pronunciation: "FIFE",                     morse: "....." },
-  { character: "6", word: "Six",      pronunciation: "SIX",                      morse: "-...." },
-  { character: "7", word: "Seven",    pronunciation: "SEV EN",                   morse: "--..." },
-  { character: "8", word: "Eight",    pronunciation: "AIT",                      morse: "---.." },
-  { character: "9", word: "Nine",     pronunciation: "NIN ER",                   morse: "----." },
-  { character: "0", word: "Zero",     pronunciation: "ZE RO",                    morse: "-----" },
-  { character: ".",  word: "Decimal", pronunciation: "DAY SEE MAL",              morse: null    },
-  { character: "—",  word: "Hundred", pronunciation: "HUN DRED",                 morse: null    },
-  { character: "—",  word: "Thousand",pronunciation: "TOU SAND",                 morse: null    },
-];
-
-const LETTER_DISTRACTORS: Record<string, [string, string]> = {
-  A: ["Atlas", "Arrow"],
-  B: ["Beacon", "Boston"],
-  C: ["Cobra", "Canyon"],
-  D: ["Denver", "Dragon"],
-  E: ["Eagle", "Engine"],
-  F: ["Falcon", "Frontier"],
-  G: ["Goal", "George"],
-  H: ["Harbor", "Hunter"],
-  I: ["Ivory", "Island"],
-  J: ["Jupiter", "Jetstream"],
-  K: ["King", "Kodiak"],
-  L: ["Legend", "Liberty"],
-  M: ["Matrix", "Mercury"],
-  N: ["Neptune", "Nexus"],
-  O: ["Orbit", "Oxford"],
-  P: ["Pilot", "Phoenix"],
-  Q: ["Quantum", "Quest"],
-  R: ["Radar", "Rocket"],
-  S: ["Signal", "Summit"],
-  T: ["Thunder", "Titan"],
-  U: ["Ultra", "Union"],
-  V: ["Vector", "Voyager"],
-  W: ["West", "Warden"],
-  X: ["Xenon", "Xylophone"],
-  Y: ["Yellow", "Yonder"],
-  Z: ["Zebra", "Zenith"],
-};
-
-// ─── Modes ─────────────────────────────────────────────────────────────────────
+import { useActiveUserId } from "../../hooks/useActiveUserId";
+import { useLearningEventLogger } from "../../hooks/useLearningEventLogger";
+import {
+  buildPhoneticQuestion,
+  PHONETIC_ENTRIES,
+  type PhoneticEntry,
+} from "../../lib/drills/phonetic";
+import { shuffle, useThreeChoiceDrill } from "../../lib/drills/threeChoice";
 
 type StudyMode = "flip" | "grid" | "quiz";
 type PhoneticSubset = "all" | "letters" | "digits";
 
 const PHONETIC_PREFERENCES_KEY = "part107_phonetic_preferences_v1";
 
-// ─── Flip-card component ───────────────────────────────────────────────────────
+function IconTile({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-brand-400/20 bg-brand-400/10 text-brand-300">
+      {children}
+    </span>
+  );
+}
 
 function FlipCard({
   entry,
@@ -136,129 +78,15 @@ function FlipCard({
   );
 }
 
-// ─── Quiz mode ─────────────────────────────────────────────────────────────────
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-function pickRandomEntry<T>(items: T[], exclude?: T): T | null {
-  if (items.length === 0) return null;
-  if (items.length === 1) return items[0] ?? null;
-
-  const candidates = exclude === undefined ? items : items.filter((item) => item !== exclude);
-  const pool = candidates.length > 0 ? candidates : items;
-  return pool[Math.floor(Math.random() * pool.length)] ?? null;
-}
-
-export function buildQuizQuestion(
-  target: PhoneticEntry,
-  pool: PhoneticEntry[]
-): { prompt: string; answer: string; options: string[] } {
-  const letterDistractors = LETTER_DISTRACTORS[target.character.toUpperCase()];
-  if (letterDistractors) {
-    const options = shuffle([target.word, ...letterDistractors]);
-    return {
-      prompt: `What is the NATO phonetic word for "${target.character}"?`,
-      answer: target.word,
-      options,
-    };
-  }
-
-  const targetIndex = pool.findIndex((entry) => entry.word === target.word);
-  const distractorIndexes: number[] = [];
-  let offset = 1;
-
-  while (
-    distractorIndexes.length < 2 &&
-    (targetIndex - offset >= 0 || targetIndex + offset < pool.length)
-  ) {
-    if (targetIndex - offset >= 0) {
-      distractorIndexes.push(targetIndex - offset);
-    }
-    if (distractorIndexes.length >= 2) break;
-    if (targetIndex + offset < pool.length) {
-      distractorIndexes.push(targetIndex + offset);
-    }
-    offset += 1;
-  }
-
-  const distractors = distractorIndexes
-    .slice(0, 2)
-    .map((index) => pool[index]?.word)
-    .filter((word): word is string => !!word && word !== target.word);
-
-  const options = shuffle([target.word, ...distractors]);
-  return {
-    prompt: `What is the NATO phonetic word for "${target.character}"?`,
-    answer: target.word,
-    options,
-  };
-}
-
 function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
   const pool = useMemo(
-    () => entries.filter((e) => /^[A-Z]$/i.test(e.character) || /^\d$/.test(e.character)),
+    () => entries.filter((entry) => /^[A-Z]$/i.test(entry.character) || /^\d$/.test(entry.character)),
     [entries]
   );
-  const [current, setCurrent] = useState<PhoneticEntry | null>(() => pickRandomEntry(pool));
-  const [selected, setSelected] = useState<string | null>(null);
-  const [streak, setStreak] = useState(0);
-  const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const question = useMemo(
-    () => (current ? buildQuizQuestion(current, pool) : null),
-    [current, pool]
-  );
-
-  useEffect(() => {
-    setCurrent((existing) => {
-      if (existing && pool.includes(existing)) {
-        return existing;
-      }
-      return pickRandomEntry(pool);
-    });
-    setSelected(null);
-    setStreak(0);
-  }, [pool]);
-
-  const handleSelect = (opt: string) => {
-    if (selected !== null || !current) return;
-    setSelected(opt);
-    const isCorrect = opt === current.word;
-    setStreak((value) => (isCorrect ? value + 1 : 0));
-    if (isCorrect) {
-      advanceTimeoutRef.current = setTimeout(() => {
-        handleNext();
-      }, 650);
-    }
-  };
-
-  const handleNext = () => {
-    if (advanceTimeoutRef.current) {
-      clearTimeout(advanceTimeoutRef.current);
-      advanceTimeoutRef.current = null;
-    }
-    setCurrent((existing) => pickRandomEntry(pool, existing ?? undefined));
-    setSelected(null);
-  };
-
-  useEffect(() => {
-    return () => {
-      if (advanceTimeoutRef.current) {
-        clearTimeout(advanceTimeoutRef.current);
-      }
-    };
-  }, []);
+  const { current, next, question, select, selected, selectedIsCorrect, streak } =
+    useThreeChoiceDrill(pool, buildPhoneticQuestion);
 
   if (!question || !current) return null;
-
-  const selectedIsCorrect = selected !== null && selected === question.answer;
 
   return (
     <div className="space-y-6">
@@ -268,22 +96,19 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
         </span>
       </div>
 
-      {/* Prompt */}
-      <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] p-8 text-center">
-        <p className="text-base text-[var(--muted)] mb-2">{question.prompt}</p>
-        <div className="text-6xl font-bold text-brand-400 mt-4">{current.character}</div>
+      <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-8 text-center">
+        <p className="mb-2 text-base text-[var(--muted)]">{question.prompt}</p>
+        <div className="mt-4 text-6xl font-bold text-brand-400">{current.character}</div>
       </div>
 
-      {/* Options */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        {question.options.map((opt) => {
-          const isCorrect = opt === question.answer;
-          const isChosen = opt === selected;
-          let cls =
-            "rounded-xl border py-4 text-lg font-semibold transition-all ";
+        {question.options.map((option) => {
+          const isCorrect = option === question.answer;
+          const isChosen = option === selected;
+          let cls = "rounded-lg border py-4 text-lg font-semibold transition-all ";
           if (selected === null) {
             cls +=
-              "border-[var(--card-border)] bg-[var(--card)] hover:border-brand-500/60 hover:bg-brand-500/10 cursor-pointer";
+              "border-[var(--card-border)] bg-[var(--card)] hover:border-brand-500/60 hover:bg-brand-500/10";
           } else if (isCorrect) {
             cls += "border-green-500 bg-green-500/20 text-green-300";
           } else if (isChosen) {
@@ -291,9 +116,10 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
           } else {
             cls += "border-[var(--card-border)] bg-[var(--card)] opacity-40";
           }
+
           return (
-            <button key={opt} onClick={() => handleSelect(opt)} className={cls}>
-              {opt}
+            <button key={option} onClick={() => select(option)} className={cls}>
+              {option}
             </button>
           );
         })}
@@ -302,32 +128,35 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
       {selected !== null && (
         <div className="space-y-2">
           {selectedIsCorrect ? (
-            <div className="rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-center text-green-200">
-              Correct. <span className="font-semibold text-green-300">{question.answer}</span> is the NATO word for{" "}
-              <span className="font-semibold text-white">{current.character}</span>. Loading the next question…
+            <div className="rounded-lg border border-green-500/30 bg-green-500/10 px-4 py-3 text-center text-sm text-green-200">
+              Correct. <span className="font-semibold text-green-300">{question.answer}</span>{" "}
+              is the NATO word for{" "}
+              <span className="font-semibold text-white">{current.character}</span>. Loading the
+              next question...
             </div>
           ) : (
             <>
-              <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-center text-red-100">
-                You picked <span className="font-semibold text-white">{selected}</span>. The correct answer for{" "}
+              <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-center text-sm text-red-100">
+                You picked <span className="font-semibold text-white">{selected}</span>. The
+                correct answer for{" "}
                 <span className="font-semibold text-white">{current.character}</span> is{" "}
                 <span className="font-semibold text-green-300">{question.answer}</span>.
               </div>
-              <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 text-sm text-center">
+              <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 text-center text-sm">
                 <span className="text-[var(--muted)]">Pronunciation: </span>
                 <span className="font-mono text-brand-300">{current.pronunciation}</span>
                 {current.morse && (
                   <>
-                    <span className="mx-2 text-[var(--muted)]">·</span>
+                    <span className="mx-2 text-[var(--muted)]">/</span>
                     <span className="font-mono text-[var(--muted)]">{current.morse}</span>
                   </>
                 )}
               </div>
               <button
-                onClick={handleNext}
-                className="w-full rounded-xl bg-brand-600 py-3 font-semibold text-white transition-all hover:bg-brand-700"
+                onClick={next}
+                className="w-full rounded-lg bg-brand-600 py-3 font-semibold text-white transition-all hover:bg-brand-700"
               >
-                Next →
+                Next
               </button>
             </>
           )}
@@ -337,14 +166,12 @@ function QuizMode({ entries }: { entries: PhoneticEntry[] }) {
   );
 }
 
-// ─── Grid / reference mode ─────────────────────────────────────────────────────
-
 function GridMode({ entries }: { entries: PhoneticEntry[] }) {
   return (
-    <div className="overflow-x-auto rounded-2xl border border-[var(--card-border)]">
+    <div className="overflow-x-auto rounded-lg border border-[var(--card-border)]">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-[var(--card-border)] text-[var(--muted)] uppercase text-xs tracking-wide">
+          <tr className="border-b border-[var(--card-border)] text-xs uppercase tracking-wide text-[var(--muted)]">
             <th className="px-4 py-3 text-left">Character</th>
             <th className="px-4 py-3 text-left">Word</th>
             <th className="px-4 py-3 text-left">Pronunciation</th>
@@ -352,18 +179,18 @@ function GridMode({ entries }: { entries: PhoneticEntry[] }) {
           </tr>
         </thead>
         <tbody>
-          {entries.map((e, i) => (
+          {entries.map((entry, index) => (
             <tr
-              key={`${e.character}-${e.word}`}
+              key={`${entry.character}-${entry.word}`}
               className={`border-b border-[var(--card-border)] last:border-0 ${
-                i % 2 === 0 ? "bg-[var(--card)]" : "bg-transparent"
+                index % 2 === 0 ? "bg-[var(--card)]" : "bg-transparent"
               }`}
             >
-              <td className="px-4 py-3 font-bold text-brand-400 text-lg">{e.character}</td>
-              <td className="px-4 py-3 font-semibold text-white">{e.word}</td>
-              <td className="px-4 py-3 font-mono text-brand-300">{e.pronunciation}</td>
-              <td className="px-4 py-3 font-mono text-[var(--muted)] tracking-widest">
-                {e.morse ?? "—"}
+              <td className="px-4 py-3 text-lg font-bold text-brand-400">{entry.character}</td>
+              <td className="px-4 py-3 font-semibold text-white">{entry.word}</td>
+              <td className="px-4 py-3 font-mono text-brand-300">{entry.pronunciation}</td>
+              <td className="px-4 py-3 font-mono tracking-widest text-[var(--muted)]">
+                {entry.morse ?? "-"}
               </td>
             </tr>
           ))}
@@ -372,8 +199,6 @@ function GridMode({ entries }: { entries: PhoneticEntry[] }) {
     </div>
   );
 }
-
-// ─── Flip-through mode ─────────────────────────────────────────────────────────
 
 function FlipMode({ entries }: { entries: PhoneticEntry[] }) {
   const [index, setIndex] = useState(0);
@@ -385,8 +210,8 @@ function FlipMode({ entries }: { entries: PhoneticEntry[] }) {
   const current = deck[index];
 
   const toggleRandom = useCallback(() => {
-    setRandomOrder((r) => {
-      const next = !r;
+    setRandomOrder((value) => {
+      const next = !value;
       setDeck(next ? shuffle(entries) : entries);
       setIndex(0);
       setRevealed(false);
@@ -400,26 +225,31 @@ function FlipMode({ entries }: { entries: PhoneticEntry[] }) {
       setRevealed(true);
     } else {
       setRevealed(false);
-      setIndex((i) => (i + 1) % total);
+      setIndex((value) => (value + 1) % total);
     }
   }, [current, revealed, total]);
 
   const handlePrev = useCallback(() => {
     setRevealed(false);
-    setIndex((i) => (i - 1 + total) % total);
+    setIndex((value) => (value - 1 + total) % total);
   }, [total]);
 
   const handleNext = useCallback(() => {
     setRevealed(false);
-    setIndex((i) => (i + 1) % total);
+    setIndex((value) => (value + 1) % total);
   }, [total]);
 
-  // Keyboard support
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight" || e.key === " ") handleNext();
-      if (e.key === "ArrowLeft") handlePrev();
-      if (e.key === "Enter" || e.key === "f") handleFlip();
+    setDeck(randomOrder ? shuffle(entries) : entries);
+    setIndex(0);
+    setRevealed(false);
+  }, [entries, randomOrder]);
+
+  useEffect(() => {
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight" || event.key === " ") handleNext();
+      if (event.key === "ArrowLeft") handlePrev();
+      if (event.key === "Enter" || event.key.toLowerCase() === "f") handleFlip();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
@@ -429,24 +259,23 @@ function FlipMode({ entries }: { entries: PhoneticEntry[] }) {
 
   return (
     <div className="space-y-6">
-      {/* Progress + controls */}
       <div className="flex items-center justify-between text-sm text-[var(--muted)]">
         <span>
           {index + 1} / {total}
         </span>
         <button
           onClick={toggleRandom}
-          className={`rounded-lg border px-3 py-1 text-xs transition-all ${
+          className={`inline-flex items-center gap-2 rounded-lg border px-3 py-1 text-xs transition-all ${
             randomOrder
               ? "border-brand-500 bg-brand-500/20 text-brand-300"
               : "border-[var(--card-border)] hover:border-white/30"
           }`}
         >
-          🔀 Random
+          <RefreshCw className="h-3.5 w-3.5" />
+          Random
         </button>
       </div>
 
-      {/* Progress bar */}
       <div className="h-1 w-full rounded-full bg-[var(--card-border)]">
         <div
           className="h-1 rounded-full bg-brand-500 transition-all"
@@ -454,7 +283,6 @@ function FlipMode({ entries }: { entries: PhoneticEntry[] }) {
         />
       </div>
 
-      {/* Card */}
       <FlipCard
         key={`${current.character}-${current.word}`}
         entry={current}
@@ -463,30 +291,29 @@ function FlipMode({ entries }: { entries: PhoneticEntry[] }) {
         onNext={handleNext}
       />
 
-      {/* Navigation */}
       <div className="flex items-center gap-3">
         <button
           onClick={handlePrev}
-          className="flex-1 rounded-xl border border-[var(--card-border)] py-3 text-sm font-semibold text-[var(--muted)] transition-all hover:border-white/30 hover:text-white"
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-[var(--card-border)] py-3 text-sm font-semibold text-[var(--muted)] transition-all hover:border-white/30 hover:text-white"
         >
-          ← Prev
+          <ChevronLeft className="h-4 w-4" />
+          Prev
         </button>
         <button
           onClick={handleNext}
-          className="flex-1 rounded-xl bg-brand-600 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-700"
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-brand-600 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-700"
         >
-          Next →
+          Next
+          <ChevronRight className="h-4 w-4" />
         </button>
       </div>
 
       <p className="text-center text-xs text-[var(--muted)]">
-        ← → arrow keys · Space to advance · Enter or F to flip
+        Arrow keys, Space, Enter, and F are supported.
       </p>
     </div>
   );
 }
-
-// ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function PhoneticPage() {
   const activeUserId = useActiveUserId();
@@ -514,117 +341,121 @@ export default function PhoneticPage() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(
-      PHONETIC_PREFERENCES_KEY,
-      JSON.stringify({
-        mode,
-        subset,
-      })
-    );
+    localStorage.setItem(PHONETIC_PREFERENCES_KEY, JSON.stringify({ mode, subset }));
   }, [mode, subset]);
 
-  const entries = ALPHABET_RAW.filter((e) => {
-    if (subset === "letters") return /^[A-Z]$/i.test(e.character);
-    if (subset === "digits") return /^\d$/.test(e.character);
-    return true;
-  });
+  const entries = useMemo(
+    () =>
+      PHONETIC_ENTRIES.filter((entry) => {
+        if (subset === "letters") return /^[A-Z]$/i.test(entry.character);
+        if (subset === "digits") return /^\d$/.test(entry.character);
+        return true;
+      }),
+    [subset]
+  );
 
   useEffect(() => {
     logEvent({ type: "page_view", mode: "phonetic", metadata: { route: "/phonetic" } });
   }, [logEvent]);
 
-  const MODES: Array<{ value: StudyMode; label: string; emoji: string }> = [
-    { value: "flip", label: "Flip Cards", emoji: "🃏" },
-    { value: "quiz", label: "Quick Quiz", emoji: "⚡" },
-    { value: "grid", label: "Reference Table", emoji: "📋" },
+  const modes: Array<{ value: StudyMode; label: string; icon: ComponentType<{ className?: string }> }> = [
+    { value: "flip", label: "Flip Cards", icon: BookOpen },
+    { value: "quiz", label: "Quick Quiz", icon: Zap },
+    { value: "grid", label: "Reference Table", icon: Rows3 },
   ];
 
-  const SUBSETS: Array<{ value: PhoneticSubset; label: string }> = [
-    { value: "all", label: "All (A–Z + 0–9 + extras)" },
-    { value: "letters", label: "Letters only (A–Z)" },
-    { value: "digits", label: "Digits only (0–9)" },
+  const subsets: Array<{ value: PhoneticSubset; label: string }> = [
+    { value: "all", label: "All (A-Z + 0-9 + extras)" },
+    { value: "letters", label: "Letters only (A-Z)" },
+    { value: "digits", label: "Digits only (0-9)" },
   ];
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div>
         <Link
           href="/"
-          className="text-sm text-[var(--muted)] hover:text-white transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-[var(--muted)] transition-colors hover:text-white"
         >
-          ← Home
+          <ChevronLeft className="h-4 w-4" />
+          Home
         </Link>
-        <h1 className="mt-3 text-3xl font-bold">
-          🔤 NATO Phonetic Alphabet
-        </h1>
+        <div className="mt-3 flex items-center gap-3">
+          <IconTile>
+            <Languages className="h-5 w-5" />
+          </IconTile>
+          <h1 className="text-3xl font-bold">NATO Phonetic Alphabet</h1>
+        </div>
         <p className="mt-2 text-sm text-[var(--muted)]">
-          Used in all ATC radio communications. Learn letter words, pronunciations, and Morse code.
-          Not on the multiple-choice exam — but essential for radio calls on the flight line.
+          Used in ATC radio communications. Learn letter words, pronunciations, and Morse code.
+          Not on the multiple-choice exam, but useful for radio calls on the flight line.
         </p>
-        <p className="mt-1 text-xs text-[var(--muted)]/60">
-          Source: ICAO Doc 9432 / SKYbrary
-        </p>
+        <p className="mt-1 text-xs text-[var(--muted)]/60">Source: ICAO Doc 9432 / SKYbrary</p>
       </div>
 
-      {/* Mode + Subset selectors */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        {/* Mode tabs */}
-        <div className="flex gap-2">
-          {MODES.map((m) => (
-            <button
-              key={m.value}
-              onClick={() => {
-                setMode(m.value);
-                logEvent({
-                  type: "tab_changed",
-                  mode: "phonetic",
-                  metadata: { tab: m.value },
-                });
-              }}
-              className={`rounded-xl border px-4 py-2 text-sm font-semibold transition-all ${
-                mode === m.value
-                  ? "border-brand-500 bg-brand-500/20 text-brand-300"
-                  : "border-[var(--card-border)] text-[var(--muted)] hover:border-white/30 hover:text-white"
-              }`}
-            >
-              {m.emoji} {m.label}
-            </button>
-          ))}
+        <div className="flex flex-wrap gap-2">
+          {modes.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.value}
+                onClick={() => {
+                  setMode(item.value);
+                  logEvent({
+                    type: "tab_changed",
+                    mode: "phonetic",
+                    metadata: { tab: item.value },
+                  });
+                }}
+                className={`inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all ${
+                  mode === item.value
+                    ? "border-brand-500 bg-brand-500/20 text-brand-300"
+                    : "border-[var(--card-border)] text-[var(--muted)] hover:border-white/30 hover:text-white"
+                }`}
+              >
+                <Icon className="h-4 w-4" />
+                {item.label}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Subset filter */}
         <select
           value={subset}
-          onChange={(e) => setSubset(e.target.value as typeof subset)}
+          onChange={(event) => setSubset(event.target.value as PhoneticSubset)}
           className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-white focus:border-brand-500/60 focus:outline-none"
         >
-          {SUBSETS.map((s) => (
-            <option key={s.value} value={s.value}>
-              {s.label}
+          {subsets.map((item) => (
+            <option key={item.value} value={item.value}>
+              {item.label}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Mode content */}
-      <div className="max-w-lg mx-auto sm:max-w-none">
+      <div className="mx-auto max-w-lg sm:max-w-none">
         {mode === "flip" && <FlipMode entries={entries} />}
         {mode === "quiz" && <QuizMode entries={entries} />}
         {mode === "grid" && <GridMode entries={entries} />}
       </div>
 
-      {/* Study tip */}
-      <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 px-5 py-4 text-sm">
-        <p className="font-semibold text-amber-300">💡 Study Tip</p>
-        <p className="mt-1 text-[var(--muted)]">
-          The phonetic alphabet itself is <strong className="text-white">not tested</strong> on the Part 107 knowledge exam —
-          but you&apos;ll use it every time you call ground control, CTAF, or request a TFR briefing.
-          Focus on the tricky ones: <strong className="text-white">Alfa</strong> (not Alpha),
-          <strong className="text-white"> Juliett</strong> (double-T),
-          <strong className="text-white"> Foxtrot</strong>, and
-          <strong className="text-white"> November</strong> (N).
-        </p>
+      <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 px-5 py-4 text-sm">
+        <div className="flex items-start gap-3">
+          <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
+          <div>
+            <p className="font-semibold text-amber-300">Study Tip</p>
+            <p className="mt-1 text-[var(--muted)]">
+              The phonetic alphabet itself is <strong className="text-white">not tested</strong>{" "}
+              on the Part 107 knowledge exam, but you will use it every time you call ground
+              control, CTAF, or request a TFR briefing. Focus on the tricky ones:{" "}
+              <strong className="text-white">Alfa</strong> (not Alpha),{" "}
+              <strong className="text-white">Juliett</strong> (double-T),{" "}
+              <strong className="text-white">Foxtrot</strong>, and{" "}
+              <strong className="text-white">November</strong> (N).
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

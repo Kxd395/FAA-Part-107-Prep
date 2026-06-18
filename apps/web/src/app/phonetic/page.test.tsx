@@ -79,10 +79,10 @@ describe("PhoneticPage", () => {
         .filter(
           (label) =>
             !!label &&
-            label !== "🃏 Flip Cards" &&
-            label !== "⚡ Quick Quiz" &&
-            label !== "📋 Reference Table" &&
-            label !== "Next →"
+            label !== "Flip Cards" &&
+            label !== "Quick Quiz" &&
+            label !== "Reference Table" &&
+            label !== "Next"
         );
 
     const before = getQuizOptions();
@@ -136,9 +136,9 @@ describe("PhoneticPage", () => {
       .find(
         (label) =>
           !!label &&
-          label !== "🃏 Flip Cards" &&
-          label !== "⚡ Quick Quiz" &&
-          label !== "📋 Reference Table" &&
+          label !== "Flip Cards" &&
+          label !== "Quick Quiz" &&
+          label !== "Reference Table" &&
           label !== correctAnswer
       );
 

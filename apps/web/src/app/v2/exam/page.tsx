@@ -462,7 +462,7 @@ function ExamPageClient() {
                       <p className="text-[var(--muted)]">{result.question.explanation_correct}</p>
                       <CitationLinks
                         citation={result.question.citation}
-                        label="📖 Correct answer reference:"
+                        label="Correct answer reference:"
                         onReferenceClick={(ref) => {
                           events.logEvent({
                             type: "citation_clicked",
@@ -485,7 +485,7 @@ function ExamPageClient() {
                               : undefined,
                           ),
                         )}
-                        label={`📖 Why "${userLabel}" reference:`}
+                        label={`Why "${userLabel}" reference:`}
                         onReferenceClick={(ref) => {
                           events.logEvent({
                             type: "citation_clicked",
@@ -547,7 +547,7 @@ function ExamPageClient() {
 
       <ProgressHeader
         left={`Q ${exam.currentIndex + 1} / ${exam.questions.length} (${exam.answeredCount} answered)`}
-        right={`⏱ ${formatClockTime(exam.remainingMs)}`}
+        right={`Time ${formatClockTime(exam.remainingMs)}`}
         progress={exam.progressPercent}
         progressClassName={isTimeLow ? "bg-incorrect animate-pulse" : "bg-brand-500"}
       />

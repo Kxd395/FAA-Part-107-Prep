@@ -1,6 +1,6 @@
-import { readFileSync } from "node:fs";
-import path from "node:path";
 import type { OptionId, Question } from "@part107/core";
+import strictCarringtonBank from "../../../../../packages/content/knowledge/carrington_question_bank.strict.json";
+import carringtonBank from "../../../../../docs/ssot/review/carrington_question_bank.json";
 
 type RawQuestion = {
   id: number;
@@ -15,10 +15,6 @@ type RawQuestion = {
   image_url?: string | null;
   image_description?: string | null;
 };
-
-function loadJsonFile<T>(absolutePath: string): T {
-  return JSON.parse(readFileSync(absolutePath, "utf8")) as T;
-}
 
 function toOptionId(index: number): OptionId {
   return (["A", "B", "C", "D"][index] ?? "A") as OptionId;
@@ -71,37 +67,17 @@ function normalizeImageRef(value: string | null | undefined): string | null {
 }
 
 export function loadCarringtonQuestionBank(): Question[] {
-  return loadCarringtonBankFile(
-    [
-      "packages/content/knowledge/carrington_question_bank.json",
-      "docs/ssot/review/carrington_question_bank.json",
-    ],
-    "carrington-question-bank"
-  );
+  return normalizeCarringtonBank(carringtonBank as RawQuestion[], "carrington-question-bank");
 }
 
 export function loadCarringtonStrictQuestionBank(): Question[] {
-  return loadCarringtonBankFile(
-    [
-      "packages/content/knowledge/carrington_question_bank.strict.json",
-      "docs/ssot/review/carrington_question_bank.strict.json",
-    ],
+  return normalizeCarringtonBank(
+    strictCarringtonBank as RawQuestion[],
     "carrington-question-bank-strict"
   );
 }
 
-function loadCarringtonBankFile(relativePaths: string[], sourceName: string): Question[] {
-  const repoRoot = path.resolve(process.cwd(), "../..");
-
-  let bank: RawQuestion[] = [];
-  for (const relativePath of relativePaths) {
-    try {
-      bank = loadJsonFile<RawQuestion[]>(path.join(repoRoot, relativePath));
-      break;
-    } catch {
-      // try next candidate
-    }
-  }
+function normalizeCarringtonBank(bank: RawQuestion[], sourceName: string): Question[] {
   if (bank.length === 0) {
     return [];
   }
