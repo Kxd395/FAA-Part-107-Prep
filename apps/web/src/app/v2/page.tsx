@@ -10,6 +10,7 @@ import {
 import { useActiveUserId } from "../../hooks/useActiveUserId";
 import { useProgress } from "../../hooks/useProgress";
 import { useQuestionBank } from "../../hooks/useQuestionBank";
+import { MATERIAL_SUMMARY } from "../../lib/materialSummary";
 import {
   IconArrowRight,
   IconBarChart,
@@ -84,7 +85,8 @@ function DashboardContent() {
   const stats = useMemo(() => getStats(), [getStats]);
 
   /* ---- derived ---- */
-  const totalQuestions = questions.length;
+  const materialCounts = bankLoaded ? counts : MATERIAL_SUMMARY.counts;
+  const totalQuestions = bankLoaded ? questions.length : MATERIAL_SUMMARY.totalQuestions;
   const passProb = useMemo(() => {
     if (stats.totalQuestions === 0) return 0;
     // simple heuristic: accuracy weighted by coverage
@@ -103,7 +105,7 @@ function DashboardContent() {
   const recentSessions = useMemo(() => sessions.slice(0, 5), [sessions]);
 
   /* ---- loading / error gates ---- */
-  if (loading && !bankLoaded) return <QuestionBankLoading />;
+  if (loading && !bankLoaded && totalQuestions === 0) return <QuestionBankLoading />;
   if (error && !bankLoaded)
     return <QuestionBankError error={error} onRetry={() => void reload()} />;
 
@@ -461,7 +463,7 @@ function DashboardContent() {
         </p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {STUDY_CATEGORIES.filter((c) => c !== "All").map((cat) => {
-            const count = counts[cat] ?? 0;
+            const count = materialCounts[cat] ?? 0;
             const catStat = stats.categoryBreakdown.find((b) => b.category === cat);
             const examTarget = REAL_EXAM_BLUEPRINT_TARGETS[cat as keyof typeof REAL_EXAM_BLUEPRINT_TARGETS] as number | undefined;
             const examPct = examTarget ? Math.round((examTarget / FULL_EXAM_QUESTION_COUNT) * 100) : null;
